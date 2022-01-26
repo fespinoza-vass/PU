@@ -12,11 +12,27 @@
         "repo": {
             "type": "composer",
             "url": "https://repo.magento.com"
+        },
+        "amasty": {
+            "type": "composer",
+            "url": "https://composer.amasty.com/enterprise/"
         }
     },
     "require": {
-        "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4",
-        "magento/composer-root-update-plugin": "~1.1"
+        "amasty/feed": "^2.6",
+        "amasty/label": "^2.1",
+        "amasty/module-elastic-search": "^1.13",
+        "amasty/module-elastic-search-graphql": "^1.0",
+        "amasty/module-promo-banners": "^1.1",
+        "amasty/module-promo-countdown": "^1.1",
+        "amasty/module-special-promo-pro": "^2.8",
+        "amasty/module-store-locator": "^2.5",
+        "amasty/product-labels-graphql": "^1.0",
+        "amasty/promo": "^2.11",
+        "amasty/shopby": "^2.17",
+        "amasty/shopby-graphql": "^1.0",
+        "magento/composer-root-update-plugin": "~1.1",
+        "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4"
     },
     "suggest": {
         "ext-pcntl": "Need for run processes in parallel mode"
