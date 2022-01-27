@@ -1,0 +1,395 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpsplitcart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+/**  @var $block \Webkul\Mpsplitcart\Block\Index */
+
+
+?>
+<?php
+$splitBlock = $block->getLayout()->createBlock(
+    \Webkul\Mpsplitcart\Block\Index::class
+);
+$multishippingBlock = $block->getLayout()->createBlock(\Magento\Multishipping\Block\Checkout\Link::class);
+?>
+
+<?php $mergedCells = ($this->helper(\Magento\Tax\Helper\Data::class)->displayCartBothPrices() ? 2 : 1); ?>
+<?= /* @escapeNotVerified */ $block->getChildHtml('form_before') ?>
+
+<?php
+if ($splitBlock->getMpsplitcartEnable()) {
+    $sellerData = $splitBlock->getSellerData();
+    foreach ($sellerData as $sellerId => $proIdsArray) {
+        ?>
+        <form action="<?= /* @noEscape */ $block->getUrl('checkout/cart/updatePost') ?>"
+              method="post"
+              id="form-validate"
+              data-mage-init='{"validation":{}}'
+              class="form form-cart">
+            <?= /* @escapeNotVerified */ $block->getBlockHtml('formkey'); ?>
+            <div class="wk-mpsplit-wrapper">
+                <div class="cart table-wrapper<?= /* @escapeNotVerified */ $mergedCells == 2 ? ' detailed' : ''; ?>">
+                    <div class="thermometer">
+                        <h4> <span><?= __('Sold by: ').$proIdsArray['seller_name'] ?></span>
+
+                            <div class="container">
+                                <small for="file" ><?= __($proIdsArray['notification'])?></small>
+                                <small class="tal"> $<?= $proIdsArray['total'] ?></small>
+                                <progress class="progreso" id="file" value="<?= $proIdsArray['accumulated percent']?>" max="100"> 32% </progress>
+                                <small class="min_amo"> $<?= $proIdsArray['min_amount'] ?></small>
+                            </div>
+                            <small class="kmore">conocer mas</small>
+                        </h4>
+
+                    </div>
+
+
+                    <table id="shopping-cart-table"
+                           class="cart items data table"
+                           data-mage-init='{"shoppingCart":{"emptyCartButton": "action.clear",
+                       "updateCartActionContainer": "#update_cart_action_container"}}'>
+                        <caption role="heading" aria-level="2" class="table-caption">
+                            <?= /* @noEscape */ __('Shopping Cart Items') ?>
+                        </caption>
+                        <thead>
+                        <tr>
+                            <th class="col item" scope="col">
+                                <span>
+                                    <?= /* @noEscape */ __('Item') ?>
+                                </span>
+                            </th>
+                            <th class="col price" scope="col">
+                                <span>
+                                    <?= /* @noEscape */ __('Price') ?>
+                                </span>
+                            </th>
+                            <th class="col qty" scope="col">
+                                <span>
+                                    <?= /* @noEscape */ __('Qty') ?>
+                                </span>
+                            </th>
+                            <th class="col subtotal" scope="col">
+                                <span>
+                                    <?= /* @noEscape */ __('Subtotal') ?>
+                                </span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <?php foreach ($block->getItems() as $_item): ?>
+                            <?php if (array_key_exists($_item->getId(), $proIdsArray)): ?>
+                                <?= /* @noEscape */ $block->getItemHtml($_item) ?>
+                            <?php endif; ?>
+                        <?php endforeach ?>
+                    </table>
+                </div>
+                <div class="cart main actions">
+                    <?php if ($block->getContinueShoppingUrl()): ?>
+                        <a class="action continue"
+                           href="<?= $escaper->escapeUrl($block->getContinueShoppingUrl()) ?>"
+                           title="<?= $escaper->escapeHtml(__('Continue Shopping')); ?>">
+                        <span>
+                            <?= /* @noEscape */ __('Continue Shopping') ?>
+                        </span>
+                        </a>
+                    <?php endif; ?>
+                    <button type="submit"
+                            name="update_cart_action"
+                            data-cart-empty=""
+                            value="empty_cart"
+                            title="<?= $escaper->escapeHtml(__('Clear Shopping Cart')); ?>"
+                            class="action clear" id="empty_cart_button">
+                    <span>
+                        <?= /* @noEscape */ __('Clear Shopping Cart'); ?>
+                    </span>
+                    </button>
+                    <button type="submit"
+                            name="update_cart_action"
+                            data-cart-item-update=""
+                            value="update_qty"
+                            title="<?= $escaper->escapeHtml(__('Update Shopping Cart')); ?>"
+                            class="action update">
+                    <span>
+                        <?= /* @noEscape */ __('Update Shopping Cart'); ?>
+                    </span>
+                    </button>
+                    <input type="hidden"
+                           value=""
+                           id="update_cart_action_container"
+                           data-cart-item-update=""/>
+                </div>
+            </div>
+        </form>
+
+        <form action="<?= /* @noEscape */ $block->getUrl('mpsplitcart/cartover/proceedtocheckout') ?>"
+              method="post"
+              id="checkout-validate"
+              data-mage-init='{"validation":{}}'
+              class="form form-checkout">
+            <?= /* @noEscape */ $block->getBlockHtml('formkey'); ?>
+            <div class="cart-summary">
+                <input type="hidden"
+                       name="wk-mp-seller-id[]"
+                       class="wk-mp-seller-id"
+                       value="<?= /* @noEscape */ $sellerId; ?>">
+                <div data-bind="scope:'giftOptionsCart'" id="gift-options-cart"></div>
+                <div class="cart-summary1">
+                    <strong class="summary title"><?= /* @noEscape */ __("Summary of purchase") ?>&nbsp;<?= $proIdsArray['seller_name'] ?></strong>
+                    <div data-bind="scope:'block-totals'"
+                         class="cart-totals"
+                         id="cart-totals">
+                        <div data-bind="blockLoader: isLoading" class="table-wrapper">
+                            <table class="data table totals">
+                                <caption class="table-caption"><?= /* @noEscape */ __("Total") ?></caption>
+                                <tbody>
+                                <tr class="totals sub">
+                                    <th scope="row" colspan="1" class="mark">
+                                        <?= /* @noEscape */ __("Subtotal") ?>
+                                    </th>
+                                    <td data-th="Subtotal" class="amount">
+                                            <span class="price">
+                                                <?= /* @noEscape */ $proIdsArray['formatted_total']; ?>
+                                            </span>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="totals ship">
+                                    <th scope="row" colspan="1" class="mark">
+                                        <?= /* @noEscape */ __("Cost of shipping") ?>
+                                        <?= $proIdsArray['seller_name'] ?>
+                                        (<?= /* @noEscape */ __("estimated") ?>)
+                                    </th>
+                                    <td data-th="cost-ship" class="amount">
+                                            <span class="price">
+                                            <?= $proIdsArray['charge_amount'] ?>
+                                            </span>
+                                    </td>
+                                </tr>
+                                <?php if(!empty($proIdsArray['free_diff'])): ?>
+                                <tr class="shipfree_diff">
+                                    
+                                    <td colspan="2" data-th="free-ship" >
+                                            <p>Te faltan <span class="diff-free price"><?= $proIdsArray['free_diff'] ?></span> para obtener envio gratis</p>
+                                    </td>
+                                </tr>
+                                    <?php endif; ?>
+                                 <!--<tr class="totals shipping excl">
+                                    <th class="mark" colspan="1" scope="row">
+                                        Shipping
+                                    </th>
+                                    <td class="amount">
+                                        <span class="price"></span>
+                                    </td>
+                                </tr>-->
+                                <tr class="grand totals">
+                                    <th scope="row" colspan="1" class="mark">
+                                        <strong data-bind="text: title">
+                                            <?= /* @noEscape */ __("Order Total") ?>
+                                        </strong>
+                                    </th>
+                                    <td data-th="Order Total" class="amount">
+                                        <strong>
+                                                <span class="price">
+                                                    <?= /* @noEscape */ $proIdsArray['formatted_total']; ?>
+                                                </span>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <ul class="checkout methods items checkout-methods-items">
+                        <li class="item">
+                            <button class="action primary checkout mp-btn-checkout"
+                                    title="Go to Checkout"
+                                    data-role="proceed-to-checkout"
+                                    type="submit"
+                                    value='<?= /* @noEscape */ $sellerId ?>'
+                                    name="mpslitcart-checkout">
+                                <span><?= /* @noEscape */ __("Go to Checkout") ?></span>
+                            </button>
+                        </li>
+                        <?php $proceedUrl = $block->getUrl(
+                            'mpsplitcart/cartover/proceedtocheckout',
+                            ['sid'=>$sellerId]
+                        );?>
+                        <li class="item">
+                            <a class="action multicheckout"
+                               href="<?= $escaper->escapeUrl($proceedUrl) ?>"
+                            ><span><?= $escaper->escapeHtml(__('Check Out with Multiple Addresses')) ?></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <?php
+    }
+} else {
+    $total = $block->getCartTotal(); ?>
+    <form action="<?= $escaper->escapeUrl($block->getUrl('checkout/cart/updatePost')) ?>"
+          method="post"
+          id="form-validate"
+          data-mage-init='{"validation":{}}'
+          class="form form-cart">
+        <?= /* @escapeNotVerified */ $block->getBlockHtml('formkey'); ?>
+        <div class="wk-mpsplit-wrapper">
+            <div class="cart table-wrapper<?= /* @noEscape */ $mergedCells == 2 ? ' detailed' : ''; ?>">
+                <table id="shopping-cart-table"
+                       class="cart items data table"
+                       data-mage-init='{"shoppingCart":{"emptyCartButton": "action.clear",
+                       "updateCartActionContainer": "#update_cart_action_container"}}'>
+                    <caption role="heading" aria-level="2" class="table-caption">
+                        <?= /* @noEscape */ __('Shopping Cart Items') ?>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th class="col item" scope="col">
+                            <span><?= /* @noEscape */ __('Item') ?></span>
+                        </th>
+                        <th class="col price" scope="col">
+                            <span><?= /* @noEscape */ __('Price') ?></span>
+                        </th>
+                        <th class="col qty" scope="col">
+                            <span><?= /* @noEscape */ __('Qty') ?></span>
+                        </th>
+                        <th class="col subtotal" scope="col">
+                                <span>
+                                    <?= /* @noEscape */ __('Subtotal') ?>
+                                </span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <?php foreach ($block->getItems() as $_item): ?>
+                        <?= /* @noEscape */ $block->getItemHtml($_item) ?>
+                    <?php endforeach ?>
+                </table>
+            </div>
+            <div class="cart main actions">
+                <?php if ($block->getContinueShoppingUrl()): ?>
+                    <a class="action continue"
+                       href="<?= $escaper->escapeUrl($block->getContinueShoppingUrl()) ?>"
+                       title="<?= $escaper->escapeHtml(__('Continue Shopping')); ?>">
+                        <span>
+                            <?= /* @noEscape */ __('Continue Shopping') ?>
+                        </span>
+                    </a>
+                <?php endif; ?>
+                <button type="submit"
+                        name="update_cart_action"
+                        data-cart-empty=""
+                        value="empty_cart"
+                        title="<?= $escaper->escapeHtml(__('Clear Shopping Cart')); ?>"
+                        class="action clear" id="empty_cart_button">
+                    <span>
+                        <?= /* @noEscape */ __('Clear Shopping Cart'); ?>
+                    </span>
+                </button>
+                <button type="submit"
+                        name="update_cart_action"
+                        data-cart-item-update=""
+                        value="update_qty"
+                        title="<?= $escaper->escapeHtml(__('Update Shopping Cart')); ?>"
+                        class="action update">
+                    <span>
+                        <?= /* @noEscape */ __('Update Shopping Cart'); ?>
+                    </span>
+                </button>
+                <input type="hidden"
+                       value=""
+                       id="update_cart_action_container"
+                       data-cart-item-update=""/>
+            </div>
+        </div>
+    </form>
+    <form action="<?= $escaper->escapeUrl($block->getUrl('mpsplitcart/cartover/proceedtocheckout')) ?>"
+          method="post"
+          id="checkout-validate"
+          data-mage-init='{"validation":{}}'
+          class="form form-checkout">
+        <?= /* @escapeNotVerified */ $block->getBlockHtml('formkey'); ?>
+        <div class="cart-summary">
+            <div data-bind="scope:'giftOptionsCart'" id="gift-options-cart">
+            </div>
+            <div class="cart-summary1">
+                <strong class="summary title"><?= /* @noEscape */ __("Summary") ?></strong>
+                <div data-bind="scope:'block-totals'"
+                     class="cart-totals"
+                     id="cart-totals">
+                    <div data-bind="blockLoader: isLoading" class="table-wrapper">
+                        <table class="data table totals">
+                            <caption class="table-caption">Total</caption>
+                            <tbody>
+                            <tr class="totals sub">
+                                <th scope="row" colspan="1" class="mark">
+                                    <?= /* @noEscape */ __("Subtotal") ?>
+                                </th>
+                                <td data-th="Subtotal" class="amount">
+                                        <span class="price">
+                                            <?= /* @noEscape */ $total ?>
+                                        </span>
+                                </td>
+                            </tr>
+                            <!-- <tr class="totals shipping excl">
+                                <th class="mark" colspan="1" scope="row">
+                                    Shipping
+                                </th>
+                                <td class="amount">
+                                    <span class="price"></span>
+                                </td>
+                            </tr> -->
+                            <tr class="grand totals">
+                                <th scope="row" colspan="1" class="mark">
+                                    <strong data-bind="text: title">
+                                        <?= /* @noEscape */ __("Order Total") ?>
+                                    </strong>
+                                </th>
+                                <td data-th="Order Total" class="amount">
+                                    <strong>
+                                            <span class="price">
+                                                <?= /* @noEscape */ $total ?>
+                                            </span>
+                                    </strong>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <ul class="checkout methods items checkout-methods-items">
+                    <li class="item">
+                        <button class="action primary checkout mp-btn-checkout"
+                                title="Go to Checkout"
+                                data-role="proceed-to-checkout"
+                                type="submit"
+                                value='1'
+                                name="mpslitcart-disbale">
+                            <span><?= /* @noEscape */ __("Go to Checkout") ?></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <?php
+} ?>
+<?= /* @noEscape */ $block->getChildHtml('shopping.cart.table.after'); ?>
+<?php $shippingBlock = $block->getLayout()->createBlock(
+    \Magento\Checkout\Block\Cart\Shipping::class
+); ?>
+<script>
+    window.checkoutConfig = <?= /* @noEscape */ \Zend_Json::encode($shippingBlock->getCheckoutConfig()); ?>;
+</script>
+<?php $giftOptionsBlock = $block->getLayout()->createBlock(
+    \Magento\GiftMessage\Block\Cart\GiftOptions::class
+); ?>
+<script>
+    window.giftOptionsConfig = <?= /* @noEscape */ $giftOptionsBlock->getGiftOptionsConfigJson(); ?>;
+</script>
+

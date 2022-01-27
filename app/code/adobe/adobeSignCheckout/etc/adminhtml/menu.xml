@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Adobe_AdobeSignCheckout::adobeSign" title="Adobe Sign" translate="title"
+             module="adobe_adobeSignCheckout" parent="Magento_Backend::system" sortOrder="6000"
+             dependsOnModule="adobe_adobeSignCheckout" resource="Adobe_AdobeSignCheckout::adobeSign"/>
+        <add id="Adobe_AdobeSignCheckout::refreshToken" title="Refresh Token Helper" translate="title"
+             module="adobe_adobeSignCheckout" parent="Adobe_AdobeSignCheckout::adobeSign" sortOrder="10"
+             dependsOnModule="adobe_adobeSignCheckout" action="adobesigncheckout/token" resource="Adobe_AdobeSignCheckout::adobeSign"/>
+    </menu>
+</config>

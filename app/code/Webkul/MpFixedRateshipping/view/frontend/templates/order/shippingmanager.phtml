@@ -1,0 +1,64 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpFixedRateshipping
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php if ($block->getConfigData('active')): ?>
+    <?php // @codingStandardsIgnoreStart ?>
+    <form action="<?= /* @noEscape */ $block->getUrl('mpfixrate/shipping', ['_secure' => $block->getRequest()->isSecure()]) ?>" method="post" id="form-validate" data-mage-init='{"validation":{}}'  data-hasrequired="<?= /* @noEscape */ __('* Required Fields') ?>" autocomplete="off">
+    <?php // @codingStandardsIgnoreEnd ?>
+        <fieldset class="fieldset info">
+            <legend class="legend"><span><?= /* @noEscape */ __('Fixed Rate Shipping Details') ?></span>
+                <button type="submit" class="button wk-mp-btn action save primary">
+                    <span><span><?= /* @noEscape */ __('Save') ?></span></span>
+                </button>
+            </legend><br>
+            <?= /* @noEscape */ $block->getBlockHtml('formkey')?>
+            <div class="field required">
+            <?php if ($block->getConfigData('shippingappliedon') == 'vendor'): ?>
+                <label class="label"><span><?= /* @noEscape */ __("Shipping Cost"); ?>:</span></label>
+            <?php else: ?>
+                <label class="label"><span><?= /* @noEscape */ __("Shipping Cost"); ?>:</span></label>
+            <?php endif; ?>
+            <div class="control">
+                <div class="addon">
+                    <?php
+                        $price = $block->getHelperObject('pricingHelper')
+                            ->currency($block->_getCustomerData()->getMpshippingFixrate(), false, false);
+                    ?>
+                    <?php // @codingStandardsIgnoreStart ?>
+                    <input id="mpshipping_fixrate" type="text" name="mpshipping_fixrate" class="required validate-zero-or-greater" value="<?= /* @noEscape */ $block->_getCustomerData()->getMpshippingFixrate()!=''?$block->getCurrentyFormat($price):''; ?>" />
+                    <?php // @codingStandardsIgnoreEnd ?>
+                    <label class="addbefore"for="price">
+                        <strong><?= /* @noEscape */ $block->getHelper()->getCurrencySymbol();?></strong>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="field required">
+            <label class="label"><span><?= /* @noEscape */ __("Allow Free Shipping From Amount"); ?>:</span></label>
+            <div class="control">
+                <div class="addon">
+                    <?php
+                        $amount = $block->getHelperObject('pricingHelper')
+                            ->currency($block->_getCustomerData()
+                            ->getMpshippingFixrateUpto(), false, false);
+                    ?>
+                    <?php // @codingStandardsIgnoreStart ?>
+                    <input id="mpshipping_fixrate_upto" type="text" name="mpshipping_fixrate_upto" class="required validate-zero-or-greater" value="<?= /* @noEscape */ $block->_getCustomerData()->getMpshippingFixrate()!=''?$block->getCurrentyFormat($amount):''; ?>" />
+                    <?php // @codingStandardsIgnoreEnd ?>
+                    <label class="addbefore" for="price">
+                        <strong><?= /* @noEscape */ $block->getHelper()->getCurrencySymbol();?></strong>
+                    </label>
+                </div>
+            </div>
+        </div>
+        </fieldset>
+    </form>
+<?php endif; ?>
