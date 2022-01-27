@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpsplitcart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<!-- event checkout_cart_save_after -->
+    <event name="checkout_cart_save_after">
+        <observer name="webkul_mpsplitcart_checkout_cart_save_after_observer" instance="Webkul\Mpsplitcart\Observer\CheckoutCartSaveAfterObserver" />
+    </event>
+    <!-- event checkout_onepage_controller_success_action -->
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="webkul_mpsplitcart_checkout_onepage_controller_success_action_observer" instance="Webkul\Mpsplitcart\Observer\CheckoutOnepageControllerSuccessActionObserver" />
+    </event>
+    <!-- event multishipping_checkout_controller_success_action -->
+    <event name="multishipping_checkout_controller_success_action">
+        <observer name="webkul_mpsplitcart_multishipping_checkout_controller_success_action_observer" instance="Webkul\Mpsplitcart\Observer\MultishippingCheckoutControllerSuccessActionObserver" />
+    </event>
+    <!-- event sales_quote_remove_item -->
+    <event name="sales_quote_remove_item">
+        <observer name="webkul_mpsplitcart_sales_quote_remove_item_observer" instance="Webkul\Mpsplitcart\Observer\SalesQuoteRemoveItemObserver" />
+    </event>
+    <!-- event controller_action_predispatch_checkout_index_index -->
+    <event name="controller_action_predispatch_checkout_index_index">
+        <observer name="webkul_mpsplitcart_controller_action_predispatch_checkout_index_index_observer" instance="Webkul\Mpsplitcart\Observer\BeforeViewCart" />
+    </event>
+    <!-- event controller_action_predispatch_checkout_cart_index -->
+    <event name="controller_action_predispatch_checkout_cart_index">
+        <observer name="webkul_mpsplitcart_controller_action_predispatch_checkout_cart_index_observer" instance="Webkul\Mpsplitcart\Observer\ShoppingCart" />
+    </event>
+    <!-- event controller_action_postdispatch_checkout_cart_index -->
+    <event name="controller_action_postdispatch_checkout_cart_index">
+        <observer name="webkul_mpsplitcart_controller_action_predispatch_checkout_cart_index_observer" instance="Webkul\Mpsplitcart\Observer\ShoppingCartPost" />
+    </event>
+    <!-- event controller_action_predispatch_customer_account_logoutSuccess -->
+    <event name="controller_action_predispatch_customer_account_logoutSuccess">
+        <observer name="webkul_mpsplitcart_customer_logout" instance="Webkul\Mpsplitcart\Observer\CustomerLogOutObserver" />
+    </event>
+    <!-- event customer_login -->
+    <event name="customer_login">
+        <observer name="webkul_mpsplitcart_customer_login" instance="Webkul\Mpsplitcart\Observer\CustomerLogInObserver" />
+    </event>
+</config>

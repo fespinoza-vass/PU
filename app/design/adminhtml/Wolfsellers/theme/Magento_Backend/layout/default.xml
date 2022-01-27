@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <css src="css/extends.css"/>
+    </head>
+    <body>
+    	<referenceContainer name="header">
+    	    <block class="Magento\Backend\Block\Page\Header" name="logo" before="-">
+    	        <arguments>
+    	            <argument name="show_part" xsi:type="string">logo</argument>
+    	            <argument name="logo_image_src" xsi:type="string">images/logo_admin.png</argument>
+    	        </arguments>
+    	    </block>
+    	</referenceContainer>
+    </body>
+</page>

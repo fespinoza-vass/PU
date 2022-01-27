@@ -1,0 +1,134 @@
+<form id="oauth">
+    <style type="text/css" scoped>
+        .hint { margin-left: 110px;margin-bottom: 20px;margin-top: -5px }
+        label { width: 100px;display:inline-block }
+        input { width: 90% !important; }
+        .row { margin-bottom: 10px }
+    </style>
+    <div>
+        This Helper will help you authenticate to Adobe Sign using OAUTH For more information regarding OAUTH 2.0 authentication, see <a target="_blank" href="https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobedocs/adobe-sign/master/gstarted/configure_oauth.md">here</a>.
+        <br><br>
+    </div>
+    <div class="row">
+        <label for="endpoint">Endpoint: </label>
+        <input id="endpoint" name="endpoint" class="input-text admin__control-text" value="https://secure.na1.echosign.com/">
+    </div>
+    <div class="hint">
+        Endpoint can be located by logging into Adobe Sign and copying the URL.
+    </div>
+    <div class="row">
+        <label for="scope">Scope: </label>
+        <input id="scope" name="scope" class="input-text admin__control-text" value="scope=user_login:self+agreement_read:account+agreement_write:account+agreement_send:account+webhook_write:account+webhook_read:account">
+    </div>
+    <div class="hint">
+        The scope of permissions needed for OAUTH.
+    </div>
+    <div class="row">
+        <label for="clientId">Client ID: </label>
+        <input id="clientId" name="clientSecret" class="input-text admin__control-text">
+    </div>
+    <div class="hint">
+        OAUTH Client ID. You can get this by creating an Application in Adobe Sign by following the instructions <a target="_blank" href="https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobedocs/adobe-sign/master/gstarted/create_app.md">here</a>.
+    </div>
+    <div class="row">
+        <label for="clientSecret">Client Secret: </label>
+        <input id="clientSecret" name="clientSecret" class="input-text admin__control-text">
+    </div>
+    <div class="hint">
+        OAUTH Client Secret. You can get this by creating an Application in Adobe Sign by following the instructions <a target="_blank" href="https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobedocs/adobe-sign/master/gstarted/configure_oauth.md">here</a>.
+    </div>
+    <div class="row">
+        <label for="redirectUrl">Redirect URL: </label>
+        <input id="redirectUrl" name="redirectUrl" class="input-text admin__control-text">
+    </div>
+    <div class="hint">
+        URL path to this page.
+    </div>
+    <div style="margin-top: 30px">
+        <button onclick="send()">Send</button>
+    </div>
+</form>
+
+<div id="info" style="display: none;font-size: 18px">
+    <div>Copy and paste these credentials from here into your <a href="<?php echo $block->getAdobeSignConfigUrl() ?>" target="_blank">Adobe Sign configuration</a> in Magento.<br><br></div>
+    <div id="webAccessPoint"></div>
+    <div id="scopeText"></div>
+    <div id="clientIdText"></div>
+    <div id="clientSecretText"></div>
+    <div id="redirectUrlText"></div>
+    <div id="apiAccessPoint"></div>
+    <div id="refreshToken"></div>
+    <div id="accessToken"></div>
+
+</div>
+<script>
+    function send() {
+        localStorage.setItem('clientId', document.getElementById('clientId').value);
+        localStorage.setItem('clientSecret', document.getElementById('clientSecret').value);
+        localStorage.setItem('redirectUrl', document.getElementById('redirectUrl').value);
+        localStorage.setItem('scope', document.getElementById('scope').value);
+
+        let url = document.getElementById('endpoint').value + '/public/oauth?redirect_uri=';
+        url += document.getElementById('redirectUrl').value;
+        url += '&response_type=code&client_id=';
+        url += document.getElementById('clientId').value;
+        url += '&' + document.getElementById('scope').value;
+
+        window.open(url);
+    }
+
+    function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    const code = getParameterByName('code');
+    if (code) {
+        document.getElementById('oauth').style.display = 'none';
+        document.getElementById('info').style.display = 'block'
+
+        let apiHost = getParameterByName('api_access_point');
+        if (apiHost.endsWith('/')) {
+            apiHost = apiHost.substr(0, apiHost.length - 1);
+        }
+
+        document.getElementById('apiAccessPoint').innerHTML = '<b>API Access Point:</b> ' + apiHost;
+        document.getElementById('webAccessPoint').innerHTML = '<b>Web Access Point:</b> ' + getParameterByName('web_access_point');
+
+        const code = getParameterByName('code');
+        const clientId = localStorage.getItem('clientId');
+        const clientSecret = localStorage.getItem('clientSecret');
+        const redirectUrl = localStorage.getItem('redirectUrl');
+
+        document.getElementById('scopeText').innerHTML = '<b>Scope:</b> ' + localStorage.getItem('scope');
+        document.getElementById('clientIdText').innerHTML = '<b>Client ID:</b> ' + clientId;
+        document.getElementById('clientSecretText').innerHTML = '<b>Client Secret:</b> ' + clientSecret;
+        document.getElementById('redirectUrlText').innerHTML = '<b>Redirect URL:</b> ' + redirectUrl;
+
+        let params = 'code=';
+        params += code;
+        params += '&client_id=';
+        params += clientId;
+        params += '&client_secret=';
+        params += clientSecret;
+        params += '&redirect_uri=';
+        params += redirectUrl;
+        params += '&grant_type=authorization_code';
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', apiHost + '/oauth/token', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            const data = JSON.parse(xhr.responseText);
+            document.getElementById('refreshToken').innerHTML = '<b>Refresh Token:</b> ' + data['refresh_token'];
+            document.getElementById('accessToken').innerHTML = '<b>Access Token:</b> ' + data['access_token'];
+        };
+        xhr.send(params);
+    } else {
+        document.getElementById('redirectUrl').value = window.location.href;
+    }
+</script>

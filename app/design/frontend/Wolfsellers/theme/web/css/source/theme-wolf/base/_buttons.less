@@ -1,0 +1,69 @@
+//
+//  Buttons
+//  ---------------------------------------------
+
+@button-primary__background: @color-primary;
+@button-primary__color: @color-white;
+@button-primary__border: 0;
+@button__padding: 16px 15px;
+@button__font-size: 1.5rem;
+@button__font-weight: 300;
+@button__border-radius:	@radius8;
+@button-primary__hover__background:	@color-a-hovers;
+@_button-background-hover: lighten(@color-primary, 15%);
+@button-primary__hover__border:	0;
+@button-primary__hover__color: @color-white;
+@button-primary__font-weight: normal;
+@button__font-size__l: 1.5rem;
+@button__border: 0;
+@_button-border-hover: 0;
+@color-blue2: @color-primary;
+
+// @button__line-height__l: 1;
+@button__padding__l: 14px 15px;
+
+body{
+    a,
+    a.link{
+        transition: all @time3;
+        &:hover{
+            transition: all @time3;
+        }
+        &:focus,
+        &:active,
+        &:visited{
+            color: @color-primary;
+            text-decoration: none;
+        }
+        .lib-link(
+            @_link-color: @color-primary,
+            @_link-color-hover: @color-a-hovers,
+            @_link-text-decoration-hover: none,
+            @_link-text-decoration-active: none
+        );
+    }
+}
+
+.lib-hovers(){
+    @media @mdmin{
+        &:hover{
+            color: @color-a-hovers;
+        }
+    }
+}
+
+.lib-hbefore(){
+    @media @mdmin{
+        &:hover::before{
+            color: @color-a-hovers;
+        }
+    }
+}
+
+.lib-hafter(){
+    @media @mdmin{
+        &:hover::after{
+            color: @color-a-hovers;
+        }
+    }
+}
