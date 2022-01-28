@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <type name="Magento\Framework\Event\ManagerInterface">
+        <plugin name="list_all_dispatched_event" type="adobe\adobeSignCheckout\Plugin\ListDispatchedEvents" sortOrder="10" disabled="true"/>
+    </type>
+</config>

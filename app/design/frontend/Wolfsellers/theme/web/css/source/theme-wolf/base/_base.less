@@ -1,0 +1,234 @@
+
+& when (@media-common = true) {
+	.nav-open{
+		body{
+			overflow: hidden;
+		}
+	}
+
+	body{
+		
+		*{
+		    box-sizing: border-box;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		*:hover,
+		*:active,
+		*:focus
+		{
+		   -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+		}
+
+		@media @mdmin{
+			a:hover
+			a:before,
+			a:after,
+			a:hover:before,
+			a:hover:after{
+				transition: all @time3;
+			}		
+		}
+
+		// forms
+		
+		input:focus,
+		textarea {
+		    outline: 0 !important;
+		    -webkit-box-shadow: none !important;
+		    box-shadow: none !important;
+		}
+		input:-webkit-autofill,
+		input:-webkit-autofill:hover, 
+		input:-webkit-autofill:focus, 
+		input:-webkit-autofill:active,
+		input:-internal-autofill-selected  {
+		    -webkit-box-shadow: 0 0 0 30px @white inset !important;
+		}
+		
+		input[type="text"],
+		input[type="password"],
+		input[type="url"],
+		input[type="tel"],
+		input[type="search"],
+		input[type="number"],
+		input[type="datetime"],
+		input[type="email"],
+		select{
+		    .lib-css(border-color, @lines);
+		    .lib-css(height, 40px);
+		    .lib-css(border-radius, @radius4);
+		}
+
+		input[type="text"]#search{
+			height: 48px;
+			@media @mdmax{
+				padding-left: 25px;
+			}
+		}
+
+		input[type="text"]:focus,
+		input[type="password"]:focus,
+		input[type="url"]:focus,
+		input[type="tel"]:focus,
+		input[type="search"]:focus,
+		input[type="number"]:focus,
+		input[type="datetime"]:focus,
+		input[type="email"]:focus{
+		    box-shadow: none;
+		    outline: 0;
+		    border-color: @primary;
+		}
+
+		form{
+			> fieldset,
+			> .fieldset{
+				> .field{
+					.lib-checkboxs();
+					.lib-radio();
+					> .label{
+						font-size: 1.2rem;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+
+		// tables
+
+		table.table:not(.totals){
+		    thead{
+		        tr th{
+		            border-bottom: 1px solid @lines;
+		        }
+		    }
+		    tbody{
+		        tr{
+		            background: @gray;
+		            &:nth-child(2n+1){
+		                background: @white;
+		            }
+		            td{
+		                border: 0;
+		            }
+		        }
+		    }
+		}
+
+		//  Inputs
+
+		input{
+			&.input-text{
+				&.mage-error{
+				    border:solid 1px @red;
+				}
+			}
+		}
+		[data-content-type='row'][data-appearance='contained'] {
+			width: 100%;
+		}
+
+		// titles
+
+		&:not(.account):not(.checkout-index-index){
+			.page-main {
+			    .page-title-wrapper {
+			        font-size: 2.6rem;
+			        font-weight: bold;
+			        margin-top: 35px;
+			        width: 100%;
+			    }
+			    legend.legend{
+			        border-color: @black;
+			    }
+			    .block{
+			        .block-title{
+			            strong{
+			                font-weight: normal;
+			            }
+			        }
+			    }
+			    .block.related,
+			    .block.upsell{
+			        strong{
+			            color: @black;
+			            font-weight: 500;
+			            font-size: 3rem;
+			            width: 100%;
+			            text-align: center;
+			            float: left;
+			            margin: 0;
+			        }
+			    }
+			}
+		}
+
+// page wrapper
+
+		.page-wrapper{
+			overflow: hidden;
+			background: @gray;
+		}
+
+		&:not(.checkout-index-index){
+			.page-wrapper{
+				@media @mdmin{
+					padding-top: 0;
+				}
+			}
+		}
+
+//breadcrumbs
+
+		.page-wrapper{
+		    .breadcrumbs {
+		        float: left;
+		        width: 100%;
+		        max-width: none;
+		        margin: 15px 0;
+		        padding: 0 15px;
+		        display: block;
+
+		        > .items {
+		            max-width: @layout__max-width;
+		            margin: auto;
+		            width: 100%;
+		            padding: 0 10px;
+		            .item {
+		                &:not(:last-child):after {
+		                    color: @black;
+		                    vertical-align: middle;
+		                }
+		                a,
+	                    strong{
+	                    	color: @black;
+	                    	font-size: 1.4rem;
+	                    	font-weight: 100;
+	                    	@media @mdmax{
+	                    		font-size: 1.1rem;;
+	                    	}
+	                    }
+	                    @media @mdmin{
+	                    	a:hover{
+	                    		color: @primary;
+	                    		text-decoration: none;
+	                    	}
+	                    }
+		            }
+		        }
+
+		        ~ div.page-main,
+		        ~ main.page-main {
+		            margin-top: 0;
+		        }
+		    }
+		}
+	}
+	// loader
+
+	.loading-mask .loader > img{
+		max-width: 50px;
+	}
+}
