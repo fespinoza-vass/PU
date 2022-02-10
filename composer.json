@@ -19,15 +19,18 @@
         }
     },
     "require": {
+        "amasty/checkout-graph-ql": "^1.1",
         "amasty/feed": "^2.6",
         "amasty/label": "^2.1",
         "amasty/module-elastic-search": "^1.13",
         "amasty/module-elastic-search-graphql": "^1.0",
+        "amasty/module-one-step-checkout-pro-package": "^2.0",
         "amasty/module-promo-banners": "^1.1",
         "amasty/module-promo-countdown": "^1.1",
         "amasty/module-special-promo-pro": "^2.8",
         "amasty/module-store-locator": "^2.5",
         "amasty/product-labels-graphql": "^1.0",
+        "amasty/product-tabs": "^1.2",
         "amasty/promo": "^2.11",
         "amasty/shopby": "^2.17",
         "amasty/shopby-graphql": "^1.0",
