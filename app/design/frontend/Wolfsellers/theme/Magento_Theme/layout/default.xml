@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header-wrapper">                
+            <block class="Magento\Framework\View\Element\Template" name="links.login" template="Magento_Theme::html/header/loginaccount.phtml" before="minicart" />
+        </referenceContainer>
+
+        <referenceContainer name="header.panel.wrapper">
+            <container name="panel-perfumes" as="panel-perfumes" label="Menu top header" htmlTag="div" htmlClass="panel-perfumes">
+                <block class="Magento\Cms\Block\Block" name="main.nav" before="logo">
+                    <arguments>
+                    <argument name="block_id" xsi:type="string">panel-perfumes</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+       
+        <referenceContainer name="footer">
+            <container name="footer-perfumes" as="footer-perfumes" label="Footer perfumes" htmlTag="div" htmlClass="footer-perfumes">
+                <block class="Magento\Cms\Block\Block" name="footer-perfumes-cms" before="form.subscribe">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-perfumes</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+
+        <move element="top.search" destination="header-wrapper" after="logo" />
+        <move element="devoluciones-y-pedidos" destination="header-wrapper" after="top.search" />
+        <move element="messages" destination="page.wrapper" before="-" />
+
+        <referenceBlock name="header.panel" remove="true"/>
+        <referenceBlock name="store.links" remove="true" />
+        <referenceBlock name="header.links" remove="true"/>
+        <referenceBlock name="authorization-link" remove="true"/>
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="catalog.compare.link" remove="true"/>
+        <referenceBlock name="category.product.addto.compare" remove="true" />
+        <referenceBlock name="view.addto.compare" remove="true" />
+        <referenceBlock name="div.sidebar.additional" remove="true" />
+        <referenceContainer name="authentication-popup" remove="true"/>
+
+    </body>
+</page>
