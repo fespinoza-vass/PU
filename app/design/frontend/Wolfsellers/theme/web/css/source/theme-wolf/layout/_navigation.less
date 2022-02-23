@@ -1,12 +1,19 @@
 @navigation__background: @primary;
 @navigation-desktop-level0-item__color: @white;
+@navigation-desktop-level0-item__hover__color: @a-hovers;
 
 & when (@media-common = true) {
 	.sections.nav-sections{
 		position: fixed;
 	    left: 0;
-	    top: 94px;
+	    top: 106px;
 	    width: 100%;
-	    z-index: 100;
+	    z-index: 10;
+	    margin: 0;
+	    nav.navigation{
+	    	.level0 .submenu a{
+	    		color: @primary;
+	    	}
+	    }
 	}
 }
