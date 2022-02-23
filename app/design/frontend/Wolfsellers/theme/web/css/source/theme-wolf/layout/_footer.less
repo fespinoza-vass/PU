@@ -1,3 +1,29 @@
 & when (@media-common = true) {
-	
+	footer{
+		.footer.content{
+			float: left;
+			width: 100%;
+			max-width: none;
+			padding: 0;
+		}
+		.footer-perfumes{
+			> div{
+				.footer-content{
+					float: left;
+					width: 100%;
+					background: @primary;
+					#footerPU{
+						display: flex;
+						justify-content: space-between;
+						margin: auto;
+						max-width: @layout__max-width;
+						h3,
+						a{
+							color: @white;
+						}
+					}
+				}
+			}
+		}
+	}
 }
