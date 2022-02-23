@@ -22,7 +22,7 @@
         </referenceContainer>
        
         <referenceContainer name="footer">
-            <container name="footer-perfumes" as="footer-perfumes" label="Footer perfumes" htmlTag="div" htmlClass="footer-perfumes">
+            <container name="footer-pu" as="footer-pu" label="Footer perfumes" htmlTag="div" htmlClass="footer-perfumes">
                 <block class="Magento\Cms\Block\Block" name="footer-perfumes-cms" before="form.subscribe">
                     <arguments>
                         <argument name="block_id" xsi:type="string">footer-perfumes</argument>
