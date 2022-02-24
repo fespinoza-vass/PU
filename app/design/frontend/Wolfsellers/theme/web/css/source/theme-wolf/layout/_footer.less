@@ -1,29 +1,119 @@
 & when (@media-common = true) {
 	footer{
+        padding-bottom: 0;
+        .footer-icons{
+            ul{
+                display: flex;
+                align-content: center;
+                justify-content: space-around;
+                height: 210px;
+                align-items: center;
+                font-size: 22px;
+                text-align: center;
+                max-width: 1386px;
+                margin: 0 auto !important;
+                li{
+                    a{
+                        span{
+                            font-size: 100px;
+                            color: @black;
+                        }
+                        p{
+                            color: @black;
+                        }
+                    }
+                }
+            }
+        }
 		.footer.content{
 			float: left;
 			width: 100%;
+            height: 480px;
 			max-width: none;
 			padding: 0;
-		}
-		.footer-perfumes{
-			> div{
-				.footer-content{
-					float: left;
-					width: 100%;
-					background: @primary;
-					#footerPU{
-						display: flex;
-						justify-content: space-between;
-						margin: auto;
-						max-width: @layout__max-width;
-						h3,
-						a{
-							color: @white;
-						}
-					}
-				}
-			}
+            .footer-perfumes{
+                > div{
+                    .footer-content{
+                        float: left;
+                        width: 100%;
+                        background: @primary;
+                        .logo-footer{
+                            text-align: center;
+                            margin: 60px 0 38px 0;
+                            img{
+                                width: 326px;
+                                height: 56px;
+                            }
+                        }
+                        #footerPU{
+                            display: flex;
+                            justify-content: space-between;
+                            margin: auto;
+                            max-width: @layout__max-width;
+                            h3{
+                                font-size: 20px;
+                                text-transform: uppercase;
+                                margin-bottom: 50px;
+                                color: @white;
+                                &.jump-line{
+                                    margin-bottom: 31px;
+                                }
+                            }
+                            a{
+                                font-size: 16px;
+                                color: @white;
+                            }
+                            .mp{
+                                margin-bottom: 31px;
+                                ul{
+                                    display: flex;
+                                    flex-direction: row;
+                                    li{
+                                        margin-right: 10px;
+                                        &:last-child{
+                                            margin-right: unset;
+                                        }
+                                    }
+                                }
+                            }
+                            .social{
+                                margin-bottom: 50px;
+                                h3{
+                                    margin-bottom: 10px;
+                                }
+                                ul{
+                                    display: flex;
+                                    flex-direction: row;
+                                    li{
+                                        margin-right: 15px;
+                                        a{
+                                            font-size: 22px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .footer-libros{
+                            padding: 23px 0 43px;
+                            border-top: 1px solid @white;
+                            max-width: 1386px;
+                            margin: 0 auto;
+                            text-align: right;
+                            a{
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-end;
+                                font-size: 16px;
+                                color: @white;
+                                span{
+                                    font-size: 27px;
+                                    margin-right: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 		}
 	}
 }
