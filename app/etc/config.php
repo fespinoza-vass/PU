@@ -578,7 +578,8 @@ return [
     'admin_user' => [
         'locale' => [
             'code' => [
-                'en_US'
+                'en_US',
+                'es_PE'
             ]
         ]
     ]
