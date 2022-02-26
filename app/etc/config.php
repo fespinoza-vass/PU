@@ -62,7 +62,7 @@ return [
         'default' => [
             'general' => [
                 'locale' => [
-                    'code' => 'es_MX'
+                    'code' => 'es_PE'
                 ]
             ],
             'dev' => [
