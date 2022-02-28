@@ -62,7 +62,7 @@ return [
         'default' => [
             'general' => [
                 'locale' => [
-                    'code' => 'es_MX'
+                    'code' => 'es_PE'
                 ]
             ],
             'dev' => [
@@ -578,7 +578,8 @@ return [
     'admin_user' => [
         'locale' => [
             'code' => [
-                'en_US'
+                'en_US',
+                'es_PE'
             ]
         ]
     ]
