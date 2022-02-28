@@ -106,7 +106,9 @@
                     .block-search{
                         float: left;
                         width: 100%;
-                        max-width: 485px;
+                        max-width: 574px;
+                        padding: 0;
+                        margin: 0 15px;
                         input.input-text{
                             padding-left: 20px;
                         }
@@ -126,6 +128,38 @@
                                 font-weight: bold;;
                             }
                         }
+                        .amsearch-form-container{
+                            &.-opened{
+                                .amsearch-wrapper-input{
+                                    position: static;
+                                }
+                                .amsearch-close{
+                                    display: none !important;
+                                }
+                                .amsearch-loupe{
+                                    .lib-center-element(
+                                    @x: 0,
+                                    @eleft: auto,
+                                    @eright: 0
+                                    );
+                                    width: 40px;
+                                    height: 38px;
+                                    background: @primary;
+                                    border-radius: 0 @radiusitems @radiusitems 0;
+                                    .lib-icon-font(
+                                        @_icon-font-content: @icon-search,
+                                        @_icon-font-size: 2rem,
+                                        @_icon-font-color: @white,
+                                        @_icon-font-position: before,
+                                        @_icon-font-display: inline-block,
+                                        @font-weight: bold
+                                    ){font-weight: normal;};
+                                    &:before{
+                                        content: "X";
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 .cont-loginaccount{
@@ -143,7 +177,7 @@
                         }
                     }
                     > span{
-                        margin-right: 1rem;
+                        margin-left: 1rem;
                         &:before{
                             font-size: 2.2rem;
                             color: @primary;
@@ -174,13 +208,10 @@
                                 position: relative;
                                 margin-right: 15px;
                                 &:after{
-                                    content: "";
+                                    content: "o";
                                     position: absolute;
-                                    right: -9px;
+                                    right: -11px;
                                     top: 0;
-                                    width: 1px;
-                                    height: 100%;
-                                    background: @black;
                                 }
                             }
                         }
@@ -203,8 +234,8 @@
                             }
                             .icon-uniE622{
                                 position: absolute;
-                                left: 35px;
-                                top: 20px;
+                                left: 80px;
+                                top: 23px;
                                 z-index: 1;
                                 transform: rotate(0deg);
                                 transition: all @time3;
@@ -233,8 +264,7 @@
                             position: absolute;
                             top: 20px;
                             left: 10px;
-                            background: @white;
-                            border: 1px solid @primary;
+                            background: @primary;
                             border-radius: @radius8;
                             list-style: none;
                             padding: 0;
@@ -248,6 +278,7 @@
                                     float: left;
                                     width: 100%;
                                     margin: 0;
+                                    color: @white;
                                     @media @mdmax{
                                         padding: 10px 20px;
                                         font-size: 1.4rem;

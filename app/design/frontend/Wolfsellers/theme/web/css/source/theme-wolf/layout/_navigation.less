@@ -3,6 +3,12 @@
 @navigation-desktop-level0-item__hover__color: @a-hovers;
 
 & when (@media-common = true) {
+	.nav-up{
+		.sections.nav-sections{
+			top: 77px;
+			transition: top @time3;
+		}	
+	}
 	.sections.nav-sections{
 		position: fixed;
 	    left: 0;
@@ -10,6 +16,7 @@
 	    width: 100%;
 	    z-index: 10;
 	    margin: 0;
+	    transition: top @time3;
 	    nav.navigation{
 	    	.level0 .submenu a{
 	    		color: @primary;
