@@ -27,6 +27,7 @@
         "amasty/module-one-step-checkout-pro-package": "^2.0",
         "amasty/module-promo-banners": "^1.1",
         "amasty/module-promo-countdown": "^1.1",
+        "amasty/module-shipping-bar": "^1.1",
         "amasty/module-special-promo-pro": "^2.8",
         "amasty/module-store-locator": "^2.5",
         "amasty/product-labels-graphql": "^1.0",

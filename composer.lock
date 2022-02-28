@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a865a21674dbc9eeba352bcfab6249c",
+    "content-hash": "da22cd7b9a51fb9fa1c5a751e6a3f59c",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -107,7 +107,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/cron-schedule-list-1.0.5-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": "^1.3.5",
                 "php": "7.0.2|7.0.4|~7.0.6|^7.1.0"
             },
             "type": "magento2-module",
@@ -158,7 +158,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/geoip-1.5.5-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": "*",
                 "php": "^7.1.0"
             },
             "type": "magento2-module",
@@ -215,7 +215,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-advanced-conditions-1.5.4-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.4.7",
                 "php": "^7.3.0"
             },
             "type": "magento2-module",
@@ -240,7 +240,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-banners-lite-1.0.19-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "php": "^7.1.0"
             },
             "type": "magento2-module",
@@ -400,7 +400,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-elastic-search-1.13.3-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "amasty/cron-schedule-list": ">=1.0.5",
                 "amasty/xsearch": ">=1.17.11",
                 "elasticsearch/elasticsearch": ">=5.1",
@@ -433,7 +433,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-elastic-search-graphql-1.0.5-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "amasty/module-elastic-search": ">=1.13.3",
                 "amasty/xsearch": ">=1.17.11",
                 "magento/module-catalog-graph-ql": "*",
@@ -514,7 +514,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-mage24fix-1.0.6-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "php": "^7.1.0"
             },
             "type": "magento2-module",
@@ -569,7 +569,6 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-one-step-checkout-pro-package-2.0.0-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.13.1",
                 "amasty/module-single-step-checkout": ">=2.8.1",
                 "php": "^7.3.0"
             },
@@ -587,7 +586,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-promo-banners-1.1.10-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "php": "^7.3.0"
             },
             "type": "magento2-module",
@@ -612,7 +611,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-promo-countdown-1.1.1-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "php": "^7.3.0"
             },
             "type": "magento2-module",
@@ -637,7 +636,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-salesrulewizard-1.0.3-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "amasty/promo": ">=2.11.0",
                 "php": "^7.1.0"
             },
@@ -654,6 +653,31 @@
                 "Commercial"
             ],
             "description": "Sales Rule Wizard by Amasty"
+        },
+        {
+            "name": "amasty/module-shipping-bar",
+            "version": "1.1.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/enterprise/packages/module-shipping-bar-1.1.3-ee.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.13.1",
+                "php": "^7.1.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\ShippingBar\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Free Shipping Bar by Amasty"
         },
         {
             "name": "amasty/module-shop-by-base",
@@ -721,7 +745,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-single-step-checkout-4.0.0-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.4.5",
                 "amasty/geoip": ">=1.5.5",
                 "amasty/module-checkout-delivery-date": ">=1.0.0",
                 "amasty/module-checkout-gift-wrap": ">=1.0.0",
@@ -729,7 +753,7 @@
                 "amasty/module-checkout-style-switcher": ">=1.0.0",
                 "amasty/module-checkout-thank-you-page": ">=1.0.0",
                 "amasty/module-google-address-autocomplete": ">=1.0.0",
-                "amasty/module-one-step-checkout-core": ">=1.0.0",
+                "amasty/module-one-step-checkout-core": ">=1.1.0",
                 "php": "^7.3.0"
             },
             "suggest": {
@@ -758,7 +782,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-special-promo-2.9.1-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "amasty/module-banners-lite": ">=1.0.19",
                 "amasty/rgrid": ">=1.0.7",
                 "php": "^7.3.0"
@@ -789,7 +813,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/module-special-promo-pro-2.8.5-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "amasty/module-special-promo": ">=2.9.1",
                 "php": "^7.3.0"
             },
@@ -844,8 +868,8 @@
                 "url": "https://composer.amasty.com/enterprise/packages/product-labels-graphql-1.0.5-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
-                "amasty/label": ">=2.1.2",
+                "amasty/base": ">=1.13.1",
+                "amasty/label": ">=2.2.0",
                 "php": "^7.1.0"
             },
             "type": "magento2-module",
@@ -870,7 +894,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/product-tabs-1.2.3-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "php": ">=7.3.0"
             },
             "type": "magento2-module",
@@ -895,7 +919,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/promo-2.11.0-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "amasty/module-advanced-conditions": ">=1.5.4",
                 "amasty/module-banners-lite": ">=1.0.19",
                 "amasty/module-salesrulewizard": ">=1.0.3",
@@ -928,7 +952,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/rgrid-1.0.7-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "php": "~5.6.5|7.0.2|7.0.4|~7.0.6|^7.1.0"
             },
             "type": "magento2-module",
@@ -1044,7 +1068,7 @@
                 "url": "https://composer.amasty.com/enterprise/packages/xsearch-1.17.11-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.12.19",
+                "amasty/base": ">=1.13.1",
                 "magento/module-cms": "*",
                 "php": "^7.3.0"
             },
@@ -1503,12 +1527,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Assert\\": "lib/Assert"
-                },
                 "files": [
                     "lib/Assert/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Assert\\": "lib/Assert"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2427,8 +2451,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector",
-                    "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
+                    "Doctrine\\Inflector\\": "lib/Doctrine/Inflector",
+                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3315,12 +3339,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3373,12 +3397,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Promise\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3462,12 +3486,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3660,12 +3684,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Illuminate\\Support\\": ""
-                },
                 "files": [
                     "helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Illuminate\\Support\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3769,12 +3793,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Zxing\\": "lib/"
-                },
                 "files": [
                     "lib/Common/customFunctions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Zxing\\": "lib/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -23007,12 +23031,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "JmesPath\\": "src/"
-                },
                 "files": [
                     "src/JmesPath.php"
-                ]
+                ],
+                "psr-4": {
+                    "JmesPath\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -26081,12 +26105,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -26157,12 +26181,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Grapheme\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Grapheme\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -26237,12 +26261,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Idn\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -26319,12 +26343,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -26403,12 +26427,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -26477,12 +26501,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php72\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php72\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -26550,12 +26574,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php73\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php73\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -26626,12 +26650,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php80\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -26706,12 +26730,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php81\\": ""
-                },
                 "files": [
                     "bootstrap.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php81\\": ""
+                },
                 "classmap": [
                     "Resources/stubs"
                 ]
@@ -27250,12 +27274,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\String\\": ""
-                },
                 "files": [
                     "Resources/functions.php"
                 ],
+                "psr-4": {
+                    "Symfony\\Component\\String\\": ""
+                },
                 "exclude-from-classmap": [
                     "/Tests/"
                 ]
@@ -27747,13 +27771,6 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Safe\\": [
-                        "lib/",
-                        "deprecated/",
-                        "generated/"
-                    ]
-                },
                 "files": [
                     "deprecated/apc.php",
                     "deprecated/libevent.php",
@@ -27844,7 +27861,14 @@
                     "generated/yaz.php",
                     "generated/zip.php",
                     "generated/zlib.php"
-                ]
+                ],
+                "psr-4": {
+                    "Safe\\": [
+                        "lib/",
+                        "deprecated/",
+                        "generated/"
+                    ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -28372,6 +28396,9 @@
             "autoload": {
                 "psr-4": {
                     "Jose\\": "src/",
+                    "Jose\\Component\\Core\\Util\\Ecc\\": [
+                        "src/Ecc"
+                    ],
                     "Jose\\Component\\Signature\\Algorithm\\": [
                         "src/SignatureAlgorithm/ECDSA",
                         "src/SignatureAlgorithm/EdDSA",
@@ -28379,9 +28406,6 @@
                         "src/SignatureAlgorithm/None",
                         "src/SignatureAlgorithm/RSA",
                         "src/SignatureAlgorithm/Experimental"
-                    ],
-                    "Jose\\Component\\Core\\Util\\Ecc\\": [
-                        "src/Ecc"
                     ],
                     "Jose\\Component\\Encryption\\Algorithm\\": [
                         "src/EncryptionAlgorithm/Experimental"
@@ -28693,12 +28717,12 @@
             },
             "type": "magento2-module",
             "autoload": {
-                "psr-4": {
-                    "WolfSellers\\EnableDisableTfa\\": ""
-                },
                 "files": [
                     "registration.php"
-                ]
+                ],
+                "psr-4": {
+                    "WolfSellers\\EnableDisableTfa\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
