@@ -19247,7 +19247,7 @@ Purchased,Comprado,module,Magento_Paypal,
 Dynamic,Dinámico,module,Magento_Paypal,
 expires,expira,module,Magento_Paypal,
 Enable this Solution,Habilitar esta Solución,module,Magento_Paypal,
-Login,Ingresar,module,Magento_Paypal,
+Login,Iniciar sesión,module,Magento_Paypal,
 Void,inválido,module,Magento_Paypal,
 Medium,Media,module,Magento_Paypal,
 Sandbox Mode,Modo Sandbox,module,Magento_Paypal,
@@ -25132,7 +25132,7 @@ Page not found.,No se encuentra la página.,module,Magento_Wishlist,
 Product Name,Nombre del Producto,module,Magento_Wishlist,
 "Email template chosen based on theme fallback when ""Default"" option is selected.","Plantilla de Email seleccionada con base en el tema recurrente cuando se selecciona la opción ""Por Defecto"".",module,Magento_Wishlist,
 Out of stock,Sin existencias,module,Magento_Wishlist,
-Add to Cart,Agregar,module,Magento_Wishlist,
+Add to Cart,Añadir a la bolsa,module,Magento_Wishlist,
 In stock,En existencias,module,Magento_Wishlist,
 * Required Fields,* Campos Requeridos,module,Magento_Wishlist,
 Comment,Comentario,module,Magento_Wishlist,
@@ -25917,7 +25917,7 @@ When Invoice Created,Cuando se creó la factura,module,Vertex_Tax,
 When Order Status Is Changed,Cuando se cambia el estado de la orden,module,Vertex_Tax,
 When to send invoice to Vertex,Cuando enviar la factura a Vertex,module,Vertex_Tax,
 Your store credit was successfully removed,Tu crédito de tienda se removió correctamente,module,Magento_CustomerBalance,
-Create Account,Solicitar Cuenta
+Create Account,Crear Cuenta
 "Search by SKU or Product Name","Buscar por SKU o nombre de producto"
 "Enter full or partial number...","Ingrese el número total o parcial ..."
 "Order Number","Número de orden"

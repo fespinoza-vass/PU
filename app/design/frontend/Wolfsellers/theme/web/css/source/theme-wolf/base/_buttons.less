@@ -18,6 +18,7 @@
 @button__border: 0;
 @_button-border-hover: 0;
 @blue2: @primary;
+@button-primary__active__background: @primary;
 
 // @button__line-height__l: 1;
 @button__padding__l: 14px 15px;
@@ -44,10 +45,32 @@ body{
     }
 }
 
+button.primary{
+    transition: all @time3;
+    &:hover{
+        transition: all @time3;
+    }
+}
+
+button:not(.primary) {
+    background: transparent;
+    border-color: @primary;
+    color: @primary;
+    font-weight: 500;
+    font-size: 12px;
+    box-shadow: none;
+    .lib-css(transition, all @time3 ease 0s);
+    &:hover{
+        // border-color: @color-second;
+        // color: @color-second;
+    }
+}
+
 .lib-hovers(){
     @media @mdmin{
         &:hover{
             color: @a-hovers;
+            text-decoration: none;
         }
     }
 }
