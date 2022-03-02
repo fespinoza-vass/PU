@@ -1,3 +1,89 @@
 & when (@media-common = true) {
-	
+	.toolbar.toolbar-products{
+        @media @mdmin{
+            margin-top: -5px;
+        }
+        ~ .toolbar.toolbar-products{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .field.limiter,
+        .toolbar-amount{
+            display: none;
+        }
+        .toolbar-sorter{
+            select {
+                background-color: @white;
+                border
+                box-shadow: none;
+                border: 0;
+                height: 32px;
+                padding-left: 10px;
+                border-radius: @radiusitems;
+            }
+            a.sorter-action{
+                display: none;
+            }
+        }
+        .pages{
+            .pages-items{
+                .item{
+                    strong.page,
+                    a.page{
+                        padding: 10px 13px;
+                        color: @black;
+                        line-height: 1;
+                        background: @white;
+                        border-radius: @radiusitems;
+                        @media @mdmin{
+                        	&:hover{
+                        		background: @black;
+                        		color: @white;
+                        	}
+                        }
+                    }
+                    a.action{
+                        background: transparent;
+                        box-shadow: none;
+                        transition: all @time3;
+                        .label ~ span{
+                            .lib-visually-hidden-reset;
+                            color: @black;
+
+                        }
+                        &:before{
+                            float: left;
+                            font-size: 1.2rem;
+                            margin-left: 5px;
+                            width: 32px;
+                            background: @white;
+                            margin-right: 10px;
+                            border-radius: @radiusitems;
+                        }
+                        &.previous{
+                            &:before{
+                                float: left;
+                                margin-left: 0;
+                                margin-right: 5px;
+                            }
+                        }
+                        @media @mdmin{
+                        	&:hover::before{
+                        		transition: all @time3;
+                        		background: @black;
+                        		color: @white;
+                        	}
+                        }
+                    }
+                    &.current{
+                        strong.page{
+                            background: @primary;
+                            color: @white;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

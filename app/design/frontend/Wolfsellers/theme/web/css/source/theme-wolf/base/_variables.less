@@ -4,12 +4,12 @@
 
 //  Base Font
 
-@font-family-name__base:'Wolf', sans-serif;
+@font-family-name__base:'Open Sans', sans-serif;
 @font-wolf: @font-family-name__base;
 @font-family__base: @font-family-name__base;
 @text__color: @black;
 // Second Font
-@font-second:'Roboto', sans-serif;
+@font-second: "Helvetica neue", Helvetica, sans-serif;
 
 // Icons Font
 
@@ -31,6 +31,8 @@
 @time4: .4s;
 @time5: .5s;
 
+@lgmin: ~"only screen and (min-width: 1024px)";
+@lgmax: ~"only screen and (max-width: 1024px)";
 @mdmin: ~"only screen and (min-width: 768px)";
 @mdmax: ~"only screen and (max-width: 768px)";
 @xsmin: ~"only screen and (min-width: 480px)";
@@ -40,30 +42,23 @@
 
 @checkout-shipping-item__border: 1px solid transparent;
 
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Light.ttf');
-    font-weight: 100;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'wolf';
+//     src: url('@{baseDir}fonts/Helvetica.ttf');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Regular.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'wolf';
+//     src: url('@{baseDir}fonts/HelveticaLight.ttf');
+//     font-weight: 100;
+//     font-style: normal;
+// }
 
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Medium.ttf');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Bold.ttf');
-    font-weight: bold;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'wolf';
+//     src: url('@{baseDir}fonts/HelveticaBold.ttf');
+//     font-weight: bold;
+//     font-style: normal;
+// }

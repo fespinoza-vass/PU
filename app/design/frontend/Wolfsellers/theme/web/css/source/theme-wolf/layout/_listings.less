@@ -2,7 +2,13 @@
     body{
         &.page-products{
             .page-wrapper{
+                .page-title-wrapper{
+                    display: none;
+                }
                 main{
+                    > .widget.block{
+                        margin-bottom: 30px;
+                    }
                     div.products-grid,
                      .block.widget,
                      .product-items{
@@ -11,7 +17,8 @@
                             box-shadow: 0 0 12px 0 @shadowitems;
                             border-radius: @radiusitems;
                             background: @white;
-                            @media only screen and (min-width: @screen__m){
+                            margin-bottom: 10px;
+                            @media @lgmin{
                                 margin-left: 2%;
                                 width: calc(~'(100% - 4%) / 3');
                                 &:nth-child(3n + 1) {
@@ -23,14 +30,28 @@
                                     transition: all @time3;
                                 }
                             }
+                            @media @lgmax{
+                                margin-left: 2%;
+                                width: calc(~'(100% - 2%) / 2');
+                                &:nth-child(2n + 1) {
+                                   margin-left: 0;
+                                }
+                                &:hover{
+                                    box-shadow: 0 0 10px 0 @primary;
+                                    border-radius: 10px;
+                                    transition: all @time3;
+                                }
+                            }
                             .product-item-info{
                                 width: 100%;
+                                position: relative;
+                                padding: 10px;
                                 &:hover,
                                 &active{
                                     box-shadow: none;
                                     border: 0;
                                     margin: 0;
-                                    padding: 0;
+                                    padding: 10px;
                                 }
                                 &:not(:hover) {
                                     &:not(.active) {
@@ -39,12 +60,27 @@
                                         }
                                     }
                                 }
+                                .product-item-photo{
+                                    .product-image-container{
+                                        // IMPORTANTS para modificar estilos de AMASTY
+                                        position: static !important;
+                                        .amlabel-position-wrapper{
+                                            left: 20px !important;
+                                            top: 10px !important;
+                                            .amasty-label-container:not(.-preview){
+                                                height: 24px !important;
+                                                line-height: 24px !important;
+                                            }
+                                        }
+                                        // ===========================================
+                                    }
+                                }
                                 .product-item-details{
                                     .product-item-name{
                                         a.product-item-link{
-                                            font-size: 1.6rem;
+                                            font-size: 1.4rem;
                                             color: @primary;
-                                            font-weight: 500;
+                                            font-weight: bold;
                                             display: block;
                                             display: -webkit-box;
                                             width: 100%;
@@ -54,13 +90,35 @@
                                             overflow: hidden;
                                             text-overflow: ellipsis;
                                             text-align: center;
+                                            .lib-hovers;
                                         }
                                     }
                                     .price-box{
                                         text-align: center;
-                                        span{
-                                            font-size: 2rem;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        > span{
+                                            margin: 0 5px;
+                                            span{
+                                                font-size: 1.6rem;
+                                            }
+                                            &.special-price{
+                                                order: 2;
+                                            }
+                                            &.old-price{
+                                                text-decoration: line-through;
+                                                color: @gray;
+                                                font-weight: 100;
+                                                order: 1;
+                                                .price-label{
+                                                    display: none;
+                                                }
+                                            }
                                         }
+                                    }
+                                    .product-reviews-summary.short{
+                                        .lib-visually-hidden;
                                     }
                                     .product-item-inner{
                                         border: 0;
@@ -71,6 +129,34 @@
                                         text-align: center;
                                         &:before{
                                             display: none;
+                                        }
+                                        .product-item-actions{
+                                            .actions-primary{
+                                                button.primary{
+                                                    font-size: 1.8rem;
+                                                    border-radius: @radiusitems;
+                                                    text-transform: uppercase;
+                                                    font-family: @font-second;
+                                                    font-weight: 500;
+                                                    @media @xsmax{
+                                                        font-size: 1.2rem;
+                                                    }
+                                                }
+                                            }
+                                            .actions-secondary{
+                                                position: absolute;
+                                                right: 20px;
+                                                top: 10px;
+                                                z-index: 10;
+                                                .towishlist{
+                                                    line-height: 1;
+                                                    display: none;
+                                                    &:before{
+                                                        font-size: 2rem;
+                                                        overflow: initial;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
