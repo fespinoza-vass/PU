@@ -1,0 +1,352 @@
+//
+// Common
+//  ---------------------------------------------
+& when (@media-common = true) {
+    .sections.nav-sections{
+        display: none;
+    }
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            .page-main{
+                padding-left: 0;
+                padding-right: 0;
+                .columns{
+                    .column.main{
+                        .row-slider-first{
+                            button.slick-prev.slick-arrow,
+                            button.slick-next.slick-arrow{
+                                display: none !important;
+                            }
+                            .slick-list.draggable{
+                                .pagebuilder-slide-wrapper{
+                                    padding-bottom: 135%;
+                                    min-height: auto !important;
+                                    .pagebuilder-overlay{
+                                        padding: 0 !important;
+                                        min-height: auto !important;
+                                    }
+                                }
+                            }
+                        }
+                        .row-carousel-brands{
+                            h2{
+                                max-width: 300px;
+                                margin: 0 auto;
+                            }
+                            .carousel-brands{
+                                .slick-prev.slick-arrow,
+                                .slick-next.slick-arrow{
+                                    display: none !important;
+                                }
+                                .slick-list.draggable{
+                                    height: 70px;
+                                    .slick-track{
+                                        .slick-slide{
+                                            max-width: 130px !important;
+                                            padding: 10px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .row-product-one-product{
+                            background-color: @white;
+                            .column-one-product{
+                                margin-bottom: 30px;
+                                padding: 15px;
+                                figure{
+                                    display: flex;
+                                    height: 60px;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+                                .product-item{
+                                    box-shadow: unset;
+                                    width: 100%;
+                                    .product-item-info{
+                                        .product-item-photo{
+                                            .product-image-container{
+                                                width: 100% !important;
+                                                .product-image-wrapper{
+                                                    padding-bottom: 100% !important;
+                                                    .product-image-photo{
+                                                        width: 100%;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        .product-item-details{
+                                            .product-item-name{
+                                                .product-item-link{
+                                                    font-size: 14px;
+                                                    height: auto;
+                                                }
+                                            }
+                                            .product-reviews-summary.short{
+                                                display: none;
+                                            }
+                                            .price-box.price-final_price{
+                                                display: flex;
+                                                flex-flow: row-reverse wrap-reverse;
+                                                align-items: center;
+                                                justify-content: center;
+                                                .special-price{
+                                                    .price{
+                                                        font-size: 16px;
+                                                        margin-left: 10px;
+                                                    }
+                                                }
+                                                .old-price{
+                                                    .price-label{
+                                                        display: none;
+                                                    }
+                                                    .price{
+                                                        font-size: 16px;
+                                                        text-decoration: line-through;
+                                                        margin-right: 10px;
+                                                    }
+                                                }
+                                            }
+                                            .product-item-inner{
+                                                .product-item-actions{
+                                                    .actions-primary{
+                                                        .action.tocart.primary{
+                                                            width: 260px;
+                                                            height: 34px;
+                                                            border-radius: 12px;
+                                                            font-size: 14px;
+                                                            font-weight: bold;
+                                                            text-transform: uppercase;
+                                                        }
+                                                    }
+                                                    .actions-secondary{
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                        .row-carousel-releases{
+                            .content-carousel-releases{
+                                .carousel-releases{
+                                    .slick-prev.slick-arrow,
+                                    .slick-next.slick-arrow{
+                                        display: none !important;
+                                    }
+                                }
+                            }
+                        }
+                        .row-footer-icons{
+                            .footer-icons{
+                                ul{
+                                    li{
+                                        width: 50%;
+                                        float: left;
+                                        text-align: center;
+                                        a{
+                                            span{
+                                                font-size: 65px;
+                                                color: @black;
+                                            }
+                                            p{
+                                                font-size: 18px;
+                                                color: @black;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .row-home{
+                            margin: 15px;
+                        }
+                        h2{
+                            font-size: 22px;
+                            font-weight: bold;
+                            margin: 15px 0;
+                        }
+                        .slick-dots{
+                            li{
+                                button{
+                                    background-color: @a-hovers;
+
+                                }
+                                &.slick-active{
+                                    button{
+                                        background-color: @primary;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .footer-carousel-brands{
+                display: none !important;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column.main{
+                        .row-slider-first{
+                            .slick-list.draggable{
+                                .pagebuilder-slide-wrapper{
+                                    padding-bottom: 38%;
+                                }
+                            }
+                        }
+                        .row-carousel-brands{
+                            h2{
+                                max-width: unset;
+                            }
+                            .carousel-brands{
+                                .slick-prev.slick-arrow,
+                                .slick-next.slick-arrow{
+                                    display: block !important;
+                                    background-color: @lines-input;
+                                    opacity: unset;
+                                    width: 35px;
+                                    text-align: center;
+                                }
+                                .slick-prev.slick-arrow{
+                                    &:before{
+                                        content: '\e617';
+                                        font-family:'theme-icons';
+                                        padding: 0;
+                                    }
+                                }
+                                .slick-next.slick-arrow{
+                                    &:before{
+                                        content: '\e608';
+                                        font-family:'theme-icons';
+                                        padding: 0;
+                                    }
+                                }
+                                .slick-list.draggable{
+                                    height: initial;
+                                    width: 90%;
+                                    margin: 0 auto;
+                                    .slick-track{
+                                        .slick-slide{
+                                            max-width: unset !important;
+                                            padding: unset;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .row-product-one-product{
+                            .column-one-product{
+                                margin-bottom: unset;
+                                padding: 0;
+                                .product-item{
+                                    box-shadow: unset;
+                                    width: 100%;
+                                    .product-item-info{
+                                        .product-item-photo{
+                                            .product-image-container{
+                                                width: 33% !important;
+                                            }
+                                        }
+                                        .product-item-details{
+                                            .product-item-link{
+                                                font-size: 16px;
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                        .row-carousel-releases{
+                            .content-carousel-releases{
+                                .carousel-releases{
+                                    .slick-prev.slick-arrow,
+                                    .slick-next.slick-arrow{
+                                        display: block !important;
+                                    }
+                                    .slick-prev.slick-arrow,
+                                    .slick-next.slick-arrow{
+                                        display: block !important;
+                                        background-color: @lines-input;
+                                        opacity: unset;
+                                        width: 35px;
+                                        text-align: center;
+                                    }
+                                    .slick-prev.slick-arrow{
+                                        &:before{
+                                            content: '\e617';
+                                            font-family:'theme-icons';
+                                            padding: 0;
+                                        }
+                                    }
+                                    .slick-next.slick-arrow{
+                                        &:before{
+                                            content: '\e608';
+                                            font-family:'theme-icons';
+                                            padding: 0;
+                                        }
+                                    }
+                                    .slick-list.draggable{
+                                        width: 90%;
+                                        margin: 0 auto;
+                                    }
+                                }
+                            }
+                        }
+                        .row-footer-icons{
+                            .footer-icons{
+                                ul{
+                                    display: flex;
+                                    align-content: center;
+                                    justify-content: space-around;
+                                    height: 210px;
+                                    align-items: center;
+                                    font-size: 22px;
+                                    text-align: center;
+                                    max-width: 1386px;
+                                    margin: 0 auto !important;
+                                    li{
+                                        width: unset;
+                                        float: unset;
+                                        text-align: center;
+                                        a{
+                                            span{
+                                                font-size: 100px;
+
+                                            }
+                                            p{
+                                                font-size: 22px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .row-home{
+                            margin: 30px 0;
+                        }
+                        h2{
+                            font-size: 32px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
