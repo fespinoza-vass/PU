@@ -16,41 +16,10 @@
                     margin: auto;
                     width: 100%;
                     max-width: @layout__max-width;
-                    padding: 10px;
-                    > div{
-                        display: flex;
-                        justify-content: space-between;
-                        a{
-                            color: @white;
-                            font-size: 1.2rem;
-                            span{
-                                margin-right: 5px;
-                            }
-                            @media @mdmin{
-                                &:hover{
-                                    color: @a-hovers;
-                                }
-                            }
-                        }
-                        > div{
-                            display: flex;
-                            align-items: center;
-                            a{
-                                white-space: nowrap;
-                                &:nth-child(2){
-                                    padding: 0 20px;
-                                    margin: 0 20px;
-                                    border-left: 1px solid @white;
-                                    border-right: 1px solid @white;
-                                }
-                            }
-                        }
-                        @media @mdmax{
-                            justify-content: center;
-                            > a{
-                                display: none;  
-                            }
-                        }
+                    padding: 4px 10px;
+                    h2{
+                        font-size: 2rem;
+                        font-weight: bold;
                     }
                 }
             }
@@ -360,10 +329,7 @@
                 transition: all @time3;
                 position: fixed;
                 width: 100%;
-                box-shadow: 5px 0px 10px -5px @black;
-                @media @mdmax{
-                    top: -40px;
-                }
+                box-shadow: 5px 0px 10px -5px @black;                
                 .header.content {
                     padding-top: 10px;
                     padding-bottom: 10px;
@@ -533,7 +499,7 @@
         }
         &.nav-up{
             header.page-header .header.content .block-search .minisearch .control{
-                top: 58px;
+                top: 53px;
             }
         }
     }
