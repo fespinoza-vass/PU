@@ -4,6 +4,46 @@
 & when (@media-common = true) {
 	footer{
         padding-bottom: 0;
+        .footer-carousel-brands{
+            h2{
+                max-width: unset;
+            }
+            .carousel-brands{
+                .slick-prev.slick-arrow,
+                .slick-next.slick-arrow{
+                    display: block !important;
+                    background-color: @lines-input;
+                    opacity: unset;
+                    width: 35px;
+                    text-align: center;
+                }
+                .slick-prev.slick-arrow{
+                    &:before{
+                        content: '\e617';
+                        font-family:'theme-icons';
+                        padding: 0;
+                    }
+                }
+                .slick-next.slick-arrow{
+                    &:before{
+                        content: '\e608';
+                        font-family:'theme-icons';
+                        padding: 0;
+                    }
+                }
+                .slick-list.draggable{
+                    height: initial;
+                    width: 90%;
+                    margin: 0 auto;
+                    .slick-track{
+                        .slick-slide{
+                            max-width: unset !important;
+                            padding: unset;
+                        }
+                    }
+                }
+            }
+        }
 		.footer.content{
 			float: left;
 			width: 100%;
@@ -77,6 +117,7 @@
                             border-top: 1px solid @white;
                             max-width: @layout__max-width;
                             text-align: right;
+                            margin: 0 auto;
                             a{
                                 display: flex;
                                 align-items: center;
@@ -102,6 +143,27 @@
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m){
     footer{
         padding-bottom: 0;
+        .footer-carousel-brands{
+            h2{
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .carousel-brands{
+                .slick-prev.slick-arrow,
+                .slick-next.slick-arrow{
+                    display: none !important;
+                }
+                .slick-list.draggable{
+                    height: 70px;
+                    .slick-track{
+                        .slick-slide{
+                            max-width: 130px !important;
+                            padding: 10px;
+                        }
+                    }
+                }
+            }
+        }
         .footer.content{
             .footer-perfumes{
                 > div{

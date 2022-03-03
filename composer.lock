@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "087a71a4ae3a972901c7563cd630ab54",
+    "content-hash": "88255f0e61094252202997078c6a7c5f",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -851,6 +851,33 @@
                 "Commercial"
             ],
             "description": "Shop by Brand by Amasty"
+        },
+        {
+            "name": "amasty/module-shop-by-brand-graphql",
+            "version": "1.0.6",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/enterprise/packages/module-shop-by-brand-graphql-1.0.6-ee.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.13.1",
+                "amasty/module-shop-by-brand": ">=2.12.4",
+                "magento/module-graph-ql": "*",
+                "php": "^7.3.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\ShopbyBrandGraphQl\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Brand Graphql By Amasty"
         },
         {
             "name": "amasty/module-single-step-checkout",
