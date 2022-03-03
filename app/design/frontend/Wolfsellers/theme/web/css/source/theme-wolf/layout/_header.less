@@ -6,26 +6,14 @@
             transition: all @time3;
             position: fixed;
             width: 100%;
-            top: 0;
+            top: 40px;
             left: 0;
-            .panel.wrapper{
-                background: @primary;
-                border: 0;
-                .panel-perfumes{
-                    display: block;
-                    margin: auto;
-                    width: 100%;
-                    max-width: @layout__max-width;
-                    padding: 4px 10px;
-                    h2{
-                        font-size: 2rem;
-                        font-weight: bold;
-                    }
-                }
-            }
+            margin-bottom: 0;
+            min-height: auto;
             .header.content{
-                padding: 25px 10px;
+                padding: 15px 10px;
                 transition: all @time3;
+                margin-bottom: 0;
                 @media @mdmax{
                     padding: 25px 20px;
                 }
@@ -36,20 +24,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                .content-logo{
+                .ammenu-logo{
                     float: left;
                     width: 23.7%;
                     min-width: 100px;
                     margin-right: 15px;
-                    a.logo{
-                        margin: 0;
-                        float: left;
-                        width: 100%;
-                        max-width: none;
-                        img{
-                            max-width: none;
-                            width: 100%;
-                        }
+                    img{
+                        max-width: 323px;
                     }
                 }
                 .block-search{
@@ -324,7 +305,7 @@
         }
         &.nav-up{
             header.page-header{
-                top: 0px;
+                top: 0;
                 left: 0;
                 transition: all @time3;
                 position: fixed;
