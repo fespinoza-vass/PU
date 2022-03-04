@@ -1,3 +1,21 @@
 & when (@media-common = true) {
-	
+	.customer-account-login,
+	.customer-account-create{
+		.page-main{
+			.page-title-wrapper{
+				max-width: @layout-width;
+				margin: auto;
+			}
+			.login-container,
+			form.form-create-account{
+				width: 100%;
+				max-width: @layout-width;
+				background: @white;
+				border-radius: @radiusitems;
+				padding: 30px;
+				display: block;
+				margin: auto;
+			}
+		}
+	}	
 }
