@@ -269,6 +269,39 @@
     <vars module="Js_Bundle">
         <var name="bundle_size">1MB</var>
     </vars>
+
+    <vars module="Magento_PageBuilder">
+        <var name="breakpoints">
+            <var name="desktop">
+                <var name="conditions">
+                    <var name="min-width">1024px</var>
+                </var>
+                <var name="options">
+                    <var name="products">
+                        <var name="default">
+                            <var name="slidesToShow">4</var>
+                        </var>
+                    </var>
+                </var>
+            </var>
+            <var name="mobile-tiny">
+            <var name="conditions">
+                <var name="max-width">480px</var>
+            </var>
+            <var name="options">
+                <var name="products">
+                    <var name="default">
+                        <var name="slidesToShow">2</var>
+                    </var>
+                    <var name="continuous">
+                        <var name="slidesToShow">2</var>
+                    </var>
+                </var>
+            </var>
+        </var>         
+        </var>
+    </vars>
+
     <exclude>
         <item type="file">Lib::chartjs/Chart.min.js</item>
         <item type="file">Lib::jquery/jquery.min.js</item>
