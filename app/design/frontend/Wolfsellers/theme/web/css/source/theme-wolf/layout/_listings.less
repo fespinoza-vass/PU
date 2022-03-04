@@ -1,9 +1,13 @@
 & when (@media-common = true){
     body{
-        .page-wrapper{
-            .page-title-wrapper{
-                display: none;
+        &.page-products{
+            .page-wrapper{
+                .page-title-wrapper{
+                    display: none;
+                }
             }
+        }
+        .page-wrapper{
             main.page-main{
                 .column.main{
                     > .ambanners{
@@ -143,7 +147,6 @@
                                                 font-size: 1.8rem;
                                                 border-radius: @radiusitems;
                                                 text-transform: uppercase;
-                                                font-family: @font-second;
                                                 font-weight: 500;
                                                 @media @xsmax{
                                                     font-size: 1.2rem;

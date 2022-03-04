@@ -15,6 +15,14 @@
 				color: @black;
 				padding: 0;
 			}
+			@media @mdmin{
+				&:hover{
+					background: @primary;
+					&:before{
+						color: @white;
+					}
+				}
+			}
 			&.slick-prev{
 				&:before{
 					content: @icon-arrowleft;
