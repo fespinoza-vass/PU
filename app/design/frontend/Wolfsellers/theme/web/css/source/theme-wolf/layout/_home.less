@@ -2,9 +2,6 @@
 // Common
 //  ---------------------------------------------
 & when (@media-common = true) {
-    .sections.nav-sections{
-        display: none;
-    }
     .cms-home.cms-index-index{
         .page-wrapper{
             .page-main{
@@ -19,7 +16,7 @@
                             }
                             .slick-list.draggable{
                                 .pagebuilder-slide-wrapper{
-                                    padding-bottom: 135%;
+                                    padding-bottom: 126%;
                                     min-height: auto !important;
                                     .pagebuilder-overlay{
                                         padding: 0 !important;
@@ -28,29 +25,15 @@
                                 }
                             }
                         }
-                        .row-carousel-brands{
-                            h2{
-                                max-width: 300px;
-                                margin: 0 auto;
-                            }
-                            .carousel-brands{
-                                .slick-prev.slick-arrow,
-                                .slick-next.slick-arrow{
-                                    display: none !important;
-                                }
-                                .slick-list.draggable{
-                                    height: 70px;
-                                    .slick-track{
-                                        .slick-slide{
-                                            max-width: 130px !important;
-                                            padding: 10px;
-                                        }
+                        .row-product-one-product{
+                            background-color: @white;
+                            &.row-mobile-one-product{
+                                .pagebuilder-column-group{
+                                    .column-one-product{
+                                        order: 2;
                                     }
                                 }
                             }
-                        }
-                        .row-product-one-product{
-                            background-color: @white;
                             .column-one-product{
                                 margin-bottom: 30px;
                                 padding: 15px;
@@ -63,6 +46,7 @@
                                 .product-item{
                                     box-shadow: unset;
                                     width: 100%;
+                                    text-align: center;
                                     .product-item-info{
                                         .product-item-photo{
                                             .product-image-container{
@@ -125,7 +109,6 @@
                                                 }
                                             }
                                         }
-
                                     }
                                 }
                             }
@@ -170,19 +153,6 @@
                             font-weight: bold;
                             margin: 15px 0;
                         }
-                        .slick-dots{
-                            li{
-                                button{
-                                    background-color: @a-hovers;
-
-                                }
-                                &.slick-active{
-                                    button{
-                                        background-color: @primary;
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -203,53 +173,23 @@
                 .columns{
                     .column.main{
                         .row-slider-first{
+                            width: 100vw;
+                            max-width: 1600px;
+                            margin-left: calc(50% - 50vw);
                             .slick-list.draggable{
                                 .pagebuilder-slide-wrapper{
-                                    padding-bottom: 38%;
-                                }
-                            }
-                        }
-                        .row-carousel-brands{
-                            h2{
-                                max-width: unset;
-                            }
-                            .carousel-brands{
-                                .slick-prev.slick-arrow,
-                                .slick-next.slick-arrow{
-                                    display: block !important;
-                                    background-color: @lines-input;
-                                    opacity: unset;
-                                    width: 35px;
-                                    text-align: center;
-                                }
-                                .slick-prev.slick-arrow{
-                                    &:before{
-                                        content: '\e617';
-                                        font-family:'theme-icons';
-                                        padding: 0;
-                                    }
-                                }
-                                .slick-next.slick-arrow{
-                                    &:before{
-                                        content: '\e608';
-                                        font-family:'theme-icons';
-                                        padding: 0;
-                                    }
-                                }
-                                .slick-list.draggable{
-                                    height: initial;
-                                    width: 90%;
-                                    margin: 0 auto;
-                                    .slick-track{
-                                        .slick-slide{
-                                            max-width: unset !important;
-                                            padding: unset;
-                                        }
-                                    }
+                                    padding-bottom: 39%;
                                 }
                             }
                         }
                         .row-product-one-product{
+                            &.row-mobile-one-product{
+                                .pagebuilder-column-group{
+                                    .column-one-product{
+                                        order: unset;
+                                    }
+                                }
+                            }
                             .column-one-product{
                                 margin-bottom: unset;
                                 padding: 0;
@@ -275,32 +215,6 @@
                         .row-carousel-releases{
                             .content-carousel-releases{
                                 .carousel-releases{
-                                    .slick-prev.slick-arrow,
-                                    .slick-next.slick-arrow{
-                                        display: block !important;
-                                    }
-                                    .slick-prev.slick-arrow,
-                                    .slick-next.slick-arrow{
-                                        display: block !important;
-                                        background-color: @lines-input;
-                                        opacity: unset;
-                                        width: 35px;
-                                        text-align: center;
-                                    }
-                                    .slick-prev.slick-arrow{
-                                        &:before{
-                                            content: '\e617';
-                                            font-family:'theme-icons';
-                                            padding: 0;
-                                        }
-                                    }
-                                    .slick-next.slick-arrow{
-                                        &:before{
-                                            content: '\e608';
-                                            font-family:'theme-icons';
-                                            padding: 0;
-                                        }
-                                    }
                                     .slick-list.draggable{
                                         width: 90%;
                                         margin: 0 auto;
@@ -337,7 +251,6 @@
                                 }
                             }
                         }
-
                         .row-home{
                             margin: 30px 0;
                         }
