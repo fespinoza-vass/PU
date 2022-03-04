@@ -1,3 +1,157 @@
+//
+// Common
+//  ---------------------------------------------
 & when (@media-common = true) {
-	
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            .page-main{
+                padding-left: 0;
+                padding-right: 0;
+                .columns{
+                    .column.main{
+                    	> .ambanners{
+                    		display: none;
+                    	}
+                        .row-product-one-product{
+                            background-color: @white;
+                            &.row-mobile-one-product{
+                                .pagebuilder-column-group{
+                                    .column-one-product{
+                                        order: 2;
+                                        margin-bottom: 30px;
+                                        padding: 15px;
+                                        figure{
+                                            display: flex;
+                                            height: 60px;
+                                            justify-content: center;
+                                            align-items: center;
+                                        }
+                                    }
+                                }
+                            }
+                            .block.widget{
+                            	.products-grid{
+                            		.widget-product-grid.product-items .product-item{
+                            			width: auto;
+                            			box-shadow: none;
+                            			&:hover{
+                            				box-shadow: none;
+                            			}
+                            		}
+                            	}
+                            }
+                        }
+                        .row-footer-icons{
+                            .footer-icons{
+                                ul{
+                                    li{
+                                        width: 50%;
+                                        float: left;
+                                        text-align: center;
+                                        a{
+                                            span{
+                                                font-size: 65px;
+                                                color: @black;
+                                            }
+                                            p{
+                                                font-size: 18px;
+                                                color: @black;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .row-home{
+                            margin: 15px;
+                        }
+                        h2{
+                            font-size: 22px;
+                            font-weight: bold;
+                            margin: 15px 0;
+                        }
+                    }
+                }
+            }
+            .footer-carousel-brands{
+                display: none !important;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column.main{
+                        .row-slider-first{
+                            width: 100vw;
+                            margin-left: ~"calc(50% - 50vw)";
+                            > div{
+                            	max-width: 1600px;
+                            	margin: auto;
+                            	.pagebuilder-slide-wrapper{
+                            		padding-bottom: 34.8%;
+                            	}
+                            }
+                        }
+                        .row-product-one-product{
+                            &.row-mobile-one-product{
+                                .pagebuilder-column-group{
+                                    .column-one-product{
+                                        order: unset;
+                                    }
+                                }
+                            }
+                            .column-one-product{
+                                margin-bottom: unset;
+                                padding: 0;
+                            }
+                        }
+                        .row-footer-icons{
+                            .footer-icons{
+                                ul{
+                                    display: flex;
+                                    align-content: center;
+                                    justify-content: space-around;
+                                    height: 210px;
+                                    align-items: center;
+                                    font-size: 22px;
+                                    text-align: center;
+                                    max-width: 1386px;
+                                    margin: 0 auto !important;
+                                    li{
+                                        width: unset;
+                                        float: unset;
+                                        text-align: center;
+                                        a{
+                                            span{
+                                                font-size: 100px;
+
+                                            }
+                                            p{
+                                                font-size: 22px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .row-home{
+                            margin: 30px 0;
+                        }
+                        h2{
+                            font-size: 32px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
