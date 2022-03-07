@@ -139,22 +139,30 @@
                                 font-size: 16px !important;
                                 margin: 15px 30px !important;
                                 &.ui-corner-all{
+                                    .lib-icon-font(
+                                        @_icon-font-content: @icon-arrowdown,
+                                        @_icon-font-size: 1.2rem,
+                                        @_icon-font-color: @white,
+                                        @_icon-font-position: after,
+                                        @_icon-font-display: inline-block
+                                        );
                                     &:after{
-                                        content: @icon-arrowdown;
-                                        font-family:'theme-icons';
-                                        color: @white;
-                                        font-size: 12px;
-                                        float: right;
-                                    }
+                                        position: absolute;
+                                        right: 35px;
+                                    };
                                 }
                                 &.ui-corner-top{
+                                    .lib-icon-font(
+                                        @_icon-font-content: @icon-arrowup,
+                                        @_icon-font-size: 1.2rem,
+                                        @_icon-font-color: @white,
+                                        @_icon-font-position: after,
+                                        @_icon-font-display: inline-block
+                                    );
                                     &:after{
-                                        content: @icon-arrowup;
-                                        font-family:'theme-icons';
-                                        color: @white;
-                                        font-size: 12px;
-                                        float: right;
-                                    }
+                                        position: absolute;
+                                        right: 35px;
+                                    };
                                 }
                                 &.jump-line{
                                     margin-bottom: 15px !important;
