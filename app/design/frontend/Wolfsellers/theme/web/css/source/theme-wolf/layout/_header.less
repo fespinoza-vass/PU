@@ -101,11 +101,11 @@
                                         @_icon-font-size: 2rem,
                                         @_icon-font-color: @white,
                                         @_icon-font-position: before,
-                                        @_icon-font-display: inline-block,
-                                        @font-weight: bold
-                                    ){font-weight: normal;};
+                                        @_icon-font-display: inline-block
+                                    );
                                     &:before{
-                                        content: "X";
+                                        font-weight: bold;
+                                        overflow: initial;
                                     }
                                 }
                             }
@@ -203,6 +203,7 @@
                                     visibility: visible;
                                     top: ~"calc(100% + 10px)";
                                     transition: all @time3;
+                                    border: 2px solid @white;
                                 }
                             }
                         }
