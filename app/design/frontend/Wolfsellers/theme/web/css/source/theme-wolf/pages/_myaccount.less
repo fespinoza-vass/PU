@@ -1,20 +1,57 @@
 & when (@media-common = true) {
 	.customer-account-login,
-	.customer-account-create{
+	.customer-account-create,
+	.customer-account-forgotpassword{
 		.page-main{
 			.page-title-wrapper{
 				max-width: @layout-width;
 				margin: auto;
 			}
 			.login-container,
-			form.form-create-account{
+			form.form-create-account,
+			form#form-validate{
 				width: 100%;
 				max-width: @layout-width;
 				background: @white;
 				border-radius: @radiusitems;
-				padding: 30px;
 				display: block;
 				margin: auto;
+				@media @mdmin{
+					padding: 30px;
+				}
+				@media @mdmax{
+					padding: 15px;
+				}
+			}
+			form.form-create-account{
+				fieldset{
+					&.info{
+						.lib-two-columns;
+					}
+					@media @mdmin{
+						&.info{
+							.field{
+								&.field-telefono,
+								&.field-numero_de_identificacion{
+									margin-left: 0;
+								}
+								&.field.field-identificacion{
+									margin-left: 2%;
+								}
+							}
+						}
+						&.account{
+							.field:not(.choice){
+								float: left;
+								margin-right: 2%;
+								width: calc(~'(100% - 4%)/3');
+								&.confirmation{
+									margin-right: 0;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}	
