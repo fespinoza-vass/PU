@@ -23,6 +23,24 @@
 					padding: 15px;
 				}
 			}
+			form.forget{
+				fieldset.fieldset{
+					.lib-two-columns;
+					.field{
+						&.note{
+							width: 100%;
+						}
+						@media @mdmin{
+							&.email{
+								margin-left: 0;
+							}
+							&.captcha{
+								margin-left: 2%;
+							}
+						}
+					}
+				}
+			}
 			form.form-create-account{
 				fieldset{
 					&.info{
@@ -49,6 +67,40 @@
 									margin-right: 0;
 								}
 							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.account{
+		.sidebar-main{
+			.block-collapsible-nav-content{
+				background: @white;
+				border-radius: @radiusitems;
+				ul.items{
+					.item{
+						margin: 0 20px;
+						&:not(:last-child){
+							border-bottom: 1px solid @gray3;
+						}
+						strong,
+						a{
+							border-left: 0;
+							padding: 7px 0;
+						}
+						a{
+							color: @gray;
+							@media @mdmin{
+								&:hover{
+									background: transparent;
+									color: @black;
+									padding-left: 20px;
+								}
+							}
+						}
+						.delimiter{
+							display: none;
 						}
 					}
 				}
