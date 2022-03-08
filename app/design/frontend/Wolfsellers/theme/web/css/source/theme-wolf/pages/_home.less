@@ -9,7 +9,8 @@
                 padding-right: 0;
                 .columns{
                     .column.main{
-                    	> .ambanners{
+                        padding-bottom: 0;
+                        > .ambanners{
                     		display: none;
                     	}
                         .row-product-one-product{
@@ -42,16 +43,45 @@
                             }
                         }
                         .row-footer-icons{
+                            padding: 10px;
+                            background-color: @white;
+                            margin-top: 50px;
                             .footer-icons{
                                 ul{
                                     li{
                                         width: 50%;
                                         float: left;
                                         text-align: center;
+                                        padding: 10px;
                                         a{
                                             span{
-                                                font-size: 65px;
-                                                color: @black;
+                                                &::after{
+                                                    background-position-x: center !important;
+                                                    background-size: contain !important;
+                                                    display: block;
+                                                    height: 46px;
+                                                    content: ' ';
+                                                }
+                                                &.icon-envios{
+                                                    &::after{
+                                                        background: url("../images/envios.png") no-repeat;
+                                                    }
+                                                }
+                                                &.icon-compra{
+                                                    &::after{
+                                                        background: url("../images/compra.png") no-repeat;
+                                                    }
+                                                }
+                                                &.icon-promociones{
+                                                    &::after{
+                                                        background: url("../images/promociones.png") no-repeat;
+                                                    }
+                                                }
+                                                &.icon-regalo{
+                                                    &::after{
+                                                        background: url("../images/regalo.png") no-repeat;
+                                                    }
+                                                }
                                             }
                                             p{
                                                 font-size: 18px;
@@ -74,8 +104,11 @@
                     }
                 }
             }
-            .footer-carousel-brands{
-                display: none !important;
+            .page-bottom{
+                display: none;
+            }
+            .page-footer{
+                margin-top: unset;
             }
         }
     }
@@ -115,6 +148,8 @@
                             }
                         }
                         .row-footer-icons{
+                            width: 100vw;
+                            margin-left: ~"calc(50% - 50vw)";
                             .footer-icons{
                                 ul{
                                     display: flex;
@@ -132,13 +167,15 @@
                                         text-align: center;
                                         a{
                                             span{
-                                                font-size: 100px;
-
+                                                &::after{
+                                                    height: 115px;
+                                                }
                                             }
                                             p{
                                                 font-size: 22px;
                                             }
                                         }
+
                                     }
                                 }
                             }
