@@ -116,7 +116,7 @@
 		table.table:not(.totals){
 		    thead{
 		        tr th{
-		            border-bottom: 1px solid @lines;
+		            border-bottom: 1px solid @mainbackground;
 		        }
 		    }
 		    tbody{
@@ -260,6 +260,12 @@
 					font-size: 1.8rem;
 					font-weight: 500;
 				}
+			}
+		}
+		&.cms-index-index,
+		&.checkout-index-index{
+			.page-bottom{
+			    display: none;
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 & when (@media-common = true) {
-	.slick-slider{
+	.product-items.slick-slider{
 		.slick-arrow{
 			float: left;
 			text-indent: -99999%;
@@ -33,6 +33,14 @@
 				&:before{
 					content: @icon-arrowright;
 					font-family: @icons__font-name;
+				}
+			}
+		}
+		.slick-slide{
+			> div li.product-item{
+				margin-bottom: 0;
+				.product-item-info .product-item-actions{
+					margin-bottom: 15px;
 				}
 			}
 		}
