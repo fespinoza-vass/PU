@@ -1,3 +1,258 @@
-& when (@media-common = true) {
-	
+& when (@media-common =true) {
+    body {
+        &.cart-open {
+            .page-wrapper {
+                .page-header {
+                    .header {
+                        .minicart-wrapper {
+                            .ui-dialog {
+                                .block-minicart {
+                                    transition: all .5s;
+                                    right: 0;
+
+                                    #minicart-content-wrapper {
+                                        .block-content {
+                                            display: inline-flex;
+                                            flex-flow: column;
+                                            width: 100%;
+
+                                            .close {
+                                                order: 1;
+
+                                                &::before {
+                                                    position: relative;
+                                                    line-height: 24px;
+                                                    font-size: 24px;
+                                                    color: @gray;
+                                                    right: 10px;
+                                                    top: 10px;
+                                                }
+
+                                                &::after {
+                                                    transition: opacity .5s;
+                                                    transition-delay: .4s;
+                                                    background: #222;
+                                                    position: fixed;
+                                                    height: 100%;
+                                                    opacity: .5;
+                                                    float: left;
+                                                    z-index: 1;
+                                                    left: 0;
+                                                    top: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .page-wrapper {
+            .page-header {
+                .header {
+                    .minicart-wrapper {
+                        .ui-dialog {
+                            .block-minicart {
+                                transition: all .5s;
+                                min-height: 100vh;
+                                box-shadow: none;
+                                min-width: unset;
+                                position: fixed;
+                                margin-top: 0;
+                                color: @black;
+                                right: -100%;
+                                border: none;
+                                top: 0;
+
+                                #minicart-content-wrapper {
+                                    .block-content {
+                                        display: inline-flex;
+                                        flex-flow: column;
+                                        width: 100%;
+
+                                        .close {
+                                            order: 1;
+
+                                            &::before {
+                                                color: @gray;
+                                            }
+
+                                            &::after {
+                                                transition: opacity .5s;
+                                                content: "";
+                                                opacity: 0;
+                                            }
+                                        }
+
+                                        .minicart-items-wrapper {
+                                            max-height: calc(~'(85vh - 140px)');
+                                            padding: 0 15px;
+                                            border: none;
+                                            order: 2;
+
+                                            &::-webkit-scrollbar {
+                                                width: 5px;
+                                            }
+
+                                            &::-webkit-scrollbar-track {
+                                                background: @gray;
+                                            }
+
+                                            &::-webkit-scrollbar-thumb {
+                                                border-radius: 50px;
+                                                background: @black;
+                                            }
+
+                                            .minicart-items {
+                                                .product-item {
+                                                    .product {
+                                                        .product-item-details {
+                                                            .product-item-name {
+                                                                a {
+                                                                    color: @black;
+                                                                }
+                                                            }
+
+                                                            .actions {
+                                                                .primary {
+                                                                    display: none;
+                                                                }
+
+                                                                .secondary {
+                                                                    .delete {
+                                                                        &::before {
+                                                                            color: @gray-4C;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .actions {
+                                            &:nth-child(4) {
+                                                order: 5;
+                                            }
+
+                                            &:nth-child(7) {
+                                                order: 3;
+
+                                                .secondary {
+                                                    .viewcart {
+                                                        span {
+                                                            text-decoration: underline;
+                                                            .lib-font-size(12);
+                                                            font-weight: 600;
+                                                            color: @black;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .items-total,
+                                        .subtotal {
+                                            .lib-font-size(16);
+                                            order: 4;
+
+                                        }
+
+                                        .items-total {
+                                            position: relative;
+                                            top: 22px;
+
+                                            .count {
+                                                font-weight: 500;
+                                            }
+                                        }
+
+                                        .subtotal {
+                                            .label {
+                                                display: none;
+                                            }
+
+                                            .price-container {
+                                                .price-wrapper {
+                                                    .price {
+                                                        font-weight: 600;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+///DESKTOP
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    body {
+        &.cart-open {
+            .page-wrapper {
+                .page-header {
+                    .header {
+                        .minicart-wrapper {
+                            .ui-dialog {
+                                .block-minicart {
+                                    #minicart-content-wrapper {
+                                        .block-content {
+                                            .close {
+                                                &::after {
+                                                    width: calc(~'(100% - 390px)');
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+///MOVIL
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    body {
+        &.cart-open {
+            .page-wrapper {
+                .page-header {
+                    .header {
+                        .minicart-wrapper {
+                            .ui-dialog {
+                                .block-minicart {
+                                    #minicart-content-wrapper {
+                                        .block-content {
+                                            .close {
+                                                &::after {
+                                                    width: calc(~'(100% - 290px)');
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
