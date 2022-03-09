@@ -1,3 +1,474 @@
-& when (@media-common = true) {
-	
+& when (@media-common =true) {
+    .lac-notification-sticky {
+        display: none;
+    }
+
+    .checkout-cart-index {
+        .page-wrapper {
+            .page-main {
+                .columns {
+                    .column {
+                        .cart-container {
+
+                            .cart-summary {
+                                border-radius: 12px;
+                                background: @white;
+
+                                .checkout-methods-items {
+                                    .item {
+                                        &:not(:first-child) {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .form-cart {
+                                .table-wrapper {
+                                    .items {
+                                        thead {
+                                            tr {
+                                                .col {
+                                                    &.price {
+                                                        text-align: center;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        tbody {
+                                            border: none;
+
+                                            &::after {
+                                                border-top: 0.5px solid @gray;
+                                                position: absolute;
+                                                display: block;
+                                                content: "";
+                                                width: auto;
+                                                z-index: 1;
+                                                bottom: 0;
+                                                right: 0;
+                                                left: 0;
+                                            }
+
+                                            &:last-child {
+                                                &::after {
+                                                    content: none;
+                                                }
+
+                                                .item-actions {
+                                                    td {
+                                                        border-radius: 0 0 12px 12px;
+                                                    }
+                                                }
+                                            }
+
+                                            .item-info {
+                                                .col {
+                                                    span {
+                                                        color: @primary;
+                                                    }
+                                                }
+                                            }
+
+                                            .item-actions {
+                                                background: @white;
+
+                                                td {
+                                                    .actions-toolbar {
+
+                                                        .wishlist,
+                                                        .action-edit {
+                                                            display: none;
+                                                        }
+
+                                                        .action-delete {
+                                                            &::before {
+                                                                color: @gray-4C;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .actions {
+                                    .update {
+                                        display: none;
+                                    }
+                                }
+                            }
+
+                            .cart-gift-item {
+                                display: none;
+                            }
+
+                            .cart-discount {
+
+                                .discount,
+                                .giftcard {
+                                    border-radius: 12px;
+                                    background: @white;
+                                    padding: 24px;
+
+                                    &.active {
+                                        .title {
+                                            padding: 0 0 10px;
+                                        }
+                                    }
+
+                                    .title {
+                                        justify-content: space-between;
+                                        display: flex;
+                                        border: none;
+                                        padding: 0;
+
+                                        strong {
+                                            .lib-font-size(20);
+                                            font-weight: bold;
+                                            color: @black-09;
+                                            margin: 0;
+                                        }
+                                    }
+
+                                    .content {
+                                        padding: 0;
+
+                                        form {
+                                            padding: 0;
+
+                                            .coupon,
+                                            .fieldset {
+                                                margin: 0;
+
+                                                .field {
+                                                    .control {
+                                                        .input-text {
+                                                            border-radius: 12px 0 0 12px;
+                                                        }
+                                                    }
+                                                }
+
+                                                .actions-toolbar {
+                                                    .primary {
+                                                        .primary {
+                                                            border: 1px solid @gray-7C;
+                                                            background: @black;
+                                                            box-shadow: none;
+                                                            color: @white;
+                                                            padding: 15px;
+                                                        }
+                                                    }
+
+                                                    .secondary {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+///DESKTOP///
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .checkout-cart-index {
+        .page-wrapper {
+            .page-main {
+                margin: 24px 0 0 0;
+                padding: 0 10%;
+
+                .page-title-wrapper {
+                    .page-title {
+                        .lib-font-size(32);
+                        margin: 0;
+                    }
+                }
+
+                .columns {
+                    .column {
+                        .amasty-banner-container {
+                            margin: 0;
+                        }
+
+                        .cart-container {
+
+                            .cart-summary {
+                                .title {
+                                    .lib-font-size(22);
+                                    font-weight: bold;
+                                }
+                            }
+
+                            .form-cart {
+                                .table-wrapper {
+                                    .items {
+                                        thead {
+                                            background: transparent;
+                                            position: relative;
+
+                                            &::after {
+                                                border-top: 0.5px solid @gray;
+                                                position: absolute;
+                                                margin: 0 25px;
+                                                display: block;
+                                                content: "";
+                                                width: auto;
+                                                z-index: 1;
+                                                top: 54px;
+                                                right: 0;
+                                                left: 0;
+                                            }
+
+                                            tr {
+                                                .col {
+                                                    padding: 15px 11px 7px;
+                                                    .lib-font-size(22);
+                                                    background: @white;
+                                                    font-weight: 500;
+                                                    border: none;
+
+                                                    &.item {
+                                                        padding: 15px 11px 7px 25px;
+                                                        border-radius: 12px 0 0 0;
+                                                    }
+
+                                                    &.subtotal {
+                                                        padding: 15px 25px 7px 11px;
+                                                        border-radius: 0 12px 0 0;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        tbody {
+                                            &::after {
+                                                margin: 0 25px;
+                                            }
+
+                                            .item-info {
+
+                                                .price,
+                                                .subtotal {
+                                                    text-align: center;
+                                                    .lib-font-size(22);
+                                                }
+
+                                                .item {
+                                                    padding: 24px 8px 24px 25px;
+
+                                                    .product-item-details {
+                                                        .product-item-name {
+                                                            a {
+                                                                .lib-font-size(16);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .subtotal {
+                                                    padding: 20px 25px 10px 20px;
+                                                }
+                                            }
+
+                                            .item-actions {
+                                                td {
+                                                    .actions-toolbar {
+                                                        .action-delete {
+                                                            bottom: 30px;
+                                                            right: 25px;
+                                                            top: auto;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .checkout-cart-index {
+        .page-wrapper {
+            .page-main {
+                margin: 30px 16px;
+
+                .page-title-wrapper {
+                    .page-title {
+                        .lib-font-size(32);
+                    }
+                }
+
+                .columns {
+                    .column {
+                        .amasty-banner-container {
+                            margin: 0;
+                        }
+
+                        .cart-container {
+                            display: inline-flex;
+                            flex-flow: column;
+                            width: 100%;
+
+                            .cart-summary {
+                                order: 1;
+
+                                .summary {
+                                    &.title {
+                                        .lib-font-size(16);
+                                        margin: 13px 16px;
+                                        font-weight: bold;
+                                        display: block;
+                                    }
+                                }
+
+                                .shipping {
+                                    .title {
+                                        border: none;
+                                    }
+                                }
+                            }
+
+                            .form-cart {
+                                order: 3;
+
+                                .table-wrapper {
+                                    .items {
+                                        thead {
+
+                                            &::after {}
+
+                                            tr {
+                                                .col {
+
+                                                    &.item {}
+
+                                                    &.subtotal {}
+                                                }
+                                            }
+                                        }
+
+                                        tbody {
+                                            &::after {
+                                                margin: 0 16px;
+                                            }
+
+                                            &:last-child {
+                                                .item-info {
+                                                    border-radius: 0 0 12px 12px;
+                                                    display: block;
+                                                    height: 135px;
+                                                }
+                                            }
+
+                                            &:nth-child(1) {
+                                                .item-info {
+                                                    border-radius: 12px 12px 0 0;
+                                                    display: block;
+                                                    height: 135px;
+                                                }
+                                            }
+
+                                            .item-info {
+                                                .subtotal {
+                                                    .lib-font-size(22);
+                                                    float: right;
+
+                                                    .price {
+                                                        display: block;
+                                                    }
+                                                }
+
+                                                .price {
+                                                    display: none;
+                                                }
+
+                                                .col {
+                                                    &::before {
+                                                        content: none;
+                                                    }
+                                                }
+
+                                                .qty {
+                                                    float: right;
+                                                }
+
+                                                .item {
+                                                    padding: 25px 15px 10px 90px;
+
+                                                    .product-item-photo {
+                                                        max-width: 72px;
+                                                        top: 25px;
+                                                    }
+
+                                                    .product-item-details {
+                                                        .product-item-name {
+                                                            a {
+                                                                .lib-font-size(16);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .subtotal {}
+                                            }
+
+                                            .item-actions {
+                                                td {
+                                                    padding: 0;
+
+                                                    .actions-toolbar {
+                                                        min-height: 0;
+                                                        padding: 0;
+
+                                                        .action-delete {
+                                                            bottom: 86px;
+                                                            right: 16px;
+                                                            top: auto;
+
+                                                            &::before {
+                                                                .lib-font-size(24);
+                                                                overflow: visible;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .cart-discount {
+                                margin: 0 0 20px 0;
+                                border: none;
+                                order: 2;
+
+                                .discount {
+                                    margin: 0 0 20px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
