@@ -288,3 +288,25 @@
     transform: translate(@x,@y);
 	position: @position;
 }
+
+.lib-pulseefx(){
+	@media @mdmin{
+		&:hover{
+		    transform-origin: 0 100%;
+		    animation: pulse 1s infinite;
+		    transform-origin: center;
+		}
+		&:hover::before{
+		    color: @primary;
+		    transform-origin: center;
+		    animation: pulsecolor 1s infinite;
+		}
+	}
+	@keyframes pulse {
+	    10% {transform: scale(1.1)}
+	}
+
+	@keyframes pulsecolor {
+	  10% {color: @primary}
+	}
+}
