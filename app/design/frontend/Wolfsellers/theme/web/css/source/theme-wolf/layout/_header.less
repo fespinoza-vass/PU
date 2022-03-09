@@ -101,11 +101,11 @@
                                         @_icon-font-size: 2rem,
                                         @_icon-font-color: @white,
                                         @_icon-font-position: before,
-                                        @_icon-font-display: inline-block,
-                                        @font-weight: bold
-                                    ){font-weight: normal;};
+                                        @_icon-font-display: inline-block
+                                    );
                                     &:before{
-                                        content: "X";
+                                        font-weight: bold;
+                                        overflow: initial;
                                     }
                                 }
                             }
@@ -203,6 +203,7 @@
                                     visibility: visible;
                                     top: ~"calc(100% + 10px)";
                                     transition: all @time3;
+                                    border: 2px solid @white;
                                 }
                             }
                         }
@@ -269,14 +270,16 @@
                     a.showcart{
                         .counter.qty{
                             position: absolute;
-                            left: 13px;
-                            top: 0;
+                            left: 20px;
+                            top: 2px;
                             width: 18px;
                             height: 18px;
-                            line-height: 16px;
+                            line-height: 14px;
                             border-radius: 100%;
-                            background: wheat;
+                            background: @white;
                             margin: 0;
+                            color: @black;
+                            border: 1px solid @black;
                             ~ span{
                                 display: block;
                                 font-size: 1.2rem;

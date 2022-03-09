@@ -78,12 +78,12 @@
             </image>
             <image id="product_page_image_large" type="image"/>
             <image id="product_page_image_medium" type="image">
-                <width>700</width>
-                <height>700</height>
+                <width>762</width>
+                <height>762</height>
             </image>
             <image id="product_page_image_small" type="thumbnail">
-                <width>88</width>
-                <height>110</height>
+                <width>102</width>
+                <height>102</height>
             </image>
             <image id="product_swatch_image_large" type="image"/>
             <image id="product_swatch_image_medium" type="image">
@@ -91,8 +91,8 @@
                 <height>305</height>
             </image>
             <image id="product_swatch_image_small" type="thumbnail">
-                <width>88</width>
-                <height>110</height>
+                <width>102</width>
+                <height>102</height>
             </image>
             <image id="product_page_main_image" type="image">
                 <width>700</width>
@@ -103,8 +103,8 @@
                 <height>560</height>
             </image>
             <image id="product_page_more_views" type="thumbnail">
-                <width>88</width>
-                <height>110</height>
+                <width>102</width>
+                <height>102</height>
             </image>
             <image id="product_stock_alert_email_product_image" type="small_image">
                 <width>76</width>
@@ -209,6 +209,7 @@
                 <var name="effect">slide</var> <!-- Sets transition effect for slides changing (slide/crossfade/dissolve) -->
                 <var name="duration">500</var> <!-- Sets transition duration in ms -->
             </var>
+            <var name="thumbmargin">20</var>
             <var name="fullscreen">
                 <var name="nav">thumbs</var> <!-- Fullscreen navigation style (false/thumbs/dots) -->
                 <var name="loop">true</var> <!-- Fullscreen navigation loop (true/false/null) -->

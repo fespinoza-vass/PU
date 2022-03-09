@@ -1,20 +1,109 @@
 & when (@media-common = true) {
 	.customer-account-login,
-	.customer-account-create{
+	.customer-account-create,
+	.customer-account-forgotpassword{
 		.page-main{
 			.page-title-wrapper{
 				max-width: @layout-width;
 				margin: auto;
 			}
 			.login-container,
-			form.form-create-account{
+			form.form-create-account,
+			form#form-validate{
 				width: 100%;
 				max-width: @layout-width;
 				background: @white;
 				border-radius: @radiusitems;
-				padding: 30px;
 				display: block;
 				margin: auto;
+				@media @mdmin{
+					padding: 30px;
+				}
+				@media @mdmax{
+					padding: 15px;
+				}
+			}
+			form.forget{
+				fieldset.fieldset{
+					.lib-two-columns;
+					.field{
+						&.note{
+							width: 100%;
+						}
+						@media @mdmin{
+							&.email{
+								margin-left: 0;
+							}
+							&.captcha{
+								margin-left: 2%;
+							}
+						}
+					}
+				}
+			}
+			form.form-create-account{
+				fieldset{
+					&.info{
+						.lib-two-columns;
+					}
+					@media @mdmin{
+						&.info{
+							.field{
+								&.field-telefono,
+								&.field-numero_de_identificacion{
+									margin-left: 0;
+								}
+								&.field.field-identificacion{
+									margin-left: 2%;
+								}
+							}
+						}
+						&.account{
+							.field:not(.choice){
+								float: left;
+								margin-right: 2%;
+								width: calc(~'(100% - 4%)/3');
+								&.confirmation{
+									margin-right: 0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.account{
+		.sidebar-main{
+			.block-collapsible-nav-content{
+				background: @white;
+				border-radius: @radiusitems;
+				ul.items{
+					.item{
+						margin: 0 20px;
+						&:not(:last-child){
+							border-bottom: 1px solid @gray3;
+						}
+						strong,
+						a{
+							border-left: 0;
+							padding: 7px 0;
+						}
+						a{
+							color: @gray;
+							@media @mdmin{
+								&:hover{
+									background: transparent;
+									color: @black;
+									padding-left: 20px;
+								}
+							}
+						}
+						.delimiter{
+							display: none;
+						}
+					}
+				}
 			}
 		}
 	}	
