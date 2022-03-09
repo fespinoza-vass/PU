@@ -1,3 +1,138 @@
 & when (@media-common = true) {
-	
+	.catalog-product-view{
+		.page-wrapper{
+			.page-main{
+				.product.media{
+					.fotorama__wrap{
+						.fotorama__stage{
+							background: @white;
+							border-radius: @radiusitems;
+							margin-bottom: 20px;
+						}
+						.fotorama__nav-wrap{
+							.fotorama__thumb-border{
+								border-color: @black;
+							}
+						}
+					}
+				}
+				.product-info-main{
+					background: @white;
+					border-radius: @radiusitems;
+					padding: 20px;
+					display: flex;
+					flex-direction: column;
+					.page-title-wrapper{
+						h1{
+							font-size: 3.2rem;
+							font-weight: bold;
+						}
+					}
+					.page-title-wrapper{
+						order: 1;
+					}
+					.product-reviews-summary{
+						order: 2;
+					}
+					.product-info-price{
+						order: 3;
+					}
+					[id*="amasty-promo-countdown"]{
+						order: 4;
+					}
+					.product-add-form{
+						order: 5;
+					}
+					.product-social-links{
+						order: 6;
+					}
+					.attribute.overview{
+						order: 7;
+					}
+					.product-info-price{
+						display: flex;
+						flex-direction: column;
+						order: 3;
+						.product-info-stock-sku{
+							order: 1;
+							padding: 0;
+							text-align: left;
+						}
+						.price-box{
+							order: 2;
+							padding: 0;
+							display: flex;
+							margin: 15px 0;
+							.price{
+								font-size: 3.2rem;
+								font-weight: bold;
+							}
+							.special-price{
+								order: 2;
+							}
+							.old-price{
+								margin-right: 5%;
+								order: 1;
+								.price-label{
+									display: none;
+								}
+								.price{
+									text-decoration: line-through;
+									font-weight: 400;
+									color: @gray;
+								}
+							}
+						}
+					}
+					[id*="amasty-promo-countdown"]{
+						.amcountdown-block-wrapper{
+							margin: 15px 0;
+							max-width: none;
+						    padding: 0;
+						    .amcountdown-text{
+						    	text-align: center;
+						    	font-weight: 500;
+						    }
+						    .amcountdown-content{
+				    		    .amcountdown-list{
+				    	    		span{
+				    	    			font-weight: 600;
+				    	    		}
+				    	    	}
+				    	    	.amcountdown-progressbar{
+									progress::-moz-progress-bar {
+										background: @black;
+										height: 8px;
+									}
+									progress::-webkit-progress-value {
+										background: @black;
+										height: 8px;
+									}
+				    	    		.amcountdown-progress{
+				    	    			height: 8px;
+				    	    			background: @gray-D8;
+				    	    		}
+				    	    		.amcountdown-pointer{
+				    	    			height: 10px;
+				    	    			width: 10px;
+				    	    			background: @black;
+				    	    			top: -1px;
+				    	    			margin-left: -2px;
+				    	    		}
+				    	    		&:before{
+				    	    			display: none;
+				    	    		}
+				    	    	}
+						    }
+						}
+					}
+				}
+			}
+			.page-main-details{
+				background: @white;
+				border-radius: @radiusitems;
+				padding: 20px;
+			}
+		}
+	}
 }
