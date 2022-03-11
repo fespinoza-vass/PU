@@ -74,6 +74,26 @@
 		}
 	}
 	.account{
+		.column.main{
+			.page-title-wrapper{
+				.page-title{
+					font-size: 2rem;
+					float: left;
+					width: 100%;
+				}
+			}
+			> .block,
+			form > fieldset.fieldset{
+				background: @white;
+				border-radius: @radiusitems;
+				padding: 20px;
+				a.action{
+					font-weight: 500;
+					text-decoration: underline;
+					font-size: 1.3rem;
+				}
+			}
+		}
 		.sidebar-main{
 			.block-collapsible-nav-content{
 				background: @white;
@@ -95,7 +115,6 @@
 								&:hover{
 									background: transparent;
 									color: @black;
-									padding-left: 20px;
 								}
 							}
 						}

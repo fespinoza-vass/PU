@@ -70,6 +70,11 @@
 								font-size: 3.2rem;
 								font-weight: bold;
 							}
+							.normal-price{
+								.price-label{
+									display: none;
+								}
+							}
 							.special-price{
 								order: 2;
 							}
@@ -127,6 +132,40 @@
 				    	    		}
 				    	    	}
 						    }
+						}
+					}
+					.product-add-form{
+						.product-options-wrapper{
+							.swatch-attribute{
+								.swatch-attribute-label{
+									font-size: 2rem;
+								    font-weight: 500;
+								    text-transform: uppercase;
+								}
+								&.color{
+									.swatch-option{
+										background-size: 100% !important;
+										width: 32px !important;
+										height: 32px !important;
+										border: 1px solid @gray-D8;
+										border-radius: @radiusitems;
+									}
+								}
+								&.size{
+									.swatch-option{
+										border: 1px solid @gray-D8;
+										border-radius: @radiusitems;
+										padding: 5px 10px;
+									    height: auto;
+									    background: transparent;
+									    color: @primary;
+									    &:not(.disabled):hover{
+									    	outline: 0;
+									    	border-color: @primary;
+									    }
+									}
+								}
+							}
 						}
 					}
 					.product-social-links{
