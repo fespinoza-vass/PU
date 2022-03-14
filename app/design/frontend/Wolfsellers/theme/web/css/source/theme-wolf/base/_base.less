@@ -121,7 +121,7 @@
 		    }
 		    tbody{
 		        tr{
-		            background: @gray;
+		            background: @mainbackground;
 		            &:nth-child(2n+1){
 		                background: @white;
 		            }
@@ -253,8 +253,9 @@
 			text-align: center;
 			float: left;
 			width: 100%;
+			padding: 10px;
+			height: 40px;
 			> div{
-				padding: 10px;
 				h2{
 					color: @white;
 					font-size: 1.8rem;
@@ -273,5 +274,76 @@
 
 	.loading-mask .loader > img{
 		max-width: 50px;
+	}
+
+	// alertas
+
+	.messages{
+		margin: 16px auto 20px;
+		max-width: 1386px;
+		padding: 0 20px;
+
+		.message{
+			border-radius: 10px;
+			.lib-font-size(14);
+			color: @black;
+
+			 > *{
+				&:first-child{
+					&:before{
+						color: @black;
+						height: auto;
+						width: auto;
+						left: 15px;
+					}
+				}
+			}
+		}
+
+		
+		.message{
+			&.message-success{
+				background: @green-A7;
+
+				div{
+					&::before{
+						overflow: visible;
+					}
+				}
+			}
+
+			&.message-error{
+				background: @red-D1;
+	
+				div{
+					&::before{
+						border-radius: 100px;
+						content: '\e602';
+					}
+				}
+			}
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+	.messages{
+		margin: 16px auto 20px;
+		max-width: 1386px;
+		padding: 0 20px;
+
+		.message{
+			border-radius: 10px;
+			.lib-font-size(14);
+			color: @black;
+
+			 > *{
+				&:first-child{
+					&:before{
+						top: 50%;
+					}
+				}
+			}
+		}
 	}
 }

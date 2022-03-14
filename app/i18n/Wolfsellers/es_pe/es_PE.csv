@@ -1470,7 +1470,7 @@ Product Name,Nombre de Producto,module,Magento_Checkout,
 Incl. Tax,Con Impuestos,module,Magento_Checkout,
 Your order number is: %1.,El número de su orden es: %1.,module,Magento_Checkout,
 Your order # is: <span>%1</span>.,El # de su orden es: <span>%1</span>.,module,Magento_Checkout,
-We'll email you an order confirmation with details and tracking info.,Le enviaremos detalles con la confirmación de su orden e información de rastreo.,module,Magento_Checkout,
+We'll email you an order confirmation with details and tracking info.,Se enviará un mail a tu correo electrónico con la información de tu pedido.,module,Magento_Checkout,
 Static Blocks,Bloques estáticos,module,Magento_Cms,
 Add New Block,Añadir Nuevo Bloque,module,Magento_Cms,
 Back,Atrás,module,Magento_Cms,
@@ -13051,7 +13051,7 @@ There are more than one shipping addresses.,Hay más de una dirección de envío
 Print receipt,Imprimir orden,module,Magento_Checkout,
 Quantity was recalculated from %1 to %2,La cantidad se volvió a calcular de %1 a %2,module,Magento_Checkout,
 The customer address is not valid.,La dirección del cliente no es válida.,module,Magento_Checkout,
-We'll email you an order confirmation with details and tracking info.,Le enviaremos detalles con la confirmación de su orden e información de rastreo.,module,Magento_Checkout,
+We'll email you an order confirmation with details and tracking info.,Se enviará un mail a tu correo electrónico con la información de tu pedido.,module,Magento_Checkout,
 "Sorry, guest checkout is not available.","Lo sentimos, no está disponible hacer pedidos como invitado.",module,Magento_Checkout,
 Maximum Number of Items to Display,Número máximo de artículos para mostrar,module,Magento_Checkout,
 Maximum Number of Items to Display in Order Summary,Número máximo de artículos para mostrar en el resumen del pedido,module,Magento_Checkout,
@@ -18287,7 +18287,7 @@ Something went wrong,Algo ocurrió,module,Magento_NegotiableQuote,
 Apply Discount Code,Cupón de descuento,module,Magento_NegotiableQuote,
 Apply Discount,APLICAR,module,Magento_NegotiableQuote,
 Cancel coupon,Cancelar Cupón,module,Magento_NegotiableQuote,
-Continue Shopping,Continuar Comprando,module,Magento_NegotiableQuote,
+Continue Shopping,SEGUIR COMPRANDO,module,Magento_NegotiableQuote,
 Cost,Costo,module,Magento_NegotiableQuote,
 The field isn't complete.,El campo no está completo.,module,Magento_NegotiableQuote,
 Ship Here,Enviar Aquí,module,Magento_NegotiableQuote,
@@ -25940,3 +25940,4 @@ Allow remote shopping assistance,Permitir asistencia de compra remota
 Item,Producto
 "Stay connected:","Mantente conectado:"
 "Copyright © 2021 United Perfumeries Peru. All rights reserved","Copyright © 2021 Perfumerías Unidas Perú. Derechos Reservados"
+"Your order number is: %1","Orden No: %1"
