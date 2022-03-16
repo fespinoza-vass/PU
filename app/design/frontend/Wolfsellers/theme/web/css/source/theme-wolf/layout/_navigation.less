@@ -12,6 +12,9 @@
 	}
 	section.ammenu-menu-wrapper{
 		margin-bottom: 0;
+		.ammenu-items.-root{
+			justify-content: center;
+		}
 		.ammenu-main-container{
 			top: 126px;
 			position: fixed;
@@ -20,23 +23,87 @@
 	}
 }
 
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	section.ammenu-menu-wrapper{
+		.ammenu-category-columns{
+			.ammenu-category-tree{
+				.ammenu-title{
+					font-size: 1.6rem;
+					text-transform: uppercase;
+					font-weight: 500;
+					~ .ammenu-list{
+						> li  > a{
+							font-size: 1.6rem;
+							font-size: 100;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
 	section.ammenu-menu-wrapper{
 		position: relative;
 		z-index: 99999;
+// AMASTY importants
 		.ammenu-nav-sections.-sidebar{
 			width: 85vw;
 			background: @white !important;
-
+			&:before {
+			    content: "MENÚ DE CATEGORÍAS";
+			    display: block;
+			    margin: 15px 0 30px 0;
+			    padding: 0px 20px;
+			    font-size: 1.6rem;
+			    font-weight: 500;
+			    font-family: @font-second;
+			}
 			.ammenu-menu-title,
 			.ammenu-tabs-list{
 				display: none;
 			}
-			a.ammenu-link.-mobile{
-				color: @primary !important;
-				border-color: @lines-input !important;
+			> .ammenu-items{
+				> li > a{
+					color: #000 !important;
+				    border-bottom: 1px solid @gray-D8 !important;
+				    font-weight: 500 !important;
+				    text-transform: uppercase;
+				    font-size: 1.6rem;
+				    font-family: @font-second;
+				    padding: 12px 0 !important;
+				    min-height: auto !important;
+				    ~ .ammenu-items{
+				    	> li > a{
+				        	color: #000 !important;
+				            border-bottom: 0 !important;
+				            font-weight: 500 !important;
+				            text-transform: uppercase;
+				            text-decoration: none !important;
+				            font-size: 1.6rem;
+				            font-family: @font-second;
+				            padding: 12px 0 !important;
+				            min-height: auto !important;
+				            ~ .ammenu-items{
+				            	padding: 0 20px !important;
+				            	> li > a{
+				                	color: #000 !important;
+				                    font-weight: 500 !important;
+				                    text-transform: normal;
+				                    font-size: 1.2rem !important;
+			                        padding: 3px 0 !important;
+			                        min-height: auto !important;
+			                        text-decoration: none !important;
+			                        margin: 0;
+				            	}
+				            }
+				    	}
+				    }
+				}
 			}
 		}
+// AMASTY importants		
 		.ammenu-menu-overlay{
 			z-index: 10;
 			.lib-icon-font(
