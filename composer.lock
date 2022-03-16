@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a7e10ec5b196c693163aecfc34535df",
+    "content-hash": "88255f0e61094252202997078c6a7c5f",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -1893,46 +1893,6 @@
                 "rfc4648"
             ],
             "time": "2021-02-26T10:19:33+00:00"
-        },
-        {
-            "name": "cloudstek/php-laff",
-            "version": "v1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Cloudstek/php-laff.git",
-                "reference": "41f9d0f328d8ac91b18d7b931597f876b1244401"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Cloudstek/php-laff/zipball/41f9d0f328d8ac91b18d7b931597f876b1244401",
-                "reference": "41f9d0f328d8ac91b18d7b931597f876b1244401",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Cloudstek\\PhpLaff\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maarten de Boer",
-                    "email": "maarten@cloudstek.nl",
-                    "homepage": "https://cloudstek.nl",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Erik de Boer",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Largest Area Fit First (LAFF) 3D box packing algorithm class for PHP",
-            "homepage": "https://github.com/Cloudstek/php-laff",
-            "time": "2019-09-19T14:43:20+00:00"
         },
         {
             "name": "colinmollenhour/cache-backend-file",

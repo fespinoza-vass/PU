@@ -125,7 +125,7 @@
                                         border: none;
                                         padding: 0;
 
-                                        &::after{
+                                        &::after {
                                             position: initial;
                                             margin: 6px 0 0;
                                         }
@@ -169,6 +169,93 @@
 
                                                     .secondary {
                                                         display: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .ampromo-overlay {
+                .ampromo-items-content {
+                    .ampromo-popup-title {
+                        max-width: none !important;
+                    }
+
+                    .ampromo-popup-container {
+                        .ampromo-carousel-product {
+                            .ampromo-gallery {
+                                .slick-list {
+                                    .slick-track {
+                                        .ampromo-item {
+                                            border-radius: 12px;
+                                            background: none;
+                                            border: none;
+
+                                            .ampromo-items-form {
+                                                box-shadow: 2px 2px 12px @shadowitems;
+                                                display: inline-flex;
+                                                border-radius: 12px;
+                                                position: relative;
+                                                flex-flow: column;
+
+                                                .ampromo-product-select {
+                                                    position: absolute;
+                                                    left: 20px;
+                                                    top: 15px;
+                                                    order: 1;
+                                                }
+
+                                                .ampromo-item-image {
+                                                    margin: 7px 9px;
+                                                    width: auto;
+                                                    order: 2;
+                                                }
+
+                                                .ampromo-item-title {
+                                                    order: 3;
+
+                                                    .ampromo-title {
+                                                        a {
+                                                            color: @black;
+                                                        }
+                                                    }
+                                                }
+
+                                                .ampromo-options {
+                                                    margin: 0;
+                                                    order: 5;
+
+                                                    .fieldset {
+                                                        margin: 0;
+                                                    }
+                                                }
+
+                                                .product-info-price {
+                                                    order: 4;
+
+                                                    .price-new-price{
+                                                        .price-new-price{
+                                                            .price-wrapper{
+                                                                .price{
+                                                                    .lib-font-size(16);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .ampromo-item-qty-input {
+                                                    margin: 0 0 15px 0;
+                                                    order: 6;
+
+                                                    .ampromo-qty {
+                                                        text-align: center;
                                                     }
                                                 }
                                             }
@@ -299,6 +386,20 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .ampromo-overlay {
+                .ampromo-items-content {
+                    .ampromo-popup-container {
+                        .ampromo-carousel-product {
+                            .ampromo-item-buttons {
+                                .ampromo-button {
+                                    padding: 18px 10%;
                                 }
                             }
                         }
@@ -468,6 +569,30 @@
 
                                 .discount {
                                     margin: 0 0 20px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .ampromo-overlay {
+                .ampromo-items-content {
+                    .ampromo-popup-container {
+                        .ampromo-carousel-product {
+                            .ampromo-gallery {
+                                .slick-arrow {
+                                    .lib-font-size(0);
+                                }
+
+                                .slick-dots{
+                                    display: none !important;
+                                }
+                            }
+
+                            .ampromo-item-buttons {
+                                .ampromo-button {
+                                    padding: 18px 50px;
                                 }
                             }
                         }
