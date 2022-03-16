@@ -39,7 +39,6 @@
         "amasty/promo": "^2.11",
         "amasty/shopby": "^2.17",
         "amasty/shopby-graphql": "^1.0",
-        "cloudstek/php-laff": "^1.1",
         "laminas/laminas-log": "^2.15",
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.5",

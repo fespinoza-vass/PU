@@ -22,8 +22,10 @@ use WolfSellers\Urbano\Helper\Config;
 class ApiService
 {
     private const QUOTE_URI = 'cotizarenvio';
+    private const GENERATE_LABEL_URI = 'ge';
 
     private string $action = '';
+    private string $lastError = '';
 
     private array $auth;
 
@@ -70,7 +72,32 @@ class ApiService
         $payload = $data;
         $this->action = 'Get quote request';
 
-        return $this->post(self::QUOTE_URI, $payload, true);
+        return $this->post(self::QUOTE_URI, $payload);
+    }
+
+    /**
+     * Generate label.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function generateLabel(array $data): array
+    {
+        $payload = $data;
+        $this->action = 'Generate label request';
+
+        return $this->post(self::GENERATE_LABEL_URI, $payload);
+    }
+
+    /**
+     * Get last error for request.
+     *
+     * @return string
+     */
+    public function getLastError(): string
+    {
+        return $this->lastError;
     }
 
     /**
@@ -110,15 +137,23 @@ class ApiService
         $this->log(['response' => $rawResponse], 'Response raw.');
 
         $result = json_decode($rawResponse, true);
+        $sqlError = (int) ($result[0]['sql_error'] ?? 0);
+        $error = (int) ($result['error'] ?? 0);
 
-        $error = $result[0]['msg_error'] ?? false;
+        if ($error < 0 || $sqlError < 0) {
+            $message = null;
 
-        if ($error) {
-            if ($code = $result[0]['sql_error'] ?? false) {
-                $error .= sprintf(' (%s)', $code);
+            if ($error < 0) {
+                $message = $result['mensaje'] ?? '';
+                $message .= sprintf(' (%s)', $error);
             }
 
-            throw new \Exception($error ?? __('Error processing response: %1', $rawResponse));
+            if ($sqlError < 0) {
+                $message = $result[0]['msg_error'] ?? '';
+                $message .= sprintf(' (%s)', $sqlError);
+            }
+
+            throw new \Exception($message ?? __('Error processing response: %1', $rawResponse));
         }
 
         return $result;
@@ -133,6 +168,8 @@ class ApiService
      */
     private function parseException(\Exception $exception)
     {
+        $this->lastError = $exception->getMessage();
+
         $this->logger->error('Urbano API Error.', [
             'status' => $exception->getCode(),
             'message' => $exception->getMessage(),
