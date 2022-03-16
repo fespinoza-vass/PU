@@ -187,7 +187,7 @@
 			}
 		}
 
-// page wrapper
+ // page wrapper
 
 		.page-wrapper{
 			overflow: hidden;
@@ -337,6 +337,127 @@
 			}
 		}
 	}
+
+	.qty{
+		.qty{
+			position: relative;
+			width: 100%;
+
+			.control{
+				.input-text{
+					width: 100% !important;
+				}
+
+				.qty_control{
+					position: absolute;
+					height: 40px;
+					width: 100%;
+					top: -7px;
+
+					button{
+						border-radius: 0;
+						height: 36px;
+						width: 30px;
+					}
+
+					.increaseQty{
+						border-left: 1px solid @lines-input;
+						position: absolute;
+						right: 0;
+
+						&::after{
+							font-family: 'theme-icons';
+							.lib-font-size(11);
+							content: '\e61c';
+							line-height: 2.8;
+							color: @black;
+						}
+					}
+
+					.decreaseQty{
+						border-right: 1px solid @lines-input;
+						position: absolute;
+						left: 0;
+
+						&::after{
+							font-family: 'theme-icons';
+							.lib-font-size(11);
+							content: '\e60f';
+							color: @black;
+						}
+					}
+					
+				}
+			}
+		}
+	}
+
+	.qty-cantidad{
+		position: relative;
+		display: flex;
+		width: 40%;
+
+		p{
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			.lib-font-size(0);
+			display: flex;
+
+			&::after{
+				font-family: 'theme-icons';
+				.lib-font-size(11);
+				line-height: 2.8;
+				color: #000;
+			}
+		}
+
+		.action-less{
+			border-right: 1px solid @lines-input;
+			left: 0;
+
+			&::after{
+				content: '\e60f';
+			}
+		}
+
+		.action-more{
+			border-left: 1px solid @lines-input;
+			right: 0;
+
+			&::after{
+				content: '\e61c';
+			}
+		}
+
+		.cart-item-qty{
+			width: 100%;
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+
+	.details-qty{
+		justify-content: start;
+		align-items: center;
+		display: flex;
+
+		.label{
+			margin: 0 8px 0 0;
+		}
+		.qty-cantidad{
+			width: 40%;
+			
+			p{
+				height: 40px;
+				width: 30px;
+			}
+			
+			.cart-item-qty{
+				height: 40px;
+			}
+		}
+	}
 }
 
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
@@ -356,6 +477,29 @@
 						top: 50%;
 					}
 				}
+			}
+		}
+	}
+
+	.details-qty{
+		justify-content: start;
+		align-items: center;
+		display: flex;
+
+		.label{
+			margin: 0 8px 0 0;
+		}
+
+		.qty-cantidad{
+			width: auto;
+			
+			p{
+				height: 30px;
+				width: 30px;
+			}
+			
+			.cart-item-qty{
+				height: 30px;
 			}
 		}
 	}
