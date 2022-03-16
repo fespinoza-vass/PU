@@ -92,7 +92,7 @@
 
                             p {
                                 .lib-font-size(20);
-                                margin: 0 0 60px; 
+                                margin: 0 0 60px;
                                 font-weight: 600;
                             }
 
@@ -102,14 +102,17 @@
                                 border-radius: 12px;
                                 background: @black;
                                 FONT-WEIGHT: 600;
-                                font-size: 18px;
                             }
                         }
                     }
                 }
             }
 
-            .page-bottom{
+            .page-bottom {
+                display: none;
+            }
+
+            .page-footer {
                 display: none;
             }
         }
@@ -158,6 +161,13 @@
                 .page-title-wrapper {
                     .page-title {}
                 }
+
+                .page-404 {
+                    a {
+                        .lib-font-size(18);
+                        display: block;
+                    }
+                }
             }
         }
     }
@@ -204,6 +214,13 @@
             .page-main {
                 .page-title-wrapper {
                     .page-title {}
+                }
+
+                .page-404 {
+                    a {
+                        .lib-font-size(16);
+                        display: block;
+                    }
                 }
             }
         }
