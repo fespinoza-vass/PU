@@ -19,3 +19,37 @@
 		}
 	}
 }
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	section.ammenu-menu-wrapper{
+		position: relative;
+		z-index: 99999;
+		.ammenu-nav-sections.-sidebar{
+			width: 85vw;
+			background: @white !important;
+
+			.ammenu-menu-title,
+			.ammenu-tabs-list{
+				display: none;
+			}
+			a.ammenu-link.-mobile{
+				color: @primary !important;
+				border-color: @lines-input !important;
+			}
+		}
+		.ammenu-menu-overlay{
+			z-index: 10;
+			.lib-icon-font(
+			    @_icon-font-content: @icon-remove,
+			    @_icon-font-size: 2rem,
+			    @_icon-font-color: @white,
+			    @_icon-font-position: after
+			);
+			&:after{
+				position: fixed;
+				right: 15px;
+				top: 15px;
+			}
+		}
+	}
+}

@@ -46,6 +46,14 @@
                                 .pagebuilder-column-group{
                                     .column-one-product{
                                         order: 2;
+                                        margin-bottom: 30px;
+                                        padding: 0;
+                                        figure{
+                                            display: flex;
+                                            height: 60px;
+                                            justify-content: center;
+                                            align-items: center;
+                                        }
                                     }
                                 }
                             }
@@ -54,9 +62,11 @@
                             		.widget-product-grid.product-items .product-item{
                             			width: auto;
                             			box-shadow: none;
+                                        max-width: 394px;
                             			&:hover{
                             				box-shadow: none;
                             			}
+                                        .lib-attr;
                             		}
                             	}
                             }
@@ -146,7 +156,7 @@
                             width: 100vw;
                             margin-left: ~"calc(50% - 50vw)";
                             > div{
-                            	max-width: 1600px;
+                            	max-width: @layout-maxwidth;
                             	margin: auto;
                             	.pagebuilder-slide-wrapper{
                             		padding-bottom: 34.8%;

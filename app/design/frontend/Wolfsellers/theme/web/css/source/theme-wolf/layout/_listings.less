@@ -115,6 +115,11 @@
                                         span{
                                             font-size: 1.6rem;
                                         }
+                                        &.normal-price{
+                                            .price-label{
+                                                display: none;
+                                            }
+                                        }
                                         &.special-price{
                                             order: 2;
                                         }
@@ -167,6 +172,9 @@
                                                     overflow: initial;
                                                 }
                                             }
+                                            a.action.tocompare{
+                                                display: none;
+                                            }
                                         }
                                     }
                                 }
@@ -178,6 +186,24 @@
                     .item{
                         .action{
                             border: 0;
+                        }
+                    }
+                }
+            }
+            > .category-view{
+                .category-description{
+                    float: left;
+                    width: 100%;
+                    > div{
+                        float: left;
+                        width: 100%;
+                        max-width: none;
+                        padding: 0;
+                        margin: 0;
+                        figure img{
+                            max-width: @layout-maxwidth;
+                            width: 100%;
+                            margin: auto;
                         }
                     }
                 }
