@@ -45,37 +45,93 @@
                     <label>Line</label>
                     <validate>required-entry</validate>
                 </field>
-                <field id="origin" translate="label" type="text" sortOrder="110" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
-                    <label>Origin</label>
-                    <validate>required-entry</validate>
-                </field>
-                <field id="contract" translate="label" type="text" sortOrder="120" showInStore="1" showInWebsite="1" showInDefault="1">
+                <field id="contract" translate="label" type="text" sortOrder="120" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
                     <label>ID Contrato</label>
                     <validate>required-entry</validate>
                 </field>
-                <field id="shipper" translate="label" type="text" sortOrder="130" showInStore="1" showInWebsite="1" showInDefault="1">
-                    <label>ID Shipper</label>
-                    <validate>required-entry</validate>
-                </field>
-                <field id="sender" translate="label" type="text" sortOrder="140" showInStore="1" showInWebsite="1" showInDefault="1">
-                    <label>ID Remitente</label>
-                    <validate>required-entry</validate>
-                </field>
-                <field id="package_type" translate="label" type="select" sortOrder="150" showInStore="1" showInWebsite="1" showInDefault="1">
+                <field id="package_type" translate="label" type="select" sortOrder="130" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
                     <label>Package Type</label>
                     <source_model>WolfSellers\Urbano\Model\Source\Packaging</source_model>
                 </field>
-                <field id="sallowspecific" translate="label" type="select" sortOrder="200" showInWebsite="1" showInStore="1" showInDefault="1">
+                <field id="weight" translate="label" type="text" sortOrder="140" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
+                    <label>Package Weight</label>
+                    <comment>Kilograms</comment>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="150" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
+                    <label>Package Height</label>
+                    <comment>Centimeters</comment>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="length" translate="label" type="text" sortOrder="160" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
+                    <label>Package Length</label>
+                    <comment>Centimeters</comment>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="width" translate="label" type="text" sortOrder="180" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
+                    <label>Package Width</label>
+                    <comment>Centimeters</comment>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="urgent" translate="label" type="select" sortOrder="190" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Urgent</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="picking" translate="label" type="select" sortOrder="200" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Picking</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="mecanizado" translate="label" type="select" sortOrder="210" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Mecanizado</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="insured" translate="label" type="select" sortOrder="210" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Insured</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="seller" translate="label" type="select" sortOrder="220" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Is seller?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="seller_code" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Seller code</label>
+                    <depends>
+                        <field id="seller">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="seller_name" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Seller name</label>
+                    <depends>
+                        <field id="seller">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="seller_address" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Seller address</label>
+                    <depends>
+                        <field id="seller">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="seller_ubigeo" translate="label" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Seller ubigeo</label>
+                    <depends>
+                        <field id="seller">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="500" showInWebsite="1" showInStore="1" showInDefault="1">
                     <label>Ship to Applicable Countries</label>
                     <frontend_class>shipping-applicable-country</frontend_class>
                     <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
                 </field>
-                <field id="specificcountry" translate="label" type="multiselect" sortOrder="210" showInWebsite="1" showInStore="1" showInDefault="1">
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="510" showInWebsite="1" showInStore="1" showInDefault="1">
                     <label>Ship to Specific Countries</label>
                     <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                     <can_be_empty>1</can_be_empty>
                 </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="220" showInWebsite="1" showInStore="1" showInDefault="1">
+                <field id="sort_order" translate="label" type="text" sortOrder="520" showInWebsite="1" showInStore="1" showInDefault="1">
                     <label>Sort Order</label>
                 </field>
             </group>
