@@ -131,6 +131,9 @@
                             max-width: unset;
                             .ui-accordion{
                                 border-top: 1px solid @lines;
+                                &:first-child{
+                                    border-top: unset;
+                                }
                             }
                             h3{
                                 font-size: 16px !important;
@@ -182,16 +185,19 @@
                                 }
                             }
                             .mp{
-                                margin-bottom: 10px !important;
+                                margin-bottom: 0 !important;
                                 ul{
                                     margin-left: 25px;
+                                    margin-bottom: 5px;
                                 }
                             }
                             .social{
-                                border-top: 1px solid @white;
-                                margin-bottom: 15px !important;
+                                display: block !important;
+                                border-top: 1px solid @lines;
+                                margin-bottom: 0 !important;
                                 ul{
                                     margin-left: 25px;
+                                    margin-bottom: 5px;
                                 }
                             }
                         }
@@ -208,7 +214,7 @@
                     .footer_copyright{
                         .copyright{
                             .copy{
-                                font-size: 10px;
+                                font-size: 10px !important;
                             }
                         }
                     }
