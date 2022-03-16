@@ -174,6 +174,36 @@
                                             }
                                         }
                                     }
+
+                                    .qty_control{
+                                        display: flex;
+                                        justify-content: center;
+                                        flex-direction: column;
+                                        .increaseQty,
+                                        .decreaseQty{
+                                            height: 16px;
+                                            position: relative;
+                                            padding: 0;
+                                            background: transparent;
+                                        }
+                                        .increaseQty::after{
+                                            content: '\e618';
+                                            font-family: 'afosa';
+                                            color: @black;
+                                            font-size: 11px;
+                                            position: absolute;
+                                            top: 4px;
+                                        }
+                                        .decreaseQty::after{
+                                            content: '\e607';
+                                            font-family: 'afosa';
+                                            color: @black;
+                                            font-size: 11px;
+                                            position: absolute;
+                                            bottom: 2px;
+                                        }
+                                     }
+
                                 }
                             }
                         }
@@ -283,6 +313,52 @@
 
                                                 .subtotal {
                                                     padding: 20px 25px 10px 20px;
+                                                }
+
+
+                                                .col.qty{
+                                                    position: relative;
+                                                    .field.qty{
+                                                        width: 100%;
+                                                        position: relative;
+                                                    }
+                                                    input{
+                                                        width: 100%;
+                                                    }
+                                                    .qty_control{
+                                                        position: absolute;
+                                                        top: -7px;
+                                                        width: 100%;
+                                                        height: 40px;
+                                                        .increaseQty,
+                                                        .decreaseQty{
+                                                            width: 30px;
+                                                            height: 36px;
+                                                            border-radius: 0;
+                                                        }
+                                                        .decreaseQty{
+                                                            position: absolute;
+                                                            left: 0;
+                                                        }
+                                                        .increaseQty{
+                                                            position: absolute;
+                                                            right: 0;
+                                                        }
+                                                        .increaseQty::after{
+                                                            content: '\e61c';
+                                                            font-family: 'theme-icons';
+                                                            color: #000;
+                                                            font-size: 11px;
+                                                            line-height: 2.8;
+
+                                                        }
+                                                        .decreaseQty::after{
+                                                            content: '\e60f';
+                                                            font-family: 'theme-icons';
+                                                            color: #000;
+                                                            font-size: 11px;
+                                                        }
+                                                    }
                                                 }
                                             }
 
