@@ -9,16 +9,37 @@
                 padding-right: 0;
                 .columns{
                     .column.main{
+                        .row-slider-first{
+                            > div{
+                                .pagebuilder-slide-wrapper{
+                                    padding-bottom: 100%;
+                                }
+                            }
+                        }
                         padding-bottom: 0;
                         > .ambanners{
                     		display: none;
                     	}
                         .row-product-one-product{
                             background-color: @white;
-                            .img-block{
-                                img{
-                                    float: left;
-                                    width: 100%;
+                            .pagebuilder-column-group{
+                                .column-img-one-product{
+                                    .img-block{
+                                        img{
+                                            float: left;
+                                            width: 100%;
+                                        }
+                                    }
+                                }
+                                .column-one-product{
+                                    margin-bottom: 30px;
+                                    padding: 15px;
+                                    figure{
+                                        display: flex;
+                                        height: 60px;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
                                 }
                             }
                             &.row-mobile-one-product{

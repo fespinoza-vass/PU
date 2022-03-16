@@ -15,7 +15,8 @@
                 transition: all @time3;
                 margin-bottom: 0;
                 @media @mdmax{
-                    padding: 25px 20px;
+                    padding: 0;
+                    height: 35px;
                 }
                 &:before,
                 &:after{
@@ -26,11 +27,17 @@
                 justify-content: space-between;
                 .ammenu-logo{
                     float: left;
-                    width: 23.7%;
                     min-width: 100px;
                     margin-right: 15px;
+                    @media @mdmax{
+                        width: 60%;
+                    }
                     img{
                         max-width: 323px;
+                        width: 100%;
+                        @media @mdmax{
+                            max-width: 153px;
+                        }
                     }
                 }
                 .block-search{
@@ -131,6 +138,10 @@
                         &:before{
                             font-size: 2.2rem;
                             color: @primary;
+                            @media @mdmax{
+                                font-size: 1.5rem;
+                                font-weight: bold;
+                            }
                         }
                     }
                     > div{
@@ -191,6 +202,9 @@
                                 transition: all @time3;
                                 &:before{
                                     color: @primary;
+                                    @media @mdmax{
+                                        font-size: 1rem;
+                                    }
                                 }
                             }
                             &.active{
@@ -258,12 +272,19 @@
                             }
                         }
                         &:before{
-                            color: @white;
-                            width: 32px;
-                            height: 32px;
-                            background: @black;
-                            border-radius: 100%;
-                            line-height: 32px;
+                            @media @mdmin{
+                                color: @white;
+                                width: 32px;
+                                height: 32px;
+                                background: @black;
+                                border-radius: 100%;
+                                line-height: 32px;
+                            }
+                            @media @mdmax{
+                                font-size: 1.5rem;
+                                font-weight: bold;
+                                color: @black;
+                            }
                         }
                         .lib-hbefore;
                     }
@@ -327,19 +348,20 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
     body {
         .page-wrapper{
-            padding-top: 202px;
+            padding-top: 95px;
         }
         header.page-header {
             position: fixed;
-            top: 0;
+            top: 16px;
             left: 0;
             width: 100%;
+            border: 0;
             .content-logo:after{
                 opacity: 0;
                 transition: all @time3;
             }
             .header.content {
-                padding-left: 34%;
+                padding-left: 10%;
                 position: relative;
                 span.nav-toggle {
                     height: 15px;
@@ -405,9 +427,9 @@
                             margin: 0;
                             padding: 0;
                             position: fixed;
-                            top: 130px;
+                            top: 51px;
                             width: 100%;
-                            background: @primary;
+                            background: @white;
                             left: 0;
                             text-align: center;
                             transition: all @time3;
@@ -460,8 +482,8 @@
                             z-index: 99;
                         }
                         .icon-uniE622{
-                            top: 10px;
-                            left: 25px;
+                            top: 5px;
+                            left: 18px;
                         }
                     }
                 }
