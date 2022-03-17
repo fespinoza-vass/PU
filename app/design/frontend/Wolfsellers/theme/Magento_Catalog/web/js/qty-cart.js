@@ -1,7 +1,8 @@
 define([
     'jquery',
     'Magento_Customer/js/customer-data',
-    'mage/url'
+    'mage/url',
+    'catalogAddToCart'
 ], function ($,Customer,urlBuilder) {
     'use strict';
 
@@ -47,6 +48,19 @@ define([
 
         _onIncreaseClicked: function (e) {
             e.stopPropagation();
+            var cart=this._cart();
+
+            if (this._getQty() == 1 && cart.length == 0){
+
+                var bindSubmit = this.options.bindSubmit;
+                var jqForm = $("#product_addtocart_form").catalogAddToCart({
+                    bindSubmit: bindSubmit
+                });
+
+                jqForm.catalogAddToCart('submitForm', jqForm);
+
+                return false;
+            }
             var qty=this._getQty()+1;
             this.qtyField.val(qty);
             this._requestUpdateCart(qty);
@@ -57,19 +71,16 @@ define([
 
             var qty = parseInt(this.qtyField.val()) || this.options.defaultValue;
                 qty >= this.options.defaultValue ? qty : this.options.defaultValue;
-             
+
             return  qty;
 
         },
         _requestUpdateCart: function (qty)
         {
-            var product=$("input[name='product']").val();
-            var cart=Customer.get('cart')()["items"];
-            var item_id=cart.find( Items => Items.product_id == product )["item_id"];
-
+            var cart=this._cart();
             $('[data-block="minicart"]').trigger('contentLoading');
             var formData = {
-                itemId: item_id,
+                itemId: cart[0].item_id,
                 itemQty: qty,
                 form_key: $("input[name='form_key']").val()
             };
@@ -81,7 +92,7 @@ define([
                 type: 'post',
                 cache: false
             }).success(function (data) {
-                $("#cart-item-"+item_id+"-qty").val(qty);
+                $("#cart-item-"+cart[0].item_id+"-qty").val(qty);
             }).fail(function() {
                 /* do nothing */
             }).always(function() {
@@ -91,15 +102,26 @@ define([
 
         _qtyInicial: function(){
 
+            var cart=this._cart();
+            if(cart.length > 0){
+                $(this.qtyField).val(cart[0].qty);
+            }
+        },
+        _cart:function (){
+            var array=[],
+            item;
             var product=$("input[name='product']").val();
             var cart=Customer.get('cart')()["items"];
 
-            if (cart.length > 0){
-                var qty=cart.find( Items => Items.product_id == product )["qty"];
-                console.log($(this.qtyField));
-                $(this.qtyField).val(qty);
+            if(cart != undefined){
+                item=cart.find( Items => Items.product_id == product );
+                if(item != undefined){
+                    array.push({qty:item["qty"],item_id:item["item_id"]});
+                }
             }
+            return array;
         }
+
     });
 
     return $.mage.UpdateQty;
