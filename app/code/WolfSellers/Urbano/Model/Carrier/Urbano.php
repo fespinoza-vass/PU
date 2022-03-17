@@ -11,14 +11,15 @@ declare(strict_types=1);
 
 namespace WolfSellers\Urbano\Model\Carrier;
 
+use Carbon\Carbon;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
-use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment\Item;
 use Magento\Shipping\Model\Carrier\AbstractCarrierOnline;
 use Magento\Shipping\Model\Carrier\CarrierInterface;
 use Magento\Shipping\Model\Shipment\Request;
+use Magento\Shipping\Model\Tracking\Result;
 use WolfSellers\Urbano\Model\Source\Packaging;
 use WolfSellers\Urbano\Service\ApiService;
 
@@ -40,6 +41,9 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
     /** @var string */
     protected $_code = self::CODE;
 
+    /** @var Result */
+    private Result $trackingResult;
+
     /**
      * {@inheritdoc}
      */
@@ -55,7 +59,6 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         if (!$quotes) {
             $this->_logger->error('Urbano: Not quoates available');
         }
-
 
         $result = $this->_rateFactory->create();
         $methods = $this->getAllowedMethods();
@@ -149,8 +152,6 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
     {
         $insured = (bool) $this->getConfigData('insured');
         $shipmentItems = $this->getShipmentItems($request);
-
-        /** @var Order $order */
         $order = $request->getOrderShipment()->getOrder();
 
         $data = [
@@ -206,8 +207,34 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
     }
 
     /**
-     * Get quotes from api.
+     * Get tracking info.
      *
+     * @param string $trackingNumber
+     *
+     * @return Result
+     */
+    protected function getTracking(string $trackingNumber): Result
+    {
+        $this->trackingResult = $this->_trackFactory->create();
+
+        $data = [
+            'guia' => $trackingNumber,
+            'vp_linea' => $this->getConfigData('line'),
+        ];
+
+        $trackingInfo = $this->getApiClient()->getTrackingInfo($data);
+
+        if (empty($trackingInfo)) {
+            $this->appendTrackingError($trackingNumber, $this->getApiClient()->getLastError());
+        } else {
+            $this->parseTrackingResponse($trackingNumber, $trackingInfo);
+        }
+
+        return $this->trackingResult;
+    }
+
+    /**
+     * Get quotes from api.
      *
      * @return array
      */
@@ -328,5 +355,103 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         }
 
         return $shipmentItems;
+    }
+
+    /**
+     * Append tracking error.
+     *
+     * @param string $trackingNumber
+     * @param mixed $errorMessage
+     *
+     * @return void
+     */
+    private function appendTrackingError(string $trackingNumber, $errorMessage)
+    {
+        $error = $this->_trackErrorFactory->create();
+        $error->setCarrier($this->_code);
+        $error->setCarrierTitle($this->getConfigData('title'));
+        $error->setTracking($trackingNumber);
+        $error->setErrorMessage($errorMessage);
+
+        $this->trackingResult->append($error);
+    }
+
+    /**
+     * Parse tracking result.
+     *
+     * @param string $trackingNumber
+     * @param array $trackingInfo
+     *
+     * @return void
+     */
+    private function parseTrackingResponse(string $trackingNumber, array $trackingInfo)
+    {
+        $tracking = $this->_trackStatusFactory->create();
+        $tracking->setCarrier($this->_code);
+        $tracking->setCarrierTitle($this->getConfigData('title'));
+        $tracking->setTracking($trackingNumber);
+        $tracking->addData($this->processTrackingDetails(current($trackingInfo)));
+
+        $this->trackingResult->append($tracking);
+    }
+
+    /**
+     * Process tracking details.
+     *
+     * @param array $trackingInfo
+     *
+     * @return array
+     */
+    private function processTrackingDetails(array $trackingInfo): array
+    {
+        $delivered = [];
+
+        // Check delivered.
+        foreach ($trackingInfo['movimientos'] as $movement) {
+            if ('EN' !== $movement['chk']) {
+                continue;
+            }
+
+            $delivered = $movement;
+        }
+
+        return [
+            'status' => $trackingInfo['estado'],
+            'signedby' => $delivered['apunts'] ?? null,
+            'shipped_date' => $trackingInfo['hora_pickup'],
+            'service' => $trackingInfo['servicio'],
+            'weight' => $trackingInfo['peso'],
+            'deliverydate' => $delivered['fecha'] ?? null,
+            'deliverytime' => $delivered['hora'] ?? null,
+            'progressdetail' => $this->processTrackDetails($trackingInfo['movimientos']),
+        ];
+    }
+
+    /**
+     * Tracking movements.
+     *
+     * @param array $movements
+     *
+     * @return array
+     */
+    private function processTrackDetails(array $movements): array
+    {
+        $result = [];
+
+        foreach ($movements as $movement) {
+            $date = Carbon::createFromFormat(
+                'd/m/Y H:i',
+                sprintf('%s %s', $movement['fecha'], $movement['hora'])
+            );
+
+            $result[] = [
+                'activity' => sprintf('%s - %s', $movement['estado'], $movement['sub_estado']),
+                'deliverydate' => $date->toDateString(),
+                'deliverytime' => $date->toTimeString(),
+                'deliverylocation' => $movement['apunts'],
+            ];
+        }
+
+        return $result;
     }
 }
