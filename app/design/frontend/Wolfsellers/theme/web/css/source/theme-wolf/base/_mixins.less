@@ -343,5 +343,24 @@
 			    }
 			}
 		}
+		&.tamano{
+			.swatch-option{
+				border: 1px solid @gray-D8;
+				border-radius: @radiusitems;
+				padding: 5px 10px;
+			    height: auto;
+			    background: transparent;
+			    color: @primary;
+			    height: auto !important;
+			    width: auto !important;
+				&:after{
+					content: attr(aria-label);
+					text-align: center;
+					font-size: 1.4rem;
+					font-weight: bold;
+					color: @black;
+				}
+			}
+		}
 	}
 }
