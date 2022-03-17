@@ -15,7 +15,7 @@
                 <div class="field qty">
                     <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
                     <div class="control">
-                    <span class="action-more" >+</span>
+                        <span class="action-less">-</span>
                         <input type="number"
                                name="qty"
                                id="qty"
@@ -25,7 +25,7 @@
                                class="input-text qty"
                                data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                         />
-                        <span class="action-less">-</span>
+                        <span class="action-more" >+</span>
                     </div>
                 </div>
             <?php endif; ?>
