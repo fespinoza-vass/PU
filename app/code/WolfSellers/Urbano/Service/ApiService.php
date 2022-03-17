@@ -23,14 +23,16 @@ class ApiService
 {
     private const QUOTE_URI = 'cotizarenvio';
     private const GENERATE_LABEL_URI = 'ge';
+    private const TRACKING_URI = 'tracking/';
 
+    /** @var string Api Action */
     private string $action = '';
+
+    /** @var string Last response error */
     private string $lastError = '';
 
+    /** @var array Authentication data */
     private array $auth;
-
-    /** @var Client */
-    private Client $client;
 
     /** @var ResponseInterface */
     private ResponseInterface $response;
@@ -91,6 +93,21 @@ class ApiService
     }
 
     /**
+     * Get tracking info.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function getTrackingInfo(array $data): array
+    {
+        $payload = $data;
+        $this->action = 'Get tracking info request';
+
+        return $this->get(self::TRACKING_URI, $payload);
+    }
+
+    /**
      * Get last error for request.
      *
      * @return string
@@ -115,13 +132,10 @@ class ApiService
             $headers = $this->auth;
         }
 
-        $this->client = new Client([
+        return new Client([
             'base_uri' => $this->getBaseUrl(),
             'headers' => $headers,
         ]);
-
-
-        return $this->client;
     }
 
     /**
@@ -212,7 +226,6 @@ class ApiService
      * @param string $uri
      * @param array $payload
      * @param bool $auth
-     *
      * @param array $options
      *
      * @return array
@@ -235,6 +248,45 @@ class ApiService
             }
 
             $this->response = $this->getClient($auth)->post($uri, $options);
+
+            $result = $this->parseResponse();
+        } catch (\Exception $exception) {
+            $this->parseException($exception);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get shortcut.
+     *
+     * @param string $uri
+     * @param array $payload
+     * @param bool $auth
+     * @param array $options
+     *
+     * @return array
+     */
+    private function get(string $uri, array $payload, bool $auth = true, array $options = []): array
+    {
+        $result = [];
+
+        try {
+            $data = [
+                'json' => json_encode($payload),
+            ];
+
+            $uri .= '?'.http_build_query($data);
+
+            $this->log([
+                'base_uri' => $this->getBaseUrl(),
+                'uri' => $uri,
+                'method' => 'GET',
+                'payload' => $payload,
+                'auth' => $this->auth,
+            ]);
+
+            $this->response = $this->getClient($auth)->get($uri, $options);
 
             $result = $this->parseResponse();
         } catch (\Exception $exception) {
