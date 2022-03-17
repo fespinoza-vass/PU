@@ -6199,7 +6199,7 @@ Carrier Title,Título de Transportista,module,Magento_Checkout,
 Next,Siguiente,module,Magento_Checkout,
 "Sorry, no quotes are available for this order at this time","Lo sentimos, no hay cotizaciones disponibles para esta orden en este momento",module,Magento_Checkout,
 Order Summary,Resumen de la Orden,module,Magento_Checkout,
-Item in Cart,Elemento en Carrito,module,Magento_Checkout,
+Item in Cart,Item,module,Magento_Checkout,
 Items in Cart,Elementos en Carrito,module,Magento_Checkout,
 View Details,Ver Detalles,module,Magento_Checkout,
 Contact Form,Forma de Contacto,module,Magento_Contact,
@@ -25941,3 +25941,4 @@ Item,Producto
 "Stay connected:","Mantente conectado:"
 "Copyright © 2021 United Perfumeries Peru. All rights reserved","Copyright © 2021 Perfumerías Unidas Perú. Derechos Reservados"
 "Your order number is: %1","Orden No: %1"
+"Stores","Tiendas"
