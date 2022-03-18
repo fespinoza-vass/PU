@@ -1926,8 +1926,8 @@ Something went wrong while validating the VAT ID.,Algo ocurrió al intentar vali
 The customer would belong to Customer Group %s.,El cliente pertenecería al Grupo de Clientes %s.,module,Magento_Customer,
 There was an error detecting Customer Group.,Hubo un error al detectar el Grupo de Clientes.,module,Magento_Customer,
 Validate VAT Number,Validar el RFC/Número VAT,module,Magento_Customer,
-Customer Login,Acceso a Clientes,module,Magento_Customer,
-Create New Customer Account,Formulario de solicitud de cuenta,module,Magento_Customer,
+Customer Login,Inicio de sesión,module,Magento_Customer,
+Create New Customer Account,Crear una cuenta,module,Magento_Customer,
 Date of Birth,Fecha de Nacimiento,module,Magento_Customer,
 Bad request.,Solicitud incorrecta.,module,Magento_Customer,
 This confirmation key is invalid or has expired.,La llave de confirmación no es válida o ha expirado.,module,Magento_Customer,
@@ -25942,3 +25942,6 @@ Item,Producto
 "Copyright © 2021 United Perfumeries Peru. All rights reserved","Copyright © 2021 Perfumerías Unidas Perú. Derechos Reservados"
 "Your order number is: %1","Orden No: %1"
 "Stores","Tiendas"
+"Email","Correo Electrónico"
+"Password Verification","Verificación De Contraseña"
+"This allows merchants to "see what you see" and take actions on your behalf in order to provide better assistance.","Esto permite a los comerciantes "ver lo que usted ve" y tomar medidas en su nombre para brindarle una mejor asistencia."
