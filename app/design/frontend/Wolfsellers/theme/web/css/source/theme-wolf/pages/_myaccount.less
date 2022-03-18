@@ -125,5 +125,232 @@
 				}
 			}
 		}
-	}	
+	}
+//  ------------LOGIN------------
+    .customer-account-login{
+        .page-main{
+            .page-title-wrapper{
+                .page-title{
+                    font-size: 3.2rem;
+                }
+            }
+        }
+        .columns{
+            .block.block-customer-login,
+            .block.block-new-customer {
+                .block-title {
+                    border-bottom: 1px solid @lines-input;
+                    font-size: 1.6rem;
+                }
+                .block-content{
+                    padding-top: 5px;
+                }
+                .actions-toolbar{
+                    .primary {
+                        width: 50%;
+                        .action.create.primary,
+                        .action.login.primary{
+                            width: 100%;
+                            margin-right: 0;
+                            height: 60px;
+                        }
+                    }
+                }
+            }
+            .block.block-customer-login{
+                margin-bottom: unset;
+                .block-content{
+                    .fieldset.login{
+                        &:after{
+                            display: none;
+                        }
+                        .field{
+                            .label{
+                                font-weight: normal;
+                            }
+                            .control{
+                                width: 100%;
+                            }
+                        }
+                        .actions-toolbar{
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: center;
+                            .secondary{
+                                width: 50%;
+                                .action.remind{
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .block.block-new-customer{
+                .block-content{
+                    p{
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+//  ------------CREATE------------
+    .customer-account-create{
+        .page-main{
+            .page-title-wrapper{
+                .page-title{
+                    font-size: 3.2rem;
+                }
+            }
+        }
+        .columns{
+            .form.create.account.form-create-account{
+                .fieldset.create.info,
+                .fieldset.create.account{
+                    .legend{
+                        span{
+                            font-size: 1.6rem;
+                            font-weight: 400;
+                        }
+                    }
+                    .field{
+                        .label{
+                            font-weight: normal;
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+                .fieldset.create.info{
+                    .field.choice{
+                        display: none;
+                    }
+                }
+                .fieldset.create.account{
+                    &:after{
+                        display: none;
+                    }
+                    .field.password.required{
+                        .control{
+                            #password-strength-meter-container{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .actions-toolbar{
+                    .primary{
+                        .action.submit.primary{
+                            width: 220px;
+                            height: 60px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+//  ------------LOGIN------------
+    .customer-account-login{
+        .page-main{
+            .page-title-wrapper{
+                .page-title{
+                    font-size: 2.2rem !important;
+                }
+            }
+        }
+        .columns{
+            .login-container{
+                background: unset !important;
+                padding: unset !important;
+                .block.block-customer-login,
+                .block.block-new-customer{
+                    background: @white;
+                    border-radius: 12px;
+                    padding: 15px;
+                }
+                .block.block-customer-login{
+                    .block-content{
+                        padding-top: unset;
+                        .fieldset.login{
+                            margin-bottom: unset !important;
+                            .actions-toolbar{
+                                flex-direction: column;
+                                .primary{
+                                    order: 2;
+                                    width: 100% !important;
+                                    .action.login.primary{
+                                        height: 40px !important;
+                                        padding: 0;
+                                    }
+                                }
+                                .secondary{
+                                    order: 1;
+                                    width: unset !important;
+                                    margin-bottom: 25px;
+                                    .action.remind{
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .block.block-new-customer{
+                    margin-top: 15px;
+                    .block-content{
+                        padding-top: 5px;
+                        p{
+                            font-size: 1.2rem;
+                        }
+                        .actions-toolbar{
+                            .primary {
+                                width: 100%;
+                                .action.create.primary {
+                                    height: 40px !important;
+                                    padding: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //  ------------CREATE------------
+    .customer-account-create{
+        .page-main{
+            .page-title-wrapper{
+                .page-title{
+                    font-size: 2.2rem;
+                }
+            }
+        }
+        .columns{
+            .form.create.account.form-create-account{
+                .fieldset.create.info,
+                .fieldset.create.account{
+                    .field{
+                        .label{
+                            font-size: 1.4rem;
+                        }
+                    }
+                }
+                .actions-toolbar{
+                    .primary{
+                        .action.submit.primary{
+                            width: 100% !important;
+                            height: 40px !important;
+                            padding: 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

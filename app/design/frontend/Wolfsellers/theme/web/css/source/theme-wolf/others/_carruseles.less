@@ -1,5 +1,10 @@
 & when (@media-common = true) {
-	.product-items.slick-slider{
+	.product-items.slick-slider,
+    .carousel-releases{
+        .slick-prev.slick-disabled,
+        .slick-next.slick-disabled {
+            opacity: unset !important;
+        }
 		.slick-arrow{
 			float: left;
 			text-indent: -99999%;
@@ -52,6 +57,8 @@
 			padding: 0 26px;
 			margin-bottom: 25px;
 			.slick-arrow{
+                font-size: 0;
+                color: transparent;
 				&.slick-prev{
 					left: 0;
 				}
