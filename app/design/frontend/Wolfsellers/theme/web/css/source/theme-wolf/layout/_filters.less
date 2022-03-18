@@ -1,3 +1,80 @@
-& when (@media-common = true) {
-	
+& when (@media-common =true) {
+    .sidebar-main {
+        .filter {
+            .filter-content {
+                .block-subtitle {
+                    border-radius: 12px 12px 0px 0px;
+                    justify-content: center;
+                    align-items: center;
+                    background: @black;
+                    .lib-font-size(16);
+                    padding: 19px 0;
+                    color: @white;
+                    display: flex;
+
+                    &::before {
+                        font-family: "theme-icons";
+                        content: @icon-filter;
+                        margin: 0 7px 0;
+                        color: @white;
+                    }
+                }
+
+                .filter-options{
+                    border-radius: 0 0 12px 12px;
+                    background: @white;
+                    .lib-font-size(16);
+                    padding: 30px;
+
+                    .filter-options-item{
+                        .filter-options-title{
+                            text-transform: capitalize;
+                            FONT-WEIGHT: 400;
+
+                            &::after{
+                                color: @lines-input;
+                                .lib-font-size(12);
+                            }
+                        }
+
+                        .amshopby-search-box{
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .filter-title{
+                strong{
+                    border-radius: 13px;
+                    background: @black;
+                    .lib-font-size(16);
+                    padding: 5px 8px;
+                    box-shadow: none;
+                    display: flex;
+                    color: @white;
+                    border: none;
+
+                    &::before{
+                        font-family: "theme-icons";
+                        content: @icon-filter;
+                        margin: 0 5px 0;
+                        color: @white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    &.page-products {
+        .page-wrapper {
+            .columns {
+                .sidebar-main {
+                    order: 2;
+                }
+            }
+        }
+    }
 }
