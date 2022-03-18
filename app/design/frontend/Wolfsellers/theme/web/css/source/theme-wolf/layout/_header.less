@@ -334,7 +334,10 @@
                 transition: all @time3;
                 position: fixed;
                 width: 100%;
-                box-shadow: 5px 0px 10px -5px @black;                
+                box-shadow: 5px 0px 10px -5px @black;  
+                @media @mdmax{
+                    top: 16px;
+                }              
                 .header.content {
                     padding-top: 10px;
                     padding-bottom: 10px;
@@ -348,7 +351,7 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
     body {
         .page-wrapper{
-            padding-top: 95px;
+            padding-top: 110px;
         }
         header.page-header {
             position: fixed;
@@ -501,11 +504,6 @@
                     padding-bottom: 10px;
                     transition: all @time3;
                 }
-            }
-        }
-        &.nav-up{
-            header.page-header .header.content .block-search .minisearch .control{
-                top: 53px;
             }
         }
     }

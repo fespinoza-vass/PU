@@ -30,6 +30,12 @@
                         border-radius: @radiusitems;
                         background: @white;
                         margin-bottom: 10px;
+                        .swatch-attribute-options{
+                            display: flex;
+                            justify-content: center;
+                            flex-wrap: wrap;
+                        }
+                        .lib-attr;
                         @media @lgmin{
                             margin-left: 2%;
                             width: calc(~'(100% - 4%) / 3');
@@ -155,6 +161,7 @@
                                         display: none;
                                     }
                                     .product-item-actions{
+                                        margin: 0;
                                         .actions-primary{
                                             button.primary{
                                                 font-size: 1.8rem;
@@ -162,7 +169,7 @@
                                                 text-transform: uppercase;
                                                 font-weight: 500;
                                                 @media @xsmax{
-                                                    font-size: 1.2rem;
+                                                    font-size: 0.9rem;
                                                 }
                                             }
                                         }

@@ -11,6 +11,14 @@
             <block class="Magento\Framework\View\Element\Template" name="links.login" template="Magento_Theme::html/header/loginaccount.phtml" before="minicart" />
         </referenceContainer>
 
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Cms\Block\Block" name="Imagen-debajo-filtros" after="catalog.leftnav">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">Imagen-debajo-filtros</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
         <referenceContainer name="header.panel.wrapper">
             <container name="panel-perfumes" as="panel-perfumes" label="Menu top header" htmlTag="div" htmlClass="panel-perfumes">
                 <block class="Magento\Cms\Block\Block" name="main.nav" before="logo">
@@ -34,6 +42,7 @@
         <move element="top.search" destination="header-wrapper" after="logo" />
         <move element="devoluciones-y-pedidos" destination="header-wrapper" after="top.search" />
         <move element="messages" destination="page.wrapper" before="-" />
+        <move element="navigation.sections" destination="header.container" after="header-wrapper"/>
 
         <referenceBlock name="header.panel" remove="true"/>
         <referenceBlock name="store.links" remove="true" />

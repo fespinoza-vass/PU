@@ -55,6 +55,9 @@
             .page-header {
                 .header {
                     .minicart-wrapper {
+                        .action.showcart .counter.qty .loader > img{
+                            width: 100%;
+                        }
                         .ui-dialog {
                             .block-minicart {
                                 transition: all .5s;
@@ -82,7 +85,7 @@
                                             }
 
                                             &::after {
-                                                transition: opacity .5s;
+                                                transition: opacity @time5;
                                                 content: "";
                                                 opacity: 0;
                                             }

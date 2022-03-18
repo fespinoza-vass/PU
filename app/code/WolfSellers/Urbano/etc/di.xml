@@ -28,4 +28,7 @@
             </argument>
         </arguments>
     </type>
+
+    <preference for="Magento\Shipping\Model\Shipping\LabelGenerator"
+                type="WolfSellers\Urbano\Model\Shipping\LabelGeneratorPreference"/>
 </config>

@@ -327,6 +327,13 @@
 				height: 32px !important;
 				border: 1px solid @gray-D8;
 				border-radius: @radiusitems;
+				transform: all @time5;
+				&:hover{
+					transform: all @time5;
+				}
+				&:last-child{
+					margin-right: 0;
+				}
 			}
 		}
 		&.size{
@@ -337,9 +344,11 @@
 			    height: auto;
 			    background: transparent;
 			    color: @primary;
+			    transform: all @time5;
 			    &:not(.disabled):hover{
 			    	outline: 0;
 			    	border-color: @primary;
+			    	transform: all @time5;
 			    }
 			}
 		}
@@ -353,6 +362,10 @@
 			    color: @primary;
 			    height: auto !important;
 			    width: auto !important;
+			    transform: all @time5;
+			    &:hover{
+			    	transform: all @time5;
+			    }
 				&:after{
 					content: attr(aria-label);
 					text-align: center;
