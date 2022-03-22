@@ -361,7 +361,7 @@
 				div{
 					&::before{
 						border-radius: 100px;
-						content: '\e602';
+						content: @icon-warning;
 					}
 				}
 			}
@@ -394,11 +394,11 @@
 						border-left: 1px solid @lines-input;
 						position: absolute;
 						right: 0;
-
+						.lib-hafter;
 						&::after{
 							font-family: 'theme-icons';
 							.lib-font-size(11);
-							content: '\e61c';
+							content: @icon-expand;
 							line-height: 2.8;
 							color: @black;
 						}
@@ -408,11 +408,11 @@
 						border-right: 1px solid @lines-input;
 						position: absolute;
 						left: 0;
-
+						.lib-hafter;
 						&::after{
 							font-family: 'theme-icons';
 							.lib-font-size(11);
-							content: '\e60f';
+							content: @icon-collapse;
 							color: @black;
 						}
 					}
@@ -446,19 +446,21 @@
 		.action-less{
 			border-right: 1px solid @lines-input;
 			left: 0;
-
+			cursor: pointer;
 			&::after{
-				content: '\e60f';
+				content: @icon-collapse;
 			}
+			.lib-hafter;
 		}
 
 		.action-more{
 			border-left: 1px solid @lines-input;
 			right: 0;
-
+			cursor: pointer;
 			&::after{
-				content: '\e61c';
+				content: @icon-expand;
 			}
+			.lib-hafter;
 		}
 
 		.cart-item-qty, .input-text.qty{

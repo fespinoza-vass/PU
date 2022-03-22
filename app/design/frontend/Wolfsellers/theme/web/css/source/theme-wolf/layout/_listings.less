@@ -9,7 +9,9 @@
         }
         .page-wrapper{
             main.page-main,
-            .block.related{
+            .block.related,
+            .block.upsell,
+            .amshopby-morefrom{
                 .column.main{
                     > .ambanners{
                         margin-bottom: 30px;
@@ -24,6 +26,7 @@
                 div.products-grid,
                  .block.widget,
                  .product-items{
+                    display: block;
                     .product-item{
                         text-align: center;
                         box-shadow: 0 0 12px 0 @shadowitems;
@@ -83,7 +86,6 @@
                                     // IMPORTANTS para modificar estilos de AMASTY
                                     position: static !important;
                                     .product-image-wrapper{
-                                        padding-bottom: 100% !important;
                                         .product-image-photo{
                                             margin: 0 !important;
                                         }
@@ -122,6 +124,8 @@
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
+                                    float: left;
+                                    width: 100%;
                                     > span{
                                         margin: 0 5px;
                                         span{

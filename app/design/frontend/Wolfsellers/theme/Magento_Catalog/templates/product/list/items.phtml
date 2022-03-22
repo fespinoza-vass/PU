@@ -68,7 +68,7 @@ switch ($type = $block->getType()) {
             $isWeightedRandom = (int) $block->getRotation()->isWeightedRandom($block->getProductListType());
 
             $showAddTo = false;
-            $showCart = false;
+            $showCart = true;
             $templateType = null;
             $description = false;
             $canItemsAddToCart = false;
@@ -89,7 +89,7 @@ switch ($type = $block->getType()) {
             $isWeightedRandom = 0;
 
             $showAddTo = false;
-            $showCart = false;
+            $showCart = true;
             $templateType = null;
             $description = false;
             $canItemsAddToCart = false;
@@ -124,7 +124,7 @@ switch ($type = $block->getType()) {
             $title = __('More Choices:');
             $items = $block->getItems();
 
-            $showAddTo = true;
+            $showAddTo = false;
             $showCart = true;
             $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
             $description = false;
