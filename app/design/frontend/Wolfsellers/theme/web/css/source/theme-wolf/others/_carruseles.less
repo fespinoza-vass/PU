@@ -1,10 +1,6 @@
 & when (@media-common = true) {
 	.product-items.slick-slider,
     .carousel-releases{
-        .slick-prev.slick-disabled,
-        .slick-next.slick-disabled {
-            opacity: unset !important;
-        }
 		.slick-arrow{
 			float: left;
 			text-indent: -99999%;
@@ -52,7 +48,9 @@
 	}
 	.row-slider-products,
 	.row-carousel-releases,
-	.block.related{
+	.block.related,
+	.block.upsell,
+	.amshopby-morefrom{
 		.slick-slider{
 			padding: 0 26px;
 			margin-bottom: 25px;
@@ -69,6 +67,9 @@
 			.slick-list{
 				padding: 10px 0;
 				.slick-track{
+					padding: 10px 0;
+					float: left;
+					width: 100%;
 					.slick-slide{
 						margin: 0 10px;
 						@media @mdmax{

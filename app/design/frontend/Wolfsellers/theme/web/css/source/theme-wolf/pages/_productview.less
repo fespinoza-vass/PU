@@ -138,18 +138,18 @@
 						.product-options-wrapper{
 							.lib-attr;
 						}
-
-						.field.qty{
-							.label{
-								display: none;
-							}
-							.control{
-								.input-text.qty ,span{
-									border-color: @black;
-									color: @black;
-
-									&::after{
-										font-weight: 600;
+						.box-tocart{
+							.field.qty{
+								.label{
+									display: none;
+								}
+								.control{
+									span[class*="action-"]{
+										width: 60px;
+										height: 60px;
+									}
+									.input-text.qty{
+										height: 60px;
 									}
 								}
 							}
@@ -205,7 +205,10 @@
 				max-width: @layout__max-width;
 				margin: 0 auto 20px;
 			}
-			.block.related{
+			.block.related,
+			.block.upsell,
+			.amshopby-morefrom {
+				padding: 0 20px;
 				.block-title{
 					float: left;
 					width: 100%;
