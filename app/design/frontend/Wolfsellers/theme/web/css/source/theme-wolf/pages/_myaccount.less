@@ -222,6 +222,13 @@
                     }
                 }
                 .fieldset.create.info{
+                    .field.gender.required,
+                    .field.field-identificacion.required{
+                        width: 23.5%;
+                    }
+                    .field.field-numero_de_identificacion.required{
+                        margin-left: 2%;
+                    }
                     .field.choice{
                         display: none;
                     }
@@ -237,6 +244,22 @@
                             }
                         }
                     }
+                    .field.choice{
+                        display: none;
+                    }
+                }
+                .fieldset.additional_info{
+                    .field.choice.newsletter{
+                        .label{
+                            span{
+                                font-weight: normal;
+                            }
+                            &:after{
+                                background-color: @black;
+                                color: @white;
+                            }
+                        }
+                    }
                 }
                 .actions-toolbar{
                     .primary{
@@ -244,6 +267,47 @@
                             width: 220px;
                             height: 60px;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    ///GIFT CART///
+    .magento_giftcardaccount-customer-index{
+        .page-wrapper{
+            .page-main{
+                .giftcard-account{
+                    box-shadow: 2px 2px 12px @gray;
+                    border-radius: 12px;
+                    background: @white;
+
+                    .actions-toolbar{
+                        .secondary{
+                            button{
+                                border: 1px solid @black;
+                                border-radius: 12px;
+                                padding: 18px 20px;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/////////////DESKTOP///////////////////
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    ///GIFT CART///
+    .magento_giftcardaccount-customer-index{
+        .page-wrapper{
+            .page-main{
+                .giftcard-account{
+                    .actions-toolbar{
+                        padding: 0 0 32px 33px;
                     }
                 }
             }
@@ -327,7 +391,7 @@
         .page-main{
             .page-title-wrapper{
                 .page-title{
-                    font-size: 2.2rem;
+                    font-size: 2.2rem !important;
                 }
             }
         }
@@ -341,6 +405,15 @@
                         }
                     }
                 }
+                .fieldset.create.info{
+                    .field.gender.required,
+                    .field.field-identificacion.required{
+                        width: 100% !important;
+                    }
+                    .field.field-numero_de_identificacion.required{
+                        margin-left: 0 !important;
+                    }
+                }
                 .actions-toolbar{
                     .primary{
                         .action.submit.primary{
@@ -348,6 +421,20 @@
                             height: 40px !important;
                             padding: 8px;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    ///GIFT CART///
+    .magento_giftcardaccount-customer-index{
+        .page-wrapper{
+            .page-main{
+                .giftcard-account{
+
+                    .actions-toolbar{
+                        padding: 0 17px 32px;
                     }
                 }
             }

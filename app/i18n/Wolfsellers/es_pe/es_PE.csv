@@ -25945,3 +25945,10 @@ Item,Producto
 "Email","Correo Electrónico"
 "Password Verification","Verificación De Contraseña"
 "This allows merchants to "see what you see" and take actions on your behalf in order to provide better assistance.","Esto permite a los comerciantes "ver lo que usted ve" y tomar medidas en su nombre para brindarle una mejor asistencia."
+"Gift Card","Tarjeta de regalo"
+"Informative note","Nota informativa"
+"We and selected third parties use cookies or similar technologies for technical purposes and, with your consent, for other purposes as specified in the","Nosotros y terceros seleccionados utilizamos cookies o tecnologías similares con fines técnicos y, con su consentimiento, para otras finalidades según se especifica en la"
+"<a href=""%1"">cookie policy</a>.","<a href=""%1"">política de cookies</a>.",module,Magento_Cookie,
+"You can consent to the use of such technologies by using the ""Accept"" button. By closing this informative note, you continue without accepting.","Puede consentir el uso de dichas tecnologías utilizando el botón de ""Aceptar"". Al cerrar esta nota informativa, usted continúa sin aceptar."
+"Accept cookies","Aceptar cookies"
+"I want to receive information about offers and promotions.","Deseo recibir información sobre ofertas y promociones."

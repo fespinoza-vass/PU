@@ -42,28 +42,6 @@ $formData = $block->getFormData();
             ->toHtml()
         ?>
 
-        <?php if ($block->isNewsletterEnabled()): ?>
-        <div class="field choice newsletter">
-            <input type="checkbox"
-                   name="is_subscribed"
-                   title="<?= $block->escapeHtmlAttr(__('Sign Up for Newsletter')) ?>"
-                   value="1"
-                   id="is_subscribed"
-                <?php if ($formData->getIsSubscribed()): ?> checked="checked"<?php endif; ?>
-                   class="checkbox"/>
-            <label for="is_subscribed" class="label">
-                <span><?= $block->escapeHtml(__('Sign Up for Newsletter')) ?></span>
-            </label>
-        </div>
-            <?php /* Extensions placeholder */ ?>
-            <?= $block->getChildHtml('customer.form.register.newsletter') ?>
-        <?php endif ?>
-
-        <?php $_dob = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Dob::class) ?>
-        <?php if ($_dob->isEnabled()): ?>
-            <?= $_dob->setDate($formData->getDob())->toHtml() ?>
-        <?php endif ?>
-
         <?php $_taxvat = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Taxvat::class) ?>
         <?php if ($_taxvat->isEnabled()): ?>
             <?= $_taxvat->setTaxvat($formData->getTaxvat())->toHtml() ?>
@@ -83,7 +61,13 @@ $formData = $block->getFormData();
             <?= $customerAttributes->toHtml() ?>
         <?php endif;?>
 
+        <?php $_dob = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Dob::class) ?>
+        <?php if ($_dob->isEnabled()): ?>
+            <?= $_dob->setDate($formData->getDob())->toHtml() ?>
+        <?php endif ?>
+
         <?= $block->getChildHtml('fieldset_create_info_additional') ?>
+
     </fieldset>
 
 <?php if ($block->getShowAddressFields()): ?>
@@ -310,6 +294,24 @@ $formData = $block->getFormData();
 
     <fieldset class="fieldset additional_info">
         <?= $block->getChildHtml('form_additional_info') ?>
+
+        <?php if ($block->isNewsletterEnabled()): ?>
+            <div class="field choice newsletter">
+                <input type="checkbox"
+                       name="is_subscribed"
+                       title="<?= $block->escapeHtmlAttr(__('I want to receive information about offers and promotions.')) ?>"
+                       value="1"
+                       id="is_subscribed"
+                    <?php if ($formData->getIsSubscribed()): ?> checked="checked"<?php endif; ?>
+                       class="checkbox"/>
+                <label for="is_subscribed" class="label">
+                    <span><?= $block->escapeHtml(__('I want to receive information about offers and promotions.')) ?></span>
+                </label>
+            </div>
+            <?php /* Extensions placeholder */ ?>
+            <?= $block->getChildHtml('customer.form.register.newsletter') ?>
+        <?php endif ?>
+
     </fieldset>
 
     <div class="actions-toolbar">
