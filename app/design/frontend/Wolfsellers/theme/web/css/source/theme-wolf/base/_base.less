@@ -1,4 +1,6 @@
-
+//
+// Common
+//  ---------------------------------------------
 & when (@media-common = true) {
 	.nav-open{
 		body{
@@ -7,7 +9,7 @@
 	}
 
 	body{
-		
+
 		*{
 		    box-sizing: border-box;
 			list-style: none;
@@ -29,11 +31,59 @@
 			a:hover:before,
 			a:hover:after{
 				transition: all @time3;
-			}		
+			}
 		}
 
+        //cookis
+        .message.global.cookie{
+            background-color: @white;
+            height: 352px;
+            font-size: 1.4rem;
+            padding: 0 16px;
+            z-index: 999;
+            .content{
+                position: relative;
+                .container-button-close{
+                    .close-button{
+                        &:before {
+                            content: @icon-close;
+                            font-family: @icons__font-name;
+                            font-size: 2rem;
+                            color: @lines-input;
+                            position: absolute;
+                            right: 4px;
+                            top: 20px;
+                        }
+                    }
+                }
+                .cookies-title{
+                    font-size: 1.6rem;
+                    margin: 29px 0 20px 0;
+                }
+                .cookies-text{
+                    a{
+                        color: @black;
+                        text-decoration: underline;
+                    }
+                    p{
+                        margin-top: 15px;
+                    }
+                }
+                .actions{
+                    margin-top: 16px;
+                    .action.allow.primary{
+                        width: 100%;
+                        height: 40px;
+                        padding: 8px;
+                        border-radius: 12px;
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+        }
+
 		// forms
-		
+
 		input:focus,
 		textarea {
 		    outline: 0 !important;
@@ -41,13 +91,13 @@
 		    box-shadow: none !important;
 		}
 		input:-webkit-autofill,
-		input:-webkit-autofill:hover, 
-		input:-webkit-autofill:focus, 
+		input:-webkit-autofill:hover,
+		input:-webkit-autofill:focus,
 		input:-webkit-autofill:active,
 		input:-internal-autofill-selected  {
 		    -webkit-box-shadow: 0 0 0 30px @white inset !important;
 		}
-		
+
 		input[type="text"],
 		input[type="password"],
 		input[type="url"],
@@ -316,12 +366,12 @@
 						&::before{
 							position: initial;
 							color: @black;
-							margin: 0;	
+							margin: 0;
 						}
 					}
 				}
 			}
-		}  
+		}
 	}
 
 	.messages{
@@ -343,7 +393,7 @@
 			}
 		}
 
-		
+
 		.message{
 			&.message-success{
 				background: @green-A7;
@@ -357,7 +407,7 @@
 
 			&.message-error{
 				background: @red-D1;
-	
+
 				div{
 					&::before{
 						border-radius: 100px;
@@ -416,7 +466,7 @@
 							color: @black;
 						}
 					}
-					
+
 				}
 			}
 		}
@@ -467,8 +517,46 @@
 		}
 	}
 }
-.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
 
+//
+//  Desktop
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    body{
+        //cookis
+        .message.global.cookie{
+            height: 320px;
+            font-size: 2rem;
+            padding: 0;
+            .content{
+                max-width: 1282px;
+                margin: 0 auto;
+                .container-button-close{
+                    .close-button{
+                        &:before {
+                            right: 0;
+                            top: 25px;
+                        }
+                    }
+                }
+                .cookies-title{
+                    font-size: 2rem;
+                    margin: 38px 0 12px 0;
+                }
+                .cookies-text{
+                    color: @gray4;
+                }
+                .actions{
+                    .action.allow.primary{
+                        width: 338px;
+                        height: 60px;
+                        padding: 0;
+                        font-size: 2rem;
+                    }
+                }
+            }
+        }
+    }
 	.details-qty, .field.qty{
 		justify-content: center;
 		align-items: center;
@@ -480,12 +568,12 @@
 		}
 		.qty-cantidad, .control{
 			width: 40%;
-			
+
 			p, span{
 				height: 40px;
 				width: 30px;
 			}
-			
+
 			.cart-item-qty, .input-text.qty{
 				height: 40px;
 			}
@@ -529,7 +617,7 @@
 				height: 30px;
 				width: 30px;
 			}
-			
+
 			.cart-item-qty, .input-text.qty{
 				height: 30px;
 			}
