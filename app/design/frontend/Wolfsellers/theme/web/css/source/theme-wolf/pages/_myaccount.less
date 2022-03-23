@@ -249,6 +249,47 @@
             }
         }
     }
+
+    ///GIFT CART///
+    .magento_giftcardaccount-customer-index{
+        .page-wrapper{
+            .page-main{
+                .giftcard-account{
+                    box-shadow: 2px 2px 12px @gray;
+                    border-radius: 12px;
+                    background: @white;
+
+                    .actions-toolbar{
+                        .secondary{
+                            button{
+                                border: 1px solid @black;
+                                border-radius: 12px;
+                                padding: 18px 20px;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/////////////DESKTOP///////////////////
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    ///GIFT CART///
+    .magento_giftcardaccount-customer-index{
+        .page-wrapper{
+            .page-main{
+                .giftcard-account{
+                    .actions-toolbar{
+                        padding: 0 0 32px 33px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -348,6 +389,20 @@
                             height: 40px !important;
                             padding: 8px;
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    ///GIFT CART///
+    .magento_giftcardaccount-customer-index{
+        .page-wrapper{
+            .page-main{
+                .giftcard-account{
+
+                    .actions-toolbar{
+                        padding: 0 17px 32px;
                     }
                 }
             }

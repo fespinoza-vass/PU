@@ -68,6 +68,14 @@
                                                     span {
                                                         color: @primary;
                                                     }
+
+                                                    &.qty{
+                                                        .add-more-product{
+                                                            .control{
+                                                                width: 70%;
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
 
@@ -335,6 +343,10 @@
                                                         border-radius: 12px 0 0 0;
                                                     }
 
+                                                    &.qty{
+                                                        text-align: center;
+                                                    }
+
                                                     &.subtotal {
                                                         padding: 15px 25px 7px 11px;
                                                         border-radius: 0 12px 0 0;
@@ -505,7 +517,7 @@
                                                 .price {
                                                     display: none;
                                                 }
-
+                                                
                                                 .col {
                                                     &::before {
                                                         content: none;
@@ -513,7 +525,14 @@
                                                 }
 
                                                 .qty {
+                                                    justify-content: end;
                                                     float: right;
+
+                                                    .qty_control{
+                                                        button{
+                                                            height: 30px;
+                                                        }
+                                                    }
                                                 }
 
                                                 .item {
