@@ -79,7 +79,6 @@
 				.page-title{
 					font-size: 2rem;
 					float: left;
-					width: 100%;
 				}
 			}
 			> .block,
@@ -125,6 +124,10 @@
 				}
 			}
 		}
+
+        .Imagen-debajo-filtros, .page-bottom{
+            display: none !important;
+        }
 	}
 //  ------------LOGIN------------
     .customer-account-login{
@@ -296,11 +299,54 @@
             }
         }
     }
+
+    ///////NEWSLATTER///////////
+    .newsletter-manage-index{
+        .page-wrapper{
+            .page-main{
+                .form-newsletter-manage{
+                    box-shadow: 2px 2px 12px @shadowitems;
+                    border-radius: 12px;
+                    background: @white;
+
+                    .fieldset{
+                        padding: 0;
+                    }
+
+                    .legend{
+                        border: none;
+
+                        span{
+                            .lib-font-size(16);
+                            FONT-WEIGHT: 600;
+                        }
+                    }
+
+                    .choice{
+                        .label{
+                            font-weight: 300;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 /////////////DESKTOP///////////////////
 
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .account{
+        .column.main{
+            .page-title-wrapper {
+                .page-title{
+                    margin: 0 0 20px 32px;
+                    width: auto;
+                }
+            }
+        } 
+    } 
+
     ///GIFT CART///
     .magento_giftcardaccount-customer-index{
         .page-wrapper{
@@ -313,12 +359,76 @@
             }
         }
     }
+
+    ///////NEWSLATTER///////////
+    .newsletter-manage-index{
+        .page-wrapper{
+            .page-main{
+                .form-newsletter-manage{
+                    padding: 24px 0 32px 31px;
+
+                    .legend{
+
+                        span{
+                        }
+                    }
+
+                    .actions-toolbar{
+                        .save{
+                            padding: 18px 73px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
 //  Mobile
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+
+    .account{
+        .column.main{
+            .page-title-wrapper {
+                display: inline-block;
+
+                .page-title{
+                    margin: 0 0 14px 0;
+                    width: 100%;
+
+                    span{
+                        .lib-font-size(16);
+                    }
+                }
+            }
+        }
+
+        .sidebar-main{
+            .block-collapsible-nav{
+                .block-collapsible-nav-title{
+                    justify-content: center;
+                    align-items: center;
+                    background: @black;
+                    display: flex;
+                    color: @white;
+
+                    &::after{
+                        margin: 0 0 0 16px;
+                        .lib-font-size(16);
+                        position: initial;
+                    }
+
+                    strong{
+                        .lib-font-size(16);
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    } 
+
 //  ------------LOGIN------------
     .customer-account-login{
         .page-main{
@@ -435,6 +545,22 @@
 
                     .actions-toolbar{
                         padding: 0 17px 32px;
+                    }
+                }
+            }
+        }
+    }
+
+    ///////NEWSLATTER///////////
+    .newsletter-manage-index{
+        .page-wrapper{
+            .page-main{
+                .form-newsletter-manage{
+                    padding: 24px 24px 38px;
+
+                    .legend{
+                        span{
+                        }
                     }
                 }
             }
