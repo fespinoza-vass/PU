@@ -8,6 +8,7 @@ require([
              
             var optionsCarrusels = {
                 centerPadding: '0',
+                centerMode: true,
                 dots: false,
                 infinite: true,
                 speed: 300,
@@ -49,6 +50,7 @@ require([
         
             $('.products-related .product-items').not('.slick-initialized').slick(optionsCarrusels);
             $('.products-upsell .product-items').not('.slick-initialized').slick(optionsCarrusels);
+            $('.amshopby-morefrom .product-items').not('.slick-initialized').slick(optionsCarrusels);
 
           });
 

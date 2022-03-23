@@ -241,11 +241,28 @@
                         .minicart-wrapper {
                             .ui-dialog {
                                 .block-minicart {
+                                    width: 85%;
+
                                     #minicart-content-wrapper {
                                         .block-content {
                                             .close {
                                                 &::after {
-                                                    width: calc(~'(100% - 290px)');
+                                                    width: calc(~'(100% - 85%)');
+                                                }
+                                            }
+
+                                            .minicart-items-wrapper{
+                                                .minicart-items{
+                                                    .product-item{
+                                                        .product{
+                                                            .product-item-details{
+                                                                .actions{
+                                                                    margin: -25px 0 0 0;
+                                                                    float: right;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
