@@ -39,7 +39,7 @@ require([
 	   		slidesToScroll: 1
 	   	});
 
-      	$('.carousel-releases, .carousel-category').slick({
+      	$('.carousel-releases').slick({
       		dots: false,
       		arrows: true,
       		infinite: false,
@@ -48,24 +48,54 @@ require([
       		slidesToShow: 5,
       		slidesToScroll: 1,
       		responsive: [
-   	        {
-   	          breakpoint: 1025,
-   	          settings: {
-   	            slidesToShow: 4
-   	          }
-   	        },
-   	        {
-   	          breakpoint: 769,
-   	          settings: {
-   	            slidesToShow: 3
-   	          }
-   	        },
-   	        {
-   	          breakpoint: 666,
-   	          settings: {
-   	            slidesToShow: 2
-   	          }
-   	        }
+	   	        {
+	   	          breakpoint: 1025,
+	   	          settings: {
+	   	            slidesToShow: 4
+	   	          }
+	   	        },
+	   	        {
+	   	          breakpoint: 769,
+	   	          settings: {
+	   	            slidesToShow: 3
+	   	          }
+	   	        },
+	   	        {
+	   	          breakpoint: 666,
+	   	          settings: {
+	   	            slidesToShow: 2
+	   	          }
+	   	        }
+   	    ]
+      	});
+
+      	$('.carousel-category').slick({
+      		dots: false,
+      		arrows: false,
+      		infinite: false,
+      		speed: 300,
+      		autoplay: false,
+      		slidesToShow: 5,
+      		slidesToScroll: 1,
+      		responsive: [
+	   	        {
+	   	          breakpoint: 1025,
+	   	          settings: {
+	   	            slidesToShow: 4
+	   	          }
+	   	        },
+	   	        {
+	   	          breakpoint: 769,
+	   	          settings: {
+	   	            slidesToShow: 3
+	   	          }
+	   	        },
+	   	        {
+	   	          breakpoint: 666,
+	   	          settings: {
+	   	            slidesToShow: 2
+	   	          }
+	   	        }
    	    ]
       	});
 

@@ -29,10 +29,17 @@
         margin-bottom: 20px;
         .content-carousel-category{
             .slick-track{
-                width: 100% !important;
+                @media only screen and (min-width: (@screen__m - 1 )){
+                    width: 100% !important;
+                }
                 .slick-slide{
-                    width: 25% !important;
-                    padding-right: 15px;
+                    img{
+                        margin: auto;
+                    }
+                    @media  only screen and (min-width: (@screen__m - 1 )){
+                        width: 25% !important;
+                        padding-right: 15px;
+                    }
                     .content-category{
                         .button-carousel-category{
                             position: relative;
