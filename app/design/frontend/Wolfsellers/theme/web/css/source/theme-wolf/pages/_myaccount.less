@@ -222,6 +222,13 @@
                     }
                 }
                 .fieldset.create.info{
+                    .field.gender.required,
+                    .field.field-identificacion.required{
+                        width: 23.5%;
+                    }
+                    .field.field-numero_de_identificacion.required{
+                        margin-left: 2%;
+                    }
                     .field.choice{
                         display: none;
                     }
@@ -234,6 +241,22 @@
                         .control{
                             #password-strength-meter-container{
                                 display: none;
+                            }
+                        }
+                    }
+                    .field.choice{
+                        display: none;
+                    }
+                }
+                .fieldset.additional_info{
+                    .field.choice.newsletter{
+                        .label{
+                            span{
+                                font-weight: normal;
+                            }
+                            &:after{
+                                background-color: @black;
+                                color: @white;
                             }
                         }
                     }
@@ -368,7 +391,7 @@
         .page-main{
             .page-title-wrapper{
                 .page-title{
-                    font-size: 2.2rem;
+                    font-size: 2.2rem !important;
                 }
             }
         }
@@ -380,6 +403,15 @@
                         .label{
                             font-size: 1.4rem;
                         }
+                    }
+                }
+                .fieldset.create.info{
+                    .field.gender.required,
+                    .field.field-identificacion.required{
+                        width: 100% !important;
+                    }
+                    .field.field-numero_de_identificacion.required{
+                        margin-left: 0 !important;
                     }
                 }
                 .actions-toolbar{
