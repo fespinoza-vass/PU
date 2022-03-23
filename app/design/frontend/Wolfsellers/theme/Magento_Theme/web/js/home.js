@@ -37,7 +37,7 @@ require([
 		slidesToScroll: 1
 	});
 
-    $('.content-carousel-releases, content-carousel-category').slick({
+    $('.carousel-releases, .carousel-category').slick({
         function (config, element) {
             if (!$(element).hasClass("slick-initialized")) {
                 $(element).slick({
