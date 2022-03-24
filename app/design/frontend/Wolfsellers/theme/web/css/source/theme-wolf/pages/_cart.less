@@ -72,7 +72,7 @@
                                                     &.qty{
                                                         .add-more-product{
                                                             .control{
-                                                                width: 70%;
+                                                                width: 100%;
                                                             }
                                                         }
                                                     }
@@ -506,21 +506,23 @@
 
                                             .item-info {
                                                 .subtotal {
-                                                    .lib-font-size(22);
-                                                    float: right;
-
-                                                    .price {
-                                                        display: block;
-                                                    }
-                                                }
-
-                                                .price {
                                                     display: none;
                                                 }
-                                                
+
                                                 .col {
                                                     &::before {
                                                         content: none;
+                                                    }
+
+                                                    &.price {
+                                                        padding: 20px 10px 20px 90px;
+                                                        .lib-font-size(22);
+                                                        float: left;
+                                                        width: auto;
+    
+                                                        .price {
+                                                            display: block;
+                                                        }
                                                     }
                                                 }
 
@@ -544,6 +546,8 @@
                                                     }
 
                                                     .product-item-details {
+                                                        width: 90%;
+
                                                         .product-item-name {
                                                             a {
                                                                 .lib-font-size(16);
