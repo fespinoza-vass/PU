@@ -21,8 +21,47 @@
 					.lib-visually-hidden;
 				}
 				.checkout-container{
+					background: transparent;
+					margin: 0;
 					> [data-content-type="row"]{
 						.lib-visually-hidden;
+					}
+					.checkout-header{
+						h1{
+							font-family: @font-second;
+							font-size: 3.2rem;
+							font-weight: bold;
+							text-transform: uppercase;
+						}
+					}
+					.opc-wrapper{
+						.checkout-column{
+							.checkout-block{
+								box-shadow: none;
+								border-radius: @radiusitems;
+								padding: 20px;
+								position: relative;
+								margin-top: 35px;
+								li{
+									position: static;
+									.checkout-shipping-method{
+										position: static;
+									}
+								}
+								.step-title {
+								    position: absolute;
+								    top: -35px;
+								    left: 0;
+								    margin: 0;
+								    padding: 0;
+								    border: 0;
+								    font-size: 2.2rem;
+								}
+								.opc-block-summary{
+									background: transparent;
+								}
+							}
+						}
 					}
 				}
 			}
