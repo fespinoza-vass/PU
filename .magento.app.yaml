@@ -9,6 +9,10 @@ type: php:7.4
 build:
     flavor: composer
 
+dependencies:
+    php:
+        composer/composer: '^2.0'
+
 # Enable extensions required by Magento 2
 runtime:
     extensions:
