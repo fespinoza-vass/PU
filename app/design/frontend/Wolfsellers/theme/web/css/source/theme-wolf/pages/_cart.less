@@ -6,10 +6,17 @@
     .checkout-cart-index {
         .page-wrapper {
             .page-main {
+                .messages {
+                    margin: 0;
+                }
+
                 .columns {
                     .column {
-                        .cart-container {
+                        .ambanners {
+                            display: none;
+                        }
 
+                        .cart-container {
                             .cart-summary {
                                 border-radius: 12px;
                                 background: @white;
@@ -69,9 +76,9 @@
                                                         color: @primary;
                                                     }
 
-                                                    &.qty{
-                                                        .add-more-product{
-                                                            .control{
+                                                    &.qty {
+                                                        .add-more-product {
+                                                            .control {
                                                                 width: 100%;
                                                             }
                                                         }
@@ -247,10 +254,10 @@
                                                 .product-info-price {
                                                     order: 4;
 
-                                                    .price-new-price{
-                                                        .price-new-price{
-                                                            .price-wrapper{
-                                                                .price{
+                                                    .price-new-price {
+                                                        .price-new-price {
+                                                            .price-wrapper {
+                                                                .price {
                                                                     .lib-font-size(16);
                                                                 }
                                                             }
@@ -343,7 +350,7 @@
                                                         border-radius: 12px 0 0 0;
                                                     }
 
-                                                    &.qty{
+                                                    &.qty {
                                                         text-align: center;
                                                     }
 
@@ -519,7 +526,7 @@
                                                         .lib-font-size(22);
                                                         float: left;
                                                         width: auto;
-    
+
                                                         .price {
                                                             display: block;
                                                         }
@@ -530,8 +537,8 @@
                                                     justify-content: end;
                                                     float: right;
 
-                                                    .qty_control{
-                                                        button{
+                                                    .qty_control {
+                                                        button {
                                                             height: 30px;
                                                         }
                                                     }
@@ -608,7 +615,7 @@
                                     .lib-font-size(0);
                                 }
 
-                                .slick-dots{
+                                .slick-dots {
                                     display: none !important;
                                 }
                             }
