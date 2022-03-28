@@ -390,6 +390,87 @@
             }
         }
     }
+
+    /////////OPINIONES////////////
+    .review-customer-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .table-wrapper{
+                        box-shadow: 2px 2px 12px  @shadowitems;
+                        border-radius: 12px 12px 0 0;
+                        padding: 14px 25px 22px;
+                        background: @white;
+                        border: none;
+                        margin: 0;
+
+                        .table-reviews{
+                            thead{
+                                tr{
+                                    .lib-font-size(16);
+
+                                    th{
+                                        border-color: @gray-D8;
+                                        padding: 18px 11px;
+                                    }
+                                }
+                            }
+
+                            tbody{
+                                tr{
+                                    border-bottom: 1px solid @gray-D8;
+
+                                    .item{
+                                        max-width: 250px;
+
+                                        strong{
+                                            a{
+                                                color: @black;
+                                            }
+                                        }
+                                    }
+
+                                    .actions{
+                                        text-decoration: underline;
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .products-reviews-toolbar{
+                        border-radius:  0 0 12px 12px;
+                        padding: 15px 32px 31px;
+                        background: @white;
+
+                        .pager{
+                            justify-content: space-between;
+                            align-items: center;
+                            .lib-font-size(16);
+
+                            .toolbar-amount{
+                                &::first-letter{
+                                    font-weight: bold;
+                                }
+                            }
+
+                            .limiter{
+                                align-items: center;
+                                display: flex;
+
+                                .limiter-options{
+                                    background-color: transparent;
+                                    box-shadow: none;
+                                    border: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -458,6 +539,80 @@
             }
         }
     }
+
+    /////////OPINIONES////////////
+    .review-customer-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .table-wrapper{
+                        box-shadow: 2px 2px 12px  @shadowitems;
+                        border-radius: 12px 12px 0 0;
+                        padding: 14px 25px 22px;
+                        background: @white;
+                        border: none;
+                        margin: 0;
+
+                        .table-reviews{
+                            thead{
+                                tr{
+                                    .lib-font-size(16);
+
+                                    th{
+                                        border-color: @gray-D8;
+                                        padding: 18px 11px;
+                                    }
+                                }
+                            }
+
+                            tbody{
+                                tr{
+                                    border-bottom: 1px solid @gray-D8;
+
+                                    td{
+                                        padding: 18px 11px;
+                                    }
+
+                                    .item{
+                                        max-width: 250px;
+
+                                        strong{
+                                            a{
+                                                color: @black;
+                                            }
+                                        }
+                                    }
+
+                                    .actions{
+                                        text-align: right;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .products-reviews-toolbar{
+                        border-radius:  0 0 12px 12px;
+                        padding: 15px 32px 31px;
+                        background: @white;
+
+                        .pager{
+                            justify-content: space-between;
+                            align-items: center;
+                            .lib-font-size(16);
+                            display: flex;
+
+                            .limiter{
+                                .limiter-options{
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -505,7 +660,7 @@
         }
     }
 
-//  ------------LOGIN------------
+ //  ------------LOGIN------------
     .customer-account-login{
         .page-main{
             .page-title-wrapper{
@@ -637,6 +792,53 @@
 
                     .legend{
                         span{
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /////////OPINIONES////////////
+    .review-customer-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .table-wrapper{
+                        box-shadow: 2px 2px 12px  @shadowitems;
+                        border-radius: 12px 12px 0 0;
+                        padding: 14px 25px 22px;
+                        background: @white;
+                        border: none;
+                        margin: 0;
+
+                        .table-reviews{
+                            thead{
+                                tr{
+                                    .lib-font-size(16);
+
+                                    th{
+                                        border-color: @gray-D8;
+                                        padding: 18px 11px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .products-reviews-toolbar{
+                        .pager{
+                            display: block;
+
+                            .limiter{
+                                justify-content: center;
+                                align-items: center;
+                                display: flex;
+
+                                .limiter-options{
+                                    width: 55px;
+                                }
+                            }
                         }
                     }
                 }

@@ -20599,7 +20599,7 @@ Author,Autor,module,Magento_Review,
 Delete Rating,Borrar Calificación,module,Magento_Review,
 Delete Review,Borrar Opinión,module,Magento_Review,
 Rating,Calificación,module,Magento_Review,
-Product Rating,Calificación de Producto,module,Magento_Review,
+Product Rating,Valoración,module,Magento_Review,
 Product Rating:,Calificación de Producto:,module,Magento_Review,
 Summary Rating,Calificación de Resumen,module,Magento_Review,
 Detailed Rating,Calificación Detallada,module,Magento_Review,
@@ -20626,7 +20626,7 @@ Rating Information,Información de Calificación,module,Magento_Review,
 The review was removed by another user or does not exist.,La opinión fue removida por otro usuario o no existe.,module,Magento_Review,
 The review has been deleted.,La opinión ha sido borrada.,module,Magento_Review,
 Rating isn't Available,Las Calificaciones no Están Disponibles,module,Magento_Review,
-My Product Reviews,Mis Opiniones de Producto,module,Magento_Review,
+My Product Reviews,Mis Valoraciones,module,Magento_Review,
 My Recent Reviews,Mis Opiniones Recientes,module,Magento_Review,
 Not Approved,No Aprobada,module,Magento_Review,
 You have submitted no reviews.,No has enviado opiniones.,module,Magento_Review,
@@ -20679,7 +20679,7 @@ Type,Tipo,module,Magento_ReviewStaging,
 Product,Producto,module,Magento_ReviewStaging,
 Created,Creado,module,Magento_ReviewStaging,
 Visibility,Visibilidad,module,Magento_ReviewStaging,
-Review,Opinar,module,Magento_ReviewStaging,
+Review,Reseña,module,Magento_ReviewStaging,
 Nickname,Alias,module,Magento_ReviewStaging,
 Actions for Acquiring Reward Points by Customers,Acciones para adquirir puntos de recompensa por parte de los clientes,module,Magento_Reward,
 Add New Rate,Agregar nueva tarifa,module,Magento_Reward,
@@ -25582,7 +25582,7 @@ Qty,Cantidad,module,Temando_Shipping,
 Active,Activo,module,Temando_Shipping,
 Country,País,module,Temando_Shipping,
 "%name,","%name,",module,Temando_Shipping,
-Product Name,Nombre del Producto,module,Temando_Shipping,
+Product Name,Producto,module,Temando_Shipping,
 View,Ver,module,Temando_Shipping,
 "Email template chosen based on theme fallback when ""Default"" option is selected.","Plantilla de Email seleccionada con base en el tema recurrente cuando se selecciona la opción ""Por Defecto"".",module,Temando_Shipping,
 Customer Group,Grupo de Clientes,module,Temando_Shipping,
@@ -25952,6 +25952,7 @@ Item,Producto
 "You can consent to the use of such technologies by using the ""Accept"" button. By closing this informative note, you continue without accepting.","Puede consentir el uso de dichas tecnologías utilizando el botón de ""Aceptar"". Al cerrar esta nota informativa, usted continúa sin aceptar."
 "Accept cookies","Aceptar cookies"
 "I want to receive information about offers and promotions.","Deseo recibir información sobre ofertas y promociones."
+"Available in Stores","Disponible en tiendas"
 "Billing Address","Dirección de Facturación"
 "Shipping Address","Dirección de Envío"
 "Select default","Seleccione por defecto"

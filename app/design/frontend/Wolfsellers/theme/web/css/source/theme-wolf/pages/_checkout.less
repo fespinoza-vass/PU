@@ -11,8 +11,22 @@
 				.header.content{
 					padding: 13px 15px;
 					justify-content: center;
-					.ammenu-logo img{
-						filter: invert(100%);
+					@media @mdmax{
+						height: 58px;
+					}
+					.content-logo{
+						a.logo{
+							margin: 0;
+							max-width: none;
+							img{
+								filter: invert(100%);
+								width: 100%;
+								max-width: 323px;
+								@media @mdmax{
+									max-width: 200px;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -21,8 +35,104 @@
 					.lib-visually-hidden;
 				}
 				.checkout-container{
+					background: transparent;
+					margin: 0;
 					> [data-content-type="row"]{
 						.lib-visually-hidden;
+					}
+					.checkout-header{
+						width: 100%;
+						h1{
+							font-family: @font-second;
+							font-size: 3.2rem;
+							font-weight: bold;
+							text-transform: uppercase;
+						}
+					}
+					.opc-wrapper{
+						.checkout-column{
+							.checkout-block{
+								box-shadow: none;
+								padding: 0;
+								position: relative;
+								margin-top: 35px;
+								background: transparent;
+								li{
+									position: static;
+									padding: 20px;
+									background: @white;
+									border-radius: @radiusitems;
+									.checkout-shipping-method{
+										position: static;
+									}
+									&.checkout-shipping-method{
+										margin-bottom: 55px;
+									}
+									form{
+										.lib-checkboxs;
+										.lib-radio;
+									}
+									&.checkout-payment-method{
+										.step-content *{
+											overflow: hidden;
+										}
+									}
+								}
+								.step-title {
+								    position: absolute;
+								    top: -35px;
+								    left: 0;
+								    margin: 0;
+								    padding: 0;
+								    border: 0;
+								    font-size: 2.2rem;
+								}
+								.opc-block-summary{
+									background: transparent;
+								}
+								&.-summary{
+									.opc-block-summary{
+										padding: 20px;
+										background: @white;
+										border-radius: @radiusitems;
+										margin: 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	.checkout-index-index{
+		.page-wrapper{
+			padding-top: 58px;
+			.page-main .column.main{
+				.checkout-container{
+					.checkout-header{
+						h1{
+							font-size: 2.2rem;
+						}
+						.description{
+							font-size: 1.6rem;
+						}
+					}
+					.opc-wrapper{
+						.checkout-column{
+							.checkout-block{
+								li{
+									.form-shipping-address{
+										background: transparent;
+										margin: 0;
+										padding: 0;
+									}
+								}
+							}
+						}
 					}
 				}
 			}

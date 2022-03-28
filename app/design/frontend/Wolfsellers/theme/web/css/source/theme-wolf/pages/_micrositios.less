@@ -52,7 +52,7 @@
                                 max-width: 220px;
                                 padding: 9px;
                                 text-align: center;
-                                font-size: 14px;
+                                font-size: 1.4rem;
                             }
                         }
                     }
@@ -76,7 +76,7 @@
                     text-align: center;
                     background-color: @white;
                     color: @black;
-                    font-size: 14px;
+                    font-size: 1.4rem;
                 }
             }
         }
@@ -95,7 +95,7 @@
                     max-width: 280px;
                     padding: 9px;
                     color: @white;
-                    font-size: 14px;
+                    font-size: 1.4rem;
                 }
             }
             &.banner-1{
@@ -108,6 +108,10 @@
     }
     .row-micrositios-banner-doble-vertical{
         .pagebuilder-column{
+            h2{
+                font-size: 3.2rem;
+                font-weight: bold;
+            }
             .button-banner-doble-vertical{
                 position: relative;
                 .pagebuilder-button-primary{
@@ -119,7 +123,7 @@
                     max-width: 150px;
                     padding: 12px;
                     border-radius: 25px;
-                    font-size: 20px;
+                    font-size: 2rem;
                     font-weight: normal;
                 }
             }
@@ -128,12 +132,12 @@
     .row-micrositios-text{
         max-width: 920px;
         margin: 25px auto;
-        font-size: 16px;
+        font-size: 1.6rem;
     }
     .row-micrositios-title{
         margin: 25px auto;
         h2{
-            font-size: 32px;
+            font-size: 3.2rem;
             font-weight: bold;
         }
     }
@@ -154,13 +158,25 @@
     .row-grid-products{
         margin-top: 90px;
     }
+    .row-slider-products{
+        h2{
+            font-size: 3.2rem;
+            font-weight: bold;
+        }
+    }
 }
 
 //
 //  Mobile
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .row-micrositios-titulo-marca{
+        margin: 0 12px 15px;
+    }
     .row-micrositios-slider{
+        margin-left: 15px;
+        margin-right: 15px;
+
         > div{
             .pagebuilder-slide-wrapper{
                 padding-bottom: 55%;
@@ -186,7 +202,7 @@
                                 .button-carousel-category{
                                     position: relative;
                                     .pagebuilder-button-primary{
-                                        font-size: 10px !important;
+                                        font-size: 1rem !important;
                                     }
                                 }
                             }
@@ -215,6 +231,11 @@
         }
     }
     .row-micrositios-banner-doble-vertical{
+        margin-left: 15px;
+        margin-right: 15px;
+        h2{
+            font-size: 2.2rem !important;
+        }
         .pagebuilder-column{
             .button-banner-doble-vertical{
                 .pagebuilder-button-primary{
@@ -226,12 +247,12 @@
     .row-micrositios-text{
         max-width: unset;
         margin: 25px 10px;
-        font-size: 14px;
+        font-size: 1.4rem;
     }
     .row-micrositios-title{
         margin: 25px auto;
         h2{
-            font-size: 22px;
+            font-size: 2.2rem;
         }
     }
     .row-micrositios-product-one-product{
@@ -249,5 +270,10 @@
     }
     .row-grid-products{
         margin-top: 45px;
+    }
+    .row-slider-products{
+        h2{
+            font-size: 2.2rem !important;
+        }
     }
 }
