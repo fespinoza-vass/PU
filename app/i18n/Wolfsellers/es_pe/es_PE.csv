@@ -14647,7 +14647,7 @@ Default Email Domain,Dominio de Email por Defecto,module,Magento_Customer,
 Edit Group,Editar Grupo,module,Magento_Customer,
 "Edit Customer Group ""%1""","Editar Grupo de Clientes ""%1""",module,Magento_Customer,
 Edit Customer Groups,Editar Grupos de Clientes,module,Magento_Customer,
-Edit Account Information,Editar Información de Cuenta,module,Magento_Customer,
+Edit Account Information,Información de la Cuenta,module,Magento_Customer,
 "Customer will stay on the current page if ""No"" is selected.","El ciente permanecerá en la página actual si se selecciona ""No"".",module,Magento_Customer,
 The customer is now assigned to Customer Group %s.,El cliente ha sido asignado al Grupo de Cliente %s.,module,Magento_Customer,
 The customer does not have default billing address.,El cliente no tiene una dirección de facturación por defecto.,module,Magento_Customer,
@@ -25927,7 +25927,7 @@ Create Account,Crear Cuenta
 Show Password,Mostrar contraseña
 "Your search <strong>%1</strong> returns %2 results","Tu Búsqueda <strong>%1</strong> arrojó '%2' resultados"
 "Are you Perfumerías Unidas client?","¿Eres Cliente Perfumerías Unidas?"
-"Account Information","Información de mi cuenta"
+"Account Information","Información de la cuenta"
 "My profile","Mi perfil"
 "My orders","Mis pedidos"
 "Logout","Salir"
