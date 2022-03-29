@@ -187,7 +187,7 @@
             }
         }
 	}
-//  ------------LOGIN------------
+ //  ------------LOGIN------------
     .customer-account-login{
         .page-main{
             .page-title-wrapper{
@@ -256,7 +256,7 @@
             }
         }
     }
-//  ------------CREATE------------
+ //  ------------CREATE------------
     .customer-account-create{
         .page-main{
             .page-title-wrapper{
@@ -471,6 +471,44 @@
             }
         }
     }
+
+    /////////INFO DE CUENTA/////////////
+    .customer-account-edit{
+        .page-main{
+            .columns{
+                .column{
+                    .form-edit-account{
+                        .fieldset{
+                            width: 100%;
+
+                            .legend{
+                                display: none;
+                            }
+
+                            .field{
+                                .label{
+                                    .lib-font-size(14);
+                                    font-weight: 400;
+                                    margin: 0 0 8px;
+                                    display: block;
+                                }
+
+                                &.choice{
+                                    .label{
+                                        .lib-font-size(12);
+                                    }
+
+                                    &:last-child{
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -613,6 +651,48 @@
             }
         }
     }
+
+    /////////INFO DE CUENTA/////////////
+    .customer-account-edit{
+        .page-main{
+            .columns{
+                .column{
+                    .form-edit-account{
+                        .fieldset{
+                            padding: 20px 32px;
+                            position: relative;
+
+                            .fullname{
+                                display: inline-block;
+                                position: absolute;
+                                width: 45%;
+
+                                .field{
+                                    width: 100%;
+                                }
+                            }
+
+                            .field{
+                                margin: 0 0 20px auto;
+                                width: 45%;
+
+                                &.choice{
+                                    display: block;
+                                    width: 51%;
+                                }
+                            }
+
+                            &.password{
+                                .field{
+                                    margin: 0 auto 20px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -626,7 +706,7 @@
                 display: inline-block;
 
                 .page-title{
-                    margin: 0 0 14px 0;
+                    margin: 0 0 14px 16px;
                     width: 100%;
 
                     span{
@@ -837,6 +917,34 @@
 
                                 .limiter-options{
                                     width: 55px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /////////INFO DE CUENTA/////////////
+    .customer-account-edit{
+        .page-main{
+            .columns{
+                .column{
+                    .form-edit-account{
+                        padding: 0 16px;
+
+                        .fieldset{
+                            position: relative;
+
+                            br{
+                                display: none;
+                            }
+
+                            .fullname{
+                                .field{
+                                    margin: 0 0 16px;
+                                    width: 100%;
                                 }
                             }
                         }
