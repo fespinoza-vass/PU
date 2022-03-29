@@ -16193,7 +16193,7 @@ Recipient Name,Nombre del Recipiente,module,Magento_GiftCardAccount,
 Balance,Saldo,module,Magento_GiftCardAccount,
 %store_name,%store_name,module,Magento_GiftCardAccount,
 Alphabetical,Alfabetico,module,Magento_GiftCardAccount,
-Apply Gift Card,Aplicar Gift Card,module,Magento_GiftCardAccount,
+Apply Gift Card,Aplicar Tarjeta de regalo,module,Magento_GiftCardAccount,
 Available,Disponible,module,Magento_GiftCardAccount,
 Balance Change,Cambio de Balance,module,Magento_GiftCardAccount,
 By admin: %1.,Por admin: %1.,module,Magento_GiftCardAccount,
@@ -18306,7 +18306,7 @@ Maximum file size,Tamaño Máximo de Archivo,module,Magento_NegotiableQuote,
 %store_name,%store_name,module,Magento_NegotiableQuote,
 Add Product By SKU,Agregar Producto por SKU,module,Magento_NegotiableQuote,
 Amount in %1,Cantidad en %1,module,Magento_NegotiableQuote,
-Apply Gift Card,Aplicar Gift Card,module,Magento_NegotiableQuote,
+Apply Gift Card,Aplicar Tarjeta de regalo,module,Magento_NegotiableQuote,
 Cannot Perform the Requested Action,No se puede realizar la acción solicitada,module,Magento_NegotiableQuote,
 Minimum Amount,Cantidad Mínima,module,Magento_NegotiableQuote,
 Choose an Amount...,Elige una Cantidad...,module,Magento_NegotiableQuote,
@@ -25953,6 +25953,8 @@ Item,Producto
 "Accept cookies","Aceptar cookies"
 "I want to receive information about offers and promotions.","Deseo recibir información sobre ofertas y promociones."
 "Available in Stores","Disponible en tiendas"
+Colony,Colonia
+Sign Up for Our Newsletter,Suscríbete a nuestro boletín
 "Billing Address","Dirección de Facturación"
 "Shipping Address","Dirección de Envío"
 "Select default","Seleccione por defecto"
