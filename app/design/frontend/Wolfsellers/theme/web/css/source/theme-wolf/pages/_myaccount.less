@@ -106,6 +106,30 @@
 					font-size: 1.3rem;
 				}
 			}
+
+            .pager{
+                justify-content: space-between;
+                align-items: center;
+                .lib-font-size(16);
+
+                .toolbar-amount{
+                    &::first-letter{
+                        font-weight: bold;
+                    }
+                }
+
+                .limiter{
+                    align-items: center;
+                    display: flex;
+
+                    .limiter-options{
+                        background-color: transparent;
+                        box-shadow: none;
+                        border: none;
+                        width: 55px;
+                    }
+                }
+            }
 		}
 		.sidebar-main{
 			.block-collapsible-nav-content{
@@ -443,29 +467,6 @@
                         border-radius:  0 0 12px 12px;
                         padding: 15px 32px 31px;
                         background: @white;
-
-                        .pager{
-                            justify-content: space-between;
-                            align-items: center;
-                            .lib-font-size(16);
-
-                            .toolbar-amount{
-                                &::first-letter{
-                                    font-weight: bold;
-                                }
-                            }
-
-                            .limiter{
-                                align-items: center;
-                                display: flex;
-
-                                .limiter-options{
-                                    background-color: transparent;
-                                    box-shadow: none;
-                                    border: none;
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -610,6 +611,65 @@
             }
         }
     }
+
+    ///////MIS PEDIDOS////////
+    .sales-order-history{
+        .page-wrapper{
+            .page-main{
+                .page {
+                    &.messages{
+                        margin: 0;
+                    }
+                }
+
+                .columns{
+                    .column{
+                        .orders-history{
+                            border-radius: 12px 12px 0 0;
+                            background: @white;
+                            border: none;
+                            margin: 0;
+
+                            .table-order-items{
+
+                                thead{
+                                    tr{
+                                        border-bottom: 1px solid @gray-D8;
+
+                                        th{
+                                            .lib-font-size(16);
+                                            border: none;
+                                        }
+
+                                        .actions{
+                                            width: 200px;
+                                        }
+                                    }
+                                }
+
+                                tbody{
+                                    tr{
+                                        background: @white;
+
+                                        .actions{
+                                            text-decoration: underline;
+                                            FONT-WEIGHT: 600;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        .order-products-toolbar{
+                            border-radius: 0 0 12px 12px;
+                            background: @white;
+                            padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -738,19 +798,6 @@
                         border-radius:  0 0 12px 12px;
                         padding: 15px 32px 31px;
                         background: @white;
-
-                        .pager{
-                            justify-content: space-between;
-                            align-items: center;
-                            .lib-font-size(16);
-                            display: flex;
-
-                            .limiter{
-                                .limiter-options{
-                                    width: 100%;
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -923,6 +970,56 @@
             }
         }
     }
+
+    ///////MIS PEDIDOS////////
+    .sales-order-history{
+        .page-wrapper{
+            .page-main{
+                .page {
+                    &.messages{
+                        margin: 0;
+                    }
+                }
+
+                .columns{
+                    .column{
+                        .orders-history{
+                            padding: 9px 19px;
+                            padding: 13px 36px;
+
+                            .table-order-items{
+
+                                thead{
+                                    tr{
+                                        .actions{
+                                            width: 200px;
+                                        }
+                                    }
+                                }
+
+                                tbody{
+                                    tr{
+                                        border-bottom: 1px solid @gray-D8;
+                                        background: @white;
+
+                                        .col{
+                                            padding: 18px 10px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        .order-products-toolbar{
+                            border-radius: 0 0 12px 12px;
+                            background: @white;
+                            padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -931,16 +1028,28 @@
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
 
     .account{
-        .column.main{
-            .page-title-wrapper {
-                display: inline-block;
-
-                .page-title{
-                    margin: 0 0 14px 16px;
-                    width: 100%;
-
-                    span{
-                        .lib-font-size(16);
+        .columns{
+            .column.main{
+                padding: 0 16px;
+    
+                .page-title-wrapper {
+                    display: inline-block;
+    
+                    .page-title{
+                        margin: 0 0 14px;
+                        width: 100%;
+    
+                        span{
+                            .lib-font-size(16);
+                        }
+                    }
+                }
+    
+                .pager{
+                    display: block;
+    
+                    .limiter{
+                        justify-content: center;
                     }
                 }
             }
@@ -1135,22 +1244,6 @@
                             }
                         }
                     }
-
-                    .products-reviews-toolbar{
-                        .pager{
-                            display: block;
-
-                            .limiter{
-                                justify-content: center;
-                                align-items: center;
-                                display: flex;
-
-                                .limiter-options{
-                                    width: 55px;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -1162,8 +1255,6 @@
             .columns{
                 .column{
                     .form-edit-account{
-                        padding: 0 16px;
-
                         .fieldset{
                             position: relative;
 
@@ -1292,6 +1383,35 @@
                                                     display: none;
                                                 }
                                             }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ///////MIS PEDIDOS////////
+    .sales-order-history{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .orders-history{
+                            padding: 0 19px;
+
+                            .table-order-items{
+                                tbody{
+                                    tr{
+                                        .id{
+                                            padding: 24px 10px 5px;
+                                        }
+                                        
+                                        .actions{
+                                            padding: 5px 10px 24px;
                                         }
                                     }
                                 }
