@@ -1,5 +1,8 @@
+//
+// Common
+//  ---------------------------------------------
 & when (@media-common = true) {
-	.customer-account-login,
+    .customer-account-login,
 	.customer-account-create,
 	.customer-account-forgotpassword{
 		.page-main{
@@ -75,6 +78,17 @@
 	}
 	.account{
 		.column.main{
+            .fieldset,
+            .block{
+                .legend,
+                .block-title{
+                    span,
+                    strong{
+                        font-size: 1.6rem !important;
+                        font-weight: 400 !important;
+                    }
+                }
+            }
 			.page-title-wrapper{
 				.page-title{
 					font-size: 2rem;
@@ -128,8 +142,52 @@
         .Imagen-debajo-filtros, .page-bottom{
             display: none !important;
         }
+        //  ------------CUENTA - Libreta de Direcciones ------------
+        &.customer-address-index{
+            .block.block-addresses-default{
+                .box-content{
+                    address{
+                        a{
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+            .page-title-wrapper{
+                .page-title{
+                    .base{
+                        font-weight: 400;
+                    }
+                }
+            }
+            .second-title{
+                .page-title{
+                    .base{
+                        font-weight: 500;
+                    }
+                }
+            }
+            .block.block-addresses-list{
+                .table-wrapper.additional-addresses{
+                    border: unset;
+                    .col.actions{
+                        border-bottom: none !important;
+                        &:before{
+                            display: none !important;
+                        }
+                        a{
+                            color: @black !important;
+                            font-weight: bold;
+                        }
+                    }
+                }
+                .customer-addresses-toolbar.toolbar.bottom{
+                    display: none;
+                }
+            }
+        }
 	}
-//  ------------LOGIN------------
+ //  ------------LOGIN------------
     .customer-account-login{
         .page-main{
             .page-title-wrapper{
@@ -198,7 +256,7 @@
             }
         }
     }
-//  ------------CREATE------------
+ //  ------------CREATE------------
     .customer-account-create{
         .page-main{
             .page-title-wrapper{
@@ -413,17 +471,177 @@
             }
         }
     }
+
+    /////////INFO DE CUENTA/////////////
+    .customer-account-edit{
+        .page-main{
+            .columns{
+                .column{
+                    .form-edit-account{
+                        .fieldset{
+                            width: 100%;
+
+                            .legend{
+                                display: none;
+                            }
+
+                            .field{
+                                .label{
+                                    .lib-font-size(14);
+                                    font-weight: 400;
+                                    margin: 0 0 8px;
+                                    display: block;
+                                }
+
+                                &.choice{
+                                    .label{
+                                        .lib-font-size(12);
+                                    }
+
+                                    &:last-child{
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //////WISHLIST//////////////
+    .page-multiple-wishlist{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        position: relative;
+
+                        .wishlist-toolbar{
+
+                            .limiter{
+                                align-items: center;
+                                display: flex;
+
+                                .limiter-options{
+                                    background-color: @white;
+                                    border-radius: 12px;
+                                    box-shadow: none;
+                                    border: none;
+                                    height: 32px;
+                                    width: 55px;
+                                }
+                            }
+                        }
+
+                        .form-wishlist-items{
+                            .block-wishlist-management{
+                                position: initial;
+
+                                .wishlist-select, .wishlist-info, .wishlist-toolbar{
+                                    display: none;
+                                }
+
+                                .wishlist-title{
+                                    border-bottom: 1px solid @gray-D8;
+                                    position: absolute;
+                                    top: 0;
+
+                                    a{
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                            .products-grid{
+                                .product-items{
+                                    .product-item{
+                                        .product-item-info{
+
+                                            .product-item-checkbox{
+                                                display: none;
+                                            }
+
+                                            .product-item-inner{
+                                                box-shadow: none;
+
+                                                .comment-box{
+                                                    display: none;
+                                                }
+
+                                                .box-tocart{
+                                                    .fieldset{
+                                                        .field{
+                                                            display: none;
+                                                        }
+
+                                                        .product-item-actions{
+                                                            display: block;
+                                                            width: 100%;
+
+                                                            .actions-primary{
+                                                                width: 100%;
+
+                                                                .tocart{
+                                                                    text-transform: uppercase;
+                                                                    border-radius: 12px;
+                                                                    width: 100%;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .product-item-actions{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .actions-toolbar{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-/////////////DESKTOP///////////////////
-
+//
+// Desktop
+//  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
     .account{
+        .page-main{
+            max-width: 1280px;
+        }
+
         .column.main{
             .page-title-wrapper {
                 .page-title{
                     margin: 0 0 20px 32px;
                     width: auto;
+                }
+            }
+        }
+        //  ------------CUENTA - Libreta de Direcciones ------------
+        &.customer-address-index{
+            .block.block-addresses-list{
+                .table-wrapper.additional-addresses{
+                    .col.actions{
+                        display: flex;
+                        flex-direction: column;
+                        a{
+                            &:after{
+                                display: none;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -538,6 +756,173 @@
             }
         }
     }
+
+    /////////INFO DE CUENTA/////////////
+    .customer-account-edit{
+        .page-main{
+            .columns{
+                .column{
+                    .form-edit-account{
+                        .fieldset{
+                            padding: 20px 32px;
+                            position: relative;
+
+                            .fullname{
+                                display: inline-block;
+                                position: absolute;
+                                width: 45%;
+
+                                .field{
+                                    width: 100%;
+                                }
+                            }
+
+                            .field{
+                                margin: 0 0 20px auto;
+                                width: 45%;
+
+                                &.choice{
+                                    display: block;
+                                    width: 51%;
+                                }
+                            }
+
+                            &.password{
+                                .field{
+                                    margin: 0 auto 20px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //////WISHLIST//////////////
+    .page-multiple-wishlist{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        position: relative;
+
+                        .wishlist-toolbar{
+                            margin: 65px 0 0 32px;
+
+                            &:last-child{
+                                display: none;
+                            }
+
+                            .pager{
+                                .lib-font-size(16);
+                            }
+
+                            .toolbar-amount{
+                                &::first-letter{
+                                    font-weight: bold;
+                                }
+                            }
+
+                            .limiter{
+                                align-items: center;
+                                display: flex;
+
+                                .limiter-options{
+                                    background-color: @white;
+                                    border-radius: 12px;
+                                    box-shadow: none;
+                                    border: none;
+                                    height: 32px;
+                                    width: 55px;
+                                }
+                            }
+                        }
+
+                        .form-wishlist-items{
+                            .block-wishlist-management{
+                                position: initial;
+
+                                .wishlist-select, .wishlist-info, .wishlist-toolbar{
+                                    display: none;
+                                }
+
+                                .wishlist-title{
+                                    width: calc(~'(100% - 5%)');
+                                    padding: 0 0 11px 0;
+                                    margin: 0 0 0 32px;
+
+                                    strong{
+                                        .lib-font-size(20);
+                                        font-weight: 500;
+                                    }
+
+                                    .edit{
+                                        text-decoration: underline;
+                                        .lib-font-size(13);
+                                    }
+                                }
+                            }
+                            .products-grid{
+                                .product-items{
+                                    .product-item{
+                                        .product-item-info{
+                                            border-radius: 12px;
+
+                                            .product-item-checkbox{
+                                                display: none;
+                                            }
+
+                                            .product-item-name{
+                                                margin: 5px 10%;
+                                            }
+
+                                            .product-item-inner{
+                                                position: initial;
+                                                padding: 0 10%;
+                                                border: none;
+                                                margin: 0;
+
+                                                .comment-box{
+                                                    display: none;
+                                                }
+
+                                                .box-tocart{
+                                                    .fieldset{
+                                                        .field{
+                                                            display: none;
+                                                        }
+
+                                                        .product-item-actions{
+                                                            display: block;
+                                                            width: 100%;
+
+                                                            .actions-primary{
+                                                                width: 100%;
+
+                                                                .tocart{
+                                                                    border-radius: 12px;
+                                                                    width: 100%;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .product-item-actions{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -551,7 +936,7 @@
                 display: inline-block;
 
                 .page-title{
-                    margin: 0 0 14px 0;
+                    margin: 0 0 14px 16px;
                     width: 100%;
 
                     span{
@@ -762,6 +1147,153 @@
 
                                 .limiter-options{
                                     width: 55px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /////////INFO DE CUENTA/////////////
+    .customer-account-edit{
+        .page-main{
+            .columns{
+                .column{
+                    .form-edit-account{
+                        padding: 0 16px;
+
+                        .fieldset{
+                            position: relative;
+
+                            br{
+                                display: none;
+                            }
+
+                            .fullname{
+                                .field{
+                                    margin: 0 0 16px;
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //////WISHLIST//////////////
+    .page-multiple-wishlist{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        margin: 0 16px;
+
+                        .wishlist-toolbar{
+                            margin:  28px 0 24px;
+
+                            &:last-child{
+                                display: none;
+                            }
+
+                            .pager{
+                                justify-content: space-between;
+                                display: flex;
+                            }
+                        }
+
+                        .form-wishlist-items{
+                            .block-wishlist-management{
+                                margin: 0;
+
+                                .wishlist-select, .wishlist-info, .wishlist-toolbar{
+                                    display: none;
+                                }
+
+                                .wishlist-title{
+                                    .lib-font-size(13);
+                                    padding: 0 0 14px;
+                                    width: 100%;
+
+                                    strong{
+                                        .lib-font-size(16);
+                                        font-weight: 500;
+                                    }
+                                }
+                            }
+
+                            .products-grid{
+                                .product-items{
+                                    .product-item{
+                                        padding: 20px 0 0;
+
+                                        .product-item-info{
+                                            padding: 0 12px 12px;
+
+                                            .product-item-photo{
+                                                float: none;
+                                                margin: 0;
+
+                                                .product-image-container{
+                                                    min-width: 100%;
+
+                                                    .product-image-wrapper{
+                                                        padding-bottom: 100% !important;
+                                                    }
+                                                }
+                                            }
+
+                                            .product-item-checkbox{
+                                                display: none;
+                                            }
+
+                                            .product-item-name{
+                                                .lib-font-size(12);
+                                                FONT-WEIGHT: 200;
+                                                margin: 0 0 5px;
+                                            }
+
+                                            .price-box{
+                                                margin: 0 0 6px;
+                                            }
+
+                                            .product-item-inner{
+                                                .comment-box{
+                                                    display: none;
+                                                }
+
+                                                .box-tocart{
+                                                    float: none;
+                                                    margin: 0;
+
+                                                    .fieldset{
+                                                        margin: 0;
+
+                                                        .product-item-actions{
+                                                            display: block;
+                                                            width: 100%;
+
+                                                            .actions-primary{
+                                                                width: 100%;
+
+                                                                .tocart{
+                                                                    .lib-font-size(14);
+                                                                    padding: 15px 0;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .product-item-actions{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

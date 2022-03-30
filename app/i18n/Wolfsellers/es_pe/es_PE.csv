@@ -14647,7 +14647,7 @@ Default Email Domain,Dominio de Email por Defecto,module,Magento_Customer,
 Edit Group,Editar Grupo,module,Magento_Customer,
 "Edit Customer Group ""%1""","Editar Grupo de Clientes ""%1""",module,Magento_Customer,
 Edit Customer Groups,Editar Grupos de Clientes,module,Magento_Customer,
-Edit Account Information,Editar Información de Cuenta,module,Magento_Customer,
+Edit Account Information,Información de la Cuenta,module,Magento_Customer,
 "Customer will stay on the current page if ""No"" is selected.","El ciente permanecerá en la página actual si se selecciona ""No"".",module,Magento_Customer,
 The customer is now assigned to Customer Group %s.,El cliente ha sido asignado al Grupo de Cliente %s.,module,Magento_Customer,
 The customer does not have default billing address.,El cliente no tiene una dirección de facturación por defecto.,module,Magento_Customer,
@@ -16193,7 +16193,7 @@ Recipient Name,Nombre del Recipiente,module,Magento_GiftCardAccount,
 Balance,Saldo,module,Magento_GiftCardAccount,
 %store_name,%store_name,module,Magento_GiftCardAccount,
 Alphabetical,Alfabetico,module,Magento_GiftCardAccount,
-Apply Gift Card,Aplicar Gift Card,module,Magento_GiftCardAccount,
+Apply Gift Card,Aplicar Tarjeta de regalo,module,Magento_GiftCardAccount,
 Available,Disponible,module,Magento_GiftCardAccount,
 Balance Change,Cambio de Balance,module,Magento_GiftCardAccount,
 By admin: %1.,Por admin: %1.,module,Magento_GiftCardAccount,
@@ -18306,7 +18306,7 @@ Maximum file size,Tamaño Máximo de Archivo,module,Magento_NegotiableQuote,
 %store_name,%store_name,module,Magento_NegotiableQuote,
 Add Product By SKU,Agregar Producto por SKU,module,Magento_NegotiableQuote,
 Amount in %1,Cantidad en %1,module,Magento_NegotiableQuote,
-Apply Gift Card,Aplicar Gift Card,module,Magento_NegotiableQuote,
+Apply Gift Card,Aplicar Tarjeta de regalo,module,Magento_NegotiableQuote,
 Cannot Perform the Requested Action,No se puede realizar la acción solicitada,module,Magento_NegotiableQuote,
 Minimum Amount,Cantidad Mínima,module,Magento_NegotiableQuote,
 Choose an Amount...,Elige una Cantidad...,module,Magento_NegotiableQuote,
@@ -25144,7 +25144,7 @@ Availability,Disponibilidad,module,Magento_Wishlist,
 General Options,Opciones Generales,module,Magento_Wishlist,
 Add to Wish List,Añadir a Lista de Deseos,module,Magento_Wishlist,
 Add to Compare,Añadir para Comparar,module,Magento_Wishlist,
-Wish List,Lista de Deseos,module,Magento_Wishlist,
+Wish List,Mi lista de deseos,module,Magento_Wishlist,
 We can't add this item to your shopping cart right now.,No podemos añadir este artículo a su carrito de compras en este momento.,module,Magento_Wishlist,
 Please enter a valid email address.,Por favor ingrese un email válido.,module,Magento_Wishlist,
 Email Sender,Remitente de Email,module,Magento_Wishlist,
@@ -25211,7 +25211,7 @@ Email Text Length Limit,Límite de Longitud de Texto de Email,module,Magento_Wis
 Max Emails Allowed to be Sent,Máximo de correos electrónicos permitidos para Enviar,module,Magento_Wishlist,
 Message from %customer_name:,Mensaje de %customer_name:,module,Magento_Wishlist,
 error-message,mensaje de error,module,Magento_Wishlist,
-My Wish List,Lista de Deseos,module,Magento_Wishlist,
+My Wish List,Mi lista de deseos,module,Magento_Wishlist,
 We can't update the Wish List right now.,No podemos actualizar la Lista de Compras en este momento.,module,Magento_Wishlist,
 We can't update your Wish List right now.,No podemos actualizar su Lista de Compras en este momento.,module,Magento_Wishlist,
 We can't add the item to Wish List right now: %1.,No podemos añadir el elemento a la Lista de Compras en este momento: %1.,module,Magento_Wishlist,
@@ -25927,7 +25927,7 @@ Create Account,Crear Cuenta
 Show Password,Mostrar contraseña
 "Your search <strong>%1</strong> returns %2 results","Tu Búsqueda <strong>%1</strong> arrojó '%2' resultados"
 "Are you Perfumerías Unidas client?","¿Eres Cliente Perfumerías Unidas?"
-"Account Information","Información de mi cuenta"
+"Account Information","Información de la cuenta"
 "My profile","Mi perfil"
 "My orders","Mis pedidos"
 "Logout","Salir"
@@ -25953,3 +25953,10 @@ Item,Producto
 "Accept cookies","Aceptar cookies"
 "I want to receive information about offers and promotions.","Deseo recibir información sobre ofertas y promociones."
 "Available in Stores","Disponible en tiendas"
+Colony,Colonia
+Sign Up for Our Newsletter,Suscríbete a nuestro boletín
+"Billing Address","Dirección de Facturación"
+"Shipping Address","Dirección de Envío"
+"Select default","Seleccione por defecto"
+"Default Addresses","Direcciones por Defecto"
+"Additional Addresses","Direcciónes Adicionales"
