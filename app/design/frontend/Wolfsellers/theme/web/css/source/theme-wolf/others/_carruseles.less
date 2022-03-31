@@ -46,7 +46,8 @@
 			}
 		}
 	}
-	.page-wrapper main.page-main{
+	.page-wrapper main.page-main,
+	.page-wrapper .block.upsell{
 		*:not(.row-slider-first){
 			.product-items.slick-slider{
 				padding: 0 26px;
@@ -83,38 +84,46 @@
 				}
 			}
 		}
-		.am-widget-brand-slider{
-			.ambrands-inner{
-				[class*="swiper-button"]{
+	}
+	.am-widget-brand-slider{
+		.ambrands-inner{
+			[class*="swiper-button"]{
+				float: left;
+				height: 56px;
+				width: 26px;
+				padding: 10px 0;
+				background-color: @gray2;
+				background-image: none;
+				top: 50%;
+				transform: translateY(-50%);
+				border-radius: 0;
+				&:before{
+					text-indent: 0;
 					float: left;
-					height: 56px;
-					width: 26px;
-					padding: 10px 0;
-					background-color: @gray2;
-					background-image: none;
-					top: 50%;
-					transform: translateY(-50%);
-					border-radius: 0;
-					&:before{
-						text-indent: 0;
-						float: left;
-						width: 100%;
-						text-align: center;
-						color: @black;
-						padding: 0;
+					width: 100%;
+					text-align: center;
+					color: @black;
+					padding: 0;
+				}
+				@media @mdmin{
+					&:hover{
+						background: @primary;
+						&:before{
+							color: @white;
+						}
 					}
 				}
-				button.swiper-button-prev{
-					&:before{
-						content: @icon-arrowleft;
-						font-family: @icons__font-name;
-					}
+			}
+			button.swiper-button-prev{
+				&:before{
+					content: @icon-arrowleft;
+					font-family: @icons__font-name;
 				}
-				button.swiper-button-next{
-					&:before{
-						content: @icon-arrowright;
-						font-family: @icons__font-name;
-					}
+			}
+			button.swiper-button-next{
+				&:before{
+					content: @icon-arrowright;
+					font-family: @icons__font-name;
 				}
 			}
 		}
