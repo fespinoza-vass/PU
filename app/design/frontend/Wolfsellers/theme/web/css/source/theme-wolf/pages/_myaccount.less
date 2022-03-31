@@ -264,70 +264,117 @@
                     font-size: 3.2rem;
                 }
             }
-        }
-        .columns{
-            .form.create.account.form-create-account{
-                .fieldset.create.info,
-                .fieldset.create.account{
-                    .legend{
-                        span{
-                            font-size: 1.6rem;
-                            font-weight: 400;
-                        }
-                    }
-                    .field{
-                        .label{
-                            font-weight: normal;
-                            font-size: 1.2rem;
-                        }
-                    }
-                }
-                .fieldset.create.info{
-                    .field.gender.required,
-                    .field.field-identificacion.required{
-                        width: 23.5%;
-                    }
-                    .field.field-numero_de_identificacion.required,
-                    .field.date.field-dob.required{
-                        margin-left: 2%;
-                    }
-                    .field.choice{
-                        display: none;
-                    }
-                }
-                .fieldset.create.account{
-                    &:after{
-                        display: none;
-                    }
-                    .field.password.required{
-                        .control{
-                            #password-strength-meter-container{
-                                display: none;
-                            }
-                        }
-                    }
-                    .field.choice{
-                        display: none;
-                    }
-                }
-                .fieldset.additional_info{
-                    .field.choice.newsletter{
-                        .label{
+            .columns{
+                .form.create.account.form-create-account{
+                    .fieldset.create.info,
+                    .fieldset.create.account{
+                        .legend{
                             span{
-                                font-weight: normal;
+                                font-size: 1.6rem;
+                                font-weight: 600;
                             }
-                            &:after{
-                                background-color: @black;
-                                color: @white;
+                        }
+                        .field{
+                            .label{
+                                font-weight: normal;
+                                font-size: 1.2rem;
+                                &:after{
+                                    content: '*';
+                                    color: @red;
+                                    font-size: 1.2rem;
+                                    margin: 0 0 0 5px;
+                                }
                             }
                         }
                     }
-                }
-                .actions-toolbar{
-                    .primary{
-                        .action.submit.primary{
-                            width: 220px;
-                            height: 60px;
+                    .fieldset.create.info{
+                        margin-bottom: 20px;
+                        .fullname{
+                            .field.field-name-firstname.required,
+                            .field.field-name-lastname.required{
+                                width: calc(~'(50% - 8px)');
+                                margin-top: unset;
+                                margin-bottom: 20px;
+                            }
+                            .field.field-name-firstname.required{
+                                float: left;
+                            }
+                            .field.field-name-lastname.required{
+                                float: right;
+                            }
+                        }
+                        .field.gender.required,
+                        .field.field-identificacion.required{
+                            width: calc(~'(25% - 12px)');
+                            float: left;
+                            margin-left: unset ;
+                            margin-right: 16px;
+                            .control{
+                                &:focus{
+                                    box-shadow: 0 0 3px 1px @a-hovers;
+                                }
+                            }
+                        }
+                        .field.date.field-dob.required{
+                            .control.customer-dob{
+                                height: 48px;
+                                border-radius: 12px;
+                                background: @white;
+                                background-clip: padding-box;
+                                border: 1px solid @lines-input;
+                                font-size: 1.4rem;
+                                line-height: 1.428571429;
+                                vertical-align: baseline;
+                                width: 100%;
+                                box-sizing: border-box;
+                                input{
+                                    border: none;
+                                    background: none;
+                                    margin: unset;
+                                }
+                            }
+                        }
+                        .field.choice{
+                            display: none;
+                        }
+                    }
+                    .fieldset.create.account{
+                        &:after{
+                            display: none;
+                        }
+                        .field.emailaddress.required{
+                            margin-top: unset;
+                        }
+                        .field.password.required{
+                            .control{
+                                #password-strength-meter-container{
+                                    display: none;
+                                }
+                            }
+                        }
+                        .field.choice{
+                            display: none;
+                        }
+                    }
+                    .fieldset.additional_info{
+                        .field.choice.newsletter{
+                            .label{
+                                span{
+                                    font-weight: normal;
+                                }
+                                &:after{
+                                    background-color: @black;
+                                    color: @white;
+                                }
+                            }
+                        }
+                    }
+                    .actions-toolbar{
+                        .primary{
+                            .action.submit.primary{
+                                width: 220px;
+                                height: 60px;
+                            }
                         }
                     }
                 }
@@ -1037,47 +1084,67 @@
             }
         }
     }
+
     //  ------------CREATE------------
     .customer-account-create{
         .page-main{
+            margin-left: 16px;
+            margin-right: 16px;
             .page-title-wrapper{
                 .page-title{
                     font-size: 2.2rem !important;
                 }
             }
-        }
-        .columns{
-            .form.create.account.form-create-account{
-                .fieldset.create.info,
-                .fieldset.create.account{
-                    .field{
-                        .label{
-                            font-size: 1.4rem;
+            .columns{
+                .form.create.account.form-create-account{
+                    .fieldset.create.info,
+                    .fieldset.create.account{
+                        .field{
+                            .label{
+                                font-weight: normal;
+                                font-size: 1.2rem;
+                                &:after{
+                                    content: '*';
+                                    color: @red;
+                                    font-size: 1.2rem;
+                                    margin: 0 0 0 5px;
+                                }
+                            }
                         }
                     }
-                }
-                .fieldset.create.info{
-                    .field.gender.required,
-                    .field.field-identificacion.required{
-                        width: 100% !important;
+                    .fieldset.create.info{
+                        margin-bottom: 20px;
+                        .fullname{
+                            .field.field-name-firstname.required,
+                            .field.field-name-lastname.required{
+                                width: 100% !important;
+                                float: unset !important;
+                            }
+                        }
+                        .field.gender.required,
+                        .field.field-identificacion.required{
+                            width: calc(~'(50% - 8px)') !important;
+                            margin-right: unset !important;
+                        }
+                        .field.field-identificacion.required{
+                            float: right !important;
+                        }
                     }
-                    .field.field-numero_de_identificacion.required,
-                    .field.date.field-dob.required{
-                        margin-left: 0 !important;
-                    }
-                }
-                .actions-toolbar{
-                    .primary{
-                        .action.submit.primary{
-                            width: 100% !important;
-                            height: 40px !important;
-                            padding: 8px;
+                    .actions-toolbar{
+                        .primary{
+                            .action.submit.primary{
+                                width: 100% !important;
+                                height: 40px !important;
+                                padding: 8px;
+                                font-size: 16px;
+                            }
                         }
                     }
                 }
             }
         }
     }
+
 
     ///GIFT CART///
     .magento_giftcardaccount-customer-index{
