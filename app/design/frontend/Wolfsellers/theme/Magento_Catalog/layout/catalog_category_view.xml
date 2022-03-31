@@ -14,5 +14,7 @@
                 </arguments>
             </block>
         </referenceContainer>
+
+        <move element="breadcrumbs" destination="page.wrapper" before="main.content" />
     </body>
 </page>
