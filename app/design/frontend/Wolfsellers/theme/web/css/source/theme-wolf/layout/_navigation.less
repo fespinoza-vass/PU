@@ -44,14 +44,22 @@
 		}
 		.ammenu-category-columns{
 			.ammenu-category-tree{
+				&.-col-4{
+					max-width: 50%;
+				}
 				.ammenu-title{
-					font-size: 1.6rem;
+					border-bottom: 1px solid @lines-input;
 					text-transform: uppercase;
+					font-size: 1.6rem;
 					font-weight: 500;
 					~ .ammenu-list{
 						> li  > a{
 							font-size: 1.6rem;
 							font-size: 100;
+
+							&.-all-link{
+								display: none;
+							}
 						}
 					}
 				}
@@ -101,7 +109,7 @@
 				            text-decoration: none !important;
 				            font-size: 1.6rem;
 				            font-family: @font-second;
-				            padding: 12px 0 !important;
+				            padding: 10px 0 !important;
 				            min-height: auto !important;
 				            ~ .ammenu-items{
 				            	padding: 0 20px !important;
