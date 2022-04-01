@@ -80,7 +80,7 @@ class Visanet
         return $valor;
     }
 
-    public function authorization($environment,$key,$amount,$transactionToken,$purchaseNumber,$merchantId){
+    public function authorization($environment,$key,$amount,$transactionToken,$purchaseNumber,$merchantId,$currencyCode){
         switch ($environment) {
             case 'prd':
                 #$merchantId = merchantIdprd;
@@ -102,7 +102,7 @@ class Visanet
             \"amount\" : \"$amount\",
             \"tokenId\" : \"$transactionToken\",
             \"purchaseNumber\" : \"$purchaseNumber\",
-            \"currency\" : \"PEN\"
+            \"currency\" : \"$currencyCode\"
         }
     }";
 
@@ -175,8 +175,7 @@ class Visanet
                 break;
             case 'dev':
                 //$merchantId = merchantidtest;
-                //$url = "https://apitestenv.vnforapps.com/api.security/v1/security";
-                $url = "https://pruebasdecertificado.vnforapps.com/api.ecommerce/v2/clientip";
+                $url = "https://apitestenv.vnforapps.com/api.security/v1/security";
                 $accessKey=$user;
                 $secretKey=$password;
                 break;
@@ -207,7 +206,7 @@ class Visanet
                 break;
             case 'dev':
                 #$merchantId = merchantidtest;
-                $url = "https://pruebasdecertificado.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId;
+                $url = "https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId;
                 $accessKey=$user;
                 $secretKey=$password;
                 break;
