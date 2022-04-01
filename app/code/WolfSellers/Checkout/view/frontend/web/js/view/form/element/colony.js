@@ -35,9 +35,14 @@ define([
          */
         onUpdate: function (value) {
             var ubigeo = '';
+            var optSelected;
 
-            if (value) {
-                ubigeo = this.getOption(value).postcode;
+            if (typeof this.getOption !== 'function') {
+                return;
+            }
+
+            if (value && (optSelected = this.getOption(value))) {
+                ubigeo = optSelected.postcode;
             }
 
             registry.get(this.parentName + '.' + 'postcode', function (postcodeField) {
