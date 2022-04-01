@@ -87,7 +87,7 @@ define([
                     } else if (type === 2) {
                         // Image
                         html += '<div class="' + optionClass + ' image" ' + attr +
-                            ' style="width:' + swatchImageWidth + 'px; height:' + swatchImageHeight + 'px">' + '<img class="swatch-custom-image" src="'+value+'"/>' +
+                            ' style="width:' + swatchImageWidth + 'px; height:' + swatchImageHeight + 'px">' + '<img class="swatch-custom-image" src="'+thumb+'"/>' +
                             '</div>';
                     } else if (type === 3) {
                         // Clear
