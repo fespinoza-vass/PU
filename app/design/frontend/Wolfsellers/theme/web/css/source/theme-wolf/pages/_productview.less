@@ -176,6 +176,64 @@
 						}
 					}
 				}
+				.product.media{
+					// AMASTY IMPORTANTS
+					.amlabel-position-wrapper{
+						top: 20px !important;
+						left: 20px !important;
+						.amasty-label-container{
+							position: static !important;
+							height: auto !important;
+							width: auto !important;
+							.amlabel-text{
+								position: static !important;
+								padding: 5px 10px !important;
+								font-size: 1.4rem;
+							}
+						}
+					}
+					// AMASTY IMPORTANTS
+				}
+				.product.info.detailed{
+					.product.items{
+						background: @white;
+						padding: 20px;
+						border-radius: @radiusitems;
+						.item.title{
+							.switch{
+								height: auto;
+							    line-height: 1;
+							    padding: 27px 0;
+							    margin: 0;
+							    border-bottom: 0 !important;
+							    border-left: 0;
+							    border-right: 0;
+							    border-bottom: 1px solid @gray-D4;
+							    font-size: 2rem;
+							    &:after{
+							    	content: @icon-expand;
+							    	font-size: 2.4rem;
+							    	transform: none;
+							    }
+							}
+							&:first-child{
+								.switch{
+									border-top: 0;
+								}
+							}
+							&.active{
+								.switch{
+									&:after{
+										content: @icon-collapse;
+									}
+								}
+							}
+						}
+						.item.content{
+							border: 0;
+						}
+					}
+				}
 			}
 			.page-main-description{
 				margin: 0 0 30px;
@@ -200,16 +258,17 @@
 				}
 			}
 			.review-add,
-			.block.related{
+			.block.related,
+			.block.upsell{
 				display: block;
 				width: 100%;
 				max-width: @layout__max-width;
 				margin: 0 auto 20px;
+				padding: 0 20px;
 			}
 			.block.related,
 			.block.upsell,
 			.amshopby-morefrom {
-				padding: 0 20px;
 				.block-title{
 					float: left;
 					width: 100%;

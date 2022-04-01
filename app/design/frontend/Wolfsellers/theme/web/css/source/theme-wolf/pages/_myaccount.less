@@ -106,6 +106,30 @@
 					font-size: 1.3rem;
 				}
 			}
+
+            .pager{
+                justify-content: space-between;
+                align-items: center;
+                .lib-font-size(16);
+
+                .toolbar-amount{
+                    &::first-letter{
+                        font-weight: bold;
+                    }
+                }
+
+                .limiter{
+                    align-items: center;
+                    display: flex;
+
+                    .limiter-options{
+                        background-color: transparent;
+                        box-shadow: none;
+                        border: none;
+                        width: 55px;
+                    }
+                }
+            }
 		}
 		.sidebar-main{
 			.block-collapsible-nav-content{
@@ -264,70 +288,117 @@
                     font-size: 3.2rem;
                 }
             }
-        }
-        .columns{
-            .form.create.account.form-create-account{
-                .fieldset.create.info,
-                .fieldset.create.account{
-                    .legend{
-                        span{
-                            font-size: 1.6rem;
-                            font-weight: 400;
-                        }
-                    }
-                    .field{
-                        .label{
-                            font-weight: normal;
-                            font-size: 1.2rem;
-                        }
-                    }
-                }
-                .fieldset.create.info{
-                    .field.gender.required,
-                    .field.field-identificacion.required{
-                        width: 23.5%;
-                    }
-                    .field.field-numero_de_identificacion.required,
-                    .field.date.field-dob.required{
-                        margin-left: 2%;
-                    }
-                    .field.choice{
-                        display: none;
-                    }
-                }
-                .fieldset.create.account{
-                    &:after{
-                        display: none;
-                    }
-                    .field.password.required{
-                        .control{
-                            #password-strength-meter-container{
-                                display: none;
-                            }
-                        }
-                    }
-                    .field.choice{
-                        display: none;
-                    }
-                }
-                .fieldset.additional_info{
-                    .field.choice.newsletter{
-                        .label{
+            .columns{
+                .form.create.account.form-create-account{
+                    .fieldset.create.info,
+                    .fieldset.create.account{
+                        .legend{
                             span{
-                                font-weight: normal;
+                                font-size: 1.6rem;
+                                font-weight: 600;
                             }
-                            &:after{
-                                background-color: @black;
-                                color: @white;
+                        }
+                        .field{
+                            .label{
+                                font-weight: normal;
+                                font-size: 1.2rem;
+                                &:after{
+                                    content: '*';
+                                    color: @red;
+                                    font-size: 1.2rem;
+                                    margin: 0 0 0 5px;
+                                }
                             }
                         }
                     }
-                }
-                .actions-toolbar{
-                    .primary{
-                        .action.submit.primary{
-                            width: 220px;
-                            height: 60px;
+                    .fieldset.create.info{
+                        margin-bottom: 20px;
+                        .fullname{
+                            .field.field-name-firstname.required,
+                            .field.field-name-lastname.required{
+                                width: calc(~'(50% - 8px)');
+                                margin-top: unset;
+                                margin-bottom: 20px;
+                            }
+                            .field.field-name-firstname.required{
+                                float: left;
+                            }
+                            .field.field-name-lastname.required{
+                                float: right;
+                            }
+                        }
+                        .field.gender.required,
+                        .field.field-identificacion.required{
+                            width: calc(~'(25% - 12px)');
+                            float: left;
+                            margin-left: unset ;
+                            margin-right: 16px;
+                            .control{
+                                &:focus{
+                                    box-shadow: 0 0 3px 1px @a-hovers;
+                                }
+                            }
+                        }
+                        .field.date.field-dob.required{
+                            .control.customer-dob{
+                                height: 48px;
+                                border-radius: 12px;
+                                background: @white;
+                                background-clip: padding-box;
+                                border: 1px solid @lines-input;
+                                font-size: 1.4rem;
+                                line-height: 1.428571429;
+                                vertical-align: baseline;
+                                width: 100%;
+                                box-sizing: border-box;
+                                input{
+                                    border: none;
+                                    background: none;
+                                    margin: unset;
+                                }
+                            }
+                        }
+                        .field.choice{
+                            display: none;
+                        }
+                    }
+                    .fieldset.create.account{
+                        &:after{
+                            display: none;
+                        }
+                        .field.emailaddress.required{
+                            margin-top: unset;
+                        }
+                        .field.password.required{
+                            .control{
+                                #password-strength-meter-container{
+                                    display: none;
+                                }
+                            }
+                        }
+                        .field.choice{
+                            display: none;
+                        }
+                    }
+                    .fieldset.additional_info{
+                        .field.choice.newsletter{
+                            .label{
+                                span{
+                                    font-weight: normal;
+                                }
+                                &:after{
+                                    background-color: @black;
+                                    color: @white;
+                                }
+                            }
+                        }
+                    }
+                    .actions-toolbar{
+                        .primary{
+                            .action.submit.primary{
+                                width: 220px;
+                                height: 60px;
+                            }
                         }
                     }
                 }
@@ -443,29 +514,6 @@
                         border-radius:  0 0 12px 12px;
                         padding: 15px 32px 31px;
                         background: @white;
-
-                        .pager{
-                            justify-content: space-between;
-                            align-items: center;
-                            .lib-font-size(16);
-
-                            .toolbar-amount{
-                                &::first-letter{
-                                    font-weight: bold;
-                                }
-                            }
-
-                            .limiter{
-                                align-items: center;
-                                display: flex;
-
-                                .limiter-options{
-                                    background-color: transparent;
-                                    box-shadow: none;
-                                    border: none;
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -509,6 +557,166 @@
             }
         }
     }
+
+    //////WISHLIST//////////////
+    .page-multiple-wishlist{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        position: relative;
+
+                        .wishlist-toolbar{
+
+                            .limiter{
+                                align-items: center;
+                                display: flex;
+
+                                .limiter-options{
+                                    background-color: @white;
+                                    border-radius: 12px;
+                                    box-shadow: none;
+                                    border: none;
+                                    height: 32px;
+                                    width: 55px;
+                                }
+                            }
+                        }
+
+                        .form-wishlist-items{
+                            .block-wishlist-management{
+                                position: initial;
+
+                                .wishlist-select, .wishlist-info, .wishlist-toolbar{
+                                    display: none;
+                                }
+
+                                .wishlist-title{
+                                    border-bottom: 1px solid @gray-D8;
+                                    position: absolute;
+                                    top: 0;
+
+                                    a{
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                            .products-grid{
+                                .product-items{
+                                    .product-item{
+                                        .product-item-info{
+
+                                            .product-item-checkbox{
+                                                display: none;
+                                            }
+
+                                            .product-item-inner{
+                                                box-shadow: none;
+
+                                                .comment-box{
+                                                    display: none;
+                                                }
+
+                                                .box-tocart{
+                                                    .fieldset{
+                                                        .field{
+                                                            display: none;
+                                                        }
+
+                                                        .product-item-actions{
+                                                            display: block;
+                                                            width: 100%;
+
+                                                            .actions-primary{
+                                                                width: 100%;
+
+                                                                .tocart{
+                                                                    text-transform: uppercase;
+                                                                    border-radius: 12px;
+                                                                    width: 100%;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .product-item-actions{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .actions-toolbar{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ///////MIS PEDIDOS////////
+    .sales-order-history{
+        .page-wrapper{
+            .page-main{
+                .page {
+                    &.messages{
+                        margin: 0;
+                    }
+                }
+
+                .columns{
+                    .column{
+                        .orders-history{
+                            border-radius: 12px 12px 0 0;
+                            background: @white;
+                            border: none;
+                            margin: 0;
+
+                            .table-order-items{
+
+                                thead{
+                                    tr{
+                                        border-bottom: 1px solid @gray-D8;
+
+                                        th{
+                                            .lib-font-size(16);
+                                            border: none;
+                                        }
+
+                                        .actions{
+                                            width: 200px;
+                                        }
+                                    }
+                                }
+
+                                tbody{
+                                    tr{
+                                        background: @white;
+
+                                        .actions{
+                                            text-decoration: underline;
+                                            FONT-WEIGHT: 600;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        .order-products-toolbar{
+                            border-radius: 0 0 12px 12px;
+                            background: @white;
+                            padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -516,6 +724,10 @@
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
     .account{
+        .page-main{
+            max-width: 1280px;
+        }
+
         .column.main{
             .page-title-wrapper {
                 .page-title{
@@ -633,19 +845,6 @@
                         border-radius:  0 0 12px 12px;
                         padding: 15px 32px 31px;
                         background: @white;
-
-                        .pager{
-                            justify-content: space-between;
-                            align-items: center;
-                            .lib-font-size(16);
-                            display: flex;
-
-                            .limiter{
-                                .limiter-options{
-                                    width: 100%;
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -693,6 +892,181 @@
             }
         }
     }
+
+    //////WISHLIST//////////////
+    .page-multiple-wishlist{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        position: relative;
+
+                        .wishlist-toolbar{
+                            margin: 65px 0 0 32px;
+
+                            &:last-child{
+                                display: none;
+                            }
+
+                            .pager{
+                                .lib-font-size(16);
+                            }
+
+                            .toolbar-amount{
+                                &::first-letter{
+                                    font-weight: bold;
+                                }
+                            }
+
+                            .limiter{
+                                align-items: center;
+                                display: flex;
+
+                                .limiter-options{
+                                    background-color: @white;
+                                    border-radius: 12px;
+                                    box-shadow: none;
+                                    border: none;
+                                    height: 32px;
+                                    width: 55px;
+                                }
+                            }
+                        }
+
+                        .form-wishlist-items{
+                            .block-wishlist-management{
+                                position: initial;
+
+                                .wishlist-select, .wishlist-info, .wishlist-toolbar{
+                                    display: none;
+                                }
+
+                                .wishlist-title{
+                                    width: calc(~'(100% - 5%)');
+                                    padding: 0 0 11px 0;
+                                    margin: 0 0 0 32px;
+
+                                    strong{
+                                        .lib-font-size(20);
+                                        font-weight: 500;
+                                    }
+
+                                    .edit{
+                                        text-decoration: underline;
+                                        .lib-font-size(13);
+                                    }
+                                }
+                            }
+                            .products-grid{
+                                .product-items{
+                                    .product-item{
+                                        .product-item-info{
+                                            border-radius: 12px;
+
+                                            .product-item-checkbox{
+                                                display: none;
+                                            }
+
+                                            .product-item-name{
+                                                margin: 5px 10%;
+                                            }
+
+                                            .product-item-inner{
+                                                position: initial;
+                                                padding: 0 10%;
+                                                border: none;
+                                                margin: 0;
+
+                                                .comment-box{
+                                                    display: none;
+                                                }
+
+                                                .box-tocart{
+                                                    .fieldset{
+                                                        .field{
+                                                            display: none;
+                                                        }
+
+                                                        .product-item-actions{
+                                                            display: block;
+                                                            width: 100%;
+
+                                                            .actions-primary{
+                                                                width: 100%;
+
+                                                                .tocart{
+                                                                    border-radius: 12px;
+                                                                    width: 100%;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .product-item-actions{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ///////MIS PEDIDOS////////
+    .sales-order-history{
+        .page-wrapper{
+            .page-main{
+                .page {
+                    &.messages{
+                        margin: 0;
+                    }
+                }
+
+                .columns{
+                    .column{
+                        .orders-history{
+                            padding: 9px 19px;
+                            padding: 13px 36px;
+
+                            .table-order-items{
+
+                                thead{
+                                    tr{
+                                        .actions{
+                                            width: 200px;
+                                        }
+                                    }
+                                }
+
+                                tbody{
+                                    tr{
+                                        border-bottom: 1px solid @gray-D8;
+                                        background: @white;
+
+                                        .col{
+                                            padding: 18px 10px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        .order-products-toolbar{
+                            border-radius: 0 0 12px 12px;
+                            background: @white;
+                            padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -701,16 +1075,28 @@
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
 
     .account{
-        .column.main{
-            .page-title-wrapper {
-                display: inline-block;
-
-                .page-title{
-                    margin: 0 0 14px 16px;
-                    width: 100%;
-
-                    span{
-                        .lib-font-size(16);
+        .columns{
+            .column.main{
+                padding: 0 16px;
+    
+                .page-title-wrapper {
+                    display: inline-block;
+    
+                    .page-title{
+                        margin: 0 0 14px;
+                        width: 100%;
+    
+                        span{
+                            .lib-font-size(16);
+                        }
+                    }
+                }
+    
+                .pager{
+                    display: block;
+    
+                    .limiter{
+                        justify-content: center;
                     }
                 }
             }
@@ -807,47 +1193,67 @@
             }
         }
     }
+
     //  ------------CREATE------------
     .customer-account-create{
         .page-main{
+            margin-left: 16px;
+            margin-right: 16px;
             .page-title-wrapper{
                 .page-title{
                     font-size: 2.2rem !important;
                 }
             }
-        }
-        .columns{
-            .form.create.account.form-create-account{
-                .fieldset.create.info,
-                .fieldset.create.account{
-                    .field{
-                        .label{
-                            font-size: 1.4rem;
+            .columns{
+                .form.create.account.form-create-account{
+                    .fieldset.create.info,
+                    .fieldset.create.account{
+                        .field{
+                            .label{
+                                font-weight: normal;
+                                font-size: 1.2rem;
+                                &:after{
+                                    content: '*';
+                                    color: @red;
+                                    font-size: 1.2rem;
+                                    margin: 0 0 0 5px;
+                                }
+                            }
                         }
                     }
-                }
-                .fieldset.create.info{
-                    .field.gender.required,
-                    .field.field-identificacion.required{
-                        width: 100% !important;
+                    .fieldset.create.info{
+                        margin-bottom: 20px;
+                        .fullname{
+                            .field.field-name-firstname.required,
+                            .field.field-name-lastname.required{
+                                width: 100% !important;
+                                float: unset !important;
+                            }
+                        }
+                        .field.gender.required,
+                        .field.field-identificacion.required{
+                            width: calc(~'(50% - 8px)') !important;
+                            margin-right: unset !important;
+                        }
+                        .field.field-identificacion.required{
+                            float: right !important;
+                        }
                     }
-                    .field.field-numero_de_identificacion.required,
-                    .field.date.field-dob.required{
-                        margin-left: 0 !important;
-                    }
-                }
-                .actions-toolbar{
-                    .primary{
-                        .action.submit.primary{
-                            width: 100% !important;
-                            height: 40px !important;
-                            padding: 8px;
+                    .actions-toolbar{
+                        .primary{
+                            .action.submit.primary{
+                                width: 100% !important;
+                                height: 40px !important;
+                                padding: 8px;
+                                font-size: 16px;
+                            }
                         }
                     }
                 }
             }
         }
     }
+
 
     ///GIFT CART///
     .magento_giftcardaccount-customer-index{
@@ -905,22 +1311,6 @@
                             }
                         }
                     }
-
-                    .products-reviews-toolbar{
-                        .pager{
-                            display: block;
-
-                            .limiter{
-                                justify-content: center;
-                                align-items: center;
-                                display: flex;
-
-                                .limiter-options{
-                                    width: 55px;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -932,8 +1322,6 @@
             .columns{
                 .column{
                     .form-edit-account{
-                        padding: 0 16px;
-
                         .fieldset{
                             position: relative;
 
@@ -945,6 +1333,154 @@
                                 .field{
                                     margin: 0 0 16px;
                                     width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //////WISHLIST//////////////
+    .page-multiple-wishlist{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        margin: 0 16px;
+
+                        .wishlist-toolbar{
+                            margin:  28px 0 24px;
+
+                            &:last-child{
+                                display: none;
+                            }
+
+                            .pager{
+                                justify-content: space-between;
+                                display: flex;
+                            }
+                        }
+
+                        .form-wishlist-items{
+                            .block-wishlist-management{
+                                margin: 0;
+
+                                .wishlist-select, .wishlist-info, .wishlist-toolbar{
+                                    display: none;
+                                }
+
+                                .wishlist-title{
+                                    .lib-font-size(13);
+                                    padding: 0 0 14px;
+                                    width: 100%;
+
+                                    strong{
+                                        .lib-font-size(16);
+                                        font-weight: 500;
+                                    }
+                                }
+                            }
+
+                            .products-grid{
+                                .product-items{
+                                    .product-item{
+                                        padding: 20px 0 0;
+
+                                        .product-item-info{
+                                            padding: 0 12px 12px;
+
+                                            .product-item-photo{
+                                                float: none;
+                                                margin: 0;
+
+                                                .product-image-container{
+                                                    min-width: 100%;
+
+                                                    .product-image-wrapper{
+                                                        padding-bottom: 100% !important;
+                                                    }
+                                                }
+                                            }
+
+                                            .product-item-checkbox{
+                                                display: none;
+                                            }
+
+                                            .product-item-name{
+                                                .lib-font-size(12);
+                                                FONT-WEIGHT: 200;
+                                                margin: 0 0 5px;
+                                            }
+
+                                            .price-box{
+                                                margin: 0 0 6px;
+                                            }
+
+                                            .product-item-inner{
+                                                .comment-box{
+                                                    display: none;
+                                                }
+
+                                                .box-tocart{
+                                                    float: none;
+                                                    margin: 0;
+
+                                                    .fieldset{
+                                                        margin: 0;
+
+                                                        .product-item-actions{
+                                                            display: block;
+                                                            width: 100%;
+
+                                                            .actions-primary{
+                                                                width: 100%;
+
+                                                                .tocart{
+                                                                    .lib-font-size(14);
+                                                                    padding: 15px 0;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                .product-item-actions{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ///////MIS PEDIDOS////////
+    .sales-order-history{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .orders-history{
+                            padding: 0 19px;
+
+                            .table-order-items{
+                                tbody{
+                                    tr{
+                                        .id{
+                                            padding: 24px 10px 5px;
+                                        }
+                                        
+                                        .actions{
+                                            padding: 5px 10px 24px;
+                                        }
+                                    }
                                 }
                             }
                         }

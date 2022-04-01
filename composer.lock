@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88255f0e61094252202997078c6a7c5f",
+    "content-hash": "211cca04739aadefd03fbfdbeb5f7330",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -50,6 +50,31 @@
                 "source": "https://github.com/2tvenom/CBOREncode/tree/1.0.2"
             },
             "time": "2020-10-27T07:22:41+00:00"
+        },
+        {
+            "name": "amasty/aminvisiblecaptcha",
+            "version": "2.4.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/enterprise/packages/aminvisiblecaptcha-2.4.4-ee.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.10.2",
+                "php": ">=7.3.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\InvisibleCaptcha\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Amasty Google Invisible Captcha"
         },
         {
             "name": "amasty/base",
@@ -622,6 +647,39 @@
                 "Commercial"
             ],
             "description": "Fix for Magento 2.4.0 by Amasty"
+        },
+        {
+            "name": "amasty/module-magento-custom-form",
+            "version": "1.17.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/enterprise/packages/module-magento-custom-form-1.17.2-ee.zip"
+            },
+            "require": {
+                "amasty/aminvisiblecaptcha": ">=2.4.4",
+                "amasty/base": ">=1.11.3",
+                "php": ">=7.3.0"
+            },
+            "suggest": {
+                "amasty/module-custom-form-to-builder": "Install Amasty_CustomFormToBuilder module to activate the integration with Custom Reports Builder extension and create valuable reports about your Custom Forms.",
+                "amasty/module-magento-custom-form-graphql": "Install amasty/module-magento-custom-form-graphql module to activate Graphql and Custom Forms integration.",
+                "amasty/module-magento-custom-form-mftf-2": "Install magento-custom-form-mftf-2 module to be able to run Custom Form MFTF tests for Magento 2.3.5+ version",
+                "amasty/module-magento-custom-form-mftf-3": "Install magento-custom-form-mftf-3 module to be able to run Custom Form MFTF tests for Magento 2.4.0+ version",
+                "dompdf/dompdf": "To use PDF functionality, please install the library dompdf/dompdf."
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\Customform\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Custom Form by Amasty"
         },
         {
             "name": "amasty/module-mega-menu-lite",

@@ -91,9 +91,12 @@
 
                                                 td {
                                                     .actions-toolbar {
+                                                        min-height: 0;
+                                                        padding: 0;
 
-                                                        .wishlist,
-                                                        .action-edit {
+                                                        .action-towishlist,
+                                                        .action-edit,
+                                                        .wishlist {
                                                             display: none;
                                                         }
 
@@ -315,6 +318,15 @@
                                     .lib-font-size(22);
                                     font-weight: bold;
                                 }
+
+                                tbody{
+                                    .totals{
+                                        .title{
+                                            font-weight: normal;
+                                            .lib-font-size(16);
+                                        }
+                                    }
+                                }
                             }
 
                             .form-cart {
@@ -396,7 +408,7 @@
                                                 td {
                                                     .actions-toolbar {
                                                         .action-delete {
-                                                            bottom: 30px;
+                                                            bottom: 25px;
                                                             right: 25px;
                                                             top: auto;
                                                         }
@@ -405,6 +417,12 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+
+                            .cart-discount{
+                                .discount{
+                                    min-width: 352px;
                                 }
                             }
                         }
