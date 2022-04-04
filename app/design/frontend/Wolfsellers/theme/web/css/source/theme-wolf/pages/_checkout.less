@@ -99,6 +99,70 @@
 										margin: 0;
 									}
 								}
+								.amcheckout-wrapper{
+									.amcheckout-form-login{
+										margin-bottom: 15px;
+										> fieldset{
+											margin: 0;
+											> .field{
+												margin: 0;
+											}
+											.hidden-fields{
+												margin: 0;
+											}
+										}
+									}
+									.form-shipping-address{
+										> .address{
+											display: flex;
+											flex-direction: column;
+											.field{
+												&[name="shippingAddress.firstname"]{
+													order: 1;
+												}
+												&[name="shippingAddress.lastname"]{
+													order: 2;
+												}
+												&[name="shippingAddress.telephone"]{
+													order: 3;
+												}
+												&[name="shippingAddress.company"]{
+													order: 4;
+												}
+												&.street{
+													order: 5;
+												}
+												&[name="shippingAddress.country_id"]{
+													order: 6;
+												}
+												&[name="shippingAddress.region_id"]{
+													order: 7;
+												}
+												&[name="shippingAddress.region"]{
+													order: 8;
+												}
+												&[name="shippingAddress.city"]{
+													order: 9;	
+												}
+												&[name="shippingAddress.vat_id"]{
+													order: 10;
+												}
+												&[name="shippingAddress.custom_attributes.colony"]{
+													order: 11;
+												}
+												&[name="shippingAddress.custom_attributes.numero_exterior"]{
+													order: 12;
+												}
+												&[name="shippingAddress.custom_attributes.numero_interior"]{
+													order: 13;
+												}
+												@media @mdmin{
+
+												}
+											}
+										}
+									}
+								}
 							}
 						}
 					}
