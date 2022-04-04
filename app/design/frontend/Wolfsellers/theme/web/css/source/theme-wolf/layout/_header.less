@@ -67,7 +67,7 @@
                         padding: 0;
                         margin: 0 15px;
                         input.input-text{
-                            padding-left: 20px;
+                            padding-left: 30px;
                         }
                         .action.search{
                             .lib-center-element(
@@ -86,10 +86,58 @@
                                 font-weight: bold;;
                             }
                         }
+                        .amasty-xsearch-loader{
+                            right: auto;
+                            left: 10px;
+                        }
+                        .input-text{
+                            border: 1px solid;
+                            &:focus{
+                                border: 1px solid;
+                            }
+                            &::placeholder{
+                                font-style: normal;
+                            }
+                        }
                         .amsearch-form-container{
                             &.-opened{
                                 .amsearch-wrapper-input{
                                     position: static;
+                                }
+                                .search-autocomplete{
+                                    box-shadow: 2px 2px 12px @black-rgba-25;
+                                    border-radius: 12px;
+                                    max-width: 100%;
+
+                                    .amsearch-leftside{
+                                        display: none;
+                                    }
+
+                                    .amsearch-products{
+                                        padding: 0;
+                                    }
+
+                                    .amsearch-leftside{
+                                        .amasty-xsearch-block-header{
+                                            display: none;
+                                        }
+                                    }
+                                    .amasty-xsearch-block-header{
+                                        display: none;
+                                    }
+                                    .amsearch-wrapper-content{
+                                        .amsearch-item{
+                                            border-bottom: 1px solid @lines-input;
+                                            flex-direction: row;
+                                            padding: 15px 0;
+                                            margin: 0 15px;
+                                            width: 100%;
+
+                                            .amsearch-autocomplete-information{
+                                                margin: 0 0 0 27px;
+                                            }
+                                        }
+                                    }
                                 }
                                 .amsearch-close{
                                     display: none !important;
@@ -448,6 +496,95 @@
                                 position: static;
                                 height: 38px;
                                 width: 90%;
+                            }
+                        }
+                    }
+
+                    .input-text{
+                        &::placeholder{
+                            font-style: normal;
+                        }
+                    }
+                    .amsearch-close{
+                        display: none !important;
+                    }
+                    .amasty-xsearch-loader{
+                        right: auto;
+                        left: 27px;
+                    }
+                    .amsearch-loupe{
+                        background: @black;
+                        z-index: inherit;
+                        display: block;
+                        height: 40px;
+                        right: 20px;
+                        width: 35px;
+                        left: auto;
+
+                        &::before{
+                            font-family: @icons__font-name;
+                            content: @icon-search;
+                            position: relative;
+                            font-size: 22px;
+                            color: @white;
+                            top: 2px;
+                        }
+                    }
+                    .amsearch-form-container{
+                        &.-opened{
+                            .amsearch-wrapper-input{
+                                position: static;
+                            }
+                            .search-autocomplete{
+                                box-shadow: 2px 2px 12px @black-rgba-25;
+                                border-radius: 12px;
+                                max-width: 100%;
+
+                                .amsearch-leftside{
+                                    .popular_searches, .page, .category, .recent_searches {
+                                        display: none;
+                                    }
+
+                                    .amsearch-products{
+                                        .amasty-xsearch-block-header{
+                                            display: none;
+                                        }
+                                    }
+                                }
+
+                                .amsearch-wrapper-content{
+                                    .amsearch-item{
+                                        border-bottom: 1px solid @lines-input;
+                                        flex-direction: row;
+                                        margin: 15px 15px 0;
+                                        padding: 0 0 15px;
+                                        width: auto;
+
+                                        .amsearch-autocomplete-image{
+                                            align-items: center;
+                                            display: flex;
+                                        }
+
+                                        .amsearch-autocomplete-information{
+                                            width: 100%;
+
+                                            .information-container{
+                                                .product-item-details{
+                                                    .product-item-link{
+                                                        .lib-font-size(16);
+                                                        font-weight: 600;
+                                                    }
+
+                                                    .product-item-description{
+                                                        .lib-font-size(16);
+                                                        font-weight: 100;
+                                                        margin: 0;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
