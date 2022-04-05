@@ -105,9 +105,10 @@
 				border-radius: @radiusitems;
 				padding: 20px;
 				a.action{
-					font-weight: 500;
 					text-decoration: underline;
 					font-size: 1.3rem;
+					font-weight: 600;
+                    color: @black;
 				}
 			}
 
@@ -441,6 +442,68 @@
                                 height: 60px;
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    //MI CUENTA//
+    .customer-account-index{
+        .page-main{
+            .columns{
+                .column{
+                    .block-dashboard-info{
+                        .block-title{
+                            display: none;
+                        }
+                    }
+
+                    .block-dashboard-addresses{
+                        background: transparent;
+                        padding: 0;
+
+                        .block-title{
+                            justify-content: space-between;
+                            display: flex;
+                            border: none;
+                            margin: 0;
+
+                            strong, a{
+                                font-weight: bold !important;
+                            }
+                        }
+
+                        .block-content{
+                            box-shadow: 2px 2px 12px @shadowitems;
+                            border-radius: 12px;
+                            background: @white;
+                            padding: 20px;
+
+                            .box{
+                                address{
+                                    a{
+                                        position: relative;
+                                        font-weight: bold;
+
+                                        &::before{
+                                            background: @white;
+                                            position: absolute;
+                                            margin-left: 0px;
+                                            content: "T:";
+                                            height: 20px;
+                                            width: 15px;
+                                            float: left;
+                                            left: -17px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .block-reviews-dashboard, .block-dashboard-orders{
+                        display: none;
                     }
                 }
             }
@@ -793,6 +856,29 @@
                         a{
                             &:after{
                                 display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //MI CUENTA//
+    .customer-account-index{
+        .page-main{
+            .columns{
+                .column{
+                    .block-dashboard-addresses{
+                        .block-title{
+                            padding: 20px;
+
+                            strong, a{
+                                .lib-font-size(20) !important;
+
+                                span{
+                                    .lib-font-size(14) !important;
+                                }
                             }
                         }
                     }
@@ -1298,6 +1384,30 @@
                                 height: 40px !important;
                                 padding: 8px;
                                 font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //MI CUENTA//
+    .customer-account-index{
+        .page-main{
+            .columns{
+                .column{
+                    .block-dashboard-addresses{
+                        .block-title{
+                            padding: 0 0 15px 0;
+
+                            strong{
+                                .lib-font-size(16) !important;
+                                margin: 0 auto 0 0;
+                            }
+
+                            a{
+                                display: none;
                             }
                         }
                     }
