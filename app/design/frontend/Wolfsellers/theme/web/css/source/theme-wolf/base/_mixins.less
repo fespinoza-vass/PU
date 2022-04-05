@@ -327,9 +327,9 @@
 				height: 32px !important;
 				border: 1px solid @gray-D8;
 				border-radius: @radiusitems;
-				transform: all @time5;
+				transition: all @time5;
 				&:hover{
-					transform: all @time5;
+					transition: all @time5;
 				}
 				&:last-child{
 					margin-right: 0;
@@ -344,11 +344,11 @@
 			    height: auto;
 			    background: transparent;
 			    color: @primary;
-			    transform: all @time5;
+			    transition: all @time5;
 			    &:not(.disabled):hover{
 			    	outline: 0;
 			    	border-color: @primary;
-			    	transform: all @time5;
+			    	transition: all @time5;
 			    }
 			}
 		}
@@ -356,15 +356,24 @@
 			.swatch-option{
 				border: 1px solid @gray-D8;
 				border-radius: @radiusitems;
-				padding: 5px 10px;
+				padding: 15px 10px;
 			    height: auto;
 			    background: transparent;
 			    color: @primary;
 			    height: auto !important;
 			    width: auto !important;
-			    transform: all @time5;
-			    &:hover{
-			    	transform: all @time5;
+			    transition: all @time5;
+			    display: flex;
+			    align-items: center;
+			    img{
+			    	float: left;
+			    	width: 100%;
+			    	max-width: 35px;
+			    }
+			    &:not(.disabled):hover{
+			    	outline: 0;
+			    	border-color: @primary;
+			    	transition: all @time5;
 			    }
 				&:after{
 					content: attr(aria-label);

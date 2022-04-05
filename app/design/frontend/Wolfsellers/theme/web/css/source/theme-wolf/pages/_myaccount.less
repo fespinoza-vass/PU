@@ -91,8 +91,12 @@
             }
 			.page-title-wrapper{
 				.page-title{
-					font-size: 2rem;
+                    font-size: 2rem;
 					float: left;
+
+                    .base{
+                        font-weight: 600;
+                    }
 				}
 			}
 			> .block,
@@ -136,11 +140,48 @@
 				background: @white;
 				border-radius: @radiusitems;
 				ul.items{
+                    flex-flow: column;
+                    display: flex;
 					.item{
 						margin: 0 20px;
-						&:not(:last-child){
+                        &:first-child{
+                            order: 1;
+                        }
+                        &:nth-child(2){
+                            order: 2;
+                        }
+                        &:nth-child(3){
+                            order: 3;
+                        }
+                        &:nth-child(4){
+                            order: 4;
+                        }
+                        &:nth-child(5){
+                            order: 5;
+                        }
+                        &:nth-child(6){
+                            order: 6;
+                        }
+                        &:nth-child(7){
+                            order: 7;
+                        }
+                        &:nth-child(8){
+                            order: 10;
+                        }
+                        &:nth-child(9){
+                            order: 8;
+                        }
+                        &:nth-child(10){
+                            order: 9;
+                        }
+						&:not(:nth-child(8)){
 							border-bottom: 1px solid @gray3;
 						}
+                        &.current{
+                            strong{
+                                font-weight: bold;
+                            }
+                        }
 						strong,
 						a{
 							border-left: 0;
@@ -454,7 +495,7 @@
 
                     .choice{
                         .label{
-                            font-weight: 300;
+                            font-weight: 400;
                         }
                     }
                 }
@@ -726,6 +767,12 @@
     .account{
         .page-main{
             max-width: 1280px;
+
+            .columns{
+                .sidebar-main{
+                    margin: 0 0 100px 0;
+                }
+            }
         }
 
         .column.main{
@@ -948,7 +995,7 @@
 
                                     strong{
                                         .lib-font-size(20);
-                                        font-weight: 500;
+                                        font-weight: bold;
                                     }
 
                                     .edit{
@@ -968,6 +1015,7 @@
                                             }
 
                                             .product-item-name{
+                                                min-height: 38px;
                                                 margin: 5px 10%;
                                             }
 
@@ -1123,6 +1171,10 @@
                     }
                 }
             }
+        }
+
+        .page-footer{
+            display: none;
         }
     }
 
@@ -1378,7 +1430,7 @@
 
                                     strong{
                                         .lib-font-size(16);
-                                        font-weight: 500;
+                                        font-weight: bold;
                                     }
                                 }
                             }
@@ -1411,6 +1463,7 @@
                                             .product-item-name{
                                                 .lib-font-size(12);
                                                 FONT-WEIGHT: 200;
+                                                min-height: 51px;
                                                 margin: 0 0 5px;
                                             }
 
@@ -1435,11 +1488,9 @@
                                                             width: 100%;
 
                                                             .actions-primary{
-                                                                width: 100%;
-
                                                                 .tocart{
+                                                                    padding: 7px 0 8px;
                                                                     .lib-font-size(14);
-                                                                    padding: 15px 0;
                                                                 }
                                                             }
                                                         }
