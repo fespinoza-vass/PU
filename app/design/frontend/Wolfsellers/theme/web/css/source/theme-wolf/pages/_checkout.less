@@ -86,7 +86,14 @@
 											}
 										}
 										.step-content *:not(label):not(.choice){
-											overflow: hidden;
+											@media @mdmin{
+												overflow: hidden;
+											}
+										}
+										.payment-methods{
+											@media @mdmax{
+												margin: 0;
+											}
 										}
 									}
 								}
