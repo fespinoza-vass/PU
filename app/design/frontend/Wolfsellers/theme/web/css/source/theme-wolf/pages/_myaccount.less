@@ -164,18 +164,15 @@
                             order: 6;
                         }
                         &:nth-child(7){
-                            order: 7;
-                        }
-                        &:nth-child(8){
                             order: 10;
                         }
-                        &:nth-child(9){
+                        &:nth-child(8){
                             order: 8;
                         }
-                        &:nth-child(10){
+                        &:nth-child(9){
                             order: 9;
                         }
-						&:not(:nth-child(8)){
+						&:not(:nth-child(7)){
 							border-bottom: 1px solid @gray3;
 						}
                         &.current{
@@ -524,8 +521,7 @@
                             button{
                                 border: 1px solid @black;
                                 border-radius: 12px;
-                                padding: 18px 20px;
-                                font-weight: 600;
+                                font-weight: bold;
                             }
                         }
                     }
@@ -892,8 +888,18 @@
         .page-wrapper{
             .page-main{
                 .giftcard-account{
+                    .form-giftcard-redeem{
+                        max-width: 65%;
+                    }
+
                     .actions-toolbar{
                         padding: 0 0 32px 33px;
+                        width: max-content;
+
+                        .action{
+                            padding: 18px 17px;
+                            .lib-font-size(18);
+                        }
                     }
                 }
             }
@@ -1423,8 +1429,17 @@
             .page-main{
                 .giftcard-account{
 
+                    .fieldset{
+                        margin: 0;
+                    }
+
                     .actions-toolbar{
                         padding: 0 17px 32px;
+
+                        .action{
+                            .lib-font-size(16);
+                            padding: 9px;
+                        }
                     }
                 }
             }
