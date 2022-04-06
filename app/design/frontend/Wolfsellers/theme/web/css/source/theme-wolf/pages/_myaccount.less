@@ -164,18 +164,15 @@
                             order: 6;
                         }
                         &:nth-child(7){
-                            order: 7;
-                        }
-                        &:nth-child(8){
                             order: 10;
                         }
-                        &:nth-child(9){
+                        &:nth-child(8){
                             order: 8;
                         }
-                        &:nth-child(10){
+                        &:nth-child(9){
                             order: 9;
                         }
-						&:not(:nth-child(8)){
+						&:not(:nth-child(7)){
 							border-bottom: 1px solid @gray3;
 						}
                         &.current{
@@ -268,6 +265,10 @@
                 .block-title {
                     border-bottom: 1px solid @lines-input;
                     font-size: 1.6rem;
+                    font-weight: 600;
+                    strong{
+                        font-weight: 600 !important;
+                    }
                 }
                 .block-content{
                     padding-top: 5px;
@@ -524,8 +525,7 @@
                             button{
                                 border: 1px solid @black;
                                 border-radius: 12px;
-                                padding: 18px 20px;
-                                font-weight: 600;
+                                font-weight: bold;
                             }
                         }
                     }
@@ -810,7 +810,7 @@
                                 }
                             }
                         }
-                        
+
                         .order-products-toolbar{
                             border-radius: 0 0 12px 12px;
                             background: @white;
@@ -892,8 +892,18 @@
         .page-wrapper{
             .page-main{
                 .giftcard-account{
+                    .form-giftcard-redeem{
+                        max-width: 65%;
+                    }
+
                     .actions-toolbar{
                         padding: 0 0 32px 33px;
+                        width: max-content;
+
+                        .action{
+                            padding: 18px 17px;
+                            .lib-font-size(18);
+                        }
                     }
                 }
             }
@@ -1190,7 +1200,7 @@
                                 }
                             }
                         }
-                        
+
                         .order-products-toolbar{
                             border-radius: 0 0 12px 12px;
                             background: @white;
@@ -1212,23 +1222,23 @@
         .columns{
             .column.main{
                 padding: 0 16px;
-    
+
                 .page-title-wrapper {
                     display: inline-block;
-    
+
                     .page-title{
                         margin: 0 0 14px;
                         width: 100%;
-    
+
                         span{
                             .lib-font-size(16);
                         }
                     }
                 }
-    
+
                 .pager{
                     display: block;
-    
+
                     .limiter{
                         justify-content: center;
                     }
@@ -1270,6 +1280,7 @@
             .page-title-wrapper{
                 .page-title{
                     font-size: 2.2rem !important;
+                    margin: 0 15px;
                 }
             }
         }
@@ -1282,6 +1293,7 @@
                     background: @white;
                     border-radius: 12px;
                     padding: 15px;
+                    margin: 0 15px;
                 }
                 .block.block-customer-login{
                     .block-content{
@@ -1423,8 +1435,17 @@
             .page-main{
                 .giftcard-account{
 
+                    .fieldset{
+                        margin: 0;
+                    }
+
                     .actions-toolbar{
                         padding: 0 17px 32px;
+
+                        .action{
+                            .lib-font-size(16);
+                            padding: 9px;
+                        }
                     }
                 }
             }
@@ -1637,7 +1658,7 @@
                                         .id{
                                             padding: 24px 10px 5px;
                                         }
-                                        
+
                                         .actions{
                                             padding: 5px 10px 24px;
                                         }

@@ -2,6 +2,8 @@
 // Common
 //  ---------------------------------------------
 & when (@media-common = true) {
+    .cms-perfumerias-unidas,
+    .cms-blog,
     .cms-contacto,
     .cms-ventas-corporativas,
     .cms-cambios-y-devoluciones,
@@ -60,6 +62,8 @@
 // Desktop
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .cms-perfumerias-unidas,
+    .cms-blog,
     .cms-contacto,
     .cms-ventas-corporativas,
     .cms-cambios-y-devoluciones,
@@ -81,6 +85,7 @@
         }
         .row-page-content{
             margin-top: 40px;
+            padding: 16px;
             p{
                 font-size: 1.6rem;
             }
