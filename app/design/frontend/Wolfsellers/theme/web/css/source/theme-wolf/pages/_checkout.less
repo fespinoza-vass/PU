@@ -115,8 +115,9 @@
 									.form-shipping-address{
 										> .address{
 											display: flex;
-											flex-direction: column;
+											flex-wrap: wrap;
 											.field{
+												padding: 0;
 												&[name="shippingAddress.firstname"]{
 													order: 1;
 												}
@@ -125,39 +126,97 @@
 												}
 												&[name="shippingAddress.telephone"]{
 													order: 3;
+													.control{
+														input{
+															width: 100%;
+															padding-right: 35px;
+														}
+														.field-tooltip{
+															top: 50%;
+															transform: translateY(-50%);
+															right: 8px;
+														}
+													}
 												}
-												&[name="shippingAddress.company"]{
+												&[name="shippingAddress.custom_attributes.fecha_de_nacimiento"]{
 													order: 4;
-												}
-												&.street{
-													order: 5;
-												}
-												&[name="shippingAddress.country_id"]{
-													order: 6;
+													.control{
+														position: relative;
+														input{
+															padding-right: 35px;
+															width: 100%;
+														}
+														button.ui-datepicker-trigger{
+															position: absolute;
+															right: 8px;
+															top: 50%;
+															transform: translateY(-50%);
+															margin: 0;
+														}
+													}
 												}
 												&[name="shippingAddress.region_id"]{
-													order: 7;
+													order: 5;
 												}
 												&[name="shippingAddress.region"]{
-													order: 8;
+													order: 6;
 												}
-												&[name="shippingAddress.city"]{
-													order: 9;	
+												&[name="shippingAddress.custom_attributes.colony"]{
+													order: 7;
+												}
+												&[name="shippingAddress.postcode"]{
+													order: 8;	
+												}
+												&[name="shippingAddress.company"]{
+													order: 9;
 												}
 												&[name="shippingAddress.vat_id"]{
 													order: 10;
 												}
-												&[name="shippingAddress.custom_attributes.colony"]{
+												&.street{
 													order: 11;
+													.control{
+														.field{
+															width: 100%;
+														}
+														.additional{
+															.lib-visually-hidden;
+														}
+													}
 												}
-												&[name="shippingAddress.custom_attributes.numero_exterior"]{
+												&[name="shippingAddress.city"]{
 													order: 12;
 												}
-												&[name="shippingAddress.custom_attributes.numero_interior"]{
+												&[name="shippingAddress.country_id"]{
 													order: 13;
 												}
+												
+												
+												
 												@media @mdmin{
-
+													&[name="shippingAddress.firstname"],
+													&[name="shippingAddress.telephone"],
+													&[name="shippingAddress.region_id"],
+													&[name="shippingAddress.postcode"],
+													&[name="shippingAddress.vat_id"],
+													&[name="shippingAddress.city"]{
+														float: left;
+														width: 49%;
+														margin-right: 2%;
+													}
+													&[name="shippingAddress.lastname"],
+													&[name="shippingAddress.custom_attributes.fecha_de_nacimiento"],
+													&[name="shippingAddress.region"],
+													&[name="shippingAddress.custom_attributes.colony"],
+													&[name="shippingAddress.company"],
+													&.street,
+													&[name="shippingAddress.country_id"]{
+														float: right;
+														width: 49%;
+													}
+												}
+												@media @mdmax{
+													width: 100%;
 												}
 											}
 										}
