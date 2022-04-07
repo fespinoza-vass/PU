@@ -17587,7 +17587,7 @@ Position,Posición,module,Magento_LayeredNavigation,
 Remove This Item,Remover Este Artículo,module,Magento_LayeredNavigation,
 Shop By,Filtros,module,Magento_LayeredNavigation,
 Clear All,Limpiar Todos,module,Magento_LayeredNavigation,
-Shopping Options,Filtros,module,Magento_LayeredNavigation,
+Shopping Options,Filtrar por,module,Magento_LayeredNavigation,
 Now Shopping by,Ahora Comprando por,module,Magento_LayeredNavigation,
 Price Navigation Step Calculation,Cálculo de Paso de Navegación por Capas,module,Magento_LayeredNavigation,
 Display Product Count,Desplegar Conteo de Productos,module,Magento_LayeredNavigation,
@@ -25964,3 +25964,8 @@ Sign Up for Our Newsletter,Suscríbete a nuestro boletín
 "Edit Address Shipping","Cambiar Dirección de Envio"
 "Edit Address Billing","Cambiar Dirección de Facturación"
 "Creating an account has many benefits: check out faster, keep more than one address, track orders, and more.","Crear una cuenta tiene muchos beneficios: pagar más rápido, mantener más de una dirección, realizar un seguimiento de los pedidos y más."
+"To enter our site and set a password, click on the following link:","Para ingresar a nuestro sitio y establecer una contraseña, haga click en el siguiente enlace:"
+"When you sign in to your account, you will be able to:","Cuando inicie sesión en su cuenta, podrá:"
+"Proceed through checkout faster","Proceder a través del checkout más rápido"
+"Check the status of orders","Compruebe el estado de los pedidos"
+"Store alternate addresses (for shipping to multiple family members and friends)","Almacenar direcciones alternativas (para el envío a varios miembros de la familia y amigos)"

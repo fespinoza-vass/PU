@@ -255,3 +255,44 @@
         }
     }
 }
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    body {
+        .page-wrapper{
+            main.page-main{
+                .product-items {
+                    .product-item {
+                        .product-item-info{
+                            .ambanners{
+                                display: none !important;
+                            }
+
+                            &.zplus{
+                                z-index: 9999 !important;
+                            }
+
+                            &:hover{
+                                .product-item-details{
+                                    .product-item-inner{
+                                        .ambanners{
+                                            border-radius: 0 0 12px 12px;
+                                            width: calc(~'100% + 10px');
+                                            display: block !important;
+                                            background: @white;
+                                            position: absolute;
+                                            left: -5px;
+
+                                            img{
+                                                width: 94%;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+        } 
+    }
+}

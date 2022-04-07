@@ -305,8 +305,103 @@
 			}
 		}
 	}
+
+	.page-product-giftcard{
+		.page-wrapper{
+			.page-main{
+				.column{
+					.product-info-main{
+						.product-options-bottom{
+							.fieldset{
+								display: flex;
+								height: 60px;
+
+								.qty{
+									margin: 0;
+
+									.control{
+										width: 90%;
+									}
+								}
+
+								.actions{
+									.tocart{
+										.lib-font-size(18);
+										padding: 0 21px;
+										height: 100%;
+										width: 100%;
+										margin: 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
 
+	.page-product-giftcard{
+		.page-wrapper{
+			.page-main, .page-main-description{
+				margin: 0 !important;
+				padding: 0 16px;
+
+				.page.messages{
+					margin: 0;
+				}
+
+				.column{
+					.product-info-main{
+						.product-info-price{
+							width: auto !important;
+							margin: 0 0 15px;
+							color: @black;
+						}
+
+						.product-options-bottom{
+							.fieldset{
+								justify-content: space-between;
+								display: flex;
+								height: 40px;
+
+								.qty{
+									height: 100%;
+									width: 35%;
+
+									.control{
+										height: 100%;
+										width: 100%;
+
+										span{
+											height: 100% !important;
+											width: 40px !important;
+										}
+
+										.input-text.qty{
+											height: 100% !important;
+											width: 100%;
+										}
+									}
+								}
+
+								.actions{
+									.tocart{
+										.lib-font-size(18);
+										padding: 0 21px;
+										height: 100%;
+										width: 100%;
+										margin: 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
