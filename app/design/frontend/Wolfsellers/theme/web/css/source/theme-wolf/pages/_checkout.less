@@ -85,11 +85,6 @@
 												margin-top: 20px;
 											}
 										}
-										.step-content *:not(label):not(.choice){
-											@media @mdmin{
-												overflow: hidden;
-											}
-										}
 										.payment-methods{
 											@media @mdmax{
 												margin: 0;
@@ -108,6 +103,11 @@
 								}
 								.opc-block-summary{
 									background: transparent;
+									table.table-totals{
+										tbody tr{
+											background: @white;
+										}
+									}
 								}
 								&.-summary{
 									.opc-block-summary{
@@ -117,17 +117,52 @@
 										margin: 0;
 									}
 									.additional-options{
-										padding: 0 20px 20px;
+										padding: 0 20px 0;
 										margin: 0;
 										float: left;
 										width: 100%;
 										background: @white;
-										border-radius: 0 0 @radiusitems @radiusitems;
 										.lib-checkboxs;
 										.checkout-agreement{
 											float: left;
 											width: 100%;
 											margin: 15px 0;
+										}
+									}
+									.checkout-payment-method{
+										float: left;
+										width: 100%;
+										background: @white;
+										&.submit{
+											float: left;
+											width: 100%;
+											background: @white;
+											padding-bottom: 20px;
+											border-radius: 0 0 @radiusitems @radiusitems;
+											.actions-toolbar{
+												display: flex;
+												justify-content: center;
+											}
+										}
+										.form-discount{
+											position: relative;
+											.payment-option-inner{
+												margin: 0;
+											}
+											.actions-toolbar{
+												.action-apply{
+													position: absolute;
+													right: 0;
+													top: 0;
+													height: 100%;
+													padding: 0 10px;
+													background: @black;
+													color: @white;
+												}
+											}
+											.input-text{
+												padding-right: 70px;
+											}
 										}
 									}
 								}
@@ -216,23 +251,24 @@
 									&[name="billingAddressvisanet_pay.region_id"]{
 										order: 5;
 									}
-									&[name="shippingAddress.region"],
-									&[name="billingAddressvisanet_pay.custom_attributes.colony"]{
+									&[name="shippingAddress.city"],
+									&[name="billingAddressvisanet_pay.city"]{
 										order: 6;
 									}
 									&[name="shippingAddress.custom_attributes.colony"],
-									&[name="billingAddressvisanet_pay.postcode"]{
+									&[name="billingAddressvisanet_pay.custom_attributes.colony"]{
 										order: 7;
 									}
 									&[name="shippingAddress.postcode"],
-									&[name="billingAddressvisanet_pay.company"]{
+									&[name="billingAddressvisanet_pay.postcode"]{
 										order: 8;	
 									}
 									&[name="shippingAddress.company"],
-									&[name="billingAddressvisanet_pay.vat_id"]{
+									&[name="billingAddressvisanet_pay.company"]{
 										order: 9;
 									}
-									&[name="shippingAddress.vat_id"]{
+									&[name="shippingAddress.vat_id"],
+									&[name="billingAddressvisanet_pay.vat_id"]{
 										order: 10;
 									}
 									&.street{
@@ -246,8 +282,8 @@
 											}
 										}
 									}
-									&[name="shippingAddress.city"],
-									&[name="billingAddressvisanet_pay.city"]{
+									&[name="shippingAddress.region"],
+									{
 										order: 12;
 									}
 									&[name="shippingAddress.country_id"],
@@ -258,15 +294,14 @@
 										&[name="shippingAddress.firstname"],
 										&[name="shippingAddress.telephone"],
 										&[name="shippingAddress.region_id"],
-										&[name="shippingAddress.postcode"],
-										&[name="shippingAddress.vat_id"],
-										&[name="shippingAddress.city"],
+										&[name="shippingAddress.custom_attributes.colony"],
+										&[name="shippingAddress.company"],
+										&.street,
 										&[name="billingAddressvisanet_pay.firstname"],
+										&[name="billingAddressvisanet_pay.custom_attributes.colony"],
 										&[name="billingAddressvisanet_pay.telephone"],
 										&[name="billingAddressvisanet_pay.region_id"],
-										&[name="billingAddressvisanet_pay.postcode"],
-										&[name="billingAddressvisanet_pay.vat_id"],
-										&[name="billingAddressvisanet_pay.city"]{
+										&[name="billingAddressvisanet_pay.company"]{
 											float: left;
 											width: 49%;
 											margin-right: 2%;
@@ -274,15 +309,16 @@
 										&[name="shippingAddress.lastname"],
 										&[name="shippingAddress.custom_attributes.fecha_de_nacimiento"],
 										&[name="shippingAddress.region"],
-										&[name="shippingAddress.custom_attributes.colony"],
-										&[name="shippingAddress.company"],
-										&.street,
+										&[name="shippingAddress.city"],
 										&[name="shippingAddress.country_id"],
+										&[name="shippingAddress.postcode"],
+										&[name="shippingAddress.vat_id"],
+										&[name="billingAddressvisanet_pay.city"],
 										&[name="billingAddressvisanet_pay.lastname"],
 										&[name="billingAddressvisanet_pay.custom_attributes.fecha_de_nacimiento"],
-										&[name="billingAddressvisanet_pay.custom_attributes.colony"],
-										&[name="billingAddressvisanet_pay.company"],
-										&[name="billingAddressvisanet_pay.country_id"]{
+										&[name="billingAddressvisanet_pay.postcode"],
+										&[name="billingAddressvisanet_pay.country_id"],
+										&[name="billingAddressvisanet_pay.vat_id"]{
 											float: right;
 											width: 49%;
 										}
