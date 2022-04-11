@@ -29,8 +29,7 @@
             }
         }
         .row-page-content{
-            margin-top: 12px;
-            padding: 16px 0;
+            margin: 12px 15px;
             p{
                 font-size: 1.4rem;
             }
@@ -46,6 +45,10 @@
             h2{
                 margin-top: 24px;
                 font-size: 2rem;
+                font-weight: bold;
+            }
+            a{
+                color: @black;
                 font-weight: bold;
             }
             div{
@@ -76,7 +79,7 @@
             height: 350px;
             top: 185px;
             .page-head-title{
-                max-width: 1346px;
+                max-width: 928px;
                 margin: 0 auto;
                 h2{
                     font-size: 4.2rem;
@@ -84,13 +87,16 @@
             }
         }
         .row-page-content{
-            margin-top: 40px;
-            padding: 16px;
+            max-width: 928px;
+            margin: 40px auto 0;
             p{
                 font-size: 1.6rem;
             }
             ul{
                 padding-left: 60px;
+            }
+            @media screen and (max-width: 1024px) and (min-width: 769px){
+                padding: 0 15px;
             }
         }
     }

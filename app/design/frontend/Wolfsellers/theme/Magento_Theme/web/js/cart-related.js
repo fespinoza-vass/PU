@@ -54,4 +54,12 @@ require([
 
           });
 
+        $('.page-with-filter .product-item-info').hover(function () {
+                // over
+                $(this).addClass('zplus');
+            }, function () {
+                // out
+                $(this).removeClass('zplus');
+            }
+        );
 });	
