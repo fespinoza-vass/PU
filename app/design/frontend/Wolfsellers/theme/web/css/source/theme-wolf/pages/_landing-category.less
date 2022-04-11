@@ -4,8 +4,9 @@
 & when (@media-common = true) {
     .row-category-head{
         height: 140px;
-        position: absolute;
-        width: 100%;
+        position: static;
+        width: 100vw;
+        margin-left: ~"calc(50% - 50vw)";
         left: 0;
         top: 0;
         justify-content: center !important;
@@ -22,7 +23,7 @@
     }
     .row-category-inforation{
         height: 450px;
-        margin: 160px 16px 16px;
+        margin: 36px 16px;
         padding: 15px;
         justify-content: flex-end !important;
         .category-inforation{
@@ -136,12 +137,12 @@
     .row-category-menu-filter{
         width: 338px;
         float: left;
-        margin: 0 16px 0 0;
+        margin: 36px 16px 0 0;
     }
     .row-category-inforation{
+        margin: 36px 0 12px 0;
         border-radius: 12px;
         justify-content: center !important;
-        margin-top: 418px;
         .category-inforation{
             border-radius: 12px;
             width: 447px !important;
@@ -169,7 +170,7 @@
     .row-category-two-products{
         width: calc(~'(100% - 354px)');
         float: right;
-        margin: 24px 0;
+        margin: 12px 0;
         .pagebuilder-column-group{
             justify-content: space-between;
             .category-banner-1,

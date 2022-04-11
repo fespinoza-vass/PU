@@ -40,6 +40,10 @@
 					> [data-content-type="row"]{
 						.lib-visually-hidden;
 					}
+					.opc-estimated-wrapper,
+					.authentication-wrapper{
+						.lib-visually-hidden;
+					}
 					.checkout-header{
 						width: 100%;
 						h1{
@@ -74,8 +78,17 @@
 										margin: 0;
 									}
 									&.checkout-payment-method{
-										.step-content *:not(label){
-											overflow: hidden;
+										.field{
+											&.choice{
+												float: left;
+												width: 100%;
+												margin-top: 20px;
+											}
+										}
+										.payment-methods{
+											@media @mdmax{
+												margin: 0;
+											}
 										}
 									}
 								}
@@ -90,13 +103,228 @@
 								}
 								.opc-block-summary{
 									background: transparent;
+									table.table-totals{
+										tbody tr{
+											background: @white;
+										}
+									}
 								}
 								&.-summary{
 									.opc-block-summary{
 										padding: 20px;
 										background: @white;
-										border-radius: @radiusitems;
+										border-radius: @radiusitems @radiusitems 0 0;
 										margin: 0;
+									}
+									.additional-options{
+										padding: 0 20px 0;
+										margin: 0;
+										float: left;
+										width: 100%;
+										background: @white;
+										.lib-checkboxs;
+										.checkout-agreement{
+											float: left;
+											width: 100%;
+											margin: 15px 0;
+										}
+									}
+									.checkout-payment-method{
+										float: left;
+										width: 100%;
+										background: @white;
+										&.submit{
+											float: left;
+											width: 100%;
+											background: @white;
+											padding-bottom: 20px;
+											border-radius: 0 0 @radiusitems @radiusitems;
+											.actions-toolbar{
+												display: flex;
+												justify-content: center;
+											}
+										}
+										.form-discount{
+											position: relative;
+											.payment-option-inner{
+												margin: 0;
+											}
+											.actions-toolbar{
+												.action-apply{
+													position: absolute;
+													right: 0;
+													top: 0;
+													height: 100%;
+													padding: 0 10px;
+													background: @black;
+													color: @white;
+												}
+											}
+											.input-text{
+												padding-right: 70px;
+											}
+										}
+									}
+								}
+								.amcheckout-wrapper{
+									.amcheckout-form-login{
+										margin-bottom: 15px;
+										padding: 0;
+										background: @white;
+										> fieldset{
+											margin: 0;
+											> .field{
+												margin: 0;
+											}
+											.hidden-fields{
+												margin: 0;
+											}
+										}
+									}
+									.payment-method-content{
+										padding: 0;
+									}
+									.field-select-billing{
+										~ .actions-toolbar{
+											.primary{
+												display: flex;
+												justify-content: space-between;
+												align-items: center;
+												button{
+													margin: 0 10px;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						form{
+							> .address{
+								display: flex;
+								flex-wrap: wrap;
+								margin: 0;
+								> .field{
+									padding: 0;
+									&[name="shippingAddress.firstname"],
+									&[name="billingAddressvisanet_pay.firstname"]{
+										order: 1;
+									}
+									&[name="shippingAddress.lastname"],
+									&[name="billingAddressvisanet_pay.lastname"]{
+										order: 2;
+									}
+									&[name="shippingAddress.telephone"],
+									&[name="billingAddressvisanet_pay.telephone"]{
+										order: 3;
+										.control{
+											input{
+												width: 100%;
+												padding-right: 35px;
+											}
+											.field-tooltip{
+												top: 50%;
+												transform: translateY(-50%);
+												right: 8px;
+											}
+										}
+									}
+									&[name="shippingAddress.custom_attributes.fecha_de_nacimiento"],
+									&[name="billingAddressvisanet_pay.custom_attributes.fecha_de_nacimiento"]{
+										order: 4;
+										.control{
+											position: relative;
+											input{
+												padding-right: 35px;
+												width: 100%;
+											}
+											button.ui-datepicker-trigger{
+												position: absolute;
+												right: 8px;
+												top: 50%;
+												transform: translateY(-50%);
+												margin: 0;
+											}
+										}
+									}
+									&[name="shippingAddress.region_id"],
+									&[name="billingAddressvisanet_pay.region_id"]{
+										order: 5;
+									}
+									&[name="shippingAddress.city"],
+									&[name="billingAddressvisanet_pay.city"]{
+										order: 6;
+									}
+									&[name="shippingAddress.custom_attributes.colony"],
+									&[name="billingAddressvisanet_pay.custom_attributes.colony"]{
+										order: 7;
+									}
+									&[name="shippingAddress.postcode"],
+									&[name="billingAddressvisanet_pay.postcode"]{
+										order: 8;	
+									}
+									&[name="shippingAddress.company"],
+									&[name="billingAddressvisanet_pay.company"]{
+										order: 9;
+									}
+									&[name="shippingAddress.vat_id"],
+									&[name="billingAddressvisanet_pay.vat_id"]{
+										order: 10;
+									}
+									&.street{
+										order: 11;
+										.control{
+											.field{
+												width: 100%;
+											}
+											.additional{
+												.lib-visually-hidden;
+											}
+										}
+									}
+									&[name="shippingAddress.region"],
+									{
+										order: 12;
+									}
+									&[name="shippingAddress.country_id"],
+									&[name="billingAddressvisanet_pay.country_id"]{
+										order: 13;
+									}
+									@media @mdmin{
+										&[name="shippingAddress.firstname"],
+										&[name="shippingAddress.telephone"],
+										&[name="shippingAddress.region_id"],
+										&[name="shippingAddress.custom_attributes.colony"],
+										&[name="shippingAddress.company"],
+										&.street,
+										&[name="billingAddressvisanet_pay.firstname"],
+										&[name="billingAddressvisanet_pay.custom_attributes.colony"],
+										&[name="billingAddressvisanet_pay.telephone"],
+										&[name="billingAddressvisanet_pay.region_id"],
+										&[name="billingAddressvisanet_pay.company"]{
+											float: left;
+											width: 49%;
+											margin-right: 2%;
+										}
+										&[name="shippingAddress.lastname"],
+										&[name="shippingAddress.custom_attributes.fecha_de_nacimiento"],
+										&[name="shippingAddress.region"],
+										&[name="shippingAddress.city"],
+										&[name="shippingAddress.country_id"],
+										&[name="shippingAddress.postcode"],
+										&[name="shippingAddress.vat_id"],
+										&[name="billingAddressvisanet_pay.city"],
+										&[name="billingAddressvisanet_pay.lastname"],
+										&[name="billingAddressvisanet_pay.custom_attributes.fecha_de_nacimiento"],
+										&[name="billingAddressvisanet_pay.postcode"],
+										&[name="billingAddressvisanet_pay.country_id"],
+										&[name="billingAddressvisanet_pay.vat_id"]{
+											float: right;
+											width: 49%;
+										}
+									}
+									@media @mdmax{
+										width: 100%;
 									}
 								}
 							}

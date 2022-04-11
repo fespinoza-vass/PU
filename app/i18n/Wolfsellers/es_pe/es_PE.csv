@@ -12220,7 +12220,7 @@ Manage Labels,Gestionar Etiquetas,module,Magento_Catalog,
 Manual,Manual,module,Magento_Catalog,
 Product Image Placeholders,Marcadores de Posición de Imágenes de Producto,module,Magento_Catalog,
 Product Image Watermarks,Marcas de Agua para Imagen de Producto,module,Magento_Catalog,
-More Choices:,También te puede interesar,module,Magento_Catalog,
+More Choices:,PRODUCTOS RELACIONADOS,module,Magento_Catalog,
 Mask for Meta Description,Máscara para Meta Descripción,module,Magento_Catalog,
 Mask for Meta Keywords,Máscara para Meta Palabras Clave,module,Magento_Catalog,
 Mask for Meta Title,Máscara para Meta Título,module,Magento_Catalog,
@@ -14546,7 +14546,7 @@ Sign-in Information,Información de Ingreso,module,Magento_Customer,
 Personal Information,Información Personal,module,Magento_Customer,
 The account is locked.,La cuenta está bloqueada.,module,Magento_Customer,
 """%1"" length must be equal or less than %2 characters.","la longitud de ""%1"" debe ser menor o igual que %2 caracteres.",module,Magento_Customer,
-Address Book,Libreta de Direcciones,module,Magento_Customer,
+Address Book,Mis Direcciones,module,Magento_Customer,
 Middle Name/Initial,Segundo nombre/Inicial,module,Magento_Customer,
 We're unable to send the password reset email.,No podemos enviar el email para reiniciar la contraseña.,module,Magento_Customer,
 No item specified.,No se especificó el artículo.,module,Magento_Customer,
@@ -14638,8 +14638,8 @@ Offline,Desconectado,module,Magento_Customer,
 Disable Automatic Group Change Based on VAT ID,Deshabilitar Cambio de Grupo Automático con Base en RFC/VAT ID,module,Magento_Customer,
 Destination folder is not writable or does not exists.,Destination folder is not writable or does not exists.,module,Magento_Customer,
 Unsubscribe from Newsletter,Desuscribir de Boletín,module,Magento_Customer,
-Default Shipping Address,Dirección de Envío por Defecto,module,Magento_Customer,
-Default Billing Address,Dirección de Facturación por Defecto,module,Magento_Customer,
+Default Shipping Address,Dirección de Envío,module,Magento_Customer,
+Default Billing Address,Dirección de Facturación,module,Magento_Customer,
 Addresses,Direcciones,module,Magento_Customer,
 Additional Address Entries,Direcciones Adicionales,module,Magento_Customer,
 Default Addresses,Direcciones por Defecto,module,Magento_Customer,
@@ -14740,7 +14740,7 @@ Very Strong,Muy Fuerte,module,Magento_Customer,
 Name Prefix,Prefijo del nombre,module,Magento_Customer,
 Name Suffix,Sufijo del nombre,module,Magento_Customer,
 New customer address has been added.,Se ha agregado una nueva dirección del cliente,module,Magento_Customer,
-Newsletters,Boletín,module,Magento_Customer,
+Newsletters,Noticias,module,Magento_Customer,
 Your Tax ID cannot be validated.,No es posible validar su RFC.,module,Magento_Customer,
 You aren't subscribed to our newsletter.,No estás suscrito a nuestro boletín.,module,Magento_Customer,
 "No such entity with %fieldName = %fieldValue, %field2Name = %field2Value","No existe esa entidad con %fieldName = %fieldValue, %field2Name = %field2Value",module,Magento_Customer,
@@ -14998,7 +14998,7 @@ Customer Address,Dirección del cliente,module,Magento_CustomerCustomAttributes,
 File Extensions,Extensiones de Archivo,module,Magento_CustomerCustomAttributes,
 Forms to Use In,Formas para Usar En,module,Magento_CustomerCustomAttributes,
 Password Strength,Fortaleza de Contraseña,module,Magento_CustomerCustomAttributes,
-Contact Information,Información de Contacto,module,Magento_CustomerCustomAttributes,
+Contact Information,Información de Cuenta,module,Magento_CustomerCustomAttributes,
 Sign-in Information,Información de Ingreso,module,Magento_CustomerCustomAttributes,
 Personal Information,Información Personal,module,Magento_CustomerCustomAttributes,
 Input Validation,Validación de Campo,module,Magento_CustomerCustomAttributes,
@@ -17587,7 +17587,7 @@ Position,Posición,module,Magento_LayeredNavigation,
 Remove This Item,Remover Este Artículo,module,Magento_LayeredNavigation,
 Shop By,Filtros,module,Magento_LayeredNavigation,
 Clear All,Limpiar Todos,module,Magento_LayeredNavigation,
-Shopping Options,Filtros,module,Magento_LayeredNavigation,
+Shopping Options,Filtrar por,module,Magento_LayeredNavigation,
 Now Shopping by,Ahora Comprando por,module,Magento_LayeredNavigation,
 Price Navigation Step Calculation,Cálculo de Paso de Navegación por Capas,module,Magento_LayeredNavigation,
 Display Product Count,Desplegar Conteo de Productos,module,Magento_LayeredNavigation,
@@ -25960,3 +25960,12 @@ Sign Up for Our Newsletter,Suscríbete a nuestro boletín
 "Select default","Seleccione por defecto"
 "Default Addresses","Direcciones por Defecto"
 "Additional Addresses","Direcciónes Adicionales"
+"Enter Keyword or Item","Introduce una palabra clave o artuculo"
+"Edit Address Shipping","Cambiar Dirección de Envio"
+"Edit Address Billing","Cambiar Dirección de Facturación"
+"Creating an account has many benefits: check out faster, keep more than one address, track orders, and more.","Crear una cuenta tiene muchos beneficios: pagar más rápido, mantener más de una dirección, realizar un seguimiento de los pedidos y más."
+"To enter our site and set a password, click on the following link:","Para ingresar a nuestro sitio y establecer una contraseña, haga click en el siguiente enlace:"
+"When you sign in to your account, you will be able to:","Cuando inicie sesión en su cuenta, podrá:"
+"Proceed through checkout faster","Proceder a través del checkout más rápido"
+"Check the status of orders","Compruebe el estado de los pedidos"
+"Store alternate addresses (for shipping to multiple family members and friends)","Almacenar direcciones alternativas (para el envío a varios miembros de la familia y amigos)"
