@@ -194,6 +194,20 @@
 					}
 					// AMASTY IMPORTANTS
 				}
+				.calculate-time{
+					float: left;
+					width: 100%;
+					margin-top: 15px;
+					.fast-shipping{
+						float: right;
+						padding: 20px;
+						border-radius: @radiusitems;
+						background: @white;
+						@media @mdmin{
+							width: 40%;
+						}
+					}
+				}
 				.product.info.detailed{
 					.product.items{
 						background: @white;
@@ -287,6 +301,24 @@
 						flex-wrap: nowrap;
 						justify-content: space-around;
 						opacity: 0;
+					}
+				}
+			}
+		}
+		.modals-wrapper{
+			.modal-estimate-shipping{
+				top: 50%;
+				transform: translateY(-50%);
+				overflow: initial;
+				.modal-inner-wrap{
+					overflow: initial;
+				}
+				.modal-footer{
+					float: left;
+					width: 100%;
+					padding: 20px !important;
+					button{
+						margin: 0 10px;
 					}
 				}
 			}
