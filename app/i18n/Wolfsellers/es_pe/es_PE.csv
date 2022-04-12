@@ -17585,7 +17585,7 @@ item,Artículo,module,Magento_LayeredNavigation,
 Previous,Anterior,module,Magento_LayeredNavigation,
 Position,Posición,module,Magento_LayeredNavigation,
 Remove This Item,Remover Este Artículo,module,Magento_LayeredNavigation,
-Shop By,Filtros,module,Magento_LayeredNavigation,
+Shop By,Filtrar por,module,Magento_LayeredNavigation,
 Clear All,Limpiar Todos,module,Magento_LayeredNavigation,
 Shopping Options,Filtrar por,module,Magento_LayeredNavigation,
 Now Shopping by,Ahora Comprando por,module,Magento_LayeredNavigation,
@@ -21434,7 +21434,7 @@ New Order Status,Nuevo Estado de la Orden,module,Magento_Sales,
 Purchase Point,Punto de Compra,module,Magento_Sales,
 Refresh,Refrescar,module,Magento_Sales,
 Anchor Custom Title,Título Personalizado de Anclaje,module,Magento_Sales,
-Add New Address,Añadir Nueva Dirección,module,Magento_Sales,
+Add New Address,+ Nueva Dirección,module,Magento_Sales,
 Add Products,Añadir Productos,module,Magento_Sales,
 Qty Shipped,Cantidad Enviada,module,Magento_Sales,
 Closed,Cerrado,module,Magento_Sales,
@@ -25969,5 +25969,10 @@ Sign Up for Our Newsletter,Suscríbete a nuestro boletín
 "Proceed through checkout faster","Proceder a través del checkout más rápido"
 "Check the status of orders","Compruebe el estado de los pedidos"
 "Store alternate addresses (for shipping to multiple family members and friends)","Almacenar direcciones alternativas (para el envío a varios miembros de la familia y amigos)"
+Estimate Shipping,Estimar envío
+Select City,Seleccionar ciudad
+Estimate,Estimar
+Town,Ciudad
+Select Twon,Seleccionar ciudad
 Show (<span class="am-counter" data-am-counter="counter"></span>) more,'Ver (<span class="am-counter" data-am-counter="counter"></span>) más'
 Less,Ver menos
