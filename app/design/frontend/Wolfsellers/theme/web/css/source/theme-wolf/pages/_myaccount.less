@@ -240,7 +240,7 @@
                         }
                         a{
                             color: @black !important;
-                            font-weight: bold;
+                            font-weight: 600;
                         }
                     }
                 }
@@ -821,6 +821,33 @@
             }
         }
     }
+
+    //MIS DIRECCIONES
+    .customer-address-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .block-addresses-default{
+                            .box-content{
+                                address{
+                                    position: relative;
+
+                                    a{
+                                        &::before{
+                                            position: absolute;
+                                            content: "T:";
+                                            left: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 //
@@ -1205,6 +1232,47 @@
                             border-radius: 0 0 12px 12px;
                             background: @white;
                             padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //MIS DIRECCIONES
+    .customer-address-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .block-addresses-list{
+                            .block-content{
+                                .additional-addresses{
+                                    .table-additional-addresses-items{
+                                        thead{
+                                            border-bottom: 1px solid @lines-input;
+
+                                            tr{
+                                                th{
+                                                    border: none;
+                                                }
+                                            }
+                                        }
+
+                                        tbody{
+                                            border-bottom: 1px solid @lines-input;
+
+                                            tr{
+                                                td{
+                                                    a{
+                                                        margin: 0 0 9px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
