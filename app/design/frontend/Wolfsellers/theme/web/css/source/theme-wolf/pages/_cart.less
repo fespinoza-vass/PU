@@ -21,12 +21,30 @@
                                 border-radius: 12px;
                                 background: @white;
                                 top: 0 !important;
-
+                                margin-bottom: 110px;
+                                @media only screen and (max-width:(@screen__m - 1)) and (min-width: 480px){
+                                    margin-bottom: 90px;
+                                }
                                 .checkout-methods-items {
                                     .item {
                                         &:not(:first-child) {
                                             display: none;
                                         }
+                                    }
+                                }
+                                .amasty-shipbar.container {
+                                    position: absolute;
+                                    bottom: -110px;
+                                    left: 0;
+                                    @media only screen and (max-width:(@screen__m - 1)){
+                                        bottom: -147px;
+                                        left: 0;
+                                        width: ~"calc(100% - 30px)";
+                                        margin: auto;
+                                        right: 0;
+                                    }
+                                    @media @xsmax{
+                                        bottom: -166px;
                                     }
                                 }
                             }
@@ -330,8 +348,6 @@
         .page-wrapper {
             .page-main {
                 margin: 24px auto 0;
-                padding: 0 5%;
-
                 .page-title-wrapper {
                     .page-title {
                         .lib-font-size(32);
@@ -348,6 +364,7 @@
                         .cart-container {
 
                             .cart-summary {
+                                width: 30%;
                                 .title {
                                     .lib-font-size(22);
                                     font-weight: bold;
@@ -364,6 +381,7 @@
                             }
 
                             .form-cart {
+                                width: 70%;
                                 .table-wrapper {
                                     .items {
                                         thead {

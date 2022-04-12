@@ -11,5 +11,6 @@
         <move element="product.info.upsell" destination="page.wrapper" before="page.bottom.container" />
         <move element="reviews.tab" destination="page.wrapper" before="page.bottom.container" />
         <move element="product.info.details.after.wrapper" destination="product.info.description.wrapper" before="-" />
+        <move element="amasty.shipbar.bottom" destination="content" before="time.calculate" />
     </body>
 </page>
