@@ -146,8 +146,8 @@
 								}
 								.control{
 									span[class*="action-"]{
-										width: 60px;
 										height: 60px;
+										width: 30%;
 									}
 									.input-text.qty{
 										height: 60px;
@@ -193,6 +193,20 @@
 						}
 					}
 					// AMASTY IMPORTANTS
+				}
+				.calculate-time{
+					float: left;
+					width: 100%;
+					margin-top: 15px;
+					.fast-shipping{
+						float: right;
+						padding: 20px;
+						border-radius: @radiusitems;
+						background: @white;
+						@media @mdmin{
+							width: 40%;
+						}
+					}
 				}
 				.product.info.detailed{
 					.product.items{
@@ -291,6 +305,24 @@
 				}
 			}
 		}
+		.modals-wrapper{
+			.modal-estimate-shipping{
+				top: 50%;
+				transform: translateY(-50%);
+				overflow: initial;
+				.modal-inner-wrap{
+					overflow: initial;
+				}
+				.modal-footer{
+					float: left;
+					width: 100%;
+					padding: 20px !important;
+					button{
+						margin: 0 10px;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -305,8 +337,103 @@
 			}
 		}
 	}
+
+	.page-product-giftcard{
+		.page-wrapper{
+			.page-main{
+				.column{
+					.product-info-main{
+						.product-options-bottom{
+							.fieldset{
+								display: flex;
+								height: 60px;
+
+								.qty{
+									margin: 0;
+
+									.control{
+										width: 90%;
+									}
+								}
+
+								.actions{
+									.tocart{
+										.lib-font-size(18);
+										padding: 0 21px;
+										height: 100%;
+										width: 100%;
+										margin: 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
 
+	.page-product-giftcard{
+		.page-wrapper{
+			.page-main, .page-main-description{
+				margin: 0 !important;
+				padding: 0 16px;
+
+				.page.messages{
+					margin: 0;
+				}
+
+				.column{
+					.product-info-main{
+						.product-info-price{
+							width: auto !important;
+							margin: 0 0 15px;
+							color: @black;
+						}
+
+						.product-options-bottom{
+							.fieldset{
+								justify-content: space-between;
+								display: flex;
+								height: 40px;
+
+								.qty{
+									height: 100%;
+									width: 35%;
+
+									.control{
+										height: 100%;
+										width: 100%;
+
+										span{
+											height: 100% !important;
+											width: 40px !important;
+										}
+
+										.input-text.qty{
+											height: 100% !important;
+											width: 100%;
+										}
+									}
+								}
+
+								.actions{
+									.tocart{
+										.lib-font-size(18);
+										padding: 0 21px;
+										height: 100%;
+										width: 100%;
+										margin: 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

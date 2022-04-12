@@ -20,6 +20,7 @@
                             .cart-summary {
                                 border-radius: 12px;
                                 background: @white;
+                                top: 0 !important;
 
                                 .checkout-methods-items {
                                     .item {
@@ -194,6 +195,39 @@
                                     }
                                 }
                             }
+
+                            .crosssell{
+                                width: 100%;
+                                padding: 0;
+                                margin: 0;
+
+                                .block-title{
+                                    text-align: center;
+
+                                    strong{
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                .slick-list, .slick-track{
+                                    padding: 0;
+                                }
+
+                                .slick-dots{
+                                    li{
+                                        button{
+                                            background: @gray-85;
+                                            border: none;
+                                        }
+                                    }
+
+                                    .slick-active{
+                                        button{
+                                            background: @black;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -295,8 +329,8 @@
     .checkout-cart-index {
         .page-wrapper {
             .page-main {
-                margin: 24px 0 0 0;
-                padding: 0 10%;
+                margin: 24px auto 0;
+                padding: 0 5%;
 
                 .page-title-wrapper {
                     .page-title {
@@ -423,6 +457,15 @@
                             .cart-discount{
                                 .discount{
                                     min-width: 352px;
+                                    width: 48%;
+                                }
+                            }
+
+                            .crosssell{
+                                .block-title{
+                                    strong{
+                                        .lib-font-size(32);
+                                    }
                                 }
                             }
                         }
@@ -617,6 +660,24 @@
 
                                 .discount {
                                     margin: 0 0 20px 0;
+                                }
+                            }
+
+                            .crosssell{
+                                order: 3;
+
+                                .block-title{
+                                    strong{
+                                        .lib-font-size(22);
+                                    }
+                                }
+
+                                .block-content{
+                                    .products-crosssell{
+                                        .slick-slider{
+                                            padding: 0;
+                                        }
+                                    }
                                 }
                             }
                         }
