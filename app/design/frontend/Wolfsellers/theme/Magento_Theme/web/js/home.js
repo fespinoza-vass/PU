@@ -8,7 +8,7 @@ require([
 
         //carrouseles de productos en el home
         $('.carrousel-productos ol.product-items').slick({
-            dots: false,
+            dots: true,
             arrows: true,
             infinite: false,
             speed: 300,
@@ -28,7 +28,7 @@ require([
 
         //slider de marcas en el home
         $('.marcas-block').slick({
-            dots: false,
+            dots: true,
             arrows: true,
             infinite: false,
             speed: 300,
@@ -38,7 +38,7 @@ require([
         });
 
         $('.carousel-releases').slick({
-            dots: false,
+            dots: true,
             arrows: true,
             infinite: false,
             speed: 300,
@@ -67,8 +67,8 @@ require([
         });
 
         $('.carousel-category').slick({
-            dots: false,
-            arrows: false,
+            dots: true,
+            arrows: true,
             infinite: false,
             speed: 300,
             autoplay: false,
