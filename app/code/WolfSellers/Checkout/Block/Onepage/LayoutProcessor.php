@@ -37,8 +37,21 @@ class LayoutProcessor implements LayoutProcessorInterface
     {
         $walker = $this->walkerFactory->create(['layoutArray' => $jsLayout]);
 
-        $city = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
+        $company = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company');
+        $company['visible'] = false;
+        $company['imports'] = [
+            'visible' => '${ $.parentName }.invoice_required:value',
+        ];
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company', $company);
 
+        $vat = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id');
+        $vat['visible'] = false;
+        $vat['imports'] = [
+            'visible' => '${ $.parentName }.invoice_required:value',
+        ];
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id', $vat);
+
+        $city = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
         $city['component'] = 'WolfSellers_Checkout/js/view/form/element/city';
         $city['validation'] = ['required-entry' => true];
         $city['config']['elementTmpl'] = 'ui/form/element/select';
@@ -50,7 +63,6 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         $colony = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
         $colony['component'] = 'WolfSellers_Checkout/js/view/form/element/colony';
-        $colony['sortOrder'] = '105';
         $colony['validation'] = ['required-entry' => true];
         $colony['config']['elementTmpl'] = 'ui/form/element/select';
         $colony['config']['options'] = [[
