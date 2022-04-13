@@ -1,6 +1,7 @@
 & when (@media-common = true) {
 	.product-items.slick-slider,
-    .carousel-releases{
+    .carousel-releases,
+	.carrucel_mejores_marcas{
 		.slick-arrow{
 			float: left;
 			text-indent: -99999%;
@@ -34,6 +35,20 @@
 				&:before{
 					content: @icon-arrowright;
 					font-family: @icons__font-name;
+				}
+			}
+		}
+
+		.slick-dots{
+			li{
+				&.slick-active{
+					button{
+						background: @black;
+					}
+				}
+				button{
+					background: @lines-input;
+					border: none;
 				}
 			}
 		}
@@ -124,6 +139,29 @@
 				&:before{
 					content: @icon-arrowright;
 					font-family: @icons__font-name;
+				}
+			}
+		}
+	}
+
+
+	.row_slider_marcas{
+		.carrucel_mejores_marcas{
+			flex-direction: row !important;
+			align-items: center;
+
+			.slick-arrow{
+				background: @gray2;
+				position: initial;
+				transform: none;
+				font-size: 0;
+
+				&:hover{
+					background: @black;
+
+					&::before{
+						color: @white;
+					}
 				}
 			}
 		}

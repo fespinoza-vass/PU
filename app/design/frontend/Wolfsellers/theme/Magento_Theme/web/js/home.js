@@ -27,14 +27,24 @@ require([
         });
 
         //slider de marcas en el home
-        $('.marcas-block').slick({
-            dots: true,
-            arrows: true,
-            infinite: false,
-            speed: 300,
+        $('.carrucel_mejores_marcas').slick({
+            slidesToScroll: 1,
+            slidesToShow: 6,
             autoplay: false,
-            slidesToShow: 7,
-            slidesToScroll: 1
+            infinite: true,
+            arrows: true,
+            dots: false,
+            speed: 300,
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToScroll: 1,
+                    slidesToShow: 3,
+                    autoplay: true,
+                    arrows: true,
+                    dots: false
+                }
+            }]
         });
 
         $('.carousel-releases').slick({
