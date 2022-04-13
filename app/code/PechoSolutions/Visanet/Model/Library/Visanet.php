@@ -88,7 +88,7 @@ class Visanet
                 break;
             case 'dev':
                 #$merchantId = merchantidtest;
-                $url = "https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/".$merchantId;
+                $url = "https://apisandbox.vnforappstest.com/api.authorization/v3/authorization/ecommerce/".$merchantId;
                 break;
         }
         $header = array("Content-Type: application/json","Authorization: $key");
@@ -175,7 +175,7 @@ class Visanet
                 break;
             case 'dev':
                 //$merchantId = merchantidtest;
-                $url = "https://apitestenv.vnforapps.com/api.security/v1/security";
+                $url = "https://apisandbox.vnforappstest.com/api.security/v1/security";
                 $accessKey=$user;
                 $secretKey=$password;
                 break;
@@ -206,7 +206,7 @@ class Visanet
                 break;
             case 'dev':
                 #$merchantId = merchantidtest;
-                $url = "https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId;
+                $url = "https://apisandbox.vnforappstest.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId;
                 $accessKey=$user;
                 $secretKey=$password;
                 break;
