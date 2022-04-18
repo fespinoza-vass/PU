@@ -72,16 +72,8 @@
 					&[name="billingAddressvisanet_pay.postcode"]{
 						order: 8;	
 					}
-					&[name="shippingAddress.company"],
-					&[name="billingAddressvisanet_pay.company"]{
-						order: 9;
-					}
-					&[name="shippingAddress.vat_id"],
-					&[name="billingAddressvisanet_pay.vat_id"]{
-						order: 10;
-					}
 					&.street{
-						order: 11;
+						order: 9;
 						.control{
 							.field{
 								width: 100%;
@@ -93,12 +85,27 @@
 					}
 					&[name="shippingAddress.region"],
 					{
-						order: 12;
+						order: 10;
 					}
 					&[name="shippingAddress.country_id"],
 					&[name="billingAddressvisanet_pay.country_id"]{
+						order: 11;
+					}
+					&[name="shippingAddress.custom_attributes.invoice_required"]{
+						order: 12;
+						> label{
+							display: none;
+						}
+					}
+					&[name="shippingAddress.company"],
+					&[name="billingAddressvisanet_pay.company"]{
 						order: 13;
 					}
+					&[name="shippingAddress.vat_id"],
+					&[name="billingAddressvisanet_pay.vat_id"]{
+						order: 14;
+					}
+
 					@media @mdmin{
 						&[name="shippingAddress.firstname"],
 						&[name="shippingAddress.telephone"],
