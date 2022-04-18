@@ -29,9 +29,9 @@
                             margin: auto;
                             max-width: @layout__max-width;
                             h3{
-                                font-size: 20px;
                                 text-transform: uppercase;
                                 margin-bottom: 50px;
+                                .lib-font-size(18);
                                 color: @white;
                                 &.jump-line{
                                     margin-bottom: 31px;
@@ -41,7 +41,7 @@
                             ul{
                                 li{
                                     a:link{
-                                        font-size: 16px;
+                                        .lib-font-size(14);
                                         color: @white;
                                     }
                                     a:hover{
@@ -121,6 +121,18 @@
         .amslider-header-container{
             text-transform: uppercase;
             font-size: 3.2rem;
+        }
+    }
+}
+
+//DESKTOP//
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .page-footer{
+        .footer.content{
+            .footer-content{
+                padding: 0 5%;
+            }
         }
     }
 }

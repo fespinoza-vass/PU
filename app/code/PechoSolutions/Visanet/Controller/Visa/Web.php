@@ -93,7 +93,7 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
 
                     $orderId = $this->cartManagement->placeOrder($quote->getId());
 
-                    $this->messageManager->addSuccess('Compra exitosa con Visa');
+                    $this->messageManager->addSuccess('Compra completada con tu tarjeta bancaría');
                     $this->_redirect('checkout/onepage/success');
                 } catch (\Exception $e) {
                     $this->messageManager->addWarning($e->getMessage());
