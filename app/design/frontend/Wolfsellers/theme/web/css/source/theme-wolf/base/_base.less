@@ -433,6 +433,34 @@
 		}
 	}
 
+	.catalogsearch-result-index{
+		.column{
+			.message.notice{
+				border-radius: 12px;
+				padding: 12px 15px;
+				position: absolute;
+				overflow: hidden;
+				color: @black;
+				width: 100%;
+				left: 0;
+
+				div{
+					align-items: center;
+					display: flex;
+
+					&::before{
+						border-radius: 12px;
+						margin: 0 10px 0 0;
+						position: initial;
+						color: @black;
+						height: auto;
+						width: auto;
+					}
+				}
+			}
+		}
+	}
+
 	.messages{
 		.message{
 			margin: 16px 20px 20px;
