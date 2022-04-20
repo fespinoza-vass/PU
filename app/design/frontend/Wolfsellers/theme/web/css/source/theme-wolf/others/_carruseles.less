@@ -166,4 +166,28 @@
 			}
 		}
 	}
+
+	.row_slider_marcas{
+		h2{
+			font-weight: bold;
+		}
+	}
+}
+
+///DESKTOP
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+	.row_slider_marcas{
+		h2{
+			.lib-font-size(32);
+		}
+	}
+}
+
+///MOBILE
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+	.row_slider_marcas{
+		h2{
+			.lib-font-size(22);
+		}
+	}
 }
