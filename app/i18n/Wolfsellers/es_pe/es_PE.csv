@@ -22557,7 +22557,7 @@ Something went wrong while saving the search query.,Algo ocurrió al intentar gu
 Delete Search,Borrar Búsqueda,module,Magento_Search,
 Delete Synonym Group,Borrar Grupo de Sinónimos,module,Magento_Search,
 You deleted the search.,Borró la búsqueda.,module,Magento_Search,
-Search entire store here...,Buscar,module,Magento_Search,
+Search entire store here...,¿Qué estás buscando?,module,Magento_Search,
 Search Term,Buscar Término,module,Magento_Search,
 Edit Search,Editar Búsqueda,module,Magento_Search,
 Edit Search '%1',Editar Búsqueda '%1',module,Magento_Search,
@@ -25936,7 +25936,7 @@ Show Password,Mostrar contraseña
 "Search Radius","Radio de búsqueda"
 "Subtotal1","Subtotal"
 Allow remote shopping assistance,Permitir asistencia de compra remota
-"Add to Cart","Añadir al carrito"
+"Add to Cart","Añadir a la bolsa"
 Item,Producto
 "Stay connected:","Mantente conectado:"
 "Copyright © 2021 United Perfumeries Peru. All rights reserved","Copyright © 2021 Perfumerías Unidas Perú. Derechos Reservados"

@@ -33,7 +33,7 @@
                         width: 60%;
                     }
                     img{
-                        max-width: 323px;
+                        max-width: 240px;
                         width: 100%;
                         @media @mdmax{
                             max-width: 153px;
@@ -63,7 +63,7 @@
                     .block-search{
                         float: left;
                         width: 100%;
-                        max-width: 574px;
+                        max-width: 430px;
                         padding: 0;
                         margin: 0 15px;
                         input.input-text{
@@ -310,10 +310,14 @@
                     }
                 }
                 .minicart-wrapper{
+                    @media @mdmin{
+                        margin: 0;
+                    }
                     .action.showcart{
                         @media @mdmin{
                             position: relative;
-                            padding-left: 35px;
+                            width: 33px;
+                            height: 33px;
                             float: left;
                             &::before{
                                 .lib-center-element(
