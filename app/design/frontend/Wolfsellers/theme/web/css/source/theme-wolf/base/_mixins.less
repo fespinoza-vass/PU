@@ -386,3 +386,37 @@
 		}
 	}
 }
+
+.lib-test(){
+    .product-item-actions{
+        margin: 0;
+        .actions-primary{
+            button.primary{
+                font-size: 1.8rem;
+                border-radius: @radiusitems;
+                text-transform: uppercase;
+                font-weight: 500;
+                @media @xsmax{
+                    font-size: 0.9rem;
+                }
+            }
+        }
+        .actions-secondary{
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            z-index: 10;
+            .towishlist{
+                line-height: 1;
+                display: none;
+                &:before{
+                    font-size: 2rem;
+                    overflow: initial;
+                }
+            }
+            a.action.tocompare{
+                display: none;
+            }
+        }
+    }
+}

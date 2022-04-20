@@ -25,5 +25,12 @@
                 </block>
             </container>
         </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Cms\Block\Block" name="transaccion.segura" before="product.info.details">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">transaccion_segura</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>
