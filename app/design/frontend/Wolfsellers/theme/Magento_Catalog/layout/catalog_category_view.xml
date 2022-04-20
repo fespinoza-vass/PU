@@ -15,6 +15,14 @@
             </block>
         </referenceContainer>
 
+        <referenceContainer name="main.content">
+            <block class="Magento\Cms\Block\Block" name="carousel-trabajamos-con-las-mejores-marcas" after="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">carousel-trabajamos-con-las-mejores-marcas</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
         <move element="breadcrumbs" destination="page.wrapper" before="main.content" />
     </body>
 </page>

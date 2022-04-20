@@ -182,6 +182,8 @@
                             width: 100vw;
                             margin-left: ~"calc(50% - 50vw)";
                             .footer-icons{
+                                margin: auto;
+                                width: 85%;
                                 ul{
                                     display: flex;
                                     align-content: center;
@@ -199,7 +201,30 @@
                                         a{
                                             span{
                                                 &::after{
+                                                    background-position-y: bottom !important;
                                                     height: 115px;
+                                                    margin: auto;
+                                                }
+
+                                                &.icon-envios{
+                                                    &::after{
+                                                        max-width: 120px;
+                                                    }
+                                                }
+                                                &.icon-compra{
+                                                    &::after{
+                                                        max-width: 90px;
+                                                    }
+                                                }
+                                                &.icon-promociones{
+                                                    &::after{
+                                                        max-width: 95px;
+                                                    }
+                                                }
+                                                &.icon-regalo{
+                                                    &::after{
+                                                        max-width: 90px;
+                                                    }
                                                 }
                                             }
                                             p{
