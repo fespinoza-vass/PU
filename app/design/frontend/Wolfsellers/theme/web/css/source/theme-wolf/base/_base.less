@@ -267,7 +267,7 @@
 				float: left;
 				width: 100%;
 				@media @mdmin{
-					padding-top: 130px;
+					padding-top: 112px;
 				}
 			}
 		}
@@ -354,6 +354,47 @@
 			    display: none;
 			}
 		}
+		.amasty-shipbar{
+			.main-container{
+				padding: 20px;
+				border-radius: @radiusitems;
+				background: @white;
+				margin: 15px 0;
+				.bar-content{
+					background: @white !important; //AMASTY important
+					.content{
+						padding: 0 0 0 40px;
+						line-height: 1;
+						position: relative;
+						.label-content{
+							.lib-icon-font(
+		                        @_icon-font-content: @icon-envio,
+		                        @_icon-font-size: 3.2rem,
+		                        @_icon-font-line-height: 1,
+		                        @_icon-font-color: inherit,
+		                        @_icon-font-position: before,
+		                        @_icon-font-text-hide: true
+		                    );
+		                    &:before{
+		                    	position: absolute;
+		                    	left: 0;
+		                    	top: 50%;
+		                    	transform: translateY(-50%);
+		                    }
+						}
+						span,
+						b{
+							color: @primary !important; //AMASTY important
+							font-size: 2rem !important; //AMASTY important
+							font-weight: normal !important; //AMASTY important
+						}
+						.extra{
+							display: none;
+						}	
+					}
+				}
+			}
+		}
 	}
 	// loader
 
@@ -386,6 +427,34 @@
 							color: @black;
 							margin: 0;
 						}
+					}
+				}
+			}
+		}
+	}
+
+	.catalogsearch-result-index{
+		.column{
+			.message.notice{
+				border-radius: 12px;
+				padding: 12px 15px;
+				position: absolute;
+				overflow: hidden;
+				color: @black;
+				width: 100%;
+				left: 0;
+
+				div{
+					align-items: center;
+					display: flex;
+
+					&::before{
+						border-radius: 12px;
+						margin: 0 10px 0 0;
+						position: initial;
+						color: @black;
+						height: auto;
+						width: auto;
 					}
 				}
 			}
@@ -454,8 +523,8 @@
 
 					button{
 						border-radius: 0;
-						height: 36px;
-						width: 30px;
+						height: 100%;
+						width: 30%;
 					}
 
 					.increaseQty{

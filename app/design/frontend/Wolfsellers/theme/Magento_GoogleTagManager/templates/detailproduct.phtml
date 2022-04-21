@@ -1,0 +1,50 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\GoogleTagManager\Block\Ga;
+?>
+<?php
+/** @var \WolfSellers\GoogleTagManager\Block\ListJson $block */
+$product = $block->getCurrentProduct();
+
+$attributes = $product->getAttributes();
+$category1 = '';
+$category2 = '';
+$brand = '';
+foreach($attributes as $attribute){
+    if($attribute->getName() === 'category_gear') {
+        $category1 = $attribute->getFrontend()->getValue($product);
+    }
+    if($attribute->getName() === 'categoria') {
+        $category2 = $attribute->getFrontend()->getValue($product);
+    }
+    if($attribute->getName() === 'brand_ids') {
+        $brand = $attribute->getFrontend()->getValue($product);
+    }
+    $category = $category1 . ' / ' . $category2;
+}
+
+?>
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_GoogleTagManager/js/actions/product-detail": {
+                "product":{
+                    "id": "<?=$block->escapeJs($product->getId());?>",
+                    "totalValue": "<?=$block->escapeJs($product->getFinalPrice());?>",
+                    "name": "<?=$block->escapeJs($product->getName());?>",
+                    "sku": "<?=$block->escapeJs($product->getSku());?>",
+                    "category": "<?=$block->escapeJs($category);?>",
+                    "brand": "<?=$block->escapeJs($brand);?>",
+                    "productURL": "<?=$block->escapeJs($product->getProductUrl());?>",
+                    "image": "<?=$block->escapeJs($product->getImage());?>"
+                },
+                "currencyCode": "<?=$block->getCurrencyCode();?>"
+            }
+        }
+    }
+</script>

@@ -91,8 +91,12 @@
             }
 			.page-title-wrapper{
 				.page-title{
-					font-size: 2rem;
+                    font-size: 2rem;
 					float: left;
+
+                    .base{
+                        font-weight: 600;
+                    }
 				}
 			}
 			> .block,
@@ -101,9 +105,10 @@
 				border-radius: @radiusitems;
 				padding: 20px;
 				a.action{
-					font-weight: 500;
 					text-decoration: underline;
 					font-size: 1.3rem;
+					font-weight: 600;
+                    color: @black;
 				}
 			}
 
@@ -136,11 +141,45 @@
 				background: @white;
 				border-radius: @radiusitems;
 				ul.items{
+                    flex-flow: column;
+                    display: flex;
 					.item{
 						margin: 0 20px;
-						&:not(:last-child){
+                        &:first-child{
+                            order: 1;
+                        }
+                        &:nth-child(2){
+                            order: 2;
+                        }
+                        &:nth-child(3){
+                            order: 3;
+                        }
+                        &:nth-child(4){
+                            order: 4;
+                        }
+                        &:nth-child(5){
+                            order: 5;
+                        }
+                        &:nth-child(6){
+                            order: 6;
+                        }
+                        &:nth-child(7){
+                            order: 10;
+                        }
+                        &:nth-child(8){
+                            order: 8;
+                        }
+                        &:nth-child(9){
+                            order: 9;
+                        }
+						&:not(:nth-child(7)){
 							border-bottom: 1px solid @gray3;
 						}
+                        &.current{
+                            strong{
+                                font-weight: bold;
+                            }
+                        }
 						strong,
 						a{
 							border-left: 0;
@@ -201,7 +240,7 @@
                         }
                         a{
                             color: @black !important;
-                            font-weight: bold;
+                            font-weight: 600;
                         }
                     }
                 }
@@ -226,6 +265,10 @@
                 .block-title {
                     border-bottom: 1px solid @lines-input;
                     font-size: 1.6rem;
+                    font-weight: 600;
+                    strong{
+                        font-weight: 600 !important;
+                    }
                 }
                 .block-content{
                     padding-top: 5px;
@@ -406,6 +449,68 @@
         }
     }
 
+    //MI CUENTA//
+    .customer-account-index{
+        .page-main{
+            .columns{
+                .column{
+                    .block-dashboard-info{
+                        .block-title{
+                            display: none;
+                        }
+                    }
+
+                    .block-dashboard-addresses{
+                        background: transparent;
+                        padding: 0;
+
+                        .block-title{
+                            justify-content: space-between;
+                            display: flex;
+                            border: none;
+                            margin: 0;
+
+                            strong, a{
+                                font-weight: bold !important;
+                            }
+                        }
+
+                        .block-content{
+                            box-shadow: 2px 2px 12px @shadowitems;
+                            border-radius: 12px;
+                            background: @white;
+                            padding: 20px;
+
+                            .box{
+                                address{
+                                    a{
+                                        position: relative;
+                                        font-weight: bold;
+
+                                        &::before{
+                                            background: @white;
+                                            position: absolute;
+                                            margin-left: 0px;
+                                            content: "T:";
+                                            height: 20px;
+                                            width: 15px;
+                                            float: left;
+                                            left: -17px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .block-reviews-dashboard, .block-dashboard-orders{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
     ///GIFT CART///
     .magento_giftcardaccount-customer-index{
         .page-wrapper{
@@ -420,8 +525,7 @@
                             button{
                                 border: 1px solid @black;
                                 border-radius: 12px;
-                                padding: 18px 20px;
-                                font-weight: 600;
+                                font-weight: bold;
                             }
                         }
                     }
@@ -454,7 +558,7 @@
 
                     .choice{
                         .label{
-                            font-weight: 300;
+                            font-weight: 400;
                         }
                     }
                 }
@@ -706,11 +810,38 @@
                                 }
                             }
                         }
-                        
+
                         .order-products-toolbar{
                             border-radius: 0 0 12px 12px;
                             background: @white;
                             padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //MIS DIRECCIONES
+    .customer-address-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .block-addresses-default{
+                            .box-content{
+                                address{
+                                    position: relative;
+
+                                    a{
+                                        &::before{
+                                            position: absolute;
+                                            content: "T:";
+                                            left: 0;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -726,6 +857,12 @@
     .account{
         .page-main{
             max-width: 1280px;
+
+            .columns{
+                .sidebar-main{
+                    margin: 0 0 100px 0;
+                }
+            }
         }
 
         .column.main{
@@ -754,13 +891,46 @@
         }
     }
 
+    //MI CUENTA//
+    .customer-account-index{
+        .page-main{
+            .columns{
+                .column{
+                    .block-dashboard-addresses{
+                        .block-title{
+                            padding: 20px;
+
+                            strong, a{
+                                .lib-font-size(20) !important;
+
+                                span{
+                                    .lib-font-size(14) !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     ///GIFT CART///
     .magento_giftcardaccount-customer-index{
         .page-wrapper{
             .page-main{
                 .giftcard-account{
+                    .form-giftcard-redeem{
+                        max-width: 65%;
+                    }
+
                     .actions-toolbar{
                         padding: 0 0 32px 33px;
+                        width: max-content;
+
+                        .action{
+                            padding: 18px 17px;
+                            .lib-font-size(18);
+                        }
                     }
                 }
             }
@@ -948,7 +1118,7 @@
 
                                     strong{
                                         .lib-font-size(20);
-                                        font-weight: 500;
+                                        font-weight: bold;
                                     }
 
                                     .edit{
@@ -968,6 +1138,7 @@
                                             }
 
                                             .product-item-name{
+                                                min-height: 38px;
                                                 margin: 5px 10%;
                                             }
 
@@ -1056,11 +1227,55 @@
                                 }
                             }
                         }
-                        
+
                         .order-products-toolbar{
                             border-radius: 0 0 12px 12px;
                             background: @white;
                             padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //MIS DIRECCIONES
+    .customer-address-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .block-addresses-list{
+                            .block-content{
+                                .additional-addresses{
+                                    .table-additional-addresses-items{
+                                        thead{
+                                            border-bottom: 1px solid @lines-input;
+
+                                            tr{
+                                                th{
+                                                    white-space: break-spaces;
+                                                    vertical-align: middle;
+                                                    border: none;
+                                                }
+                                            }
+                                        }
+
+                                        tbody{
+                                            border-bottom: 1px solid @lines-input;
+
+                                            tr{
+                                                td{
+                                                    a{
+                                                        white-space: break-spaces;
+                                                        margin: 0 0 9px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -1078,23 +1293,23 @@
         .columns{
             .column.main{
                 padding: 0 16px;
-    
+
                 .page-title-wrapper {
                     display: inline-block;
-    
+
                     .page-title{
                         margin: 0 0 14px;
                         width: 100%;
-    
+
                         span{
                             .lib-font-size(16);
                         }
                     }
                 }
-    
+
                 .pager{
                     display: block;
-    
+
                     .limiter{
                         justify-content: center;
                     }
@@ -1124,6 +1339,10 @@
                 }
             }
         }
+
+        .page-footer{
+            display: none;
+        }
     }
 
  //  ------------LOGIN------------
@@ -1132,6 +1351,7 @@
             .page-title-wrapper{
                 .page-title{
                     font-size: 2.2rem !important;
+                    margin: 0 15px;
                 }
             }
         }
@@ -1144,6 +1364,7 @@
                     background: @white;
                     border-radius: 12px;
                     padding: 15px;
+                    margin: 0 15px;
                 }
                 .block.block-customer-login{
                     .block-content{
@@ -1254,6 +1475,30 @@
         }
     }
 
+    //MI CUENTA//
+    .customer-account-index{
+        .page-main{
+            .columns{
+                .column{
+                    .block-dashboard-addresses{
+                        .block-title{
+                            padding: 0 0 15px 0;
+
+                            strong{
+                                .lib-font-size(16) !important;
+                                margin: 0 auto 0 0;
+                            }
+
+                            a{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     ///GIFT CART///
     .magento_giftcardaccount-customer-index{
@@ -1261,8 +1506,17 @@
             .page-main{
                 .giftcard-account{
 
+                    .fieldset{
+                        margin: 0;
+                    }
+
                     .actions-toolbar{
                         padding: 0 17px 32px;
+
+                        .action{
+                            .lib-font-size(16);
+                            padding: 9px;
+                        }
                     }
                 }
             }
@@ -1378,7 +1632,7 @@
 
                                     strong{
                                         .lib-font-size(16);
-                                        font-weight: 500;
+                                        font-weight: bold;
                                     }
                                 }
                             }
@@ -1411,6 +1665,7 @@
                                             .product-item-name{
                                                 .lib-font-size(12);
                                                 FONT-WEIGHT: 200;
+                                                min-height: 51px;
                                                 margin: 0 0 5px;
                                             }
 
@@ -1435,11 +1690,9 @@
                                                             width: 100%;
 
                                                             .actions-primary{
-                                                                width: 100%;
-
                                                                 .tocart{
+                                                                    padding: 7px 0 8px;
                                                                     .lib-font-size(14);
-                                                                    padding: 15px 0;
                                                                 }
                                                             }
                                                         }
@@ -1476,7 +1729,7 @@
                                         .id{
                                             padding: 24px 10px 5px;
                                         }
-                                        
+
                                         .actions{
                                             padding: 5px 10px 24px;
                                         }

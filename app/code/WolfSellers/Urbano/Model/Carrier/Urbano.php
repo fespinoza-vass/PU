@@ -58,6 +58,8 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
 
         if (!$quotes) {
             $this->_logger->error('Urbano: Not quoates available');
+
+            return false;
         }
 
         $result = $this->_rateFactory->create();
@@ -75,6 +77,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
 
             $method->setPrice($quote['cost']);
             $method->setCost($quote['cost']);
+            $method->setTime($quote['time']);
 
             $result->append($method);
         }

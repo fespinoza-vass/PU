@@ -16,16 +16,15 @@
 		.ammenu-nav-sections.-topmenu{
 			.ammenu-items.-root{
 				> .ammenu-item > .ammenu-link{
+					background: @black !important;
 					text-transform: uppercase;
-					font-weight: 400;
 					font-family: @font-second;
-					font-size: 2rem;
-					padding: 8px 20px;
+					color: @white !important;
 					position: relative;
-					&:hover{
-						color: @black !important;
-						background: @white;
-					}
+					padding: 8px 20px;
+					font-weight: 400;
+					font-size: 1.4rem;
+
 					.lib-icon-font(
                         @_icon-font-content: @icon-down,
                         @_icon-font-size: 1.2rem,
@@ -104,6 +103,9 @@
 				    padding: 12px 0 !important;
 				    min-height: auto !important;
 				    ~ .ammenu-items{
+						.-all-link{
+							display: none;
+						}
 				    	> li > a{
 				        	color: #000 !important;
 				            border-bottom: 0 !important;
@@ -113,7 +115,7 @@
 				            font-size: 1.6rem;
 				            font-family: @font-second;
 				            padding: 10px 0 !important;
-				            min-height: auto !important;
+							min-height: auto !important;
 				            ~ .ammenu-items{
 				            	padding: 0 20px !important;
 				            	> li > a{
