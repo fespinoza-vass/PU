@@ -1,0 +1,140 @@
+& when (@media-common =true) {
+    .cms-libro-de-reclamaciones {
+        .page-wrapper {
+            .page-main-full-width {
+                .columns {
+                    .column {
+                        .row-page-content {
+                            .rendered-form {
+                                background: @white;
+                                max-width: none;
+
+                                .amform-form-fieldset {
+                                    .amcform-page-wrap {
+                                        flex-flow: wrap;
+                                        display: flex;
+
+                                        .amform-layout-three {}
+                                    }
+
+                                    .field {
+                                        .control {
+                                            height: 48px;
+
+                                            .date-identi {
+                                                border: 1px solid @lines-input;
+                                                border-radius: 12px;
+                                                height: 100%;
+
+                                                +.ui-datepicker-trigger {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//DESKTOP
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .cms-libro-de-reclamaciones {
+        .page-wrapper {
+            .page-main-full-width {
+                .columns {
+                    .column {
+                        .row-page-content {
+                            h2 {
+                                .lib-font-size(32);
+                            }
+
+                            .rendered-form {
+                                padding: 16px 32px;
+
+                                .amform-form-fieldset {
+                                    .amcform-page-wrap {
+                                        .amform-layout-three {
+                                            width: 23%;
+                                        }
+                                    }
+
+                                    .field {
+                                        .control {
+                                            height: 48px;
+
+                                            .codi-recl {
+                                                width: 60%;
+                                            }
+
+                                            .date-identi {
+                                                width: 60%;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//MOBILE
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .cms-libro-de-reclamaciones {
+        .page-wrapper {
+            .page-main-full-width {
+                .columns {
+                    .column {
+                        .row-page-content {
+                            h2 {
+                                .lib-font-size(22);
+                            }
+
+                            .rendered-form {
+                                padding: 16px 32px;
+
+                                .amform-form-fieldset {
+                                    .amcform-page-wrap {
+                                        .amform-layout-three {
+                                            width: 100%;
+                                        }
+                                    }
+
+                                    .field {
+                                        max-width: 100%;
+
+                                        .control {
+                                            height: 48px;
+
+                                            .codi-recl {
+                                                width: 100%;
+                                            }
+
+                                            .date-identi {
+                                                width: 100%;
+
+                                                +.ui-datepicker-trigger {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
