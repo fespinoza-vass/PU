@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "211cca04739aadefd03fbfdbeb5f7330",
+    "content-hash": "9c18c33c7e266b4a453f9c7995a3b6a7",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -1264,6 +1264,38 @@
                 "Commercial"
             ],
             "description": "Improved Layered Navigation by Amasty - SEO sub-module"
+        },
+        {
+            "name": "amasty/sorting",
+            "version": "2.10.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/enterprise/packages/sorting-2.10.0-ee.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.12.6",
+                "amasty/cron-schedule-list": ">=1.0.5",
+                "php": "^7.3.0"
+            },
+            "suggest": {
+                "amasty/improved-sorting-graphql": "Install improved-sorting-graphql module to activate GraphQl and Sorting integration.",
+                "amasty/module-sorting-mftf-2": "Install module-sorting-mftf-2 module to implement module's mftf-tests for Magento 2.3.5+ version.",
+                "amasty/module-sorting-mftf-3": "Install module-sorting-mftf-3 module to implement module's mftf-tests for Magento 2.4.0+ version.",
+                "amasty/yotpo": "Install amasty/yotpo module to activate Yotpo Reviews and Sorting integration."
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\Sorting\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Improved Sorting by Amasty"
         },
         {
             "name": "amasty/xsearch",
@@ -29862,5 +29894,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
