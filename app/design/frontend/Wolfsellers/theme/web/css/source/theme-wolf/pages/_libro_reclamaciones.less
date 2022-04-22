@@ -14,6 +14,12 @@
                                     .amcform-page-wrap {
                                         flex-flow: wrap;
                                         display: flex;
+
+                                        .amcform-submit {
+                                            border-radius: 12px;
+                                            background: @black;
+                                            color: @white;
+                                        }
                                     }
 
                                     .field {
@@ -48,7 +54,7 @@
                                             }
                                         }
 
-                                        .fb-h3 {
+                                        &.fb-h3 {
                                             .lib-font-size(16);
                                             font-weight: 600;
 
@@ -77,15 +83,15 @@
                                             flex-flow: row-reverse;
                                             display: flex;
 
-                                            .fb-checkbox-group-label{
+                                            .fb-checkbox-group-label {
                                                 display: none;
                                             }
 
                                             .control {
                                                 height: auto;
 
-                                                .checkbox-group{
-                                                    label{
+                                                .checkbox-group {
+                                                    label {
                                                         padding: 0;
                                                     }
                                                 }
@@ -122,6 +128,11 @@
                                     .amcform-page-wrap {
                                         .amform-layout-three {
                                             width: 23%;
+                                        }
+
+                                        .amcform-submit {
+                                            .lib-font-size(18);
+                                            padding: 18px 77px;
                                         }
                                     }
 
@@ -179,6 +190,16 @@
                                     .amcform-page-wrap {
                                         .amform-layout-three {
                                             width: 100%;
+                                        }
+
+                                        .amcform-toolbar {
+                                            width: 100%;
+
+                                            .amcform-submit {
+                                                .lib-font-size(16);
+                                                padding: 9px 0;
+                                                width: 100%;
+                                            }
                                         }
                                     }
 
