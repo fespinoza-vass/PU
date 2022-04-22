@@ -1,7 +1,18 @@
 & when (@media-common = true) {
 	.catalog-product-view{
+		.fotorama--fullscreen{
+			z-index: 10000 !important;
+		}
 		.page-wrapper{
 			.page-main{
+				.column.main{
+					> .ambanners{
+						display: none;
+						~ .ambanners{
+							display: block;
+						}
+					}
+				}
 				.product-manufacturer-main{
 					background: @black;
 				    border-radius: 12px;
@@ -20,6 +31,50 @@
 							background: @white;
 							border-radius: @radiusitems;
 							margin-bottom: 20px;
+							.fotorama__arr{
+								transform: none;
+								opacity: 1;
+								.fotorama__arr__arr{
+									float: left;
+									height: 56px;
+									width: 26px;
+									padding: 0;
+									background: @gray2;
+									&:before{
+										float: left;
+										width: 100%;
+										text-align: center;
+										color: @black;
+										padding: 0;
+										font-size: 3rem;
+										line-height: 56px;
+									}
+									@media @mdmin{
+										&:hover{
+											background: @primary;
+											&:before{
+												color: @white;
+											}
+										}
+									}
+								}
+								&.fotorama__arr--prev{
+									.fotorama__arr__arr{
+										&:before{
+											content: @icon-arrowleft;
+											font-family: @icons__font-name;
+										}
+									}
+								}
+								&.fotorama__arr--next{
+									.fotorama__arr__arr{
+										&:before{
+											content: @icon-arrowright;
+											font-family: @icons__font-name;
+										}
+									}
+								}
+							}
 						}
 						.fotorama__nav-wrap{
 							.fotorama__thumb-border{
@@ -51,12 +106,15 @@
 					}
 					.product-info-price{
 						order: 3;
+						border: 0;
+						margin-bottom: 0;
 					}
 					[id*="amasty-promo-countdown"]{
 						order: 4;
 					}
 					.product-add-form{
 						order: 5;
+						padding-top: 0;
 					}
 					.product-social-links{
 						order: 6;
@@ -77,7 +135,7 @@
 							order: 2;
 							padding: 0;
 							display: flex;
-							margin: 15px 0;
+							margin: 15px 0 0;
 							.price{
 								font-size: 3.2rem;
 								font-weight: bold;
@@ -163,6 +221,39 @@
 									}
 									.input-text.qty{
 										height: 60px;
+										padding: 0 65px;
+									}
+									div.mage-error{
+										position: absolute;
+									    bottom: -17px;
+									    width: 300px;
+									}
+								}
+							}
+							.fieldset{
+								margin-top: 10px;
+								@media @mdmin{
+									display: flex;
+									float: left;
+									width: 100%;
+								}
+								> .field.qty{
+									width: 200px;
+									margin-right: 8%;
+									margin-bottom: 0;
+									.control{
+										width: 100%;
+									}
+								}
+								> .actions{
+									@media @mdmax{
+										margin-top: 20px;
+									}
+									button{
+										width: 100%;
+										height: 60px;
+										margin: 0;
+										text-transform: uppercase;
 									}
 								}
 							}
@@ -185,6 +276,12 @@
 								color: @black;
 							}
 							.lib-pulseefx;
+						}
+					}
+					.product.attribute.sku .type{
+						margin-right: 0;
+						strong:after{
+							content: ":";
 						}
 					}
 				}
