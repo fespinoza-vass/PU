@@ -6,6 +6,7 @@
                     .column {
                         .row-page-content {
                             .rendered-form {
+                                border-radius: 12px;
                                 background: @white;
                                 max-width: none;
 
@@ -13,8 +14,6 @@
                                     .amcform-page-wrap {
                                         flex-flow: wrap;
                                         display: flex;
-
-                                        .amform-layout-three {}
                                     }
 
                                     .field {
@@ -30,6 +29,45 @@
                                                     display: none;
                                                 }
                                             }
+
+                                            ._has-datepicker{
+                                                &::placeholder{
+                                                    .lib-font-size(0);
+                                                }
+                                            }
+
+                                            .date-cont{
+                                                border: 1px solid @lines-input;
+                                                border-radius: 12px;
+                                                height: 100%;
+                                                width: 100%;
+
+                                                +.ui-datepicker-trigger{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+
+                                        .fb-div{
+                                            .lib-font-size(16);
+                                            font-weight: 600;
+
+                                            &::first-letter{
+                                                color: @gray-7C;
+                                            }
+
+                                            .control{
+
+                                            }
+                                        }
+
+                                        &.fb-h3, &.fb-div, &.fb-radio, &.fb-undefined{
+                                            width: 100%;
+                                        }
+
+                                        .fb-checkbox{
+                                            flex-flow: row-reverse;
+                                            display: flex;
                                         }
                                     }
                                 }
@@ -56,6 +94,7 @@
 
                             .rendered-form {
                                 padding: 16px 32px;
+                                margin: 30px 0 0 0;
 
                                 .amform-form-fieldset {
                                     .amcform-page-wrap {
@@ -74,6 +113,17 @@
 
                                             .date-identi {
                                                 width: 60%;
+                                            }
+                                        }
+
+                                        &.fb-undefined{
+                                            .control{
+                                                height: 96px;
+
+                                                .form-control{
+                                                    border-radius: 12px;
+                                                    height: 100%;
+                                                }
                                             }
                                         }
                                     }
@@ -101,7 +151,7 @@
                             }
 
                             .rendered-form {
-                                padding: 16px 32px;
+                                padding: 16px;
 
                                 .amform-form-fieldset {
                                     .amcform-page-wrap {
