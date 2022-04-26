@@ -1,0 +1,39 @@
+& when (@media-common = true) {
+	.brand-sites{
+		&.brand-title{
+			figure img{
+				max-width: 150px !important;
+			}
+		}
+		~ [data-content-type="row"]{
+			&.brand-slider{
+				position: relative;
+				.pagebuilder-slide-wrapper{
+					@media @mdmin{
+						padding-bottom: 15.9%;
+					}
+					@media @mdmax{
+						padding-bottom: 65.9%;
+					}
+				}
+				.slick-dots{
+					display: block;
+				    position: absolute;
+				    left: 50%;
+				    transform: translateX(-50%);
+				    bottom: 0;
+				}
+			}
+			.carrusel{
+				margin: 50px 0;
+				.tit-carrusel{
+					float: left;
+					width: 100%;
+					text-align: center;
+					font-size: 3.2rem;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
