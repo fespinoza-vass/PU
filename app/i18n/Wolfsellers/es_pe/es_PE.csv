@@ -25940,7 +25940,7 @@ Allow remote shopping assistance,Permitir asistencia de compra remota
 Item,Producto
 "Stay connected:","Mantente conectado:"
 "Copyright © 2021 United Perfumeries Peru. All rights reserved","Copyright © 2021 Perfumerías Unidas Perú. Derechos Reservados"
-"Your order number is: %1","Orden No: %1"
+"Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>","Orden no: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>"
 "Stores","Tiendas"
 "Email","Correo Electrónico"
 "Password Verification","Verificación De Contraseña"

@@ -6,6 +6,7 @@
                     .column {
                         .row-page-content {
                             .rendered-form {
+                                border-radius: 12px;
                                 background: @white;
                                 max-width: none;
 
@@ -14,7 +15,11 @@
                                         flex-flow: wrap;
                                         display: flex;
 
-                                        .amform-layout-three {}
+                                        .amcform-submit {
+                                            border-radius: 12px;
+                                            background: @black;
+                                            color: @white;
+                                        }
                                     }
 
                                     .field {
@@ -28,6 +33,83 @@
 
                                                 +.ui-datepicker-trigger {
                                                     display: none;
+                                                }
+                                            }
+
+                                            ._has-datepicker {
+                                                &::placeholder {
+                                                    .lib-font-size(0);
+                                                }
+                                            }
+
+                                            .date-cont {
+                                                border: 1px solid @lines-input;
+                                                border-radius: 12px;
+                                                height: 100%;
+                                                width: 100%;
+
+                                                +.ui-datepicker-trigger {
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+
+                                        &.fb-h1{
+                                            margin: 0 0 60px;
+                                            width: 100%;
+
+                                            .control{
+                                                background: @mainbackground;
+                                                position: absolute;
+                                                width: 100%;
+                                                left: 0;
+
+                                                h1{
+                                                    .lib-font-size(0);
+                                                }
+                                            }
+                                        }
+
+                                        &.fb-h3 {
+                                            .lib-font-size(16);
+                                            font-weight: 600;
+
+                                            &::first-letter {
+                                                color: @gray-7C;
+                                            }
+
+                                            .control {
+                                                height: auto;
+
+                                                h3 {
+                                                    border-bottom: 1px solid @lines-input;
+                                                    padding: 0 0 10px;
+                                                }
+                                            }
+                                        }
+
+                                        &.fb-h3,
+                                        &.fb-div,
+                                        &.fb-radio,
+                                        &.fb-undefined {
+                                            width: 100%;
+                                        }
+
+                                        &.fb-checkbox {
+                                            flex-flow: row-reverse;
+                                            display: flex;
+
+                                            .fb-checkbox-group-label {
+                                                display: none;
+                                            }
+
+                                            .control {
+                                                height: auto;
+
+                                                .checkbox-group {
+                                                    label {
+                                                        padding: 0;
+                                                    }
                                                 }
                                             }
                                         }
@@ -56,11 +138,17 @@
 
                             .rendered-form {
                                 padding: 16px 32px;
+                                margin: 30px 0 0 0;
 
                                 .amform-form-fieldset {
                                     .amcform-page-wrap {
                                         .amform-layout-three {
                                             width: 23%;
+                                        }
+
+                                        .amcform-submit {
+                                            .lib-font-size(18);
+                                            padding: 18px 77px;
                                         }
                                     }
 
@@ -74,6 +162,17 @@
 
                                             .date-identi {
                                                 width: 60%;
+                                            }
+                                        }
+
+                                        &.fb-undefined {
+                                            .control {
+                                                height: 96px;
+
+                                                .form-control {
+                                                    border-radius: 12px;
+                                                    height: 100%;
+                                                }
                                             }
                                         }
                                     }
@@ -101,12 +200,22 @@
                             }
 
                             .rendered-form {
-                                padding: 16px 32px;
+                                padding: 16px;
 
                                 .amform-form-fieldset {
                                     .amcform-page-wrap {
                                         .amform-layout-three {
                                             width: 100%;
+                                        }
+
+                                        .amcform-toolbar {
+                                            width: 100%;
+
+                                            .amcform-submit {
+                                                .lib-font-size(16);
+                                                padding: 9px 0;
+                                                width: 100%;
+                                            }
                                         }
                                     }
 
