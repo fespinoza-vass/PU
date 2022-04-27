@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<default>
+    <wolfsellers_tracking>
+        <urbano>
+            <status_received>SS</status_received>
+            <status_ready>DD</status_ready>
+            <status_in_transit>ER</status_in_transit>
+            <status_delivered>EN</status_delivered>
+            <undelivered>CV</undelivered>
+        </urbano>
+    </wolfsellers_tracking>
+</default>
+</config>

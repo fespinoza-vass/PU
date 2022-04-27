@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var \WolfSellers\OrderTracking\Block\TrackingStatus $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<div class="tracking-status">
+    <div class="item-status status-received <?php echo $block->isReceived() ? 'active' : 'inactive'; ?>">
+        <?php echo $escaper->escapeHtml(__('Order received')); ?>
+    </div>
+    <div class="item-status status-ready <?php echo $block->isReady() ? 'active' : 'inactive'; ?>">
+        <?php echo $escaper->escapeHtml(__('Order ready')); ?>
+    </div>
+    <div class="item-status status-in-transit <?php echo $block->isInTransit() ? 'active' : 'inactive'; ?>">
+        <?php echo $escaper->escapeHtml(__('Order in transit')); ?>
+    </div>
+    <div class="item-status status-delivered <?php echo $block->isDelivered() ? 'active' : 'inactive'; ?>">
+        <?php echo $escaper->escapeHtml(__('Order delivered')); ?>
+    </div>
+
+    <?php if ($block->isUndelivered() && !$block->isDelivered()) { ?>
+        <div class="item-status status-undelivered active">
+            <?php echo $escaper->escapeHtml(__('Order undelivered')); ?>
+        </div>
+    <?php } ?>
+</div>
