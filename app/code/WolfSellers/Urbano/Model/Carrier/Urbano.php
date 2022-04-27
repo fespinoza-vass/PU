@@ -448,6 +448,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
             );
 
             $result[] = [
+                'status_code' => $movement['chk'],
                 'activity' => sprintf('%s - %s', $movement['estado'], $movement['sub_estado']),
                 'deliverydate' => $date->toDateString(),
                 'deliverytime' => $date->toTimeString(),
