@@ -25,6 +25,19 @@
                 </block>
             </container>
         </referenceContainer>
+        <referenceContainer name="product.info.main">
+            <container name="product.manufacturer.tit" htmlTag="div" htmlClass="product-manufacturer-main-tit" before="-">
+                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.manufacturer.tit" template="Magento_Catalog::product/view/attribute.phtml">
+                    <arguments>
+                        <argument name="at_call" xsi:type="string">getManufacturer</argument>
+                        <argument name="at_code" xsi:type="string">manufacturer</argument>
+                        <argument name="css_class" xsi:type="string">manufacturer-head</argument>
+                        <argument name="at_label" xsi:type="string">none</argument>
+                        <argument name="at_type" xsi:type="string">text</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
         <referenceContainer name="content">
             <block class="Magento\Cms\Block\Block" name="transaccion.segura" before="product.info.details">
                 <arguments>
