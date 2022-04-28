@@ -182,6 +182,7 @@
 				.checkout-container{
 					background: transparent;
 					margin: 0;
+					padding: 0;
 					> [data-content-type="row"]{
 						.lib-visually-hidden;
 					}
@@ -199,6 +200,11 @@
 						}
 					}
 					.opc-wrapper{
+						.amcheckout-shipping-address{
+							@media @mdmax{
+								margin-bottom: 100px;
+							}
+						}
 						.field.amcheckout-comment{
 							float: left;
 							width: 100%;
@@ -228,11 +234,19 @@
 										margin: 0;
 									}
 									&.checkout-payment-method{
+										hr,
+										br{
+											display: none;
+										}
+										[name="billing_address_id"] {
+										    padding-right: 30px;
+										}
 										.field{
 											&.choice{
 												float: left;
 												width: 100%;
 												margin-top: 20px;
+												border: 0;
 											}
 										}
 										.payment-methods{
@@ -317,6 +331,7 @@
 									}
 								}
 								.amcheckout-wrapper{
+									position: relative;
 									.amcheckout-form-login{
 										margin-bottom: 15px;
 										padding: 0;
@@ -344,6 +359,63 @@
 													margin: 0 10px;
 												}
 											}
+										}
+									}
+									form.form.methods-shipping{
+										border: 0;
+										background: @white;
+									}
+									.shipping-address-items{
+										display: grid;
+										grid-template-columns: ~"repeat(auto-fill, calc(50% - 0.5rem))";
+										gap: 1rem;
+										@media @xsmax{
+											grid-template-columns: repeat(auto-fill, 100%);
+											gap: 0;
+										}
+										.shipping-address-item{
+											position: relative;
+											padding: 10px 10px 40px;
+											width: 100%;
+											margin: 0;
+											border-bottom-color: transparent;
+											&:before{
+												@media @xsmin{
+													content: "";
+													height: 100%;
+													left: -11px;
+													background: rgba(0, 0, 0,0.1);
+												    position: absolute;
+												    top: 0;
+												    width: 1px;
+												}
+											}
+											button.action-select-shipping-item{
+												position: absolute;
+												left: 50%;
+												transform: translateX(-49.5%);
+												bottom: 5px;
+												margin: 0;
+												padding: 5px;
+												border: 1px solid @black;
+												max-width: 100px;
+											}
+											&.selected-item{
+												border-bottom: 1px solid @black;
+											}
+										}
+									}
+									button.action.-new-address{
+										background: @black;
+										color: @white;
+										padding: 20px;
+										font-size: 1.8rem;
+										font-weight: bold;
+										position: absolute;
+										left: 0;
+										bottom: -100px;
+										@media @mdmax{
+											bottom: -110px;
 										}
 									}
 								}
