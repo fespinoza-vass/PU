@@ -16,10 +16,26 @@
         $widgetOptions = $this->helper(\Magento\Framework\Json\Helper\Data::class)->jsonEncode($widget['productListToolbarForm']);
     ?>
     <div class="toolbar toolbar-products" data-mage-init='{"productListToolbarForm":<?= /* @noEscape */ $widgetOptions ?>}'>
+        <div class="btn-filter" id="layered-filter-block" data-mage-init='
+            {
+                "collapsible":
+                {
+                    "openedState": "active",
+                    "collapsible": true,
+                    "active": false,
+                    "collateral":
+                    {
+                        "openedState": "filter-active",
+                        "element": "body"
+                    }
+                }
+            }'>
+            <span class="icon-filter"></span>
+            <span><?= $block->escapeHtml(__('Shop By')); ?></span>
+        </div>
         <?php if ($block->getIsBottom()): ?>
             <?= $block->getPagerHtml() ?>
         <?php else: ?>
-            <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')) ?>
             <?php if ($block->isExpanded()): ?>
                 <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/sorter.phtml')) ?>
             <?php endif ?>

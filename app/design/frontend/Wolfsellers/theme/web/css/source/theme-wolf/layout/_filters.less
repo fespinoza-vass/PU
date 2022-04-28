@@ -1,4 +1,76 @@
 & when (@media-common =true) {
+    .filter-active{
+        div.page-wrapper{
+            margin-top: 0;
+            height: auto;
+            visibility: visible;
+            .sidebar.sidebar-main{
+                position: relative;
+                z-index: 9999;
+            }
+            .filter {
+                position: relative;
+                visibility: visible;
+                z-index: 99;
+                .filter-title {
+                    border-bottom: 1px solid @gray5;
+                    height: 48px;
+                    left: 0;
+                    position: fixed;
+                    right: 0;
+                    top: 0;
+                    z-index: 2;
+                }
+                .filter-options {
+                    background: @white;
+                    bottom: 0;
+                    display: block;
+                    left: 0;
+                    overflow: scroll;
+                    position: fixed;
+                    right: 0;
+                    top: 50px;
+                    z-index: 10;
+                }
+            }
+            .btn-filter{
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 10px;
+                background: @white;
+                .icon-filter{
+                    ~ span{
+                        font-size: 1.6rem;
+                        margin-left: 10px;
+                        .lib-icon-font(
+                            @_icon-font-content: @icon-remove,
+                            @_icon-font-size: 1.5rem,
+                            @_icon-font-line-height: 1,
+                            @_icon-font-color: @black,
+                            @_icon-font-position: after,
+                        );
+                        &:after{
+                            position: absolute;
+                            right: 10px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            float: right;
+                        }
+                    }
+                }
+            }
+            .block-title.filter-title{
+                display: none;
+            }
+        }
+    }
+
     .sidebar-main {
         .filter {
             .filter-content {
@@ -115,8 +187,8 @@
                                     }
 
                                     .filter-options{
-                                        padding: 30px 40px;
-
+                                        padding: 60px 40px 20px;
+                                        top: 0;
                                         input[type='checkbox'] + .amshopby-choice:after{
                                             background-size: 16px;
                                             height: 16px;
