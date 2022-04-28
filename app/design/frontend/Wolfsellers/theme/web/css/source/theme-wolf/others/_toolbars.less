@@ -3,10 +3,28 @@
         @media @mdmin{
             margin-top: -5px;
         }
+        .btn-filter{
+            &:not(.active){
+                background: @black;
+                margin: 15px auto 0;
+                border-radius: 12px;
+                font-size: 1.6rem;
+                padding: 5px 8px;
+                color: @white;
+                width: 130px;
+                display: inline-block;
+            }
+            @media @mdmin{
+                display: none !important;
+            }
+        }
         ~ .toolbar.toolbar-products{
             display: flex;
             justify-content: center;
             align-items: center;
+            .btn-filter{
+                .lib-visually-hidden;
+            }
         }
         .field.limiter,
         .toolbar-amount{
@@ -103,8 +121,6 @@
                 display: none;
             }
             .columns{
-                padding: 0 16px;
-
                 .column.main{
                     padding: 0;
 
@@ -115,6 +131,7 @@
 
                 .sidebar-main{
                     .filter-title{
+                        .lib-visually-hidden;
                         strong{
                             left: 16px;
                             top: 94px;
@@ -127,26 +144,6 @@
                         }
                     }
                 }
-
-                .products-grid{
-                    .product-items{
-                        .product-item{
-                            .product-item-info{
-                                .product-item-details{
-                                    .product-item-inner{
-                                        .product-item-actions{
-                                            .action.tocart.primary{
-                                                padding: 7px 0 8px;
-                                                .lib-font-size(14);
-                                                width: 94%;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
 
@@ -154,6 +151,8 @@
             .toolbar-sorter{
                 position: initial;
                 margin: 16px 0 0;
+                float: left;
+                width: 100%;
                 .sorter-options{
                     padding-right: 25px;
                 }
