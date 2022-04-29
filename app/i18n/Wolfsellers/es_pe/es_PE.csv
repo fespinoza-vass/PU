@@ -25594,7 +25594,7 @@ Disabled,Inactivo,module,Temando_Shipping,
 Add,Añadir,module,Temando_Shipping,
 Shipping Method,Método de Envío,module,Temando_Shipping,
 Payment Method,Método de Pago,module,Temando_Shipping,
-Search,Búsqueda,module,Temando_Shipping,
+Search,ENVIAR,module,Temando_Shipping,
 Configure,Configuración,module,Temando_Shipping,
 Billing Address,Dirección de Facturación,module,Temando_Shipping,
 Shipping,Envío,module,Temando_Shipping,
@@ -25976,3 +25976,8 @@ Town,Ciudad
 Select Twon,Seleccionar ciudad
 Show (<span class="am-counter" data-am-counter="counter"></span>) more,'Ver (<span class="am-counter" data-am-counter="counter"></span>) más'
 Less,Ver menos
+Tracking number,Número de rastreo
+Order received,Pedido recibido
+Order ready,Pedido preparado
+Order in transit,Pedido en camino
+Order delivered,Pedido entregado
