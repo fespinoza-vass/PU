@@ -5,9 +5,12 @@
                 .column {
                     .row-page-content {
                         .order-tracking-container {
+                            background: @gray-F7;
+                            border-radius: 12px;
+
                             form {
+                                background: @gray-F7;
                                 border-radius: 12px;
-                                background: @white;
 
                                 .required {
                                     .label {
@@ -16,10 +19,31 @@
                                 }
                             }
 
-                            .tracking-result{
-                                .tracking-status{
+                            .tracking-result {
+                                .tracking-status {
                                     font-weight: bold;
+                                    .lib-font-size(0);
                                     color: @gray-7C;
+
+                                    .item-status {
+                                        &.active {
+                                            .active {
+                                                display: block;
+                                            }
+
+                                            img {
+                                                display: none;
+                                            }
+                                        }
+
+                                        .active {
+                                            display: none;
+                                        }
+
+                                        img {
+                                            width: 90%;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -44,10 +68,10 @@
                         .order-tracking-container {
                             form {
                                 justify-content: start;
+                                margin: auto auto 30px;
                                 align-items: center;
                                 padding: 24px 32px;
                                 display: flex;
-                                margin: auto;
                                 width: 70%;
 
                                 .required {
@@ -77,6 +101,8 @@
                             }
 
                             .tracking-result {
+                                padding: 20px;
+
                                 .tracking-status {
                                     justify-content: space-between;
                                     display: flex;
@@ -135,12 +161,20 @@
                                 }
                             }
 
-                            .tracking-result{
-                                .tracking-status{
+                            .tracking-result {
+                                .tracking-status {
                                     text-align: center;
 
-                                    div{
+                                    div {
                                         margin: 0 0 20px;
+                                    }
+
+                                    .item-status {
+                                        &.active {
+                                            .active {
+                                                margin: auto;
+                                            }
+                                        }
                                     }
                                 }
                             }
