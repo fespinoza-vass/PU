@@ -1,4 +1,15 @@
 & when (@media-common = true) {
+	.row-slider-first{
+		.pagebuilder-slider{
+			.slick-dots{
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				bottom: 15px;
+				padding: 0;
+			}
+		}
+	}
 	.product-items.slick-slider,
     .carousel-releases,
 	.carrucel_mejores_marcas{
@@ -9,6 +20,7 @@
 			width: 26px;
 			padding: 10px 0;
 			background: @gray2;
+			opacity: 1;
 			&:before{
 				text-indent: 0;
 				float: left;
