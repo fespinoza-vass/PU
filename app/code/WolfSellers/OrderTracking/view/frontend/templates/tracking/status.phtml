@@ -30,6 +30,7 @@
 
     <?php if ($block->isUndelivered() && !$block->isDelivered()) { ?>
         <div class="item-status status-undelivered active">
+        <img class="active" src='<?php echo $this->getViewFileUrl('images/entregado-error.jpeg'); ?>' alt="Demo">
             <?php echo $escaper->escapeHtml(__('Order undelivered')); ?>
         </div>
     <?php } ?>
