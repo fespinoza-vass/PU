@@ -3,6 +3,236 @@
 // Logout
 // 404
 
-& when (@media-common = true) {
-	
+& when (@media-common =true) {
+    .checkout-onepage-success {
+        .page-wrapper {
+            .page-main {
+                .page-title-wrapper {
+                    .page-title {
+                        text-align: center;
+                        color: @black-09 ;
+                        width: 100%;
+
+                        &::before {
+                            font-family: 'theme-icons';
+                            content: @icon-nike;
+                            .lib-font-size(100);
+                            display: block;
+                        }
+
+                        &::after {
+                            content: "Tu pedido ha sido creado con éxito";
+                            font-weight: bold;
+                            display: block;
+                        }
+                    }
+
+                    .print {
+                        display: none;
+                    }
+                }
+
+                .columns {
+                    .column {
+                        .checkout-success {
+                            .success-messages {
+                                text-align: center;
+
+                                p {
+                                    &:first-child {
+                                        margin: 0 0 27px;
+                                        color: @gray;
+                                    }
+
+                                    .order-number {
+                                        color: @black;
+                                    }
+                                }
+                            }
+
+                            .account {
+                                display: none;
+                            }
+
+                            .actions-toolbar {
+                                text-align: center;
+
+                                .primary {
+                                    float: initial;
+                                }
+                            }
+
+                            .Imagen-debajo-filtros{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .cms-no-route {
+        .page-wrapper {
+            .page-main {
+                text-align: center;
+
+                .page-title-wrapper {
+                    .page-title {
+                        .lib-font-size(180);
+                        margin: 0;
+                    }
+                }
+
+                .columns {
+                    .column {
+                        width: 100%;
+
+                        .page-404 {
+                            h2 {
+                                margin: -40px 0 60px;
+                                .lib-font-size(80);
+                            }
+
+                            p {
+                                .lib-font-size(20);
+                                margin: 0 0 60px;
+                                font-weight: 600;
+                            }
+
+                            a {
+                                padding: 18px 100px;
+                                color: @color-white;
+                                border-radius: 12px;
+                                background: @black;
+                                FONT-WEIGHT: 600;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .page-bottom {
+                display: none;
+            }
+
+            .page-footer {
+                display: none;
+            }
+        }
+
+        .Imagen-debajo-filtros{
+            display: none;
+        }
+    }
+}
+
+
+///DESKTOP
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .checkout-onepage-success {
+        .page-wrapper {
+            .page-main {
+                .page-title-wrapper {
+                    .page-title {
+                        &::before {
+                            margin: 0 0 32px;
+                        }
+
+                        &::after {
+                            margin: 13px 0 0 0;
+                            .lib-font-size(20);
+                        }
+                    }
+                }
+
+                .columns {
+                    .column {
+                        .checkout-success {
+                            .success-messages {
+                                p {
+                                    &:first-child {
+                                        .lib-font-size(32);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .cms-no-route {
+        .page-wrapper {
+            .page-main {
+                .page-title-wrapper {
+                    .page-title {}
+                }
+
+                .page-404 {
+                    a {
+                        .lib-font-size(18);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+///MOVIL
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .checkout-onepage-success {
+        .page-wrapper {
+            .page-main {
+                .page-title-wrapper {
+                    .page-title {
+                        &::before {
+                            margin: 0 0 21px;
+                        }
+
+                        &::after {
+                            margin: 7px 0 0 0;
+                            .lib-font-size(16);
+                        }
+                    }
+                }
+
+                .columns {
+                    .column {
+                        .checkout-success {
+                            .success-messages {
+                                p {
+                                    &:first-child {
+                                        .lib-font-size(22);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .cms-no-route {
+        .page-wrapper {
+            .page-main {
+                .page-title-wrapper {
+                    .page-title {}
+                }
+
+                .page-404 {
+                    margin: auto;
+                    width: 85%;
+
+                    a {
+                        .lib-font-size(16);
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
 }

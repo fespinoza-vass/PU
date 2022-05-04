@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <urbano>
+                <model>WolfSellers\Urbano\Model\Carrier\Urbano</model>
+                <active>1</active>
+                <title>Urbano</title>
+                <terrestre_name>Terrestre</terrestre_name>
+                <aereo_name>Aéreo</aereo_name>
+                <sandbox_mode>1</sandbox_mode>
+                <user>WS.PERFUND</user>
+                <password>7c222fb2927d828af22f592134e8932480637c0d</password>
+                <production_ws_url>https://api.urbanoexpress.com.pe/pyp/ws/ue/ge/</production_ws_url>
+                <sandbox_ws_url>https://dev.urbanoexpress.com.pe/pyp/ws/ue/</sandbox_ws_url>
+                <line>3</line>
+                <contract>7984</contract>
+                <package_type>PQ</package_type>
+                <weight>1</weight>
+                <height>1</height>
+                <length>1</length>
+                <width>1</width>
+                <urgent>0</urgent>
+                <picking>0</picking>
+                <mecanizado>1</mecanizado>
+                <insured>1</insured>
+                <seller>0</seller>
+                <seller_code />
+                <seller_name />
+                <seller_address />
+                <seller_ubigeo />
+                <sallowspecific>0</sallowspecific>
+                <sort_order>15</sort_order>
+            </urbano>
+        </carriers>
+    </default>
+</config>

@@ -1,0 +1,62 @@
+<div class="cont-loginaccount">
+    <?php 
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $customerSession = $objectManager->create('Magento\Customer\Model\Session');
+        /** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+        if($customerSession->isLoggedIn()) : ?>
+        <div class="loginbtns">
+            <div>
+                <span><?= $block->escapeHtml(__('Welcome')) ?>, </span>
+                <?php
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    $customerSession = $objectManager->create('Magento\Customer\Model\Session');
+
+                    if ($customerSession->isLoggedIn()) {
+                    $customerSession->getCustomerId();  // get Customer Id
+                    $customerSession->getCustomerGroupId();
+                    $customerSession->getCustomer();
+                    $customerSession->getCustomerData();
+
+                    echo $customerSession->getCustomer()->getName();  // get  Full Name
+                    // echo $customerSession->getCustomer()->getEmail(); // get Email
+                    }
+                ?>
+            </div>
+            <a data-mage-init='{"dropdown":{}}' data-toggle="dropdown" class="ddaccount action" data-action="customer-menu-toggle">
+                <span><?= $block->escapeHtml(__('My Account')) ?></span>
+                <span class="icon-uniE622"></span>
+            </a>
+            <ul data-target="dropdown" class="dropdown-options">
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/index') ?>';"><span><?= $block->escapeHtml(__('My profile')) ?></span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('sales/order/history') ?>';"><span><?= $block->escapeHtml(__('My orders')) ?></span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('wishlist') ?>';"><span>Wishlist</span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/logout') ?>';"><span><?= $block->escapeHtml(__('Logout')) ?></span></a>
+                </li>
+            </ul>
+        <?php else: ?>
+        <div class="loginbtns logout">
+            <a href="<?php echo $block->getUrl('customer/account/login') ?>" class="efirst"><span><?= $block->escapeHtml(__('Login')) ?></span></a>
+            <a href="<?php echo $block->getUrl('customer/account/create') ?>"><span><?= $block->escapeHtml(__('Create Account')) ?></span></a>
+            <a href="#" data-mage-init='{"dropdown":{}}' data-toggle="dropdown" class="ddaccount mobile action" data-action="customer-menu-toggle" style="display: none;">
+                <span>Open menu</span>
+                <span class="icon-uniE622"></span>
+            </a>
+            <ul data-target="dropdown" class="dropdown-options mobile">
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/login') ?>';" class="efirst"><span><?= $block->escapeHtml(__('Login')) ?></span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/create') ?>';"><span><?= $block->escapeHtml(__('Create Account')) ?></span></a>
+                </li>
+            </ul>
+    <?php endif;?>
+   </div>
+   <span class="icon-uniE627"></span>
+</div>

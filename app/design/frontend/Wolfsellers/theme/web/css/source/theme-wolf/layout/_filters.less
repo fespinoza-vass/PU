@@ -1,3 +1,260 @@
-& when (@media-common = true) {
-	
+& when (@media-common =true) {
+    .filter-active{
+        div.page-wrapper{
+            margin-top: 0;
+            height: auto;
+            visibility: visible;
+            .sidebar.sidebar-main{
+                position: relative;
+                z-index: 9999;
+            }
+            .filter {
+                position: relative;
+                visibility: visible;
+                z-index: 99;
+                .filter-title {
+                    border-bottom: 1px solid @gray5;
+                    height: 48px;
+                    left: 0;
+                    position: fixed;
+                    right: 0;
+                    top: 0;
+                    z-index: 2;
+                }
+                .filter-options {
+                    background: @white;
+                    bottom: 0;
+                    display: block;
+                    left: 0;
+                    overflow: scroll;
+                    position: fixed;
+                    right: 0;
+                    top: 50px;
+                    z-index: 10;
+                }
+            }
+            .btn-filter{
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 10px;
+                background: @white;
+                .icon-filter{
+                    ~ span{
+                        font-size: 1.6rem;
+                        margin-left: 10px;
+                        .lib-icon-font(
+                            @_icon-font-content: @icon-remove,
+                            @_icon-font-size: 1.5rem,
+                            @_icon-font-line-height: 1,
+                            @_icon-font-color: @black,
+                            @_icon-font-position: after,
+                        );
+                        &:after{
+                            position: absolute;
+                            right: 10px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            float: right;
+                        }
+                    }
+                }
+            }
+            .block-title.filter-title{
+                display: none;
+            }
+        }
+    }
+
+    .sidebar-main {
+        .filter {
+            .filter-content {
+                .block-subtitle {
+                    border-radius: 12px 12px 0px 0px;
+                    justify-content: center;
+                    align-items: center;
+                    background: @black;
+                    .lib-font-size(16);
+                    padding: 19px 0;
+                    color: @white;
+                    display: flex;
+
+                    &::before {
+                        font-family: "theme-icons";
+                        content: @icon-filter;
+                        margin: 0 7px 0;
+                        color: @white;
+                    }
+                }
+
+                .filter-options{
+                    border-radius: 0 0 12px 12px;
+                    background: @white;
+                    .lib-font-size(16);
+                    padding: 30px;
+
+                    .filter-options-item{
+                        .filter-options-title{
+                            text-transform: capitalize;
+                            FONT-WEIGHT: 400;
+
+                            &::after{
+                                color: @lines-input;
+                                .lib-font-size(12);
+                            }
+                        }
+
+                        .amshopby-search-box{
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .filter-title{
+                strong{
+                    border-radius: 13px;
+                    background: @black;
+                    .lib-font-size(16);
+                    padding: 5px 8px;
+                    box-shadow: none;
+                    display: flex;
+                    color: @white;
+                    border: none;
+
+                    &::before{
+                        font-family: "theme-icons";
+                        content: @icon-filter;
+                        margin: 0 5px 0;
+                        color: @white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    &.page-products {
+        .page-wrapper {
+            .columns {
+                .sidebar-main {
+                    order: 2;
+                }
+            }
+        }
+
+        &.filter-active{
+            .page-wrapper{
+                .page-main{
+                    .columns{
+                        .sidebar-main{
+                            .filter{
+                                .filter-title{
+                                    background: @white;
+                                    border: none;
+
+                                    strong{
+                                        justify-content: space-between;
+                                        background: @white;
+                                        padding: 17px 24px;
+                                        color: @black;
+                                        height: 100%;
+                                        left: 0;
+                                        top: 0;
+
+                                        &::before{
+                                            content: none;
+                                        }
+
+                                        &::after{
+                                            overflow: visible;
+                                        }
+                                    }
+                                }
+
+                                .filter-content{
+                                    display: block;
+
+                                    .filter-subtitle{
+                                        background: transparent;
+                                        border: none;
+                                    }
+
+                                    .filter-options{
+                                        padding: 60px 40px 20px;
+                                        top: 0;
+                                        input[type='checkbox'] + .amshopby-choice:after{
+                                            background-size: 16px;
+                                            height: 16px;
+                                            width: 16px;
+                                            top: 7px;
+                                        }
+
+                                        .filter-options-item{
+                                            border: none;
+
+                                            .filter-options-title{
+                                                border-bottom: 1px solid @lines-input;
+                                                padding: 10px 40px 8px 0;
+                                                font-weight: 600;
+
+                                                &::after{
+                                                    .lib-font-size(16);
+                                                    right: 0;
+                                                }
+                                            }
+
+                                            .filter-options-content{
+                                                padding: 5px 0;
+
+                                                form{
+                                                    margin: 10px 0 0;
+                                                }
+
+                                                ol, ul{
+                                                    box-shadow: none;
+                                                    margin: 0;
+
+                                                    li{
+                                                        flex-direction: row;
+                                                        align-items: center;
+                                                        padding: 4px 0;
+                                                        display: flex;
+
+                                                        a{
+                                                            padding: 0 0 0 7px;
+                                                            order: 1;
+                                                        }
+
+                                                        span{
+                                                            position: initial;
+                                                            min-height: 16px;
+                                                            height: 16px;
+                                                            padding: 0;
+
+                                                            &::before{
+                                                                position: initial;
+                                                                height: 16px;
+                                                                width: 16px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

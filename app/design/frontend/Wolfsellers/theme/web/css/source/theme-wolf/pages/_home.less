@@ -1,3 +1,251 @@
+//
+// Common
+//  ---------------------------------------------
 & when (@media-common = true) {
-	
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            .page-main{
+                padding-left: 0;
+                padding-right: 0;
+                .columns{
+                    .column.main{
+                        .row-slider-first{
+                            margin-bottom: 35px;
+                            > div{
+                                .pagebuilder-slide-wrapper{
+                                    padding-bottom: 100%;
+                                }
+                            }
+                        }
+                        padding-bottom: 0;
+                        > .ambanners{
+                    		display: none;
+                    	}
+                        .row-product-one-product{
+                            background-color: @white;
+                            .pagebuilder-column-group{
+                                .column-img-one-product{
+                                    .img-block{
+                                        img{
+                                            float: left;
+                                            width: 100%;
+                                        }
+                                    }
+                                }
+                                .column-one-product{
+                                    margin-bottom: 30px;
+                                    padding: 15px;
+                                    figure{
+                                        display: flex;
+                                        height: 60px;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
+                                }
+                            }
+                            &.row-mobile-one-product{
+                                .pagebuilder-column-group{
+                                    .column-one-product{
+                                        order: 2;
+                                        margin-bottom: 30px;
+                                        padding: 0;
+                                        figure{
+                                            display: flex;
+                                            height: 60px;
+                                            justify-content: center;
+                                            align-items: center;
+                                        }
+                                    }
+                                }
+                            }
+                            .block.widget{
+                            	.products-grid{
+                            		.widget-product-grid.product-items .product-item{
+                            			width: auto;
+                            			box-shadow: none;
+                                        max-width: 394px;
+                            			&:hover{
+                            				box-shadow: none;
+                            			}
+                                        .lib-attr;
+                            		}
+                            	}
+                            }
+                        }
+                        .row-footer-icons{
+                            padding: 10px;
+                            background-color: @white;
+                            margin-top: 50px;
+                            .footer-icons{
+                                ul{
+                                    li{
+                                        width: 50%;
+                                        float: left;
+                                        text-align: center;
+                                        padding: 10px;
+                                        a{
+                                            span{
+                                                &::after{
+                                                    background-position-x: center !important;
+                                                    background-size: contain !important;
+                                                    display: block;
+                                                    height: 46px;
+                                                    content: ' ';
+                                                }
+                                                &.icon-envios{
+                                                    &::after{
+                                                        background: url("../images/envios.png") no-repeat;
+                                                    }
+                                                }
+                                                &.icon-compra{
+                                                    &::after{
+                                                        background: url("../images/compra.png") no-repeat;
+                                                    }
+                                                }
+                                                &.icon-promociones{
+                                                    &::after{
+                                                        background: url("../images/promociones.png") no-repeat;
+                                                    }
+                                                }
+                                                &.icon-regalo{
+                                                    &::after{
+                                                        background: url("../images/regalo.png") no-repeat;
+                                                    }
+                                                }
+                                            }
+                                            p{
+                                                font-size: 18px;
+                                                color: @black;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .row-home{
+                            margin: 15px;
+                        }
+                        h2{
+                            font-size: 22px;
+                            font-weight: bold;
+                            margin: 15px 0;
+                        }
+                    }
+                }
+            }
+            .page-bottom{
+                display: none;
+            }
+            .page-footer{
+                margin-top: unset;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column.main{
+                        .row-slider-first{
+                            width: 100vw;
+                            margin-left: ~"calc(50% - 50vw)";
+                            > div{
+                            	max-width: @layout-maxwidth;
+                            	margin: auto;
+                            	.pagebuilder-slide-wrapper{
+                            		padding-bottom: 34.8%;
+                            	}
+                            }
+                        }
+                        .row-product-one-product{
+                            width: 100vw;
+                            margin-left: ~"calc(50% - 50vw)";
+                            &.row-mobile-one-product{
+                                .pagebuilder-column-group{
+                                    .column-one-product{
+                                        order: unset;
+                                    }
+                                }
+                            }
+                            .column-one-product{
+                                margin-bottom: unset;
+                                padding: 0;
+                            }
+                        }
+                        .row-footer-icons{
+                            width: 100vw;
+                            margin-left: ~"calc(50% - 50vw)";
+                            .footer-icons{
+                                margin: auto;
+                                width: 85%;
+                                ul{
+                                    display: flex;
+                                    align-content: center;
+                                    justify-content: space-around;
+                                    height: 210px;
+                                    align-items: center;
+                                    font-size: 22px;
+                                    text-align: center;
+                                    max-width: 1386px;
+                                    margin: 0 auto !important;
+                                    li{
+                                        width: unset;
+                                        float: unset;
+                                        text-align: center;
+                                        a{
+                                            span{
+                                                &::after{
+                                                    background-position-y: bottom !important;
+                                                    height: 115px;
+                                                    margin: auto;
+                                                }
+
+                                                &.icon-envios{
+                                                    &::after{
+                                                        max-width: 120px;
+                                                    }
+                                                }
+                                                &.icon-compra{
+                                                    &::after{
+                                                        max-width: 90px;
+                                                    }
+                                                }
+                                                &.icon-promociones{
+                                                    &::after{
+                                                        max-width: 95px;
+                                                    }
+                                                }
+                                                &.icon-regalo{
+                                                    &::after{
+                                                        max-width: 90px;
+                                                    }
+                                                }
+                                            }
+                                            p{
+                                                font-size: 22px;
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                        .row-home{
+                            margin: 30px 0;
+                        }
+                        h2{
+                            font-size: 32px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -1,3 +1,179 @@
+@navigation__background: @primary;
+@navigation-desktop-level0-item__color: @white;
+@navigation-desktop-level0-item__hover__color: @a-hovers;
+
 & when (@media-common = true) {
-	
+	section.ammenu-menu-wrapper{
+		margin-bottom: 0;
+		.ammenu-items.-root{
+			justify-content: center;
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){	
+	section.ammenu-menu-wrapper{
+		.ammenu-nav-sections.-topmenu{
+			.ammenu-items.-root{
+				> .ammenu-item > .ammenu-link{
+					background: @black !important;
+					text-transform: uppercase;
+					font-family: @font-second;
+					color: @white !important;
+					position: relative;
+					padding: 8px 20px;
+					font-weight: 400;
+					font-size: 1.4rem;
+
+					.lib-icon-font(
+                        @_icon-font-content: @icon-down,
+                        @_icon-font-size: 1.2rem,
+                        @_icon-font-color: @white,
+                        @_icon-font-position: after,
+                        @_icon-font-display: inline-block
+                    );
+                    &:after{
+                    	position: absolute;
+                    	right: 0;
+                    	top: 50%;
+                    	transform: translateY(-50%);
+                    }
+				}
+			}
+		}
+		.ammenu-category-columns{
+			.ammenu-category-tree{
+				&.-col-4{
+					padding: 0 35px 35px 0;
+					max-width: 50%;
+				}
+				.ammenu-title{
+					border-bottom: 1px solid @lines-input;
+					text-transform: uppercase;
+					font-size: 1.4rem;
+					font-weight: 500;
+					margin: 0 0 8px;
+					~ .ammenu-list{
+						> li  > a{
+							font-size: 1.4rem;
+							font-weight: 100;
+							padding: 0 0 5px;
+
+							&.-all-link{
+								display: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+	section.ammenu-menu-wrapper{
+		position: relative;
+		z-index: 99999;
+ // AMASTY importants
+		.ammenu-nav-sections.-sidebar{
+			width: 85vw;
+			background: @white !important;
+			&:before {
+			    content: "MENÚ DE CATEGORÍAS";
+			    display: block;
+			    margin: 15px 0 30px 0;
+			    padding: 0px 20px;
+			    font-size: 1.6rem;
+			    font-weight: 500;
+			    font-family: @font-second;
+			}
+			.ammenu-menu-title,
+			.ammenu-tabs-list{
+				display: none;
+			}
+			> .ammenu-items{
+				// AMASTY importants
+				> li > a{
+					color: #000 !important;
+				    border-bottom: 1px solid @gray-D8 !important;
+				    font-weight: 500 !important;
+				    text-transform: uppercase;
+				    font-size: 1.6rem;
+				    font-family: @font-second;
+				    padding: 12px 0 !important;
+				    min-height: auto !important;
+				    ~ .ammenu-items{
+						.-all-link{
+							display: none;
+						}
+				    	> li > a{
+				        	color: #000 !important;
+				            border-bottom: 0 !important;
+				            font-weight: 500 !important;
+				            text-transform: uppercase;
+				            text-decoration: none !important;
+				            font-size: 1.6rem;
+				            font-family: @font-second;
+				            padding: 10px 0 !important;
+							min-height: auto !important;
+				            ~ .ammenu-items{
+				            	padding: 0 20px !important;
+				            	> li > a{
+				                	color: #000 !important;
+				                    font-weight: 500 !important;
+				                    text-transform: normal;
+				                    font-size: 1.2rem !important;
+			                        padding: 3px 0 !important;
+			                        min-height: auto !important;
+			                        text-decoration: none !important;
+			                        margin: 0;
+				            	}
+				            }
+				    	}
+				    }
+				}
+
+				> .ammenu-item > {
+					.ammenu-items > {
+						.ammenu-item > {
+							.ammenu-items > {
+								.ammenu-item > {
+									.ammenu-items >{
+										padding: 0;
+
+										.ammenu-item {
+											.ammenu-link {
+												min-height: auto;
+												padding: 3px 0;
+
+												.ammenu-text-block{
+													.ammenu-text{
+														.lib-font-size(12);
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}		
+		.ammenu-menu-overlay{
+			z-index: 10;
+			.lib-icon-font(
+			    @_icon-font-content: @icon-remove,
+			    @_icon-font-size: 2rem,
+			    @_icon-font-color: @white,
+			    @_icon-font-position: after
+			);
+			&:after{
+				position: fixed;
+				right: 15px;
+				top: 15px;
+			}
+		}
+	}
 }

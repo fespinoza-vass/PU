@@ -6,17 +6,49 @@
     "license": "OSL-3.0",
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "magento/*": true,
+            "laminas/*": true
+        }
     },
     "repositories": {
         "repo": {
             "type": "composer",
             "url": "https://repo.magento.com"
+        },
+        "amasty": {
+            "type": "composer",
+            "url": "https://composer.amasty.com/enterprise/"
         }
     },
     "require": {
-        "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4",
-        "magento/composer-root-update-plugin": "~1.1"
+        "amasty/checkout-graph-ql": "^1.1",
+        "amasty/feed": "^2.6",
+        "amasty/label": "^2.1",
+        "amasty/mega-menu": "^2.2",
+        "amasty/mega-menu-graphql": "^1.0",
+        "amasty/mega-menu-page-builder": "^1.0",
+        "amasty/module-elastic-search": "^1.13",
+        "amasty/module-elastic-search-graphql": "^1.0",
+        "amasty/module-magento-custom-form": "^1.17",
+        "amasty/module-one-step-checkout-pro-package": "^2.0",
+        "amasty/module-promo-banners": "^1.1",
+        "amasty/module-promo-countdown": "^1.1",
+        "amasty/module-shipping-bar": "^1.1",
+        "amasty/module-shop-by-brand-graphql": "^1.0",
+        "amasty/module-special-promo-pro": "^2.8",
+        "amasty/module-store-locator": "^2.5",
+        "amasty/product-labels-graphql": "^1.0",
+        "amasty/product-tabs": "^1.2",
+        "amasty/promo": "^2.11",
+        "amasty/shopby": "^2.17",
+        "amasty/shopby-graphql": "^1.0",
+        "amasty/sorting": "^2.10",
+        "laminas/laminas-log": "^2.15",
+        "magento/composer-root-update-plugin": "~1.1",
+        "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.5",
+        "wolfsellers/module-enabledisabletfa": "^1.0"
     },
     "suggest": {
         "ext-pcntl": "Need for run processes in parallel mode"

@@ -152,14 +152,14 @@
 	
 	input[type='radio'] + label:after{
 		content: "";
-		width: 12px;
-		height: 12px;
+		width: 22px;
+		height: 22px;
 		background: transparent;
 		border: 1px solid @black;
 		border-radius: 100%;
 		position: absolute;
 		left: 0;
-		top: 4px;
+		top: -2px;
 		z-index: 1;
 		box-sizing: border-box;
 		transition: all @time3 cubic-bezier(.4,.0,.23,1);
@@ -168,7 +168,7 @@
 	
 	input[type='radio']:checked + label:after {
 		border: 1px solid @primary;
-		background: @primary;
+		background: @white;
 		animation: rfxbg 200ms cubic-bezier(.4,.0,.23,1);
 		transition: all @time3 cubic-bezier(.4,.0,.23,1);
 	}
@@ -176,13 +176,13 @@
 	input[type='radio']:checked + label:before{
 		content: "";
 		position: absolute;
-		top: 7px;
-		left: 3px;
+		top: 2px;
+		left: 4px;
 		animation: rcheckarrow @time2;
 		z-index: 2;
-		height: 6px;
-		width: 6px;
-		background: @white;
+		height: 14px;
+		width: 14px;
+		background: @black;
 		border-radius: 100%;
 	}
 	
@@ -259,6 +259,19 @@
 	}
 }
 
+.lib-two-columns(){
+	> .field:not(.choice){
+		@media @mdmin{
+			float: left;
+			margin-left: 2%;
+			width: calc(~'(100% - 2%)/2');
+			&:nth-child(2n+1){
+				margin-left: 0;
+			}
+		}
+	}
+}
+
 .lib-center-element(
 	@eleft: 50%,
 	@etop: 50%,
@@ -274,4 +287,136 @@
 	bottom: @ebottom;
     transform: translate(@x,@y);
 	position: @position;
+}
+
+.lib-pulseefx(){
+	@media @mdmin{
+		&:hover{
+		    transform-origin: 0 100%;
+		    animation: pulse 1s infinite;
+		    transform-origin: center;
+		}
+		&:hover::before{
+		    color: @primary;
+		    transform-origin: center;
+		    animation: pulsecolor 1s infinite;
+		}
+	}
+	@keyframes pulse {
+	    10% {transform: scale(1.1)}
+	}
+
+	@keyframes pulsecolor {
+	  10% {color: @primary}
+	}
+}
+
+.lib-attr(){
+	.swatch-attribute{
+		float: left;
+		width: 100%;
+		.swatch-attribute-label{
+			font-size: 2rem;
+		    font-weight: 500;
+		    text-transform: uppercase;
+		}
+		&.color{
+			.swatch-option{
+				background-size: 100% !important;
+				width: 32px !important;
+				height: 32px !important;
+				border: 1px solid @gray-D8;
+				border-radius: @radiusitems;
+				transition: all @time5;
+				&:hover{
+					transition: all @time5;
+				}
+				&:last-child{
+					margin-right: 0;
+				}
+			}
+		}
+		&.size{
+			.swatch-option{
+				border: 1px solid @gray-D8;
+				border-radius: @radiusitems;
+				padding: 5px 10px;
+			    height: auto;
+			    background: transparent;
+			    color: @primary;
+			    transition: all @time5;
+			    &:not(.disabled):hover{
+			    	outline: 0;
+			    	border-color: @primary;
+			    	transition: all @time5;
+			    }
+			}
+		}
+		&.tamano{
+			.swatch-option{
+				border: 1px solid @gray-D8;
+				border-radius: @radiusitems;
+				padding: 15px 10px;
+			    height: auto;
+			    background: transparent;
+			    color: @primary;
+			    height: auto !important;
+			    width: auto !important;
+			    transition: all @time5;
+			    display: flex;
+			    align-items: center;
+			    img{
+			    	float: left;
+			    	width: 100%;
+			    	max-width: 35px;
+			    }
+			    &:not(.disabled):hover{
+			    	outline: 0;
+			    	border-color: @primary;
+			    	transition: all @time5;
+			    }
+				&:after{
+					content: attr(aria-label);
+					text-align: center;
+					font-size: 1.4rem;
+					font-weight: bold;
+					color: @black;
+				}
+			}
+		}
+	}
+}
+
+.lib-actions-product(){
+    .product-item-actions{
+        margin: 0;
+        .actions-primary{
+            button.primary{
+                font-size: 1.8rem;
+                border-radius: @radiusitems;
+                text-transform: uppercase;
+                font-weight: 500;
+                @media @xsmax{
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        .actions-secondary{
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            z-index: 10;
+            .towishlist{
+                line-height: 1;
+                display: none;
+                &:before{
+                    font-size: 2rem;
+                    overflow: initial;
+                }
+            }
+            a.action.tocompare{
+                display: none;
+            }
+        }
+    }
 }

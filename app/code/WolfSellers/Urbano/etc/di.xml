@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="UrbanoLoggerHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/urbano.log</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="UrbanoLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="sytem" xsi:type="object">UrbanoLoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="WolfSellers\Urbano\Service\ApiService">
+        <arguments>
+            <argument name="logger" xsi:type="object">UrbanoLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="WolfSellers\Urbano\Model\Carrier\Urbano">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="logger" xsi:type="object">UrbanoLogger</item>
+                <item name="api_client" xsi:type="object">WolfSellers\Urbano\Service\ApiService</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Magento\Shipping\Model\Shipping\LabelGenerator"
+                type="WolfSellers\Urbano\Model\Shipping\LabelGeneratorPreference"/>
+</config>

@@ -23,3 +23,5 @@
 !/update/.htaccess
 !/README.md
 !/op-exclude.txt
+auth.json
+.gitignore

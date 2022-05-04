@@ -4,22 +4,26 @@
 
 //  Base Font
 
-@font-family-name__base:'Wolf', sans-serif;
+@font-family-name__base:'Open Sans', sans-serif;
 @font-wolf: @font-family-name__base;
 @font-family__base: @font-family-name__base;
 @text__color: @black;
 // Second Font
-@font-second:'Roboto', sans-serif;
+@font-second: "Helvetica neue", Helvetica, sans-serif;
 
 // Icons Font
 
-// @icons__font-path: "@{baseDir}fonts/icons/wolf-icons";
-// @icons__font-name: 'wolf-icons';
+@icons__font-path: "@{baseDir}fonts/icons/theme-icons";
+@icons__font-name: 'theme-icons';
 
 @layout__max-width: 1386px;
+@layout-maxwidth: 1600px;
+@layout-width: 928px;
+@ammenu-menu__max-width: @layout__max-width;
 
 @radius4: 4px;
 @radius8: 8px;
+@radiusitems: 12px;
 
 @boxshadow: 0px 0px 6px @black;
 
@@ -30,37 +34,36 @@
 @time4: .4s;
 @time5: .5s;
 
+@lgmin: ~"only screen and (min-width: 1024px)";
+@lgmax: ~"only screen and (max-width: 1024px)";
 @mdmin: ~"only screen and (min-width: 768px)";
 @mdmax: ~"only screen and (max-width: 768px)";
 @xsmin: ~"only screen and (min-width: 480px)";
 @xsmax: ~"only screen and (max-width: 480px)";
+@xxsmin: ~"only screen and (min-width: 320px)";
+@xxsmax: ~"only screen and (max-width: 320px)";
+
+@screen__ml: 980px;
 
 @checkout-shipping-item__border: 1px solid transparent;
 
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Light.ttf');
-    font-weight: 100;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'wolf';
+//     src: url('@{baseDir}fonts/Helvetica.ttf');
+//     font-weight: normal;
+//     font-style: normal;
+// }
 
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Regular.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'wolf';
+//     src: url('@{baseDir}fonts/HelveticaLight.ttf');
+//     font-weight: 100;
+//     font-style: normal;
+// }
 
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Medium.ttf');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'wolf';
-    src: url('@{baseDir}fonts/Montserrat-Bold.ttf');
-    font-weight: bold;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'wolf';
+//     src: url('@{baseDir}fonts/HelveticaBold.ttf');
+//     font-weight: bold;
+//     font-style: normal;
+// }

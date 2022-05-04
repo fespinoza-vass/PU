@@ -1,3 +1,162 @@
 & when (@media-common = true) {
-	
+	.toolbar.toolbar-products{
+        @media @mdmin{
+            margin-top: -5px;
+        }
+        .btn-filter{
+            &:not(.active){
+                background: @black;
+                margin: 15px auto 0;
+                border-radius: 12px;
+                font-size: 1.6rem;
+                padding: 5px 8px;
+                color: @white;
+                width: 130px;
+                display: inline-block;
+            }
+            @media @mdmin{
+                display: none !important;
+            }
+        }
+        ~ .toolbar.toolbar-products{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .btn-filter{
+                .lib-visually-hidden;
+            }
+        }
+        .field.limiter,
+        .toolbar-amount{
+            display: none;
+        }
+        .toolbar-sorter{
+            select {
+                background-color: @white;
+                box-shadow: none;
+                border: 0;
+                height: 32px;
+                padding-left: 10px;
+                border-radius: @radiusitems;
+                padding-right: 30px;
+            }
+            a.sorter-action{
+                display: none;
+            }
+        }
+        .pages{
+        	width: 100%;
+            .pages-items{
+            	padding: 0;
+                .item{
+                    strong.page,
+                    a.page{
+                        padding: 10px 13px;
+                        color: @black;
+                        line-height: 1;
+                        background: @white;
+                        border-radius: @radiusitems;
+                        @media @mdmin{
+                        	&:hover{
+                        		background: @black;
+                        		color: @white;
+                        	}
+                        }
+                    }
+                    a.action{
+                        background: transparent;
+                        box-shadow: none;
+                        transition: all @time3;
+                        .label ~ span{
+                            .lib-visually-hidden-reset;
+                            color: @black;
+
+                        }
+                        &:before{
+                            float: left;
+                            font-size: 1.2rem;
+                            width: 32px;
+                            background: @white;
+                            margin-right: 10px;
+                            border-radius: @radiusitems;
+                        }
+                        &.previous{
+                            &:before{
+                                float: left;
+                                margin-left: 0;
+                                margin-right: 5px;
+                            }
+                        }
+                        @media @mdmin{
+                        	&:hover::before{
+                        		transition: all @time3;
+                        		background: @black;
+                        		color: @white;
+                        	}
+                        }
+                    }
+                    &.current{
+                        strong.page{
+                            background: @primary;
+                            color: @white;
+                        }
+                    }
+                    &.pages-item-next{
+                    	position: static;
+                    	a.action{
+                    		padding: 0;
+                    		margin: 0;
+                    	}
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .page-with-filter{
+        .page-wrapper{
+            .breadcrumbs{
+                display: none;
+            }
+            .columns{
+                .column.main{
+                    padding: 0;
+
+                    .ambanners{
+                        margin: 0;
+                    }
+                }
+
+                .sidebar-main{
+                    .filter-title{
+                        .lib-visually-hidden;
+                        strong{
+                            left: 16px;
+                            top: 94px;
+                        }
+                    }
+
+                    .filter{
+                        .filter-content{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .toolbar.toolbar-products{
+            .toolbar-sorter{
+                position: initial;
+                margin: 16px 0 0;
+                float: left;
+                width: 100%;
+                .sorter-options{
+                    padding-right: 25px;
+                }
+            }
+        }
+    }
 }
