@@ -51,12 +51,12 @@ require([
             $('.products-related .product-items').not('.slick-initialized').slick(optionsCarrusels);
             $('.products-upsell .product-items').not('.slick-initialized').slick(optionsCarrusels);
             $('.amshopby-morefrom .product-items').not('.slick-initialized').slick(optionsCarrusels);
-            $('.products-upsell .product-items').slick('refresh');
-            $('.products-upsell .product-items').slick('reinit');
-            $('.products-upsell .product-items').slick('resize');
-            $('.products-upsell .product-items')[0].slick.refresh()
 
-          });
+        });
+
+        setTimeout(function(){
+            $('.products-upsell .product-items').slick('reinit');
+        }, 1500);
 
         $('.page-with-filter .product-item-info').hover(function () {
                 // over
