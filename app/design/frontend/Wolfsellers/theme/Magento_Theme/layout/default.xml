@@ -7,10 +7,10 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="header-wrapper">                
-            <block class="Magento\Framework\View\Element\Template" name="links.login" template="Magento_Theme::html/header/loginaccount.phtml" before="minicart" />
+        <referenceContainer name="header-wrapper">
+            <block class="WolfSellers\Customer\Block\LoginAccount" name="links.login" template="Magento_Theme::html/header/loginaccount.phtml" before="minicart" />
         </referenceContainer>
-       
+
         <referenceContainer name="footer">
             <container name="footer-pu" as="footer-pu" label="Footer perfumes" htmlTag="div" htmlClass="footer-perfumes">
                 <block class="Magento\Cms\Block\Block" name="footer-perfumes-cms" before="form.subscribe">
