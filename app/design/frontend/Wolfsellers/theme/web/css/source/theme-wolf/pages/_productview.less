@@ -91,6 +91,7 @@
 					display: flex;
 					flex-direction: column;
 					position: relative;
+					margin-bottom: 15px;
 					.product-manufacturer-main-tit{
 						.value{
 							font-size: 2.2rem;
@@ -414,6 +415,9 @@
 					.column.main{
 						padding-bottom: 0;
 						min-height: auto;
+						.review-title{
+							overflow: hidden;
+						}
 						.table-wrapper{
 							margin-bottom: 0;
 						}
@@ -422,7 +426,8 @@
 			}
 			.review-add,
 			.block.related,
-			.block.upsell{
+			.block.upsell,
+			.amshopby-morefrom{
 				display: block;
 				width: 100%;
 				max-width: @layout__max-width;

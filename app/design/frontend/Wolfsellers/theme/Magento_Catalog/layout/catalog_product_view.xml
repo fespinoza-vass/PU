@@ -11,7 +11,8 @@
         <move element="product.info.upsell" destination="page.wrapper" before="page.bottom.container" />
         <move element="reviews.tab" destination="page.wrapper" before="page.bottom.container" />
         <move element="product.info.details.after.wrapper" destination="product.info.description.wrapper" before="-" />
-        <move element="amasty.shipbar.bottom" destination="content" before="time.calculate" />
+        <move element="product.info.amshopby.morefrom" destination="page.wrapper" after="product.info.details.wrapper" />
+        <move element="amasty.shipbar.bottom" destination="content" before="transaccion.segura" />
         <referenceContainer name="content">
             <container name="product.manufacturer" htmlTag="div" htmlClass="product-manufacturer-main" before="product.info.main">
                 <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.manufacturer" template="Magento_Catalog::product/view/attribute.phtml">
