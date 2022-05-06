@@ -1,26 +1,14 @@
+<?php
+/**
+* @var \WolfSellers\Customer\Block\LoginAccount $block
+*/
+?>
 <div class="cont-loginaccount">
-    <?php 
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $customerSession = $objectManager->create('Magento\Customer\Model\Session');
-        /** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
-        if($customerSession->isLoggedIn()) : ?>
+    <?php if ($block->customerLoggedIn()) { ?>
         <div class="loginbtns">
             <div>
                 <span><?= $block->escapeHtml(__('Welcome')) ?>, </span>
-                <?php
-                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                    $customerSession = $objectManager->create('Magento\Customer\Model\Session');
-
-                    if ($customerSession->isLoggedIn()) {
-                    $customerSession->getCustomerId();  // get Customer Id
-                    $customerSession->getCustomerGroupId();
-                    $customerSession->getCustomer();
-                    $customerSession->getCustomerData();
-
-                    echo $customerSession->getCustomer()->getName();  // get  Full Name
-                    // echo $customerSession->getCustomer()->getEmail(); // get Email
-                    }
-                ?>
+                <?php echo $block->getFullname(); ?>
             </div>
             <a data-mage-init='{"dropdown":{}}' data-toggle="dropdown" class="ddaccount action" data-action="customer-menu-toggle">
                 <span><?= $block->escapeHtml(__('My Account')) ?></span>
@@ -40,7 +28,8 @@
                     <a onclick="location.href = '<?php echo $block->getUrl('customer/account/logout') ?>';"><span><?= $block->escapeHtml(__('Logout')) ?></span></a>
                 </li>
             </ul>
-        <?php else: ?>
+        </div>
+    <?php } else { ?>
         <div class="loginbtns logout">
             <a href="<?php echo $block->getUrl('customer/account/login') ?>" class="efirst"><span><?= $block->escapeHtml(__('Login')) ?></span></a>
             <a href="<?php echo $block->getUrl('customer/account/create') ?>"><span><?= $block->escapeHtml(__('Create Account')) ?></span></a>
@@ -56,7 +45,7 @@
                     <a onclick="location.href = '<?php echo $block->getUrl('customer/account/create') ?>';"><span><?= $block->escapeHtml(__('Create Account')) ?></span></a>
                 </li>
             </ul>
-    <?php endif;?>
-   </div>
-   <span class="icon-uniE627"></span>
+        </div>
+    <?php } ?>
+    <span class="icon-uniE627"></span>
 </div>
