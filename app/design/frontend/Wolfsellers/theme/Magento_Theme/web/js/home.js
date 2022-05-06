@@ -12,7 +12,7 @@ require([
             arrows: true,
             infinite: false,
             speed: 300,
-            autoplay: false,
+            autoplay: true,
             slidesToShow: 5,
             slidesToScroll: 1,
             responsive: [{
@@ -21,7 +21,7 @@ require([
                     slidesToShow: 2,
                     slidesToScroll: 1,
                     arrows: true,
-                    dots: false
+                    dots: true
                 }
             }]
         });
@@ -33,7 +33,7 @@ require([
             autoplay: false,
             infinite: true,
             arrows: true,
-            dots: false,
+            dots: true,
             speed: 300,
             responsive: [{
                 breakpoint: 768,
@@ -42,7 +42,7 @@ require([
                     slidesToShow: 3,
                     autoplay: true,
                     arrows: true,
-                    dots: false
+                    dots: true
                 }
             }]
         });
@@ -70,7 +70,8 @@ require([
                 {
                     breakpoint: 666,
                     settings: {
-                        slidesToShow: 2
+                        slidesToShow: 2,
+                        arrows: false,
                     }
                 }
             ]
