@@ -11,7 +11,7 @@
         <move element="product.info.upsell" destination="page.wrapper" before="page.bottom.container" />
         <move element="reviews.tab" destination="page.wrapper" before="page.bottom.container" />
         <move element="product.info.details.after.wrapper" destination="product.info.description.wrapper" before="-" />
-        <move element="product.info.amshopby.morefrom" destination="page.wrapper" after="product.info.details.wrapper" />
+        <move element="product.info.amshopby.morefrom" destination="page.wrapper" before="product.info.upsell" />
         <move element="amasty.shipbar.bottom" destination="content" before="transaccion.segura" />
         <referenceContainer name="content">
             <container name="product.manufacturer" htmlTag="div" htmlClass="product-manufacturer-main" before="product.info.main">
