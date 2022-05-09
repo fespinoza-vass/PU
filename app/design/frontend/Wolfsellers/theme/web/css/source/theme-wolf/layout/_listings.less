@@ -40,7 +40,9 @@
                             button.slick-prev.slick-arrow,
                             button.slick-next.slick-arrow,
                             ul.slick-dots{
-                                .lib-visually-hidden;
+                                @media @mdmin{
+                                    .lib-visually-hidden;
+                                }
                             }
                         }
                     }
@@ -116,6 +118,10 @@
                                     .amlabel-position-wrapper{
                                         left: 20px !important;
                                         top: 10px !important;
+                                        @media @lgmax{
+                                            left: 5px !important;
+                                            top: 5px !important;
+                                        }
                                         .amasty-label-container:not(.-preview){
                                             height: 24px !important;
                                             line-height: 24px !important;
