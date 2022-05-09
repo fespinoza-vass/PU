@@ -69,12 +69,18 @@
                 <strong class="product-item-name" data-bind="text: $parent.name"></strong>
                 <div class="details-qty amcheckout-qty">
                     <span class="label"><!-- ko i18n: 'Qty' --><!-- /ko --></span>
+                    <button type="button" class="decrease-qty-item" data-bind="click: decreaseQty.bind($data, $parent)">
+                        -
+                    </button>
                     <!-- ko if: isDecimal($parent) -->
                     <input class="qty" type="number" step="0.1"  name="qty" data-bind="value: $parent.qty" autocomplete="off">
                     <!-- /ko -->
                     <!-- ko ifnot: isDecimal($parent) -->
                     <input class="qty" type="number" step="1"  name="qty" data-bind="value: $parent.qty" autocomplete="off">
                     <!-- /ko -->
+                    <button type="button" class="increase-qty-item" data-bind="click: increaseQty.bind($data, $parent)">
+                        +
+                    </button>
                 </div>
             </div>
             <if args="isShowUnitPrice">
