@@ -6,6 +6,29 @@
 		.page-wrapper{
 			.page-main{
 				.column.main{
+					.free-gift-mailt{
+						float: left;
+						width: 100%;
+						padding: 20px;
+						border-radius: @radiusitems;
+						background: @white;
+						margin-bottom: 20px;
+						display: flex;
+						justify-content: center;
+						border: 1px solid @black;
+						> div{
+							display: flex;
+							align-items: center;
+							span:not(.icon-gift){
+								font-size: 3.2rem;
+								font-weight: 100;
+							}
+							.icon-gift:before{
+								font-size: 4rem;
+								margin-right: 10px;
+							}
+						}
+					}
 					> .ambanners{
 						display: none;
 						~ .ambanners{

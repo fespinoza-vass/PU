@@ -7,6 +7,9 @@
 
 <?php if ($block->hasFreeGift()) { ?>
     <div class="free-gift-mailt">
-        <?php echo $escaper->escapeHtml(__('Get a gift when you buy this product.')); ?>
+        <div>
+            <span class="icon-gift"></span>
+            <span><?php echo $escaper->escapeHtml(__('Get a gift when you buy this product.')); ?></span>
+        </div>
     </div>
 <?php } ?>
