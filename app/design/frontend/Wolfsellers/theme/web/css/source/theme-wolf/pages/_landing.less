@@ -1,3 +1,51 @@
-& when (@media-common = true) {
-	
+& when (@media-common =true) {
+    [att*=cms-dior] {
+        .page-wrapper {
+            .columns {
+                .column {
+                    .menu-ms {
+                        .custom-menu {
+                            ul {
+                                li {
+                                    a {
+                                        FONT-WEIGHT: 700;
+                                        color: @white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//DESKTOP//
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    [att*=cms-dior] {
+        .page-wrapper {
+            .columns {
+                .column {
+                    .menu-ms {
+                        .custom-menu {
+                            ul {
+                                justify-content: space-around;
+                                display: flex;
+
+                                li {
+                                    margin: 1rem 0;
+
+                                    a {
+                                        .lib-font-size(16);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
