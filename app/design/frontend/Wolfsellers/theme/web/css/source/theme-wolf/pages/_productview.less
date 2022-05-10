@@ -6,6 +6,32 @@
 		.page-wrapper{
 			.page-main{
 				.column.main{
+					.free-gift-mailt{
+						float: left;
+						width: 100%;
+						padding: 20px;
+						border-radius: @radiusitems;
+						background: @white;
+						margin-bottom: 20px;
+						display: flex;
+						justify-content: center;
+						border: 1px solid @black;
+						> div{
+							display: flex;
+							align-items: center;
+							span:not(.icon-gift){
+								font-size: 3.2rem;
+								font-weight: 100;
+								@media @mdmax{
+									font-size: 1.6rem;
+								}
+							}
+							.icon-gift:before{
+								font-size: 4rem;
+								margin-right: 10px;
+							}
+						}
+					}
 					> .ambanners{
 						display: none;
 						~ .ambanners{
@@ -91,6 +117,7 @@
 					display: flex;
 					flex-direction: column;
 					position: relative;
+					margin-bottom: 15px;
 					.product-manufacturer-main-tit{
 						.value{
 							font-size: 2.2rem;
@@ -231,6 +258,8 @@
 									.input-text.qty{
 										height: 60px;
 										padding: 0 65px;
+										font-size: 2.2rem;
+										font-weight: bold;
 									}
 									div.mage-error{
 										position: absolute;
@@ -263,6 +292,7 @@
 										height: 60px;
 										margin: 0;
 										text-transform: uppercase;
+										font-size: 1.8rem;
 									}
 								}
 							}
@@ -414,6 +444,9 @@
 					.column.main{
 						padding-bottom: 0;
 						min-height: auto;
+						.review-title{
+							overflow: hidden;
+						}
 						.table-wrapper{
 							margin-bottom: 0;
 						}
@@ -422,7 +455,8 @@
 			}
 			.review-add,
 			.block.related,
-			.block.upsell{
+			.block.upsell,
+			.amshopby-morefrom{
 				display: block;
 				width: 100%;
 				max-width: @layout__max-width;

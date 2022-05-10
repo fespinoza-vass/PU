@@ -73,9 +73,30 @@
 			}
 		}
 	}
+	.carousel-releases{
+		flex-direction: row;
+		align-items: center;
+		display: flex;
+
+		.slick-arrow{
+			transform: translate(0, 0);
+			position: initial;
+		}
+
+		.slick-dots{
+			display: block;
+			transform: translateX(-50%);
+			position: absolute;
+			bottom: -20px;
+			padding: 0;
+			left: 50%;
+		}
+	}
 	.page-wrapper main.page-main,
 	.page-wrapper .block.upsell,
-	.page-wrapper [data-content-type="row"] .carrusel{
+	.page-wrapper [data-content-type="row"] .carrusel,
+	.page-wrapper ,
+	.amshopby-morefrom{
 		*:not(.row-slider-first){
 			.product-items.slick-slider{
 				padding: 0 26px;
@@ -176,6 +197,14 @@
 						color: @white;
 					}
 				}
+			}
+
+			.slick-dots{
+				transform: translateX(-50%);
+				position: absolute;
+				bottom: -20px;
+				padding: 0;
+				left: 50%;
 			}
 		}
 	}
