@@ -4,14 +4,38 @@
             .columns {
                 .column {
                     .menu-ms {
-                        .custom-menu {
-                            ul {
+                        background: transparent !important;
+
+                        .menu-dior {
+                            >ul {
                                 li {
-                                    a {
-                                        FONT-WEIGHT: 700;
+                                    background: @black;
+
+                                    span {
+                                        .lib-font-size(18);
+                                        font-weight: bold;
                                         color: @white;
                                     }
+
+                                    ul {
+                                        display: none;
+
+                                        &.se-ve {
+                                            display: block;
+                                        }
+                                    }
                                 }
+                            }
+                        }
+
+                        a,
+                        p {
+                            color: @white;
+                        }
+
+                        .custom-menu {
+                            >ul {
+                                >li {}
                             }
                         }
                     }
@@ -29,16 +53,76 @@
             .columns {
                 .column {
                     .menu-ms {
-                        .custom-menu {
-                            ul {
+                        [data-content-type="html"] {
+                            &:first-child {
+                                z-index: 1;
+                            }
+                        }
+
+                        .carrusel{
+                            margin: 50px 0 0;
+                        }
+
+                        .menu-dior {
+                            margin: 0 0 40px;
+
+                            &::before {
+                                width: -webkit-fill-available;
+                                position: absolute;
+                                background: @black;
+                                display: block;
+                                height: 45px;
+                                content: "";
+                            }
+
+                            >ul {
                                 justify-content: space-around;
+                                position: absolute;
                                 display: flex;
+                                width: 100%;
 
                                 li {
+                                    height: max-content;
+                                    text-align: center;
+                                    min-width: 200px;
                                     margin: 1rem 0;
+                                }
+                            }
 
-                                    a {
-                                        .lib-font-size(16);
+                            a,
+                            p {
+                                .lib-font-size(13);
+                                color: @white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//MOBILE
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    [class*=cms-dior] {
+        .page-wrapper {
+            .columns {
+                .column {
+                    .menu-ms {
+                        .menu-dior {
+                            background: @black;
+
+                            ul{
+                                li{
+                                    margin: 0 0 1rem 23%;
+
+                                    span{
+                                        &::before{
+                                            margin: 0 10px 0 0;
+                                            .lib-font-size(20);
+                                            font-weight: 900;
+                                            content: "+";
+                                        }
                                     }
                                 }
                             }
