@@ -62,4 +62,8 @@ require([
                 $(this).removeClass('zplus');
             }
         );
+        
+        $('.btn-filter').click(function (e) { 
+            $('main.page-main, .sidebar-main').toggleClass('zplus');
+        });
 });	
