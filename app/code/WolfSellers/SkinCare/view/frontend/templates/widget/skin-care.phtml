@@ -1,0 +1,46 @@
+<?php
+/**
+ * @var \WolfSellers\SkinCare\Block\Widget\SkinCare $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<div class="skin-care-content">
+    <script>
+        (function (d,k) {
+            var s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = 'https://plugins-media.makeupar.com/c41059/sdk.js?apiKey=' + k;
+            var x = d.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        })(document, '<?php echo $escaper->escapeHtml($block->getApiKey()); ?>');
+    </script>
+
+    <div id="YMK-module"></div>
+
+    <script>
+        window.ymkAsyncInit = () => {
+            require([
+                'jquery',
+                'WolfSellers_SkinCare/js/skin_care'
+            ], function ($) {
+                $('.skin-care-content').skinCare({
+                    ymk: YMK,
+                    width: <?php echo $block->getWidth(); ?>,
+                    height: <?php echo $block->getHeight(); ?>,
+                    limits: {
+                        ageSpots: <?php echo $block->getAgeSpotsMax(); ?>,
+                        darkCircles: <?php echo $block->getDarkCirclesMax(); ?>,
+                        skinAge: <?php echo $block->getSkinAgeMax(); ?>,
+                        skinHealth: <?php echo $block->getSkinHealthMax(); ?>,
+                        texture: <?php echo $block->getTextureMax(); ?>,
+                        wrinkles: <?php echo $block->getWrinklesMax(); ?>
+                    }
+                });
+            })
+        };
+    </script>
+    <button type="button" class="open-skincare"><?php echo $escaper->escapeHtml(__('Open Skincare')); ?></button>
+    <button type="button" class="analysis-updated"><?php echo $escaper->escapeHtml(__('skinAnalysisUpdated')); ?></button>
+</div>
