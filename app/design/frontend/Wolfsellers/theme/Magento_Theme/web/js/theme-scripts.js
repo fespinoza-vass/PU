@@ -18,7 +18,7 @@ require([
     var y = window.matchMedia("(min-width: 769px)");
 
 	if (y.matches) {
-		$('.menu-dior ul li ').hover(function () {
+		$('.menu-dior ul li, .menu-swarovski ul li').hover(function () {
 				$(this).children('.custom-menu').toggleClass('se-ve');
 				
 			}, function () {
@@ -28,13 +28,8 @@ require([
 	}
 
 	if (x.matches) {
-
-		$('.menu-dior::before').click(function (e) { 
-			alert('hbsdxi');
-		});
-
-		$('.menu-dior ul li').click(function (e) { 
-			$(this).children('.custom-menu').toggleClass('se-ve');
+		$('.menu-dior ul li, .menu-swarovski ul li').click(function (e) { 
+			$(this).children('.custom-menu, span').toggleClass('se-ve');
 		});
 	}
 
