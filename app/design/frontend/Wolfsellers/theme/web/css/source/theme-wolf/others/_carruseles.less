@@ -219,8 +219,16 @@
 ///DESKTOP
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
 	.row_slider_marcas{
+		margin: 0 0 40px;
+
 		h2{
 			.lib-font-size(32);
+		}
+
+		.slick-initialized{
+			.slick-slide{
+				margin: 0 2rem;
+			}
 		}
 	}
 }
@@ -228,8 +236,16 @@
 ///MOBILE
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
 	.row_slider_marcas{
+		margin: 0 0 20px;
+
 		h2{
 			.lib-font-size(22);
+		}
+
+		.slick-initialized{
+			.slick-slide{
+				margin: 0 1rem;
+			}
 		}
 	}
 }
