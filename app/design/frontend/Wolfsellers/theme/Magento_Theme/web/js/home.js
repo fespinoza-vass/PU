@@ -41,7 +41,7 @@ require([
                     slidesToScroll: 1,
                     slidesToShow: 3,
                     autoplay: true,
-                    arrows: true,
+                    arrows: false,
                     dots: true
                 }
             }]
