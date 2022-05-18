@@ -284,15 +284,16 @@
 									}
 								}
 								> .actions{
-									@media @mdmax{
-										margin-top: 20px;
-									}
 									button{
 										width: 100%;
 										height: 60px;
 										margin: 0;
 										text-transform: uppercase;
 										font-size: 1.8rem;
+
+										@media @mdmax {
+											.lib-font-size(12);
+										}
 									}
 								}
 							}
@@ -623,4 +624,96 @@
 			}
 		}
 	}
+
+	.catalog-product-view{
+		.page-wrapper {
+			.page-main {
+				.free-gift-mailt{
+					order: -1;
+				}
+
+				.product-info-main {
+					.product-add-form {
+						.product-options-bottom{
+							background: @white;
+							position: fixed;
+							z-index: 999;
+							width: 100%;
+							bottom: 0;
+							left: 0;
+						}
+
+						.box-tocart {
+							margin: 20px 0;
+
+							.fieldset{
+								justify-content: space-around;
+								align-items: center;
+								display: flex;
+								width: 100%;
+
+								.actions{
+									margin: 0;
+								}
+							}
+						}
+
+						form{
+							.product-options-wrapper{
+								.fieldset{
+									.swatch-opt{
+										.swatch-attribute{
+											float: none;
+										}
+									}
+								}
+							}
+						}
+					}
+
+					.product-social-links{
+							[id*="amasty-promo-countdown"]{
+							.amcountdown-block-wrapper{
+								.amcountdown-text{
+									text-align: left;
+									.lib-font-size(14);
+								}
+
+								.amcountdown-wrap{
+									.amcountdown-item{
+										align-items: center;
+										.lib-font-size(16);
+										margin: 0;
+
+										&::after{
+											border-radius: 50px;
+											background: @black;
+											margin: 0 5px;
+											height: 5px;
+											content: "";
+											width: 5px;
+										}
+
+										.amcountdown-number{
+											.lib-font-size(16);
+										}
+									}
+
+									&:nth-child(2){
+										.amcountdown-item{
+											&:nth-child(2){
+												&::after{
+													content: none;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	} 
 }
