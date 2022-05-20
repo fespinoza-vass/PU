@@ -42,7 +42,9 @@ require([
                         breakpoint: 666,
                         settings: {
                             centerMode: true,
-                            slidesToShow: 1
+                            slidesToShow: 2,
+                            arrows:false,
+                            
                         }
                     },
                 ]
