@@ -343,8 +343,9 @@
 					}
 					// AMASTY IMPORTANTS
 				}
-				.amasty-shipbar{
+				[data-bind="scope: 'amasty-shipbar-bottom'"]{
 					float: right;
+					clear: both;
 					@media @mdmin{
 						width: 40%;
 					}
@@ -359,6 +360,7 @@
 					display: flex;
 				    align-items: center;
 				    justify-content: center;
+				    clear: both;
 					span{
 						&.icon-padlock{
 							&:before{

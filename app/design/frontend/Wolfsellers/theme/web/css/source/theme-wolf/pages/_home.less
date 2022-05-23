@@ -23,6 +23,17 @@
                     	}
                         .row-product-one-product{
                             background-color: @white;
+                            .pagebuilder-column-group .pagebuilder-column.column-img-one-product{
+                                @media @mdmin{
+                                    background: @black;
+                                    align-self: stretch !important;
+                                    figure{
+                                        align-items: center;
+                                        display: flex;
+                                        height: 100%;
+                                    }
+                                }
+                            }
                             .pagebuilder-column-group{
                                 .column-img-one-product{
                                     .img-block{
