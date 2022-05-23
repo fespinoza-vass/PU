@@ -168,8 +168,20 @@
                 }
             }
         }
-        .column-micrositios-img-one-product{
+        .pagebuilder-column.column-micrositios-img-one-product{
+            @media @mdmin{
+                background: @black;
+                align-self: stretch !important;
+                figure{
+                    align-items: center;
+                    display: flex;
+                    height: 100%;
+                }
+            }
             figure{
+                align-items: center;
+                display: flex;
+                height: 100%;
                 img{
                     float: left;
                     width: 100%;
@@ -179,6 +191,23 @@
     }
     .row-grid-products{
         margin-top: 90px;
+        div.block.widget{
+            ol.widget-product-grid{
+                display: grid;
+                gap: 15px;
+                justify-content: center;
+                @media @mdmin{
+                    grid-template-columns: repeat(auto-fill, 32.5%);
+                }
+                @media @mdmax{
+                    grid-template-columns: repeat(auto-fill, 47.8%);
+                }
+                li.product-item{
+                    width: 100%;
+                    margin: 0 !important;
+                }
+            }
+        }
     }
     .row-slider-products{
         h2{

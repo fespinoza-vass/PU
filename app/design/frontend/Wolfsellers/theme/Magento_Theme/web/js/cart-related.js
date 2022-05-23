@@ -4,8 +4,7 @@ require([
 	'domReady!'
 	], function($){
 
-        $(window).on('load', function() {
-             
+        setTimeout(function() {
             var optionsCarrusels = {
                 centerPadding: '0',
                 centerMode: true,
@@ -49,12 +48,12 @@ require([
                     },
                 ]
             };
-        
+
             $('.products-related .product-items').not('.slick-initialized').slick(optionsCarrusels);
             $('.products-upsell .product-items').not('.slick-initialized').slick(optionsCarrusels);
             $('.amshopby-morefrom .product-items').not('.slick-initialized').slick(optionsCarrusels);
 
-          });
+        }, 3000);
 
         $('.page-with-filter .product-item-info').hover(function () {
                 // over

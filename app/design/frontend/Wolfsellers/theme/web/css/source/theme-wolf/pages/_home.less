@@ -23,6 +23,17 @@
                     	}
                         .row-product-one-product{
                             background-color: @white;
+                            @media @mdmin{
+                                .pagebuilder-column{
+                                    align-self: stretch !important;
+                                    position: relative;
+                                    overflow: hidden;
+                                    img{
+                                        position: absolute;
+                                        .lib-center-element;
+                                    }
+                                }
+                            }
                             .pagebuilder-column-group{
                                 .column-img-one-product{
                                     .img-block{
