@@ -8,13 +8,13 @@ require([
             var optionsCarrusels = {
                 centerPadding: '0',
                 centerMode: true,
-                dots: false,
+                dots: true,
                 infinite: true,
                 speed: 300,
                 autoplay: false,
                 autoplaySpeed: 5000,
                 slidesToShow: 4,
-                slidesToScroll: 1,
+                slidesToScroll: 4,
                 responsive: [
                     {
                         breakpoint: 2025,
