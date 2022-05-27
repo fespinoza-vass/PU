@@ -75,7 +75,7 @@
         .filter {
             .filter-content {
                 .block-subtitle {
-                    border-radius: 12px 12px 0px 0px;
+                    border-radius: 12px 12px 0 0;
                     justify-content: center;
                     align-items: center;
                     background: @black;
@@ -96,12 +96,19 @@
                     border-radius: 0 0 12px 12px;
                     background: @white;
                     .lib-font-size(16);
-                    padding: 30px;
+                    padding-bottom: 10px !important;
 
                     .filter-options-item{
+                        border-bottom: unset;
+                        padding: 0 20px;
+                        &:last-child{
+                            margin-bottom: 15px;
+                        }
                         .filter-options-title{
-                            text-transform: capitalize;
-                            FONT-WEIGHT: 700;
+                            text-transform: uppercase;
+                            font-weight: 400;
+                            border-bottom: 1px solid @gray5;
+                            padding: 10px 0;
 
                             &::after{
                                 color: @lines-input;
@@ -111,15 +118,36 @@
 
                         .filter-options-content{
                             padding: 0;
-
-                            .amshopby-flyout-block{
+                            form{
                                 .items{
                                     box-shadow: none;
                                     margin: 15px 0;
-                                    padding: 0;
-
+                                    padding: 0  10px 0 0;
                                     .item{
                                         padding: 4px 0;
+                                        font-size: 1.6rem;
+                                        margin: 0;
+                                        display: flex;
+                                        align-items: flex-start;
+                                        flex-direction: row-reverse;
+                                        line-height: 22px;
+                                        justify-content: flex-end;
+                                        a{
+                                            font-weight: 400;
+                                            display: inline-block;
+                                            width: 100%;
+                                            padding-left: 0;
+                                        }
+                                        &:hover{
+                                            background-color: @gray-F8;
+                                        }
+                                        .amshopby-choice{
+                                            position: relative;
+                                            top: inherit;
+                                            left: inherit;
+                                            margin: 3px 0;
+                                            padding-left: 22px;
+                                        }
                                     }
                                 }
                             }
