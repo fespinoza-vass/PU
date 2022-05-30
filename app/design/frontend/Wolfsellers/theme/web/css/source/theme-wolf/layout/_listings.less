@@ -247,6 +247,9 @@
     }
 }
 
+//
+//  Desktop
+//  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
     body {
         .page-wrapper{
@@ -257,11 +260,9 @@
                             .ambanners{
                                 display: none !important;
                             }
-
                             &.zplus{
                                 z-index: 9999 !important;
                             }
-
                             &:hover{
                                 .product-item-details{
                                     .product-item-inner{
@@ -272,7 +273,6 @@
                                             background: @white;
                                             position: absolute;
                                             left: -5px;
-
                                             img{
                                                 width: 94%;
                                             }
@@ -283,11 +283,14 @@
                         }
                     }
                 }
-            } 
-        } 
+            }
+        }
     }
 }
 
+//
+//  Mobile
+//  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
     body{
         .page-wrapper{
@@ -297,16 +300,23 @@
                         .row-slider-products{
                             .product-items{
                                 padding: 0;
-
                                 .slick-arrow{
                                     display: none !important;
                                 }
-
                                 .slick-list{
                                     padding: 10px 50px 10px 0;
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+        &.page-products {
+            .page-wrapper {
+                .page-main{
+                    .columns{
+                        padding-top: 16px;
                     }
                 }
             }
