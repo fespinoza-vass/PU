@@ -183,6 +183,7 @@
     }
 }
 
+
 //
 //  Desktop
 //  ---------------------------------------------
@@ -200,15 +201,18 @@
     }
 }
 
+
 //
 //  Mobile
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
     &.page-products {
         .page-wrapper {
-            .columns {
-                .sidebar-main {
-                    order: 2;
+            .page-main{
+                .columns{
+                    .sidebar-main {
+                        order: 2;
+                    }
                 }
             }
         }
