@@ -42,21 +42,36 @@
                                                 }
                                             }
                                         }
-
                                         tbody {
                                             border: none;
-                                            &::after {
-                                                border-top: 0.5px solid @gray;
-                                                position: absolute;
-                                                display: block;
-                                                content: "";
-                                                width: auto;
-                                                z-index: 1;
-                                                top: 0;
-                                                right: 0;
-                                                left: 0;
+                                            @media @mdmin{
+                                                &::after {
+                                                    border-top: 0.5px solid @gray;
+                                                    position: absolute;
+                                                    display: block;
+                                                    content: "";
+                                                    width: auto;
+                                                    z-index: 1;
+                                                    top: 0;
+                                                    right: 0;
+                                                    left: 0;
+                                                }
                                             }
-
+                                            @media @mdmax{
+                                                ~ tbody{
+                                                    &::after {
+                                                        border-top: 0.5px solid @gray;
+                                                        position: absolute;
+                                                        display: block;
+                                                        content: "";
+                                                        width: auto;
+                                                        z-index: 1;
+                                                        top: 0;
+                                                        right: 0;
+                                                        left: 0;
+                                                    }
+                                                }
+                                            }
                                             &:last-child {
                                                 &::after {
                                                     content: none;
@@ -68,7 +83,6 @@
                                                     }
                                                 }
                                             }
-
                                             .item-info {
                                                 .col {
                                                     span {
@@ -548,6 +562,7 @@
                                 order: 3;
 
                                 .table-wrapper {
+                                    border: 0;
                                     .items {
                                         thead {
 
@@ -564,6 +579,9 @@
                                         }
 
                                         tbody {
+                                            &:first-child::after{
+                                                display: none;
+                                            }
                                             &::after {
                                                 margin: 0 16px;
                                             }
@@ -619,7 +637,17 @@
 
                                                 .item {
                                                     padding: 25px 15px 10px 90px;
-
+                                                    &.message.notice{
+                                                        padding: 5px 0 10px 10px;
+                                                        width: 95%;
+                                                        > div{
+                                                            display: flex;
+                                                            align-items: end;
+                                                            &:before{
+                                                                line-height: 20px;
+                                                            }
+                                                        }
+                                                    }
                                                     .product-item-photo {
                                                         max-width: 72px;
                                                         top: 25px;
