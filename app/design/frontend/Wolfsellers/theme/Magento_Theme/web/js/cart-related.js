@@ -43,7 +43,7 @@ require([
                             centerMode: true,
                             slidesToShow: 2,
                             arrows:false,
-                            
+                            dots: false
                         }
                     },
                 ]
