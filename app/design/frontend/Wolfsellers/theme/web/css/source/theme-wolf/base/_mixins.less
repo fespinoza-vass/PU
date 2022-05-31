@@ -322,11 +322,14 @@
 		}
 		&.color{
 			.swatch-option{
-				background-size: 100% !important;
-				width: 32px !important;
-				height: 32px !important;
+				background-size: 100% !important; //AMASTY importants
+				width: 32px !important; //AMASTY importants
+				height: 32px !important; //AMASTY importants
 				border: 0;
+				padding: 0;
 				transition: all @time5;
+				border: 1px solid @gray-D8;
+
 				&:hover{
 					transition: all @time5;
 				}
@@ -340,14 +343,28 @@
 				border: 1px solid @gray-D8;
 				border-radius: @radiusitems;
 				padding: 5px 10px;
-			    height: auto;
 			    background: transparent;
 			    color: @primary;
 			    transition: all @time5;
+			    position: relative;
+			    height: 32px !important; //AMASTY importants
+		        width: 100px !important; //AMASTY importants;
 			    &:not(.disabled):hover{
 			    	outline: 0;
 			    	border-color: @primary;
 			    	transition: all @time5;
+			    }
+			    img{
+			    	display: none;
+			    }
+			    &:after{
+			    	content: attr(aria-label);
+			    	text-align: center;
+			    	font-size: 1.4rem;
+			    	font-weight: bold;
+			    	color: @black;
+			    	white-space: nowrap;
+			    	.lib-center-element;
 			    }
 			}
 		}
@@ -359,8 +376,8 @@
 			    height: auto;
 			    background: transparent;
 			    color: @primary;
-			    height: auto !important;
-			    width: auto !important;
+			    height: auto !important; //AMASTY importants
+			    width: auto !important; //AMASTY importants
 			    transition: all @time5;
 			    display: flex;
 			    align-items: center;
