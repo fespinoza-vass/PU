@@ -347,6 +347,7 @@
 					float: right;
 					@media @mdmin{
 						width: 40%;
+						clear: right;
 					}
 				}
 				.transaccion-segura{
@@ -372,6 +373,7 @@
 					}
 					@media @mdmin{
 						width: 40%;
+						clear: right;
 					}
 				}
 				.calculate-time{
@@ -647,17 +649,21 @@
 				.free-gift-mailt{
 					order: -1;
 				}
-
 				.product-info-main {
 					.product-add-form {
-						.product-options-bottom{
+						.product-options-bottom > .box-tocart,
+						form > .box-tocart{
 							background: @white;
 							position: fixed;
 							z-index: 999;
 							width: 100%;
 							bottom: 0;
 							left: 0;
-							padding: 0 10px;
+							padding: 15px;
+							margin: 0;
+							> .fieldset{
+								margin: 0;	
+							}
 						}
 
 						.box-tocart {
