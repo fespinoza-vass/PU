@@ -127,34 +127,33 @@
                                         float: left;
                                         text-align: center;
                                         padding: 10px;
-                                        a{
-                                            span{
+
+                                        span{
+                                            &::after{
+                                                background-position-x: center !important;
+                                                background-size: contain !important;
+                                                display: block;
+                                                height: 46px;
+                                                content: ' ';
+                                            }
+                                            &.icon-envios{
                                                 &::after{
-                                                    background-position-x: center !important;
-                                                    background-size: contain !important;
-                                                    display: block;
-                                                    height: 46px;
-                                                    content: ' ';
+                                                    background: url("../images/envios.png") no-repeat;
                                                 }
-                                                &.icon-envios{
-                                                    &::after{
-                                                        background: url("../images/envios.png") no-repeat;
-                                                    }
+                                            }
+                                            &.icon-compra{
+                                                &::after{
+                                                    background: url("../images/compra.png") no-repeat;
                                                 }
-                                                &.icon-compra{
-                                                    &::after{
-                                                        background: url("../images/compra.png") no-repeat;
-                                                    }
+                                            }
+                                            &.icon-promociones{
+                                                &::after{
+                                                    background: url("../images/promociones.png") no-repeat;
                                                 }
-                                                &.icon-promociones{
-                                                    &::after{
-                                                        background: url("../images/promociones.png") no-repeat;
-                                                    }
-                                                }
-                                                &.icon-regalo{
-                                                    &::after{
-                                                        background: url("../images/regalo.png") no-repeat;
-                                                    }
+                                            }
+                                            &.icon-regalo{
+                                                &::after{
+                                                    background: url("../images/regalo.png") no-repeat;
                                                 }
                                             }
                                             p{
@@ -167,6 +166,10 @@
                                                     font-size: 14px;
                                                 }
                                             }
+                                        }
+                                        p{
+                                            font-size: 18px;
+                                            color: @black;
                                         }
                                     }
                                 }
