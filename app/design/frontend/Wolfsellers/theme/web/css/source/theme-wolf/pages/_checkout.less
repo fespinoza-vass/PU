@@ -229,10 +229,11 @@
 									border-radius: @radiusitems;
 									&.product-item{
 										border-radius: 0;
+										padding-right: 0;
 										.product{
 											.delete{
 												position: absolute;
-												right: 0;
+												right: 15px	;
 												bottom: -10px;
 												border: 0;
 												background: transparent;
@@ -308,9 +309,7 @@
 								}
 								&.-summary{
 									.minicart-items-wrapper{
-										@media @mdmax{
-											padding: 0;
-										}
+										padding: 0;
 										.minicart-items{
 											.product-item{
 												@media @mdmax{
@@ -346,7 +345,7 @@
 										}
 									}
 									.opc-block-summary{
-										padding: 20px;
+										padding: 20px 20px 0px;
 										background: @white;
 										border-radius: @radiusitems @radiusitems 0 0;
 										margin: 0;
@@ -358,10 +357,16 @@
 										width: 100%;
 										background: @white;
 										.lib-checkboxs;
-										.checkout-agreement{
-											float: left;
-											width: 100%;
-											margin: 15px 0;
+										.checkout-agreements{
+											margin-bottom: 0;
+											.checkout-agreement{
+												float: left;
+												width: 100%;
+												margin: 15px 0 0;
+											}
+										}
+										.admin__field.admin__field-option{
+											.lib-visually-hidden;
 										}
 									}
 									.checkout-payment-method{
@@ -405,6 +410,9 @@
 										}
 										.discount-code{
 											margin: 0 10px;
+											.payment-option-content{
+												padding: 10px 10px 20px;
+											}
 										}
 									}
 								}
