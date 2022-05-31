@@ -21,6 +21,15 @@
                         > .ambanners{
                     		display: none;
                     	}
+                        .row-slider-products{
+                            .amsearch-pagebuilder-carousel{
+                                .product-items.widget-product-carousel.slick-initialized.slick-slider.slick-dotted{
+                                    .slick-dots{
+                                        display: none !important;
+                                    }
+                                }
+                            }
+                        }
                         @media @mdmax{
                             .row-slider-products{
                                 margin-left: 0 !important;
@@ -151,6 +160,12 @@
                                             p{
                                                 font-size: 18px;
                                                 color: @black;
+                                                @media @xssmax{
+                                                    font-size: 16px;
+                                                }
+                                                @media @xxsmax{
+                                                    font-size: 14px;
+                                                }
                                             }
                                         }
                                     }
