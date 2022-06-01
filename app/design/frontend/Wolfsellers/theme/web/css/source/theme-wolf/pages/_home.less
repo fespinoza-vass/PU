@@ -13,7 +13,12 @@
                             margin-bottom: 35px;
                             > div{
                                 .pagebuilder-slide-wrapper{
-                                    padding-bottom: 100%;
+                                   @media @mdmin{
+                                        padding-bottom: 100%;
+                                   }
+                                   @media @mdmax{
+                                        min-height: 585px !important;
+                                   }
                                 }
                             }
                         }
@@ -135,6 +140,9 @@
                                                 display: block;
                                                 height: 46px;
                                                 content: ' ';
+                                                @media @mdmin{
+                                                    height: 85px;
+                                                }
                                             }
                                             &.icon-envios{
                                                 &::after{
@@ -168,8 +176,13 @@
                                             }
                                         }
                                         p{
-                                            font-size: 18px;
+                                            font-size: 1.5rem;
                                             color: @black;
+                                            font-weight: 100;
+                                            @media @mdmin{
+                                                font-size: 2.2rem;
+                                                margin-top: 20px;
+                                            }
                                         }
                                     }
                                 }
