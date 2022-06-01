@@ -47,7 +47,7 @@ require([
             }]
         });
 
-        $('.carousel-releases').slick({
+        $('.carrusel-ultimos-lanzamientos').slick({
             dots: true,
             arrows: true,
             infinite: false,
@@ -71,6 +71,8 @@ require([
                     breakpoint: 666,
                     settings: {
                         slidesToShow: 2,
+                        autoplay: true,
+                        infinite: true,
                         arrows: false,
                     }
                 }
