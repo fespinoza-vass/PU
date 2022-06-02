@@ -11,11 +11,15 @@
                                     right: 0;
 
                                     #minicart-content-wrapper {
+                                        @media not all and (min-resolution:.001dpcm) {
+                                            .block-content { 
+                                                height: ~"calc(100vh - 135px)";
+                                            }
+                                        }
                                         .block-content {
                                             display: inline-flex;
                                             flex-flow: column;
                                             width: 100%;
-
                                             .close {
                                                 order: 1;
 

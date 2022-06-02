@@ -391,10 +391,18 @@
 					}
 				}
 				.product.info.detailed{
+					@media @mdmax{
+						margin-bottom: 0;
+					}
 					.product.items{
 						background: @white;
 						padding: 20px;
 						border-radius: @radiusitems;
+						@media @mdmax{
+							padding: 0 20px;
+							margin: 0;
+							border: 0;
+						}
 						.item.title{
 							.switch{
 								height: auto;
@@ -674,7 +682,28 @@
 							padding: 15px;
 							margin: 0;
 							> .fieldset{
-								margin: 0;	
+								margin: 0;
+								.field.qty{
+									width: 120px	;
+									> .control{
+										span[class*="action-"]{
+											height: 40px;
+											width: 40px;
+										}
+										.input-text.qty{
+											height: 40px;
+											padding: 0 50px;
+											.lib-font-size(16);
+										}
+									}
+								}
+								.actions{
+									button.action.primary{
+										height: 40px;
+										padding-top: 0;
+										padding-bottom: 0;
+									}
+								}
 							}
 						}
 
