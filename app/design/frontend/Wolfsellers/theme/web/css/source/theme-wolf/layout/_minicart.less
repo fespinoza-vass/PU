@@ -11,11 +11,6 @@
                                     right: 0;
 
                                     #minicart-content-wrapper {
-                                        @media not all and (min-resolution:.001dpcm) {
-                                            .block-content { 
-                                                height: ~"calc(100vh - 135px)";
-                                            }
-                                        }
                                         .block-content {
                                             display: inline-flex;
                                             flex-flow: column;
@@ -260,6 +255,7 @@
 
                                     #minicart-content-wrapper {
                                         .block-content {
+                                            height: ~"calc(100vh - 135px)";
                                             .close {
                                                 &::after {
                                                     width: calc(~'(100% - 85%)');
