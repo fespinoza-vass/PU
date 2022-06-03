@@ -365,9 +365,15 @@
 							&:before{
 								font-size: 2.4rem;
 								margin-right: 10px;
+								@media mdmax{
+									font-size: 2rem;
+								}
 							}
 							~ span{
 								font-size: 2rem;
+								@media mdmax{
+									font-size: 1.4rem;
+								}
 							}
 						}
 					}
@@ -618,6 +624,7 @@
 							width: auto !important;
 							margin: 0 0 15px;
 							color: @black;
+							padding: 0 10px;
 						}
 
 						.product-options-bottom{
@@ -665,6 +672,7 @@
 
 	.catalog-product-view{
 		.page-wrapper {
+			padding-bottom: 70px;
 			.page-main {
 				.free-gift-mailt{
 					order: -1;
