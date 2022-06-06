@@ -1,4 +1,4 @@
-& when (@media-common =true) {
+    & when (@media-common =true) {
     .lac-notification-sticky {
         display: none;
     }
@@ -21,6 +21,7 @@
                                 border-radius: 12px;
                                 background: @white;
                                 top: 0 !important;
+                                box-shadow: @boxshadow;
                                 .checkout-methods-items {
                                     .item {
                                         &:not(:first-child) {
@@ -155,7 +156,7 @@
                                     border-radius: 12px;
                                     background: @white;
                                     padding: 24px;
-
+                                    box-shadow: @boxshadow;
                                     &.active {
                                         .title {
                                             padding: 0 0 10px;
@@ -392,6 +393,7 @@
                                 .table-wrapper {
                                     overflow: hidden;
                                     border-radius: @radiusitems;
+                                    box-shadow: @boxshadow;
                                     .items {
                                         thead {
                                             background: transparent;
@@ -527,7 +529,7 @@
                                 order: 1;
                                 position: relative;
                                 background: transparent;
-                                margin-bottom: -10px;
+                                margin-bottom: 5px;
                                 &:before {
                                     content: "";
                                     position: absolute;
@@ -538,6 +540,7 @@
                                     height: ~"calc(100% - 95px)";
                                     z-index: 0;
                                     border-radius: @radiusitems;
+                                    box-shadow: @boxshadow;
                                 }
                                 .summary {
                                     &.title {
@@ -560,12 +563,17 @@
                                     z-index: 1;
                                     margin-bottom: 40px;
                                 }
+                                [data-bind="scope: 'amasty-shipbar-bottom'"]{
+                                    margin-bottom: -15px;
+                                }
                             }
                             .form-cart {
                                 order: 3;
 
                                 .table-wrapper {
                                     border: 0;
+                                    border-radius: @radiusitems;
+                                    box-shadow: @boxshadow;
                                     .items {
                                         thead {
 
@@ -697,12 +705,12 @@
                             }
 
                             .cart-discount {
-                                margin: 0 0 20px 0;
+                                margin: 0 0 15px 0;
                                 border: none;
                                 order: 2;
 
                                 .discount {
-                                    margin: 0 0 20px 0;
+                                    margin: 0 0 15px 0;
                                 }
                             }
 
