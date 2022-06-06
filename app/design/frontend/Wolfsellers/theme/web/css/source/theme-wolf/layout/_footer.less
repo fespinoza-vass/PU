@@ -29,9 +29,9 @@
                             margin: auto;
                             max-width: @layout__max-width;
                             h3{
-                                font-size: 20px;
                                 text-transform: uppercase;
                                 margin-bottom: 50px;
+                                .lib-font-size(18);
                                 color: @white;
                                 &.jump-line{
                                     margin-bottom: 31px;
@@ -41,7 +41,7 @@
                             ul{
                                 li{
                                     a:link{
-                                        font-size: 16px;
+                                        .lib-font-size(14);
                                         color: @white;
                                     }
                                     a:hover{
@@ -125,6 +125,18 @@
     }
 }
 
+//DESKTOP//
+
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .page-footer{
+        .footer.content{
+            .footer-content{
+                padding: 0 5%;
+            }
+        }
+    }
+}
+
 //
 //  Mobile
 //  ---------------------------------------------
@@ -145,8 +157,15 @@
                             flex-direction: column;
                             justify-content: center;
                             max-width: unset;
+                            > div:not(.ui-accordion){
+                                transition: all @time3;
+                                max-height: 1px;
+                                overflow: hidden;
+                            }
                             .ui-accordion{
                                 border-top: 1px solid @lines;
+                                transition: all @time3;
+                                max-height: 100%;
                                 &:first-child{
                                     border-top: unset;
                                 }

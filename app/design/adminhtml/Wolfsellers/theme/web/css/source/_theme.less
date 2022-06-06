@@ -1,6 +1,7 @@
-@import '_colors.less';
-@import '_icon-styles.less';
-@import '_tables-autodesk.less';
+@import '_colors';
+@import '_icon-styles';
+@import '_tables-autodesk';
+@import '_buttons';
 
 @field-control__focus__border-color: @secondary;
 
@@ -19,8 +20,8 @@
 
 @color-phoenix: @secondary;
 
-@body__background-color: @secondary-black;
-@menu__background-color: @secondary-black;
+@body__background-color: @primary;
+@menu__background-color: @primary;
 
 @data-grid-th__background-color: @secondary-black;
 @action__active__border-color: @secondary;
@@ -31,3 +32,33 @@
 
 @color-very-dark-grayish-orange: @secondary-black;
 @submenu__background-color: @secondary-black;
+
+@radiusitems: 12px;
+
+body{
+	.action-primary {
+	    &:extend(.abs-action-pattern all);
+	    background-color: @primary;
+	    border-color: @primary;
+	    color: @white;
+	    text-shadow: 1px 1px 0 rgba(0, 0, 0, .25);
+	    border-radius: @radiusitems;
+
+	    &:hover,
+	    &:active,
+	    &:focus {
+	        background-color: @primary;
+	        border-color: @primary;
+	        box-shadow: @gray-A;
+	        color: @white;
+	        text-decoration: none;
+	    }
+
+	    &.disabled,
+	    &[disabled] {
+	        cursor: default;
+	        opacity: .8;
+	        pointer-events: none;
+	    }
+	}
+}

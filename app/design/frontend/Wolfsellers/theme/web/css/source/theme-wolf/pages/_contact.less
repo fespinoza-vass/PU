@@ -1,0 +1,148 @@
+& when (@media-common =true) {
+    .cms-contacto {
+        .page-wrapper {
+            .page-main-full-width {
+                .column {
+                    .row-page-head {
+                        height: auto;
+                    }
+
+                    .row-page-content {
+                        .pagebuilder-column {
+                            .rendered-form {
+                                .amform-form-fieldset {
+                                    .amcform-multi-page {
+                                        .amcform-page-wrap {
+                                            .fb-text {}
+
+                                            .fb-h3{
+                                                margin: 25px 0 15px;
+                                            }
+
+                                            .fb-undefined {
+                                                .control {
+
+                                                    textarea {
+                                                        border-radius: 12px;
+                                                    }
+                                                }
+                                            }
+
+                                            .amcform-toolbar{
+                                                .amcform-submit{
+                                                    background: @black;
+                                                    width: 100%;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+///DESKTOP
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .cms-contacto {
+        .page-wrapper {
+            .page-main-full-width {
+                .column {
+
+                    .row-page-content {
+                        .pagebuilder-column {
+                            .rendered-form {
+                                .amform-form-fieldset {
+                                    .amcform-multi-page {
+                                        .amcform-page-wrap {
+                                            position: relative;
+
+                                            .fb-text {
+                                                display: inline-block;
+                                                width: 51%;
+                                            }
+
+                                            .fb-undefined {
+                                                position: absolute;
+                                                height: 70%;
+                                                width: 46%;
+                                                top: 35px;
+                                                right: 0;
+
+                                                .control {
+                                                    height: 70%;
+
+                                                    textarea {
+                                                        height: 100%;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+///MOVIL
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .cms-contacto {
+        .page-wrapper {
+            .breadcrumbs {
+                display: none;
+            }
+
+            .page-main-full-width {
+                .column {
+                    .row-page-head {
+                        margin: 0 15px;
+                        width: auto;
+                    }
+
+                    .row-page-content {
+                        .pagebuilder-column {
+                            .rendered-form {
+                                .amform-form-fieldset {
+                                    .amcform-multi-page {
+                                        .amcform-page-wrap {
+                                            .fb-text {}
+
+                                            .fb-undefined {
+                                                .control {
+                                                    textarea {
+                                                        height: 150px;
+                                                    }
+                                                }
+                                            }
+
+                                            .amcform-toolbar{
+                                                .amcform-submit{
+                                                    width: 100%;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            &:first-child{
+                                margin: 0 0 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -263,10 +263,10 @@
 	> .field:not(.choice){
 		@media @mdmin{
 			float: left;
-			margin-left: 2%;
+			margin-right: 2%;
 			width: calc(~'(100% - 2%)/2');
 			&:nth-child(2n+1){
-				margin-left: 0;
+				margin-right: 0;
 			}
 		}
 	}
@@ -322,12 +322,14 @@
 		}
 		&.color{
 			.swatch-option{
-				background-size: 100% !important;
-				width: 32px !important;
-				height: 32px !important;
-				border: 1px solid @gray-D8;
-				border-radius: @radiusitems;
+				background-size: 100% !important; //AMASTY importants
+				width: 32px !important; //AMASTY importants
+				height: 32px !important; //AMASTY importants
+				border: 0;
+				padding: 0;
 				transition: all @time5;
+				border: 1px solid @gray-D8;
+
 				&:hover{
 					transition: all @time5;
 				}
@@ -341,27 +343,43 @@
 				border: 1px solid @gray-D8;
 				border-radius: @radiusitems;
 				padding: 5px 10px;
-			    height: auto;
 			    background: transparent;
 			    color: @primary;
 			    transition: all @time5;
+			    position: relative;
+			    height: 32px !important; //AMASTY importants
+		        width: 100px !important; //AMASTY importants;
+		        background-image: none !important; //AMASTY importants;
 			    &:not(.disabled):hover{
 			    	outline: 0;
 			    	border-color: @primary;
 			    	transition: all @time5;
 			    }
+			    img{
+			    	display: none;
+			    }
+			    // &:after{
+			    // 	content: attr(aria-label);
+			    // 	text-align: center;
+			    // 	font-size: 1.4rem;
+			    // 	font-weight: bold;
+			    // 	color: @black;
+			    // 	white-space: nowrap;
+			    // 	.lib-center-element;
+			    // }
 			}
 		}
 		&.tamano{
 			.swatch-option{
 				border: 1px solid @gray-D8;
 				border-radius: @radiusitems;
-				padding: 15px 10px;
+				padding: 17px 10px 17px 40px;
 			    height: auto;
 			    background: transparent;
 			    color: @primary;
-			    height: auto !important;
-			    width: auto !important;
+			    height: auto !important; //AMASTY importants
+			    width: auto !important; //AMASTY importants
+			    background-position: 5px !important; //AMASTY importants
 			    transition: all @time5;
 			    display: flex;
 			    align-items: center;
@@ -385,4 +403,40 @@
 			}
 		}
 	}
+}
+
+.lib-actions-product(){
+    .product-item-actions{
+        margin: 0;
+        .actions-primary{
+            button.primary{
+                font-size: 1.8rem;
+                border-radius: @radiusitems;
+                text-transform: uppercase;
+                font-weight: 500;
+                @media @xsmax{
+                    font-size: 1.2rem;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }
+        }
+        .actions-secondary{
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            z-index: 10;
+            .towishlist{
+                line-height: 1;
+                display: none;
+                &:before{
+                    font-size: 2rem;
+                    overflow: initial;
+                }
+            }
+            a.action.tocompare{
+                display: none;
+            }
+        }
+    }
 }

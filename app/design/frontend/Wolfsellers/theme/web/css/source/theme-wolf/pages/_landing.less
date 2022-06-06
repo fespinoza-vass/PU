@@ -1,3 +1,242 @@
-& when (@media-common = true) {
-	
+& when (@media-common =true) {
+
+    [class*=cms-dior],
+    [class*=cms-swarovski] {
+        .page-wrapper {
+            .columns {
+                .column {
+                    .menu-ms {
+                        background: transparent !important;
+
+                        .menu-dior {
+                            >ul {
+                                li {
+                                    background: @black;
+
+                                    span {
+                                        font-weight: normal ;
+                                        .lib-font-size(18);
+                                        color: @white;
+                                    }
+
+                                    ul {
+                                        display: none;
+
+                                        &.se-ve {
+                                            display: block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        a,
+                        p {
+                            color: @white;
+                        }
+
+                        .custom-menu {
+                            >ul {
+                                >li {}
+                            }
+                        }
+                    }
+
+                    .menu-swarovski {
+                        ul {
+                            background: @white;
+
+                            li {
+                                ul {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+
+                    .row-slider-products{
+                        .product-items{
+                            .slick-dots{
+                                display: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//DESKTOP//
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+
+    [class*=cms-dior],
+    [class*=cms-swarovski] {
+        .page-wrapper {
+            .columns {
+                .column {
+                    .menu-ms {
+                        [data-content-type="html"] {
+                            &:first-child {
+                                z-index: 1;
+                            }
+                        }
+
+                        .carrusel {
+                            margin: 50px 0 0;
+                        }
+
+                        .menu-dior {
+                            margin: 0 0 40px;
+
+                            &::before {
+                                width: -webkit-fill-available;
+                                position: absolute;
+                                background: @black;
+                                display: block;
+                                height: 45px;
+                                content: "";
+                            }
+
+                            >ul {
+                                justify-content: space-around;
+                                position: absolute;
+                                display: flex;
+                                width: 100%;
+
+                                li {
+                                    height: max-content;
+                                    text-align: center;
+                                    min-width: 200px;
+                                    margin: 1rem 0;
+                                }
+                            }
+
+                            a,
+                            p {
+                                .lib-font-size(13);
+                                color: @white;
+                            }
+                        }
+                    }
+
+                    .menu-swarovski {
+                        position: relative;
+
+                        ul {
+                            justify-content: space-around;
+                            display: flex;
+
+                            li {
+                                height: 60px;
+                                margin: 0;
+
+                                span,
+                                a {
+                                    align-items: center;
+                                    .lib-font-size(15);
+                                    color: @gray-7C;
+                                    display: flex;
+                                    height: 100%;
+
+                                    &:hover {
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                ul {
+                                    display: none;
+
+                                    &.se-ve {
+                                        background: @pink-D8;
+                                        position: absolute;
+                                        display: flex;
+                                        width: 100%;
+                                        z-index: 1;
+                                        top: 60px;
+                                        left: 0;
+                                    }
+
+                                    li {
+                                        a {
+                                            color: @gray-79;
+
+                                            &:hover {
+                                                text-decoration: underline;
+                                                font-weight: 400;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//MOBILE
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+
+    [class*=cms-dior],
+    [class*=cms-swarovski] {
+        .page-wrapper {
+            .columns {
+                .column {
+                    .menu-ms {
+                        .menu-dior {
+                            background: @black;
+
+                            ul {
+                                li {
+                                    margin: 0 0 1rem 23%;
+
+                                    span {
+                                        &::before {
+                                            margin: 0 10px 0 0;
+                                            .lib-font-size(20);
+                                            font-weight: 900;
+                                            content: "+";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .menu-swarovski {
+                        ul {
+                            li {
+                                margin: 0 0 1rem 23%;
+
+                                span {
+                                    &::before {
+                                        margin: 0 10px 0 0;
+                                        .lib-font-size(20);
+                                        font-weight: 900;
+                                        content: "+";
+                                    }
+
+                                    &.se-ve {
+                                        &::before {
+                                            content: "-";
+                                        }
+                                    }
+                                }
+
+                                ul {
+                                    &.se-ve {
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

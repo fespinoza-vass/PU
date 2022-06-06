@@ -42,8 +42,9 @@ if ($cookieHelper->isCookieRestrictionModeEnabled()): ?>
     <script type="text/x-magento-init">
         {
             "#notice-cookie-block": {
-                "cookieNotices": {
+                "Magento_Cookie/js/cookie-notices": {
                     "cookieAllowButtonSelector": "#btn-cookie-allow",
+                    "cookieCloseButtonSelector": ".close-button",
                     "cookieName": "<?= /* @noEscape */ \Magento\Cookie\Helper\Cookie::IS_USER_ALLOWED_SAVE_COOKIE ?>",
                     "cookieValue": <?= /* @noEscape */ $cookieHelper->getAcceptedSaveCookiesWebsiteIds() ?>,
                     "cookieLifetime": <?= /* @noEscape */ $cookieHelper->getCookieRestrictionLifetime() ?>,

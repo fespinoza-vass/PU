@@ -3,10 +3,28 @@
         @media @mdmin{
             margin-top: -5px;
         }
+        .btn-filter{
+            &:not(.active){
+                background: @black;
+                margin: 15px auto 0;
+                border-radius: 12px;
+                font-size: 1.6rem;
+                padding: 5px 8px;
+                color: @white;
+                width: 130px;
+                display: inline-block;
+            }
+            @media @mdmin{
+                display: none !important;
+            }
+        }
         ~ .toolbar.toolbar-products{
             display: flex;
             justify-content: center;
             align-items: center;
+            .btn-filter{
+                .lib-visually-hidden;
+            }
         }
         .field.limiter,
         .toolbar-amount{
@@ -20,6 +38,7 @@
                 height: 32px;
                 padding-left: 10px;
                 border-radius: @radiusitems;
+                padding-right: 30px;
             }
             a.sorter-action{
                 display: none;
@@ -30,6 +49,10 @@
             .pages-items{
             	padding: 0;
                 .item{
+                    padding-top: 10px;
+                    &.pages-item-previous{
+                        position: static !important;
+                    }
                     strong.page,
                     a.page{
                         padding: 10px 13px;
@@ -102,8 +125,6 @@
                 display: none;
             }
             .columns{
-                padding: 0 16px;
-
                 .column.main{
                     padding: 0;
 
@@ -114,9 +135,10 @@
 
                 .sidebar-main{
                     .filter-title{
+                        .lib-visually-hidden;
                         strong{
                             left: 16px;
-                            top: 115px;
+                            top: 94px;
                         }
                     }
 
@@ -126,32 +148,28 @@
                         }
                     }
                 }
-
-                .products-grid{
-                    .product-items{
-                        .product-item{
-                            .product-item-info{
-                                .product-item-details{
-                                    .product-item-inner{
-                                        .product-item-actions{
-                                            .action.tocart.primary{
-                                                padding: 7px 0 8px;
-                                                .lib-font-size(14);
-                                                width: 94%;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
 
         .toolbar.toolbar-products{
+            .btn-filter{
+                margin-top: 22px !important;
+                width: 200px !important;
+                padding: 7px !important;
+            }
             .toolbar-sorter{
                 position: initial;
+                margin: 22px 0 0;
+                float: left;
+                width: 100%;
+                text-align: left;
+                .sorter-label{
+                    font-size: 1.3rem;
+                }
+                .sorter-options{
+                    padding-right: 25px;
+                    font-size: 1.3rem;
+                }
             }
         }
     }

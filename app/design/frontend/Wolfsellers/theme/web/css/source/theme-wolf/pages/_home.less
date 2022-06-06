@@ -10,9 +10,15 @@
                 .columns{
                     .column.main{
                         .row-slider-first{
+                            margin-bottom: 35px;
                             > div{
                                 .pagebuilder-slide-wrapper{
-                                    padding-bottom: 100%;
+                                   @media @mdmin{
+                                        padding-bottom: 100%;
+                                   }
+                                   @media @mdmax{
+                                        min-height: 585px !important;
+                                   }
                                 }
                             }
                         }
@@ -20,8 +26,52 @@
                         > .ambanners{
                     		display: none;
                     	}
+                        .row-slider-products{
+                            .amsearch-pagebuilder-carousel{
+                                .product-items.widget-product-carousel.slick-initialized.slick-slider.slick-dotted{
+                                    .slick-dots{
+                                        display: none !important;
+                                    }
+                                }
+                            }
+                        }
+                        @media @mdmax{
+                            .row-slider-products{
+                                margin-left: 0 !important;
+                                margin-right: 0 !important;
+                                .product-items{
+                                    padding: 0;
+                                    .product-item-details{
+                                        .action.tocart.primary{
+                                            font-size: 1.1rem !important;
+                                            padding-left: 8px !important;
+                                            padding-right: 8px !important;
+                                            font-weight: bold;
+                                        }
+                                    }
+                                    button.slick-prev.slick-arrow,
+                                    button.slick-next.slick-arrow,
+                                    ul.slick-dots{
+                                        @media @mdmin{
+                                            .lib-visually-hidden;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         .row-product-one-product{
                             background-color: @white;
+                            .pagebuilder-column-group .pagebuilder-column.column-img-one-product{
+                                @media @mdmin{
+                                    background: @black;
+                                    align-self: stretch !important;
+                                    figure{
+                                        align-items: center;
+                                        display: flex;
+                                        height: 100%;
+                                    }
+                                }
+                            }
                             .pagebuilder-column-group{
                                 .column-img-one-product{
                                     .img-block{
@@ -82,39 +132,56 @@
                                         float: left;
                                         text-align: center;
                                         padding: 10px;
-                                        a{
-                                            span{
+
+                                        span{
+                                            &::after{
+                                                background-position-x: center !important;
+                                                background-size: contain !important;
+                                                display: block;
+                                                height: 46px;
+                                                content: ' ';
+                                                @media @mdmin{
+                                                    height: 85px;
+                                                }
+                                            }
+                                            &.icon-envios{
                                                 &::after{
-                                                    background-position-x: center !important;
-                                                    background-size: contain !important;
-                                                    display: block;
-                                                    height: 46px;
-                                                    content: ' ';
+                                                    background: url("../images/envios.png") no-repeat;
                                                 }
-                                                &.icon-envios{
-                                                    &::after{
-                                                        background: url("../images/envios.png") no-repeat;
-                                                    }
+                                            }
+                                            &.icon-compra{
+                                                &::after{
+                                                    background: url("../images/compra.png") no-repeat;
                                                 }
-                                                &.icon-compra{
-                                                    &::after{
-                                                        background: url("../images/compra.png") no-repeat;
-                                                    }
+                                            }
+                                            &.icon-promociones{
+                                                &::after{
+                                                    background: url("../images/promociones.png") no-repeat;
                                                 }
-                                                &.icon-promociones{
-                                                    &::after{
-                                                        background: url("../images/promociones.png") no-repeat;
-                                                    }
-                                                }
-                                                &.icon-regalo{
-                                                    &::after{
-                                                        background: url("../images/regalo.png") no-repeat;
-                                                    }
+                                            }
+                                            &.icon-regalo{
+                                                &::after{
+                                                    background: url("../images/regalo.png") no-repeat;
                                                 }
                                             }
                                             p{
                                                 font-size: 18px;
                                                 color: @black;
+                                                @media @xssmax{
+                                                    font-size: 16px;
+                                                }
+                                                @media @xxsmax{
+                                                    font-size: 14px;
+                                                }
+                                            }
+                                        }
+                                        p{
+                                            font-size: 1.5rem;
+                                            color: @black;
+                                            font-weight: 100;
+                                            @media @mdmin{
+                                                font-size: 2.2rem;
+                                                margin-top: 20px;
                                             }
                                         }
                                     }
@@ -124,6 +191,12 @@
 
                         .row-home{
                             margin: 15px;
+
+                            @media @mdmax{
+                                &.row-carousel-releases{
+                                    margin: 15px 0;
+                                }   
+                            }
                         }
                         h2{
                             font-size: 22px;
@@ -159,7 +232,7 @@
                             	max-width: @layout-maxwidth;
                             	margin: auto;
                             	.pagebuilder-slide-wrapper{
-                            		padding-bottom: 34.8%;
+                            		padding-bottom: 20%;
                             	}
                             }
                         }
@@ -182,6 +255,8 @@
                             width: 100vw;
                             margin-left: ~"calc(50% - 50vw)";
                             .footer-icons{
+                                margin: auto;
+                                width: 85%;
                                 ul{
                                     display: flex;
                                     align-content: center;
@@ -199,7 +274,30 @@
                                         a{
                                             span{
                                                 &::after{
+                                                    background-position-y: bottom !important;
                                                     height: 115px;
+                                                    margin: auto;
+                                                }
+
+                                                &.icon-envios{
+                                                    &::after{
+                                                        max-width: 120px;
+                                                    }
+                                                }
+                                                &.icon-compra{
+                                                    &::after{
+                                                        max-width: 90px;
+                                                    }
+                                                }
+                                                &.icon-promociones{
+                                                    &::after{
+                                                        max-width: 95px;
+                                                    }
+                                                }
+                                                &.icon-regalo{
+                                                    &::after{
+                                                        max-width: 90px;
+                                                    }
                                                 }
                                             }
                                             p{

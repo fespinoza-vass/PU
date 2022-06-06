@@ -1,0 +1,37 @@
+<?php
+/**
+ * @var \WolfSellers\OrderTracking\Block\Widget\OrderTracking $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<div class="order-tracking-container">
+    <form action="<?php echo $escaper->escapeUrl($block->getUrl('order-tracking/status')) ?>" class="form" method="post" id="order-tracking-form" autocomplete="off">
+        <div class="field required">
+            <label class="label" for="tracking_number">
+                <span><?php echo $escaper->escapeHtml(__('Tracking number')); ?></span>
+            </label>
+            <div class="control">
+                <input type="text" name="tracking_number" id="tracking_number" class="input-text" data-validate="{required:true}">
+            </div>
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" class="action primary" name="send">
+                    <span><?php echo $escaper->escapeHtml(__('Search')); ?></span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="tracking-result"></div>
+</div>
+
+<script type="text/x-magento-init">
+{
+    ".order-tracking-container": {
+        "WolfSellers_OrderTracking/js/order-tracking": {}
+    }
+}
+</script>

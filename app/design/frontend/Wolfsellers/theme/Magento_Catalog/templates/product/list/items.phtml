@@ -190,7 +190,7 @@ $_item = null;
                     </div>
                 <?php endif; ?>
                 <div class="products wrapper grid products-grid products-<?= $block->escapeHtmlAttr($type) ?>">
-                    <ol class="products list items product-items">
+                    <ol class="products list items product-items" data-mage-init='{"Magento_Theme/js/cart-related": {}}'>
                         <?php foreach ($items as $_item):?>
                             <?php $available = ''; ?>
                             <?php if (!$_item->isComposite() && $_item->isSaleable() && $type == 'related'):?>

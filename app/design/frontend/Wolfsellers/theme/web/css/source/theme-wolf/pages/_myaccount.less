@@ -28,20 +28,10 @@
 			}
 			form.forget{
 				fieldset.fieldset{
+                    .field.note{
+                        width: 100% !important;
+                    }
 					.lib-two-columns;
-					.field{
-						&.note{
-							width: 100%;
-						}
-						@media @mdmin{
-							&.email{
-								margin-left: 0;
-							}
-							&.captcha{
-								margin-left: 2%;
-							}
-						}
-					}
 				}
 			}
 			form.form-create-account{
@@ -240,7 +230,7 @@
                         }
                         a{
                             color: @black !important;
-                            font-weight: bold;
+                            font-weight: 600;
                         }
                     }
                 }
@@ -821,6 +811,49 @@
             }
         }
     }
+
+    //MIS DIRECCIONES
+    .customer-address-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .block-addresses-default{
+                            .box-content{
+                                address{
+                                    position: relative;
+
+                                    a{
+                                        &::before{
+                                            position: absolute;
+                                            content: "T:";
+                                            left: 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //FORMULARIO DIRECCIONES
+    .customer-address-form{
+        .fullname{
+            .field{
+                .lib-font-size(12);
+                font-weight: bold;
+                margin: 0 0 20px;
+
+                .label{
+                    margin: 0 0 8px;
+                    display: block;
+                }
+            }
+        }
+    }
 }
 
 //
@@ -1205,6 +1238,50 @@
                             border-radius: 0 0 12px 12px;
                             background: @white;
                             padding: 13px 36px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //MIS DIRECCIONES
+    .customer-address-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column{
+                        .block-addresses-list{
+                            .block-content{
+                                .additional-addresses{
+                                    .table-additional-addresses-items{
+                                        thead{
+                                            border-bottom: 1px solid @lines-input;
+
+                                            tr{
+                                                th{
+                                                    white-space: break-spaces;
+                                                    vertical-align: middle;
+                                                    border: none;
+                                                }
+                                            }
+                                        }
+
+                                        tbody{
+                                            border-bottom: 1px solid @lines-input;
+
+                                            tr{
+                                                td{
+                                                    a{
+                                                        white-space: break-spaces;
+                                                        margin: 0 0 9px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

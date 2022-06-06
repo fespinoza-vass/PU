@@ -11,7 +11,7 @@
 	}
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){	
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
 	section.ammenu-menu-wrapper{
 		.ammenu-nav-sections.-topmenu{
 			.ammenu-items.-root{
@@ -23,7 +23,7 @@
 					position: relative;
 					padding: 8px 20px;
 					font-weight: 400;
-					font-size: 2rem;
+					font-size: 1.4rem;
 
 					.lib-icon-font(
                         @_icon-font-content: @icon-down,
@@ -50,18 +50,14 @@
 				.ammenu-title{
 					border-bottom: 1px solid @lines-input;
 					text-transform: uppercase;
-					font-size: 1.6rem;
+					font-size: 1.4rem;
 					font-weight: 500;
 					margin: 0 0 8px;
 					~ .ammenu-list{
 						> li  > a{
-							font-size: 1.6rem;
+							font-size: 1.4rem;
 							font-weight: 100;
 							padding: 0 0 5px;
-
-							&.-all-link{
-								display: none;
-							}
 						}
 					}
 				}
@@ -69,7 +65,9 @@
 		}
 	}
 }
-
+//
+//  Mobile
+//  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
 	section.ammenu-menu-wrapper{
 		position: relative;
@@ -82,9 +80,9 @@
 			    content: "MENÚ DE CATEGORÍAS";
 			    display: block;
 			    margin: 15px 0 30px 0;
-			    padding: 0px 20px;
+			    padding: 0 20px;
 			    font-size: 1.6rem;
-			    font-weight: 500;
+			    font-weight: 600;
 			    font-family: @font-second;
 			}
 			.ammenu-menu-title,
@@ -95,35 +93,44 @@
 				// AMASTY importants
 				> li > a{
 					color: #000 !important;
-				    border-bottom: 1px solid @gray-D8 !important;
-				    font-weight: 500 !important;
+				    border-bottom: 1px solid @lines-input !important;
+				    font-weight: 600 !important;
 				    text-transform: uppercase;
 				    font-size: 1.6rem;
 				    font-family: @font-second;
 				    padding: 12px 0 !important;
 				    min-height: auto !important;
+                    figure{
+                        color: @lines-input !important;
+                    }
 				    ~ .ammenu-items{
 				    	> li > a{
 				        	color: #000 !important;
 				            border-bottom: 0 !important;
-				            font-weight: 500 !important;
+				            font-weight: 600 !important;
 				            text-transform: uppercase;
 				            text-decoration: none !important;
 				            font-size: 1.6rem;
 				            font-family: @font-second;
 				            padding: 10px 0 !important;
-				            min-height: auto !important;
+							min-height: auto !important;
+                            figure{
+                                color: @lines-input !important;
+                            }
 				            ~ .ammenu-items{
 				            	padding: 0 20px !important;
 				            	> li > a{
 				                	color: #000 !important;
-				                    font-weight: 500 !important;
+				                    font-weight: 400 !important;
 				                    text-transform: normal;
 				                    font-size: 1.2rem !important;
 			                        padding: 3px 0 !important;
 			                        min-height: auto !important;
 			                        text-decoration: none !important;
 			                        margin: 0;
+                                    figure{
+                                        color: @lines-input !important;
+                                    }
 				            	}
 				            }
 				    	}
@@ -157,7 +164,7 @@
 					}
 				}
 			}
-		}		
+		}
 		.ammenu-menu-overlay{
 			z-index: 10;
 			.lib-icon-font(

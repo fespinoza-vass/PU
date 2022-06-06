@@ -2,10 +2,12 @@
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="product.info.main">
-            <block class="WolfSellers\FastShipping\Block\Product\FastShippingView" name="fast_shipping"
-                   template="WolfSellers_FastShipping::product/view/fast_shipping.phtml">
+        <referenceContainer name="content">
+            <block class="Magento\Cms\Block\Block" name="time.calculate">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">time_calculate</argument>
+                </arguments>
             </block>
-        </referenceContainer>
+        </referenceContainer> 
     </body>
 </page>

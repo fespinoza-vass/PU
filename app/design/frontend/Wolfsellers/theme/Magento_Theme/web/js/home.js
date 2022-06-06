@@ -8,11 +8,11 @@ require([
 
         //carrouseles de productos en el home
         $('.carrousel-productos ol.product-items').slick({
-            dots: false,
+            dots: true,
             arrows: true,
             infinite: false,
             speed: 300,
-            autoplay: false,
+            autoplay: true,
             slidesToShow: 5,
             slidesToScroll: 1,
             responsive: [{
@@ -21,24 +21,34 @@ require([
                     slidesToShow: 2,
                     slidesToScroll: 1,
                     arrows: true,
-                    dots: false
+                    dots: true
                 }
             }]
         });
 
         //slider de marcas en el home
-        $('.marcas-block').slick({
-            dots: false,
-            arrows: true,
-            infinite: false,
-            speed: 300,
+        $('.carrucel_mejores_marcas').slick({
+            slidesToScroll: 1,
+            slidesToShow: 6,
             autoplay: false,
-            slidesToShow: 7,
-            slidesToScroll: 1
+            infinite: true,
+            arrows: true,
+            dots: true,
+            speed: 300,
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToScroll: 1,
+                    slidesToShow: 3,
+                    autoplay: true,
+                    arrows: false,
+                    dots: true
+                }
+            }]
         });
 
-        $('.carousel-releases').slick({
-            dots: false,
+        $('.carrusel-ultimos-lanzamientos').slick({
+            dots: true,
             arrows: true,
             infinite: false,
             speed: 300,
@@ -60,15 +70,18 @@ require([
                 {
                     breakpoint: 666,
                     settings: {
-                        slidesToShow: 2
+                        slidesToShow: 2,
+                        autoplay: true,
+                        infinite: true,
+                        arrows: false,
                     }
                 }
             ]
         });
 
         $('.carousel-category').slick({
-            dots: false,
-            arrows: false,
+            dots: true,
+            arrows: true,
             infinite: false,
             speed: 300,
             autoplay: false,

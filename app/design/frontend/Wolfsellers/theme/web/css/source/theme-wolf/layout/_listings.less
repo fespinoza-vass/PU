@@ -8,7 +8,7 @@
             }
         }
         .page-wrapper{
-            main.page-main,
+            main[class*="page-main"],
             .block.related,
             .block.upsell,
             .amshopby-morefrom{
@@ -23,28 +23,6 @@
                         }
                     }
                 }
-                @media @mdmax{
-                    .row-slider-products{
-                        margin-left: 0 !important;
-                        margin-right: 0 !important;
-                        .product-items{
-                            padding: 0;
-                            .product-item-details{
-                                .action.tocart.primary{
-                                    font-size: 1.2rem !important;
-                                    padding-left: 8px !important;
-                                    padding-right: 8px !important;
-                                    font-weight: bold;
-                                }
-                            }
-                            button.slick-prev.slick-arrow,
-                            button.slick-next.slick-arrow,
-                            ul.slick-dots{
-                                .lib-visually-hidden;
-                            }
-                        }
-                    }
-                }
                 div.products-grid,
                  .block.widget,
                  .product-items{
@@ -55,6 +33,10 @@
                         border-radius: @radiusitems;
                         background: @white;
                         margin-bottom: 10px;
+                        padding: 5px;
+                        .split.button.wishlist{
+                            .lib-visually-hidden;
+                        }
                         .swatch-attribute-options{
                             display: flex;
                             justify-content: center;
@@ -89,12 +71,18 @@
                             width: 100%;
                             position: relative;
                             padding: 10px;
+                            @media @xssmax{
+                                padding: 5px;
+                            }
                             &:hover,
                             &active{
                                 box-shadow: none;
                                 border: 0;
                                 margin: 0;
                                 padding: 10px;
+                                @media @xssmax{
+                                    padding: 5px;
+                                }
                             }
                             &:not(:hover) {
                                 &:not(.active) {
@@ -109,12 +97,16 @@
                                     position: static !important;
                                     .product-image-wrapper{
                                         .product-image-photo{
-                                            margin: 0 !important;
+                                            width: 100% !important;
                                         }
                                     }
                                     .amlabel-position-wrapper{
                                         left: 20px !important;
                                         top: 10px !important;
+                                        @media @lgmax{
+                                            left: 5px !important;
+                                            top: 5px !important;
+                                        }
                                         .amasty-label-container:not(.-preview){
                                             height: 24px !important;
                                             line-height: 24px !important;
@@ -124,11 +116,16 @@
                                 }
                             }
                             .product-item-details{
+                                .lib-actions-product;
                                 .product-item-name{
+                                    .list_item_product_manufacturer{
+                                        font-size: 1.4rem;
+                                        font-weight: bold;
+                                    }
                                     a.product-item-link{
                                         font-size: 1.4rem;
                                         color: @primary;
-                                        font-weight: bold;
+                                        font-weight: 100;
                                         display: block;
                                         display: -webkit-box;
                                         width: 100%;
@@ -188,37 +185,7 @@
                                     &:before{
                                         display: none;
                                     }
-                                    .product-item-actions{
-                                        margin: 0;
-                                        .actions-primary{
-                                            button.primary{
-                                                font-size: 1.8rem;
-                                                border-radius: @radiusitems;
-                                                text-transform: uppercase;
-                                                font-weight: 500;
-                                                @media @xsmax{
-                                                    font-size: 0.9rem;
-                                                }
-                                            }
-                                        }
-                                        .actions-secondary{
-                                            position: absolute;
-                                            right: 20px;
-                                            top: 10px;
-                                            z-index: 10;
-                                            .towishlist{
-                                                line-height: 1;
-                                                display: none;
-                                                &:before{
-                                                    font-size: 2rem;
-                                                    overflow: initial;
-                                                }
-                                            }
-                                            a.action.tocompare{
-                                                display: none;
-                                            }
-                                        }
-                                    }
+                                    .lib-actions-product;
                                 }
                             }
                         }
@@ -256,6 +223,9 @@
     }
 }
 
+//
+//  Desktop
+//  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
     body {
         .page-wrapper{
@@ -266,11 +236,9 @@
                             .ambanners{
                                 display: none !important;
                             }
-
                             &.zplus{
                                 z-index: 9999 !important;
                             }
-
                             &:hover{
                                 .product-item-details{
                                     .product-item-inner{
@@ -281,7 +249,6 @@
                                             background: @white;
                                             position: absolute;
                                             left: -5px;
-
                                             img{
                                                 width: 94%;
                                             }
@@ -292,7 +259,43 @@
                         }
                     }
                 }
-            } 
-        } 
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    body{
+        .page-wrapper{
+            main.page-main{
+                .columns{
+                    .column{
+                        .row-slider-products{
+                            .product-items{
+                                padding: 0;
+                                .slick-arrow{
+                                    display: none !important;
+                                }
+                                .slick-list{
+                                    padding: 10px 50px 10px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.page-products {
+            .page-wrapper {
+                .page-main{
+                    .columns{
+                        padding-top: 16px;
+                    }
+                }
+            }
+        }
     }
 }
