@@ -96,6 +96,9 @@
                     padding: 9px;
                     color: @white;
                     font-size: 1.4rem;
+                    @media all and (max-width: @screen__m) {
+                        font-size: 1rem;
+                    }
                 }
             }
             &.banner-1{
@@ -218,6 +221,21 @@
 }
 
 //
+//  Tablet y desk
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {    
+    .button-carousel-category-fijo {
+        div.pagebuilder-button-primary {
+            width: ~"calc(100% - 40px)";
+            bottom: -19px !important;
+        }
+    }
+    .banner-brand-carousel {
+        display: none !important;
+    }
+}
+
+//
 //  Mobile
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
@@ -237,8 +255,7 @@
     .row-micrositios-category{
         margin: 10px;
         .content-carousel-category{
-            .carousel-category{
-                min-width: 700px;
+            .carousel-category{                
                 .slick-prev.slick-arrow,
                 .slick-next.slick-arrow,
                 .slick-dots{
@@ -247,18 +264,25 @@
                 .slick-list.draggable{
                     .slick-track{
                         .slick-slide{
-                            width: 25% !important;
+                            
                             padding-right: 15px;
-                            .content-category{
+                            .content-category{                                
                                 .button-carousel-category{
                                     position: relative;
                                     .pagebuilder-button-primary{
-                                        font-size: 1rem !important;
+                                        font-size: .9rem !important;                                        
+                                        width: ~"calc(100% - 12px)";
                                     }
-                                }
+                                }                                
                             }
                         }
                     }
+                }
+            }
+            .banner-brand-carousel {
+                .pagebuilder-button-primary {
+                    background-color: @color-white  !important;
+                    color: @color-black  !important;
                 }
             }
         }
@@ -347,5 +371,8 @@
         h2{
             font-size: 2.2rem !important;
         }
+    }
+    .content-carousel-category-fijo {
+        display: none !important;
     }
 }
