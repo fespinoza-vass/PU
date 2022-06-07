@@ -356,6 +356,11 @@
 					}
 				}
 				.transaccion-segura{
+					@media mdmax{
+						background: #000 !important;
+					}
+				}
+				.transaccion-segura{
 					float: right;
 					padding: 20px;
 					border-radius: @radiusitems;
@@ -366,20 +371,26 @@
 				    align-items: center;
 				    justify-content: center;
 				    box-shadow: @boxshadow;
+				    @media only screen and (max-width: @screen__m){
+				    	&[data-element="main"]{
+				    		span{
+				    			&.icon-padlock:before{
+				    				font-size: 2rem;
+				    			}
+				    			~ span{
+				    				font-size: 1.4rem !important;
+				    			}
+				    		}
+				    	}
+				    }
 					span{
 						&.icon-padlock{
 							&:before{
 								font-size: 2.4rem;
 								margin-right: 10px;
-								@media mdmax{
-									font-size: 2rem;
-								}
 							}
 							~ span{
 								font-size: 2rem;
-								@media mdmax{
-									font-size: 1.4rem;
-								}
 							}
 						}
 					}
@@ -694,7 +705,7 @@
 							width: 100%;
 							bottom: 0;
 							left: 0;
-							padding: 15px;
+							padding: 15px 30px;
 							margin: 0;
 							> .fieldset{
 								margin: 0;
@@ -713,6 +724,8 @@
 									}
 								}
 								.actions{
+									width: 100%;
+									max-width: 220px;
 									button.action.primary{
 										height: 40px;
 										padding-top: 0;
@@ -726,7 +739,7 @@
 							margin: 20px 0;
 
 							.fieldset{
-								justify-content: space-around;
+								justify-content: space-between;
 								align-items: center;
 								display: flex;
 								width: 100%;
