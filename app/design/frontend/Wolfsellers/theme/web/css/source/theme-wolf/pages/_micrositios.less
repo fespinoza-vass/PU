@@ -142,6 +142,21 @@
         }
     }
     .row-micrositios-banner-doble-vertical{
+        @media @mdmax{
+            margin-top: 40px;
+        }
+        .pagebuilder-column-group{
+            @media @mdmin{
+                .pagebuilder-column{
+                    &.banner-1{
+                        padding-right: 10px !important; //importants PAGEBUILDER
+                    }
+                    &.banner-2{
+                        padding-left: 10px !important; //importants PAGEBUILDER
+                    }
+                }
+            }
+        }
         .pagebuilder-column{
             h2{
                 font-size: 3.2rem;
