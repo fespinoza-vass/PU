@@ -116,6 +116,7 @@
 					flex-direction: column;
 					position: relative;
 					margin-bottom: 15px;
+					box-shadow: @boxshadow;
 					.product-manufacturer-main-tit{
 						.value{
 							font-size: 2.2rem;
@@ -160,6 +161,9 @@
 						display: flex;
 						flex-direction: column;
 						order: 3;
+						@media @mdmax{
+							padding: 0 10px;
+						}
 						.product-info-stock-sku{
 							order: 1;
 							padding: 0;
@@ -345,9 +349,15 @@
 				}
 				[data-bind="scope: 'amasty-shipbar-bottom'"]{
 					float: right;
+					box-shadow: @boxshadow;
 					@media @mdmin{
 						width: 40%;
 						clear: right;
+					}
+				}
+				.transaccion-segura{
+					@media mdmax{
+						background: #000 !important;
 					}
 				}
 				.transaccion-segura{
@@ -360,20 +370,27 @@
 					display: flex;
 				    align-items: center;
 				    justify-content: center;
+				    box-shadow: @boxshadow;
+				    @media only screen and (max-width: @screen__m){
+				    	&[data-element="main"]{
+				    		span{
+				    			&.icon-padlock:before{
+				    				font-size: 2rem;
+				    			}
+				    			~ span{
+				    				font-size: 1.4rem !important;
+				    			}
+				    		}
+				    	}
+				    }
 					span{
 						&.icon-padlock{
 							&:before{
 								font-size: 2.4rem;
 								margin-right: 10px;
-								@media mdmax{
-									font-size: 2rem;
-								}
 							}
 							~ span{
 								font-size: 2rem;
-								@media mdmax{
-									font-size: 1.4rem;
-								}
 							}
 						}
 					}
@@ -459,6 +476,7 @@
 					width: 100%;
 					max-width: 1346px;
 					margin: 0 auto 20px;
+					box-shadow: @boxshadow;
 					.column.main{
 						padding-bottom: 0;
 						min-height: auto;
@@ -687,7 +705,7 @@
 							width: 100%;
 							bottom: 0;
 							left: 0;
-							padding: 15px;
+							padding: 15px 30px;
 							margin: 0;
 							> .fieldset{
 								margin: 0;
@@ -706,6 +724,8 @@
 									}
 								}
 								.actions{
+									width: 100%;
+									max-width: 220px;
 									button.action.primary{
 										height: 40px;
 										padding-top: 0;
@@ -719,7 +739,7 @@
 							margin: 20px 0;
 
 							.fieldset{
-								justify-content: space-around;
+								justify-content: space-between;
 								align-items: center;
 								display: flex;
 								width: 100%;

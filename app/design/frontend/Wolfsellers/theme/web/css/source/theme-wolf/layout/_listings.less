@@ -20,6 +20,8 @@
                         img{
                             float: left;
                             width: 100%;
+                            overflow: hidden;
+                            border-radius: @radiusitems;
                         }
                     }
                 }
@@ -216,6 +218,11 @@
                             margin: auto;
                             float: left;
                         }
+                    }
+                    [class*="background-image"]{
+                        border-radius: @radiusitems;
+                        overflow: hidden;
+                        background-size: 100% !important;
                     }
                 }
             }

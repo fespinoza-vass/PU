@@ -21,7 +21,7 @@ require([
                     slidesToShow: 2,
                     slidesToScroll: 1,
                     arrows: true,
-                    dots: true
+                    dots: false
                 }
             }]
         });
@@ -87,6 +87,7 @@ require([
             autoplay: false,
             slidesToShow: 5,
             slidesToScroll: 1,
+            centerMode: false,
             responsive: [{
                     breakpoint: 1025,
                     settings: {
@@ -96,13 +97,14 @@ require([
                 {
                     breakpoint: 769,
                     settings: {
+                        arrows: false,
                         slidesToShow: 3
                     }
                 },
                 {
                     breakpoint: 666,
                     settings: {
-                        slidesToShow: 2
+                        slidesToShow: 2.2
                     }
                 }
             ]

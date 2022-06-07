@@ -151,8 +151,8 @@
                 <height>340</height>
             </image>
             <image id="related_products_list" type="small_image">
-                <width>152</width>
-                <height>190</height>
+                <width>305</width>
+                <height>305</height>
             </image>
             <image id="review_page_product_image" type="small_image">
                 <width>285</width>
@@ -175,8 +175,8 @@
                 <height>90</height>
             </image>
             <image id="upsell_products_list" type="small_image">
-                <width>152</width>
-                <height>190</height>
+                <width>305</width>
+                <height>305</height>
             </image>
             <image id="wishlist_sidebar_block" type="thumbnail">
                 <width>75</width>

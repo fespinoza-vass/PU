@@ -5,14 +5,14 @@ require([
 ], function ($) {
 
 // header sticky
-	$(window).scroll(function () {
-		if ($(window).scrollTop() >= 1) {
-			$('body').addClass('nav-up');
-		}
-		else {
-			$('body').removeClass('nav-up');
-		}
-	});
+	// $(window).scroll(function () {
+	// 	if ($(window).scrollTop() >= 1) {
+	// 		$('body').addClass('nav-up');
+	// 	}
+	// 	else {
+	// 		$('body').removeClass('nav-up');
+	// 	}
+	// });
 
 	var x = window.matchMedia("(max-width: 768px)");
     var y = window.matchMedia("(min-width: 769px)");

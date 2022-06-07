@@ -2,14 +2,6 @@
     body{
         .page-header{
             background: @white;
-            z-index: 10000;
-            transition: all @time3;
-            position: fixed;
-            width: 100%;
-            top: 40px;
-            left: 0;
-            margin-bottom: 0;
-            min-height: auto;
             .header.content{
                 padding: 15px 10px;
                 transition: all @time3;
@@ -419,15 +411,10 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
     body {
-        .page-wrapper{
-            padding-top: 110px;
-        }
-        header.page-header {
-            position: fixed;
-            top: 16px;
-            left: 0;
-            width: 100%;
-            border: 0;
+        .page-wrapper header.page-header {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            background: @white;
             .content-logo:after{
                 opacity: 0;
                 transition: all @time3;
@@ -495,16 +482,6 @@
                             display: none;
                         }
                         .control{
-                            border: 0;
-                            margin: 0;
-                            padding: 0;
-                            position: fixed;
-                            top: 54px;
-                            width: 100%;
-                            background: @white;
-                            left: 0;
-                            text-align: center;
-                            transition: all @time3;
                             input.input-text{
                                 position: static;
                                 height: 38px;
@@ -512,7 +489,6 @@
                             }
                         }
                     }
-
                     .input-text{
                         &::placeholder{
                             font-style: normal;
@@ -529,9 +505,10 @@
                         background: @black;
                         z-index: inherit;
                         display: block;
-                        height: 40px;
-                        right: 20px;
+                        height: 34px;
+                        right: 15px;
                         width: 40px;
+                        top: -10px;
                         left: auto;
                         border-radius: 0 @radiusitems @radiusitems 0;
 
