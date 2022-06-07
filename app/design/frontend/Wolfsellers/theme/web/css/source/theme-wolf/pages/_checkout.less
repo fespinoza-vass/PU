@@ -148,7 +148,6 @@
 			.lib-visually-hidden;
 		}
 		.page-wrapper{
-			padding-top: 85px;
 			.page-header{
 				background: @primary;
 				top: 0;
@@ -230,6 +229,10 @@
 									&.product-item{
 										border-radius: 0;
 										padding-right: 0;
+										padding-left: 0;
+										.product-image-container{
+											margin-left: 0;
+										}
 										.product{
 											.delete{
 												position: absolute;
@@ -415,6 +418,10 @@
 											margin: 0 10px;
 											.payment-option-content{
 												padding: 10px 10px 20px;
+											}
+											span.action-toggle{
+												color: @black;
+												font-weight: 600;
 											}
 										}
 									}
