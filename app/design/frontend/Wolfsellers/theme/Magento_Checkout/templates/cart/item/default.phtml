@@ -97,9 +97,9 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
     <?php else :?>
         <td class="col price" data-th="<?= $block->escapeHtml(__('Price')) ?>">
             <?php if (number_format($_item->getBaseOriginalPrice(), 2, '.', ',')!==number_format($_item->getPrice(), 2, '.', ',')): ?>
-            <div class="form-group">
-                <span class="price"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_item->getBaseOriginalPrice(),true,false); ?></span>
-            </div>
+                <div class="form-group">
+                    <span class="price"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_item->getBaseOriginalPrice(),true,false); ?></span>
+                </div>
             <?php endif; ?>
             <?= $block->getUnitPriceHtml($_item) ?>
         </td>
