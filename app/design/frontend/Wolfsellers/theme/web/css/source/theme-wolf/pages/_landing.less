@@ -7,7 +7,33 @@
                 .column {
                     .menu-ms {
                         background: transparent !important;
-
+                        .widget.block > div{
+                            float: left;
+                        }
+                        [data-content-type="html"]{
+                            z-index: 10 !important;
+                            position: relative;
+                        }
+                        .carrusel{
+                            .block-content{
+                                width: 100%;
+                            }
+                            ol.widget-product-grid{
+                                display: grid;
+                                gap: 15px;
+                                justify-content: center;
+                                @media @mdmin{
+                                    grid-template-columns: repeat(auto-fill, 24.1%);
+                                }
+                                @media @mdmax{
+                                    grid-template-columns: repeat(auto-fill, 47.8%);
+                                }
+                                li.product-item{
+                                    width: 100%;
+                                    margin: 0 !important;
+                                }
+                            }   
+                        }
                         .menu-dior {
                             >ul {
                                 li {
@@ -84,7 +110,7 @@
                         }
 
                         .carrusel {
-                            margin: 50px 0 0;
+                            margin: 30px 0 0;
                         }
 
                         .menu-dior {
