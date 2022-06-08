@@ -1,5 +1,10 @@
 & when (@media-common = true) {
 	.catalog-product-view{
+		footer.page-footer ~ a[href*="http"]{
+			@media @mdmax{
+				margin-bottom: 60px;
+			}
+		}
 		.fotorama--fullscreen{
 			z-index: 10000 !important;
 		}
@@ -350,6 +355,9 @@
 				[data-bind="scope: 'amasty-shipbar-bottom'"]{
 					float: right;
 					box-shadow: @boxshadow;
+					.amasty-shipbar.container{
+						position: static;
+					}
 					@media @mdmin{
 						width: 40%;
 						clear: right;
@@ -707,10 +715,11 @@
 							left: 0;
 							padding: 15px 30px;
 							margin: 0;
+							box-shadow: 0px 0px 16px @gray5;
 							> .fieldset{
 								margin: 0;
 								.field.qty{
-									width: 120px	;
+									min-width: 120px	;
 									> .control{
 										span[class*="action-"]{
 											height: 40px;

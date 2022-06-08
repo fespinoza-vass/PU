@@ -1,5 +1,16 @@
 & when (@media-common = true) {
     body{
+        .ammenu-header-container.-sticky .header.content{
+            position: static;
+            max-width: @layout__max-width;
+        }
+        .ammenu-nav-sections.-topmenu.-sticky .ammenu-main-container{
+            position: static;
+            max-width: none;
+        }
+        .ammenu-nav-sections.-topmenu.-sticky{
+            min-height: auto;
+        }
         .page-header{
             background: @white;
             .header.content{
@@ -412,7 +423,6 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
     body {
         .page-wrapper header.page-header {
-            margin-top: 15px;
             margin-bottom: 20px;
             background: @white;
             .content-logo:after{
