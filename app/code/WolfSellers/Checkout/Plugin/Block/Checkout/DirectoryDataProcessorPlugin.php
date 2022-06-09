@@ -76,7 +76,7 @@ class DirectoryDataProcessorPlugin
         array_unshift($cities, [
             'value' => '',
             'region_id' => '',
-            'label' => __('Select city'),
+            'label' => '',
         ]);
 
         return $cities;
