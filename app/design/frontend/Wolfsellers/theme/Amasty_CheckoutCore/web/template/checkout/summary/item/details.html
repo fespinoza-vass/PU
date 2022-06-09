@@ -67,35 +67,37 @@
         <div class="product-item-inner">
             <div class="product-item-name-block">
                 <strong class="product-item-name" data-bind="text: $parent.name"></strong>
-                <div class="details-qty amcheckout-qty">
+               <div class="block-qty">
                     <span class="label"><!-- ko i18n: 'Qty' --><!-- /ko --></span>
-                    <button type="button" class="decrease-qty-item" data-bind="click: decreaseQty.bind($data, $parent)">
-                        -
-                    </button>
-                    <!-- ko if: isDecimal($parent) -->
-                    <input class="qty" type="number" step="0.1"  name="qty" data-bind="value: $parent.qty" autocomplete="off">
+                    <div class="details-qty amcheckout-qty">
+                        <button type="button" class="decrease-qty-item" data-bind="click: decreaseQty.bind($data, $parent)">
+                            -
+                        </button>
+                        <!-- ko if: isDecimal($parent) -->
+                        <input class="qty" type="number" step="0.1"  name="qty" data-bind="value: $parent.qty" autocomplete="off">
+                        <!-- /ko -->
+                        <!-- ko ifnot: isDecimal($parent) -->
+                        <input class="qty" type="number" step="1"  name="qty" data-bind="value: $parent.qty" autocomplete="off">
+                        <!-- /ko -->
+                        <button type="button" class="increase-qty-item" data-bind="click: increaseQty.bind($data, $parent)">
+                            +
+                        </button>
+                    </div>
+                    <if args="isShowUnitPrice">
+                    <div class="amcheckout-price-wrapper" if="window.checkoutConfig.reviewItemPriceDisplayMode === 'both'
+                        || window.checkoutConfig.reviewItemPriceDisplayMode === 'excluding'">
+                        <each args="getRegion('unit_excl_tax')" render=""></each>
+                    </div>
+                    <div class="amcheckout-price-wrapper" if="window.checkoutConfig.reviewItemPriceDisplayMode === 'both'
+                        || window.checkoutConfig.reviewItemPriceDisplayMode === 'including'">
+                        <each args="getRegion('unit_incl_tax')" render=""></each>
+                    </div>
+                    </if>
+                    <!-- ko fastForEach: getRegion('after_details') -->
+                        <!-- ko template: getTemplate() --><!-- /ko -->
                     <!-- /ko -->
-                    <!-- ko ifnot: isDecimal($parent) -->
-                    <input class="qty" type="number" step="1"  name="qty" data-bind="value: $parent.qty" autocomplete="off">
-                    <!-- /ko -->
-                    <button type="button" class="increase-qty-item" data-bind="click: increaseQty.bind($data, $parent)">
-                        +
-                    </button>
-                </div>
+               </div>
             </div>
-            <if args="isShowUnitPrice">
-                <div class="amcheckout-price-wrapper" if="window.checkoutConfig.reviewItemPriceDisplayMode === 'both'
-                    || window.checkoutConfig.reviewItemPriceDisplayMode === 'excluding'">
-                    <each args="getRegion('unit_excl_tax')" render=""></each>
-                </div>
-                <div class="amcheckout-price-wrapper" if="window.checkoutConfig.reviewItemPriceDisplayMode === 'both'
-                    || window.checkoutConfig.reviewItemPriceDisplayMode === 'including'">
-                    <each args="getRegion('unit_incl_tax')" render=""></each>
-                </div>
-            </if>
-            <!-- ko fastForEach: getRegion('after_details') -->
-                <!-- ko template: getTemplate() --><!-- /ko -->
-            <!-- /ko -->
         </div>
 
         <!-- ko if: (JSON.parse($parent.options).length > 0)-->
