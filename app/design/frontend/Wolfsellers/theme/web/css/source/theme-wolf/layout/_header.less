@@ -1,5 +1,12 @@
 & when (@media-common = true) {
     body{
+        &:not(.checkout-index-index){
+            .page-wrapper{
+                @media @mdmin{
+                    padding-top: 150px;
+                }
+            }
+        }
         .ammenu-header-container.-sticky .header.content{
             position: static;
             max-width: @layout__max-width;
@@ -11,8 +18,30 @@
         .ammenu-nav-sections.-topmenu.-sticky{
             min-height: auto;
         }
+        > .ambanners{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
         .page-header{
-            background: @white;
+            @media @mdmin{
+                background: @white;
+                z-index: 10000;
+                transition: all @time3;
+                position: fixed;
+                width: 100%;
+                top: 40px;
+                left: 0;
+                margin-bottom: 0;
+                min-height: auto;
+            }
+            &.ammenu-header-container.-sticky{
+                .ammenu-button.-hamburger{
+                    margin-left: 0;
+                }
+            }
             .header.content{
                 padding: 15px 10px;
                 transition: all @time3;
@@ -422,164 +451,175 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
     body {
-        .page-wrapper header.page-header {
-            margin-bottom: 20px;
-            background: @white;
-            .content-logo:after{
-                opacity: 0;
-                transition: all @time3;
+        &:not(.checkout-index-index){
+            .page-wrapper{
+                padding-top: 107px;
             }
-            .header.content {
-                padding-left: 10%;
-                position: relative;
-                span.nav-toggle {
-                    height: 15px;
-                    width: 20px;
-                    .lib-center-element(
-                    @eleft: 20px,
-                    @eright: auto,
-                    @ebottom: auto,
-                    @x: 0
-                    );
-                    &:after,
-                    &:before {
-                        display: none;
-                    }
-                    > span{
-                        text-indent: -99999%;
+        }
+        .page-wrapper{
+            header.page-header {
+                position: fixed;
+                width: 100%;
+                z-index: 999;
+                background: @white;
+                top: 18px;
+                left: 0;
+                .content-logo:after{
+                    opacity: 0;
+                    transition: all @time3;
+                }
+                .header.content {
+                    padding-left: 10%;
+                    position: relative;
+                    span.nav-toggle {
+                        height: 15px;
                         width: 20px;
-                        height: 2px;
-                        float: left;
-                        background: @primary;
-                        transition: all @time5;
-                        transform-origin: center;
-                        transition-delay: @time3;
-                        .lib-center-element;
-                        &:before{
-                            content: "";
-                            width: 20px;
-                            height: 2px;
-                            float: left;
-                            position: absolute;
-                            background: @primary;
-                            top: -7px;
-                            left: 0;
-                            transition: all @time5;
-                            transition-delay: @time3;
-                        }
-                        &:after{
-                            content: "";
-                            width: 20px;
-                            height: 2px;
-                            float: left;
-                            position: absolute;
-                            background: @primary;
-                            bottom: -7px;
-                            left: 0;
-                            transition: all @time5;
-                            transition-delay: @time3;
-                        }
-                    }
-                }
-                .content-logo{
-                    min-width: 108px;
-                    padding-right: 0;
-                }
-                .block-search{
-                    margin-top: 0;
-                    .minisearch{
-                        label.label{
+                        .lib-center-element(
+                        @eleft: 20px,
+                        @eright: auto,
+                        @ebottom: auto,
+                        @x: 0
+                        );
+                        &:after,
+                        &:before {
                             display: none;
                         }
-                        .control{
-                            input.input-text{
-                                position: static;
-                                height: 38px;
-                                width: 90%;
+                        > span{
+                            text-indent: -99999%;
+                            width: 20px;
+                            height: 2px;
+                            float: left;
+                            background: @primary;
+                            transition: all @time5;
+                            transform-origin: center;
+                            transition-delay: @time3;
+                            .lib-center-element;
+                            &:before{
+                                content: "";
+                                width: 20px;
+                                height: 2px;
+                                float: left;
+                                position: absolute;
+                                background: @primary;
+                                top: -7px;
+                                left: 0;
+                                transition: all @time5;
+                                transition-delay: @time3;
+                            }
+                            &:after{
+                                content: "";
+                                width: 20px;
+                                height: 2px;
+                                float: left;
+                                position: absolute;
+                                background: @primary;
+                                bottom: -7px;
+                                left: 0;
+                                transition: all @time5;
+                                transition-delay: @time3;
                             }
                         }
                     }
-                    .input-text{
-                        &::placeholder{
-                            font-style: normal;
-                        }
+                    .content-logo{
+                        min-width: 108px;
+                        padding-right: 0;
                     }
-                    .amsearch-close{
-                        display: none !important;
-                    }
-                    .amasty-xsearch-loader{
-                        right: auto;
-                        left: 27px;
-                    }
-                    .amsearch-loupe{
-                        background: @black;
-                        z-index: inherit;
-                        display: block;
-                        height: 34px;
-                        right: 15px;
-                        width: 40px;
-                        top: -10px;
-                        left: auto;
-                        border-radius: 0 @radiusitems @radiusitems 0;
-
-                        &::before{
-                            font-family: @icons__font-name;
-                            content: @icon-search;
-                            position: relative;
-                            font-size: 22px;
-                            color: @white;
-                            top: 2px;
-                        }
-                    }
-                    .amsearch-form-container{
-                        &.-opened{
-                            .amsearch-wrapper-input{
-                                position: static;
+                    .block-search{
+                        margin-top: 0;
+                        .minisearch{
+                            label.label{
+                                display: none;
                             }
-                            .search-autocomplete{
-                                box-shadow: 2px 2px 12px @black-rgba-25;
-                                border-radius: 12px;
-                                max-width: 100%;
+                            .control{
+                                input.input-text{
+                                    position: static;
+                                    height: 38px;
+                                    width: 90%;
+                                }
+                            }
+                        }
+                        .input-text{
+                            &::placeholder{
+                                font-style: normal;
+                            }
+                        }
+                        .amsearch-close{
+                            display: none !important;
+                        }
+                        .amasty-xsearch-loader{
+                            right: auto;
+                            left: 27px;
+                        }
+                        .amsearch-loupe{
+                            background: @black;
+                            z-index: inherit;
+                            display: block;
+                            height: 34px;
+                            right: 15px;
+                            width: 40px;
+                            top: -10px;
+                            left: auto;
+                            border-radius: 0 @radiusitems @radiusitems 0;
 
-                                .amsearch-leftside{
-                                    .popular_searches, .page, .category, .recent_searches {
-                                        display: none;
-                                    }
+                            &::before{
+                                font-family: @icons__font-name;
+                                content: @icon-search;
+                                position: relative;
+                                font-size: 22px;
+                                color: @white;
+                                top: 2px;
+                            }
+                        }
+                        .amsearch-form-container{
+                            &.-opened{
+                                .amsearch-wrapper-input{
+                                    position: static;
+                                }
+                                .search-autocomplete{
+                                    box-shadow: 2px 2px 12px @black-rgba-25;
+                                    border-radius: 12px;
+                                    max-width: 100%;
 
-                                    .amsearch-products{
-                                        .amasty-xsearch-block-header{
+                                    .amsearch-leftside{
+                                        .popular_searches, .page, .category, .recent_searches {
                                             display: none;
                                         }
-                                    }
-                                }
 
-                                .amsearch-wrapper-content{
-                                    .amsearch-item{
-                                        border-bottom: 1px solid @lines-input;
-                                        flex-direction: row;
-                                        margin: 15px 15px 0;
-                                        padding: 0 0 15px;
-                                        width: auto;
-
-                                        .amsearch-autocomplete-image{
-                                            align-items: center;
-                                            display: flex;
+                                        .amsearch-products{
+                                            .amasty-xsearch-block-header{
+                                                display: none;
+                                            }
                                         }
+                                    }
 
-                                        .amsearch-autocomplete-information{
-                                            width: 100%;
+                                    .amsearch-wrapper-content{
+                                        .amsearch-item{
+                                            border-bottom: 1px solid @lines-input;
+                                            flex-direction: row;
+                                            margin: 15px 15px 0;
+                                            padding: 0 0 15px;
+                                            width: auto;
 
-                                            .information-container{
-                                                .product-item-details{
-                                                    .product-item-link{
-                                                        .lib-font-size(14);
-                                                        font-weight: 600;
-                                                    }
+                                            .amsearch-autocomplete-image{
+                                                align-items: center;
+                                                display: flex;
+                                            }
 
-                                                    .product-item-description{
-                                                        .lib-font-size(14);
-                                                        font-weight: 100;
-                                                        margin: 0;
+                                            .amsearch-autocomplete-information{
+                                                width: 100%;
+
+                                                .information-container{
+                                                    .product-item-details{
+                                                        .product-item-link{
+                                                            .lib-font-size(14);
+                                                            font-weight: 600;
+                                                        }
+
+                                                        .product-item-description{
+                                                            .lib-font-size(14);
+                                                            font-weight: 100;
+                                                            margin: 0;
+                                                        }
                                                     }
                                                 }
                                             }
@@ -589,56 +629,56 @@
                             }
                         }
                     }
-                }
-                .cont-loginaccount{
-                    position: relative;
-                    margin: 0;
-                    > span{
+                    .cont-loginaccount{
+                        position: relative;
                         margin: 0;
-                    }
-                    > div{
-                        > div{
-                            display: none;
+                        > span{
+                            margin: 0;
                         }
-                        > a{  
-                            &:last-child,  
-                            &:after,
-                            span:not(.icon-uniE622){ 
+                        > div{
+                            > div{
                                 display: none;
                             }
-                            &.efirst{
-                                position: static;
-                                margin: 0;
-                                &:before{
-                                    content: "";
-                                    position: absolute;
-                                    left: 0;
-                                    top: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    z-index: 1;
+                            > a{  
+                                &:last-child,  
+                                &:after,
+                                span:not(.icon-uniE622){ 
+                                    display: none;
+                                }
+                                &.efirst{
+                                    position: static;
+                                    margin: 0;
+                                    &:before{
+                                        content: "";
+                                        position: absolute;
+                                        left: 0;
+                                        top: 0;
+                                        width: 100%;
+                                        height: 100%;
+                                        z-index: 1;
+                                    }
                                 }
                             }
                         }
+                        .loginbtns .ddaccount{
+                            &.mobile{
+                                display: block !important;
+                            }
+                            ~ .dropdown-options{
+                                left: auto;
+                                right: -20px;
+                                z-index: 99;
+                            }
+                            .icon-uniE622{
+                                top: 5px;
+                                left: 18px;
+                            }
+                        }
                     }
-                    .loginbtns .ddaccount{
-                        &.mobile{
-                            display: block !important;
-                        }
-                        ~ .dropdown-options{
-                            left: auto;
-                            right: -20px;
-                            z-index: 99;
-                        }
-                        .icon-uniE622{
-                            top: 5px;
-                            left: 18px;
-                        }
+                    .minicart-wrapper{
+                        margin-top: 0;
+                        margin-right: 20px;
                     }
-                }
-                .minicart-wrapper{
-                    margin-top: 0;
-                    margin-right: 20px;
                 }
             }
         }
