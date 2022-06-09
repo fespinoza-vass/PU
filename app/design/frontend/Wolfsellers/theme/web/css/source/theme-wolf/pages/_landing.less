@@ -33,14 +33,14 @@
                         .widget.block > div{
                             float: left;
                         }
-                        .menu-dior {
+                        .menu-dior,
+                        .menu-swarovski-prueba{
                             >ul {
                                 li {
                                     background: @black;
 
                                     span {
                                         font-weight: normal ;
-                                        .lib-font-size(18);
                                         color: @white;
                                     }
 
@@ -91,7 +91,8 @@
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
 
      .cms-page-view{
-        .menu-ms{
+        .menu-ms,
+        .widget.block{
             .widget.block > div{
                 width: 100%;
                 max-width: none;
@@ -99,10 +100,11 @@
             [data-content-type="html"]{
                 width: 100%;
                 max-width: none;
-                .menu-dior{
+                .menu-dior,
+                .menu-swarovski-prueba{
                     padding: 0 15px;
                     background: @black;
-                    >ul {
+                    > ul {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
@@ -117,6 +119,9 @@
                                 position: absolute;
                                 background: black;
                                 z-index: 12;
+                            }
+                            span a{
+                                .lib-font-size(18);
                             }
                         }
                     }
