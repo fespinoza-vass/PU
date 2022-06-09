@@ -216,7 +216,9 @@ $_item = null;
                                     <?= $block->getImage($_item, $image)->toHtml() ?>
                                 </a>
                                 <div class="product details product-item-details">
-                                    <strong class="product name product-item-name"><a
+                                    <strong class="product name product-item-name">
+                                        <span class="list_item_product_manufacturer"><?= $_item->getAttributeText("manufacturer"); ?></span>
+                                        <a
                                                 class="product-item-link"
                                                 title="<?= $block->escapeHtmlAttr($_item->getName()) ?>"
                                                 href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>">

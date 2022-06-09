@@ -317,6 +317,9 @@
 									.minicart-items-wrapper{
 										padding: 0;
 										.minicart-items{
+											.product-item-details{
+												padding-left: 85px;
+											}
 											.product-item{
 												@media @mdmax{
 													padding-left: 0;
@@ -327,21 +330,100 @@
 														.product-item-name{
 															float: left;
 															width: 100%;
-														}
-														.details-qty{
+															.lib-font-size(16);
+														}	
+														.block-qty{
+															display: flex;
 															float: left;
-															width: 50%;
+															width: 100%;
+															align-items: center;
+															span.label{
+																font-size: 1.4rem;
+																white-space: nowrap;
+																margin-right: 15px;
+																@media @mdmax{
+																	.lib-font-size(12);
+																}
+															}
+															.details-qty{
+																float: left;
+																width: 155px;
+																position: relative;
+																margin: 0;
+																@media @mdmax{
+																	width: 88px;
+																}
+																input.qty{
+																	width: 100%;
+																	padding: 0 40px;
+																	text-align: center;
+																	height: 40px;
+																	width: 118px;
+																	@media @mdmax{
+																		width: 88px;
+																		.lib-font-size(12);
+																		padding: 0 30px;
+																		height: 30px;
+																	}
+																}
+																button{
+																	position: absolute;
+																	width: 40px;
+																	height: 100%;
+																	top: 0;
+																	margin: 0;
+																	text-indent: -99999%;
+																	border-radius: 0;
+																	@media @mdmax{
+																		width: 30px;
+																	}
+																	&::after{
+																		font-family: 'theme-icons';
+																		.lib-font-size(11);
+																		color: #000;
+																		text-shadow: 0 0 1px @black;
+																		float: left;
+																	    text-align: center;
+																	    width: 100%;
+																	    text-indent: 0;
+																	    @media @mdmax{
+																	    	font-size: 0.8rem;
+																	    }
+																	}
+																	&.decrease-qty-item{
+																		left: 0;
+																		border-right: 0.5px solid @lines-input;
+																		cursor: pointer;
+																		&::after{
+																			content: @icon-collapse;
+																		}
+																	}
+																	&.increase-qty-item{
+																		right: 0;	
+																		border-left: 0.5px solid @lines-input;
+																		cursor: pointer;
+																		&::after{
+																			content: @icon-expand;
+																		}
+																	}
+																}
+															}
 														}
 														.subtotal{
 															float: right;
 															width: 50%;
 															text-align: right;
 															font-weight: bold;
-															margin-top: 10px;
+															@media @mdmax{
+																margin-left: 10px;
+															}
 															.price-excluding-tax{
 																margin: 0;
 																.price{
 																	font-weight: bold;
+																	@media @mdmax{
+																		.lib-font-size(14);
+																	}
 																}
 															}
 														}

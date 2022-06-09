@@ -35,11 +35,17 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
     <?php endif; ?>
         <div class="product-item-details">
             <strong class="product-item-name">
+                <div class="form-group">
+                    <span class="list_item_product_manufacturer"><?= $block->getProduct()->getAttributeText("manufacturer");?> </span>
+                </div>
                 <?php if ($block->hasProductUrl()) :?>
                     <a href="<?= $block->escapeUrl($block->getProductUrl()) ?>"><?= $block->escapeHtml($block->getProductName()) ?></a>
                 <?php else :?>
                     <?= $block->escapeHtml($block->getProductName()) ?>
                 <?php endif; ?>
+                <div class="form-group">
+                    <span class="list_item_product_sku muted">SKU : <?= $block->getProduct()->getSku(); ?> </span>
+                </div>
             </strong>
             <?php if ($_options = $block->getOptionList()) :?>
                 <dl class="item-options">
@@ -90,6 +96,11 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
         </td>
     <?php else :?>
         <td class="col price" data-th="<?= $block->escapeHtml(__('Price')) ?>">
+            <?php if (number_format($_item->getBaseOriginalPrice(), 2, '.', ',')!==number_format($_item->getPrice(), 2, '.', ',')): ?>
+                <div class="form-group">
+                    <span class="price"><?= $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($_item->getBaseOriginalPrice(),true,false); ?></span>
+                </div>
+            <?php endif; ?>
             <?= $block->getUnitPriceHtml($_item) ?>
         </td>
     <?php endif; ?>

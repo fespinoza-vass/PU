@@ -33,18 +33,14 @@
                         .widget.block > div{
                             float: left;
                         }
-                        [data-content-type="html"]{
-                            z-index: 10 !important;
-                            position: relative;
-                        }
-                        .menu-dior {
+                        .menu-dior,
+                        .menu-swarovski-prueba{
                             >ul {
                                 li {
                                     background: @black;
 
                                     span {
                                         font-weight: normal ;
-                                        .lib-font-size(18);
                                         color: @white;
                                     }
 
@@ -62,12 +58,6 @@
                         a,
                         p {
                             color: @white;
-                        }
-
-                        .custom-menu {
-                            >ul {
-                                >li {}
-                            }
                         }
                     }
 
@@ -100,55 +90,59 @@
 //DESKTOP//
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
 
+     .cms-page-view{
+        .menu-ms,
+        .widget.block{
+            .widget.block > div{
+                width: 100%;
+                max-width: none;
+            }
+            [data-content-type="html"]{
+                width: 100%;
+                max-width: none;
+                .menu-dior,
+                .menu-swarovski-prueba{
+                    padding: 0 15px;
+                    background: @black;
+                    > ul {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        max-width: @layout__max-width;
+                        margin: auto;
+                        li {
+                            height: max-content;
+                            text-align: center;
+                            min-width: 200px;
+                            margin: 1rem 0;
+                            .custom-menu{
+                                position: absolute;
+                                background: black;
+                                z-index: 12;
+                            }
+                            span a{
+                                .lib-font-size(18);
+                            }
+                        }
+                    }
+
+                    a,
+                    p {
+                        .lib-font-size(13);
+                        color: @white;
+                    }
+                }
+            }
+        }
+    }
+
     [class*=cms-dior],
     [class*=cms-swarovski] {
         .page-wrapper {
             .columns {
                 .column {
-                    .menu-ms {
-                        [data-content-type="html"] {
-                            &:first-child {
-                                z-index: 1;
-                            }
-                        }
+                    
 
-                        .carrusel {
-                            margin: 30px 0 0;
-                        }
-
-                        .menu-dior {
-                            margin: 0 0 40px;
-
-                            &::before {
-                                width: -webkit-fill-available;
-                                position: absolute;
-                                background: @black;
-                                display: block;
-                                height: 45px;
-                                content: "";
-                            }
-
-                            >ul {
-                                justify-content: space-around;
-                                position: absolute;
-                                display: flex;
-                                width: 100%;
-
-                                li {
-                                    height: max-content;
-                                    text-align: center;
-                                    min-width: 200px;
-                                    margin: 1rem 0;
-                                }
-                            }
-
-                            a,
-                            p {
-                                .lib-font-size(13);
-                                color: @white;
-                            }
-                        }
-                    }
 
                     .menu-swarovski {
                         position: relative;
@@ -216,9 +210,17 @@
             .columns {
                 .column {
                     .menu-ms {
+                        .widget.block > div{
+                            width: 100%;
+                        }
                         .menu-dior {
                             background: @black;
-
+                            &.w-mobil{
+                                .toggle-menu-custom{
+                                    font-size: 1.8rem;
+                                    line-height: 45px;
+                                }
+                            }
                             ul {
                                 li {
                                     margin: 0 0 1rem 23%;

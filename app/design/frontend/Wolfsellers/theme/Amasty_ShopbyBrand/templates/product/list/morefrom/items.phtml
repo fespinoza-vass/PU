@@ -15,7 +15,6 @@ $showCart = true;
 $templateType = null;
 $description = false;
 ?>
-
 <div class="block <?= /* @noEscape */ $class ?>">
     <div class="block-title title">
         <strong id="block-<?= /* @noEscape */ $class ?>-heading" role="heading" aria-level="2">
@@ -27,7 +26,6 @@ $description = false;
             <ol class="products list items product-items">
                 <?php foreach ($items as $item): ?>
                     <li class="item product product-item">
-
                         <div class="product-item-info">
                             <?= /* @noEscape */ '<!-- ' . $image . '-->' ?>
                             <a href="<?= $productUrl = $escaper->escapeUrl($block->getProductUrl($item)) ?>"
@@ -36,6 +34,7 @@ $description = false;
                             </a>
                             <div class="product details product-item-details">
                                 <strong class="product name product-item-name">
+                                    <span class="list_item_product_manufacturer"><?= $item->getAttributeText("manufacturer"); ?></span>
                                     <a class="product-item-link"
                                        title="<?= $escaper->escapeHtml($item->getName()) ?>"
                                        href="<?= /* @noEscape */ $productUrl ?>">
