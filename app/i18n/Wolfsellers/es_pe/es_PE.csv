@@ -13077,7 +13077,6 @@ Payment Failed Email Receiver,Receptor de Email de Pago No Exitoso,module,Magent
 Payment Transaction Failed Reminder,Recordatorio de Fallo de Transacción de Pago,module,Magento_Checkout,
 After Adding a Product Redirect to Shopping Cart,Redirigir a Carrito de Compras Luego de Añadir Producto,module,Magento_Checkout,
 Payment Failed Email Sender,Remitente de Email de Pago No Exitoso,module,Magento_Checkout,
-Order Summary,Título de tu reseña,module,Magento_Checkout,
 Review & Payments,Revisión y Pagos,module,Magento_Checkout,
 Select a new payment method,Seleccionar un Nuevo Método de Pago,module,Magento_Checkout,
 "Separate by "","".","Separar por "","".",module,Magento_Checkout,
