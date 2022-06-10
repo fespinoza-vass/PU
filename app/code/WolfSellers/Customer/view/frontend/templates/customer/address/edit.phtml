@@ -148,7 +148,7 @@ $colonyVal = $colonyAttr ? $colonyAttr->getValue() : '';
             </label>
             <div class="control">
                 <select class="<?php echo $escaper->escapeHtmlAttr($_cityValidationClass); ?>" name="city" id="city">
-                    <option value=""><?php echo $escaper->escapeHtmlAttr(__('Select city')); ?></option>
+                    <option value=""></option>
                 </select>
             </div>
         </div>
@@ -158,7 +158,7 @@ $colonyVal = $colonyAttr ? $colonyAttr->getValue() : '';
             </label>
             <div class="control">
                 <select class="<?php echo $escaper->escapeHtmlAttr($_colonyValidationClass); ?>" name="colony" id="colony" data-value="<?= $escaper->escapeHtmlAttr($colonyVal) ?>">
-                    <option value=""><?php echo $escaper->escapeHtmlAttr(__('Select colony')); ?></option>
+                    <option value=""></option>
                 </select>
             </div>
         </div>

@@ -66,7 +66,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $colony['validation'] = ['required-entry' => true];
         $colony['config']['elementTmpl'] = 'ui/form/element/select';
         $colony['config']['options'] = [[
-            'label' => __('Select colony'),
+            'label' => "",
             'value' => '',
         ]];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony', $colony);
