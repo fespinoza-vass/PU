@@ -307,7 +307,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
             ];
         }
 
-        if (!empty($quoteService['valor_envio_aereo']) && (float) $quoteService['valor_ennvio'] > 0) {
+        if (!empty($quoteService['valor_envio_aereo']) && (float) $quoteService['valor_envio_aereo'] > 0) {
             $quoteMethods[] = [
                 'method' => self::METHOD_AEREO,
                 'cost' => $quoteService['valor_envio_aereo'] + $insuranceCost,
