@@ -73,7 +73,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
             $method->setCarrierTitle($this->getConfigData('title'));
 
             $method->setMethod($quote['method']);
-            $method->setMethodTitle($methods[$quote['method']]);
+            $method->setMethodTitle($this->getConfigData('name'));
 
             $method->setPrice($quote['cost']);
             $method->setCost($quote['cost']);
@@ -113,7 +113,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         ];
 
         foreach ($allowedMethods as $key => $title) {
-            $allowedMethods[$key] = $this->getConfigData(sprintf('%s_name', $key));
+            $allowedMethods[$key] = $this->getConfigData('name');
         }
 
         return $allowedMethods;
@@ -276,6 +276,10 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         $quoteService = [];
         $insurance = [];
         foreach ($quotes as $quote) {
+            if (!isset($quote['id_servicio'])) {
+                continue;
+            }
+
             if (self::QUOTE_SERVICE_ID === $quote['id_servicio']) {
                 $quoteService = $quote;
 
@@ -295,7 +299,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         $insuranceCost = $insurance['valor_ennvio'] ?? 0;
 
         // Split methods.
-        if (!empty($quoteService['valor_ennvio'])) {
+        if (!empty($quoteService['valor_ennvio']) && (float) $quoteService['valor_ennvio'] > 0) {
             $quoteMethods[] = [
                 'method' => self::METHOD_TERRESTRE,
                 'cost' => $quoteService['valor_ennvio'] + $insuranceCost,
@@ -303,7 +307,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
             ];
         }
 
-        if (!empty($quoteService['valor_envio_aereo'])) {
+        if (!empty($quoteService['valor_envio_aereo']) && (float) $quoteService['valor_ennvio'] > 0) {
             $quoteMethods[] = [
                 'method' => self::METHOD_AEREO,
                 'cost' => $quoteService['valor_envio_aereo'] + $insuranceCost,
