@@ -15,11 +15,8 @@
                 <field id="title" translate="label" type="text" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1">
                     <label>Title</label>
                 </field>
-                <field id="terrestre_name" translate="label" type="text" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1">
-                    <label>Terrestre Method Name</label>
-                </field>
-                <field id="aereo_name" translate="label" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1">
-                    <label>Aereo Method Name</label>
+                <field id="name" translate="label" type="text" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Method Name</label>
                 </field>
                 <field id="production_ws_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Web-Services URL (Production)</label>

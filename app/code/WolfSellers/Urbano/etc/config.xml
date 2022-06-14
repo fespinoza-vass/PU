@@ -6,12 +6,11 @@
                 <model>WolfSellers\Urbano\Model\Carrier\Urbano</model>
                 <active>1</active>
                 <title>Urbano</title>
-                <terrestre_name>Terrestre</terrestre_name>
-                <aereo_name>Aéreo</aereo_name>
+                <name>Urbano</name>
                 <sandbox_mode>1</sandbox_mode>
                 <user>WS.PERFUND</user>
                 <password>7c222fb2927d828af22f592134e8932480637c0d</password>
-                <production_ws_url>https://api.urbanoexpress.com.pe/pyp/ws/ue/ge/</production_ws_url>
+                <production_ws_url>https://api.urbanoexpress.com.pe/pyp/ws/ue/</production_ws_url>
                 <sandbox_ws_url>https://dev.urbanoexpress.com.pe/pyp/ws/ue/</sandbox_ws_url>
                 <line>3</line>
                 <contract>7984</contract>

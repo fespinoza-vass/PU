@@ -1,5 +1,11 @@
 & when (@media-common = true) {
 	.checkout-index-index{
+		@media @mdmin{
+			padding-top: 68px;
+		}
+		@media @mdmax{
+			padding-top: 58px;
+		}
 		aside.modal-popup{
 			.modal-inner-wrap[class]{
 				background: @white;
@@ -347,7 +353,7 @@
 															}
 															.details-qty{
 																float: left;
-																width: 155px;
+																width: 155px; 
 																position: relative;
 																margin: 0;
 																@media @mdmax{
@@ -360,7 +366,7 @@
 																	height: 40px;
 																	width: 118px;
 																	@media @mdmax{
-																		width: 88px;
+																		width: 88px;	
 																		.lib-font-size(12);
 																		padding: 0 30px;
 																		height: 30px;
