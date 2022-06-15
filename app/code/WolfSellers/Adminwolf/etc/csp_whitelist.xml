@@ -14,8 +14,10 @@
                 <value id="hscollectedforms-script" type="host">*.hscollectedforms.net</value>
                 <value id="hs-analytics-script" type="host">*.hs-analytics.net</value>
                 <value id="hs-banner-script" type="host">*.hs-banner.com</value>
+                <value id="hs-scripts-script" type="host">*.hs-scripts.com</value>
                 <value id="hsadspixel-script" type="host">*.hsadspixel.net</value>
                 <value id="newrelic-script" type="host">*.newrelic.com</value>
+                <value id="omappapi-script" type="host">*.omappapi.com</value>
             </values>
         </policy>
         <policy id="frame-src">
@@ -32,6 +34,7 @@
             <values>
                 <value id="perfumeriasunidas-img" type="host">*.perfumeriasunidas.com</value>
                 <value id="www_google-img" type="host">*.google.com</value>
+                <value id="mx_google-img" type="host">*.google.com.mx</value>
                 <value id="hubapi-img" type="host">*.hubapi.com</value>
                 <value id="hubspot-img" type="host">*.hubspot.com</value>
                 <value id="hsforms-img" type="host">*.hsforms.com</value>
@@ -40,6 +43,7 @@
         </policy>
         <policy id="connect-src">
             <values>
+                <value id="doubleclick-connect" type="host">*.doubleclick.net</value>
                 <value id="omappapi-connect" type="host">*.omappapi.com</value>
                 <value id="luckyorange-connect" type="host">*.luckyorange.com</value>
                 <value id="hubapi-connect" type="host">*.hubapi.com</value>
