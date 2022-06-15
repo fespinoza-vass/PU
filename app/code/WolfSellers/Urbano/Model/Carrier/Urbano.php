@@ -297,20 +297,33 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
 
         $quoteMethods = [];
         $insuranceCost = $insurance['valor_ennvio'] ?? 0;
+        $igv = (float) $this->getConfigData('igv');
 
         // Split methods.
         if (!empty($quoteService['valor_ennvio']) && (float) $quoteService['valor_ennvio'] > 0) {
+            $cost = (float) $quoteService['valor_ennvio'];
+
+            if ($igv > 0) {
+                $cost += $cost * ($igv / 100);
+            }
+
             $quoteMethods[] = [
                 'method' => self::METHOD_TERRESTRE,
-                'cost' => $quoteService['valor_ennvio'] + $insuranceCost,
+                'cost' => $cost + $insuranceCost,
                 'time' => $quoteService['time_envio'],
             ];
         }
 
         if (!empty($quoteService['valor_envio_aereo']) && (float) $quoteService['valor_envio_aereo'] > 0) {
+            $cost = (float) $quoteService['valor_envio_aereo'];
+
+            if ($igv > 0) {
+                $cost += $cost * ($igv / 100);
+            }
+
             $quoteMethods[] = [
                 'method' => self::METHOD_AEREO,
-                'cost' => $quoteService['valor_envio_aereo'] + $insuranceCost,
+                'cost' => $cost + $insuranceCost,
                 'time' => $quoteService['time_aereo'],
             ];
         }
