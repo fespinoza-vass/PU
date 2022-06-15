@@ -9,6 +9,13 @@
                 padding-right: 0;
                 .columns{
                     .column.main{
+                        [data-content-type="row"]:not(.row-slider-first){
+                            .row-full-width-inner{
+                                @media @mdmax{
+                                    padding: 0 15px;
+                                }
+                            }
+                        }
                         .row-slider-first{
                             margin-bottom: 35px;
                             > div{
