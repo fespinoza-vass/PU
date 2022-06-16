@@ -71,6 +71,24 @@ class LayoutProcessor implements LayoutProcessorInterface
         ]];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony', $colony);
 
+        $fechaNacimiento = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento');
+        $fechaNacimiento['validation'] = [];
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
+
+        $payments = $walker->getValue('{PAYMENT}.>>.payments-list');
+        foreach ($payments["children"] as &$payment) {
+            if(
+                !empty($payment["children"])
+                && !empty($payment["children"]["form-fields"])
+                && !empty($payment["children"]["form-fields"]["children"])
+                && !empty($payment["children"]["form-fields"]["children"]["fecha_de_nacimiento"])
+            ) {
+                $payment["children"]["form-fields"]["children"]["fecha_de_nacimiento"]["validation"] = [];
+            }
+        }
+
+        $walker->setValue('{PAYMENT}.>>.payments-list', $payments);
+
         return $walker->getResult();
     }
 }
