@@ -216,8 +216,22 @@
                             background: @black;
                             &.w-mobil{
                                 .toggle-menu-custom{
-                                    font-size: 1.8rem;
-                                    line-height: 45px;
+                                    text-indent: -99999%;
+                                    display: block;
+                                    position: relative;
+                                    height: 45px;
+                                    .lib-icon-font(
+                                        @_icon-font-content: @icon-menu,
+                                        @_icon-font-size: 4rem,
+                                        @_icon-font-line-height: 1,
+                                        @_icon-font-color: inherit,
+                                        @_icon-font-position: after,
+                                    );
+                                    &:after{
+                                        text-indent: 0;
+                                        float: left;
+                                        .lib-center-element;
+                                    }
                                 }
                             }
                             ul {
