@@ -280,7 +280,8 @@
             main.page-main{
                 .columns{
                     .column{
-                        .row-slider-products{
+                        .row-slider-products:not(.row-home),
+                        .amsearch-pagebuilder-carousel{
                             .product-items{
                                 padding: 0;
                                 .slick-arrow{
@@ -288,6 +289,10 @@
                                 }
                                 .slick-list{
                                     padding: 10px 50px 10px 0;
+                                    margin: 0 -15px;
+                                }
+                                .slick-dots{
+                                    display: none !important;
                                 }
                             }
                         }
