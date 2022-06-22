@@ -276,23 +276,25 @@
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
     body{
-        .page-wrapper{
-            main.page-main{
-                .columns{
-                    .column{
-                        .row-slider-products:not(.row-home),
-                        .amsearch-pagebuilder-carousel{
-                            .product-items{
-                                padding: 0;
-                                .slick-arrow{
-                                    display: none !important;
-                                }
-                                .slick-list{
-                                    padding: 10px 50px 10px 0;
-                                    margin: 0 -15px;
-                                }
-                                .slick-dots{
-                                    display: none !important;
+        &:not(.cms-home){
+            .page-wrapper{
+                main.page-main{
+                    .columns{
+                        .column{
+                            .row-slider-products:not(.row-home),
+                            .amsearch-pagebuilder-carousel{
+                                .product-items{
+                                    padding: 0;
+                                    .slick-arrow{
+                                        display: none !important;
+                                    }
+                                    .slick-list{
+                                        padding: 10px 50px 10px 0;
+                                        margin: 0 -15px;
+                                    }
+                                    .slick-dots{
+                                        display: none !important;
+                                    }
                                 }
                             }
                         }

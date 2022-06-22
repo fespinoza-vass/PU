@@ -7,6 +7,9 @@
             .page-main{
                 padding-left: 0;
                 padding-right: 0;
+                .messages{
+                    margin: 0;
+                }
                 .columns{
                     .column.main{
                         [data-content-type="row"]:not(.row-slider-first){
@@ -22,9 +25,6 @@
                                 .pagebuilder-slide-wrapper{
                                    @media @mdmin{
                                         padding-bottom: 100%;
-                                   }
-                                   @media @mdmax{
-                                        min-height: 585px !important;
                                    }
                                 }
                             }
@@ -321,6 +321,53 @@
                         }
                         h2{
                             font-size: 32px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m){
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            .page-main{
+                .columns{
+                    .column.main{
+                        .row-slider-first{
+                            .slick-slider{
+                                .slick-slide{
+                                    [class*="background-image"]{
+                                        background-size: 100% !important; //importats PAGE BUILDER
+                                        min-height: auto !important; //importats PAGE BUILDER
+                                        padding-bottom: 138%;
+                                        *{
+                                            min-height: auto !important; //importats PAGE BUILDER
+                                        }
+                                        .pagebuilder-overlay{
+                                            padding: 0 !important; //importats PAGE BUILDER
+                                        }
+                                    }
+                                }
+                                .slick-dots{
+                                    bottom: 20px;
+                                    li{
+                                        width: 8px;
+                                        height: 8px;
+                                        margin: 0 3px;
+                                        button{
+                                            height: 8px;
+                                            width: 8px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .row-slider-products{
+                            .slick-slider .slick-arrow{
+                                display: none !important; //importats PAGE BUILDER
+                            }
                         }
                     }
                 }
