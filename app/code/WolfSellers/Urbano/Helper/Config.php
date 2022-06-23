@@ -26,6 +26,7 @@ class Config extends AbstractHelper
     private const FIELD_PRODUCTION_WS_URL = 'production_ws_url';
     private const FIELD_SANDBOX_WS_URL = 'sandbox_ws_url';
     private const FIELD_PACKAGE_TYPE = 'package_type';
+    private const FIELD_SSL_VERIFY = 'ssl_verify';
 
     /**
      * Is sandbox.
@@ -85,6 +86,16 @@ class Config extends AbstractHelper
     public function getPackageType(): string
     {
         return $this->getValue(self::FIELD_PACKAGE_TYPE);
+    }
+
+    /**
+     * SSL Verify?.
+     *
+     * @return bool
+     */
+    public function sslVerify(): bool
+    {
+        return (bool) $this->getValue(self::FIELD_SSL_VERIFY);
     }
 
     /**

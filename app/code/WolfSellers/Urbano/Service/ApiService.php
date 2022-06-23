@@ -135,6 +135,7 @@ class ApiService
         return new Client([
             'base_uri' => $this->getBaseUrl(),
             'headers' => $headers,
+            'verify' => $this->config->sslVerify(),
         ]);
     }
 
