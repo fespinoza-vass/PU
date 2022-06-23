@@ -202,64 +202,99 @@
 
 //MOBILE
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+       .page-wrapper {
+           .columns {
+               .column {
+                   .menu-ms {
+                       .widget.block > div{
+                           width: 100%;
+                       }
+                       [class*="menu-"]{
+                           background: @black;
+                           &.w-mobil{
+                               .toggle-menu-custom{
+                                   text-indent: -99999%;
+                                   display: block;
+                                   position: relative;
+                                   height: 45px;
+                                   .lib-icon-font(
+                                       @_icon-font-content: @icon-menu,
+                                       @_icon-font-size: 4rem,
+                                       @_icon-font-line-height: 1,
+                                       @_icon-font-color: inherit,
+                                       @_icon-font-position: after,
+                                       );
+                                   &:after{
+                                       text-indent: 0;
+                                       float: left;
+                                       .lib-center-element;
+                                   }
+                               }
+                           }
+                           ul {
+                               li {
+                                   margin: 0 0 1rem 23%;
 
-    [class*=cms-dior],
-    [class*=cms-swarovski] {
-        .page-wrapper {
-            .columns {
-                .column {
-                    .menu-ms {
-                        .widget.block > div{
-                            width: 100%;
-                        }
-                        .menu-dior {
+                                   span {
+                                       &::before {
+                                           margin: 0 10px 0 0;
+                                           .lib-font-size(20);
+                                           font-weight: 900;
+                                           content: "+";
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+                   .widget.block{
+                    .menu-swarovski{
+                        > .presentation {
                             background: @black;
-                            &.w-mobil{
-                                .toggle-menu-custom{
-                                    font-size: 1.8rem;
-                                    line-height: 45px;
-                                }
+                            height: 45px;
+                        }
+                        ul#nav-list{
+                            display: none;
+                            background: @black;
+                        }
+                        &.open-nav{
+                            ul#nav-list{
+                                display: block;
                             }
-                            ul {
-                                li {
-                                    margin: 0 0 1rem 23%;
-
-                                    span {
-                                        &::before {
-                                            margin: 0 10px 0 0;
-                                            .lib-font-size(20);
-                                            font-weight: 900;
-                                            content: "+";
-                                        }
-                                    }
+                        }
+                        &.w-mobil{
+                            .toggle-menu-custom{
+                                text-indent: -99999%;
+                                display: block;
+                                position: relative;
+                                height: 45px;
+                                .lib-icon-font(
+                                    @_icon-font-content: @icon-menu,
+                                    @_icon-font-size: 4rem,
+                                    @_icon-font-line-height: 1,
+                                    @_icon-font-color: inherit,
+                                    @_icon-font-position: after,
+                                    );
+                                &:after{
+                                    text-indent: 0;
+                                    float: left;
+                                    .lib-center-element;
                                 }
                             }
                         }
-                    }
-
-                    .menu-swarovski {
                         ul {
                             li {
                                 margin: 0 0 1rem 23%;
-
+                                color: @white;
                                 span {
+                                    a{
+                                     color: @white;   
+                                    }
                                     &::before {
                                         margin: 0 10px 0 0;
                                         .lib-font-size(20);
                                         font-weight: 900;
                                         content: "+";
-                                    }
-
-                                    &.se-ve {
-                                        &::before {
-                                            content: "-";
-                                        }
-                                    }
-                                }
-
-                                ul {
-                                    &.se-ve {
-                                        display: block;
                                     }
                                 }
                             }

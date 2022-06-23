@@ -13,6 +13,7 @@
                 <password>7c222fb2927d828af22f592134e8932480637c0d</password>
                 <production_ws_url>https://api.urbanoexpress.com.pe/pyp/ws/ue/</production_ws_url>
                 <sandbox_ws_url>https://dev.urbanoexpress.com.pe/pyp/ws/ue/</sandbox_ws_url>
+                <ssl_verify>0</ssl_verify>
                 <line>3</line>
                 <contract>7984</contract>
                 <package_type>PQ</package_type>
