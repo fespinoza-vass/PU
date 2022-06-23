@@ -34,6 +34,10 @@
                         <field id="sandbox_mode">1</field>
                     </depends>
                 </field>
+                <field id="ssl_verify" translate="label" type="select" sortOrder="75" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>SSL Verify</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
                 <field id="user" translate="label" type="text" sortOrder="80" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
                     <label>User</label>
                     <validate>required-entry</validate>
