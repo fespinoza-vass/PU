@@ -1,10 +1,14 @@
 & when (@media-common = true){
     body{
-        &.page-products{
+        &.page-products,
+        &.page-with-filter{
             .page-wrapper{
                 .page-title-wrapper{
                     display: none;
                 }
+            }
+            .page-main > .category-view .category-image{
+                display: none;
             }
         }
         .page-wrapper{
