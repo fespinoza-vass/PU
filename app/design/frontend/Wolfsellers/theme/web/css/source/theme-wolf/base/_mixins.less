@@ -260,15 +260,17 @@
 }
 
 .lib-two-columns(){
-	> .field:not(.choice){
-		@media @mdmin{
-			float: left;
-			margin-right: 2%;
-			width: calc(~'(100% - 2%)/2');
-			&:nth-child(2n+1){
-				margin-right: 0;
-			}
-		}
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -10px;
+	> [class*="field"]:not(.choice){
+		display: inline-block;
+		padding: 0 10px;
+		width: calc(~'(100%)/2');
+		vertical-align: top;
+	}
+	> [class*="field"].choice{
+		padding: 0 10px;
 	}
 }
 
