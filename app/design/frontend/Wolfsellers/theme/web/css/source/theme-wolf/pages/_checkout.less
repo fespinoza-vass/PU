@@ -39,6 +39,9 @@
 				}
 				> .field{
 					padding: 0;
+					@media @mdmax{
+						width: 100% !important;
+					}
 					&[name="shippingAddress.firstname"],
 					&[name="billingAddressvisanet_pay.firstname"]{
 						order: 1;
@@ -523,9 +526,6 @@
 										background: @white;
 										> fieldset{
 											margin: 0;
-											> .field{
-												margin: 0;
-											}
 											.hidden-fields{
 												margin: 0;
 											}
