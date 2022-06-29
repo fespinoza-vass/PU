@@ -14,9 +14,29 @@
 			}
 		}
 		form{
+			&.form-login{
+				> .fieldset{
+					> .field{
+						margin-bottom: 20px;
+					}
+					> .fieldset{
+						padding-bottom: 20px;
+						.actions-toolbar{
+							display: flex;
+							flex-direction: column;
+							.primary{
+								display: flex;
+								justify-content: center;
+							}
+						}
+					}
+				}
+			}
 			> div.address,
 			> fieldset.address{
-				.lib-two-columns;
+				@media @mdmin{
+					.lib-two-columns;
+				}
 				> .field{
 					padding: 0;
 					&[name="shippingAddress.firstname"],
@@ -108,7 +128,7 @@
 						order: 13;
 						display: block !important;
 					}
-					&[name="shippingAddress.custom_attributes.ruc"]{
+					&[name="shippingAddress.custom_attributes.dni"]{
 						order: 14;
 					}
 					&.choice {
