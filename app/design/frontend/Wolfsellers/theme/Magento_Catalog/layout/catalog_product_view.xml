@@ -15,7 +15,7 @@
         <move element="amasty.shipbar.bottom" destination="content" before="transaccion.segura" />
         <referenceContainer name="content">
             <container name="product.manufacturer" htmlTag="div" htmlClass="product-manufacturer-main" before="product.info.main">
-                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.manufacturer" template="Magento_Catalog::product/view/attribute.phtml">
+                <block class="WolfSellers\DiorMenu\Block\Product\View\Description" name="product.info.manufacturer" template="Magento_Catalog::product/view/brand.phtml">
                     <arguments>
                         <argument name="at_call" xsi:type="string">getManufacturer</argument>
                         <argument name="at_code" xsi:type="string">manufacturer</argument>
@@ -43,6 +43,13 @@
             <block class="Magento\Cms\Block\Block" name="transaccion.segura" before="product.info.details">
                 <arguments>
                     <argument name="block_id" xsi:type="string">transaccion_segura</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Cms\Block\Block" name="boton.compartir" after="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">boton_compartir</argument>
                 </arguments>
             </block>
         </referenceContainer>
