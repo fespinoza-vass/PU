@@ -14,11 +14,34 @@
 			}
 		}
 		form{
+			&.form-login{
+				> .fieldset{
+					> .field{
+						margin-bottom: 20px;
+					}
+					> .fieldset{
+						padding-bottom: 20px;
+						.actions-toolbar{
+							display: flex;
+							flex-direction: column;
+							.primary{
+								display: flex;
+								justify-content: center;
+							}
+						}
+					}
+				}
+			}
 			> div.address,
 			> fieldset.address{
-				.lib-two-columns;
+				@media @mdmin{
+					.lib-two-columns;
+				}
 				> .field{
 					padding: 0;
+					@media @mdmax{
+						width: 100% !important;
+					}
 					&[name="shippingAddress.firstname"],
 					&[name="billingAddressvisanet_pay.firstname"]{
 						order: 1;
@@ -108,7 +131,7 @@
 						order: 13;
 						display: block !important;
 					}
-					&[name="shippingAddress.custom_attributes.ruc"]{
+					&[name="shippingAddress.custom_attributes.dni"]{
 						order: 14;
 					}
 					&.choice {
@@ -503,9 +526,6 @@
 										background: @white;
 										> fieldset{
 											margin: 0;
-											> .field{
-												margin: 0;
-											}
 											.hidden-fields{
 												margin: 0;
 											}
