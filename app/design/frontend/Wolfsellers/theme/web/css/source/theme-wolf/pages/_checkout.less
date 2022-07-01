@@ -14,9 +14,33 @@
 			}
 		}
 		form{
+			&.form-login{
+				> .fieldset{
+					> .field{
+						margin-bottom: 20px;
+					}
+					> .fieldset{
+						padding-bottom: 20px;
+						.actions-toolbar{
+							display: flex;
+							flex-direction: column;
+							.primary{
+								display: flex;
+								justify-content: center;
+							}
+						}
+					}
+				}
+			}
 			> div.address,
 			> fieldset.address{
-				.lib-two-columns;
+				@media @mdmin{
+					.lib-two-columns;
+				}
+				@media @mdmax{
+					display: flex;
+					flex-direction: column;
+				}
 				> .field{
 					padding: 0;
 					&[name="shippingAddress.firstname"],
@@ -85,9 +109,6 @@
 							}
 						}
 					}
-
-
-
 					&[name="shippingAddress.custom_attributes.referencia_envio"]
 					{
 						order: 10;
@@ -108,7 +129,7 @@
 						order: 13;
 						display: block !important;
 					}
-					&[name="shippingAddress.custom_attributes.ruc"]{
+					&[name="shippingAddress.custom_attributes.dni"]{
 						order: 14;
 					}
 					&.choice {
@@ -120,6 +141,62 @@
 					&[name="shippingAddress.postcode"],
 					&[name="shippingAddress.country_id"]{
 						.lib-visually-hidden;
+					}
+					@media @mdmax{
+						width: 100% !important;
+						&[name="shippingAddress.firstname"],
+						&[name="billingAddressvisanet_pay.firstname"]{
+							order: 1;
+						}
+						&[name="shippingAddress.lastname"],
+						&[name="billingAddressvisanet_pay.lastname"]{
+							order: 2;
+						}
+						&[name="shippingAddress.telephone"],
+						&[name="billingAddressvisanet_pay.telephone"]{
+							order: 5;
+						}
+						&[name="shippingAddress.custom_attributes.fecha_de_nacimiento"],
+						&[name="billingAddressvisanet_pay.custom_attributes.fecha_de_nacimiento"]{
+							order: 4;
+						}
+						&[name="shippingAddress.region_id"],
+						&[name="billingAddressvisanet_pay.region_id"]{
+							order: 6;
+						}
+						&[name="shippingAddress.city"],
+						&[name="billingAddressvisanet_pay.city"]{
+							order: 7;
+						}
+						&[name="shippingAddress.custom_attributes.colony"],
+						&[name="billingAddressvisanet_pay.custom_attributes.colony"]{
+							order: 8;
+						}
+						&[name="billingAddressvisanet_pay.postcode"]{
+							order: 8;
+						}
+						&.street{
+							order: 9;
+						}
+						&[name="shippingAddress.custom_attributes.referencia_envio"]
+						{
+							order: 10;
+						}
+						&[name="shippingAddress.vat_id"]{
+							order: 3;
+						}
+						&[name="shippingAddress.custom_attributes.invoice_required"]{
+							order: 12;
+						}
+						&[name="shippingAddress.company"]{
+							order: 13;
+						}
+						&[name="shippingAddress.custom_attributes.dni"]{
+							order: 14;
+						}
+						&.choice {
+							order: 15;
+						}
 					}
 				}
 			}
@@ -503,9 +580,6 @@
 										background: @white;
 										> fieldset{
 											margin: 0;
-											> .field{
-												margin: 0;
-											}
 											.hidden-fields{
 												margin: 0;
 											}
