@@ -49,6 +49,9 @@ class LayoutProcessor implements LayoutProcessorInterface
         $vat['imports'] = [
             'visible' => '${ $.parentName }.invoice_required:value',
         ];
+        $vat['validation'] = array_merge($vat['validation'], [
+            'required-entry' => true,
+        ]);
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id', $vat);
 
         $city = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
