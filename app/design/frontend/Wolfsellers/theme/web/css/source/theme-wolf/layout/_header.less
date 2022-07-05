@@ -76,7 +76,18 @@
                     .amsearch-wrapper-content{
                         .amsearch-item.product-item{
                             .amsearch-autocomplete-image{
-                                max-width: 80px;
+                                max-width: 150px;
+                                min-width: 140px;
+                                .amlabel-position-wrapper{
+                                    width: auto !important; // important AMASTY
+                                    margin: 10px;
+                                    .amasty-label-container{
+                                        width: auto !important; // important AMASTY
+                                        .amlabel-text{
+                                            position: static !important; // important AMASTY
+                                        }
+                                    }
+                                }
                             }
                             .amsearch-autocomplete-information{
                                 display: flex;
