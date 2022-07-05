@@ -307,6 +307,7 @@
                                                 border-radius: 12px;
                                                 position: relative;
                                                 flex-flow: column;
+                                                width: 100%;
 
                                                 .ampromo-product-select {
                                                     position: absolute;
@@ -321,7 +322,16 @@
                                                     order: 2;
                                                 }
 
+                                                .ampromo-item-buttons{
+                                                    order: 4;
+
+                                                    .tocart{
+                                                        width: 100%;
+                                                    }
+                                                }
+
                                                 .ampromo-item-title {
+                                                    min-height: 31px;
                                                     order: 3;
 
                                                     .ampromo-title {
@@ -365,6 +375,10 @@
                                             }
                                         }
                                     }
+                                }
+
+                                .slick-arrow{
+                                    .lib-font-size(0);
                                 }
                             }
                         }
