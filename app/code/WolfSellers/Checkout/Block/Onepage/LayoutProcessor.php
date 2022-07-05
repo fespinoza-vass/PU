@@ -76,6 +76,9 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         $fechaNacimiento = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento');
         $fechaNacimiento['validation'] = [];
+        $fechaNacimiento['options'] = [
+            'yearRange' => '-60:-10',
+        ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
 
         $payments = $walker->getValue('{PAYMENT}.>>.payments-list');
