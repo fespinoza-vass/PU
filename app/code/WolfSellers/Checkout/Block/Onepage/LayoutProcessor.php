@@ -69,7 +69,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $colony['validation'] = ['required-entry' => true];
         $colony['config']['elementTmpl'] = 'ui/form/element/select';
         $colony['config']['options'] = [[
-            'label' => "",
+            'label' => '',
             'value' => '',
         ]];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony', $colony);
@@ -78,18 +78,18 @@ class LayoutProcessor implements LayoutProcessorInterface
         $fechaNacimiento['validation'] = [];
         $fechaNacimiento['options'] = [
             'yearRange' => '-60:-10',
+            'dateFormat' => 'dd/mm/yy',
         ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
 
         $payments = $walker->getValue('{PAYMENT}.>>.payments-list');
-        foreach ($payments["children"] as &$payment) {
-            if(
-                !empty($payment["children"])
-                && !empty($payment["children"]["form-fields"])
-                && !empty($payment["children"]["form-fields"]["children"])
-                && !empty($payment["children"]["form-fields"]["children"]["fecha_de_nacimiento"])
+        foreach ($payments['children'] as &$payment) {
+            if (!empty($payment['children'])
+                && !empty($payment['children']['form-fields'])
+                && !empty($payment['children']['form-fields']['children'])
+                && !empty($payment['children']['form-fields']['children']['fecha_de_nacimiento'])
             ) {
-                $payment["children"]["form-fields"]["children"]["fecha_de_nacimiento"]["validation"] = [];
+                $payment['children']['form-fields']['children']['fecha_de_nacimiento']['validation'] = [];
             }
         }
 
