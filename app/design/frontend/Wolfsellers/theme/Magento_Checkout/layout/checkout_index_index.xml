@@ -16,5 +16,13 @@
         <referenceBlock name="catalog.topnav" remove="true"/>
         <referenceContainer name="footer" remove="true"/>
         <referenceContainer name="footer-container" remove="true"/>
+
+        <referenceContainer name="main.content">
+            <block class="Magento\Cms\Block\Block" name="msg.checkout" before="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">msg_checkout</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>
