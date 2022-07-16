@@ -57,13 +57,12 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         $quotes = $this->getQuotes();
 
         if (!$quotes) {
-            $this->_logger->error('Urbano: Not quoates available');
+            $this->_logger->error('Urbano: Not quotes available');
 
             return false;
         }
 
         $result = $this->_rateFactory->create();
-        $methods = $this->getAllowedMethods();
 
         // Append quotes to result
         foreach ($quotes as $quote) {
@@ -90,7 +89,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
      */
     public function processAdditionalValidation(DataObject $request)
     {
-        //Skip by item validation if there is no items in request
+        // Skip by item validation if there is no items in request
         if (empty($this->getAllItems($request))) {
             return false;
         }

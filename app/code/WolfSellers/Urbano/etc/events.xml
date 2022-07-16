@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_invoice_pay">
+        <observer name="wolfsellers_urbano_generate_label"
+                  instance="WolfSellers\Urbano\Observer\InvoicePayGenerateLabelObserver" />
+    </event>
+</config>
