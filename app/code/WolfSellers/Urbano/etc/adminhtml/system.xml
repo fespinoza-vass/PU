@@ -126,7 +126,41 @@
                     </depends>
                     <validate>required-entry</validate>
                 </field>
-                <field id="sallowspecific" translate="label" type="select" sortOrder="500" showInWebsite="1" showInStore="1" showInDefault="1">
+                <field id="auto_generate_shipment" translate="label" type="select" sortOrder="270" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Auto Generate Shipment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Autogenerate shipment when invoice is paid</comment>
+                </field>
+                <field id="package_weight" translate="label" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Package Weight</label>
+                    <validate>required-entry validate-number validate-zero-or-greater</validate>
+                    <comment>Value 0 for dynamic calculate</comment>
+                    <depends>
+                        <field id="auto_generate_shipment">1</field>
+                    </depends>
+                </field>
+                <field id="package_length" translate="label" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Package Length</label>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="auto_generate_shipment">1</field>
+                    </depends>
+                </field>
+                <field id="package_width" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Package Width</label>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="auto_generate_shipment">1</field>
+                    </depends>
+                </field>
+                <field id="package_height" translate="label" type="text" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Package Height</label>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="auto_generate_shipment">1</field>
+                    </depends>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="500" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
                     <label>Ship to Applicable Countries</label>
                     <frontend_class>shipping-applicable-country</frontend_class>
                     <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
@@ -138,6 +172,16 @@
                 </field>
                 <field id="sort_order" translate="label" type="text" sortOrder="520" showInWebsite="1" showInStore="1" showInDefault="1">
                     <label>Sort Order</label>
+                </field>
+            </group>
+        </section>
+
+        <section id="shipping">
+            <group id="origin">
+                <field id="contact_id" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1">
+                    <label>User Contact</label>
+                    <source_model>WolfSellers\Urbano\Model\Source\User</source_model>
+                    <validate>required-entry</validate>
                 </field>
             </group>
         </section>

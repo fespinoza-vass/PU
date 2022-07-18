@@ -63,7 +63,7 @@ class LabelGeneratorPreference extends LabelGenerator
 
         $carrierCode = $carrier->getCarrierCode();
         $carrierTitle = (string) $this->scopeConfig->getValue(
-            'carriers/' . $carrierCode . '/title',
+            'carriers/'.$carrierCode.'/title',
             ScopeInterface::SCOPE_STORE,
             $shipment->getStoreId()
         );
