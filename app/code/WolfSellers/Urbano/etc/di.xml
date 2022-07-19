@@ -30,5 +30,7 @@
     </type>
 
     <preference for="Magento\Shipping\Model\Shipping\LabelGenerator"
-                type="WolfSellers\Urbano\Model\Shipping\LabelGeneratorPreference"/>
+                type="WolfSellers\Urbano\Model\Shipping\LabelGeneratorPreference" />
+    <preference for="Magento\Shipping\Model\Shipping\Labels"
+                type="WolfSellers\Urbano\Model\Shipping\LabelsPreference" />
 </config>

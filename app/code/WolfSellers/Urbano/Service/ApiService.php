@@ -152,6 +152,11 @@ class ApiService
         $this->log(['response' => $rawResponse], 'Response raw.');
 
         $result = json_decode($rawResponse, true);
+
+        if (!$result) {
+            return [];
+        }
+
         $sqlError = (int) ($result[0]['sql_error'] ?? 0);
         $error = (int) ($result['error'] ?? 0);
 
