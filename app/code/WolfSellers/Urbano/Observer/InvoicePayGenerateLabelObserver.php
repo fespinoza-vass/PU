@@ -19,7 +19,6 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\ShipmentSender;
-use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
 use Magento\Sales\Model\Order\Shipment\ShipmentValidatorInterface;
@@ -101,9 +100,7 @@ class InvoicePayGenerateLabelObserver implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        /* @var $invoice Invoice */
-        $invoice = $observer->getEvent()->getInvoice();
-        $this->order = $invoice->getOrder();
+        $this->order = $observer->getOrder();
 
         if (Urbano::CODE !== $this->order->getShippingMethod(true)->getCarrierCode()
             || !$this->autoGenerateShipment()
