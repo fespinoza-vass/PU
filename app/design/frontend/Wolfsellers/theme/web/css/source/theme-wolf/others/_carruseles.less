@@ -323,12 +323,24 @@
 ///MOBILE
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
 
-	.slick-slider{
-		.slick-list {
-			padding: 10px 50px 10px 0 !important;
+	[data-content-type="row"]:not(.row-slider-first),
+	.products-morefrom,
+	.block.upsell,
+	.block.related{
+		.slick-slider{
+			.slick-list {
+				padding: 10px 50px 10px 0 !important;
+			}
 		}
 	}
-
+	.products-morefrom,
+	.block.upsell,
+	.block.related{
+		margin: 0 -20px;
+		ol.products.list.items{
+			padding: 0;
+		}
+	}
 	.row_slider_marcas{
 		margin: 0 0 20px;
 
