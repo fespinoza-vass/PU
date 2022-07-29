@@ -75,10 +75,14 @@ class LayoutProcessor implements LayoutProcessorInterface
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony', $colony);
 
         $fechaNacimiento = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento');
+        $fechaNacimiento['component'] = 'WolfSellers_Checkout/js/view/form/element/birthdate';
+        $fechaNacimiento['config']['elementTmpl'] = 'WolfSellers_Checkout/form/element/birthdate';
         $fechaNacimiento['validation'] = [];
         $fechaNacimiento['options'] = [
             'yearRange' => '-60:-10',
             'dateFormat' => 'dd/mm/yy',
+            'altField' => '#custom_birthdate',
+            'altFormat' => 'mm/dd/yy',
         ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
 
