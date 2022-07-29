@@ -176,6 +176,25 @@
 					}
 					.btn-share{
 						order: 10;
+
+						span{
+							align-items: center;
+							.lin-font-size(20);
+							display: flex;
+							@media @mdmax{
+								.lin-font-size(14);
+							}
+							&::after{
+								font-family: @icons__font-name;
+								content: @icon-share;
+								background: @black;
+								border-radius: 8px;
+								.lib-font-size(22);
+								margin: 0 0 0 8px;
+								padding: 0 5px;
+								color: @white;
+							}
+						}
 					}
 					.product-info-price{
 						display: flex;
