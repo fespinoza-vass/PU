@@ -59,12 +59,12 @@
                 <label translate="true">ID</label>
             </settings>
         </column>
-        <column name="store_name">
+        <column name="store_name"  sortOrder="2">
             <settings>
                 <label translate="true">Purchase Point</label>
             </settings>
         </column>
-        <column name="created_at" sortOrder="2">
+        <column name="created_at" sortOrder="3">
             <settings>
                 <sortable>false</sortable>
                 <filter>dateRange</filter>
@@ -73,48 +73,53 @@
                 <sorting>desc</sorting>
             </settings>
         </column>
-        <column name="billing_name" sortOrder="3">
+        <column name="billing_name" sortOrder="4">
             <settings>
                 <sortable>false</sortable>
                 <dataType>text</dataType>
                 <label translate="true">Bill-to Name</label>
             </settings>
         </column>
-        <column name="shipping_name" sortOrder="4">
+        <column name="shipping_name" sortOrder="5">
             <settings>
                 <sortable>false</sortable>
                 <dataType>text</dataType>
                 <label translate="true">Ship-to Name</label>
             </settings>
         </column>
-        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="21">
+        <column name="dni" sortOrder="6">
             <settings>
-                <!--filter>select</filter-->
-                <options class="Magento\Sales\Ui\Component\Listing\Column\Status\Options"/>
-                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">DNI</label>
+                <dataType>text</dataType>
+            </settings>
+        </column>
+        <column name="status" sortOrder="7">
+            <settings>
+                <dataType>text</dataType>
                 <label translate="true">Status</label>
             </settings>
         </column>
-        <column name="billing_address" sortOrder="5">
+        <column name="billing_address" sortOrder="8">
             <settings>
                 <label translate="true">Billing Address</label>
-                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <dataType>text</dataType>
             </settings>
         </column>
-        <column name="shipping_address" sortOrder="6">
+        <column name="shipping_address" sortOrder="9">
             <settings>
                 <label translate="true">Shipping Address</label>
-                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <dataType>text</dataType>
             </settings>
         </column>
-        <column name="base_grand_total" sortOrder="7" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
+        <column name="base_grand_total" sortOrder="10" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
             <settings>
                 <sortable>false</sortable>
                 <dataType>text</dataType>
                 <label translate="true">Grand Total (Base)</label>
             </settings>
         </column>
-        <column name="total_paid" sortOrder="8" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
+        <column name="total_paid" sortOrder="11" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
             <settings>
                 <sortable>false</sortable>
                 <dataType>text</dataType>
@@ -122,122 +127,106 @@
             </settings>
         </column>
 
-        <column name="shipping_information" sortOrder="9" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
+        <column name="shipping_information" sortOrder="12" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
             <settings>
                 <sortable>false</sortable>
                 <dataType>text</dataType>
                 <label translate="true">Shipping Information</label>
             </settings>
         </column>
-        <column name="customer_email"  sortOrder="10">
+        <column name="customer_email"  sortOrder="13">
             <settings>
                 <label translate="true">Customer Email</label>
             </settings>
         </column>
-        <column name="customer_group"  sortOrder="11">
+        <column name="customer_group"  sortOrder="14">
             <settings>
                 <label translate="true">Customer Group</label>
             </settings>
         </column>
-        <column name="subtotal"  sortOrder="12" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
+        <column name="subtotal"  sortOrder="15" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
             <settings>
                 <label translate="true">Subtotal</label>
             </settings>
         </column>
-        <column name="shipping_and_handling" sortOrder="13" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
+        <column name="shipping_and_handling" sortOrder="16" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
             <settings>
                 <label translate="true">Shipping and Handling</label>
             </settings>
         </column>
-        <column name="customer_name" sortOrder="14">
+        <column name="customer_name" sortOrder="17">
             <settings>
                 <label translate="true">Customer Name</label>
             </settings>
         </column>
-        <column name="payment_method" sortOrder="15">
+        <column name="payment_method" sortOrder="18">
             <settings>
-                <!--filter>select</filter-->
                 <options class="Magento\Payment\Ui\Component\Listing\Column\Method\Options"/>
                 <dataType>select</dataType>
                 <label translate="true">Payment Method</label>
             </settings>
         </column>
-        <column name="total_refunded" sortOrder="16">
+        <column name="total_refunded" sortOrder="19">
             <settings>
                 <label translate="true">Total Refunded</label>
             </settings>
         </column>
-        <column name="transaction_source"  sortOrder="17">
+        <column name="transaction_source"  sortOrder="20">
             <settings>
                 <label translate="true">Braintree Transaction Source</label>
             </settings>
         </column>
-        <column name="pickup_location_code"  sortOrder="18">
+        <column name="pickup_location_code"  sortOrder="21">
             <settings>
                 <label translate="true">pickup_location_code</label>
             </settings>
         </column>
-        <column name="store_name"  sortOrder="19">
+        <column name="store_name"  sortOrder="22">
             <settings>
                 <label translate="true">Allocated sources</label>
             </settings>
         </column>
-        <column name="vat_id"  sortOrder="20">
+        <column name="rut"  sortOrder="23">
             <settings>
                 <label translate="true">RUT</label>
             </settings>
         </column>
-        <column name="company"  sortOrder="20">
+        <column name="company"  sortOrder="24">
             <settings>
                 <label translate="true">Razón Social (RUC)</label>
             </settings>
         </column>
-        <!--column name="company"  sortOrder="21">
-            <settings>
-                <label translate="true">Nombre Gift Card</label>
-            </settings>
-        </column>
-        <column name="company"  sortOrder="22">
-            <settings>
-                <label translate="true">Monto de Gift Card</label>
-            </settings>
-        </column>
-        <column name="company"  sortOrder="23">
-            <settings>
-                <label translate="true">tem Attachment - Mensaje del Gift Card Nombre Cliente</label>
-            </settings>
-        </column-->
-        <column name="lastname"  sortOrder="24">
+        <column name="lastname"  sortOrder="25">
             <settings>
                 <label translate="true">Apellidos Cliente</label>
             </settings>
         </column>
-        <column name="last_trans_id"  sortOrder="25">
+        <column name="last_trans_id"  sortOrder="26">
             <settings>
                 <label translate="true">ID de Transacción</label>
             </settings>
         </column>
-        <column name="TARJETA_NUMBER"  sortOrder="26">
+        <column name="TARJETA_NUMBER"  sortOrder="27">
             <settings>
                 <label translate="true">Tarjeta</label>
             </settings>
         </column>
-        <column name="brand"  sortOrder="27">
+        <column name="brand"  sortOrder="28">
             <settings>
                 <label translate="true">Marca Tarjeta</label>
             </settings>
         </column>
-        <column name="region"  sortOrder="28">
+        <column name="region"  sortOrder="29">
             <settings>
                 <label translate="true">Departamento</label>
             </settings>
         </column>
-        <column name="city"  sortOrder="29">
+        <column name="city"  sortOrder="30">
             <settings>
                 <label translate="true">Provincia</label>
             </settings>
         </column>
-        <column name="city"  sortOrder="30">
+        <column name="city"  sortOrder="31">
             <settings>
                 <label translate="true">Distrito</label>
             </settings>

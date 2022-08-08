@@ -43,8 +43,15 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             "braintree_transaction_details.order_id=main_table.entity_id"
         );
         $this->getSelect()->joinLeft(
+            "customer_address_entity",
+            "customer_address_entity.entity_id=main_table.customer_id",
+            ["customer_address_entity.vat_id as rut"]
+        );
+
+        $this->getSelect()->joinLeft(
             "sales_order_address",
-            "sales_order_address.parent_id=main_table.entity_id"
+            "sales_order_address.parent_id=main_table.entity_id",
+            ["sales_order_address.vat_id as dni"]
         )->group('sales_order_address.parent_id');
 
         $this->getSelect()->joinLeft(
