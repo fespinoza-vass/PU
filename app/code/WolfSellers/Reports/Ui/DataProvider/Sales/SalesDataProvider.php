@@ -38,23 +38,23 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
     protected function _initSelect()
     {
         parent::_initSelect();
+        $this->getSelect()->joinLeft(
+            "braintree_transaction_details",
+            "braintree_transaction_details.order_id=main_table.entity_id"
+        );
+        $this->getSelect()->joinLeft(
+            "sales_order_address",
+            "sales_order_address.parent_id=main_table.entity_id"
+        )->group('sales_order_address.parent_id');
 
-        /*$this->getSelect()->joinInner(
-            "sales_order_grid",
-            "sales_order_grid.entity_id = main_table.order_id",
-            ["increment_id", "customer_name", "shipping_and_handling", "order_status" => "status", "payment_method", "customer_email"]
+        $this->getSelect()->joinLeft(
+            "sales_order_payment",
+            "sales_order_payment.parent_id=main_table.entity_id",
+            ["JSON_VALUE(sales_order_payment.additional_information, '$.PAN') AS TARJETA_NUMBER","JSON_VALUE(sales_order_payment.additional_information, '$.brand') AS brand"]
         );
-        $this->getSelect()->joinInner("sales_order_address",
-            "sales_order_grid.entity_id = sales_order_address.parent_id and sales_order_address.address_type = 'shipping'",
-            ["street", "region","postcode","city"]
-        );
-        $this->getSelect()->joinInner("catalog_product_entity",
-            "catalog_product_entity.entity_id = main_table.product_id",
-            "sku as sku-parent"
-        );
-        $this->addFilterToMap("created_at","sales_order_grid.created_at");
-        $this->addExpressionFieldToSelect("created_at", "CONVERT_TZ({{created_at}},'+00:00','-06:00')",['created_at'=>'sales_order_grid.created_at']);
-        $this->getSelect()->where("main_table.parent_item_id IS NULL");*/
+
+        $this->_logger->info('Query: ' . trim($this->getSelect()->__toString()));
+
         return $this;
     }
 }

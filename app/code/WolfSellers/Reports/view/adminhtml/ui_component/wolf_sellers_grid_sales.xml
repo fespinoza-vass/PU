@@ -87,7 +87,7 @@
                 <label translate="true">Ship-to Name</label>
             </settings>
         </column>
-        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="60">
+        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="21">
             <settings>
                 <!--filter>select</filter-->
                 <options class="Magento\Sales\Ui\Component\Listing\Column\Status\Options"/>
@@ -180,6 +180,66 @@
         <column name="store_name"  sortOrder="19">
             <settings>
                 <label translate="true">Allocated sources</label>
+            </settings>
+        </column>
+        <column name="vat_id"  sortOrder="20">
+            <settings>
+                <label translate="true">RUT</label>
+            </settings>
+        </column>
+        <column name="company"  sortOrder="20">
+            <settings>
+                <label translate="true">Razón Social (RUC)</label>
+            </settings>
+        </column>
+        <!--column name="company"  sortOrder="21">
+            <settings>
+                <label translate="true">Nombre Gift Card</label>
+            </settings>
+        </column>
+        <column name="company"  sortOrder="22">
+            <settings>
+                <label translate="true">Monto de Gift Card</label>
+            </settings>
+        </column>
+        <column name="company"  sortOrder="23">
+            <settings>
+                <label translate="true">tem Attachment - Mensaje del Gift Card Nombre Cliente</label>
+            </settings>
+        </column-->
+        <column name="lastname"  sortOrder="24">
+            <settings>
+                <label translate="true">Apellidos Cliente</label>
+            </settings>
+        </column>
+        <column name="last_trans_id"  sortOrder="25">
+            <settings>
+                <label translate="true">ID de Transacción</label>
+            </settings>
+        </column>
+        <column name="TARJETA_NUMBER"  sortOrder="26">
+            <settings>
+                <label translate="true">Tarjeta</label>
+            </settings>
+        </column>
+        <column name="brand"  sortOrder="27">
+            <settings>
+                <label translate="true">Marca Tarjeta</label>
+            </settings>
+        </column>
+        <column name="region"  sortOrder="28">
+            <settings>
+                <label translate="true">Departamento</label>
+            </settings>
+        </column>
+        <column name="city"  sortOrder="29">
+            <settings>
+                <label translate="true">Provincia</label>
+            </settings>
+        </column>
+        <column name="city"  sortOrder="30">
+            <settings>
+                <label translate="true">Distrito</label>
             </settings>
         </column>
     </columns>
