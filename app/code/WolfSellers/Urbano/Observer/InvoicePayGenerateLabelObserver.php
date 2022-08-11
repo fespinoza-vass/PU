@@ -35,6 +35,7 @@ use WolfSellers\Urbano\Model\Source\Packaging;
  */
 class InvoicePayGenerateLabelObserver implements ObserverInterface
 {
+    const ORDER_FREE_SHIPPING_METHOD = 'freeshipping';
     /** @var ShipmentLoader */
     private ShipmentLoader $shipmentLoader;
 
@@ -76,6 +77,9 @@ class InvoicePayGenerateLabelObserver implements ObserverInterface
      * @param LoggerInterface $logger
      */
     public function __construct(
+        \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
+        \Magento\Sales\Model\Convert\Order $convertOrder,
+        \Magento\Shipping\Model\ShipmentNotifier $shipmentNotifier,
         ShipmentLoader $shipmentLoader,
         RequestInterface $request,
         ShipmentValidatorInterface $shipmentValidator,
@@ -85,6 +89,9 @@ class InvoicePayGenerateLabelObserver implements ObserverInterface
         ShipmentSender $shipmentSender,
         LoggerInterface $logger
     ) {
+        $this->_orderRepository = $orderRepository;
+        $this->_convertOrder = $convertOrder;
+        $this->_shipmentNotifier = $shipmentNotifier;
         $this->shipmentLoader = $shipmentLoader;
         $this->request = $request;
         $this->shipmentValidator = $shipmentValidator;
@@ -102,16 +109,55 @@ class InvoicePayGenerateLabelObserver implements ObserverInterface
     {
         $this->order = $observer->getOrder();
 
-        if (Urbano::CODE !== $this->order->getShippingMethod(true)->getCarrierCode()
-            || !$this->autoGenerateShipment()
+        if (Urbano::CODE == $this->order->getShippingMethod(true)->getCarrierCode()
+            && $this->autoGenerateShipment()
         ) {
-            return;
+            try {
+                $this->generateShipment();
+            } catch (\Exception $e) {
+                $this->logger->error('Error generate shipment: '.$e->getMessage());
+            }
         }
 
+        if (self::ORDER_FREE_SHIPPING_METHOD == $this->order->getShippingMethod(true)->getCarrierCode()
+            && $this->autoGenerateShipment()
+        ) {
+            try {
+                $this->generateShipmentFree();
+            } catch (\Exception $e) {
+                $this->logger->error('Error generate free shipment: '.$e->getMessage());
+            }
+        }
+        return;
+    }
+
+    private function generateShipmentFree(){
+        $order = $this->order;
+        // to check order can ship or not
+        if (!$order->canShip()) {
+            $this->logger->error('You cant create the free Shipment of this order.');
+        }
+        $orderShipment = $this->_convertOrder->toShipment($order);
+        foreach ($order->getAllItems() AS $orderItem) {
+         // Check virtual item and item Quantity
+         if (!$orderItem->getQtyToShip() || $orderItem->getIsVirtual()) {
+            continue;
+         }
+         $qty = $orderItem->getQtyToShip();
+         $shipmentItem = $this->_convertOrder->itemToShipmentItem($orderItem)->setQty($qty);
+         $orderShipment->addItem($shipmentItem);
+        }
+        $orderShipment->register();
+        $orderShipment->getOrder()->setIsInProcess(true);
         try {
-            $this->generateShipment();
+            // Save created Order Shipment
+            $orderShipment->save();
+            $orderShipment->getOrder()->save();
+            // Send Shipment Email
+            $this->_shipmentNotifier->notify($orderShipment);
+            $orderShipment->save();
         } catch (\Exception $e) {
-            $this->logger->error('Error generate shipment: '.$e->getMessage());
+            $this->logger->error('Error generate free shipment: '.$e->getMessage());
         }
     }
 
