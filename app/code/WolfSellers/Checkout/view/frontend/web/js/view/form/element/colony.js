@@ -24,7 +24,7 @@ define([
             ubigeo.listUbigeo.subscribe(function (listUbigeo) {
                 self.setOptions(listUbigeo);
             });
-
+            this.onUpdate();
             return this;
         },
 
@@ -34,7 +34,7 @@ define([
          * @returns {*}
          */
         onUpdate: function (value) {
-            var ubigeo = '';
+            var ubigeo = ubigeo;
             var optSelected;
 
             if (typeof this.getOption !== 'function') {
