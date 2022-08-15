@@ -264,6 +264,7 @@
                                     }
 
                                     .filter-options{
+                                        height: calc(~"100% - 65px");
                                         padding: 60px 40px 20px;
                                         top: 0;
                                         input[type='checkbox'] + .amshopby-choice:after{
@@ -329,6 +330,26 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            .am_shopby_apply_filters{
+                bottom: 0;
+
+                .am-show-button{
+                    .am-items{
+                        display: none;
+                    }
+
+                    .amshopby-button{
+                        text-transform: uppercase;
+                        border-radius: 12px;
+                        background: @black;
+                        padding: 10px 70px;
+                        min-height: auto;
+                        font-size: 14px;
+                        color: @white;
                     }
                 }
             }
