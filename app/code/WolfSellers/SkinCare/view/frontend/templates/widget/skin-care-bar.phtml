@@ -6,8 +6,10 @@
 ?>
 
 <div class="skin-care-bar" data-type="<?php echo $block->getType(); ?>">
-    <?php echo $escaper->escapeHtml($block->getTitle()); ?>
+   <span class="cont-percentage">
+   <?php echo $escaper->escapeHtml($block->getTitle()); ?>
     <span class="percentage">0</span>%
+   </span>
     <div class="bar">
         <div class="bar-percentage"></div>
     </div>

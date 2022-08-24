@@ -560,7 +560,15 @@
 				width: 100%;
 				max-width: @layout__max-width;
 				margin: 0 auto 27px;
-				padding: 0 20px;
+				@media @mdmin{
+					padding: 0 20px;
+				}
+				@media @mdmax{
+					padding: 0;
+					ol.products.list.items.product-items.slick-slider{
+						padding: 0;
+					}
+				}
 			}
 			.block.related,
 			.block.upsell,
