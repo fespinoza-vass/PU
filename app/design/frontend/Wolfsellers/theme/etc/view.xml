@@ -178,6 +178,10 @@
                 <width>305</width>
                 <height>305</height>
             </image>
+            <image id="am_brand_more_from_image" type="small_image">
+                <width>305</width>
+                <height>305</height>
+            </image>
             <image id="wishlist_sidebar_block" type="thumbnail">
                 <width>75</width>
                 <height>90</height>
