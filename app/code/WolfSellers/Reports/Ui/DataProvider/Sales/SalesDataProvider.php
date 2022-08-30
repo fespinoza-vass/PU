@@ -48,7 +48,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         $this->getSelect()->joinLeft(
             "sales_order_item",
             "sales_order_item.order_id=main_table.entity_id",
-            ["sales_order_item.item_id","sales_order_item.sku","sales_order_item.name as sku_description","sales_order_item.qty_ordered","sales_order_item.price", "sales_order_item.base_price","main_table.status as estatus_pedido"]
+            ["sales_order_item.item_id","sales_order_item.sku","sales_order_item.name as sku_description","sales_order_item.qty_ordered","sales_order_item.price", "sales_order_item.base_price","main_table.status as estatus_pedido","main_table.store_name as Purchase_Point"]
         );
 
         $this->getSelect()->joinLeft(
@@ -76,10 +76,11 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             "customer_address_entity.entity_id=main_table.customer_id",
             ["customer_address_entity.vat_id as rut","customer_address_entity.firstname","customer_address_entity.lastname"]
         );
+
         $this->getSelect()->joinLeft(
             "sales_order_address",
             "sales_order_address.parent_id=main_table.entity_id",
-            ["sales_order_address.vat_id as dni"]
+            ["sales_order_address.vat_id as dni","sales_order_address.region as region","sales_order_address.city as provincia","sales_order_address.city as city"]
         );
         $this->getSelect()->joinLeft(
             "sales_order_payment",
