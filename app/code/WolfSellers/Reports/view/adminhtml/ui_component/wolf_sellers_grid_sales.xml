@@ -134,7 +134,7 @@
                 <label translate="true">Item Attachment - Mensaje del Gift Card</label>
             </settings>
         </column>
-        <column name=""  sortOrder="17">
+        <column name="Purchase_Point"  sortOrder="17">
             <settings>
                 <label translate="true">Purchase Point</label>
             </settings>
@@ -217,7 +217,7 @@
                 <label translate="true">Departamento</label>
             </settings>
         </column>
-        <column name="city"  sortOrder="31">
+        <column name="provincia"  sortOrder="31">
             <settings>
                 <label translate="true">Provincia</label>
             </settings>
@@ -291,6 +291,11 @@
         <column name="pickup_location_code"  sortOrder="44">
             <settings>
                 <label translate="true">pickup_location_code</label>
+            </settings>
+        </column>
+        <column name="transaction_source"  sortOrder="45">
+            <settings>
+                <label translate="true">Braintree Transaction Source</label>
             </settings>
         </column>
     </columns>
