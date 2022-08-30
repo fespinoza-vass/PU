@@ -91,6 +91,10 @@
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
 
      .cms-page-view{
+        .menu-ms{
+            position: relative;
+            z-index: 999;
+        }
         .menu-ms,
         .widget.block{
             .widget.block > div{
@@ -121,7 +125,8 @@
                                 position: absolute;
                                 background: black;
                                 z-index: 12;
-                                top: 45px;
+                                top: 30px;
+                                padding-top: 20px;
                             }
                             span a{
                                 .lib-font-size(18); 
