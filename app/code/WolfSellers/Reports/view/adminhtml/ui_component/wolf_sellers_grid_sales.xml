@@ -53,8 +53,6 @@
                 <indexField>entity_id</indexField>
             </settings>
         </selectionsColumn>
-
-
         <column name="increment_id" sortOrder="1">
             <settings>
                 <filter>text</filter>
@@ -229,7 +227,6 @@
                 <label translate="true">Distrito</label>
             </settings>
         </column>
-
         <column name="total_paid" sortOrder="33" class="Magento\Catalog\Ui\Component\Listing\Columns\Price">
             <settings>
                 <label translate="true">ID de Transacción</label>
