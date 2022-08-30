@@ -76,14 +76,11 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             "customer_address_entity.entity_id=main_table.customer_id",
             ["customer_address_entity.vat_id as rut","customer_address_entity.firstname","customer_address_entity.lastname"]
         );
-
         $this->getSelect()->joinLeft(
             "sales_order_address",
             "sales_order_address.parent_id=main_table.entity_id",
             ["sales_order_address.vat_id as dni"]
         );
-        //    ->group('sales_order_address.parent_id');
-
         $this->getSelect()->joinLeft(
             "sales_order_payment",
             "sales_order_payment.parent_id=main_table.entity_id",
