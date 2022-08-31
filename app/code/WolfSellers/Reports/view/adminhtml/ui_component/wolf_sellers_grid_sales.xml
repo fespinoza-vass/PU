@@ -99,7 +99,7 @@
                 <label translate="true">Descuentos de Producto (Sku)</label>
             </settings>
         </column>
-        <column name=""  sortOrder="10">
+        <column name="tipopedido"  sortOrder="10">
             <settings>
                 <label translate="true">Tipo de Pedido (Boleta o Factura)</label>
             </settings>
