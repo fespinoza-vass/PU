@@ -77,6 +77,12 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ["customer_address_entity.vat_id as rut","customer_address_entity.firstname","customer_address_entity.lastname"]
         );
 
+        //$this->getSelect()->columns("CASE customer_address_entity.vat_id WHEN customer_address_entity.vat_id <> '' THEN 'FACTURA' ELSE 'BOLETA' END as tipoB");
+        //$fullCases[] = 'CASE WHEN ' . $condition . ' THEN ' . $weight . ' ELSE 0 END';
+        //$this->addFieldToSelect("customer_address_entity.vat_id","CASE customer_address_entity.vat_id WHEN '' THEN 'BOLETA' ELSE 'FACTURA' END, ");
+
+        $this->getSelect()->columns(new \Zend_Db_Expr("IF(customer_address_entity.vat_id <> '','FACTURA','BOLETA') as tipopedido"));
+
         $this->getSelect()->joinLeft(
             "sales_order_address",
             "sales_order_address.parent_id=main_table.entity_id",
@@ -93,6 +99,9 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
                 "sales_order_payment.last_trans_id"
             ]
         );
+
+
+        //$this->addFieldToSelect(new \Zend_Db_Expr("CASE `customer_address_entity`.`vat_id` WHEN `customer_address_entity`.`vat_id` <> '' THEN 'FACTURA' ELSE 'BOLETA' END as tipoB"));
         $this->_logger->info('Query: ' . trim($this->getSelect()->__toString()));
 
         return $this;
