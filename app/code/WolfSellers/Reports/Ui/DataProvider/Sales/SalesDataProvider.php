@@ -48,7 +48,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         $this->getSelect()->joinLeft(
             "sales_order_item",
             "sales_order_item.order_id=main_table.entity_id",
-            ["sales_order_item.item_id","sales_order_item.sku","sales_order_item.name as sku_description","sales_order_item.qty_ordered","sales_order_item.price", "sales_order_item.base_price","main_table.status as estatus_pedido","main_table.store_name as Purchase_Point"]
+            ["sales_order_item.item_id","sales_order_item.sku","sales_order_item.name as sku_description","sales_order_item.qty_ordered","sales_order_item.price", "sales_order_item.base_price","main_table.status as estatus_pedido","main_table.store_name as Purchase_Point","main_table.grand_total as grand_total","main_table.customer_name as name_customer"]
         );
 
         $this->getSelect()->joinLeft(
@@ -61,11 +61,25 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             "catalog_product_entity_varchar.row_id=catalog_product_entity.row_id AND catalog_product_entity_varchar.attribute_id=844",
             ["value as marca"]
         );
+
         $this->getSelect()->joinLeft(
             "catalog_product_entity_varchar as cpev2",
             "cpev2.row_id=catalog_product_entity.row_id AND cpev2.attribute_id=742",
             ["value as categoria"]
         );
+
+        $this->getSelect()->joinLeft(
+            "catalog_product_entity_varchar as cpev3",
+            "cpev3.row_id=catalog_product_entity.row_id AND cpev3.attribute_id=370",
+            ["value as url_1"]
+        );
+
+        $this->getSelect()->joinLeft(
+            "catalog_product_entity_varchar as cpev4",
+            "cpev4.row_id=catalog_product_entity.row_id AND cpev4.attribute_id=376",
+            ["value as url_2"]
+        );
+
 
         $this->getSelect()->joinLeft(
             "braintree_transaction_details",
@@ -77,11 +91,19 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ["customer_address_entity.vat_id as rut","customer_address_entity.firstname","customer_address_entity.lastname"]
         );
 
-        //$this->getSelect()->columns("CASE customer_address_entity.vat_id WHEN customer_address_entity.vat_id <> '' THEN 'FACTURA' ELSE 'BOLETA' END as tipoB");
-        //$fullCases[] = 'CASE WHEN ' . $condition . ' THEN ' . $weight . ' ELSE 0 END';
-        //$this->addFieldToSelect("customer_address_entity.vat_id","CASE customer_address_entity.vat_id WHEN '' THEN 'BOLETA' ELSE 'FACTURA' END, ");
-
         $this->getSelect()->columns(new \Zend_Db_Expr("IF(customer_address_entity.vat_id <> '','FACTURA','BOLETA') as tipopedido"));
+
+        $this->getSelect()->joinLeft(
+            "customer_entity",
+            "customer_entity.entity_id=main_table.customer_id",
+            ["customer_entity.firstname as nombre_cliente","customer_entity.lastname as apellido_cliente"]
+        );
+
+        $this->getSelect()->joinLeft(
+            "customer_group",
+            "customer_group.customer_group_id=main_table.customer_group",
+            ["customer_group.customer_group_code as customer_group_code"]
+        );
 
         $this->getSelect()->joinLeft(
             "sales_order_address",
@@ -100,8 +122,6 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ]
         );
 
-
-        //$this->addFieldToSelect(new \Zend_Db_Expr("CASE `customer_address_entity`.`vat_id` WHEN `customer_address_entity`.`vat_id` <> '' THEN 'FACTURA' ELSE 'BOLETA' END as tipoB"));
         $this->_logger->info('Query: ' . trim($this->getSelect()->__toString()));
 
         return $this;
