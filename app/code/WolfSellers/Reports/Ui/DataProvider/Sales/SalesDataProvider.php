@@ -77,7 +77,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         $this->getSelect()->joinLeft(
             "catalog_product_entity_varchar as cpev4",
             "cpev4.row_id=catalog_product_entity.row_id AND cpev4.attribute_id=376",
-            ["value as url_2"]
+            ["concat(cpev4.value,'.html') as url_2"]
         );
 
 
