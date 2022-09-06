@@ -12,7 +12,8 @@ $quote = $block->getQuote();
 
 $shippingData = $block->getQuoteShippingAddress();
 $billing =$block->getQuoteBillingAddress();
-
+$currencyCode=$block->getCurrency();
+$currencyDesc=$block->getCurrencyCode();
 ?>
 
 <?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
@@ -118,13 +119,13 @@ $billing =$block->getQuoteBillingAddress();
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Sub Total: </td>
-                    <td align="center">S/ <?PHP echo number_format($quote->getSubtotal(),2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($quote->getSubtotal(),2);  ?></td>
                 </tr>
 
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Costo de envío: </td>
-                    <td align="center">S/ <?PHP echo number_format($shippingData['shipping_amount'],2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($shippingData['shipping_amount'],2);  ?></td>
                 </tr>
 
                 <?PHP
@@ -136,7 +137,7 @@ $billing =$block->getQuoteBillingAddress();
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> - Total descuentos: </td>
-                    <td align="center">S/ <?PHP echo number_format($shippingData['discount_amount'],2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($shippingData['discount_amount'],2);  ?></td>
                 </tr>
 
                 <?PHP
@@ -147,7 +148,7 @@ $billing =$block->getQuoteBillingAddress();
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Total: </td>
-                    <td align="center">S/ <?PHP echo number_format($quote->getGrandTotal(),2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($quote->getGrandTotal(),2);  ?></td>
                 </tr>
 
 

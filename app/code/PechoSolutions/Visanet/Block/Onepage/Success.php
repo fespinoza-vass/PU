@@ -7,7 +7,7 @@ namespace PechoSolutions\Visanet\Block\Onepage;
 
 use Magento\Customer\Model\Context;
 use Magento\Sales\Model\Order;
-
+use Magento\Directory\Model\Currency;
 /**
  * One page checkout success page
  *
@@ -56,6 +56,8 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     protected $httpContext;
 
+    protected $currency;
+
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Checkout\Model\Session $checkoutSession
@@ -71,6 +73,7 @@ class Success extends \Magento\Framework\View\Element\Template
         \Magento\Sales\Model\OrderFactory $orderFactory,
         \PechoSolutions\Visanet\Helper\Data $helperConfig,
         \Magento\Store\Model\StoreManagerInterface $storeManagerInterface,
+        Currency $currency,       
         \Magento\Catalog\Model\Product $product,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         array $data = []
@@ -85,6 +88,7 @@ class Success extends \Magento\Framework\View\Element\Template
         $this->_storeManagerInterface=$storeManagerInterface;
         $this->_product=$product;
         $this->_productRepository=$productRepository;
+        $this->currency = $currency;
     }
 
 
@@ -97,6 +101,37 @@ class Success extends \Magento\Framework\View\Element\Template
     {
         $order = $this->_checkoutSession->getLastRealOrder();
         return $order->getGrandTotal();
+    }
+
+    /**
+     * Get Currency Code
+     *
+     * @return number
+     */
+    public function getCurrencyCode()
+    {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+        $logger->info("Currency Code");
+        $logger->info($this->_storeManagerInterface->getStore()->getBaseCurrencyCode());
+        return $this->_storeManagerInterface->getStore()->getBaseCurrencyCode();        
+    }
+
+
+    /**
+     * Get Currency
+     *
+     * @return number
+     */
+    public function getCurrency()
+    {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+        $logger->info("Currency jp");
+        $logger->info($this->currency->getCurrencySymbol());
+        return $this->currency->getCurrencySymbol();        
     }
 
      /**

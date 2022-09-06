@@ -28,7 +28,7 @@ if (!window.jscolor) { window.jscolor = (function () {
             for (var i = 0; i < elms.length; i += 1) {
                 if (elms[i].type !== undefined && elms[i].type.toLowerCase() == 'color') {
                     if (jsc.isColorAttrSupported) {
-                        // skip inputs of type 'color' if supported by the browser
+                        // omitir entradas de tipo 'color' si es compatible con el navegador
                         continue;
                     }
                 }
@@ -228,7 +228,7 @@ if (!window.jscolor) { window.jscolor = (function () {
             } else if (document.createEventObject) {
                 var ev = document.createEventObject();
                 el.fireEvent('on' + evnt, ev);
-            } else if (el['on' + evnt]) { // alternatively use the traditional event model
+            } else if (el['on' + evnt]) { // alternativamente use el modelo de evento tradicional
                 el['on' + evnt]();
             }
         },
@@ -239,7 +239,7 @@ if (!window.jscolor) { window.jscolor = (function () {
         },
 
 
-        // The className parameter (str) can only contain a single class name
+// El parámetro className (str) solo puede contener un solo nombre de clase
         hasClass : function (elm, className) {
             if (!className) {
                 return false;
@@ -248,7 +248,7 @@ if (!window.jscolor) { window.jscolor = (function () {
         },
 
 
-        // The className parameter (str) can contain multiple class names separated by whitespace
+// El parámetro className (str) puede contener varios nombres de clase separados por espacios en blanco
         setClass : function (elm, className) {
             var classList = jsc.classNameToList(className);
             for (var i = 0; i < classList.length; i += 1) {
@@ -259,7 +259,7 @@ if (!window.jscolor) { window.jscolor = (function () {
         },
 
 
-        // The className parameter (str) can contain multiple class names separated by whitespace
+// El parámetro className (str) puede contener varios nombres de clase separados por espacios en blanco
         unsetClass : function (elm, className) {
             var classList = jsc.classNameToList(className);
             for (var i = 0; i < classList.length; i += 1) {
@@ -336,7 +336,7 @@ if (!window.jscolor) { window.jscolor = (function () {
         },
 
 
-        // get pointer's X/Y coordinates relative to viewport
+// obtiene las coordenadas X / Y del puntero relativas a la ventana gráfica
         getAbsPointerPos : function (e) {
             if (!e) { e = window.event; }
             var x = 0, y = 0;
@@ -352,7 +352,7 @@ if (!window.jscolor) { window.jscolor = (function () {
         },
 
 
-        // get pointer's X/Y coordinates relative to target element
+// obtiene las coordenadas X / Y del puntero relativas al elemento de destino
         getRelPointerPos : function (e) {
             if (!e) { e = window.event; }
             var target = e.target || e.srcElement;
