@@ -8,10 +8,10 @@ define(
     [
         //'Magento_Checkout/js/view/payment/default'
         'Magento_Payment/js/view/payment/cc-form',
-        'jquery', 
+        'jquery',
         'Magento_Checkout/js/model/url-builder',
         'Magento_Checkout/js/model/quote',
-        'Magento_Customer/js/model/customer', 
+        'Magento_Customer/js/model/customer',
         'Magento_Checkout/js/model/place-order',
         'Magento_Checkout/js/action/set-payment-information',
         'Magento_Payment/js/model/credit-card-validation/validator'
@@ -111,6 +111,7 @@ define(
                            if(window.checkoutConfig.payment.visanet_pay.vex_showamount==1){
                                vex_show = true;
                            }
+                           monto=monto.toFixed(2);
                            window.VisanetCheckout.configuration = {
                                action: window.checkoutConfig.payment.visanet_pay.actionUrl,
                                merchantid: window.checkoutConfig.payment.visanet_pay.merchantId,
