@@ -5,6 +5,7 @@ namespace PechoSolutions\Visanet\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 use PechoSolutions\Visanet\Model\Library\Visanet;
+use Magento\Store\Model\StoreManagerInterface;
 
 class AdditionalConfigProvider implements ConfigProviderInterface
 {
@@ -15,11 +16,15 @@ class AdditionalConfigProvider implements ConfigProviderInterface
     protected $checkoutSession;
     protected $logger;
     protected $cart;
+
     /**
      * @var \Magento\Framework\Encryption\EncryptorInterface
      */
     private $encryptor;
     private $assetRepository;
+    /**
+     * @var StoreManagerInterface
+     */
     private $storeManager;
     /**
      * Initialize dependencies.
@@ -36,6 +41,7 @@ class AdditionalConfigProvider implements ConfigProviderInterface
         \Magento\Checkout\Model\Cart $cart,
         \Magento\Store\Model\StoreManagerInterface $storeManager
 
+
     )
     {
         $this->config = $config;
@@ -46,7 +52,7 @@ class AdditionalConfigProvider implements ConfigProviderInterface
         $this->cart=$cart;
         $this->storeManager = $storeManager;
     }
- 
+
     /**
      * Retrieve assoc array of checkout configuration
      *
@@ -58,8 +64,8 @@ class AdditionalConfigProvider implements ConfigProviderInterface
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
 
-          
-        $media_dir = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);       
+
+        $media_dir = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
         $grandTotal = $this->cart->getQuote()->getGrandTotal();
         $debug = $this->config->getValue('visanetConfiguracion/debug');
 
@@ -68,28 +74,40 @@ class AdditionalConfigProvider implements ConfigProviderInterface
         }else{
             $ambiente = 'prd';
         }
- 
+
         $quoteId = $this->checkoutSession->getQuoteId();
         $quote = $this->checkoutSession->getQuote();
         $tokenTrassactionExist = '0';
         $transactionToken = $quote->getData('visanet_token');
+        $currencyCode=$this->storeManager->getStore()->getBaseCurrencyCode();
+        $merchant_id="";
+        if($currencyCode=="USD")
+        {
+            $merchant_id=$this->config->getValue('visanetConfiguracion/merchant_id_dollar');
+        }elseif($currencyCode=="PEN"){
+            $merchant_id=$this->config->getValue('visanetConfiguracion/merchant_id');
+        }
+        $logger->info("Merchant Id jp2");
+        $logger->info($merchant_id);
+        /**
+         *  'merchantId' => $this->config->getValue('visanetConfiguracion/merchant_id'),**/
 
         if($transactionToken != ''){
             $tokenTrassactionExist = '1';
         }
 
         $logo_visa  =  $this->assetRepository->getUrl('PechoSolutions_Visanet::images/visanet_pay.png');
-    
+
         return [
             'payment' => [
                 Payment::CODE => [
                     'isActive' => $this->config->getValue('active'),
                     'tokenTrassactionExist' => $tokenTrassactionExist,
-                    'title' => $this->config->getValue('title'), 
+                    'title' => $this->config->getValue('title'),
                     'publicKey' => $this->encryptor->decrypt($this->config->getValue('visanetConfiguracion/public_key')),
                     'privateKey' => $this->encryptor->decrypt($this->config->getValue('visanetConfiguracion/private_key')),
                     'actionUrl' => $this->storeManager->getStore()->getBaseUrl() . 'visanet/visa/web',
-                    'merchantId' => $this->config->getValue('visanetConfiguracion/merchant_id'),
+                    'merchantId' => $merchant_id,
                     'vex_formbuttoncolor' => $this->config->getValue('visanetConfiguracion/formbuttoncolor'),
                     'vex_showamount' => $this->config->getValue('visanetConfiguracion/showamount'),
                     'vex_buttonsize' => $this->config->getValue('visanetConfiguracion/buttonsize'),
@@ -103,7 +121,8 @@ class AdditionalConfigProvider implements ConfigProviderInterface
                     'subtotal' => $this->cart->getQuote()->getSubtotal(),
                     'subtotalWithDiscount' =>  $this->cart->getQuote()->getSubtotalWithDiscount(),
                     'logo_visa' => $logo_visa,
-                    'terminos' => $this->config->getValue('visanetConfiguracion/terminos_condiciones')
+                    'terminos' => $this->config->getValue('visanetConfiguracion/terminos_condiciones'),
+                    'base_url' => $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_LINK)
                 ]
             ]
         ];
