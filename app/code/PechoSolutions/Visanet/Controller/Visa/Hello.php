@@ -11,42 +11,46 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Store\Model\ScopeInterface;
 use PechoSolutions\Visanet\Model\Library\Visanet;
-   
+use Magento\Store\Model\StoreManagerInterface;
+
 class Hello extends \Magento\Framework\App\Action\Action {
-    
+
     protected $config;
-    private $encryptor;   
+    private $encryptor;
     protected $checkoutSession;
-    protected $resultJsonFactory;   
+    protected $resultJsonFactory;
     protected $customerSession;
+    protected $storeManager;
+
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,      
+        \Magento\Framework\App\Action\Context $context,
         ScopeConfigInterface $scopeConfig,
         \Magento\Framework\Encryption\EncryptorInterface $encryptor,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        \Magento\Customer\Model\Session $customerSession
+        \Magento\Customer\Model\Session $customerSession,
+        StoreManagerInterface $storeManager
     )
     {
-        parent::__construct($context);    
+        parent::__construct($context);
         $this->scopeConfig = $scopeConfig;
         $this->encryptor = $encryptor;
         $this->checkoutSession = $checkoutSession;
         $this->resultJsonFactory = $resultJsonFactory;
         $this->customerSession = $customerSession;
-      
+        $this->storeManager = $storeManager;
     }
- 
+
 
     public function getCheckoutSession()
     {
         return $this->checkoutSession;
     }
-  
+
 
     private function getValueConfig($field, $storeId = null)
     {
-      
+
         $pathPattern = 'payment/%s/visanetConfiguracion/%s';
         $methodCode = 'visanet_pay';
 
@@ -57,12 +61,12 @@ class Hello extends \Magento\Framework\App\Action\Action {
         );
     }
 
-    public function execute() {         
+    public function execute() {
 
-        
+
         $quote = $this->checkoutSession->getQuote();
         $grandTotal = $quote->getGrandTotal();
-  
+
         $Visanet = new Visanet();
         $sessionKey = $Visanet->getGUID();
 
@@ -74,14 +78,23 @@ class Hello extends \Magento\Framework\App\Action\Action {
             $ambiente = 'prd';
         }
 
-        $securitykey = $Visanet->securitykey($ambiente,$this->getValueConfig('merchant_id'), $this->encryptor->decrypt($this->getValueConfig('public_key')),$this->encryptor->decrypt($this->getValueConfig('private_key')));
-        $sessionToken = $Visanet->create_token($ambiente,$grandTotal,$securitykey,$this->getValueConfig('merchant_id'),$this->encryptor->decrypt($this->getValueConfig('public_key')),$this->encryptor->decrypt($this->getValueConfig('private_key')),$this->getValueConfig('ip_client'));
+        $currencyCode=$this->storeManager->getStore()->getBaseCurrencyCode();
+        $merchantIdbyCurrency="";
+
+        if($currencyCode=="USD")
+        {
+            $merchantIdbyCurrency=$this->getValueConfig('merchant_id_dollar');
+        }elseif($currencyCode=="PEN"){
+            $merchantIdbyCurrency=$this->getValueConfig('merchant_id');
+        }
+
+        $securitykey = $Visanet->securitykey($ambiente, $merchantIdbyCurrency, $this->encryptor->decrypt($this->getValueConfig('public_key')),$this->encryptor->decrypt($this->getValueConfig('private_key')));
+        $sessionToken = $Visanet->create_token($ambiente,$grandTotal,$securitykey,$merchantIdbyCurrency,$this->encryptor->decrypt($this->getValueConfig('public_key')),$this->encryptor->decrypt($this->getValueConfig('private_key')),$this->getValueConfig('ip_client'));
+
         $this->checkoutSession->setSessionToken($sessionToken);
         $this->checkoutSession->setSessionKey($securitykey);
 
-
-        $response = new \Magento\Framework\DataObject(); 
- 
+        $response = new \Magento\Framework\DataObject();
         $response->setMonto(
             $grandTotal
         );
@@ -93,7 +106,7 @@ class Hello extends \Magento\Framework\App\Action\Action {
         $response->setTestMerchantId(
             $this->getValueConfig('merchant_id')
         );
-        
+
         $response->setTestPublicKey(
             $this->getValueConfig('public_key')
         );
@@ -102,7 +115,7 @@ class Hello extends \Magento\Framework\App\Action\Action {
             $this->getValueConfig('private_key')
         );
 
-        
+
 
         return $this->resultJsonFactory->create()
                                        ->setJsonData($response->toJson());

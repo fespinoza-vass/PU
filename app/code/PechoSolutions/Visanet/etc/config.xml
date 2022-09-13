@@ -7,7 +7,6 @@
                 <model>PechoSolutions\Visanet\Model\Payment</model>
                 <payment_action>authorize_capture</payment_action>
                 <title>Visa</title>
-                <sort_order>1</sort_order>
                 <store_title>Mi Tiendita</store_title>
                 <store_desc>Por compras en MiTiendita.com</store_desc>
                 <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />

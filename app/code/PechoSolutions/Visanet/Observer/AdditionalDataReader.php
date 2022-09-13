@@ -20,10 +20,7 @@ class AdditionalDataReader extends AbstractDataAssignObserver
         'MONEDA',
         'CODACCION',
         'DSC_COD_ACCION',
-        'NROCUOTA',
-        'AUTHORIZATION_CODE',
-        'BRAND',
-        'BRAND_NAME'
+        'NROCUOTA'
     ];
 
     public function execute(\Magento\Framework\Event\Observer $observer)
