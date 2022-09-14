@@ -34,6 +34,13 @@
             .page-main > .category-view .category-image{
                 display: none;
             }
+            [data-content-type="row"]:not(.row-slider-first){
+                .slick-slider .slick-list{
+                    @media @mdmax{
+                        padding: 0 !important;
+                    }
+                }
+            }
         }
         .page-wrapper{
             main[class*="page-main"],

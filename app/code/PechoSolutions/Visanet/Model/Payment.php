@@ -152,7 +152,17 @@ class Payment extends AbstractMethod
 
             $currencyCode=$this->storeManager->getStore()->getBaseCurrencyCode();
 
-            $merchant_id = $this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id');
+            $merchant_id="";
+            if($currencyCode=="USD")
+            {
+                $merchant_id=$this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id_dollar');
+
+            }elseif($currencyCode=="PEN"){
+                $merchant_id=$this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id');
+
+            }
+
+          /*  $merchant_id = $this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id');*/
             $access_key = $this->encryptor->decrypt($this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/public_key'));
             $SecretAccessKey = $this->encryptor->decrypt($this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/private_key'));
             $debug = $this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/debug');
@@ -172,15 +182,37 @@ class Payment extends AbstractMethod
 
 
                 if( trim($statusCode) == 200){
+                    //Variable para conocer si se uso los puntos
+                    //true o false
+                    $usoLosPuntos=false;
+                    $esUnaCombinacionDepago=false;
+
+                    if(isset($resultado['dataMap']['REDEEMED_EQUIVALENT_AMOUNT']))
+                    {
+                        $usoLosPuntos=true;
+
+                        if($resultado['dataMap']['AMOUNT']!="0.0"){
+                            $esUnaCombinacionDepago=true;
+                        }
+
+                    }
                     $codaccion = $resultado['dataMap']['ACTION_CODE']; // Código de denegación y aprobación. El Código de aprobación: 000.
                     //$autorizado = $resultado['dataMap']['RESPUESTA'];
-                    $tarjeta = $resultado['dataMap']['CARD'];
+
+                   $tarjeta="";
+                    if($usoLosPuntos==false){
+                        $tarjeta = $resultado['dataMap']['CARD'];
+                    }
+                    if($esUnaCombinacionDepago==true)
+                    {
+                        $tarjeta = $resultado['dataMap']['CARD'];
+
+                    }
+
+
+
                     $fecha_pedido = $resultado['dataMap']['TRANSACTION_DATE'];
                     $id_unico = $resultado['dataMap']['ID_UNICO'];  // ID único de la transacción del sistema Visanet
-
-                    $authorization_code = $resultado['dataMap']['AUTHORIZATION_CODE'];
-                    $brand = $resultado['dataMap']['BRAND'];
-                    $brand_name = $resultado['dataMap']['BRAND_NAME'] ?? "";
 
                     $dsc_cod_accion = $resultado['dataMap']['ACTION_DESCRIPTION']; // Descripción del código de acción, permite identificar el motivo de rechazo de una operación.
                     //$nrocuota = $resultado['dataMap']['NROCUOTA']; //Nro de cuota
@@ -190,10 +222,6 @@ class Payment extends AbstractMethod
                     $_SESSION['fecha_pedido'] = $fecha_pedido;
                     $_SESSION['DSC_COD_ACCION'] = $dsc_cod_accion;
                     $_SESSION['CODACCION'] = $codaccion;
-
-                    $_SESSION['AUTHORIZATION_CODE'] = $authorization_code;
-                    $_SESSION['BRAND'] = $brand;
-                    $_SESSION['BRAND_NAME'] = $brand_name;
 
 
                     $autorizado = 1;
@@ -212,9 +240,25 @@ class Payment extends AbstractMethod
                     $payment->setAdditionalInformation('MONEDA', $currencyCode);
                     $payment->setAdditionalInformation('autorizado', $autorizado);
 
-                    $payment->setAdditionalInformation('authorization_code', $authorization_code);
-                    $payment->setAdditionalInformation('brand', $brand);
-                    $payment->setAdditionalInformation('brand_name', $brand_name);
+                    if($usoLosPuntos==true){
+                        $redeemed_points=$resultado['dataMap']['REDEEMED_POINTS'];
+                        $redeemed_equivalent_amount=$resultado['dataMap']['REDEEMED_EQUIVALENT_AMOUNT'];
+                        $exchange_program_name=$resultado['dataMap']['EXCHANGE_PROGRAM_NAME'];
+                        $exchange_id=$resultado['dataMap']['EXCHANGE_ID'];
+                        $monto_tarjeta_combinada=$resultado['dataMap']['AMOUNT'];
+
+                        $_SESSION['MONTOTARJETACOMBINADA'] = $monto_tarjeta_combinada;
+                        $_SESSION['USOLOSPUNTOS'] = $usoLosPuntos;
+                        $_SESSION['ESUNACOMBINACIONDEPAGO'] = $esUnaCombinacionDepago;
+                        $_SESSION['REDEEMED_POINTS'] = $redeemed_points;
+                        $_SESSION['REDEEMED_EQUIVALENT_AMOUNT'] = $redeemed_equivalent_amount;
+                        $_SESSION['EXCHANGE_PROGRAM_NAME'] = $exchange_program_name;
+                        $_SESSION['EXCHANGE_ID'] = $exchange_id;
+
+
+                    }
+
+
 
                     $payment->setIsTransactionClosed(1);
 

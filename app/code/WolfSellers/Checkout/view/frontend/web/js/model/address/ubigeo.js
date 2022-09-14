@@ -20,7 +20,9 @@ define([
          */
         getUbigeos: function (regionId, city) {
             var self = this;
-
+            if (!regionId) {
+                regionId = window.checkoutConfig.shippingAddressFromData.region_id;
+            }
             if (!city || !regionId) {
                 this.listUbigeo(null);
 
