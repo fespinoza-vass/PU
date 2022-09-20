@@ -89,12 +89,10 @@
 	.cms-simulador{
 		.pagebuilder-column-group{
 			background: @white;
-
 			.pagebuilder-column{
 				h2{
 					font-weight: bold;
 				}
-
 				[data-content-type="html"]{
 					padding: 15px 12px 0;
 
@@ -107,8 +105,6 @@
 						width: 100%;
 					}
 				}
-
-
 				div{
 					p{
 						align-items: center;
@@ -120,6 +116,85 @@
 						}
 					}
 				}
+			}	
+		}
+
+		.perfect-inc{
+			> .pagebuilder-column-group{
+				border-radius: @radiusitems;
+				> .pagebuilder-column{	
+					align-items: center;
+				    justify-content: center !important; //PageBuilder importants
+				    float: left;
+				    h2{
+				    	margin: 0 0 60px 0;
+				    }
+				    > [data-content-type="html"]{
+				    	padding: 10px;
+				    	text-align: center;
+				    	.skin-care-content{
+				    		button{
+				    			max-width: 200px;
+				    			&.analysis-updated{
+				    				margin-top: 15px;	
+				    			}
+				    		}
+				    	}		
+				    }
+				    &.skin-care-recomendations{
+				    	padding: 20px;
+				    	> div{
+				    		float: left;
+				    		width: 100%;
+				    		.skin-care-results{
+				    			.pagebuilder-column-group{
+				    				justify-content: space-between;
+				    				.result-item{
+				    					width: 20% !important; //PageBuilder importants
+				    					&:not(:last-child){
+				    						margin-right: 15px;
+				    					}
+				    					[data-content-type="text"]{
+				    						p{
+				    							margin-top: 20px;
+				    							font-size: 1.6rem;	
+				    							font-weight: normal;
+				    							&:not(:last-child){
+				    								display: none;
+				    							}
+				    						}
+				    						.skin-care-bar{
+				    							padding: 20px 10px 15px 10px;
+				    							border-radius: @radiusitems;
+				    							border: 1px solid @black;
+				    							position: relative;
+				    							white-space: nowrap;
+				    							font-size: 1.6rem;	
+				    							font-weight: normal;
+				    							.cont-percentage{
+				    								position: absolute;
+			    								    left: 5px;
+			    								    top: -11px;
+			    								    background: @white;
+			    								    padding: 0 10px;
+				    							}
+				    							.bar{
+				    								background: @lines-input;
+				    								.bar-percentage{
+				    									background: @primary;
+				    									height: 15px;
+				    									position: relative;
+				    									width: 0%;
+				    								}
+				    							}
+				    						}
+				    					}
+				    				}
+				    			}
+				    		}
+				    	}
+				    }		
+				}
 			}
 		}
 	}
@@ -128,30 +203,9 @@
 //
 // Desktop
 //  ---------------------------------------------
-.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
-	.cms-simulador{
-		.pagebuilder-column-group{
+// .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
 
-			.pagebuilder-column{
-				h2{
-					margin: 40px 0 60px 0;
-				}
-
-				div{
-					p{
-						margin: 0 0 30px 10%;
-						align-items: center;
-						display: flex;
-
-						img{
-							margin: 0 30px 0 0;
-						}
-					}
-				}
-			}
-		}
-	}
-}
+// }
 
 
 ///MOBILE

@@ -91,6 +91,10 @@
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
 
      .cms-page-view{
+        .menu-ms{
+            position: relative;
+            z-index: 999;
+        }
         .menu-ms,
         .widget.block{
             .widget.block > div{
@@ -104,6 +108,8 @@
                 .menu-swarovski-prueba{
                     padding: 0 15px;
                     background: @black;
+                    border-radius: @radiusitems;
+                    margin-bottom: 20px;
                     > ul {
                         display: flex;
                         justify-content: space-between;
@@ -119,6 +125,8 @@
                                 position: absolute;
                                 background: black;
                                 z-index: 12;
+                                top: 30px;
+                                padding-top: 20px;
                             }
                             span a{
                                 .lib-font-size(18); 
@@ -129,6 +137,17 @@
                     p {
                         .lib-font-size(13);
                         color: @white;
+                    }
+                }
+                .menu-swarovski-prueba{
+                    background: @pastel1;
+                    ul li{
+                        .custom-menu{
+                            background: @green1;
+                        }
+                        span a{
+                            color: @black;
+                        }
                     }
                 }
             }
@@ -298,6 +317,18 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                    div.menu-swarovski{
+                        background: transparent;
+                        > .presentation{
+                            background: @pastel1;
+                        }
+                        &.w-mobil .toggle-menu-custom:after {
+                            color: @black;
+                        }
+                        ul#nav-list{
+                            background: @green1;
                         }
                     }
                 }
