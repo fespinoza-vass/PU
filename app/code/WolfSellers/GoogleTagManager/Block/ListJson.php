@@ -19,6 +19,7 @@ use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\GoogleTagManager\Model\Banner\Collector;
 use Magento\Checkout\Model\Cart as CartModel;
+use Magento\Catalog\Helper\Image;
 
 class ListJson extends \Magento\GoogleTagManager\Block\ListJson
 {
@@ -27,6 +28,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
      */
     protected $_categoryRepository;
     protected CartModel $_cart;
+    protected $imageHelper;
 
     public function __construct(
         \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
@@ -42,11 +44,13 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         \Magento\Framework\App\Request\Http $request,
         \Magento\Banner\Model\ResourceModel\Banner\CollectionFactory $bannerColFactory,
         \Magento\GoogleTagManager\Model\Banner\Collector $bannerCollector,
+        Image $imageHelper,
         array $data = [],
         CartModel $cart )
     {
         $this->_categoryRepository = $categoryRepository;
         $this->_cart = $cart;
+        $this->imageHelper = $imageHelper;
         parent::__construct(
             $context,
             $helper,
@@ -84,15 +88,32 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         /** @var \Magento\Quote\Model\Quote\Item $item */
         foreach ($quote->getAllVisibleItems() as $item) {
             $item2 = $item->getProduct();
+            $imageUrl = $this->imageHelper->init($item2, 'product_base_image')->getUrl();
+            $attributes = $item2->getAttributes();
+            $category1 = '';
+            $category2 = '';
+            $brand = '';
+            foreach($attributes as $attribute){
+                if($attribute->getName() === 'category_gear') {
+                    $category1 = $attribute->getFrontend()->getValue($item2);
+                }
+                if($attribute->getName() === 'categoria') {
+                    $category2 = $attribute->getFrontend()->getValue($item2);
+                }
+                if($attribute->getName() === 'brand_ids') {
+                    $brand = $attribute->getFrontend()->getValue($item2);
+                }
+                $category = $category1 . ' / ' . $category2;
+            }
             $cartItem = [
                 'id' => $item2->getId(),
                 'name' => $item2->getName(),
                 'sku' => $item2->getSku(),
                 'price' => $item2->getFinalPrice(),
-                'category' => '',
+                'category' => $category,
                 'quantity' => $item->getQty(),
                 'productURL' => $item2->getProductUrl(),
-                'imageURL' => $item2->getImage()
+                'imageURL' => $imageUrl
             ];
             array_push($items, $cartItem);
             array_push($ids, $item2->getId());

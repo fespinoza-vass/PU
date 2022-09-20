@@ -84,6 +84,7 @@ define([
     }
 
     return function (data) {
+
         var events = {
                 shipping: {
                     desctiption: 'shipping',
