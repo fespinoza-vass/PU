@@ -24,6 +24,8 @@ define([
         const customer = customerData.get('customer')();
         const product = data.product;
 
+        console.log(product);
+
         const cartContent = !$.isEmptyObject(cart) ? {
             'totals': {
                 'applied_coupons': [],
