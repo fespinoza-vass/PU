@@ -25,6 +25,8 @@ foreach($attributes as $attribute){
     }
     $category = $category1 . ' / ' . $category2;
 }
+$imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($product, 'product_base_image')->getUrl();
 
 ?>
 
@@ -41,7 +43,7 @@ foreach($attributes as $attribute){
                     "category": "<?=$block->escapeJs($category);?>",
                     "brand": "<?=$block->escapeJs($brand);?>",
                     "productURL": "<?=$block->escapeJs($product->getProductUrl());?>",
-                    "image": "<?=$block->escapeJs($product->getImage());?>"
+                    "imageURL": "<?=$block->escapeJs($imageUrl);?>"
                 },
                 "currencyCode": "<?=$block->getCurrencyCode();?>"
             }
