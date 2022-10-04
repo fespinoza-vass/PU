@@ -60,7 +60,7 @@ class UpgradeUbigeosData implements DataPatchInterface
         });
 
         $zipcodeTable = $this->moduleDataSetup->getTable('wolfsellers_zipcode');
-        $this->moduleDataSetup->getConnection()->truncateTable($zipcodeTable);
+        $this->moduleDataSetup->getConnection()->delete($zipcodeTable);
         $this->moduleDataSetup->getConnection()->insertMultiple($zipcodeTable, $data);
     }
 
