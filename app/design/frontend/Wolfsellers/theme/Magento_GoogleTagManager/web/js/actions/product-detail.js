@@ -70,7 +70,6 @@ define([
     }
 
     return function (productData) {
-
         window.dataLayer ?
             notify(productData) :
             $(document).on('ga:inited', notify.bind(this, productData));
