@@ -10,20 +10,28 @@ use Magento\GoogleTagManager\Block\Ga;
 $product = $block->getCurrentProduct();
 
 $attributes = $product->getAttributes();
-$category1 = '';
-$category2 = '';
+$category = '';
+$subcategory = '';
 $brand = '';
+
+$gender = '';
+$size = '';
 foreach($attributes as $attribute){
-    if($attribute->getName() === 'category_gear') {
-        $category1 = $attribute->getFrontend()->getValue($product);
-    }
     if($attribute->getName() === 'categoria') {
-        $category2 = $attribute->getFrontend()->getValue($product);
+        $category = $attribute->getFrontend()->getValue($product);
+    }
+    if($attribute->getName() === 'sub_categoria') {
+        $subcategory = $attribute->getFrontend()->getValue($product);
     }
     if($attribute->getName() === 'brand_ids') {
         $brand = $attribute->getFrontend()->getValue($product);
     }
-    $category = $category1 . ' / ' . $category2;
+    if($attribute->getName() === 'genero') {
+        $gender = $attribute->getFrontend()->getValue($product);
+    }
+    if($attribute->getName() === 'tamano') {
+        $size = $attribute->getFrontend()->getValue($product);
+    }
 }
 $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
     ->init($product, 'product_base_image')->getUrl();
@@ -41,9 +49,12 @@ $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
                     "name": "<?=$block->escapeJs($product->getName());?>",
                     "sku": "<?=$block->escapeJs($product->getSku());?>",
                     "category": "<?=$block->escapeJs($category);?>",
+                    "sub_categoria": "<?=$block->escapeJs($subcategory);?>",
                     "brand": "<?=$block->escapeJs($brand);?>",
                     "productURL": "<?=$block->escapeJs($product->getProductUrl());?>",
-                    "imageURL": "<?=$block->escapeJs($imageUrl);?>"
+                    "imageURL": "<?=$block->escapeJs($imageUrl);?>",
+                    "genero": "<?=$block->escapeJs($gender);?>",
+                    "tamano": "<?=$block->escapeJs($size);?>"
                 },
                 "currencyCode": "<?=$block->getCurrencyCode();?>"
             }
