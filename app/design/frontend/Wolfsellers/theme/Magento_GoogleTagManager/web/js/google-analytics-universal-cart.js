@@ -64,6 +64,7 @@ define([
      * @param {Object} config
      */
     function GoogleAnalyticsUniversalCart(config) {
+
         this.dlCurrencyCode = config.dlCurrencyCode;
         this.dataLayer = config.dataLayer;
         this.cookieAddToCart = config.cookieAddToCart;
@@ -412,6 +413,7 @@ define([
          * Cart item add action
          */
         cartItemAdded: function () {
+
             if (!this.addedProducts.length) {
                 return;
             }
