@@ -90,20 +90,27 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $item2 = $item->getProduct();
             $imageUrl = $this->imageHelper->init($item2, 'product_base_image')->getUrl();
             $attributes = $item2->getAttributes();
-            $category1 = '';
-            $category2 = '';
+            $category = '';
+            $subcategory = '';
             $brand = '';
+            $gender = '';
+            $size = '';
             foreach($attributes as $attribute){
-                if($attribute->getName() === 'category_gear') {
-                    $category1 = $attribute->getFrontend()->getValue($item2);
-                }
                 if($attribute->getName() === 'categoria') {
-                    $category2 = $attribute->getFrontend()->getValue($item2);
+                    $category = $attribute->getFrontend()->getValue($item->getProduct());
+                }
+                if($attribute->getName() === 'sub_categoria') {
+                    $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
                 }
                 if($attribute->getName() === 'brand_ids') {
-                    $brand = $attribute->getFrontend()->getValue($item2);
+                    $brand = $attribute->getFrontend()->getValue($item->getProduct());
                 }
-                $category = $category1 . ' / ' . $category2;
+                if($attribute->getName() === 'genero') {
+                    $gender = $attribute->getFrontend()->getValue($item->getProduct());
+                }
+                if($attribute->getName() === 'tamano') {
+                    $size = $attribute->getFrontend()->getValue($item->getProduct());
+                }
             }
             $cartItem = [
                 'id' => $item2->getId(),
@@ -111,9 +118,13 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 'sku' => $item2->getSku(),
                 'price' => $item2->getFinalPrice(),
                 'category' => $category,
+                'sub_categoria' => $subcategory,
+                'brand' => $brand,
                 'quantity' => $item->getQty(),
                 'productURL' => $item2->getProductUrl(),
-                'imageURL' => $imageUrl
+                'imageURL' => $imageUrl,
+                'genero'    => $gender,
+                'tamano'    => $size
             ];
             array_push($items, $cartItem);
             array_push($ids, $item2->getId());
