@@ -126,30 +126,14 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             $products = [];
             /** @var \Magento\Sales\Model\Order\Item $item*/
             foreach ($order->getAllVisibleItems() as $item) {
-                $attributes = $item->getAttributes();
-                $category = '';
-                $subcategory = '';
-                $brand = '';
 
-                $gender = '';
-                $size = '';
-                foreach($attributes as $attribute){
-                    if($attribute->getName() === 'categoria') {
-                        $category = $attribute->getFrontend()->getValue($item);
-                    }
-                    if($attribute->getName() === 'sub_categoria') {
-                        $subcategory = $attribute->getFrontend()->getValue($item);
-                    }
-                    if($attribute->getName() === 'brand_ids') {
-                        $brand = $attribute->getFrontend()->getValue($item);
-                    }
-                    if($attribute->getName() === 'genero') {
-                        $gender = $attribute->getFrontend()->getValue($item);
-                    }
-                    if($attribute->getName() === 'tamano') {
-                        $size = $attribute->getFrontend()->getValue($item);
-                    }
-                }
+                $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
+                $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
+                $brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
+
+                $gender = !empty($item->getProduct()->getAttributeText('genero')) ? $item->getProduct()->getAttributeText('genero') : '';
+                $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
+
                 $products[] = [
                     'id' => $item->getSku(),
                     'name' => $item->getName(),
