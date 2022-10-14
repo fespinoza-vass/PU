@@ -220,6 +220,38 @@
                 margin-top: unset;
             }
         }
+        .modals-wrapper{
+            .modals-overlay{
+                z-index: 10000;
+            }
+            .modal-popup{
+                z-index: 10001;
+                .modal-inner-wrap{
+                    border-radius: 15px;
+                    .modal-content{
+                        margin: auto;
+                        .row-popup-home{
+                            h2{
+                                font-weight: bold;
+                                text-align: center;
+                            }
+                            .pagebuilder-column-group{
+                                .pagebuilder-column{
+                                    .contador{
+                                        .contenedor-general{
+                                            margin: 10px 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .modal-footer{
+                        display: none;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -326,6 +358,32 @@
                 }
             }
         }
+        .modals-wrapper{
+            .modal-popup{
+                .modal-inner-wrap{
+                    top: 20%;
+                    height: 456px;
+                    width: 600px;
+                    .modal-content{
+                        .row-popup-home{
+                            h2{
+                                font-size: 30px;
+                                margin-bottom: 40px;
+                            }
+                            .pagebuilder-column-group{
+                                .pagebuilder-column{
+                                    .contador{
+                                        span{
+                                            font-size: 23px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -367,6 +425,38 @@
                         .row-slider-products{
                             .slick-slider .slick-arrow{
                                 display: none !important; //importats PAGE BUILDER
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .modals-wrapper{
+            .modal-popup{
+                left: 0;
+                .modal-inner-wrap{
+                    top: 17%;
+                    height: 70%;
+                    width: 80%; 
+                    position: absolute;
+                    margin: auto;                   
+                    .modal-content{
+                        .row-popup-home{
+                            h2{
+                                font-size: 23px;
+                                margin-bottom: 20px;
+                            }
+                            .pagebuilder-column-group{
+                                .pagebuilder-column{
+                                    .contador{
+                                        span{
+                                            font-size: 18px;
+                                        }
+                                    }
+                                    &:first-child{
+                                        margin-bottom: 20px;
+                                    }
+                                }
                             }
                         }
                     }
