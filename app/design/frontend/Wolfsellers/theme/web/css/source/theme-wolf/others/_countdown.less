@@ -19,7 +19,7 @@
 	                    .contador{
 	                    	display: flex;
 					        justify-content: center;
-					        align-items: center;
+					        align-items: flex-start;
 	                    	color: @white;
 	                    	> span{
 		                    	font-weight: bold;                    		
@@ -46,7 +46,6 @@
                             .punto{
                                 color: @white;
                                 font-weight: 700;
-                                margin-top: -19px;
                                 width: 20px;
                             }
 	                    }
@@ -95,6 +94,17 @@
                             margin-top: -5px;
                             margin: 0 5px;
                             font-size: 28px;
+                        }
+                    }
+                }
+            }
+        }
+        .page-wrapper{
+            .columns{
+                .column{
+                    .widget{
+                        .row-popup-home{
+                            display: none !important;
                         }
                     }
                 }
