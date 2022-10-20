@@ -19,11 +19,13 @@
 	                    .contador{
 	                    	display: flex;
 					        justify-content: center;
-					        align-items: flex-start;
 	                    	color: @white;
 	                    	> span{
 		                    	font-weight: bold;                    		
 	                    	}
+                            .contenedor-general{
+                                display: flex;
+                            }
                             .container-date{
                                 text-align: center;
                                 display: flex;
@@ -123,6 +125,7 @@
                 .row-countdown{
                     .row-full-width-inner{
                         .contador{
+                            align-items: flex-start;
                             > span{
                                 font-size: 30px;
                                 margin-right: 10px;                             
@@ -172,9 +175,14 @@
                 .row-countdown{
                     .row-full-width-inner{
                         .contador{
+                            flex-direction: column;
+                            align-items: center;
                             > span{
                                 font-size: 18px;
                                 margin-right: 8px;                             
+                            }
+                            .contenedor-general{
+                                flex-direction: row;
                             }
                             .container-date{
                                 span{                                    
