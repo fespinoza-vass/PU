@@ -20,8 +20,11 @@
 		</arguments>
 	</type>
 
-	<type name="Amasty\Customform\Api\AnswerRepositoryInterface">
+	<type name="Amasty\Customform\Controller\Form\Submit">
 		<plugin name="add_correlative_number_to_Amasty_customform_after" type="WolfSellers\Consecutive\Plugin\AddCorrelativeNumberPlugin"/>
+	</type>
+	<type name="Amasty\Customform\Api\AnswerRepositoryInterface">
+		<plugin name="add_correlative_number_to_Answer_Amasty_customform_after" type="WolfSellers\Consecutive\Plugin\AddCorrelativeNumberToAnswerPlugin"/>
 	</type>
 
 	<type name="WolfSellers\Consecutive\Logger\Handler">
