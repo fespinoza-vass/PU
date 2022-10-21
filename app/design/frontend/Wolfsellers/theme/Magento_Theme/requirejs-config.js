@@ -4,6 +4,7 @@ var config = {
         'Magento_Theme/js/login-dropdown',
         'Magento_Theme/js/cart-related',
     	'Magento_Theme/js/home',
+        'Magento_Theme/js/popup-home',
         'Magento_Theme/js/accordion-footer',
     ],
     "map": {
