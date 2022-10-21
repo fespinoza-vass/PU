@@ -43,6 +43,9 @@ if ($_attributeType && $_attributeType == 'text') {
 } else {
     $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
 }
+
+$urlAlias = $block->getManufactureUrlAlias($_product->getManufacturer()) ?? "#";
+
 ?>
 
 <?php if ($_attributeValue) :?>
@@ -52,7 +55,10 @@ if ($_attributeType && $_attributeType == 'text') {
         <?php endif; ?>
         <div class="value" <?= /* @noEscape */ $_attributeAddAttribute ?>>
             <?php if ($block->getManufactureImage($_product->getManufacturer())): ?>
-            <img src="<?= $block->getManufactureImage($_product->getManufacturer()) ?>" class="img-fluid logo-brand" alt="Logo de marca">
+
+            <a href="<?= $urlAlias ?>">
+                <img src="<?= $block->getManufactureImage($_product->getManufacturer()) ?>" class="img-fluid logo-brand" alt="Logo de marca">
+            </a>
             <?php endif; ?>
         </div>
     </div>
