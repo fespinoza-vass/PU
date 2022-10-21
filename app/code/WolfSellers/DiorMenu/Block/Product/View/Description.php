@@ -31,4 +31,8 @@ class Description extends \Magento\Catalog\Block\Product\View\Description
     public function getManufactureImageSlider($idAttribute){
         return $this->optionSetting->getByParams("attr_manufacturer",$idAttribute,1)->getSliderImageUrl();
     }
+
+    public function getManufactureUrlAlias($idAttribute){
+        return $this->optionSetting->getByParams("attr_manufacturer",$idAttribute,1)->getUrlAlias();
+    }
 }
