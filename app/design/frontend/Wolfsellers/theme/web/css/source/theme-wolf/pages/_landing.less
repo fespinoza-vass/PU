@@ -108,7 +108,7 @@
                 .menu-swarovski-prueba{
                     padding: 0 15px;
                     background: @black;
-                    border-radius: 20px;
+                    border-radius: @radiusitems;
                     margin-bottom: 20px;
                     > ul {
                         display: flex;
@@ -121,20 +121,12 @@
                             text-align: center;
                             min-width: 200px;
                             margin: 1rem 0;
-                            .submenu{
-                                &:after{
-                                    content: '\e622';
-                                    font-family: 'theme-icons';
-                                    color: @white;
-                                    margin-left: 5px;
-                                }
-                            }
                             .custom-menu{
                                 position: absolute;
                                 background: black;
                                 z-index: 12;
-                                top: 36px;
-                                padding-top: 10px;
+                                top: 30px;
+                                padding-top: 20px;
                             }
                             span a{
                                 .lib-font-size(18); 
@@ -148,13 +140,13 @@
                     }
                 }
                 .menu-swarovski-prueba{
-                    background: @black;
+                    background: @pastel1;
                     ul li{
                         .custom-menu{
-                            background: @black;
+                            background: @green1;
                         }
                         span a{
-                            color: @white;
+                            color: @black;
                         }
                     }
                 }
@@ -324,27 +316,19 @@
                                         content: "+";
                                     }
                                 }
-                                .custom-menu{
-                                    background: @black;
-                                    li{
-                                        a{
-                                            color: @white;
-                                        }
-                                    }
-                                }
                             }
                         }
                     }
                     div.menu-swarovski{
                         background: transparent;
                         > .presentation{
-                            background: @black;
+                            background: @pastel1;
                         }
                         &.w-mobil .toggle-menu-custom:after {
-                            color: @white;
+                            color: @black;
                         }
                         ul#nav-list{
-                            background: @black;
+                            background: @green1;
                         }
                     }
                 }
