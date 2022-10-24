@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="WolfSellers\Consecutive\Api\ConsecutiveRepositoryInterface" type="WolfSellers\Consecutive\Model\ConsecutiveRepository"/>
+	<preference for="WolfSellers\Consecutive\Api\Data\ConsecutiveInterface" type="WolfSellers\Consecutive\Model\Data\Consecutive"/>
+	<preference for="WolfSellers\Consecutive\Api\Data\ConsecutiveSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<preference for="WolfSellers\Consecutive\Api\SequentialRepositoryInterface" type="WolfSellers\Consecutive\Model\SequentialRepository"/>
+	<preference for="WolfSellers\Consecutive\Api\Data\SequentialInterface" type="WolfSellers\Consecutive\Model\Data\Sequential"/>
+	<preference for="WolfSellers\Consecutive\Api\Data\SequentialSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="WolfSellers\Consecutive\Model\ResourceModel\Sequential\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">wolfsellers_consecutive_sequential</argument>
+			<argument name="resourceModel" xsi:type="string">WolfSellers\Consecutive\Model\ResourceModel\Sequential\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="wolfsellers_consecutive_sequential_listing_data_source" xsi:type="string">WolfSellers\Consecutive\Model\ResourceModel\Sequential\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
+	<type name="Amasty\Customform\Controller\Form\Submit">
+		<plugin name="add_correlative_number_to_Amasty_customform_after" type="WolfSellers\Consecutive\Plugin\AddCorrelativeNumberPlugin"/>
+	</type>
+	<type name="Amasty\Customform\Api\AnswerRepositoryInterface">
+		<plugin name="add_correlative_number_to_Answer_Amasty_customform_after" type="WolfSellers\Consecutive\Plugin\AddCorrelativeNumberToAnswerPlugin"/>
+	</type>
+
+	<type name="WolfSellers\Consecutive\Logger\Handler">
+		<arguments>
+			<argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+		</arguments>
+	</type>
+
+	<type name="WolfSellers\Consecutive\Logger\Logger">
+		<arguments>
+			<argument name="name" xsi:type="string">CONSECUTIVE</argument>
+			<argument name="handlers"  xsi:type="array">
+				<item name="system" xsi:type="object">WolfSellers\Consecutive\Logger\Handler</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
