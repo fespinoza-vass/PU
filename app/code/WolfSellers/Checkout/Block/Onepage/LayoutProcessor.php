@@ -45,13 +45,15 @@ class LayoutProcessor implements LayoutProcessorInterface
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company', $company);
 
         $vat = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id');
-        $vat['visible'] = false;
         $vat['imports'] = [
             'visible' => '${ $.parentName }.invoice_required:value',
         ];
-        $vat['validation'] = array_merge($vat['validation'], [
+        $vat['validation'] = [
+            'min_text_length' => 8,
+            'max_text_length' => 8,
             'required-entry' => true,
-        ]);
+            'validate-number' => true
+        ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id', $vat);
 
         $city = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
