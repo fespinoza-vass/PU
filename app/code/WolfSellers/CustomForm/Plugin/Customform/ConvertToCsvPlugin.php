@@ -1,0 +1,148 @@
+<?php
+declare(strict_types=1);
+
+namespace WolfSellers\CustomForm\Plugin\Customform;
+
+use WolfSellers\CustomForm\Logger\Logger;
+use Magento\Framework\File\Csv;
+use Amasty\Customform\Model\ResourceModel\Form\Collection as Forms;
+
+class ConvertToCsvPlugin extends \Magento\Ui\Model\Export\ConvertToCsv
+{
+    const ARRAY_POSITION_JSON = 8;
+
+    protected array $headersWhitAdditional;
+    protected array $mainAditional;
+
+    /** @var Logger */
+    protected Logger $logger;
+
+    /** @var Csv */
+    protected Csv $csv;
+
+    /** @var Forms */
+    protected Forms $forms;
+
+    public function __construct(
+        \Magento\Framework\Filesystem $filesystem,
+        \Magento\Ui\Component\MassAction\Filter $filter,
+        \Amasty\Customform\Model\Export\MetadataProvider $metadataProvider,
+        Logger $logger,
+        Csv $csv,
+        Forms $forms
+    ) {
+        $this->logger = $logger;
+        $this->csv = $csv;
+        $this->forms = $forms;
+        $this->headersWhitAdditional = [];
+        $this->mainAditional = [];
+        parent::__construct($filesystem, $filter, $metadataProvider);
+    }
+
+    /**
+     * @throws \Magento\Framework\Exception\FileSystemException
+     * @throws \Exception
+     */
+    public function afterGetCsvFile(
+        \Amasty\Customform\Model\Export\ConvertToCsv $subject,
+                                                     $result
+    )
+    {
+        if (!isset($result['value'])) {
+            $this->logger->info('No existe archivo a parsear');
+            return $result;
+        }
+
+        try {
+            $file = $this->directory->getAbsolutePath().$result['value'];
+            $csv = $this->csv->getData($file);
+
+            if (!count($csv)){
+                $this->logger->info('Sin contenido al parsear');
+                return $result;
+            }
+
+            $this->getAdditionalHeaders($csv);
+            $parsedFile = $this->parseData($csv);
+            $this->directory->delete($file);
+
+            $stream = $this->directory->openFile($file, 'w+');
+            $stream->lock();
+            $stream->writeCsv($this->headersWhitAdditional);
+            foreach ($parsedFile as $document){
+                $stream->writeCsv($document);
+            }
+            $stream->unlock();
+            $stream->close();
+        }catch (\Exception $e){
+            $this->logger->error($e->getMessage() . "\n" . $e->getTraceAsString());
+        }
+
+        return $result;
+    }
+
+    private function getAdditionalHeaders($cvs)
+    {
+        $headers = $original = array_shift($cvs);
+        array_push($headers, '***');
+
+        $forms = $this->forms->getColumnValues('form_json');
+        foreach ($forms as $form){
+            $data = json_decode($form, true);
+            $node = current($data);
+            //foreach ($data as $node){
+                foreach ($node as $input){
+                    if (isset($input['label'])){
+                        if (!empty($input['label'])){
+                            if (!in_array($input['label'], $headers)){
+                                array_push($headers, $input['label']);
+                            }
+                        }
+                    }
+                }
+            //}
+        }
+
+        unset($forms, $data);
+        $this->headersWhitAdditional = $headers;
+        $this->setmainAditional($original);
+    }
+
+    private function parseData($csv)
+    {
+        array_shift($csv);
+        $mainAditional = $this->mainAditional;
+        $parseData=[];
+        foreach ($csv as $answer){
+
+            if ($answer[self::ARRAY_POSITION_JSON] === null || $answer[self::ARRAY_POSITION_JSON] === ''){
+                continue;
+            }
+
+            $answ_inputs = json_decode($answer[self::ARRAY_POSITION_JSON], true);
+
+            foreach ($answ_inputs as $node){
+                $mainAditional[key($node)] = current($node);
+            }
+
+            foreach ($mainAditional as $key => $value){
+                array_push($answer, $value);
+            }
+            array_push($parseData, $answer);
+        }
+
+        return $parseData;
+    }
+
+    private function setmainAditional($original)
+    {
+        foreach ($this->headersWhitAdditional as $header){
+            if (!in_array($header, $original)){
+                $additional[$header] = '';
+            }
+        }
+        $this->mainAditional = $additional??[];
+    }
+
+}
+
