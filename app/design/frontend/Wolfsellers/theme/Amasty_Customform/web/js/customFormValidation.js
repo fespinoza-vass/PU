@@ -16,7 +16,6 @@ define([
         var edad = Math.round(Math.round(diff/(1000 * 60 * 60 * 24)) / 360);
 
         console.log(edad);
-        $('#dropdown-apoderado-obligatorio').attr("disabled", true);
 
         if (edad<=0){
             alert({
