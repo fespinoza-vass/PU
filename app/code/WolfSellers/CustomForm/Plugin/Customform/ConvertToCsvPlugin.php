@@ -6,6 +6,7 @@ namespace WolfSellers\CustomForm\Plugin\Customform;
 use WolfSellers\CustomForm\Logger\Logger;
 use Magento\Framework\File\Csv;
 use Amasty\Customform\Model\ResourceModel\Form\Collection as Forms;
+use Magento\Framework\Serialize\Serializer\Json;
 
 class ConvertToCsvPlugin extends \Magento\Ui\Model\Export\ConvertToCsv
 {
@@ -23,19 +24,24 @@ class ConvertToCsvPlugin extends \Magento\Ui\Model\Export\ConvertToCsv
     /** @var Forms */
     protected Forms $forms;
 
+    /** @var Json */
+    protected Json $json;
+
     public function __construct(
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Ui\Component\MassAction\Filter $filter,
         \Amasty\Customform\Model\Export\MetadataProvider $metadataProvider,
         Logger $logger,
         Csv $csv,
-        Forms $forms
+        Forms $forms,
+        Json $json
     ) {
         $this->logger = $logger;
         $this->csv = $csv;
         $this->forms = $forms;
         $this->headersWhitAdditional = [];
         $this->mainAditional = [];
+        $this->json = $json;
         parent::__construct($filesystem, $filter, $metadataProvider);
     }
 
@@ -76,6 +82,7 @@ class ConvertToCsvPlugin extends \Magento\Ui\Model\Export\ConvertToCsv
             $stream->close();
         }catch (\Exception $e){
             $this->logger->error($e->getMessage() . "\n" . $e->getTraceAsString());
+            $this->logger->info('error', $document);
         }
 
         return $result;
@@ -86,24 +93,16 @@ class ConvertToCsvPlugin extends \Magento\Ui\Model\Export\ConvertToCsv
         $headers = $original = array_shift($cvs);
         array_push($headers, '***');
 
-        $forms = $this->forms->getColumnValues('form_json');
-        foreach ($forms as $form){
-            $data = json_decode($form, true);
-            $node = current($data);
-            //foreach ($data as $node){
-                foreach ($node as $input){
-                    if (isset($input['label'])){
-                        if (!empty($input['label'])){
-                            if (!in_array($input['label'], $headers)){
-                                array_push($headers, $input['label']);
-                            }
-                        }
+        foreach ($cvs as $items){
+            $answer = $this->json->unserialize($items[self::ARRAY_POSITION_JSON]);
+            foreach ($answer as $input){
+                if (key($input)){
+                    if (!in_array(key($input), $headers)){
+                        array_push($headers, key($input));
                     }
                 }
-            //}
+            }
         }
-
-        unset($forms, $data);
         $this->headersWhitAdditional = $headers;
         $this->setmainAditional($original);
     }
@@ -111,21 +110,21 @@ class ConvertToCsvPlugin extends \Magento\Ui\Model\Export\ConvertToCsv
     private function parseData($csv)
     {
         array_shift($csv);
-        $mainAditional = $this->mainAditional;
         $parseData=[];
         foreach ($csv as $answer){
+            $mainAdditional = $this->mainAditional;
 
             if ($answer[self::ARRAY_POSITION_JSON] === null || $answer[self::ARRAY_POSITION_JSON] === ''){
-                continue;
+                $ans_inputs = [];
+            }else{
+                $ans_inputs = $this->json->unserialize($answer[self::ARRAY_POSITION_JSON]);
             }
 
-            $answ_inputs = json_decode($answer[self::ARRAY_POSITION_JSON], true);
-
-            foreach ($answ_inputs as $node){
-                $mainAditional[key($node)] = current($node);
+            foreach ($ans_inputs as $node){
+                $mainAdditional[key($node)] = current($node);
             }
 
-            foreach ($mainAditional as $key => $value){
+            foreach ($mainAdditional as $key => $value){
                 array_push($answer, $value);
             }
             array_push($parseData, $answer);
