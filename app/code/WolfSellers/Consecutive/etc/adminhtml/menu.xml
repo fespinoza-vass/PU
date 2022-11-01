@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
 	<menu>
-        <add id="WolfSellers::top_level" module="WolfSellers_Consecutive" resource="WolfSellers_Consecutive::consecutive" sortOrder="0" title="WolfSellers"/>
+        <add id="WolfSellers::top_level" module="WolfSellers_Consecutive" resource="WolfSellers_Consecutive::consecutive" sortOrder="9999" title="WolfSellers"/>
         <add action="wolfsellers_consecutive/sequential/index" id="WolfSellers_Consecutive::wolfsellers_consecutive_sequential" module="WolfSellers_Consecutive" parent="WolfSellers::top_level" resource="Magento_Backend::content" sortOrder="9999" title="Sequential"/>
 	</menu>
 </config>
