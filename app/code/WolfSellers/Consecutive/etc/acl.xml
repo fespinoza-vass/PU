@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="WolfSellers_Consecutive::Sequential" sortOrder="10" title="Sequential">
+					<resource id="WolfSellers_Consecutive::Sequential_save" sortOrder="10" title="Save Sequential"/>
+					<resource id="WolfSellers_Consecutive::Sequential_delete" sortOrder="20" title="Delete Sequential"/>
+					<resource id="WolfSellers_Consecutive::Sequential_update" sortOrder="30" title="Update Sequential"/>
+					<resource id="WolfSellers_Consecutive::Sequential_view" sortOrder="40" title="View Sequential"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>
