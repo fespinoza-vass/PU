@@ -90,11 +90,11 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $item2 = $item->getProduct();
             $imageUrl = $this->imageHelper->init($item2, 'product_base_image')->getUrl();
             $attributes = $item2->getAttributes();
-            $category = '';
-            $subcategory = '';
-            $brand = '';
-            $gender = '';
-            $size = '';
+            $category = null;
+            $subcategory = null;
+            $brand = null;
+            $gender = null;
+            $size = null;
             foreach($attributes as $attribute){
                 if($attribute->getName() === 'categoria') {
                     $category = $attribute->getFrontend()->getValue($item->getProduct());
@@ -102,7 +102,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 if($attribute->getName() === 'sub_categoria') {
                     $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
                 }
-                if($attribute->getName() === 'brand_ids') {
+                if($attribute->getName() === 'manufacturer') {
                     $brand = $attribute->getFrontend()->getValue($item->getProduct());
                 }
                 if($attribute->getName() === 'genero') {
@@ -110,6 +110,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 }
                 if($attribute->getName() === 'tamano') {
                     $size = $attribute->getFrontend()->getValue($item->getProduct());
+                    if( !$size ) $size = null;
                 }
             }
             $cartItem = [

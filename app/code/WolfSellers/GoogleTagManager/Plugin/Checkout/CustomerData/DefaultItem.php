@@ -12,11 +12,11 @@ class DefaultItem
         $data = $proceed($item);
 
         $attributes = $item->getProduct()->getAttributes();
-        $category = '';
-        $subcategory = '';
-        $brand = '';
-        $gender = '';
-        $size = '';
+        $category = null;
+        $subcategory = null;
+        $brand = null;
+        $gender = null;
+        $size = null;
         foreach($attributes as $attribute){
             if($attribute->getName() === 'categoria') {
                 $category = $attribute->getFrontend()->getValue($item->getProduct());
@@ -24,7 +24,7 @@ class DefaultItem
             if($attribute->getName() === 'sub_categoria') {
                 $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
             }
-            if($attribute->getName() === 'brand_ids') {
+            if($attribute->getName() === 'manufacturer') {
                 $brand = $attribute->getFrontend()->getValue($item->getProduct());
             }
             if($attribute->getName() === 'genero') {
@@ -32,11 +32,12 @@ class DefaultItem
             }
             if($attribute->getName() === 'tamano') {
                 $size = $attribute->getFrontend()->getValue($item->getProduct());
+                if( !$size ) $size = null;
             }
         }
 
         $result['category'] = $category;
-        $result['sub_category'] = $subcategory;
+        $result['subcategory'] = $subcategory;
         $result['brand'] = $brand;
         $result['gender'] = $gender;
         $result['size'] = $size;
