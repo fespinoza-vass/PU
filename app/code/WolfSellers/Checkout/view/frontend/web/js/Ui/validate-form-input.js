@@ -20,11 +20,6 @@ define([
                     $("div[name='shippingAddress.custom_attributes.dni']").show()
                 }
             }, this);
-            self.clearInputs()
-        },
-        clearInputs:function () {
-            var attr = self.checkoutConfig.shippingAddressFromData.custom_attributes;
-            console.log(attr)
         }
     });
 });
