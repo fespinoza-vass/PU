@@ -24,8 +24,7 @@ define([
         },
         clearInputs:function () {
             var attr = self.checkoutConfig.shippingAddressFromData.custom_attributes;
-            attr.dni = null;
-            attr.referencia_envio = null;
+            console.log(attr)
         }
     });
 });
