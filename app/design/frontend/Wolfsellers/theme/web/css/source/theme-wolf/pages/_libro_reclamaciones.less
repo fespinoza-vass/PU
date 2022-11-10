@@ -165,7 +165,20 @@
                                     .field {
                                         &.field-dropdown-apoderado-obligatorio,
                                         &.field-textinput-1650406602047 {
-                                            visibility: hidden;
+                                            display: none;
+                                        }
+                                        &.field-date-1650406641407{
+                                            max-width: 50%;
+                                        }
+                                        &.field-text-1650407196517{
+                                            .control{
+                                                display: none;
+                                            }
+                                            &::after{
+                                                content: 'Solo para menores de edad';
+                                                height: auto;
+                                                visibility: visible;
+                                            }
                                         }
                                         .control {
                                             height: 48px;
