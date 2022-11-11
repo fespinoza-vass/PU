@@ -25,6 +25,7 @@ $viewModel = $block->getViewModel();
                 }
             }">
 
+    <?php if (method_exists($viewModel, "isMobile")): ?>
     <?php if (!$viewModel->isMobile()): ?>
         <div class="megamenu_desk">
         <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
@@ -40,6 +41,12 @@ $viewModel = $block->getViewModel();
         <!-- /ko -->
     <?php endif; ?>
     </div>
+    <?php else: ?>
+    
+        <div class="megamenu_desk">
+        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
+        </div>
+    <?php endif; ?>
 </section>
 
 
