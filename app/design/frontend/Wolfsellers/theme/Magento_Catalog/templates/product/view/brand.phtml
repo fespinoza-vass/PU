@@ -43,8 +43,10 @@ if ($_attributeType && $_attributeType == 'text') {
 } else {
     $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
 }
-
-$urlAlias = $block->getManufactureUrlAlias($_product->getManufacturer()) ?? "#";
+$manufacturer_id = intval($_product->getManufacturer());
+if (is_numeric($manufacturer_id)){
+    $urlAlias = $block->getManufactureUrlAlias($manufacturer_id) ?? "#";
+}
 
 ?>
 

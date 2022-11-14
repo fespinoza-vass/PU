@@ -33,6 +33,8 @@ class Description extends \Magento\Catalog\Block\Product\View\Description
     }
 
     public function getManufactureUrlAlias($idAttribute){
-        return $this->optionSetting->getByParams("attr_manufacturer",$idAttribute,1)->getUrlAlias();
+        if (is_numeric($idAttribute)) {
+            return $this->optionSetting->getByParams("attr_manufacturer", $idAttribute, 1)->getUrlAlias();
+        }
     }
 }
