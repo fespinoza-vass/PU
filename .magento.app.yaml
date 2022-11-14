@@ -65,7 +65,7 @@ web:
                     passthru: "/static/$resource"
 
 # The size of the persistent disk of the application (in MB).
-disk: 10240
+disk: 10300
 
 
 
