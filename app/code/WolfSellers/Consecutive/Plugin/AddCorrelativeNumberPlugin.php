@@ -42,13 +42,7 @@ class AddCorrelativeNumberPlugin
         \Amasty\Customform\Controller\Form\Submit $subject
     )
     {
-        $this->logger->info('::: adding correlative to post :::');
-
-        $consecutive = $this->_consecutiveBuilder->getNewConsecutiveToAssign(self::DEFAULT_STORE);
-        $correlative = $consecutive['consecutive_name'];
-
-        $subject->getRequest()->setPostValue(self::DEFAULT_CORRELATIVE_ID, $correlative);
-
+        $subject->getRequest()->setPostValue(self::DEFAULT_CORRELATIVE_ID, 'processing');
         return $subject;
     }
 }

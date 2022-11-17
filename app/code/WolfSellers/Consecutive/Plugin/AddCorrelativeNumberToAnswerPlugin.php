@@ -8,9 +8,13 @@ use Amasty\Customform\Api\Data\AnswerInterface;
 use Amasty\Customform\Model\Answer;
 use WolfSellers\Consecutive\Model\ConsecutiveBuilder;
 use WolfSellers\Consecutive\Logger\Logger;
+use Magento\Framework\Serialize\Serializer\Json;
 
 class AddCorrelativeNumberToAnswerPlugin
 {
+    const DEFAULT_STORE = 1;
+
+    const NUMBER_NAME = 'Número Correlativo';
 
     /** @var ConsecutiveBuilder */
     protected ConsecutiveBuilder $_consecutiveBuilder;
@@ -21,15 +25,20 @@ class AddCorrelativeNumberToAnswerPlugin
     /** @var Logger */
     protected Logger $logger;
 
+    /** @var Json */
+    protected Json $json;
+
     public function __construct(
         ConsecutiveBuilder $consecutiveBuilder,
         Answer             $answer,
-        Logger             $logger
+        Logger             $logger,
+        Json               $json
     )
     {
         $this->_consecutiveBuilder = $consecutiveBuilder;
         $this->_answer = $answer;
         $this->logger = $logger;
+        $this->json = $json;
     }
 
     /**
@@ -50,17 +59,30 @@ class AddCorrelativeNumberToAnswerPlugin
 
             if (!$myAnswer) return $entity;
 
-            if (empty($myAnswer->getData('correlative_number'))) {
-                $json = $myAnswer->getResponseJson();
-                $data = json_decode($json, true);
+            $consecutive = $this->_consecutiveBuilder->getNewConsecutiveToAssign(self::DEFAULT_STORE);
+            $correlative = $consecutive['consecutive_name'];
 
-                $correlative = $data[\WolfSellers\Consecutive\Plugin\AddCorrelativeNumberPlugin::DEFAULT_CORRELATIVE_ID]['value'];
+            $myAnswer->setData('correlative_number', $correlative);
 
-                $myAnswer->setData('correlative_number', $correlative);
-                $myAnswer->save();
+            $json = $myAnswer->getResponseJson();
+            $data = $this->json->unserialize($json);
 
-                $this->logger->info('::: adding correlative to post :::', [$entity->getAnswerId() => $correlative]);
+            if (!isset($data[\WolfSellers\Consecutive\Plugin\AddCorrelativeNumberPlugin::DEFAULT_CORRELATIVE_ID])){
+                $data[\WolfSellers\Consecutive\Plugin\AddCorrelativeNumberPlugin::DEFAULT_CORRELATIVE_ID] = [
+                    "label"=> self::NUMBER_NAME,
+                    "type"=> "textinput"
+                ];
             }
+
+            $data[\WolfSellers\Consecutive\Plugin\AddCorrelativeNumberPlugin::DEFAULT_CORRELATIVE_ID]['value'] = $correlative;
+
+            $myAnswer->setResponseJson(
+                $this->json->serialize($data)
+            );
+
+            $myAnswer->save();
+            $this->logger->info('::: correlative to row :::', [$entity->getAnswerId() => $correlative]);
+
         }catch (\Exception $e){
             $this->logger->error($e->getMessage());
         }
