@@ -299,13 +299,13 @@ $formData = $block->getFormData();
             <div class="field choice newsletter">
                 <input type="checkbox"
                        name="is_subscribed"
-                       title="<?= $block->escapeHtmlAttr(__('I want to receive information about offers and promotions.')) ?>"
+                       title="<?= $block->escapeHtmlAttr(__('He leído y acepto el envío de publicidad y promociones.')) ?>"
                        value="1"
                        id="is_subscribed"
                     <?php if ($formData->getIsSubscribed()): ?> checked="checked"<?php endif; ?>
                        class="checkbox"/>
                 <label for="is_subscribed" class="label">
-                    <span><?= $block->escapeHtml(__('I want to receive information about offers and promotions.')) ?></span>
+                    <span><?= $block->escapeHtml(__('He leído y acepto el envío de publicidad y promociones.')) ?></span>
                 </label>
             </div>
             <?php /* Extensions placeholder */ ?>
@@ -316,7 +316,8 @@ $formData = $block->getFormData();
 
     <div class="actions-toolbar">
         <div class="primary">
-            <button type="submit"
+            <button type="submit" disabled="disabled"
+                    id="createCount"
                     class="action submit primary"
                     title="<?= $block->escapeHtmlAttr(__('Create an Account')) ?>">
                 <span><?= $block->escapeHtml(__('Create an Account')) ?></span>
@@ -383,3 +384,17 @@ $formData = $block->getFormData();
         }
     }
 </script>
+
+<script type="text/javascript">
+    require(['jquery', "domReady!"], function($){
+        $('#is_subscribed').click(function() {
+            if ($(this).is(":checked")) {
+                $("#createCount").removeAttr("disabled");
+            } else {
+                $("#createCount").attr("disabled", "disabled");
+            }
+        });
+    });
+</script>
+
+
