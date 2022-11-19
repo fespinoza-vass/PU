@@ -49,13 +49,13 @@
         },
         {
             "name": "amasty/aminvisiblecaptcha",
-            "version": "2.4.4",
+            "version": "2.4.6",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/aminvisiblecaptcha-2.4.4-ee.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/aminvisiblecaptcha-2.4.6.zip"
             },
             "require": {
-                "amasty/base": ">=1.10.2",
+                "amasty/base": ">=1.13.5",
                 "php": ">=7.3.0"
             },
             "type": "magento2-module",
@@ -74,12 +74,13 @@
         },
         {
             "name": "amasty/base",
-            "version": "1.13.2",
+            "version": "1.14.2",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/base-1.13.2-ee.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/base-1.14.2.zip"
             },
             "require": {
+                "ext-dom": "*",
                 "php": ">=7.3"
             },
             "type": "magento2-module",
@@ -646,14 +647,14 @@
         },
         {
             "name": "amasty/module-magento-custom-form",
-            "version": "1.17.2",
+            "version": "1.18.2",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/module-magento-custom-form-1.17.2-ee.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/module-magento-custom-form-1.18.2.zip"
             },
             "require": {
-                "amasty/aminvisiblecaptcha": ">=2.4.4",
-                "amasty/base": ">=1.11.3",
+                "amasty/aminvisiblecaptcha": ">=2.4.0",
+                "amasty/base": ">=1.13.6",
                 "php": ">=7.3.0"
             },
             "suggest": {
@@ -3316,7 +3317,7 @@
             ],
             "authors": [
                 {
-                    "name": "Friedrich Große",
+                    "name": "Friedrich GroÃŸe",
                     "email": "friedrich.grosse@gmail.com",
                     "homepage": "https://github.com/FGrosse",
                     "role": "Author"
@@ -3713,7 +3714,7 @@
                     "homepage": "https://github.com/Nyholm"
                 },
                 {
-                    "name": "Márk Sági-Kazár",
+                    "name": "MÃ¡rk SÃ¡gi-KazÃ¡r",
                     "email": "mark.sagikazar@gmail.com",
                     "homepage": "https://github.com/sagikazarmark"
                 },
@@ -3984,7 +3985,7 @@
                     "email": "igor@wiedler.ch"
                 },
                 {
-                    "name": "Robert Schönthal",
+                    "name": "Robert SchÃ¶nthal",
                     "email": "seroscho@googlemail.com"
                 }
             ],
@@ -6186,7 +6187,7 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": "A component that aids in manipulating and validating » Uniform Resource Identifiers (URIs)",
+            "description": "A component that aids in manipulating and validating Â» Uniform Resource Identifiers (URIs)",
             "homepage": "https://laminas.dev",
             "keywords": [
                 "laminas",
@@ -7608,7 +7609,7 @@
                     "email": "flyingmana@googlemail.com"
                 },
                 {
-                    "name": "Jörg Weller",
+                    "name": "JÃ¶rg Weller",
                     "email": "weller@flagbit.de"
                 },
                 {
@@ -24788,7 +24789,7 @@
                     "email": "github@oliverklee.de"
                 },
                 {
-                    "name": "Zoli Szabó",
+                    "name": "Zoli SzabÃ³",
                     "email": "zoli.szabo+github@gmail.com"
                 },
                 {
@@ -24869,7 +24870,7 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "Raúl Araya",
+                    "name": "RaÃºl Araya",
                     "email": "nubeiro@gmail.com",
                     "role": "Maintainer"
                 },
@@ -25011,7 +25012,7 @@
                     "role": "Documentation contributor"
                 },
                 {
-                    "name": "Jaroslav Týc",
+                    "name": "Jaroslav TÃ½c",
                     "homepage": "https://www.jaroslavtyc.com/",
                     "role": "Developer"
                 }
@@ -25126,7 +25127,7 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Hans-Jürgen Petrich",
+                    "name": "Hans-JÃ¼rgen Petrich",
                     "email": "petrich@tronic-media.com",
                     "role": "Developer"
                 },
@@ -25755,7 +25756,7 @@
                     "homepage": "https://sorgalla.com/"
                 },
                 {
-                    "name": "Christian Lück",
+                    "name": "Christian LÃ¼ck",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -26288,7 +26289,7 @@
                     "email": "fabien@symfony.com"
                 },
                 {
-                    "name": "Jean-François Simon",
+                    "name": "Jean-FranÃ§ois Simon",
                     "email": "jeanfrancois.simon@sensiolabs.com"
                 },
                 {
@@ -28082,7 +28083,7 @@
             ],
             "authors": [
                 {
-                    "name": "Kévin Dunglas",
+                    "name": "KÃ©vin Dunglas",
                     "email": "dunglas@gmail.com"
                 },
                 {
@@ -29027,7 +29028,7 @@
             ],
             "authors": [
                 {
-                    "name": "Túbal Martín",
+                    "name": "TÃºbal MartÃ­n",
                     "homepage": "http://tubalmartin.me/"
                 }
             ],
@@ -29796,7 +29797,7 @@
                     "homepage": "https://github.com/agar"
                 },
                 {
-                    "name": "Martin Jantošovič",
+                    "name": "Martin JantoÅ¡oviÄ",
                     "homepage": "https://github.com/Mordred"
                 }
             ],
@@ -29971,5 +29972,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.3.0"
 }
