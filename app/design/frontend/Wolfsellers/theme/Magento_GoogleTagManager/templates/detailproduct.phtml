@@ -23,7 +23,8 @@ foreach($attributes as $attribute){
     if($attribute->getName() === 'sub_categoria') {
         $subcategory = $attribute->getFrontend()->getValue($product);
     }
-    if($attribute->getName() === 'brand_ids') {
+    //if($attribute->getName() === 'brand_ids') {
+    if($attribute->getName() === 'manufacturer') {
         $brand = $attribute->getFrontend()->getValue($product);
     }
     if($attribute->getName() === 'genero') {
@@ -36,8 +37,12 @@ foreach($attributes as $attribute){
 $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
     ->init($product, 'product_base_image')->getUrl();
 
+$rules = $block->getRules($product->getId);
+
+var_dump($rules);die();
 ?>
 
+<h1>ALEJANDRA</h1>
 
 <script type="text/x-magento-init">
     {
