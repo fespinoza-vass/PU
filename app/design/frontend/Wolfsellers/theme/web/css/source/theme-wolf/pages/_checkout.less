@@ -270,7 +270,7 @@
 						.field.amcheckout-comment{
 							float: left;
 							width: 100%;
-							margin-top: 15px;
+							margin-top: 35px;
 						}
 						.checkout-column{
 							.checkout-block{
@@ -379,6 +379,13 @@
 									table.table-totals{
 										tbody tr{
 											background: @white;
+											&.grand.totals{
+												~ div{
+													width: 150%;
+													margin-top: 60px;
+													.lib-checkboxs;
+												}
+											}
 										}
 									}
 								}
@@ -519,7 +526,19 @@
 											.checkout-agreement{
 												float: left;
 												width: 100%;
-												margin: 15px 0 0;
+												margin-top: -50px;
+												margin-left: -5px;
+												label.label{
+													input[type='checkbox']:checked + label:before{
+														left: 7px;
+													}
+													button{
+														margin-left: 8px;
+														margin-top: -5px;
+														color: @primary;
+														font-size: 1.4rem;
+													}
+												}
 											}
 										}
 										.admin__field.admin__field-option{
