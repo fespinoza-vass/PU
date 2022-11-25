@@ -13,12 +13,9 @@
                                 .amform-form-fieldset {
                                     .amcform-multi-page {
                                         .amcform-page-wrap {
-                                            .fb-text {}
-
                                             .fb-h3{
                                                 margin: 25px 0 15px;
                                             }
-
                                             .fb-undefined {
                                                 .control {
 
@@ -27,11 +24,32 @@
                                                     }
                                                 }
                                             }
-
                                             .amcform-toolbar{
                                                 .amcform-submit{
                                                     background: @black;
                                                     width: 100%;
+                                                }
+                                            }
+                                            .field.fb-checkbox{
+                                                margin-top: 20px;
+                                                label{
+                                                    margin-right: 10px;
+                                                }
+                                                .lib-css(display, flex) !important; 
+                                                ~ .field.fb-checkbox{
+                                                    margin-top: 0;
+                                                }
+                                            }
+                                            .field.fb-wysiwyg{
+                                                p{
+                                                    display: inline;
+                                                    strong{
+                                                        padding-left: 155px;
+                                                        font-weight: normal;
+                                                    }
+                                                }
+                                                .control {
+                                                    margin-top: -64px;
                                                 }
                                             }
                                         }
@@ -69,14 +87,14 @@
 
                                             .fb-undefined {
                                                 position: absolute;
-                                                height: 70%;
+                                                height: 100%;
+                                                max-height: 270px;
                                                 width: 46%;
                                                 top: 35px;
                                                 right: 0;
 
                                                 .control {
-                                                    height: 70%;
-
+                                                    height: 90%;
                                                     textarea {
                                                         height: 100%;
                                                     }
