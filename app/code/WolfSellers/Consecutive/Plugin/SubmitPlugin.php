@@ -64,7 +64,7 @@ class SubmitPlugin
         $count_result = 0;
         if(count($result_query) > 0) {
             $this->logger->error(print_r($result_query[0], true));
-            $count_result = (int)str_replace("", $codeForm, $result_query[0]['correlative_number']);
+            $count_result = (int)str_replace($codeForm, "", $result_query[0]['correlative_number']);
         }
         $consecutive = $this->_consecutiveBuilder->getNewConsecutiveToAssign(self::DEFAULT_STORE);
         //$correlative = $consecutive['consecutive_name'];
