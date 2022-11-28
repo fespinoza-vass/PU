@@ -69,7 +69,7 @@ class SubmitPlugin
         //$correlative = $consecutive['consecutive_name'];
         $new_correlative_number = str_replace("LRV","",$consecutive['consecutive_name']);
         $longitudeCorrelative = strlen(str_replace("LRV","",$consecutive['consecutive_name']));
-        $correlative = $codeForm.str_pad($count_result,10,0,STR_PAD_LEFT);
+        $correlative = $codeForm.str_pad(($count_result + 1),10,0,STR_PAD_LEFT);
         $model->setData('correlative_number', $correlative);
 
         $json = $model->getResponseJson();
