@@ -58,13 +58,14 @@ class SubmitPlugin
         /*RC Resource Connection*/
         $connection = $this->resourceConnection->getConnection();
         $tableName = $this->resourceConnection->getTableName('amasty_customform_answer');
-        $sql = "SELECT * FROM amasty_customform_answer WHERE form_code LIKE '$codeForm' ORDER BY answer_id DESC";
+        $sql = "SELECT * FROM amasty_customform_answer WHERE form_code LIKE '$codeForm' and correlative_number is not null ORDER BY answer_id DESC";
         $this->logger->error($sql);
         $result_query = $connection->fetchAll($sql);
         $count_result = 0;
         if(count($result_query) > 0) {
             $this->logger->error(print_r($result_query[0], true));
             $count_result = (int)str_replace("", $codeForm, $result_query[0]['correlative_number']);
+            $this->logger->error("\$count_result: " . $count_result);
         }
         $consecutive = $this->_consecutiveBuilder->getNewConsecutiveToAssign(self::DEFAULT_STORE);
         //$correlative = $consecutive['consecutive_name'];
