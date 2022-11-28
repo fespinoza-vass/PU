@@ -32,24 +32,40 @@
                                             }
                                             .field.fb-checkbox{
                                                 margin-top: 20px;
+                                                .lib-css(display, flex) !important; 
+                                                position: relative ;
+                                                .lib-checkboxs;
                                                 label{
                                                     margin-right: 10px;
                                                 }
-                                                .lib-css(display, flex) !important; 
                                                 ~ .field.fb-checkbox{
                                                     margin-top: 0;
                                                 }
+                                                .mage-error{
+                                                    position: absolute;
+                                                    left: 0;
+                                                    bottom: -30px;
+                                                }
                                             }
                                             .field.fb-wysiwyg{
+                                                @media @mdmax{
+                                                    max-width: 670px;
+                                                }
                                                 p{
                                                     display: inline;
+                                                    letter-spacing: -1px;
                                                     strong{
                                                         padding-left: 155px;
                                                         font-weight: normal;
                                                     }
                                                 }
                                                 .control {
-                                                    margin-top: -64px;
+                                                    margin-top: -66px;
+                                                    margin-bottom: 15px;
+                                                    margin-left: 3px;
+                                                    @media @mdmin{
+                                                        margin-top: -69px;
+                                                    }
                                                 }
                                             }
                                         }

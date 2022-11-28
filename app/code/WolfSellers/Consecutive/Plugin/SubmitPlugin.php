@@ -58,18 +58,21 @@ class SubmitPlugin
         /*RC Resource Connection*/
         $connection = $this->resourceConnection->getConnection();
         $tableName = $this->resourceConnection->getTableName('amasty_customform_answer');
-        $condition = "%".$result->getFormCode()."%";
-        $sql = "SELECT COUNT(correlative_number) FROM amasty_customform_answer WHERE correlative_number LIKE '$condition' ORDER BY answer_id DESC";
+        $sql = "SELECT * FROM amasty_customform_answer WHERE form_code LIKE '$codeForm' and correlative_number is not null ORDER BY answer_id DESC";
+        $this->logger->error($sql);
         $result_query = $connection->fetchAll($sql);
-        $count_result = $result_query[0]['COUNT(correlative_number)'];
-        if ($count_result==0){
-            $count_result=1;
+        $count_result = 0;
+        if(count($result_query) > 0) {
+            $this->logger->error(print_r($result_query[0], true));
+            $count_result = (int)str_replace("", $codeForm, $result_query[0]['correlative_number']);
+            $this->logger->error("\$count_result: " . $count_result);
         }
         $consecutive = $this->_consecutiveBuilder->getNewConsecutiveToAssign(self::DEFAULT_STORE);
         //$correlative = $consecutive['consecutive_name'];
         $new_correlative_number = str_replace("LRV","",$consecutive['consecutive_name']);
         $longitudeCorrelative = strlen(str_replace("LRV","",$consecutive['consecutive_name']));
-        $correlative = $codeForm.str_pad($count_result,10,0,STR_PAD_LEFT);
+        $correlative = $codeForm . str_pad(($count_result + 1),10,0,STR_PAD_LEFT);
+        $this->logger->error("correlative: " . $correlative);
         $model->setData('correlative_number', $correlative);
 
         $json = $model->getResponseJson();
