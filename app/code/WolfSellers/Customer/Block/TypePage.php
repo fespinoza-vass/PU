@@ -19,6 +19,7 @@ class TypePage extends \Magento\Framework\View\Element\Template
     }
     
     public function getTypePage() {
+        $pageType = '';
         $category = $this->_registry->registry('current_category');
         if($category){
             $pageCategory = $category->getName();
@@ -41,6 +42,9 @@ class TypePage extends \Magento\Framework\View\Element\Template
         }
         if ($currentPage == 'catalogsearch_result_index') {
             $pageType = 'Search Result';
+        }
+        if ($currentPage == 'customer_account_login') {
+            $pageType = 'Login';
         }
         
         $data = [
