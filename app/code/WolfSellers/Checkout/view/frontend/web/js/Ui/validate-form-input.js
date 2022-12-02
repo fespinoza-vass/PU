@@ -1,25 +1,63 @@
-/**
- *
- */
 define([
-    'Magento_Ui/js/form/element/select',
-    'jquery',
-], function (Select,$) {
+
+    'Magento_Ui/js/form/element/single-checkbox',
+
+    'mage/translate'
+
+], function (AbstractField, $t) {
+
     'use strict';
-    return Select.extend({
-        initialize: function () {
-            var self = this;
-            self._super();
-            self.value.subscribe(function(anotherValue){
-                if (!anotherValue){
-                    $("div[name='shippingAddress.company']").hide()
-                    $("div[name='shippingAddress.custom_attributes.dni']").hide()
-                }
-                if (anotherValue){
-                    $("div[name='shippingAddress.company']").show()
-                    $("div[name='shippingAddress.custom_attributes.dni']").show()
-                }
-            }, this);
+
+    return AbstractField.extend({
+
+        defaults: {
+            streetLabels: [$t('Empresa'), $t('RUC')],
+            modules: {
+                company: '${ $.parentName }.company',
+                dni: '${ $.parentName }.dni',
+            }
+        },
+
+
+        updateStreetLabels: function () {
+
+            if (this.value()) {
+                this.company().elems.each(function (street, key) {
+                    this.company().elems()[key].set('label', this.streetLabels[key]);
+                }.bind(this));
+            } else {
+                this.company().elems.each(function (street, key) {
+                    this.company().elems()[key].set('label', '');
+                }.bind(this));
+            }
+        },
+
+
+        updateCompany: function () {
+            if (this.value()) {
+                this.company().disabled(true);
+            } else {
+                this.company().disabled(false);
+            }
+        },
+
+
+        updateDni: function () {
+            if (this.value()) {
+                this.dni().disabled(true);
+            } else {
+                this.dni().disabled(false);
+            }
+        },
+
+
+        onCheckedChanged: function () {
+            this._super();
+            this.updateStreetLabels();
+            this.updateCompany();
+            this.updateDni();
         }
+
     });
+
 });
