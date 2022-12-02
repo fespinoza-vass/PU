@@ -40,7 +40,7 @@
                                                         <item name="shipping-address-fieldset" xsi:type="array">
                                                             <item name="children" xsi:type="array">
                                                                 <item name="invoice_required" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">WolfSellers_Checkout/js/Ui/validate-form-input</item>
+                                                                    <item name="component" xsi:type="string">Magento_Checkout/js/single-checkbox</item>
                                                                 </item>
                                                             </item>
                                                         </item>
@@ -85,8 +85,5 @@
                 </argument>
             </arguments>
         </referenceBlock>
-
-
-
     </body>
 </page>
