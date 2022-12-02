@@ -17,12 +17,10 @@ define([
             var value= this.value() === "" ? 1 : 0;
 
             if (value == 0) {
-                console.log("ENTRE A FALSE");
                 this.company().visible(false);
             }
 
             if(value == 1) {
-                console.log("ENTRE A TRUE")
                 this.company().visible(true);
             }
         },
