@@ -47,6 +47,26 @@ class DirectoryDataProcessorPlugin
         if (isset($result['components']['checkoutProvider']['dictionaries'])) {
             $result['components']['checkoutProvider']['dictionaries']['city_id'] = $this->getCities();
         }
+        $session_CustomerID = $this->customerSession->getCustomerId();
+        if ($this->validateDNI($session_CustomerID)){
+            $dni = $this->getDNI($session_CustomerID);
+            if ($dni){
+                $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['value']=$dni;
+
+            }
+        }
+        return $result;
+    }
+
+    public function getDNI($customerId)
+    {
+        $customer = $this->customerRepository->getById($customerId);
+        $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
+        if (!is_null($dni)){
+            return $dni;
+        }
+        return false;
+    }
 
         return $result;
     }
