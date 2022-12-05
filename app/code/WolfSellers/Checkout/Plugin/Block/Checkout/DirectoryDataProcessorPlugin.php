@@ -61,7 +61,7 @@ class DirectoryDataProcessorPlugin
             $dni = $this->getDNI($session_CustomerID);
             if ($dni){
                 $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['value']=$dni;
-                $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['disabled']="disabled";
+
             }
         }
         return $result;
