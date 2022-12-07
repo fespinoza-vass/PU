@@ -131,9 +131,8 @@
 							display: none;
 						}
 					}
-					&[name="shippingAddress.company"]{
+					&[name="shippingAddress.custom_attributes.company"]{
 						order: 13;
-						display: block !important;
 					}
 					&[name="shippingAddress.custom_attributes.dni"]{
 						order: 14;
@@ -194,7 +193,7 @@
 						&[name="shippingAddress.custom_attributes.invoice_required"]{
 							order: 12;
 						}
-						&[name="shippingAddress.company"]{
+						&[name="shippingAddress.custom_attributes.company"]{
 							order: 13;
 						}
 						&[name="shippingAddress.custom_attributes.dni"]{
@@ -270,7 +269,7 @@
 						.field.amcheckout-comment{
 							float: left;
 							width: 100%;
-							margin-top: 15px;
+							margin-top: 35px;
 						}
 						.checkout-column{
 							.checkout-block{
@@ -338,6 +337,11 @@
 										[name="billing_address_id"] {
 										    padding-right: 30px;
 										}
+										.payment-method:not(:last-child){
+											float: left;
+											width: 100%;
+											margin-bottom: 10px;
+										}
 										.payment-method-title.field.choice{
 											border: 1px solid @lines-input;
 										    margin: 0;
@@ -374,6 +378,18 @@
 									table.table-totals{
 										tbody tr{
 											background: @white;
+											&.grand.totals{
+												~ div{
+													width: 150%;
+													margin-top: 90px;
+													.lib-checkboxs;
+													a{
+														font-weight: bold;
+														text-decoration: underline;
+														font-family: @font-family-name__base;
+													}
+												}
+											}
 										}
 									}
 								}
@@ -514,11 +530,27 @@
 											.checkout-agreement{
 												float: left;
 												width: 100%;
-												margin: 15px 0 0;
-												button {
-													text-decoration: none;
-													&:hover {
-														text-decoration: underline;
+												margin-top: -90px;
+												margin-left: -5px;
+												a{
+													font-weight: bold;
+													text-decoration: underline;
+												}
+												input[type='checkbox']:checked + label:before{
+													left: 7px;
+												}
+												label.label{
+													word-break: break-word;
+													button{
+														margin-left: 8px;
+														margin-top: -5px;
+														color: @primary;
+														font-size: 1.4rem;
+														font-weight: bold;
+														text-decoration: none;
+														&:hover {
+															text-decoration: underline;
+														}
 													}
 												}
 											}
