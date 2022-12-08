@@ -3317,7 +3317,7 @@
             ],
             "authors": [
                 {
-                    "name": "Friedrich GroÃŸe",
+                    "name": "Friedrich Große",
                     "email": "friedrich.grosse@gmail.com",
                     "homepage": "https://github.com/FGrosse",
                     "role": "Author"
@@ -3714,7 +3714,7 @@
                     "homepage": "https://github.com/Nyholm"
                 },
                 {
-                    "name": "MÃ¡rk SÃ¡gi-KazÃ¡r",
+                    "name": "Márk Sági-Kazár",
                     "email": "mark.sagikazar@gmail.com",
                     "homepage": "https://github.com/sagikazarmark"
                 },
@@ -3985,7 +3985,7 @@
                     "email": "igor@wiedler.ch"
                 },
                 {
-                    "name": "Robert SchÃ¶nthal",
+                    "name": "Robert Schönthal",
                     "email": "seroscho@googlemail.com"
                 }
             ],
@@ -6187,7 +6187,7 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": "A component that aids in manipulating and validating Â» Uniform Resource Identifiers (URIs)",
+            "description": "A component that aids in manipulating and validating » Uniform Resource Identifiers (URIs)",
             "homepage": "https://laminas.dev",
             "keywords": [
                 "laminas",
@@ -7609,7 +7609,7 @@
                     "email": "flyingmana@googlemail.com"
                 },
                 {
-                    "name": "JÃ¶rg Weller",
+                    "name": "Jörg Weller",
                     "email": "weller@flagbit.de"
                 },
                 {
@@ -24789,7 +24789,7 @@
                     "email": "github@oliverklee.de"
                 },
                 {
-                    "name": "Zoli SzabÃ³",
+                    "name": "Zoli Szabó",
                     "email": "zoli.szabo+github@gmail.com"
                 },
                 {
@@ -24870,7 +24870,7 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "RaÃºl Araya",
+                    "name": "Raúl Araya",
                     "email": "nubeiro@gmail.com",
                     "role": "Maintainer"
                 },
@@ -25012,7 +25012,7 @@
                     "role": "Documentation contributor"
                 },
                 {
-                    "name": "Jaroslav TÃ½c",
+                    "name": "Jaroslav Týc",
                     "homepage": "https://www.jaroslavtyc.com/",
                     "role": "Developer"
                 }
@@ -25127,7 +25127,7 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Hans-JÃ¼rgen Petrich",
+                    "name": "Hans-Jürgen Petrich",
                     "email": "petrich@tronic-media.com",
                     "role": "Developer"
                 },
@@ -25756,7 +25756,7 @@
                     "homepage": "https://sorgalla.com/"
                 },
                 {
-                    "name": "Christian LÃ¼ck",
+                    "name": "Christian Lück",
                     "email": "christian@clue.engineering",
                     "homepage": "https://clue.engineering/"
                 },
@@ -26289,7 +26289,7 @@
                     "email": "fabien@symfony.com"
                 },
                 {
-                    "name": "Jean-FranÃ§ois Simon",
+                    "name": "Jean-François Simon",
                     "email": "jeanfrancois.simon@sensiolabs.com"
                 },
                 {
@@ -28083,7 +28083,7 @@
             ],
             "authors": [
                 {
-                    "name": "KÃ©vin Dunglas",
+                    "name": "Kévin Dunglas",
                     "email": "dunglas@gmail.com"
                 },
                 {
@@ -29028,7 +29028,7 @@
             ],
             "authors": [
                 {
-                    "name": "TÃºbal MartÃ­n",
+                    "name": "Túbal Martín",
                     "homepage": "http://tubalmartin.me/"
                 }
             ],
@@ -29797,7 +29797,7 @@
                     "homepage": "https://github.com/agar"
                 },
                 {
-                    "name": "Martin JantoÅ¡oviÄ",
+                    "name": "Martin Jantošovič",
                     "homepage": "https://github.com/Mordred"
                 }
             ],
