@@ -86,6 +86,10 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
                     $sessionToken = $this->getCheckoutSession()->getSessionToken();
                     $sessionKey = $this->getCheckoutSession()->getSessionKey();
 
+                    if (empty($sessionKey) || empty($sessionToken)){
+                        throw new \Exception("SessionKey or SessionToken not valid.");
+                    }
+
                     $this->registry->register('transactionToken', $transactionToken);
                     $this->registry->register('sessionToken', $sessionToken);
                     $this->registry->register('sessionKey', $sessionKey);
