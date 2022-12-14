@@ -374,6 +374,11 @@
 									table.table-totals{
 										tbody tr{
 											background: @white;
+											&.grand.totals~div a{
+												font-weight: bold;
+												text-decoration: none;
+												font-family: 'Open Sans',sans-serif;
+											}
 										}
 									}
 								}
@@ -520,6 +525,9 @@
 													&:hover {
 														text-decoration: underline;
 													}
+												}
+												label.label button{
+													font-weight: normal;
 												}
 											}
 										}
