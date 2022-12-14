@@ -9,6 +9,7 @@
     <body>
         <referenceContainer name="header-wrapper">
             <block class="WolfSellers\Customer\Block\LoginAccount" name="links.login" template="Magento_Theme::html/header/loginaccount.phtml" before="minicart" />
+            <block class="WolfSellers\Customer\Block\TypePage" name="google_typepage" as="google_typepage" template="Magento_Theme::html/header/typepage.phtml" />
         </referenceContainer>
 
         <referenceContainer name="footer">
@@ -41,6 +42,5 @@
         <referenceContainer name="authentication-popup" remove="true"/>
         <referenceContainer name="customer-account-navigation-delimiter-1" remove="true"/>
         <referenceContainer name="customer-account-navigation-delimiter-2" remove="true"/>
-
     </body>
 </page>
