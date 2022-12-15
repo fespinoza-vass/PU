@@ -77,6 +77,21 @@ class DirectoryDataProcessorPlugin
         return false;
     }
 
+            }
+        }
+        return $result;
+    }
+
+    public function getDNI($customerId)
+    {
+        $customer = $this->customerRepository->getById($customerId);
+        $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
+        if (!is_null($dni)){
+            return $dni;
+        }
+        return false;
+    }
+
     public function validateDNI($customerId){
         if ($this->customerSession->isLoggedIn()){
             $customer = $this->customerRepository->getById($customerId);
