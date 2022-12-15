@@ -423,8 +423,17 @@
                                     font-weight: normal;
                                 }
                                 &:after{
-                                    background-color: @black;
+                                    background-color: @white;
                                     color: @white;
+                                }
+                            }
+                            .checkbox{
+                                &:checked{
+                                    +.label{
+                                        &::after{
+                                            background-color: @black;
+                                        }
+                                    }
                                 }
                             }
                         }
