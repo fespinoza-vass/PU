@@ -5,6 +5,7 @@
  */
 
 $viewModel = $block->getViewModel();
+if ( $viewModel->isMobile()):
 ?>
 <section class="ammenu-menu-wrapper"
          data-bind="
@@ -19,42 +20,24 @@ $viewModel = $block->getViewModel();
                             children: <?= $escaper->escapeHtml($block->getJsComponents()) ?>,
                             settings: <?= $escaper->escapeHtml($block->getJsSettings()) ?>,
                             links: <?= $escaper->escapeHtml($block->getStoreLinks()) ?>,
-                            isMobile: <?= (int) true ?>
+                            isMobile: <?= $viewModel->isMobile() ?>
                         }
                     }
                 }
             }">
-
-    <?php if (method_exists($viewModel, "isMobile")): ?>
-    <?php if (!$viewModel->isMobile()): ?>
-        <div class="megamenu_desk">
+    <?php if (!$viewModel->isHamburger() && !$viewModel->isMobile()): ?>
         <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
-        </div>
     <?php endif; ?>
-    <div class="megamenu_mobile">
-    <?php if ($viewModel->isHamburger() && $viewModel->isMobile()): ?>
+    <?php if ($viewModel->isHamburger() && !$viewModel->isMobile()): ?>
+        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getHamburgerNodesData())->toHtml() ?>
+    <?php endif; ?>
+    <?php if ($viewModel->isHamburger() || $viewModel->isMobile()): ?>
         <!-- ko scope: 'index = ammenu_sidebar_menu_wrapper' -->
-            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
         <!-- ko scope: 'index = ammenu_overlay_wrapper' -->
-            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
     <?php endif; ?>
-    </div>
-    <?php else: ?>
-    
-        <div class="megamenu_desk">
-        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
-        </div>
-    <?php endif; ?>
 </section>
-
-
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Amasty_MegaMenuLite/js/responsive" : {
-            }
-        }
-    }
-</script>
+<?php endif; ?>
