@@ -25,7 +25,7 @@ $viewModel = $block->getViewModel();
                 }
             }">
 
-    <?php if (!$viewModel->isHamburger() && !$viewModel->isMobile()): ?>
+    <?php if (!$viewModel->isMobile()): ?>
         <div class="megamenu_desk">
             <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
         </div>
