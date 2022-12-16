@@ -5,7 +5,6 @@
  */
 
 $viewModel = $block->getViewModel();
-if ( $viewModel->isMobile()):
 ?>
 <section class="ammenu-menu-wrapper"
          data-bind="
@@ -20,18 +19,22 @@ if ( $viewModel->isMobile()):
                             children: <?= $escaper->escapeHtml($block->getJsComponents()) ?>,
                             settings: <?= $escaper->escapeHtml($block->getJsSettings()) ?>,
                             links: <?= $escaper->escapeHtml($block->getStoreLinks()) ?>,
-                            isMobile: <?= $viewModel->isMobile() ?>
+                            isMobile: <?= (int) $viewModel->isMobile() ?>
                         }
                     }
                 }
             }">
-    <?php if (!$viewModel->isHamburger() && !$viewModel->isMobile()): ?>
-        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
+
+    <?php if (!$viewModel->isMobile()): ?>
+        <div class="megamenu_desk">
+            <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
+        </div>
     <?php endif; ?>
     <?php if ($viewModel->isHamburger() && !$viewModel->isMobile()): ?>
         <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getHamburgerNodesData())->toHtml() ?>
     <?php endif; ?>
-    <?php if ($viewModel->isHamburger() || $viewModel->isMobile()): ?>
+
+    <?php if ($viewModel->isHamburger() && $viewModel->isMobile()): ?>
         <!-- ko scope: 'index = ammenu_sidebar_menu_wrapper' -->
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
@@ -40,4 +43,3 @@ if ( $viewModel->isMobile()):
         <!-- /ko -->
     <?php endif; ?>
 </section>
-<?php endif; ?>

@@ -68,11 +68,12 @@ define([
         onMouseenter: function () {
             this.item.isActive(true);
             this.item.isLoaded(true);
-
+            this.item.rendered(true);
+            /*
             console.log(this.item);
             if (this.item.nodes.submenu && !this.item.submenu_position.checked) {
                 this._setSubmenuPosition(this.item);
-            }
+            }*/
         },
 
         /**
