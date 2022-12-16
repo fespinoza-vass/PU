@@ -6,6 +6,7 @@
 
 $viewModel = $block->getViewModel();
 ?>
+
 <section class="ammenu-menu-wrapper"
          data-bind="
             scope: 'ammenu_wrapper',
@@ -24,22 +25,16 @@ $viewModel = $block->getViewModel();
                     }
                 }
             }">
-
     <?php if (!$viewModel->isMobile()): ?>
-        <div class="megamenu_desk">
-            <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
-        </div>
-    <?php endif; ?>
-    <?php if ($viewModel->isHamburger() && !$viewModel->isMobile()): ?>
-        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getHamburgerNodesData())->toHtml() ?>
+        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
     <?php endif; ?>
 
-    <?php if ($viewModel->isHamburger() && $viewModel->isMobile()): ?>
+    <?php if ($viewModel->isHamburger() || $viewModel->isMobile()): ?>
         <!-- ko scope: 'index = ammenu_sidebar_menu_wrapper' -->
-        <!-- ko template: getTemplate() --><!-- /ko -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
         <!-- ko scope: 'index = ammenu_overlay_wrapper' -->
-        <!-- ko template: getTemplate() --><!-- /ko -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
     <?php endif; ?>
 </section>
