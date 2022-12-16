@@ -77,12 +77,7 @@ class DirectoryDataProcessorPlugin
         return false;
     }
 
-            }
-        }
-        return $result;
-    }
-
-    public function getDNI($customerId)
+    public function getDNI2($customerId)
     {
         $customer = $this->customerRepository->getById($customerId);
         $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
