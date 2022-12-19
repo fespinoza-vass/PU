@@ -439,7 +439,17 @@
                                     font-weight: normal;
                                 }
                                 &:after{
+                                    background-color: @white;
                                     color: @white;
+                                }
+                            }
+                            .checkbox{
+                                &:checked{
+                                    +.label{
+                                        &::after{
+                                            background-color: @black;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -972,7 +982,9 @@
             .page-main{
                 .form-newsletter-manage{
                     padding: 24px 0 32px 31px;
-
+                    > .fieldset{
+                        box-shadow: none;
+                    }
                     .legend{
 
                         span{

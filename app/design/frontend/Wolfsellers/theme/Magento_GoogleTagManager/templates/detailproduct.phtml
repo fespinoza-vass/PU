@@ -23,7 +23,8 @@ foreach($attributes as $attribute){
     if($attribute->getName() === 'sub_categoria') {
         $subcategory = $attribute->getFrontend()->getValue($product);
     }
-    if($attribute->getName() === 'brand_ids') {
+    //if($attribute->getName() === 'brand_ids') {
+    if($attribute->getName() === 'manufacturer') {
         $brand = $attribute->getFrontend()->getValue($product);
     }
     if($attribute->getName() === 'genero') {
@@ -36,8 +37,16 @@ foreach($attributes as $attribute){
 $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
     ->init($product, 'product_base_image')->getUrl();
 
-?>
+$rules = $block->getRules($product->getId());
 
+$data = '';
+if($rules){
+    foreach ($rules as $rule){
+        $data = $rule;
+    }
+}
+
+?>
 
 <script type="text/x-magento-init">
     {
@@ -54,7 +63,8 @@ $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
                     "productURL": "<?=$block->escapeJs($product->getProductUrl());?>",
                     "imageURL": "<?=$block->escapeJs($imageUrl);?>",
                     "genero": "<?=$block->escapeJs($gender);?>",
-                    "tamano": "<?=$block->escapeJs($size);?>"
+                    "tamano": "<?=$block->escapeJs($size);?>",
+                    "promotion": "<?=$block->escapeJs($data);?>"
                 },
                 "currencyCode": "<?=$block->getCurrencyCode();?>"
             }
