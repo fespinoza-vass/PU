@@ -29,21 +29,23 @@ $isIconsAvailable = $block->getData('isIconsAvailable');
 
     <?= $block->getChildBlock('ammenu.top.menu.link')->setData('item', $item)->setData('isIconsAvailable', $isIconsAvailable)->toHtml() ?>
 
+    <!-- ko if: item.isLoaded -->
     <!-- ko scope: 'index = ammenu_submenu_wrapper' -->
-        <!-- ko template: {
-            name: getTemplate(),
-            data: {
-                item: $parent.item,
-                event: {
-                    mouseleave: function () {
-                        $parent.item.isActive(false)
-                    },
-                    mouseenter: function () {
-                        $parent.item.isActive(true)
-                    }
+    <!-- ko template: {
+        name: getTemplate(),
+        data: {
+            item: $parent.item,
+            event: {
+                mouseleave: function () {
+                    $parent.item.isActive(false)
+                },
+                mouseenter: function () {
+                    $parent.item.isActive(true)
                 }
             }
-        }-->
-        <!-- /ko -->
+        }
+    }-->
+    <!-- /ko -->
+    <!-- /ko -->
     <!-- /ko -->
 </li>

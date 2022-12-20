@@ -13,7 +13,8 @@ namespace WolfSellers\Checkout\Plugin\Block\Checkout;
 
 use Magento\Checkout\Block\Checkout\DirectoryDataProcessor;
 use Magento\Framework\App\ResourceConnection;
-
+use Magento\Customer\Model\Session;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 /**
  * Checkout Directory Data Processor Plugin.
  */
@@ -21,14 +22,21 @@ class DirectoryDataProcessorPlugin
 {
     /** @var ResourceConnection */
     private ResourceConnection $resourceConnection;
+    private Session $customerSession;
+    private CustomerRepositoryInterface $customerRepository;
 
     /**
      * @param ResourceConnection $resourceConnection
      */
     public function __construct(
-        ResourceConnection $resourceConnection
-    ) {
+        ResourceConnection $resourceConnection,
+        Session $customerSession,
+        CustomerRepositoryInterface $customerRepository
+    )
+    {
         $this->resourceConnection = $resourceConnection;
+        $this->customerSession = $customerSession;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -40,9 +48,10 @@ class DirectoryDataProcessorPlugin
      */
     public function afterProcess(
         DirectoryDataProcessor $subject,
-        $result,
-        $jsLayout
-    ) {
+                               $result,
+                               $jsLayout
+    )
+    {
 
         if (isset($result['components']['checkoutProvider']['dictionaries'])) {
             $result['components']['checkoutProvider']['dictionaries']['city_id'] = $this->getCities();
@@ -68,7 +77,26 @@ class DirectoryDataProcessorPlugin
         return false;
     }
 
-        return $result;
+    public function getDNI2($customerId)
+    {
+        $customer = $this->customerRepository->getById($customerId);
+        $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
+        if (!is_null($dni)){
+            return $dni;
+        }
+        return false;
+    }
+
+    public function validateDNI($customerId){
+        if ($this->customerSession->isLoggedIn()){
+            $customer = $this->customerRepository->getById($customerId);
+            $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
+            if (!is_null($dni)){
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
     /**
@@ -88,8 +116,7 @@ class DirectoryDataProcessorPlugin
         $select = $connection->select()
             ->from($tableName, $cols)
             ->order('ciudad ASC')
-            ->distinct()
-        ;
+            ->distinct();
 
         $cities = $connection->fetchAll($select);
 

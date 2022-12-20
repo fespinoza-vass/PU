@@ -6,7 +6,6 @@
 
 $viewModel = $block->getViewModel();
 ?>
-
 <section class="ammenu-menu-wrapper"
          data-bind="
             scope: 'ammenu_wrapper',
@@ -20,16 +19,19 @@ $viewModel = $block->getViewModel();
                             children: <?= $escaper->escapeHtml($block->getJsComponents()) ?>,
                             settings: <?= $escaper->escapeHtml($block->getJsSettings()) ?>,
                             links: <?= $escaper->escapeHtml($block->getStoreLinks()) ?>,
-                            isMobile: <?= (int) $viewModel->isMobile() ?>
+                            isMobile: <?= (int) true ?>
                         }
                     }
                 }
             }">
-    <?php if (!$viewModel->isMobile()): ?>
-        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
-    <?php endif; ?>
 
-    <?php if ($viewModel->isHamburger() || $viewModel->isMobile()): ?>
+    <?php if (!$viewModel->isMobile()): ?>
+        <div class="megamenu_desk">
+        <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
+        </div>
+    <?php endif; ?>
+    <div class="megamenu_mobile">
+    <?php if ($viewModel->isHamburger() && $viewModel->isMobile()): ?>
         <!-- ko scope: 'index = ammenu_sidebar_menu_wrapper' -->
             <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
@@ -37,4 +39,15 @@ $viewModel = $block->getViewModel();
             <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
     <?php endif; ?>
+    </div>
 </section>
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Amasty_MegaMenuLite/js/responsive" : {
+            }
+        }
+    }
+</script>

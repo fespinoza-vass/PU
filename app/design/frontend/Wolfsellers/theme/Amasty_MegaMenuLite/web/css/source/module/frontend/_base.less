@@ -44,10 +44,16 @@
 
         .ammenu-item {
             margin: 0;
+            &.nav-6{
+                .ammenu-submenu-wrapper{
+                    right: 0;
+                }
+            }
         }
 
-        .ammenu-main-container {
+        .ammenu-main-container, .ammenu-main-container {
             box-sizing: border-box;
+            max-width: none;
             width: 100%;
         }
 
@@ -172,7 +178,7 @@
     .ammenu-nav-sections {
         & {
             z-index: 9;
-            background: #fff;
+            background: @black;
         }
 
         &:not(.-topmenu) {
