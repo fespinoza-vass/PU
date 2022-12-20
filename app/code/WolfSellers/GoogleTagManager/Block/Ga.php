@@ -42,10 +42,12 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         \Magento\GoogleTagManager\Helper\Data $googleAnalyticsData,
         \Magento\Cookie\Helper\Cookie $cookieHelper,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
+        \Magento\Catalog\Model\Product\Attribute\Repository $attributerepository,
         array $data = []
     ) {
         $this->cookieHelper = $cookieHelper;
         $this->jsonHelper = $jsonHelper;
+        $this->attributerepository = $attributerepository;
         parent::__construct($context, $salesOrderCollection, $googleAnalyticsData, $data, $cookieHelper);
     }
 
@@ -129,7 +131,15 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
 
                 $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
                 $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
-                $brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
+                //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
+                
+                $options = $this->attributerepository->get('manufacturer')->getOptions();
+                
+                foreach($options as $options_value){
+                    if($options_value->getValue() == $item->getProduct()->getData('manufacturer')){
+                        $brand = $options_value->getLabel();
+                    }
+                }
 
                 $gender = !empty($item->getProduct()->getAttributeText('genero')) ? $item->getProduct()->getAttributeText('genero') : '';
                 $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
