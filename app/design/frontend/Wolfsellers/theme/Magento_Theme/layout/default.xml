@@ -9,6 +9,7 @@
     <body>
         <referenceContainer name="header-wrapper">
             <block class="WolfSellers\Customer\Block\LoginAccount" name="links.login" template="Magento_Theme::html/header/loginaccount.phtml" before="minicart" />
+            <block class="WolfSellers\Customer\Block\TypePage" name="google_typepage" as="google_typepage" template="Magento_Theme::html/header/typepage.phtml" />
         </referenceContainer>
 
         <referenceContainer name="footer">
