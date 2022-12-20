@@ -1,0 +1,24 @@
+<?php
+/**
+* @var \Magento\Customer\Block\TypePage $block
+*/
+
+$data = $block->getTypePage();
+$pageType = $data['pageType'];
+$pageCategory = $data['pageCategory'];
+$pageTitle = $data['pageTitle'];
+
+?>
+<script>
+	require(['jquery', 'domReady!'],function($){
+		console.log('<?= $pageType ?>');
+		console.log('<?= $pageCategory ?>');
+		console.log('<?= $pageTitle ?>');
+		window.dataLayer = window.dataLayer || [];
+		dataLayer.push({
+			'pageType':'<?= $pageType ?>',
+			'pageCategory':'<?= $pageCategory ?>',
+			'pageTitle': '<?= $pageTitle ?>'
+		});
+    });
+</script>
