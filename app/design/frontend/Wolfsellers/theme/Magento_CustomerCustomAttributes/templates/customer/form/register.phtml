@@ -385,16 +385,4 @@ $formData = $block->getFormData();
     }
 </script>
 
-<script type="text/javascript">
-    require(['jquery', "domReady!"], function($){
-        $('#is_subscribed').click(function() {
-            if ($(this).is(":checked")) {
-                $("#createCount").removeAttr("disabled");
-            } else {
-                $("#createCount").attr("disabled", "disabled");
-            }
-        });
-    });
-</script>
-
 
