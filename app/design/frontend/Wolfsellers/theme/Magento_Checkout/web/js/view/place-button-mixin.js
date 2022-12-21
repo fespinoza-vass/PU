@@ -3,17 +3,22 @@ define([
     'ko',
     'uiRegistry',
     'Amasty_CheckoutStyleSwitcher/js/model/amalert',
+    'Magento_Checkout/js/checkout-data',
     'mage/translate'
 ], function (
         $,
         ko,
         registry,
-        alert
+        alert,
+        checkoutData
 ) {
 
     'use strict';
 
+    var shippingAddressData = checkoutData.getShippingAddressFromData();
+
     var placeButtonMixin = {
+
         /**
          * Add shipping Address Validation to place order button
          */
@@ -23,7 +28,14 @@ define([
                 addressValidator;
             addressValidator = registry.get(addressValidatorPath);
 
-            if (!addressValidator.isAddressValid) {
+            if (addressValidator.addressData.country_id == "" ||
+                addressValidator.addressData.firstname == "" ||
+                addressValidator.addressData.lastname == "" ||
+                addressValidator.addressData.postcode == "" ||
+                addressValidator.addressData.region_id == "" ||
+                addressValidator.addressData.telephone == "" ||
+                addressValidator.addressData.street[0] == ""
+            ) {
                 errorMessage = $.mage.__('No payment shipping address selected');
                 alert({ content: errorMessage });
                 return;
