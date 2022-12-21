@@ -1,6 +1,5 @@
 <?php
 namespace WolfSellers\Customer\Block;
-
 class TypePage extends \Magento\Framework\View\Element\Template
 {
     protected $context;
