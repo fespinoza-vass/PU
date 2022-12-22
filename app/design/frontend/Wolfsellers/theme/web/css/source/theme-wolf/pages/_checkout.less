@@ -380,7 +380,7 @@
 											background: @white;
 											&.grand.totals{
 												~ div{
-													width: 150%;
+													width: 140%;
 													margin-top: 90px;
 													.lib-checkboxs;
 													a{
@@ -388,6 +388,13 @@
 														text-decoration: underline;
 														font-family: @font-family-name__base;
 													}
+												}
+											}
+										}
+										label{
+											&#receive-promotion{
+												a{
+													white-space: nowrap;
 												}
 											}
 										}
@@ -547,6 +554,9 @@
 														font-size: 1.4rem;
 														font-weight: bold;
 														text-decoration: underline;
+														span{
+															word-break: break-word; 
+														}
 													}
 												}
 											}
@@ -702,6 +712,36 @@
 			}
 		}
 	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.checkout-index-index {
+		.page-wrapper {
+			.page-main {
+				.column.main {
+					.checkout-container {
+						.opc-wrapper {
+							.checkout-column {
+								.checkout-block {
+									.opc-block-summary {
+										table.table-totals {
+											tbody {
+												tr.grand.totals~div {
+													a.aspan {
+														white-space: nowrap;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
