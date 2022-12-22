@@ -7,7 +7,7 @@
 	}
 
 	input[type='checkbox']{
-		+ label {
+		~ label {
 			+ div.mage-error[generated]{
 			    display: block;
 			    width: 100%;
@@ -18,7 +18,7 @@
 		}
 	}
 	
-	input[type='checkbox'] + label {
+	input[type='checkbox'] ~ label {
 		position: relative;
 		float: left;
 		height: 13px;
@@ -30,7 +30,7 @@
 
 	}
 	
-	input[type='checkbox'] + label:after{
+	input[type='checkbox'] ~ label:after{
 		content: "";
 		width: 14px;
 		height: 14px;
@@ -46,14 +46,14 @@
 	}
 	
 	
-	input[type='checkbox']:checked + label:after {
+	input[type='checkbox']:checked ~ label:after {
 		border: 1px solid @primary;
 		background: @primary;
 		animation: fxbg 200ms cubic-bezier(.4,.0,.23,1);
 		transition: all .3s cubic-bezier(.4,.0,.23,1);
 	}
 	
-	input[type='checkbox']:checked + label:before{
+	input[type='checkbox']:checked ~ label:before{
 		content: @icon-checkmark;
 		font-family: @icons__font-name;
 		font-size: 10px;

@@ -36,7 +36,7 @@
 			}
 			form.form-create-account{
 				fieldset{
-					&.info{
+					&.info, &.account{
 						.lib-two-columns;
 					}
 					@media @mdmin{
@@ -49,6 +49,9 @@
 								&.field.field-identificacion{
 									margin-left: 2%;
 								}
+                                &.field-numero_de_identificacion, &.field-dob{
+                                    padding: 0 10px 0 0;
+                                }
 							}
 						}
 						&.account{
@@ -60,6 +63,11 @@
 									margin-right: 0;
 								}
 							}
+                            .field{
+                                &.emailaddress{
+                                    padding: 0 10px 0 0;
+                                }
+                            }
 						}
 					}
 				}
@@ -403,10 +411,16 @@
                                 vertical-align: baseline;
                                 width: 100%;
                                 box-sizing: border-box;
+                                display: inline-flex;
+                                position: relative;
                                 input{
                                     border: none;
                                     background: none;
                                     margin: unset;
+                                }
+                                div.mage-error{
+                                    position: absolute;
+                                    top: 45px;
                                 }
                             }
                         }
@@ -453,9 +467,18 @@
                                 }
                             }
                         }
-                        .checkout-agreement{
-                            .action-show{
-                                color: @black;
+                        .checkout-agreement.field.choice.required{
+                            position: relative;
+                            margin: 0 0  30px;
+                            .lib-checkboxs();
+                            .label{
+                                &::after{
+                                    margin: 0;
+                                }
+                            }
+                            div.mage-error{
+                                position: absolute;
+                                top: 10px;
                             }
                         }
                     }
@@ -1485,6 +1508,7 @@
                     .fieldset.create.info{
                         margin-bottom: 20px;
                         .fullname{
+                            padding: 0 0 0 10px;
                             .field.field-name-firstname.required,
                             .field.field-name-lastname.required{
                                 width: 100% !important;
@@ -1493,7 +1517,7 @@
                         }
                         .field.gender.required,
                         .field.field-identificacion.required{
-                            width: calc(~'(50% - 8px)') !important;
+                            width: calc(~'((100%)/2)') !important;
                             margin-right: unset !important;
                         }
                         .field.field-identificacion.required{
@@ -1510,6 +1534,23 @@
                             }
                         }
                     }
+                }
+            }
+        }
+        .checkout-agreements{
+            .checkout-agreement{
+                margin: 0 0 55px !important;
+                .label{
+                    .action-show{
+                        text-align: left;
+                        display: flex;
+                        &::after{
+                            align-self: flex-end;
+                        }
+                    }
+                }
+                div.mage-error{
+                    top: 30px !important;
                 }
             }
         }
