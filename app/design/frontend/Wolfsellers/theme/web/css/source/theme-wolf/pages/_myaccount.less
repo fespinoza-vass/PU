@@ -475,7 +475,16 @@
                                 &::after{
                                     margin: 0;
                                 }
+                                button {
+                                  &.action.action-show {
+                                    color: @black;
+                                    &:hover {
+                                      text-decoration: none;
+                                    }
+                                  }
+                                }
                             }
+
                             div.mage-error{
                                 position: absolute;
                                 top: 10px;
