@@ -16,7 +16,7 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Customer\Model\Session;
-use Magento\Customer\Api\CustomerRepositoryInterface;
+
 /**
  * Checkout Directory Data Processor Plugin.
  */
