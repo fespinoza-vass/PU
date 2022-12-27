@@ -1,7 +1,8 @@
 define([
+    "jquery",
     'Magento_Ui/js/form/element/single-checkbox',
     'mage/translate'
-], function (AbstractField, $t) {
+], function ($, AbstractField, $t) {
     'use strict';
 
     return AbstractField.extend({
@@ -10,37 +11,27 @@ define([
             modules: {
                 company: '${ $.parentName }.company',
                 dni: '${ $.parentName }.dni',
+            },
+            valueMap: {
+                'true': true,
+                'false': false
             }
         },
 
-        updateCompany: function () {
-            var value= this.value() === "" ? 1 : 0;
-
-            if (value == 0) {
-                this.company().visible(false);
-            }
-
-            if(value == 1) {
+        updateDniCompany: function (flag) {
+            if (flag) {
                 this.company().visible(true);
-            }
-        },
-
-        updateDni: function () {
-            var value= this.value() === "" ? 1 : 0;
-
-            if (value == 0) {
-                this.dni().visible(false);
-            }
-            if(value == 1)
-            {
                 this.dni().visible(true);
+            } else {
+                this.company().visible(false);
+                this.dni().visible(false);
             }
         },
 
         onCheckedChanged: function () {
             this._super();
-            this.updateCompany();
-            this.updateDni();
+
+            this.updateDniCompany(this.value());
         }
     });
 });
