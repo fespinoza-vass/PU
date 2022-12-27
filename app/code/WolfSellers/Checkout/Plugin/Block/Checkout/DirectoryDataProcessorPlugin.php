@@ -64,6 +64,7 @@ class DirectoryDataProcessorPlugin
             $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['value']=$dni;
 
         }
+        $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']["validation"]["required-entry"] = true;
 
         return $result;
     }

@@ -6,6 +6,7 @@ define(
         'uiRegistry',
         'Magento_Checkout/js/model/quote',
         'Magento_Checkout/js/model/customer-email-validator',
+        'Magento_Customer/js/model/customer',
         'Magento_Checkout/js/model/shipping-service',
         'Amasty_CheckoutCore/js/model/payment/payment-loading',
         'Amasty_CheckoutStyleSwitcher/js/action/start-place-order',
@@ -27,6 +28,7 @@ define(
         registry,
         quote,
         guestEmailValidator,
+        customer,
         shippingService,
         paymentLoader,
         startPlaceOrderAction,
@@ -329,7 +331,29 @@ define(
                     return;
                 }
 
+
+                if(!this.validateDni()) {
+                    errorMessage = $.mage.__('Por favor ingresa un DNI válido.');
+                    alert({ content: errorMessage });
+
+                    return;
+                }
+
                 startPlaceOrderAction();
+            },
+
+            validateDni: function () {
+                var validationResult = customer.isLoggedIn(),
+                    formSelector = 'form.form-shipping-address';
+
+                if (!customer.isLoggedIn()) {
+                    var $dni = $(formSelector + ' input[name=vat_id]').val();
+                    if($dni.length === 8 && !isNaN($dni)) {
+                        validationResult = true;
+                    }
+                }
+
+                return validationResult;
             }
         });
     }
