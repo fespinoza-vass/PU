@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "851e96f891e1d8e8d99e2283a473f241",
+    "content-hash": "0ed15c0ec50efa55a14146c3239dddea",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -235,14 +235,14 @@
         },
         {
             "name": "amasty/mega-menu",
-            "version": "2.2.1",
+            "version": "2.4.0",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/mega-menu-2.2.1-ee.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/mega-menu-2.4.0-ee.zip"
             },
             "require": {
-                "amasty/base": ">=1.10.8",
-                "amasty/module-mega-menu-lite": ">=1.2.2",
+                "amasty/base": ">=1.13.4",
+                "amasty/module-mega-menu-lite": ">=1.2.1",
                 "magento/module-review": "*",
                 "php": ">=7.3.0"
             },
@@ -704,6 +704,33 @@
                 "Commercial"
             ],
             "description": "Mega Menu Lite by Amasty",
+            "homepage": "https://amasty.com/"
+        },
+        {
+            "name": "amasty/module-mega-menu-package-pro",
+            "version": "2.4.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/module-mega-menu-package-pro-2.4.1.zip"
+            },
+            "require": {
+                "amasty/base": ">=1.13.6",
+                "amasty/mega-menu": ">=2.4.0",
+                "php": ">=7.3"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Amasty\\MegaMenuPackagePro\\": ""
+                }
+            },
+            "license": [
+                "Commercial"
+            ],
+            "description": "Mega Menu Pro by Amasty",
             "homepage": "https://amasty.com/"
         },
         {
@@ -29972,5 +29999,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
