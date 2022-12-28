@@ -6,6 +6,7 @@
 
 $viewModel = $block->getViewModel();
 ?>
+
 <section class="ammenu-menu-wrapper"
          data-bind="
             scope: 'ammenu_wrapper',
@@ -24,13 +25,13 @@ $viewModel = $block->getViewModel();
                     }
                 }
             }">
-
     <?php if (method_exists($viewModel, "isMobile")): ?>
     <?php if (!$viewModel->isMobile()): ?>
         <div class="megamenu_desk">
         <?= $block->getChildBlock('ammenu.top.menu')->setItems($block->getAllNodesData())->toHtml() ?>
         </div>
     <?php endif; ?>
+
     <div class="megamenu_mobile">
     <?php if ($viewModel->isHamburger() && $viewModel->isMobile()): ?>
         <!-- ko scope: 'index = ammenu_sidebar_menu_wrapper' -->
@@ -48,7 +49,6 @@ $viewModel = $block->getViewModel();
         </div>
     <?php endif; ?>
 </section>
-
 
 <script type="text/x-magento-init">
     {
