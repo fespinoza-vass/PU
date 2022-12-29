@@ -1,8 +1,10 @@
 <?php
 
 namespace WolfSellers\DiorMenu\Block\Product\View;
+
 use \Amasty\ShopbyBase\Model\OptionSettingRepository;
 use \Amasty\ShopbyBase\Model\OptionSetting;
+
 class Description extends \Magento\Catalog\Block\Product\View\Description
 {
     private \Magento\Catalog\Api\ProductAttributeRepositoryInterface $attributeRepository;
@@ -11,11 +13,11 @@ class Description extends \Magento\Catalog\Block\Product\View\Description
 
     public function __construct
     (
-        \Magento\Framework\View\Element\Template\Context $context,
+        \Magento\Framework\View\Element\Template\Context         $context,
         \Magento\Catalog\Api\ProductAttributeRepositoryInterface $attributeRepository,
-        OptionSettingRepository $optionSettingRepository,
-        OptionSetting $optionSetting,
-        \Magento\Framework\Registry $registry, array $data = []
+        OptionSettingRepository                                  $optionSettingRepository,
+        OptionSetting                                            $optionSetting,
+        \Magento\Framework\Registry                              $registry, array $data = []
     )
     {
         parent::__construct($context, $registry, $data);
@@ -24,15 +26,21 @@ class Description extends \Magento\Catalog\Block\Product\View\Description
         $this->optionSetting = $optionSetting;
     }
 
-    public function getManufactureImage($idAttribute){
-        return $this->optionSetting->getByParams("attr_manufacturer",$idAttribute,1)->getImageUrl();
+    public function getManufactureImage($idAttribute)
+    {
+        $idAttribute = intval($idAttribute);
+        return $this->optionSetting->getByParams("attr_manufacturer", $idAttribute, 1)->getImageUrl();
     }
 
-    public function getManufactureImageSlider($idAttribute){
-        return $this->optionSetting->getByParams("attr_manufacturer",$idAttribute,1)->getSliderImageUrl();
+    public function getManufactureImageSlider($idAttribute)
+    {
+        $idAttribute = intval($idAttribute);
+        return $this->optionSetting->getByParams("attr_manufacturer", $idAttribute, 1)->getSliderImageUrl();
     }
 
-    public function getManufactureUrlAlias($idAttribute){
-        return $this->optionSetting->getByParams("attr_manufacturer",$idAttribute,1)->getUrlAlias();
+    public function getManufactureUrlAlias($idAttribute)
+    {
+        $idAttribute = intval($idAttribute);
+        return $this->optionSetting->getByParams("attr_manufacturer", $idAttribute, 1)->getUrlAlias();
     }
 }

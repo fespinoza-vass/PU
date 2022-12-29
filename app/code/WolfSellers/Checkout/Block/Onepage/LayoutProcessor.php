@@ -39,10 +39,14 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         $company = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company');
         $company['visible'] = false;
-        $company['imports'] = [
-            'visible' => '${ $.parentName }.invoice_required:value',
-        ];
+        $company['sortOrder'] = 200;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company', $company);
+
+        $dni = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.dni');
+        $dni['visible'] = false;
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.dni', $dni);
+
+
 
         $vat = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id');
         $vat['visible'] = false;
