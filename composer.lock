@@ -268,14 +268,15 @@
         },
         {
             "name": "amasty/mega-menu-graphql",
-            "version": "1.0.8",
+            "version": "1.0.11",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/mega-menu-graphql-1.0.8-ee.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/mega-menu-graphql-1.0.11.zip"
             },
             "require": {
-                "amasty/base": "*",
-                "amasty/mega-menu": ">=2.2.1",
+                "amasty/base": ">=1.14.3",
+                "amasty/mega-menu": ">=1.9.0",
+                "magento/framework": ">=103.0.3",
                 "magento/module-graph-ql": "*",
                 "php": ">=7.3"
             },
@@ -295,16 +296,16 @@
         },
         {
             "name": "amasty/mega-menu-page-builder",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/mega-menu-page-builder-1.0.6-ee.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/mega-menu-page-builder-1.0.7-ee.zip"
             },
             "require": {
-                "amasty/base": "*",
+                "amasty/base": ">=1.13.3",
                 "amasty/mega-menu": ">=2.2.1",
                 "magento/module-page-builder": "*",
-                "php": "^7.1.0"
+                "php": ">=7.3.0"
             },
             "type": "magento2-module",
             "autoload": {
