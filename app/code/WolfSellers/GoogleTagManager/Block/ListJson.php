@@ -27,7 +27,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
      * @var \Magento\Catalog\Api\CategoryRepositoryInterface
      */
     protected $_categoryRepository;
-    protected CartModel $_cart;
+    protected $_cart;
     protected $imageHelper;
 
     public function __construct(
@@ -44,6 +44,11 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         \Magento\Framework\App\Request\Http $request,
         \Magento\Banner\Model\ResourceModel\Banner\CollectionFactory $bannerColFactory,
         \Magento\GoogleTagManager\Model\Banner\Collector $bannerCollector,
+        \Magento\CatalogRule\Model\ResourceModel\Rule $rule,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Customer\Model\Session\Proxy $sessionProxy,
+        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
+        \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
         Image $imageHelper,
         array $data = [],
         CartModel $cart )
@@ -51,6 +56,13 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         $this->_categoryRepository = $categoryRepository;
         $this->_cart = $cart;
         $this->imageHelper = $imageHelper;
+        $this->ruleResource = $rule;
+        $this->_storeManager = $storeManager;
+        $this->ruleResource = $rule;
+        $this->_storeManager = $storeManager;
+        $this->sessionProxy= $sessionProxy;
+        $this->_date =  $date;
+        $this->catalogRuleRepository = $catalogRuleRepository;
         parent::__construct(
             $context,
             $helper,
@@ -173,5 +185,22 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         ];
 
         return $this->jsonHelper->jsonEncode($customer);
+    }
+    
+    public function getRules($productId)
+    {
+        $date = $this->_date->date()->format('Y-m-d H:i:s');
+        $websiteId = $this->_storeManager->getStore()->getWebsiteId();
+        $customerGroupId = $this->sessionProxy->getCustomer()->getGroupId();
+        
+        $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
+        $promos = [];
+        
+        foreach ($rules as $rule){
+            $promo = $this->catalogRuleRepository->get($rule['rule_id']);
+            array_push($promos, $promo->getName());
+        }
+        
+        return $promos;
     }
 }

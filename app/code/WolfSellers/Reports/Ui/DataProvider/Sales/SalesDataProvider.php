@@ -40,27 +40,29 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         parent::_initSelect();
 
         $this->getSelect()->joinLeft(
-            "sales_order",
-            "sales_order.entity_id=main_table.entity_id",
-            ["sales_order.status as status_pedido"]
-        );
-
-        $this->getSelect()->joinLeft(
             "sales_order_item",
             "sales_order_item.order_id=main_table.entity_id",
-            ["sales_order_item.item_id","sales_order_item.sku","sales_order_item.name as sku_description","sales_order_item.qty_ordered","sales_order_item.price", "sales_order_item.base_price","main_table.status as estatus_pedido","main_table.store_name as Purchase_Point","main_table.grand_total as grand_total","main_table.customer_name as name_customer"]
+            [
+                "sales_order_item.item_id",
+                "sales_order_item.sku",
+                "sales_order_item.name as sku_description",
+                "sales_order_item.qty_ordered",
+                "sales_order_item.price",
+                "sales_order_item.original_price",
+                "sales_order_item.base_price",
+                "main_table.status as estatus_pedido",
+                "main_table.store_name as Purchase_Point",
+                "main_table.grand_total as grand_total",
+                "main_table.customer_name as name_customer"
+            ]
         );
+        $this->getSelect()->columns(new \Zend_Db_Expr("( sales_order_item.original_price - sales_order_item.price) as discount_product"));
 
         $this->getSelect()->joinLeft(
             "catalog_product_entity",
             "catalog_product_entity.sku=sales_order_item.sku AND catalog_product_entity.entity_id=sales_order_item.product_id"
         );
 
-        $this->getSelect()->joinLeft(
-            "catalog_product_entity_varchar",
-            "catalog_product_entity_varchar.row_id=catalog_product_entity.row_id AND catalog_product_entity_varchar.attribute_id=844",
-            ["value as marca"]
-        );
 
         $this->getSelect()->joinLeft(
             "catalog_product_entity_varchar as cpev2",
@@ -80,24 +82,24 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ["concat(cpev4.value,'.html') as url_2"]
         );
 
+        $this->getSelect()->joinLeft(
+            "catalog_product_entity_varchar as cpev5",
+            "cpev5.row_id=catalog_product_entity.row_id AND cpev5.attribute_id=844",
+            ["value as marca"]
+        );
 
         $this->getSelect()->joinLeft(
             "braintree_transaction_details",
             "braintree_transaction_details.order_id=main_table.entity_id"
         );
+
         $this->getSelect()->joinLeft(
             "customer_address_entity",
             "customer_address_entity.entity_id=main_table.customer_id",
-            ["customer_address_entity.vat_id as rut","customer_address_entity.firstname","customer_address_entity.lastname"]
+            ["customer_address_entity.firstname","customer_address_entity.lastname"]
         );
 
         $this->getSelect()->columns(new \Zend_Db_Expr("IF(customer_address_entity.vat_id <> '','FACTURA','BOLETA') as tipopedido"));
-
-        $this->getSelect()->joinLeft(
-            "customer_entity",
-            "customer_entity.entity_id=main_table.customer_id",
-            ["customer_entity.firstname as nombre_cliente","customer_entity.lastname as apellido_cliente"]
-        );
 
         $this->getSelect()->joinLeft(
             "customer_group",
@@ -107,9 +109,18 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
 
         $this->getSelect()->joinLeft(
             "sales_order_address",
-            "sales_order_address.parent_id=main_table.entity_id",
-            ["sales_order_address.vat_id as dni","sales_order_address.region as region","sales_order_address.city as provincia","sales_order_address.city as city"]
+            "sales_order_address.parent_id=main_table.entity_id AND sales_order_address.address_type = 'shipping'",
+            [
+                "sales_order_address.firstname as nombre_cliente",
+                "sales_order_address.lastname as apellido_cliente",
+                "sales_order_address.vat_id as dni",
+                "sales_order_address.region as region",
+                "sales_order_address.city as provincia",
+                "sales_order_address.city as city",
+                "sales_order_address.company as ruc"
+            ]
         );
+
         $this->getSelect()->joinLeft(
             "sales_order_payment",
             "sales_order_payment.parent_id=main_table.entity_id",
@@ -122,8 +133,11 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ]
         );
 
+
+
         $this->_logger->info('Query: ' . trim($this->getSelect()->__toString()));
 
         return $this;
     }
 }
+
