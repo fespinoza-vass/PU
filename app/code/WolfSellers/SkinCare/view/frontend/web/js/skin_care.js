@@ -50,7 +50,7 @@ define([
                 var $this = $(this),
                     resultType = $this.data('type')
                 ;
-
+                
                 self.resultElements[resultType] = {
                     el: $this,
                     wrapper: $this.closest(self.options.resultItemSelector),
@@ -122,6 +122,23 @@ define([
                 elements.percentage.text(valReport);
                 elements.bar.width(valReport + '%');
                 elements.wrapper.show();
+                
+                if(key == 'ageSpots' || key == 'darkCircles' || key == 'texture' || key == 'wrinkles'){
+	                $('.slider-'+key+' .product-items .slick-list .slick-track .slick-slide div .product-item .product-item-info').each(function(){
+	                    var max = $(this).attr('data-'+key+'-max');
+	                    var min = $(this).attr('data-'+key+'-min');
+
+                    	//console.log(valReport + '<' + max + '||' + valReport + '>' + min);
+                    	if (parseFloat(valReport) >= min && parseFloat(valReport) <= max) {
+	                    	console.log('SE MUESTRA');
+	                    	$(this).parent().parent().parent().show();
+	                    }else{
+	                    	console.log('SE OCULTA');
+	                    	$(this).parent().parent().parent().hide();
+	                    }
+	                });
+                }
+                
                 elements.slider.show();
             });
 
