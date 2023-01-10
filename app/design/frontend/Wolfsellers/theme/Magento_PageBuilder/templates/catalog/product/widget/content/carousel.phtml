@@ -15,17 +15,31 @@ use Magento\Framework\App\Action\Action;
 
     $image = 'new_products_content_widget_grid';
     $items = $block->getProductCollection()->getItems();
-
+    
     $showWishlist = true;
     $showCompare = true;
     $showCart = true;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    
     ?>
     <ol class="product-items <?= /* @noEscape */ $type ?>">
         <?php $iterator = 1; ?>
         <?php foreach ($items as $_item) : ?>
+        	<?php 
+        	   $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        	   $product = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
+        	   $dataItem = $product->getById($_item->getEntityId());
+        	   $dataDarkMax = $dataItem->getAttributeText('dark_circle_score_max') ? 'data-darkCircles-max="'.$dataItem->getAttributeText('dark_circle_score_max').'"' : '';
+        	   $dataDarkMin = $dataItem->getAttributeText('dark_circle_score_min') ? 'data-darkCircles-min="'.$dataItem->getAttributeText('dark_circle_score_min').'"' : ''; 
+        	   $dataSpotkMax = $dataItem->getAttributeText('spot_score_max') ? 'data-ageSpots-max="'.$dataItem->getAttributeText('spot_score_max').'"' : '';
+        	   $dataSpotMin = $dataItem->getAttributeText('spot_score_min') ? 'data-ageSpots-min="'.$dataItem->getAttributeText('spot_score_min').'"' : '';
+        	   $dataWrinkleMax = $dataItem->getAttributeText('wrinle_score_max') ? 'data-wrinkles-max="'.$dataItem->getAttributeText('wrinle_score_max').'"' : '';
+        	   $dataWrinkleMin = $dataItem->getAttributeText('wrinkle_score_min') ? 'data-wrinkles-min="'.$dataItem->getAttributeText('wrinkle_score_min').'"' : '';
+        	   $dataTextureMax = $dataItem->getAttributeText('texture_score_max') ? 'data-texture-max="'.$dataItem->getAttributeText('texture_score_max').'"' : '';
+        	   $dataTextureMin = $dataItem->getAttributeText('texture_score_min') ? 'data-texture-min="'.$dataItem->getAttributeText('texture_score_min').'"' : '';
+        	?>
             <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
-            <div class="product-item-info">
+            <div class="product-item-info" <?= $dataDarkMax ?> <?= $dataDarkMin ?> <?= $dataSpotkMax ?> <?= $dataSpotMin ?> <?= $dataWrinkleMax ?>  <?= $dataWrinkleMin ?> <?= $dataTextureMax ?> <?= $dataTextureMin ?> >
                 <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
                     <?= $block->getImage($_item, $image)->toHtml() ?>
                 </a>
