@@ -7,13 +7,23 @@
 		margin-bottom: 0;
 		.ammenu-items.-root{
 			justify-content: center;
-			[data-bind*="scope: 'ammenu_topmenu_item_5'"] .ammenu-submenu-wrapper{
-				display: none !important; //AMASTY important
-			}
 			[data-bind*="scope: 'ammenu_topmenu_item_6'"] .ammenu-submenu-wrapper{
 				width: auto !important; //AMASTY important
 			    right: 1px !important; //AMASTY important
 			    left: auto !important; //AMASTY important
+			}
+		}
+		li{
+			&.ammenu-item{
+				&.category-item{
+					.ammenu-submenu-wrapper{
+						&:last-child {
+							width: auto !important;
+							right: 1px !important;
+							left: auto !important;
+						}
+					}
+				}
 			}
 		}
 	}
