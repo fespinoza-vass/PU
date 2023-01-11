@@ -25,21 +25,25 @@ define([
         placeOrder: function () {
             var addressValidatorPath = "checkout.steps.shipping-step.shippingAddress.before-shipping-method-form.shippingAdditional.address-validation-message.validator",
                 errorMessage = '',
+                visible = false,
                 addressValidator;
             addressValidator = registry.get(addressValidatorPath);
-
-            if (addressValidator.addressData.country_id == "" ||
-                addressValidator.addressData.firstname == "" ||
-                addressValidator.addressData.lastname == "" ||
-                addressValidator.addressData.postcode == "" ||
-                addressValidator.addressData.region_id == "" ||
-                addressValidator.addressData.telephone == "" ||
-                addressValidator.addressData.street[0] == ""
-            ) {
-                errorMessage = $.mage.__('No payment shipping address selected');
-                alert({ content: errorMessage });
-                return;
+            visible = $(".form-shipping-address").is(':visible');
+            if (visible){
+                if (addressValidator.addressData.country_id == "" ||
+                    addressValidator.addressData.firstname == "" ||
+                    addressValidator.addressData.lastname == "" ||
+                    addressValidator.addressData.postcode == "" ||
+                    addressValidator.addressData.region_id == "" ||
+                    addressValidator.addressData.telephone == "" ||
+                    addressValidator.addressData.street[0] == ""
+                ) {
+                    errorMessage = $.mage.__('No payment shipping address selected');
+                    alert({ content: errorMessage });
+                    return;
+                }
             }
+            
             this._super();
         }
     };
