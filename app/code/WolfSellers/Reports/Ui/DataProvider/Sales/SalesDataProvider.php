@@ -56,6 +56,8 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
                 "main_table.customer_name as name_customer"
             ]
         );
+        
+
         $this->getSelect()->columns(new \Zend_Db_Expr("( sales_order_item.original_price - sales_order_item.price) as discount_product"));
 
         $this->getSelect()->joinLeft(
@@ -65,10 +67,36 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
 
 
         $this->getSelect()->joinLeft(
+            "catalog_product_entity_int as cpei",
+            "cpei.row_id=catalog_product_entity.row_id AND cpei.attribute_id=247 "
+        );
+        
+        $this->getSelect()->joinLeft(
+            "eav_attribute_option_value as eaov",
+            "eaov.option_id=cpei.value",
+            ["value as marca"]
+        );
+
+        /*$this->getSelect()->joinLeft(
             "catalog_product_entity_varchar as cpev2",
             "cpev2.row_id=catalog_product_entity.row_id AND cpev2.attribute_id=742",
             ["value as categoria"]
-        );
+        );*/
+        $this->getSelect()->columns("(SELECT GROUP_CONCAT(catalog_category_entity_varchar.value  SEPARATOR ' + ') FROM catalog_category_entity_varchar
+        JOIN catalog_category_entity cce ON cce.entity_id = catalog_category_entity_varchar.row_id AND catalog_category_entity_varchar.attribute_id = (
+            SELECT attribute_id
+            FROM eav_attribute
+            WHERE attribute_code = 'name'
+              and entity_type_id =
+                  (
+                      SELECT entity_type_id
+                      FROM eav_entity_type
+                      WHERE entity_type_code = 'catalog_category'
+                  )
+        ) AND cce.entity_id in 
+        (SELECT category_id FROM catalog_category_product where product_id = sales_order_item.product_id) limit 1
+    ) as categoria");
+
 
         $this->getSelect()->joinLeft(
             "catalog_product_entity_varchar as cpev3",
@@ -82,11 +110,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ["concat(cpev4.value,'.html') as url_2"]
         );
 
-        $this->getSelect()->joinLeft(
-            "catalog_product_entity_varchar as cpev5",
-            "cpev5.row_id=catalog_product_entity.row_id AND cpev5.attribute_id=844",
-            ["value as marca"]
-        );
+        
 
         $this->getSelect()->joinLeft(
             "braintree_transaction_details",
@@ -116,8 +140,16 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
                 "sales_order_address.vat_id as dni",
                 "sales_order_address.region as region",
                 "sales_order_address.city as provincia",
-                "sales_order_address.city as city",
-                "sales_order_address.company as ruc"
+                "company as razon_social",
+                "vat_id as ruc"
+            ]
+        );
+
+        $this->getSelect()->joinLeft(
+            "customer_address_entity_varchar",
+            "customer_address_entity_varchar.entity_id=sales_order_address.customer_address_id AND customer_address_entity_varchar.attribute_id = 700",
+            [
+                "value as city"
             ]
         );
 
@@ -133,7 +165,18 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ]
         );
 
+        $this->getSelect()->joinLeft(
+            "sales_order",
+            "sales_order.entity_id=main_table.entity_id",
+            [
+                
+                "sales_order.coupon_code",
+                "sales_order.discount_amount",
+            ]
+        );
 
+        
+        $this->getSelect()->where("sales_order_item.product_type = 'simple'");
 
         $this->_logger->info('Query: ' . trim($this->getSelect()->__toString()));
 
