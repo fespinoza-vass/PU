@@ -113,7 +113,12 @@
         </column>
         <column name="ruc"  sortOrder="12">
             <settings>
-                <label translate="true">Razón Social (RUC)</label>
+                <label translate="true">(RUC)</label>
+            </settings>
+        </column>
+        <column name="razon_social"  sortOrder="12">
+            <settings>
+                <label translate="true">(razon_social)</label>
             </settings>
         </column>
         <column name="url_2"  sortOrder="13">
@@ -292,6 +297,16 @@
         <column name="transaction_source"  sortOrder="46">
             <settings>
                 <label translate="true">Braintree Transaction Source</label>
+            </settings>
+        </column>
+        <column name="coupon_code"  sortOrder="47">
+            <settings>
+                <label translate="true">Coupon Code</label>
+            </settings>
+        </column>
+        <column name="discount_amount"  sortOrder="48">
+            <settings>
+                <label translate="true">Descuento</label>
             </settings>
         </column>
     </columns>
