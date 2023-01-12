@@ -25,6 +25,7 @@ define([
             resultItemBarSelector: '.skin-care-bar',
             resultItemSelector: '.result-item',
             resultSliderSelector: '.result-slider',
+            productsSliderSelector: '.product-items',
             limits: {
                 ageSpots: 0,
                 darkCircles: 0,
@@ -48,7 +49,8 @@ define([
 
             $(this.resultItemsBar).each(function (index) {
                 var $this = $(this),
-                    resultType = $this.data('type')
+                    resultType = $this.data('type'),
+                    $sliderWrapper = $('.slider-' + resultType)
                 ;
 
                 self.resultElements[resultType] = {
@@ -56,7 +58,8 @@ define([
                     wrapper: $this.closest(self.options.resultItemSelector),
                     percentage: $this.find('.percentage'),
                     bar: $this.find('.bar-percentage'),
-                    slider: $('.slider-' + resultType),
+                    slider: $sliderWrapper,
+                    productsSlider: $sliderWrapper.find(self.options.productsSliderSelector)
                 };
             });
 
@@ -111,6 +114,7 @@ define([
 
             this.resultItems.hide();
             this.resultSliders.hide();
+            this.result.show();
 
             $.each(this.resultElements, function (key, elements) {
                 var valReport = report[key];
@@ -123,9 +127,8 @@ define([
                 elements.bar.width(valReport + '%');
                 elements.wrapper.show();
                 elements.slider.show();
+                elements.productsSlider.slick('refresh');
             });
-
-            this.result.show();
         },
 
         _onOpenedSkinCare: function () {
