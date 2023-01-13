@@ -59,6 +59,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         
 
         $this->getSelect()->columns(new \Zend_Db_Expr("( sales_order_item.original_price - sales_order_item.price) as discount_product"));
+        $this->getSelect()->columns(new \Zend_Db_Expr("DATE_SUB(sales_order_item.created_at, INTERVAL 5 hour ) as purchase_date"));
 
         $this->getSelect()->joinLeft(
             "catalog_product_entity",
