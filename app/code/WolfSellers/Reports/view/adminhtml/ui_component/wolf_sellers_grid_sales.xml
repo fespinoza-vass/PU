@@ -146,13 +146,9 @@
                 <label translate="true">Purchase Point</label>
             </settings>
         </column>
-        <column name="created_at" sortOrder="18">
+        <column name="purchase_date" sortOrder="18">
             <settings>
-                <sortable>false</sortable>
-                <filter>dateRange</filter>
-                <dataType>date</dataType>
-                <label translate="true">Purchase Date</label>
-                <sorting>desc</sorting>
+                <label >Purchase Date</label>
             </settings>
         </column>
         <column name="billing_name" sortOrder="19">
