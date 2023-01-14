@@ -18,8 +18,8 @@ define(
         'Amasty_CheckoutCore/js/model/payment/place-order-state',
         'Magento_Ui/js/lib/knockout/extender/bound-nodes',
         'Magento_Ui/js/lib/view/utils/dom-observer',
-        'Magento_Ui/js/lib/view/utils/async',
-        'mage/translate'
+        'mage/translate',
+        'Magento_Ui/js/lib/view/utils/async'
     ],
     function (
         ko,
@@ -39,7 +39,8 @@ define(
         oneStepLayout,
         placeOrderState,
         boundNodes,
-        domObserver
+        domObserver,
+        $t
     ) {
         'use strict';
 
@@ -63,6 +64,17 @@ define(
             checkoutRootNode: null,
 
             previousPaymentMethod: null,
+
+            shippingRules: {
+                firstname: 'Por favor ingresa un nombre válido.',
+                lastname: 'Por favor ingresa un apellido válido.',
+                telephone: 'Por favor ingresa un número de teléfono válido.',
+                region_id: 'Por favor ingresa un departamento válido.',
+                city: 'Por favor ingresa una provincia válida.',
+                colony: 'Por favor ingresa un distrito válido.',
+                street: 'Por favor ingresa una calle válida.',
+                vat_id: 'Por favor ingresa un DNI válido.',
+            },
 
             /**
              * @private
@@ -324,15 +336,18 @@ define(
                     return;
                 }
 
-                if(!guestEmailValidator.validate()) {
+                if (!guestEmailValidator.validate()) {
                     errorMessage = $.mage.__('Por favor ingresa un correo electrónico.');
                     alert({ content: errorMessage });
 
                     return;
                 }
 
+                if (!this.validateShippingForm()) {
+                    return;
+                }
 
-                if(!this.validateDni()) {
+                if (!this.validateDni()) {
                     errorMessage = $.mage.__('Por favor ingresa un DNI válido.');
                     alert({ content: errorMessage });
 
@@ -348,13 +363,41 @@ define(
 
                 if (!customer.isLoggedIn()) {
                     var $dni = $(formSelector + ' input[name=vat_id]').val();
-                    if($dni.length === 8 && !isNaN($dni)) {
+                    if ($dni.length === 8 && !isNaN($dni)) {
                         validationResult = true;
                     }
                 }
 
                 return validationResult;
-            }
+            },
+
+            validateShippingForm: function () {
+                var shippingValid = true,
+                    shippingForm;
+
+                if (!$('.form-shipping-address').is(':visible')) {
+                    return true;
+                }
+
+                shippingForm = registry.get('checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset');
+
+                $.each(this.shippingRules, function (field, message) {
+                    var fieldComp = shippingForm.getChild(field);
+
+                    if ('street' === field) {
+                        fieldComp = fieldComp.elems()[0];
+                    }
+
+                    if (!fieldComp.validate().valid) {
+                        alert({ content: $t(message) });
+                        shippingValid = false;
+
+                        return false;
+                    }
+                });
+
+                return shippingValid;
+            },
         });
     }
 );
