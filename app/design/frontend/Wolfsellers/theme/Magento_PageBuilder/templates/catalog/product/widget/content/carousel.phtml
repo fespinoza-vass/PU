@@ -30,14 +30,14 @@ use Magento\Framework\App\Action\Action;
         	   $product = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
         	   $dataItem = $product->getById($_item->getEntityId());
 
-                $dataDarkMax = $dataItem->getCustomAttribute('dark_circle_score_max') ? 'data-darkCircles-max="'.$dataItem->getCustomAttribute('dark_circle_score_max').'"' : '';
-                $dataDarkMin = $dataItem->getCustomAttribute('dark_circle_score_min') ? 'data-darkCircles-min="'.$dataItem->getCustomAttribute('dark_circle_score_min').'"' : '';
-                $dataSpotkMax = $dataItem->getCustomAttribute('spot_score_max') ? 'data-ageSpots-max="'.$dataItem->getCustomAttribute('spot_score_max').'"' : '';
-                $dataSpotMin = $dataItem->getCustomAttribute('spot_score_min') ? 'data-ageSpots-min="'.$dataItem->getCustomAttribute('spot_score_min').'"' : '';
-                $dataWrinkleMax = $dataItem->getCustomAttribute('wrinle_score_max') ? 'data-wrinkles-max="'.$dataItem->getCustomAttribute('wrinle_score_max').'"' : '';
-                $dataWrinkleMin = $dataItem->getCustomAttribute('wrinkle_score_min') ? 'data-wrinkles-min="'.$dataItem->getCustomAttribute('wrinkle_score_min').'"' : '';
-                $dataTextureMax = $dataItem->getCustomAttribute('texture_score_max') ? 'data-texture-max="'.$dataItem->getCustomAttribute('texture_score_max').'"' : '';
-                $dataTextureMin = $dataItem->getCustomAttribute('texture_score_min') ? 'data-texture-min="'.$dataItem->getCustomAttribute('texture_score_min').'"' : '';
+                $dataDarkMax = $dataItem->getCustomAttribute('dark_circle_score_max') ? 'data-darkCircles-max="'.$dataItem->getCustomAttribute('dark_circle_score_max')->getValue().'"' : '';
+                $dataDarkMin = $dataItem->getCustomAttribute('dark_circle_score_min') ? 'data-darkCircles-min="'.$dataItem->getCustomAttribute('dark_circle_score_min')->getValue().'"' : '';
+                $dataSpotkMax = $dataItem->getCustomAttribute('spot_score_max') ? 'data-ageSpots-max="'.$dataItem->getCustomAttribute('spot_score_max')->getValue().'"' : '';
+                $dataSpotMin = $dataItem->getCustomAttribute('spot_score_min') ? 'data-ageSpots-min="'.$dataItem->getCustomAttribute('spot_score_min')->getValue().'"' : '';
+                $dataWrinkleMax = $dataItem->getCustomAttribute('wrinle_score_max') ? 'data-wrinkles-max="'.$dataItem->getCustomAttribute('wrinle_score_max')->getValue().'"' : '';
+                $dataWrinkleMin = $dataItem->getCustomAttribute('wrinkle_score_min') ? 'data-wrinkles-min="'.$dataItem->getCustomAttribute('wrinkle_score_min')->getValue().'"' : '';
+                $dataTextureMax = $dataItem->getCustomAttribute('texture_score_max') ? 'data-texture-max="'.$dataItem->getCustomAttribute('texture_score_max')->getValue().'"' : '';
+                $dataTextureMin = $dataItem->getCustomAttribute('texture_score_min') ? 'data-texture-min="'.$dataItem->getCustomAttribute('texture_score_min')->getValue().'"' : '';
 
         	?>
             <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
