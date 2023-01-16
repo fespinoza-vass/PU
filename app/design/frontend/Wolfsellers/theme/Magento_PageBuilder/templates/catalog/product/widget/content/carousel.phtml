@@ -20,31 +20,28 @@ use Magento\Framework\App\Action\Action;
     $showCompare = true;
     $showCart = true;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    $helperProduct = $this->helper('WolfSellers\PageBuilder\Helper\HelperProduct');
 
     ?>
     <ol class="product-items <?= /* @noEscape */ $type ?>">
         <?php $iterator = 1; ?>
         <?php foreach ($items as $_item) : ?>
         	<?php
-        	   $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        	   $product = $objectManager->get('\Magento\Catalog\Model\ProductRepository');
-        	   $dataItem = $product->getById($_item->getEntityId());
-
-                $dataDarkMax = $dataItem->getCustomAttribute('dark_circle_score_max') ? 'data-darkCircles-max="'.$dataItem->getCustomAttribute('dark_circle_score_max')->getValue().'"' : '';
-                $dataDarkMin = $dataItem->getCustomAttribute('dark_circle_score_min') ? 'data-darkCircles-min="'.$dataItem->getCustomAttribute('dark_circle_score_min')->getValue().'"' : '';
-                $dataSpotkMax = $dataItem->getCustomAttribute('spot_score_max') ? 'data-ageSpots-max="'.$dataItem->getCustomAttribute('spot_score_max')->getValue().'"' : '';
-                $dataSpotMin = $dataItem->getCustomAttribute('spot_score_min') ? 'data-ageSpots-min="'.$dataItem->getCustomAttribute('spot_score_min')->getValue().'"' : '';
-                $dataWrinkleMax = $dataItem->getCustomAttribute('wrinle_score_max') ? 'data-wrinkles-max="'.$dataItem->getCustomAttribute('wrinle_score_max')->getValue().'"' : '';
-                $dataWrinkleMin = $dataItem->getCustomAttribute('wrinkle_score_min') ? 'data-wrinkles-min="'.$dataItem->getCustomAttribute('wrinkle_score_min')->getValue().'"' : '';
-                $dataTextureMax = $dataItem->getCustomAttribute('texture_score_max') ? 'data-texture-max="'.$dataItem->getCustomAttribute('texture_score_max')->getValue().'"' : '';
-                $dataTextureMin = $dataItem->getCustomAttribute('texture_score_min') ? 'data-texture-min="'.$dataItem->getCustomAttribute('texture_score_min')->getValue().'"' : '';
-
-        	?>
+                $dataDarkMax = $helperProduct->getDarkMax($_item->getEntityId());
+                $dataDarkMin = $helperProduct->getDarkMin($_item->getEntityId());
+                $dataSpotkMax = $helperProduct->getSpotkMax($_item->getEntityId());
+                $dataSpotMin = $helperProduct->getSpotMin($_item->getEntityId());
+                $dataWrinkleMax = $helperProduct->getWrinkleMax($_item->getEntityId());
+                $dataWrinkleMin = $helperProduct->getWrinkleMin($_item->getEntityId());
+                $dataTextureMax = $helperProduct->getTextureMax($_item->getEntityId());
+                $dataTextureMin = $helperProduct->getTextureMin($_item->getEntityId());
+            ?>
             <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
             <div class="product-item-info" <?= $dataDarkMax ?> <?= $dataDarkMin ?> <?= $dataSpotkMax ?> <?= $dataSpotMin ?> <?= $dataWrinkleMax ?>  <?= $dataWrinkleMin ?> <?= $dataTextureMax ?> <?= $dataTextureMin ?> >
                 <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
                     <?= $block->getImage($_item, $image)->toHtml() ?>
                 </a>
+                <div></div>
                 <div class="product-item-details">
                     <strong class="product-item-name">
                         <span class="list_item_product_manufacturer"><?= $_item->getAttributeText("manufacturer"); ?></span>
