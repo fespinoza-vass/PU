@@ -9,30 +9,46 @@ use Magento\GoogleTagManager\Block\Ga;
 /** @var \WolfSellers\GoogleTagManager\Block\ListJson $block */
 $product = $block->getCurrentProduct();
 
-$attributes = $product->getAttributes();
-$category = '';
-$subcategory = '';
-$brand = '';
+$category = ($product->getCategoria()) ? $product->getCategoria() : '';
+$subcategory = ($product->getSubCategoria()) ? $product->getSubCategoria() : '';
+$family = ($product->getFamilia()) ? $product->getFamilia() : '';
 
 $gender = '';
 $size = '';
+$attr = $product->getResource()->getAttribute('tamano');
+if ($attr->usesSource()) {
+    $size = $attr->getSource()->getOptionText($product->getTamano());
+}
+
+$attr = $product->getResource()->getAttribute('genero');
+if ($attr->usesSource()) {
+    $gender = $attr->getSource()->getOptionText($product->getGenero());
+}
+
+$attributes = $product->getAttributes();/*
+/*$category = '';
+$subcategory = '';*/
+$brand = '';
+
+/*$gender = '';
+$size = '';*/
 foreach($attributes as $attribute){
-    if($attribute->getName() === 'categoria') {
+    /*if($attribute->getName() === 'categoria') {
         $category = $attribute->getFrontend()->getValue($product);
     }
     if($attribute->getName() === 'sub_categoria') {
         $subcategory = $attribute->getFrontend()->getValue($product);
-    }
+    }*/
     //if($attribute->getName() === 'brand_ids') {
     if($attribute->getName() === 'manufacturer') {
         $brand = $attribute->getFrontend()->getValue($product);
     }
-    if($attribute->getName() === 'genero') {
+    /*if($attribute->getName() === 'genero') {
         $gender = $attribute->getFrontend()->getValue($product);
     }
     if($attribute->getName() === 'tamano') {
         $size = $attribute->getFrontend()->getValue($product);
-    }
+    }*/
 }
 $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
     ->init($product, 'product_base_image')->getUrl();
