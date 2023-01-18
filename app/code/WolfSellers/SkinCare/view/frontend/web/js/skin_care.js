@@ -164,8 +164,12 @@ define([
                 {},
                 function(data) {
                 var $container = $("#" + typeKey + "-container");
-                $container.html(data);
-                $container.parent().parent().show();
+                $container.parent().parent().hide();
+
+                if (data !== "") {
+                    $container.html(data);
+                    $container.parent().parent().show();
+                }
             });
         },
 

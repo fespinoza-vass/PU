@@ -97,6 +97,9 @@ class Index extends Action
         $productCollection->addAttributeToFilter($attrCodeMin, $minValue);
         $productCollection->addAttributeToFilter($attrCodeMax, $maxValue);
         $productCollection->setPageSize(20);
+        if($productCollection->getSize() < 1) {
+            echo ""; die();
+        }
 
         $conditions = [
             $attrCodeMin => $minValue,
