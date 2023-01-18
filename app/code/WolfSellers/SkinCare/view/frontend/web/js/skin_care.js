@@ -124,7 +124,7 @@ define([
                 elements.wrapper.show();
 
                 if(key == 'ageSpots' || key == 'darkCircles' || key == 'texture' || key == 'wrinkles'){
-	                self._ajaxSkinCareCall(key, parseFloat(valReport));
+                    self._ajaxSkinCareCall(key, parseFloat(valReport));
                 }
 
                 elements.slider.show();
@@ -154,23 +154,27 @@ define([
                 }
 
                 default: {
-                    typeKey = "dark_circle";
+                    typeKey = "";
                     break;
                 }
 
             }
-            $.get(
-                window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey,
-                {},
-                function(data) {
-                var $container = $("#" + typeKey + "-container");
-                $container.parent().parent().hide();
+            if (typeKey !== "") {
+                $.get(
+                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey,
+                    {},
+                    function(data) {
+                        var $container = $("#" + typeKey + "-container");
+                        $container.parent().parent().hide();
+                        console.log(typeKey);
 
-                if (data !== "") {
-                    $container.html(data);
-                    $container.parent().parent().show();
-                }
-            });
+                        if (data !== "") {
+                            $container.html(data);
+                            $container.parent().parent().show();
+                        }
+                    }
+                );
+            }
         },
 
         _onOpenedSkinCare: function () {
