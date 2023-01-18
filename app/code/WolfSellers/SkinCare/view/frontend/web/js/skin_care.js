@@ -172,6 +172,8 @@ define([
                         if (data !== "") {
                             $container.html(data);
                             $parentContainer.show();
+                            $('body').trigger('click');
+                            $parentContainer.click();
                         }
                     }
                 );
