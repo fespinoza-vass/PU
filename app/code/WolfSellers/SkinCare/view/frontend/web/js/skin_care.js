@@ -168,12 +168,13 @@ define([
                     {},
                     function(data) {
                         var $container = $("#" + typeKey + "-container");
-                        $container.parent().parent().hide();
+                        var $parentContainer = $("." + typeKey + "-parent-container");
+                        $parentContainer.hide();
                         console.log(typeKey);
 
                         if (data !== "") {
                             $container.html(data);
-                            $container.parent().parent().show();
+                            $parentContainer.show();
                         }
                     }
                 );
