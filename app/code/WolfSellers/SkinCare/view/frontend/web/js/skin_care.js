@@ -172,6 +172,46 @@ define([
             });
         },
 
+        _ajaxSkinCareCall: function (type, value) {
+            var typeKey = type;
+            switch (type) {
+                case "ageSpots": {
+                    typeKey = "spot";
+                    break;
+                }
+                case "texture": {
+                    typeKey = "texture";
+                    break;
+                }
+                case "wrinkles": {
+                    typeKey = "wrinkle";
+                    break;
+                }
+                case "darkCircles": {
+                    typeKey = "dark_circle";
+                    break;
+                }
+
+                default: {
+                    typeKey = "dark_circle";
+                    break;
+                }
+
+            }
+            $.get(
+                window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey,
+                {},
+                function(data) {
+                var $container = $("#" + typeKey + "-container");
+                $container.parent().parent().hide();
+
+                if (data !== "") {
+                    $container.html(data);
+                    $container.parent().parent().show();
+                }
+            });
+        },
+
         _onOpenedSkinCare: function () {
             $('body').trigger('processStop');
             this.btnOpen.hide();
