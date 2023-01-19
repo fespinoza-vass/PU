@@ -10,6 +10,7 @@ namespace PechoSolutions\Visanet\Controller\Visa;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Store\Model\ScopeInterface;
+use mysql_xdevapi\Exception;
 use PechoSolutions\Visanet\Model\Library\Visanet;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -50,7 +51,6 @@ class Hello extends \Magento\Framework\App\Action\Action {
 
     private function getValueConfig($field, $storeId = null)
     {
-
         $pathPattern = 'payment/%s/visanetConfiguracion/%s';
         $methodCode = 'visanet_pay';
 
@@ -62,7 +62,6 @@ class Hello extends \Magento\Framework\App\Action\Action {
     }
 
     public function execute() {
-
 
         $quote = $this->checkoutSession->getQuote();
         $grandTotal = $quote->getGrandTotal();
@@ -88,11 +87,20 @@ class Hello extends \Magento\Framework\App\Action\Action {
             $merchantIdbyCurrency=$this->getValueConfig('merchant_id');
         }
 
-        $securitykey = $Visanet->securitykey($ambiente, $merchantIdbyCurrency, $this->encryptor->decrypt($this->getValueConfig('public_key')),$this->encryptor->decrypt($this->getValueConfig('private_key')));
-        $sessionToken = $Visanet->create_token($ambiente,$grandTotal,$securitykey,$merchantIdbyCurrency,$this->encryptor->decrypt($this->getValueConfig('public_key')),$this->encryptor->decrypt($this->getValueConfig('private_key')),$this->getValueConfig('ip_client'));
+        try {
 
-        $this->checkoutSession->setSessionToken($sessionToken);
-        $this->checkoutSession->setSessionKey($securitykey);
+            $publicKey = $this->encryptor->decrypt($this->getValueConfig('public_key'));
+            $privateKey = $this->encryptor->decrypt($this->getValueConfig('private_key'));
+            $ipClient = $this->getValueConfig('ip_client');
+
+            $securitykey = $Visanet->securitykey($ambiente, $merchantIdbyCurrency, $publicKey,$privateKey);
+            $sessionToken = $Visanet->create_token($ambiente,$grandTotal,$securitykey,$merchantIdbyCurrency,$publicKey,$privateKey,$ipClient);
+
+            $this->checkoutSession->setSessionToken($sessionToken);
+            $this->checkoutSession->setSessionKey($securitykey);
+
+        } catch (\Exception $e) {
+        }
 
         $response = new \Magento\Framework\DataObject();
         $response->setMonto(
@@ -114,8 +122,6 @@ class Hello extends \Magento\Framework\App\Action\Action {
         $response->setTestPrivateKey(
             $this->getValueConfig('private_key')
         );
-
-
 
         return $this->resultJsonFactory->create()
                                        ->setJsonData($response->toJson());
