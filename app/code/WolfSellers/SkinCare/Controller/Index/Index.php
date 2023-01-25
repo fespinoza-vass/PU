@@ -122,7 +122,7 @@ class Index extends Action
         $productBlock->setData("sort_order", "position_by_sku");
         $productBlock->setProductCollection($productCollection);
         $productBlock->setTemplate("Magento_PageBuilder::catalog/product/widget/content/carousel.phtml");
-        echo '<div data-content-type="products-' . $type. '" data-appearance="carousel" data-autoplay="false" data-autoplay-speed="4000" data-infinite-loop="false" data-show-arrows="false" data-show-dots="true" data-carousel-mode="default" data-center-padding="90px" data-element="main">';
+        echo '<div data-content-type="products-' . $type. '" data-appearance="carousel" data-autoplay="false" data-autoplay-speed="4000" data-infinite-loop="false" data-show-arrows="true" data-show-dots="true" data-carousel-mode="default" data-center-padding="90px" data-element="main">';
 
 
         echo $productBlock->toHtml();
