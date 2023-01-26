@@ -54,16 +54,15 @@ $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
     ->init($product, 'product_base_image')->getUrl();
 
 $rules = $block->getRules($product->getId());
+
 $data = '';
 if($rules){
     foreach ($rules as $rule){
         $data = $rule;
     }
 }
-    
-    
-?>
 
+?>
 
 <script type="text/x-magento-init">
     {

@@ -25,6 +25,7 @@ define([
             resultItemBarSelector: '.skin-care-bar',
             resultItemSelector: '.result-item',
             resultSliderSelector: '.result-slider',
+            productsSliderSelector: '.product-items',
             limits: {
                 ageSpots: 0,
                 darkCircles: 0,
@@ -48,7 +49,8 @@ define([
 
             $(this.resultItemsBar).each(function (index) {
                 var $this = $(this),
-                    resultType = $this.data('type')
+                    resultType = $this.data('type'),
+                    $sliderWrapper = $('.slider-' + resultType)
                 ;
 
                 self.resultElements[resultType] = {
@@ -56,7 +58,8 @@ define([
                     wrapper: $this.closest(self.options.resultItemSelector),
                     percentage: $this.find('.percentage'),
                     bar: $this.find('.bar-percentage'),
-                    slider: $('.slider-' + resultType),
+                    slider: $sliderWrapper,
+                    productsSlider: $sliderWrapper.find(self.options.productsSliderSelector)
                 };
             });
 
@@ -111,6 +114,7 @@ define([
 
             this.resultItems.hide();
             this.resultSliders.hide();
+            this.result.show();
 
             $.each(this.resultElements, function (key, elements) {
                 var valReport = report[key];
@@ -122,10 +126,61 @@ define([
                 elements.percentage.text(valReport);
                 elements.bar.width(valReport + '%');
                 elements.wrapper.show();
-                elements.slider.show();
-            });
 
-            this.result.show();
+                if(key == 'ageSpots' || key == 'darkCircles' || key == 'texture' || key == 'wrinkles'){
+                    self._ajaxSkinCareCall(key, parseFloat(valReport));
+                }
+
+                elements.slider.show();
+                elements.productsSlider.slick('refresh');
+            });
+        },
+
+        _ajaxSkinCareCall: function (type, value) {
+            var typeKey = type;
+            switch (type) {
+                case "ageSpots": {
+                    typeKey = "spot";
+                    break;
+                }
+                case "texture": {
+                    typeKey = "texture";
+                    break;
+                }
+                case "wrinkles": {
+                    typeKey = "wrinkle";
+                    break;
+                }
+                case "darkCircles": {
+                    typeKey = "dark_circle";
+                    break;
+                }
+
+                default: {
+                    typeKey = "";
+                    break;
+                }
+
+            }
+            if (typeKey !== "") {
+                $.get(
+                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey,
+                    {},
+                    function(data) {
+                        var $container = $("#" + typeKey + "-container");
+                        var $parentContainer = $("." + typeKey + "-parent-container");
+                        $parentContainer.hide();
+                        console.log(typeKey);
+
+                        if (data !== "") {
+                            $container.html(data);
+                            $parentContainer.show();
+                            $('body').trigger('click');
+                            $parentContainer.click();
+                        }
+                    }
+                );
+            }
         },
 
         _onOpenedSkinCare: function () {
