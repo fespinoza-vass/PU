@@ -22,6 +22,8 @@ use Magento\SalesRule\Model\CouponFactory;
 use Magento\SalesRule\Model\ResourceModel\RuleFactory as ResourceSalesRuleFactory;
 use Magento\SalesRule\Model\RuleFactory as SalesRuleFactory;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory as RulesCollectionFactory;
+
 
 /**
  * Observer for applying catalog rules on product for frontend area.
@@ -44,6 +46,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
 
     /** @var RulePricesStorage */
     protected RulePricesStorage $rulePricesStorage;
+    protected RulesCollectionFactory $_salesRuleCollectionFactory;
+
 
     /** @var CheckoutSession */
     private CheckoutSession $checkoutSession;
@@ -77,7 +81,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         CheckoutSession $checkoutSession,
         CouponFactory $couponFactory,
         SalesRuleFactory $salesRuleFactory,
-        ResourceSalesRuleFactory $resourceSalesRuleFactory
+        ResourceSalesRuleFactory $resourceSalesRuleFactory,
+        RulesCollectionFactory $salesRuleCollectionFactory
     ) {
         $this->rulePricesStorage = $rulePricesStorage;
         $this->resourceRuleFactory = $resourceRuleFactory;
@@ -88,6 +93,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         $this->couponFactory = $couponFactory;
         $this->salesRuleFactory = $salesRuleFactory;
         $this->resourceSalesRuleFactory = $resourceSalesRuleFactory;
+        $this->_salesRuleCollectionFactory = $salesRuleCollectionFactory;
     }
 
     /**
@@ -136,6 +142,10 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
                 $finalPrice = max($product->getData('final_price'), $this->rulePricesStorage->getRulePrice($key));
             }
 
+            if ($this->hasCustomerGroupRules()) {
+                $finalPrice = max($product->getData('final_price'), $this->rulePricesStorage->getRulePrice($key));
+            }
+
             $product->setFinalPrice($finalPrice);
         }
 
@@ -161,6 +171,27 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
             $this->resourceSalesRuleFactory->create()->load($salesRule, $ruleId);
 
             return (bool) $salesRule->getData('apply_original_price');
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    private function hasCustomerGroupRules(): bool
+    {
+        try {
+            $result = false;
+            $currentGroupId = $this->checkoutSession->getQuote()->getCustomer()->getGroupId();
+            $salesRuleByCustomerGroup = $this->_salesRuleCollectionFactory->create()->addCustomerGroupFilter($currentGroupId);
+            $rulesGroup = $salesRuleByCustomerGroup->getData();
+
+            foreach ($rulesGroup as $rule):
+                if($rule['is_active'] ==1 && $rule['apply_original_price']==1 && $rule['coupon_type'] !== 2):
+                    $result = true;
+                endif;
+            endforeach;
+
+            return (bool)$result;
+
         } catch (\Exception $e) {
             return false;
         }
