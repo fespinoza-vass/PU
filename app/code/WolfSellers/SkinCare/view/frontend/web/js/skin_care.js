@@ -66,12 +66,7 @@ define([
             this.resultItems = this.resultItemsBar.closest(this.options.resultItemSelector);
             this.resultSliders = $(this.options.resultSliderSelector);
             this.result.hide();
-
-            if (this.resultItems = this.resultItemsBar.closest(this.options.resultItemSelector) ){
-                this.resultSliders.show();
-            }else{
-                this.resultSliders.hide();
-            }
+            this.resultSliders.hide();
 
             this.options.ymk.init({
                 autoOpen: false,
@@ -117,7 +112,7 @@ define([
             this.recommendations.hide();
 
             this.resultItems.hide();
-            this.resultSliders.hide();
+            this.resultSliders.show();
             this.result.show();
 
             $.each(this.resultElements, function (key, elements) {
