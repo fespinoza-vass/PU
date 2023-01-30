@@ -322,6 +322,17 @@ define(
             placeOrder: function () {
                 var errorMessage = '';
 
+                if (!this.validateShippingForm()) {
+                    return;
+                }
+
+                if (!this.validateDni()) {
+                    errorMessage = $.mage.__('Por favor ingresa un DNI válido.');
+                    alert({ content: errorMessage });
+
+                    return;
+                }
+
                 if (!quote.paymentMethod()) {
                     errorMessage = $.mage.__('No payment method selected');
                     alert({ content: errorMessage });
@@ -343,17 +354,6 @@ define(
                     return;
                 }
 
-                if (!this.validateShippingForm()) {
-                    return;
-                }
-
-                if (!this.validateDni()) {
-                    errorMessage = $.mage.__('Por favor ingresa un DNI válido.');
-                    alert({ content: errorMessage });
-
-                    return;
-                }
-
                 startPlaceOrderAction();
             },
 
@@ -363,9 +363,18 @@ define(
 
                 if (!customer.isLoggedIn()) {
                     var $dni = $(formSelector + ' input[name=vat_id]').val();
-                    if ($dni.length === 8 && !isNaN($dni)) {
-                        validationResult = true;
-                    }
+
+                    validationResult = this.isDniValid($dni);
+                }
+
+                return validationResult;
+            },
+
+            isDniValid: function (value) {
+                var validationResult = false;
+
+                if (value.length === 8 && !isNaN(value)) {
+                    validationResult = true;
                 }
 
                 return validationResult;
@@ -373,6 +382,7 @@ define(
 
             validateShippingForm: function () {
                 var shippingValid = true,
+                    self = this,
                     shippingForm;
 
                 if (!$('.form-shipping-address').is(':visible')) {
@@ -389,6 +399,13 @@ define(
                     }
 
                     if (!fieldComp.validate().valid) {
+                        alert({ content: $t(message) });
+                        shippingValid = false;
+
+                        return false;
+                    }
+
+                    if ('vat_id' === field && !self.isDniValid(fieldComp.value())) {
                         alert({ content: $t(message) });
                         shippingValid = false;
 
