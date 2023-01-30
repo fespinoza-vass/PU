@@ -26,6 +26,20 @@
 				}
 			}
 		}
+		a{
+			&.ammenu-link{
+				&.-mobile[aria-label="Go to SALES"] {
+					background: @black;
+					border-radius: 5px;
+					span{
+						&.ammenu-text {
+							color: @white;
+							margin-left: 5px;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
@@ -113,20 +127,6 @@
 	    		border-radius: @radiusitems;
 	    	}
 	    }
-		a{
-			&.ammenu-link{
-				&.-mobile[aria-label="Go to SALES"] {
-					background: @black;
-					border-radius: 5px;
-					span{
-						&.ammenu-text {
-							color: @white;
-							margin-left: 5px;
-						}
-					}
-				}
-			}
-		}
 	}
 }
 //
