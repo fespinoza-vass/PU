@@ -42,6 +42,5 @@
         <referenceContainer name="authentication-popup" remove="true"/>
         <referenceContainer name="customer-account-navigation-delimiter-1" remove="true"/>
         <referenceContainer name="customer-account-navigation-delimiter-2" remove="true"/>
-
     </body>
 </page>
