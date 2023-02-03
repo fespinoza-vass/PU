@@ -42,6 +42,7 @@
         <shipping>
             <origin>
                 <contact_id>1</contact_id>
+                <default_estimated>15</default_estimated>
             </origin>
         </shipping>
     </default>
