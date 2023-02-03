@@ -183,6 +183,15 @@
                     <source_model>WolfSellers\Urbano\Model\Source\User</source_model>
                     <validate>required-entry</validate>
                 </field>
+                <field id="delivery_time" type="file" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Archivo</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">delivery_time</upload_dir>
+                    <base_url type="media" scope_info="1">delivery_time</base_url>
+                </field>
+                <field id="default_estimated" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1">
+                    <label>Estamación Default</label>
+                </field>
             </group>
         </section>
     </system>

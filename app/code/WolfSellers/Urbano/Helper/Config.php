@@ -111,4 +111,22 @@ class Config extends AbstractHelper
 
         return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
     }
+
+    /**
+     * Returns File name to calculate delivery estiamted time
+     *
+     * @return mixed
+     */
+    public function getEstimateDelivery() {
+        return $this->scopeConfig->getValue('shipping/origin/delivery_time', ScopeInterface::SCOPE_STORE);
+    }
+
+    /**
+     * Returns Default Delivery estimated
+     *
+     * @return mixed
+     */
+    public function getDefaultEstimated() {
+        return $this->scopeConfig->getValue('shipping/origin/default_estimated', ScopeInterface::SCOPE_STORE);
+    }
 }
