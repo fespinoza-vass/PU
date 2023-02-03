@@ -55,7 +55,7 @@ define([
                 }).done(function (estimated) {
                     if (estimated) {
                         estimated = JSON.parse(estimated);
-                        self.customTitle(_shippingMethod['method_title'] + ' ' + estimated.type + ' ' + estimated.days);
+                        self.customTitle(_shippingMethod['method_title'] + ' ' + estimated.data );
                     } else {
                         self.customTitle(_shippingMethod['method_title']);
                     }
