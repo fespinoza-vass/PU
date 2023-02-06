@@ -84,7 +84,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         CouponFactory $couponFactory,
         SalesRuleFactory $salesRuleFactory,
         RulesCollectionFactory $salesRuleCollectionFactory,
-        Product $itemProduct
+        Product $itemProduct,
+        ResourceSalesRuleFactory $resourceSalesRuleFactory
     ) {
         $this->rulePricesStorage = $rulePricesStorage;
         $this->resourceRuleFactory = $resourceRuleFactory;
@@ -96,6 +97,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         $this->salesRuleFactory = $salesRuleFactory;
         $this->_salesRuleCollectionFactory = $salesRuleCollectionFactory;
         $this->_itemProduct = $itemProduct;
+        $this->resourceSalesRuleFactory = $resourceSalesRuleFactory;
     }
 
     /**
