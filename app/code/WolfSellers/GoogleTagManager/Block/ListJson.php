@@ -167,10 +167,11 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
 
     public function getCategoryName(){
         $product = $this->getCurrentProduct();
+        $categories = [];
         foreach($product->getCategoryIds() as $categoryId){
-            return $this->_categoryRepository->get($categoryId)->getName();
+            array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
         }
-        return '';
+        return $categories;
     }
 
     public function getCustomerInfo()
