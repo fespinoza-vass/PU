@@ -9,12 +9,15 @@ use Magento\GoogleTagManager\Block\Ga;
 /** @var \WolfSellers\GoogleTagManager\Block\ListJson $block */
 $product = $block->getCurrentProduct();
 
-$category = ($product->getCategoria()) ? $product->getCategoria() : '';
-$subcategory = ($product->getSubCategoria()) ? $product->getSubCategoria() : '';
-$family = ($product->getFamilia()) ? $product->getFamilia() : '';
+$categories = $block->getCategoryName();
+
+$category = ($categories[0]) ? $categories[0] : '';
+$subcategory = ($categories[1]) ? $categories[1] : '';
+$family = ($categories[2]) ? $categories[2] : '';
 
 $gender = '';
 $size = '';
+
 $attr = $product->getResource()->getAttribute('tamano');
 if ($attr->usesSource()) {
     $size = $attr->getSource()->getOptionText($product->getTamano());
@@ -25,30 +28,13 @@ if ($attr->usesSource()) {
     $gender = $attr->getSource()->getOptionText($product->getGenero());
 }
 
-$attributes = $product->getAttributes();/*
-/*$category = '';
-$subcategory = '';*/
+$attributes = $product->getAttributes();
 $brand = '';
 
-/*$gender = '';
-$size = '';*/
 foreach($attributes as $attribute){
-    /*if($attribute->getName() === 'categoria') {
-        $category = $attribute->getFrontend()->getValue($product);
-    }
-    if($attribute->getName() === 'sub_categoria') {
-        $subcategory = $attribute->getFrontend()->getValue($product);
-    }*/
-    //if($attribute->getName() === 'brand_ids') {
     if($attribute->getName() === 'manufacturer') {
         $brand = $attribute->getFrontend()->getValue($product);
     }
-    /*if($attribute->getName() === 'genero') {
-        $gender = $attribute->getFrontend()->getValue($product);
-    }
-    if($attribute->getName() === 'tamano') {
-        $size = $attribute->getFrontend()->getValue($product);
-    }*/
 }
 $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
     ->init($product, 'product_base_image')->getUrl();
@@ -75,6 +61,7 @@ if($rules){
                     "sku": "<?=$block->escapeJs($product->getSku());?>",
                     "category": "<?=$block->escapeJs($category);?>",
                     "sub_categoria": "<?=$block->escapeJs($subcategory);?>",
+                    "familia": "<?=$block->escapeJs($family);?>",
                     "brand": "<?=$block->escapeJs($brand);?>",
                     "productURL": "<?=$block->escapeJs($product->getProductUrl());?>",
                     "imageURL": "<?=$block->escapeJs($imageUrl);?>",
