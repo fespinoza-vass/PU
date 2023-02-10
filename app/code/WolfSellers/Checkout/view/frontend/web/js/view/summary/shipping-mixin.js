@@ -63,6 +63,15 @@ define([
                 }
             });
         },
+        getShippingMethodTitle: function () {
+            var shippingMethod = '',
+                shippingMethodTitle = '';
+
+            if (!this.isCalculated()) {
+                return '';
+            }
+            return this.customTitle();
+        },
     };
 
     /**
