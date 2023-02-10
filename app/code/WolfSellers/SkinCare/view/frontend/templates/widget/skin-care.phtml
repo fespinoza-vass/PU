@@ -38,8 +38,16 @@
                         wrinkles: <?php echo $block->getWrinklesMax(); ?>
                     }
                 });
+
+                $('#privacy_policy').click(function() {
+                    if (!$(this).is(':checked')) {
+                    	$('.open-skincare').attr('disabled', 'disabled');
+                    }else{
+                    	$('.open-skincare').removeAttr("disabled");
+                    }
+                });
             })
         };
     </script>
-    <button type="button" class="open-skincare"><?php echo $escaper->escapeHtml(__('Open Skincare')); ?></button>
+    <button type="button" class="open-skincare" disabled="true"><?php echo $escaper->escapeHtml(__('Open Skincare')); ?></button>
 </div>
