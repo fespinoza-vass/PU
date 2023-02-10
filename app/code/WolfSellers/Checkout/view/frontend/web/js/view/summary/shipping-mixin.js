@@ -42,7 +42,7 @@ define([
         quote.shippingAddress.subscribe(function (value) {
             var _shippingMethod = quote.shippingMethod();
 
-            if (_shippingMethod &&_shippingMethod.method_title) {
+            if (_shippingMethod && _shippingMethod.method_title) {
                 var payload = {
                     'ubigeo': quote.shippingAddress().postcode
                 };
@@ -63,20 +63,6 @@ define([
                 }
             });
         },
-        getShippingMethodTitle: function () {
-            var shippingMethod = '',
-                shippingMethodTitle = '';
-
-            if (!this.isCalculated()) {
-                return '';
-            }
-           return this.customTitle();
-
-
-
-
-        },
-
     };
 
     /**
