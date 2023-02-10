@@ -43,22 +43,26 @@ if ($_attributeType && $_attributeType == 'text') {
 } else {
     $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
 }
-
-$urlAlias = $block->getManufactureUrlAlias($_product->getManufacturer()) ?? "#";
+$manufacturer_id = intval($_product->getManufacturer());
+if (is_numeric($manufacturer_id)) {
+    $urlAlias = $block->getManufactureUrlAlias($manufacturer_id) ?? "#";
+}
 
 ?>
 
-<?php if ($_attributeValue) :?>
+<?php if ($_attributeValue) : ?>
     <div class="product attribute <?= $block->escapeHtmlAttr($_className) ?>">
-        <?php if ($renderLabel) :?>
+        <?php if ($renderLabel) : ?>
             <strong class="type"><?= $block->escapeHtml($_attributeLabel) ?></strong>
         <?php endif; ?>
-        <div class="value" <?= /* @noEscape */ $_attributeAddAttribute ?>>
+        <div class="value" <?= /* @noEscape */
+        $_attributeAddAttribute ?>>
             <?php if ($block->getManufactureImage($_product->getManufacturer())): ?>
 
-            <a href="<?= $urlAlias ?>">
-                <img src="<?= $block->getManufactureImage($_product->getManufacturer()) ?>" class="img-fluid logo-brand" alt="Logo de marca">
-            </a>
+                <a href="<?= $urlAlias ?>">
+                    <img src="<?= $block->getManufactureImage($_product->getManufacturer()) ?>"
+                         class="img-fluid logo-brand" alt="Logo de marca">
+                </a>
             <?php endif; ?>
         </div>
     </div>

@@ -7,22 +7,73 @@
 		margin-bottom: 0;
 		.ammenu-items.-root{
 			justify-content: center;
-			[data-bind*="scope: 'ammenu_topmenu_item_5'"] .ammenu-submenu-wrapper{
-				display: none !important; //AMASTY important
-			}
 			[data-bind*="scope: 'ammenu_topmenu_item_6'"] .ammenu-submenu-wrapper{
 				width: auto !important; //AMASTY important
 			    right: 1px !important; //AMASTY important
 			    left: auto !important; //AMASTY important
 			}
 		}
+		li{
+			&.ammenu-item{
+				&.category-item{
+					.ammenu-submenu-wrapper{
+						&:last-child {
+							width: auto !important;
+							right: 1px !important;
+							left: auto !important;
+						}
+					}
+				}
+			}
+		}
+		a{
+			&.ammenu-link{
+				&.-mobile[aria-label="Go to SALES"] {
+					background: @black;
+					border-radius: 5px;
+					span{
+						&.ammenu-text {
+							color: @white;
+							margin-left: 5px;
+						}
+					}
+				}
+			}
+		}
 	}
 }
-
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
 	section.ammenu-menu-wrapper{
 		.ammenu-nav-sections.-topmenu{
 			.ammenu-items.-root{
+				li[data-bind*="id: 'category-node-1718'"]{
+					p {
+						background: @white;
+						border-radius: 10px;
+						padding: 5px 10px;
+						margin: 0 -15px 0 0;
+						color: @black;
+					}
+					.ammenu-link{
+						&:after {
+							display: none;
+						}
+					}
+				}
+				li[data-bind*="id: 'category-node-1971'"]{
+					p {
+						background: @white;
+						border-radius: 10px;
+						padding: 5px 10px;
+						margin: 0 -15px 0 0;
+						color: @black;
+					}
+					.ammenu-link{
+						&:after {
+							display: none;
+						}
+					}
+				}
 				> .ammenu-item > .ammenu-link{
 					background: @black !important;
 					text-transform: uppercase;

@@ -20,22 +20,35 @@ use Magento\Framework\App\Action\Action;
     $showCompare = true;
     $showCart = true;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    $helperProduct = $this->helper('WolfSellers\PageBuilder\Helper\HelperProduct');
+
     ?>
     <ol class="product-items <?= /* @noEscape */ $type ?>">
         <?php $iterator = 1; ?>
         <?php foreach ($items as $_item) : ?>
+        	<?php
+                $dataDarkMax = $helperProduct->getDarkMax($_item->getEntityId());
+                $dataDarkMin = $helperProduct->getDarkMin($_item->getEntityId());
+                $dataSpotkMax = $helperProduct->getSpotkMax($_item->getEntityId());
+                $dataSpotMin = $helperProduct->getSpotMin($_item->getEntityId());
+                $dataWrinkleMax = $helperProduct->getWrinkleMax($_item->getEntityId());
+                $dataWrinkleMin = $helperProduct->getWrinkleMin($_item->getEntityId());
+                $dataTextureMax = $helperProduct->getTextureMax($_item->getEntityId());
+                $dataTextureMin = $helperProduct->getTextureMin($_item->getEntityId());
+            ?>
             <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
-            <div class="product-item-info">
+            <div class="product-item-info" <?= $dataDarkMax ?> <?= $dataDarkMin ?> <?= $dataSpotkMax ?> <?= $dataSpotMin ?> <?= $dataWrinkleMax ?>  <?= $dataWrinkleMin ?> <?= $dataTextureMax ?> <?= $dataTextureMin ?> >
                 <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
                     <?= $block->getImage($_item, $image)->toHtml() ?>
                 </a>
+                <div></div>
                 <div class="product-item-details">
                     <strong class="product-item-name">
                         <span class="list_item_product_manufacturer"><?= $_item->getAttributeText("manufacturer"); ?></span>
                         <a title="<?= $block->escapeHtml($_item->getName()) ?>"
                            href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
                            class="product-item-link">
-                            <?= $block->escapeHtml($_item->getName()) ?> 
+                            <?= $block->escapeHtml($_item->getName()) ?>
                         </a>
                     </strong>
                     <?php if ($templateType) : ?>
