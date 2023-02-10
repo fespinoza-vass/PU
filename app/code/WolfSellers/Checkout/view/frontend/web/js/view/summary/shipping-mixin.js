@@ -30,7 +30,7 @@ define([
                 }).done(function (estimated) {
                     if (estimated) {
                         estimated = JSON.parse(estimated);
-                        self.customTitle(value['method_title'] + ' ' + estimated.type + ' ' + estimated.days);
+                        self.customTitle(value['method_title'] + ' ' + estimated.data );
                     } else {
                         self.customTitle(value['method_title']);
                     }
