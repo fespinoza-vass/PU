@@ -38,6 +38,14 @@
                         wrinkles: <?php echo $block->getWrinklesMax(); ?>
                     }
                 });
+
+                $('#privacy_policy').click(function() {
+                    if (!$(this).is(':checked')) {
+                    	$('.open-skincare').attr('disabled', 'disabled');
+                    }else{
+                    	$('.open-skincare').removeAttr("disabled");
+                    }
+                });
             })
         };
     </script>
