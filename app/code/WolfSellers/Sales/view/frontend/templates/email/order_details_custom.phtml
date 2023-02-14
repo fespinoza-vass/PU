@@ -1,9 +1,9 @@
 <?php
 /* @var \Magento\Framework\View\Element\Template $block */
 /* @var \Magento\Sales\Model\Order $_order */
-/* @var mixed $customAttribute */
 
 $_order = $block->getOrder();
-echo $order->getData($customAttribute);
+$customAttribute = $block->getCustomAttribute();
+echo $_order->getData($customAttribute);
 ?>
 
