@@ -8,18 +8,34 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use WolfSellers\Urbano\Helper\Ubigeo;
 
-class CheckoutSubmitAllAfterObserver implements ObserverInterface
+class SalesModelServiceQuoteSubmitSuccess implements ObserverInterface
 {
 
+    /**
+     * Var to initilize ubigeoHelper
+     *
+     * @var Ubigeo $ubigeoHelper
+     */
     private Ubigeo $ubigeoHelper;
 
 
+    /**
+     * Construct for Observer
+     *
+     * @param Ubigeo $ubigeoHelper
+     */
     public function __construct(
         Ubigeo $ubigeoHelper
     ) {
         $this->ubigeoHelper = $ubigeoHelper;
     }
 
+    /**
+     * Execute method to set estimated delivery data from ubigeo file
+     *
+     * @param Observer $observer
+     * @return void
+     */
     public function execute(Observer $observer)
     {
         $writer = new \Laminas\Log\Writer\Stream(BP . '/var/log/ubigeo.log');
