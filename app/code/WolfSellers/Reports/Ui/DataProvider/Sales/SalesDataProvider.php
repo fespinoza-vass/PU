@@ -7,9 +7,12 @@ use Magento\Framework\Data\Collection\Db\FetchStrategyInterface as FetchStrategy
 use Magento\Framework\Data\Collection\EntityFactoryInterface as EntityFactory;
 use Magento\Framework\Event\ManagerInterface as EventManager;
 use Psr\Log\LoggerInterface as Logger;
+use WolfSellers\Urbano\Helper\Ubigeo;
 
 class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult {
 
+
+    public Ubigeo $ubigeoHelper;
     /**
      * Initialize dependencies.
      *
@@ -26,9 +29,11 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         Logger $logger,
         FetchStrategy $fetchStrategy,
         EventManager $eventManager,
-                      $mainTable = 'sales_order_grid',
-                      $resourceModel = \Magento\Sales\Model\ResourceModel\Order::class
+        Ubigeo $ubigeoHelper,
+        $mainTable = 'sales_order_grid',
+        $resourceModel = \Magento\Sales\Model\ResourceModel\Order::class
     ) {
+        $this->ubigeoHelper = $ubigeoHelper;
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel);
     }
 
@@ -38,7 +43,6 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
     protected function _initSelect()
     {
         parent::_initSelect();
-
         $this->getSelect()->joinLeft(
             "sales_order_item",
             "sales_order_item.order_id=main_table.entity_id",
@@ -56,7 +60,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
                 "main_table.customer_name as name_customer"
             ]
         );
-        
+
 
         $this->getSelect()->columns(new \Zend_Db_Expr("( sales_order_item.original_price - sales_order_item.price) as discount_product"));
         $this->getSelect()->columns(new \Zend_Db_Expr("DATE_SUB(sales_order_item.created_at, INTERVAL 5 hour ) as purchase_date"));
@@ -71,18 +75,14 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             "catalog_product_entity_int as cpei",
             "cpei.row_id=catalog_product_entity.row_id AND cpei.attribute_id=247 "
         );
-        
+
         $this->getSelect()->joinLeft(
             "eav_attribute_option_value as eaov",
             "eaov.option_id=cpei.value",
             ["value as marca"]
         );
 
-        /*$this->getSelect()->joinLeft(
-            "catalog_product_entity_varchar as cpev2",
-            "cpev2.row_id=catalog_product_entity.row_id AND cpev2.attribute_id=742",
-            ["value as categoria"]
-        );*/
+
         $this->getSelect()->columns("(SELECT GROUP_CONCAT(catalog_category_entity_varchar.value  SEPARATOR ' + ') FROM catalog_category_entity_varchar
         JOIN catalog_category_entity cce ON cce.entity_id = catalog_category_entity_varchar.row_id AND catalog_category_entity_varchar.attribute_id = (
             SELECT attribute_id
@@ -94,7 +94,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
                       FROM eav_entity_type
                       WHERE entity_type_code = 'catalog_category'
                   )
-        ) AND cce.entity_id in 
+        ) AND cce.entity_id in
         (SELECT category_id FROM catalog_category_product where product_id = sales_order_item.product_id) limit 1
     ) as categoria");
 
@@ -111,7 +111,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             ["concat(cpev4.value,'.html') as url_2"]
         );
 
-        
+
 
         $this->getSelect()->joinLeft(
             "braintree_transaction_details",
@@ -125,6 +125,9 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         );
 
         $this->getSelect()->columns(new \Zend_Db_Expr("IF(customer_address_entity.vat_id <> '','FACTURA','BOLETA') as tipopedido"));
+
+
+        $this->getSelect()->columns(new \Zend_Db_Expr("CONCAT(shipping_information,' ', '150140') as shipping_information"));
 
         $this->getSelect()->joinLeft(
             "customer_group",
@@ -170,13 +173,14 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             "sales_order",
             "sales_order.entity_id=main_table.entity_id",
             [
-                
+
                 "sales_order.coupon_code",
                 "sales_order.discount_amount",
+                "IFNULL(sales_order.ubigeo_estimated_delivery,main_table.shipping_information) as urbano_information",
             ]
         );
 
-        
+
         $this->getSelect()->where("sales_order_item.product_type = 'simple'");
 
         $this->_logger->info('Query: ' . trim($this->getSelect()->__toString()));
