@@ -1,0 +1,8 @@
+<?php
+/* @var \Magento\Framework\View\Element\Template $block */
+/* @var \Magento\Sales\Model\Order $_order */
+
+    $_order = $block->getOrder();
+    echo $_order->getData('ubigeo_estimated_delivery');
+?>
+

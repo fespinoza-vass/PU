@@ -140,7 +140,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                         $brand = $options_value->getLabel();
                     }
                 }
-
+                
                 $gender = !empty($item->getProduct()->getAttributeText('genero')) ? $item->getProduct()->getAttributeText('genero') : '';
                 $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
 

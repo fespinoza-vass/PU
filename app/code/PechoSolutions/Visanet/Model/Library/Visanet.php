@@ -239,8 +239,13 @@ class Visanet
         $response = curl_exec($ch);
         #var_dump($response);
         $json = json_decode($response);
-        $dato = $json->sessionKey;
-        return $dato;
+
+        try {
+            if (property_exists($json, "sessionKey")){
+                return $json->sessionKey;
+            }
+        } catch (\Exception $e) {
+        }
     }
 
 }

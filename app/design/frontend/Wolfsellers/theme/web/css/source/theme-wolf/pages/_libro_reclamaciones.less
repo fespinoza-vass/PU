@@ -26,6 +26,11 @@
                                     }
 
                                     .field {
+                                        .field-error, div.mage-error[generated]{
+                                            margin-top: 0;
+                                        }
+                                        .lib-checkboxs;
+                                        .lib-radio;
                                         .control {
                                             height: 48px;
 
@@ -93,28 +98,23 @@
                                                 }
                                             }
                                         }
-
                                         &.fb-h3,
                                         &.fb-div,
                                         &.fb-radio,
                                         &.fb-undefined {
                                             width: 100%;
                                         }
-
                                         &.fb-checkbox {
                                             flex-flow: row-reverse;
                                             display: flex;
-
                                             .fb-checkbox-group-label {
                                                 display: none;
                                             }
-
                                             .control {
                                                 height: auto;
-
-                                                .checkbox-group {
-                                                    label {
-                                                        padding: 0;
+                                                .checkbox-group{
+                                                    .amform-versiontwo-label:after{
+                                                        top: 1  px;
                                                     }
                                                 }
                                             }
@@ -138,6 +138,14 @@
                                         }
                                         .control {
                                             height: 48px;
+                                            .prodatos{
+                                                margin-top: -60px;
+                                                margin-left: 23px;
+                                                @media only screen and (min-width: 900px){
+                                                    margin-top: -26px;
+                                                    margin-left: -30px;
+                                                }
+                                            }   
                                             .codi-recl {
                                                 width: 60%;
                                             }
@@ -151,6 +159,13 @@
                                                 .form-control {
                                                     border-radius: 12px;
                                                     height: 100%;
+                                                }
+                                            }
+                                        }
+                                        &.fb-checkbox.form-group.amform-layout-one{
+                                            .control{
+                                                div.mage-error{
+                                                    position: absolute;
                                                 }
                                             }
                                         }
@@ -213,7 +228,6 @@
                                         }
                                         .control {
                                             height: 48px;
-
                                             .codi-recl {
                                                 width: 60%;
                                             }
@@ -221,12 +235,14 @@
                                             .date-identi {
                                                 width: 60%;
                                             }
+                                            .prodatos{
+                                                margin-left: -45px;
+                                            }
                                         }
 
                                         &.fb-undefined {
                                             .control {
                                                 height: 96px;
-
                                                 .form-control {
                                                     border-radius: 12px;
                                                     height: 100%;
@@ -296,6 +312,18 @@
 
                                                 +.ui-datepicker-trigger {
                                                     display: none;
+                                                }
+                                            }
+                                        }
+                                        &.fb-wysiwyg.form-group.amform-layout-one{
+                                            margin: 0 2% 40px 0;
+                                        }
+                                        &.fb-checkbox.form-group.amform-layout-one{
+                                            .control{
+                                                position: relative;
+                                                div.mage-error{
+                                                    width: max-content;
+                                                    top: 80px;
                                                 }
                                             }
                                         }
