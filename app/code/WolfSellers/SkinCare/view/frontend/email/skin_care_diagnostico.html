@@ -1,0 +1,38 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Your %store_name Skincare Diagnóstico" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order_data.email_customer_note|escape|nl2br":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"skin_care_diagnostico\" diagnostico=$diagnostico area=\"frontend\"":"Skincare Diagnóstico",
+"var store.frontend_name":"Store Frontend Name",
+"var store_phone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order_data.customer_name":"Customer Name"
+} @-->
+
+<!--@subject {{trans "Resultados de tu diagnóstico"}} @-->
+{{template config_path="design/email/header_template"}}
+<h3>RESULTADOS DEL DIAGNÓSTICO</h3>
+
+<div class="greeting">Hola {{var customerName}},</div>
+<!-- Custom Image with your email-->
+<!--img src="{{view url='Magenest_AbandonedCart::images/customimage.png'}}"/-->
+<div>
+    {{trans "somos %store_name. " store_name=$store.getFrontendName()}}
+    {{trans "Te compartimos los resultados de tu diagnóstico"}}
+</div>
+<hr>
+<div class="content">
+    {{layout handle="skin_care_diagnostico" items=$items area="frontend"}}
+</div>
+<hr>
+
+{{template config_path="design/email/footer_template"}}
