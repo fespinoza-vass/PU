@@ -241,9 +241,9 @@
                 <dataType>text</dataType>
             </settings>
         </column>
-        <column name="shipping_information" sortOrder="35">
+        <column name="urbano_information" sortOrder="35">
             <settings>
-                <label translate="true"> Shipping Information</label>
+                <label translate="true">Shipping Information</label>
                 <dataType>text</dataType>
             </settings>
         </column>
