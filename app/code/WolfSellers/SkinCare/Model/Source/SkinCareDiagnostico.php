@@ -109,7 +109,7 @@ class SkinCareDiagnostico
         endforeach;
 
         $this->_diagnosticoResult = $result;
-        $this->sendEmail($$email);
+        $this->sendEmail($email);
 
         return $result;
     }
