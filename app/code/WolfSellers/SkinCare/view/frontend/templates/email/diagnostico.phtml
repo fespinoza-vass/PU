@@ -1,0 +1,23 @@
+<?php
+
+/** $viewModel WolfSellers\SkinCare\ViewModel\Email\SkinCareDiagnostico
+$viewModel = $block->getViewModel();
+ */
+?>
+<table>
+<?php if($this->getProductsList()):?>
+    <?php foreach ($this->getProductsList() as $item): ?>
+        <tr>
+            <td>
+                <img src="<?= $item['urlImage'] ?>" alt="<?= $item['name']; ?>" title="<?= $item['name']; ?>" height="80" width="80"/>
+            </td>
+            <td>
+                <a href="<?= $item['urlProduct'] ?>" target="__blank">
+                    <?= $item['name'] ?>
+                </a>
+            </td>
+            <td><?= $item['price'] ?></td>
+        </tr>
+    <?php endforeach; ?>
+<?php endif;?>
+</table>
