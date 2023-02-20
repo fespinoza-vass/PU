@@ -5,9 +5,12 @@ namespace WolfSellers\SkinCare\Model\Source;
 use Magento\Customer\Model\Session;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Pricing\Helper\Data as DataPricing;
-use Magento\Framework\Mail\Template\TransportBuilder;
-use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\Translate\Inline\StateInterface;
+use Magento\Framework\Escaper;
+use Magento\Framework\Mail\Template\TransportBuilder;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use \Magento\Store\Model\ScopeInterface;
 
 class SkinCareDiagnostico
 {
@@ -15,29 +18,45 @@ class SkinCareDiagnostico
     protected Session $_customerSession;
     protected ProductRepositoryInterface $_productRepository;
     protected DataPricing $_priceHelper;
+
     protected $transportBuilder;
-    protected $storeManager;
     protected $inlineTranslation;
-    public $_productListIds;
+    protected $escaper;
+    protected $logger;
+
+    public $_diagnosticoResult;
+
+    /**
+     * @param ProductRepositoryInterface $productRepository
+     * @param DataPricing $priceHelper
+     * @param StoreManagerInterface $storeManager
+     * @param StateInterface $inlineTranslation
+     * @param Escaper $escaper
+     * @param TransportBuilder $transportBuilder
+     * @param Session $customerSession
+     * @param ScopeConfigInterface $scopeConfig
+     */
 
     public function __construct(
-        \Magento\Framework\Registry $coreRegistry,
-        ProductRepositoryInterface $productRepository,
-        DataPricing $priceHelper,
+        ProductRepositoryInterface                 $productRepository,
+        DataPricing                                $priceHelper,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        TransportBuilder $transportBuilder,
-        #StoreManagerInterface $storeManager,
-        StateInterface $state,
-        Session $customerSession
-    ) {
-        $this->_coreRegistry = $coreRegistry;
+        StateInterface                             $inlineTranslation,
+        Escaper                                    $escaper,
+        TransportBuilder                           $transportBuilder,
+        Session                                    $customerSession,
+        ScopeConfigInterface                       $scopeConfig
+    )
+    {
         $this->_customerSession = $customerSession;
         $this->_productRepository = $productRepository;
         $this->_storeManager = $storeManager;
         $this->_priceHelper = $priceHelper;
+        $this->_diagnosticoResult = [];
+        $this->inlineTranslation = $inlineTranslation;
+        $this->escaper = $escaper;
         $this->transportBuilder = $transportBuilder;
-        $this->inlineTranslation = $state;
-        $this->_productListIds = [];
+        $this->_scopeConfig = $scopeConfig;
     }
 
 
@@ -47,146 +66,94 @@ class SkinCareDiagnostico
      * @param $value
      * @return array
      */
-    public function setProductCollection($productCollection, $type, $value)
+    public function setProductCollection($productCollection, $type, $value, $email)
     {
-        $items= $productCollection->getData();
+        $items = $productCollection->getData();
         $store = $this->_storeManager->getStore();
 
-        $result= [];
-        $result['dark_circle']= [];
-        $result['wrinkle']= [];
-        $result['texture']= [];
-        $result['spot']= [];
+        $result = [];
+        $result['dark_circle'] = [];
+        $result['wrinkle'] = [];
+        $result['texture'] = [];
+        $result['spot'] = [];
 
         $result['results']['dark_circle'] = 0;
         $result['results']['texture'] = 0;
         $result['results']['wrinkle'] = 0;
         $result['results']['spot'] = 0;
 
-        if($type == 'dark_circle'):
-            $result['results']['dark_circle'] = $value;
-        endif;
-        if($type == 'texture'):
-            $result['results']['texture'] = $value;
-        endif;
-        if($type == 'wrinkle'):
-            $result['results']['wrinkle'] = $value;
-        endif;
-        if($type == 'spot'):
-            $result['results']['spot'] = $value;
-        endif;
-
         foreach ($items as $item):
-            $product = $this->_productRepository ->getById($item['entity_id']);
+            $product = $this->_productRepository->getById($item['entity_id']);
             $productInfo['urlImage'] = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
-            $productInfo['price'] = $this->_priceHelper->currency($product->getPrice(),true,false);
-            $productInfo['name']= $product->getName();
+            $productInfo['price'] = $this->_priceHelper->currency($product->getPrice(), true, false);
+            $productInfo['name'] = $product->getName();
+            $productInfo['urlProduct'] = $product->getProductUrl();
 
-            $productInfo['urlProduct']= $product->getProductUrl();
-            if($type == 'dark_circle' && count($result['dark_circle']) < 4):
-                array_push($result['dark_circle'], $product['entity_id']);
-            endif;
-            if($type == 'texture' && count($result['texture']) < 4):
-                array_push($result['texture'], $product['entity_id']);
-            endif;
-            if($type == 'wrinkle' && count($result['wrinkle']) < 4):
-                array_push($result['wrinkle'], $product['entity_id']);
-            endif;
-            if($type == 'spot' && count($result['spot']) < 4):
-                array_push($result['spot'], $product['entity_id']);
-            endif;
-            if($type == 'dark_circle' && count($result['dark_circle']) < 4):
-                array_push($result['dark_circle'], $productInfo);
-            endif;
-            if($type == 'texture' && count($result['texture']) < 4):
-                array_push($result['texture'], $productInfo);
-            endif;
-            if($type == 'wrinkle' && count($result['wrinkle']) < 4):
-                array_push($result['wrinkle'], $productInfo);
-            endif;
-            if($type == 'spot' && count($result['spot']) < 4):
-                array_push($result['spot'], $productInfo);
-            endif;
-        endforeach;
+            if ($type == 'dark_circle' && count($result['dark_circle']) < 4):
+                $result['dark_circle'][] = $productInfo;
+                $result['results']['dark_circle'] = $value;
 
-/*
-        foreach($items as $item):
+            elseif($type == 'texture' && count($result['texture']) < 4):
+                $result['texture'][] = $productInfo;
+                $result['results']['texture'] = $value;
 
-            $product = $this->_productRepository ->getById($item['entity_id']);
-            $productInfo['urlImage'] = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
-            $productInfo['price'] = $this->_priceHelper->currency($product->getPrice(),true,false);
-            $productInfo['name']= $product->getName();
-            $productInfo['urlProduct']= $product->getProductUrl();
+            elseif($type == 'wrinkle' && count($result['wrinkle']) < 4):
+                $result['wrinkle'][] = $productInfo;
+                $result['results']['wrinkle'] = $value;
 
-            if($type == 'dark_circle' && count($result['dark_circle']) < 4):
-                array_push($result['dark_circle'], $productInfo);
-            endif;
-            if($type == 'texture' && count($result['texture']) < 4):
-                array_push($result['texture'], $productInfo);
-            endif;
-            if($type == 'wrinkle' && count($result['wrinkle']) < 4):
-                array_push($result['wrinkle'], $productInfo);
-            endif;
-            if($type == 'spot' && count($result['spot']) < 4):
-                array_push($result['spot'], $productInfo);
+            elseif($type == 'spot' && count($result['spot']) < 4):
+                $result['spot'][] = $productInfo;
+                $result['results']['spot'] = $value;
             endif;
 
         endforeach;
 
-*/
-        $this->_customerSession->setDiagnostico($result);
-        $this->_coreRegistry->register('diagnostico', $result);
-        $this->_productListIds = $result;
+        $this->_diagnosticoResult = $result;
+        $this->sendEmail($$email);
 
         return $result;
     }
 
+
     public function getProductCollection()
     {
-        #return $this->_coreRegistry->registry('diagnostico');
-        return $this->_productListIds;#$this->_customerSession->getDiagnostico();
+        return $this->_diagnosticoResult;
     }
 
-    public function sendEmail()
+    /**
+     * @return void
+     */
+    public function sendEmail($email)
     {
-        $templateId = 'my_custom_email_template'; // template id
-        $fromEmail = 'owner@domain.com';  // sender Email id
-        $fromName = 'Admin';             // sender Name
-        $toEmail = 'customer@email.com'; // receiver email id
-
         try {
-            // template variables pass here
-            $templateVars = [
-                'msg' => 'test',
-                'msg1' => 'test1'
-            ];
-
-            $storeId = $this->_storeManager->getStore()->getId();
-
-            $from = ['email' => $fromEmail, 'name' => $fromName];
+            $diagnostico = new \Magento\Framework\DataObject();
+            $diagnostico->setData($this->_diagnosticoResult);
             $this->inlineTranslation->suspend();
-
-            $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-            $templateOptions = [
-                'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                'store' => $storeId
+            $emailStore = $this->_scopeConfig->getValue('trans_email/ident_support/email',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+            $name  = $this->_scopeConfig->getValue('trans_email/ident_support/name',ScopeInterface::SCOPE_STORE);
+            $sender = [
+                'name' => $this->escaper->escapeHtml($name),
+                'email' => $this->escaper->escapeHtml($emailStore),
             ];
-            $transport = $this->transportBuilder->setTemplateIdentifier($templateId, $storeScope)
-                ->setTemplateOptions($templateOptions)
-                ->setTemplateVars($templateVars)
-                ->setFrom($from)
-                ->addTo($toEmail)
+            $transport = $this->transportBuilder
+                ->setTemplateIdentifier('skin_care_diagnostico')
+                ->setTemplateOptions(
+                    [
+                        'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
+                        'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
+                    ]
+                )
+                ->setTemplateVars([
+                    'diagnostico'  => $diagnostico,
+                ])
+                ->setFrom($sender)
+                ->addTo($email)
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();
         } catch (\Exception $e) {
-            $this->_logger->info($e->getMessage());
         }
     }
-
-
-
-
 
 
 

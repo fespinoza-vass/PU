@@ -24,6 +24,7 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\LayoutFactory;
 use Magento\Framework\View\Result\PageFactory;
 use Psr\Log\LoggerInterface;
+use WolfSellers\SkinCare\Model\Source\SkinCareDiagnostico;
 
 class Index extends Action
 {
@@ -48,6 +49,7 @@ class Index extends Action
     private ProductCollectionFactory $productCollectionFactory;
     private RequestInterface $request;
     private ResourceConnection $resourceConnection;
+    protected SkinCareDiagnostico $_skinCareDiagnostico;
 
     /**
      * Constructor
@@ -64,6 +66,7 @@ class Index extends Action
         Http $http,
         LayoutFactory $layoutFactory,
         ProductCollectionFactory $productCollectionFactory,
+        SkinCareDiagnostico $skinCareDiagnostico,
         Context $context,
         ResourceConnection $resourceConnection = null
     ) {
@@ -73,6 +76,7 @@ class Index extends Action
         $this->http = $http;
         $this->layoutFactory = $layoutFactory;
         $this->productCollectionFactory = $productCollectionFactory;
+        $this->_skinCareDiagnostico = $skinCareDiagnostico;
         parent::__construct($context);
         $this->resourceConnection = $resourceConnection
             ?? ObjectManager::getInstance()->create(ResourceConnection::class);
@@ -85,6 +89,8 @@ class Index extends Action
     {
         $connection = $this->resourceConnection->getConnection();
         $incomingValue = $this->getRequest()->getParam("value");
+        $email = $this->getRequest()->getParam("textinput-1663957503940");
+
         $type = $this->getRequest()->getParam("type");
         $incomingValue = $incomingValue / 10;
         $attrCodeMin = "{$type}_score_min";
@@ -123,8 +129,6 @@ class Index extends Action
         $productBlock->setProductCollection($productCollection);
         $productBlock->setTemplate("Magento_PageBuilder::catalog/product/widget/content/carousel.phtml");
         echo '<div data-content-type="products-' . $type. '" data-appearance="carousel" data-autoplay="false" data-autoplay-speed="4000" data-infinite-loop="false" data-show-arrows="true" data-show-dots="true" data-carousel-mode="default" data-center-padding="90px" data-element="main">';
-
-
         echo $productBlock->toHtml();
         echo '</div>
 </div></div>
@@ -135,6 +139,14 @@ class Index extends Action
 <script type="text/x-magento-init">
 {"*":{"Magento_PageBuilder/js/widget-initializer":{"config":{"[data-content-type=\"products-' . $type. '\"][data-appearance=\"carousel\"]":{"Amasty_Xsearch/js/content-type/products/appearance/carousel/widget-override":false}},"breakpoints":{"desktop":{"label":"Desktop","stage":true,"default":true,"class":"desktop-switcher","icon":"Magento_PageBuilder::css/images/switcher/switcher-desktop.svg","conditions":{"min-width":"1024px"},"options":{"products":{"default":{"slidesToShow":"4"}}}},"tablet":{"conditions":{"max-width":"1024px","min-width":"768px"},"options":{"products":{"default":{"slidesToShow":"4"},"continuous":{"slidesToShow":"3"}}}},"mobile":{"label":"Mobile","stage":true,"class":"mobile-switcher","icon":"Magento_PageBuilder::css/images/switcher/switcher-mobile.svg","media":"only screen and (max-width: 768px)","conditions":{"max-width":"768px","min-width":"640px"},"options":{"products":{"default":{"slidesToShow":"3"}}}},"mobile-small":{"conditions":{"max-width":"640px"},"options":{"products":{"default":{"slidesToShow":"2"},"continuous":{"slidesToShow":"1"}}}},"mobile-tiny":{"conditions":{"max-width":"480px"},"options":{"products":{"default":{"slidesToShow":"2"},"continuous":{"slidesToShow":"2"}}}}}}}}
 </script>';
+
+        $this->_skinCareDiagnostico->setProductCollection(
+            $productCollection,
+            $type,
+            $this->getRequest()->getParam("value"),
+            $email
+        );
+
         die();
 
     }
@@ -155,4 +167,6 @@ class Index extends Action
             str_replace("'", "\\'", $value) . "';";
         return $connection->fetchOne($sql);
     }
+
+
 }

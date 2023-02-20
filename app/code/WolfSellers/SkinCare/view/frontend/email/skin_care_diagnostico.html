@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 -->
-<!--@subject {{trans "Your %store_name Skincare Diagnóstico" store_name=$store.frontend_name}} @-->
+<!--@subject {{trans "%store_name Skincare Diagnóstico" store_name=$store.frontend_name}} @-->
 <!--@vars {
 "var formattedBillingAddress|raw":"Billing Address",
 "var order_data.email_customer_note|escape|nl2br":"Email Order Note",
@@ -15,7 +15,8 @@
 "var store_email":"Store Email",
 "var store_hours":"Store Hours",
 "var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
-"var order_data.customer_name":"Customer Name"
+"var order_data.customer_name":"Customer Name",
+""
 } @-->
 
 <!--@subject {{trans "Resultados de tu diagnóstico"}} @-->
@@ -30,9 +31,80 @@
     {{trans "Te compartimos los resultados de tu diagnóstico"}}
 </div>
 <hr>
-<div class="content">
-    {{layout handle="skin_care_diagnostico" items=$items area="frontend"}}
+<table>
+    <tr>
+        <td>{{trans "Lineas de Expresión: %spot %" spot=$diagnostico.results.spot}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "Mancha: %wrinkle %" wrinkle=$diagnostico.results.wrinkle}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "Textura: %texture %" texture=$diagnostico.results.texture}}</td>
+    </tr>
+    <tr>
+        <td>{{trans "Ojeras: %dark_circle %" dark_circle=$diagnostico.results.dark_circle}}</td>
+    </tr>
+</table>
+<div>
 </div>
-<hr>
+<div class="content">
+    <div>
+        <h3>Lineas de Expresión</h3>
+    </div>
+    <div>
+        {{block
+        class='Magento\\Framework\\View\\Element\\Template'
+        type='core/template'
+        name='diagnostico_spot'
+        order_id='1'
+        area='frontend'
+        template='WolfSellers_SkinCare::email/diagnostico.phtml'
+        productsList=$diagnostico.spot
+        }}
+    </div>
+    <div>
+        <h3>Manchas</h3>
+    </div>
+    <div>
+        {{block
+        class='Magento\\Framework\\View\\Element\\Template'
+        type='core/template'
+        name='diagnostico_wrinkle'
+        order_id='2'
+        area='frontend'
+        template='WolfSellers_SkinCare::email/diagnostico.phtml'
+        productsList=$diagnostico.wrinkle
+
+        }}
+    </div>
+    <div>
+        <h3>Texturas</h3>
+    </div>
+    <div>
+        {{block
+        class='Magento\\Framework\\View\\Element\\Template'
+        type='core/template'
+        name='diagnostico_texture'
+        order_id='3'
+        area='frontend'
+        template='WolfSellers_SkinCare::email/diagnostico.phtml'
+        productsList=$diagnostico.texture
+        }}
+    </div>
+    <div>
+        <h3>Ojeras</h3>
+    </div>
+    <div>
+        {{block
+        class='Magento\\Framework\\View\\Element\\Template'
+        type='core/template'
+        name='diagnostico_dark_circle'
+        order_id='4'
+        area='frontend'
+        template='WolfSellers_SkinCare::email/diagnostico.phtml'
+        productsList=$diagnostico.dark_circle
+        }}
+    </div>
+</div>
 
 {{template config_path="design/email/footer_template"}}

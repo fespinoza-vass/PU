@@ -4,166 +4,20 @@
 $viewModel = $block->getViewModel();
  */
 ?>
-<?php
-/**
- * @var $block \WolfSellers\SkinCare\Block\Email\Diagnostico
- */
-#$products = $block->getProducts();
-$diagnostico = $block->getDiagnostico();
-
-?>
-<div>
-    <table class="table">
-        <?php if($diagnostico['results']['spot']): ?>
-        <tr>
-            <td class="col">
-                <strong>Lineas de Expresión <?= $diagnostico['results']['spot'] ?>%</strong>
-            </td>
-            <td class="col">
-                <p>
-                    <small class="">
-                        Suelen aparecer por múltiples factores como la edad, sobreexposición al sol contaminación y más.
-                        Hidrata y protege tu piel de forma constante.
-                    </small>
-                </p>
-            </td>
-        </tr>
-        <?php endif; ?>
-        <?php if($diagnostico['results']['wrinkle']): ?>
-        <tr>
-            <td class="col">
-                <strong>Mancha <?= $diagnostico['results']['wrinkle'] ?>%</strong>
-            </td>
-            <td class="col">
-                <p>
-                    <small class="">
-                        Se pueden originar por exposicion solar, cambios hormonales, genética y más.
-                        Prevenga y evite su aparición.
-                    </small>
-                </p>
-            </td>
-        </tr>
-        <?php endif; ?>
-        <?php if($diagnostico['results']['texture']): ?>
-        <tr>
-            <td class="col">
-                <strong>Textura <?= $diagnostico['results']['texture'] ?>%</strong>
-            </td>
-            <td class="col">
-                <p>
-                    <small class="">
-                        El exceso de células muertas de la piel puede acumularse, lo que lleva a una textura desigual de la piel.
-                    </small>
-                </p>
-            </td>
-        </tr>
-        <?php endif; ?>
-        <?php if($diagnostico['results']['dark_circle']): ?>
-        <tr>
-            <td class="col">
-                <strong>Ojeras <?= $diagnostico['results']['dark_circle'] ?>%</strong>
-            </td>
-            <td class="col">
-                <p>
-                    <small class="">
-                        La falta de sueño, camsancio fisico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.
-                    </small>
-                </p>
-            </td>
-        </tr>
-        <?php endif; ?>
-    </table>
-</div>
-<div>
-<h3>Ojeras</h3>
-    <table class="table">
-    <?php foreach ($diagnostico['dark_circle'] as $product): ?>
-        <?php if ($product): ?>
+<table>
+<?php if($this->getProductsList()):?>
+    <?php foreach ($this->getProductsList() as $item): ?>
         <tr>
             <td>
-                <img src="<?= $product['urlImage']; ?>" alt="<?= $product['name']; ?>" title="<?= $product['name']; ?>" height="80" width="80"/>
+                <img src="<?= $item['urlImage'] ?>" alt="<?= $item['name']; ?>" title="<?= $item['name']; ?>" height="80" width="80"/>
             </td>
             <td>
-                <a href="<?= $product['urlProduct']; ?>" target="__blank">
-                    <?= $product['name']; ?>
+                <a href="<?= $item['urlProduct'] ?>" target="__blank">
+                    <?= $item['name'] ?>
                 </a>
             </td>
-            <td>
-                <?= $product['price']; ?>
-            </td>
+            <td><?= $item['price'] ?></td>
         </tr>
-        <?php endif; ?>
     <?php endforeach; ?>
-    </table>
-</div>
-<div>
-    <h3>Manchas</h3>
-    <table class="table">
-        <?php foreach ($diagnostico['wrinkle'] as $product): ?>
-            <?php if ($product): ?>
-            <tr>
-                <td>
-                    <img src="<?= $product['urlImage']; ?>" alt="<?= $product['name']; ?>" title="<?= $product['name']; ?>" height="80" width="80"/>
-                </td>
-                <td>
-                    <p>
-                        <a href="<?= $product['urlProduct']; ?>" target="__blank">
-                            <?= $product['name']; ?>
-                        </a>
-                    </p>
-                </td>
-                <td>
-                    <?= $product['price']; ?>
-                </td>
-            </tr>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </table>
-</div>
-<div>
-    <h3>Textura</h3>
-    <table class="table">
-        <?php foreach ($diagnostico['texture'] as $product): ?>
-            <?php if ($product): ?>
-            <tr>
-                <td>
-                    <img src="<?= $product['urlImage']; ?>" alt="<?= $product['name']; ?>" title="<?= $product['name']; ?>" height="80" width="80"/>
-                </td>
-                <td>
-                    <a href="<?= $product['urlProduct']; ?>" target="__blank">
-                        <?= $product['name']; ?>
-                    </a>
-                </td>
-                <td>
-                    <?= $product['price']; ?>
-                </td>
-            </tr>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </table>
-</div>
-<div>
-    <h3>Líneas de expresión</h3>
-    <table class="table">
-        <?php foreach ($diagnostico['spot'] as $product): ?>
-            <?php if ($product): ?>
-            <tr>
-                <td>
-                    <img src="<?= $product['urlImage']; ?>" alt="<?= $product['name']; ?>" title="<?= $product['name']; ?>" height="80" width="80"/>
-                </td>
-                <td>
-                    <a href="<?= $product['urlProduct']; ?>" target="__blank">
-                        <?= $product['name']; ?>
-                    </a>
-                </td>
-                <td>
-                    <?= $product['price']; ?>
-                </td>
-            </tr>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </table>
-</div>
-
-
-
+<?php endif;?>
+</table>
