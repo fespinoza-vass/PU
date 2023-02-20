@@ -111,6 +111,7 @@ class Index extends Action
             $attrCodeMin => $minValue,
             $attrCodeMax => $maxValue
         ];
+
         //die("\$minDark = [$minDark] -- \$maxDark = [$maxDark]<pre>" . print_r($productCollection->getAllIds(), true));
         /** @var ProductList $productBlock */
         $productBlock = $this->layoutFactory->create()
@@ -139,14 +140,6 @@ class Index extends Action
 <script type="text/x-magento-init">
 {"*":{"Magento_PageBuilder/js/widget-initializer":{"config":{"[data-content-type=\"products-' . $type. '\"][data-appearance=\"carousel\"]":{"Amasty_Xsearch/js/content-type/products/appearance/carousel/widget-override":false}},"breakpoints":{"desktop":{"label":"Desktop","stage":true,"default":true,"class":"desktop-switcher","icon":"Magento_PageBuilder::css/images/switcher/switcher-desktop.svg","conditions":{"min-width":"1024px"},"options":{"products":{"default":{"slidesToShow":"4"}}}},"tablet":{"conditions":{"max-width":"1024px","min-width":"768px"},"options":{"products":{"default":{"slidesToShow":"4"},"continuous":{"slidesToShow":"3"}}}},"mobile":{"label":"Mobile","stage":true,"class":"mobile-switcher","icon":"Magento_PageBuilder::css/images/switcher/switcher-mobile.svg","media":"only screen and (max-width: 768px)","conditions":{"max-width":"768px","min-width":"640px"},"options":{"products":{"default":{"slidesToShow":"3"}}}},"mobile-small":{"conditions":{"max-width":"640px"},"options":{"products":{"default":{"slidesToShow":"2"},"continuous":{"slidesToShow":"1"}}}},"mobile-tiny":{"conditions":{"max-width":"480px"},"options":{"products":{"default":{"slidesToShow":"2"},"continuous":{"slidesToShow":"2"}}}}}}}}
 </script>';
-
-        $this->_skinCareDiagnostico->setProductCollection(
-            $productCollection,
-            $type,
-            $this->getRequest()->getParam("value"),
-            $email
-        );
-
         die();
 
     }
