@@ -2,57 +2,39 @@
 
 namespace WolfSellers\SkinCare\Model\Source;
 
-use Magento\Customer\Model\Session;
-use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Framework\Pricing\Helper\Data as DataPricing;
-use Magento\Store\Model\StoreManagerInterface;
+
 use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Framework\Escaper;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use \Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\StoreManagerInterface;
+
+use Magento\Store\Model\ScopeInterface;
 
 class SkinCareDiagnostico
 {
-
-    protected Session $_customerSession;
-    protected ProductRepositoryInterface $_productRepository;
-    protected DataPricing $_priceHelper;
-
     protected $transportBuilder;
     protected $inlineTranslation;
     protected $escaper;
     protected $logger;
 
-    public $_diagnosticoResult;
 
     /**
-     * @param ProductRepositoryInterface $productRepository
-     * @param DataPricing $priceHelper
      * @param StoreManagerInterface $storeManager
      * @param StateInterface $inlineTranslation
      * @param Escaper $escaper
      * @param TransportBuilder $transportBuilder
-     * @param Session $customerSession
      * @param ScopeConfigInterface $scopeConfig
      */
-
     public function __construct(
-        ProductRepositoryInterface                 $productRepository,
-        DataPricing                                $priceHelper,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        StateInterface                             $inlineTranslation,
-        Escaper                                    $escaper,
-        TransportBuilder                           $transportBuilder,
-        Session                                    $customerSession,
-        ScopeConfigInterface                       $scopeConfig
+        StoreManagerInterface $storeManager,
+        StateInterface        $inlineTranslation,
+        Escaper               $escaper,
+        TransportBuilder      $transportBuilder,
+        ScopeConfigInterface  $scopeConfig
     )
     {
-        $this->_customerSession = $customerSession;
-        $this->_productRepository = $productRepository;
         $this->_storeManager = $storeManager;
-        $this->_priceHelper = $priceHelper;
-        $this->_diagnosticoResult = [];
         $this->inlineTranslation = $inlineTranslation;
         $this->escaper = $escaper;
         $this->transportBuilder = $transportBuilder;
@@ -61,16 +43,19 @@ class SkinCareDiagnostico
 
 
     /**
+     * Receives the email and data, prepares the template and send the email
+     * @param string $email
+     * @param array $diagnosticoArray
      * @return void
      */
-    public function sendEmail($email)
+    public function sendEmail(string $email, array $diagnosticoArray)
     {
         try {
             $diagnostico = new \Magento\Framework\DataObject();
-            $diagnostico->setData($this->_diagnosticoResult);
+            $diagnostico->setData($diagnosticoArray);
             $this->inlineTranslation->suspend();
-            $emailStore = $this->_scopeConfig->getValue('trans_email/ident_support/email',\Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-            $name  = $this->_scopeConfig->getValue('trans_email/ident_support/name',ScopeInterface::SCOPE_STORE);
+            $emailStore = $this->_scopeConfig->getValue('trans_email/ident_support/email', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+            $name = $this->_scopeConfig->getValue('trans_email/ident_support/name', ScopeInterface::SCOPE_STORE);
             $sender = [
                 'name' => $this->escaper->escapeHtml($name),
                 'email' => $this->escaper->escapeHtml($emailStore),
@@ -84,7 +69,7 @@ class SkinCareDiagnostico
                     ]
                 )
                 ->setTemplateVars([
-                    'diagnostico'  => $diagnostico,
+                    'diagnostico' => $diagnostico,
                 ])
                 ->setFrom($sender)
                 ->addTo($email)
@@ -92,10 +77,9 @@ class SkinCareDiagnostico
             $transport->sendMessage();
             $this->inlineTranslation->resume();
         } catch (\Exception $e) {
+
         }
     }
-
-
 
 
 }
