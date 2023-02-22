@@ -11,6 +11,8 @@ use Magento\Store\Model\StoreManagerInterface;
 
 use Magento\Store\Model\ScopeInterface;
 
+use Psr\Log\LoggerInterface as logger;
+
 class SkinCareDiagnostico
 {
     protected $transportBuilder;
@@ -31,7 +33,8 @@ class SkinCareDiagnostico
         StateInterface        $inlineTranslation,
         Escaper               $escaper,
         TransportBuilder      $transportBuilder,
-        ScopeConfigInterface  $scopeConfig
+        ScopeConfigInterface  $scopeConfig,
+        logger                $logger
     )
     {
         $this->_storeManager = $storeManager;
@@ -39,6 +42,7 @@ class SkinCareDiagnostico
         $this->escaper = $escaper;
         $this->transportBuilder = $transportBuilder;
         $this->_scopeConfig = $scopeConfig;
+        $this->logger = $logger;
     }
 
 
@@ -77,7 +81,8 @@ class SkinCareDiagnostico
             $transport->sendMessage();
             $this->inlineTranslation->resume();
         } catch (\Exception $e) {
-
+            $this->logger->error(__METHOD__);
+            $this->logger->error($e->getMessage());
         }
     }
 

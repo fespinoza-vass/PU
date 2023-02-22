@@ -7,7 +7,7 @@ use Magento\Customer\Model\Session as customerSession;
 use Magento\Framework\Pricing\Helper\Data as priceHelper;
 use Magento\Store\Model\StoreManagerInterface as storeManager;
 
-
+use WolfSellers\SkinCare\Model\Source\SkinCareDiagnostico;
 use WolfSellers\SkinCare\Helper\Constants;
 
 use Psr\Log\LoggerInterface;
@@ -20,20 +20,24 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
     protected priceHelper $priceHelper;
     protected storeManager $storeManager;
 
+    protected SkinCareDiagnostico $skinCareDiagnostico;
+
     protected LoggerInterface $logger;
 
     public function __construct(
-        productRepository $productRepository,
-        customerSession   $customerSession,
-        priceHelper       $priceHelper,
-        storeManager      $storeManager,
-        LoggerInterface   $logger
+        productRepository   $productRepository,
+        customerSession     $customerSession,
+        priceHelper         $priceHelper,
+        storeManager        $storeManager,
+        SkinCareDiagnostico $skinCareDiagnostico,
+        LoggerInterface     $logger
     )
     {
         $this->productRepository = $productRepository;
         $this->customerSession = $customerSession;
         $this->priceHelper = $priceHelper;
         $this->storeManager = $storeManager;
+        $this->skinCareDiagnostico = $skinCareDiagnostico;
         $this->logger = $logger;
     }
 
@@ -106,7 +110,7 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         $result[Constants::TEXTURA] = $this->getFourProductsByType($textureProductIds);
         $result[Constants::OJERAS] = $this->getFourProductsByType($darkCircleProductIds);
 
-        //$this->xyz->sendEmail($userEmail, $result);
+        $this->skinCareDiagnostico->sendEmail($userEmail, $result);
 
         /**
          * UNSET/empty sessionVariables
