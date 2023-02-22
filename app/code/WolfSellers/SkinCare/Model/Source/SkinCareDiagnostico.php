@@ -61,66 +61,6 @@ class SkinCareDiagnostico
 
 
     /**
-     * @param $productCollection
-     * @param $type
-     * @param $value
-     * @return array
-     */
-    public function setProductCollection($productCollection, $type, $value, $email)
-    {
-        $items = $productCollection->getData();
-        $store = $this->_storeManager->getStore();
-
-        $result = [];
-        $result['dark_circle'] = [];
-        $result['wrinkle'] = [];
-        $result['texture'] = [];
-        $result['spot'] = [];
-
-        $result['results']['dark_circle'] = 0;
-        $result['results']['texture'] = 0;
-        $result['results']['wrinkle'] = 0;
-        $result['results']['spot'] = 0;
-
-        foreach ($items as $item):
-            $product = $this->_productRepository->getById($item['entity_id']);
-            $productInfo['urlImage'] = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
-            $productInfo['price'] = $this->_priceHelper->currency($product->getPrice(), true, false);
-            $productInfo['name'] = $product->getName();
-            $productInfo['urlProduct'] = $product->getProductUrl();
-
-            if ($type == 'dark_circle' && count($result['dark_circle']) < 4):
-                $result['dark_circle'][] = $productInfo;
-                $result['results']['dark_circle'] = $value;
-
-            elseif($type == 'texture' && count($result['texture']) < 4):
-                $result['texture'][] = $productInfo;
-                $result['results']['texture'] = $value;
-
-            elseif($type == 'wrinkle' && count($result['wrinkle']) < 4):
-                $result['wrinkle'][] = $productInfo;
-                $result['results']['wrinkle'] = $value;
-
-            elseif($type == 'spot' && count($result['spot']) < 4):
-                $result['spot'][] = $productInfo;
-                $result['results']['spot'] = $value;
-            endif;
-
-        endforeach;
-
-        $this->_diagnosticoResult = $result;
-        $this->sendEmail($email);
-
-        return $result;
-    }
-
-
-    public function getProductCollection()
-    {
-        return $this->_diagnosticoResult;
-    }
-
-    /**
      * @return void
      */
     public function sendEmail($email)
