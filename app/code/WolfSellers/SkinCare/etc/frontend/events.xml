@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="amasty_custom_form_submitted">
+        <observer name="send_email_simulador" instance="WolfSellers\SkinCare\Observer\CollectSimulatorDataAndSendEmail" />
+    </event>
+</config>
