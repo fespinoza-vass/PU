@@ -542,7 +542,6 @@
 										background: @white;
 										.lib-checkboxs;
 										.checkout-agreements{
-											margin-bottom: 20px;
 											.checkout-agreement{
 												float: left;
 												width: 100%;
@@ -731,6 +730,15 @@
 					.checkout-container {
 						.opc-wrapper {
 							.checkout-column {
+								.checkout-block{
+									&.-summary{
+										.additional-options{
+											.checkout-agreements {
+												margin-bottom: 20px;
+											}
+										}
+									}
+								}
 								.checkout-block {
 									.opc-block-summary {
 										table.table-totals {
@@ -756,6 +764,20 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
 	.checkout-index-index{
+		th{
+			&.mark {
+				padding: 6px 120px 6px 0 !important;
+			}
+		}
+		table{
+			&.data{
+				&.table{
+					&.table-totals {
+						display: flex;
+					}
+				}
+			}
+		}
 		.page-wrapper{
 			.page-main .column.main{
 				.checkout-container{
@@ -770,11 +792,33 @@
 					.opc-wrapper{
 						.checkout-column{
 							.checkout-block{
+								&.-summary{
+									.additional-options{
+										.checkout-agreements {
+											margin-bottom: 10px;
+										}
+									}
+								}
 								li{
 									.form-shipping-address{
 										background: transparent;
 										margin: 0;
 										padding: 0;
+									}
+								}
+								.opc-block-summary{
+									table{
+										&.table-totals{
+											tbody{
+												tr{
+													&.grand{
+														&.totals~div {
+															width: 100% !important;
+														}
+													}
+												}
+											}
+										}
 									}
 								}
 							}
