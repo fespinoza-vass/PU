@@ -9,11 +9,12 @@ namespace WolfSellers\SkinCare\Controller\Index;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
+use Magento\Customer\Model\Session as customerSession;
+
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResourceConnection;
-use WolfSellers\SkinCare\Block\Widget\ProductList;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http;
@@ -23,11 +24,15 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\LayoutFactory;
 use Magento\Framework\View\Result\PageFactory;
+
+
+use WolfSellers\SkinCare\Block\Widget\ProductList;
+use WolfSellers\SkinCare\Helper\Constants;
+
 use Psr\Log\LoggerInterface;
 
 class Index extends Action
 {
-
     /**
      * @var PageFactory
      */
@@ -48,15 +53,9 @@ class Index extends Action
     private ProductCollectionFactory $productCollectionFactory;
     private RequestInterface $request;
     private ResourceConnection $resourceConnection;
+    protected customerSession $customerSession;
 
-    /**
-     * Constructor
-     *
-     * @param PageFactory $resultPageFactory
-     * @param Json $json
-     * @param LoggerInterface $logger
-     * @param Http $http
-     */
+
     public function __construct(
         PageFactory $resultPageFactory,
         Json $json,
@@ -64,6 +63,7 @@ class Index extends Action
         Http $http,
         LayoutFactory $layoutFactory,
         ProductCollectionFactory $productCollectionFactory,
+        customerSession $customerSession,
         Context $context,
         ResourceConnection $resourceConnection = null
     ) {
@@ -73,6 +73,7 @@ class Index extends Action
         $this->http = $http;
         $this->layoutFactory = $layoutFactory;
         $this->productCollectionFactory = $productCollectionFactory;
+        $this->customerSession = $customerSession;
         parent::__construct($context);
         $this->resourceConnection = $resourceConnection
             ?? ObjectManager::getInstance()->create(ResourceConnection::class);
@@ -84,9 +85,9 @@ class Index extends Action
     public function execute()
     {
         $connection = $this->resourceConnection->getConnection();
-        $incomingValue = $this->getRequest()->getParam("value");
+        $incomingValueParam = $this->getRequest()->getParam("value");
         $type = $this->getRequest()->getParam("type");
-        $incomingValue = $incomingValue / 10;
+        $incomingValue = $incomingValueParam / 10;
         $attrCodeMin = "{$type}_score_min";
         $attrCodeMax = "{$type}_score_max";
         $minValue = $this->getOptionId($attrCodeMin, floor($incomingValue) * 10, $connection);
@@ -97,6 +98,8 @@ class Index extends Action
         $productCollection->addAttributeToFilter($attrCodeMin, $minValue);
         $productCollection->addAttributeToFilter($attrCodeMax, $maxValue);
         $productCollection->setPageSize(20);
+
+        $this->setSessionVariables($type, $productCollection, $incomingValueParam);
         if($productCollection->getSize() < 1) {
             echo ""; die();
         }
@@ -154,5 +157,43 @@ class Index extends Action
             where attribute_code = '$attributeCode' and eaov.value = '" .
             str_replace("'", "\\'", $value) . "';";
         return $connection->fetchOne($sql);
+    }
+
+    /**
+     *
+     * @param string $type
+     * @param ProductCollection $productCollection
+     * @param $incomingValue
+     * @return void
+     */
+    private function setSessionVariables(string $type, ProductCollection $productCollection, $incomingValue){
+        if($type == Constants::LINEAS_DE_EXPRESION){
+            $this->customerSession->setWrinklePercentage($incomingValue);
+            $this->customerSession->setWrinkleProductIds($this->getProductIdsFromCollection($productCollection));
+        }
+        elseif ($type == Constants::MANCHAS){
+            $this->customerSession->setSpotPercentage($incomingValue);
+            $this->customerSession->setSpotProductIds($this->getProductIdsFromCollection($productCollection));
+        }
+        elseif ($type == Constants::TEXTURA){
+            $this->customerSession->setTexturePercentage($incomingValue);
+            $this->customerSession->setTextureProductIds($this->getProductIdsFromCollection($productCollection));
+        }
+        elseif ($type == Constants::OJERAS){
+            $this->customerSession->setDarkCirclePercentage($incomingValue);
+            $this->customerSession->setDarkCircleProductIds($this->getProductIdsFromCollection($productCollection));
+        }
+    }
+
+    /**
+     * @param ProductCollection $productCollection
+     * @return array
+     */
+    private function getProductIdsFromCollection(ProductCollection $productCollection){
+        $productIds = [];
+        foreach ($productCollection->getData() as $product){
+            $productIds[] = $product['entity_id'];
+        }
+        return $productIds;
     }
 }
