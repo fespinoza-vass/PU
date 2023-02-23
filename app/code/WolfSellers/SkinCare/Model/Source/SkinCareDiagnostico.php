@@ -56,6 +56,8 @@ class SkinCareDiagnostico
     {
         try {
             $diagnostico = new \Magento\Framework\DataObject();
+            $this->logger->info('------------- diagnosticoArray -------------' );
+            $this->logger->info(print_r($diagnosticoArray,true));
             $diagnostico->setData($diagnosticoArray);
             $this->inlineTranslation->suspend();
             $emailStore = $this->_scopeConfig->getValue('trans_email/ident_support/email', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);

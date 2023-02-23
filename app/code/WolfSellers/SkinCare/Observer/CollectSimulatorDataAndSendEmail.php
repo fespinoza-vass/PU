@@ -47,7 +47,7 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
             $answer = $observer->getData('answer');
             $form = $observer->getData('form');
 
-            if ($form->getFormId() == '26' and $answer->getData('textinput-1663957503940')) {
+            if ($form->getFormId() == '26' and $answer->getData('response_json')) {
                 $this->logger->info(__METHOD__);
                 $this->logger->info('-------------------- ANSWER --------------------');
                 foreach ($answer->getData() as $key => $value) {
@@ -58,7 +58,9 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
                 $this->logger->info('-------------------- FORM --------------------');
                 $this->logger->info(print_r($form->getData(), true));
 
-                $userEmail = $answer->getData('textinput-1663957503940');
+                $json = $answer->getData('response_json');
+                $array = json_decode($json, true);
+                $userEmail = $array['textinput-1663957503940']['value'];
                 $this->sendVariablesByEmail($userEmail);
             }
         } catch (\Exception $e) {
