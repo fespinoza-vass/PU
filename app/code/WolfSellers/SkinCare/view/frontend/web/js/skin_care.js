@@ -104,7 +104,7 @@ define([
 
         _testIt:function (e) {
             var self = this;
-            var report = {ageSpots: 94, darkCircles: 77, texture: 95, wrinkles: 86, skinAge: 27, skinHealth:88, timed:2372};
+            var report = {ageSpots: 74, darkCircles: 77, texture: 65, wrinkles: 86, skinAge: 27, skinHealth:76, timed:2372};
             console.log('Cargando información de prueba....');
             self._onAnalysisUpdated(report);
             console.log('Espera que los 4 servicios respondan...');
