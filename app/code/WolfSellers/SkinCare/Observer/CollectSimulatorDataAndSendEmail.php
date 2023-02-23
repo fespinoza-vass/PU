@@ -71,20 +71,30 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
 
     private function sendVariablesByEmail(string $userEmail)
     {
+        $this->logger->info(__METHOD__);
         /**
          * Get session variables
          */
+        $this->logger->info("------------- Get session variables -------------");
         $wrinklePercentage = $this->customerSession->getWrinklePercentage();
         $wrinkleProductIds = $this->customerSession->getWrinkleProductIds();
+        $this->logger->info($wrinklePercentage);
+        $this->logger->info(print_r($wrinkleProductIds,true));
 
         $spotPercentage = $this->customerSession->getSpotPercentage();
         $spotProductIds = $this->customerSession->getSpotProductIds();
+        $this->logger->info($spotPercentage);
+        $this->logger->info(print_r($spotProductIds,true));
 
         $texturePercentage = $this->customerSession->getTexturePercentage();
         $textureProductIds = $this->customerSession->getTextureProductIds();
+        $this->logger->info($texturePercentage);
+        $this->logger->info(print_r($textureProductIds,true));
 
         $darkCirclePercentage = $this->customerSession->getDarkCirclePercentage();
         $darkCircleProductIds = $this->customerSession->getDarkCircleProductIds();
+        $this->logger->info($darkCirclePercentage);
+        $this->logger->info(print_r($darkCircleProductIds,true));
 
         /**
          * Start empty arrays
@@ -112,8 +122,12 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         $result[Constants::TEXTURA] = $this->getFourProductsByType($textureProductIds);
         $result[Constants::OJERAS] = $this->getFourProductsByType($darkCircleProductIds);
 
+        $this->logger->info("ENVIANDO EL RESULT PARA EL EMAIL");
+        $this->logger->info(print_r($result,true));
+
         $this->skinCareDiagnostico->sendEmail($userEmail, $result);
 
+        $this->logger->info("UNSET SESSION VARIABLES");
         /**
          * UNSET/empty sessionVariables
          */
@@ -121,13 +135,13 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         $this->customerSession->unsWrinkleProductIds();
 
         $this->customerSession->unsSpotPercentage();
-        $this->customerSession->unsSpotProdutIds();
+        $this->customerSession->unsSpotProductIds();
 
         $this->customerSession->unsTexturePercentage();
-        $this->customerSession->unsTextureProdutIds();
+        $this->customerSession->unsTextureProductIds();
 
         $this->customerSession->unsDarkCirclePercentage();
-        $this->customerSession->unsDarkCircleProdutIds();
+        $this->customerSession->unsDarkCircleProductIds();
     }
 
     /**
