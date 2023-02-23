@@ -180,6 +180,7 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         try {
             $store = $this->storeManager->getStore();
             $product = $this->productRepository->getById($productId);
+            $productInfo['productId'] = $productId;
             $productInfo['urlImage'] = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
             $productInfo['price'] = $this->priceHelper->currency($product->getPrice(), true, false);
             $productInfo['name'] = $product->getName();
