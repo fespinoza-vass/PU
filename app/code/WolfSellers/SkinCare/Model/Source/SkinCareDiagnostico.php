@@ -81,6 +81,7 @@ class SkinCareDiagnostico
                 ->addTo($email)
                 ->getTransport();
             $transport->sendMessage();
+            $this->logger->info('------------- FINISH SEND MESSAGE -------------' );
             $this->inlineTranslation->resume();
         } catch (\Exception $e) {
             $this->logger->error(__METHOD__);

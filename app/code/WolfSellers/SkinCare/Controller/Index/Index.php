@@ -168,18 +168,26 @@ class Index extends Action
      */
     private function setSessionVariables(string $type, ProductCollection $productCollection, $incomingValue){
         if($type == Constants::LINEAS_DE_EXPRESION){
+            $this->logger->info("SET SESSION VARIABLES: " . Constants::LINEAS_DE_EXPRESION);
+            $this->logger->info("PERCENTAGE: " . $incomingValue);
             $this->customerSession->setWrinklePercentage($incomingValue);
             $this->customerSession->setWrinkleProductIds($this->getProductIdsFromCollection($productCollection));
         }
         elseif ($type == Constants::MANCHAS){
+            $this->logger->info("SET SESSION VARIABLES: " . Constants::MANCHAS);
+            $this->logger->info("PERCENTAGE: " . $incomingValue);
             $this->customerSession->setSpotPercentage($incomingValue);
             $this->customerSession->setSpotProductIds($this->getProductIdsFromCollection($productCollection));
         }
         elseif ($type == Constants::TEXTURA){
+            $this->logger->info("SET SESSION VARIABLES: " . Constants::TEXTURA);
+            $this->logger->info("PERCENTAGE: " . $incomingValue);
             $this->customerSession->setTexturePercentage($incomingValue);
             $this->customerSession->setTextureProductIds($this->getProductIdsFromCollection($productCollection));
         }
         elseif ($type == Constants::OJERAS){
+            $this->logger->info("SET SESSION VARIABLES: " . Constants::OJERAS);
+            $this->logger->info("PERCENTAGE: " . $incomingValue);
             $this->customerSession->setDarkCirclePercentage($incomingValue);
             $this->customerSession->setDarkCircleProductIds($this->getProductIdsFromCollection($productCollection));
         }
@@ -194,6 +202,8 @@ class Index extends Action
         foreach ($productCollection->getData() as $product){
             $productIds[] = $product['entity_id'];
         }
+        $this->logger->info("PRODUCT IDS");
+        $this->logger->info(print_r($productIds, true));
         return $productIds;
     }
 }
