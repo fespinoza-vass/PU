@@ -28,6 +28,7 @@ use Magento\Framework\View\Result\PageFactory;
 
 use WolfSellers\SkinCare\Block\Widget\ProductList;
 use WolfSellers\SkinCare\Helper\Constants;
+use WolfSellers\SkinCare\Helper\GetSessionId;
 
 use Psr\Log\LoggerInterface;
 
@@ -54,6 +55,7 @@ class Index extends Action
     private RequestInterface $request;
     private ResourceConnection $resourceConnection;
     protected customerSession $customerSession;
+    protected GetSessionId $getSessionId;
 
 
     public function __construct(
@@ -64,6 +66,7 @@ class Index extends Action
         LayoutFactory $layoutFactory,
         ProductCollectionFactory $productCollectionFactory,
         customerSession $customerSession,
+        GetSessionId $getSessionId,
         Context $context,
         ResourceConnection $resourceConnection = null
     ) {
@@ -74,6 +77,7 @@ class Index extends Action
         $this->layoutFactory = $layoutFactory;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->customerSession = $customerSession;
+        $this->getSessionId = $getSessionId;
         parent::__construct($context);
         $this->resourceConnection = $resourceConnection
             ?? ObjectManager::getInstance()->create(ResourceConnection::class);
@@ -167,6 +171,7 @@ class Index extends Action
      * @return void
      */
     private function setSessionVariables(string $type, ProductCollection $productCollection, $incomingValue){
+        $this->getSessionId->getSessionIdentificator();
         if($type == Constants::LINEAS_DE_EXPRESION){
             $this->logger->info("SET SESSION VARIABLES: " . Constants::LINEAS_DE_EXPRESION);
             $this->logger->info("PERCENTAGE: " . $incomingValue);
