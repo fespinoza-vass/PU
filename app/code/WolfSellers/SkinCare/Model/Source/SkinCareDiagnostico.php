@@ -9,6 +9,8 @@ use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
+use WolfSellers\SkinCare\Helper\GetSessionId;
+
 use Magento\Store\Model\ScopeInterface;
 
 use Psr\Log\LoggerInterface as logger;
@@ -18,6 +20,8 @@ class SkinCareDiagnostico
     protected $transportBuilder;
     protected $inlineTranslation;
     protected $escaper;
+    protected GetSessionId $getSessionId;
+
     protected $logger;
 
 
@@ -27,6 +31,8 @@ class SkinCareDiagnostico
      * @param Escaper $escaper
      * @param TransportBuilder $transportBuilder
      * @param ScopeConfigInterface $scopeConfig
+     * @param GetSessionId $getSessionId
+     * @param logger $logger
      */
     public function __construct(
         StoreManagerInterface $storeManager,
@@ -34,6 +40,7 @@ class SkinCareDiagnostico
         Escaper               $escaper,
         TransportBuilder      $transportBuilder,
         ScopeConfigInterface  $scopeConfig,
+        getSessionId          $getSessionId,
         logger                $logger
     )
     {
@@ -42,6 +49,7 @@ class SkinCareDiagnostico
         $this->escaper = $escaper;
         $this->transportBuilder = $transportBuilder;
         $this->_scopeConfig = $scopeConfig;
+        $this->getSessionId = $getSessionId;
         $this->logger = $logger;
     }
 
@@ -56,8 +64,9 @@ class SkinCareDiagnostico
     {
         try {
             $diagnostico = new \Magento\Framework\DataObject();
-            $this->logger->info('------------- diagnosticoArray -------------' );
-            $this->logger->info(print_r($diagnosticoArray,true));
+            $this->getSessionId->getSessionIdentificator();
+            $this->logger->info('------------- diagnosticoArray -------------');
+            $this->logger->info(print_r($diagnosticoArray, true));
             $diagnostico->setData($diagnosticoArray);
             $this->inlineTranslation->suspend();
             $emailStore = $this->_scopeConfig->getValue('trans_email/ident_support/email', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
@@ -81,7 +90,7 @@ class SkinCareDiagnostico
                 ->addTo($email)
                 ->getTransport();
             $transport->sendMessage();
-            $this->logger->info('------------- FINISH SEND MESSAGE -------------' );
+            $this->logger->info('------------- FINISH SEND MESSAGE -------------');
             $this->inlineTranslation->resume();
         } catch (\Exception $e) {
             $this->logger->error(__METHOD__);

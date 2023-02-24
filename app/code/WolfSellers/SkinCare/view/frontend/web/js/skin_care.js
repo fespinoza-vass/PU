@@ -14,6 +14,7 @@ define([
         resultItemsBar: null,
         resultElements: {},
         resultSliders: null,
+        formId:null,
 
         options: {
             ymk: null,
@@ -75,6 +76,9 @@ define([
                 height: this.options.height,
                 hideSkinAnalysisResult: true
             });
+
+            this.formId = utils.uniqueid(15);
+            self._setFormId();
 
             this._bind();
         },
@@ -146,6 +150,7 @@ define([
         },
 
         _ajaxSkinCareCall: function (type, value) {
+            var self = this;
             var typeKey = type;
             switch (type) {
                 case "ageSpots": {
@@ -173,7 +178,7 @@ define([
             }
             if (typeKey !== "") {
                 $.get(
-                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey,
+                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey + "&form=" + self.formId,
                     {},
                     function(data) {
                         var $container = $("#" + typeKey + "-container");
@@ -202,6 +207,10 @@ define([
             this.resultItems.hide();
             this.resultSliders.hide();
             this.recommendations.show();
+        },
+
+        _setFormId: function (){
+            $("#textinput-formid").attr("type", "hidden").val(this.formId);
         }
     });
 
