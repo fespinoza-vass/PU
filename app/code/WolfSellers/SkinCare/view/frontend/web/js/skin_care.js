@@ -2,8 +2,9 @@
  * Skin care.
  */
 define([
-    'jquery'
-], function ($) {
+    'jquery',
+    'mageUtils'
+], function ($, utils) {
     'use strict';
 
     $.widget('wolfsellers.skinCare', {
