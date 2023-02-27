@@ -28,6 +28,7 @@ define([
             resultItemSelector: '.result-item',
             resultSliderSelector: '.result-slider',
             productsSliderSelector: '.product-items',
+            skinHealthPercentage: '#js_skin_health_percentage',
             limits: {
                 ageSpots: 0,
                 darkCircles: 0,
@@ -48,6 +49,7 @@ define([
             this.recommendations = $(this.options.recommendationsSelector);
             this.result = $(this.options.resultSelector);
             this.resultItemsBar = $(this.options.resultItemBarSelector);
+            this.skinHealthPercentage = $(this.options.skinHealthPercentage);
 
             $(this.resultItemsBar).each(function (index) {
                 var $this = $(this),
@@ -129,6 +131,10 @@ define([
             this.resultItems.hide();
             this.resultSliders.show();
             this.result.show();
+
+            if(report['skinHealth']){
+                this.skinHealthPercentage.text(report['skinHealth']);
+            }
 
             $.each(this.resultElements, function (key, elements) {
                 var valReport = report[key];
