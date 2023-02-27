@@ -194,7 +194,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
             $rulesGroup = $salesRuleByCustomerGroup->getData();
 
             foreach ($rulesGroup as $rule):
-                if($rule['is_active'] ==1 && $rule['apply_original_price']==1 && $rule['coupon_type'] !== 2):
+                if($rule['is_active'] ==1 && $rule['apply_original_price']==1 && $rule['coupon_type'] != 2):
                     $result[] = $rule['rule_id'];
                 endif;
             endforeach;
