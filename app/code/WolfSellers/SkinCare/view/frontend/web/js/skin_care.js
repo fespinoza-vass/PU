@@ -2,8 +2,9 @@
  * Skin care.
  */
 define([
-    'jquery'
-], function ($) {
+    'jquery',
+    'mageUtils'
+], function ($, utils) {
     'use strict';
 
     $.widget('wolfsellers.skinCare', {
@@ -14,6 +15,7 @@ define([
         resultItemsBar: null,
         resultElements: {},
         resultSliders: null,
+        formId:null,
 
         options: {
             ymk: null,
@@ -78,6 +80,9 @@ define([
                 hideSkinAnalysisResult: true
             });
 
+            this.formId = utils.uniqueid(15);
+            self._setFormId();
+
             this._bind();
         },
 
@@ -106,10 +111,10 @@ define([
 
         _testIt:function (e) {
             var self = this;
-            var report = {ageSpots: 94, darkCircles: 79, texture: 95, wrinkles: 87, skinAge: 27, skinHealth:88, timed:2372};
+            var report = {ageSpots: 74, darkCircles: 77, texture: 65, wrinkles: 86, skinAge: 27, skinHealth:76, timed:2372};
             console.log('Cargando información de prueba....');
             self._onAnalysisUpdated(report);
-            console.log('Información de prueba LISTA');
+            console.log('Espera que los 4 servicios respondan...');
         },
 
         _onOpenSkinCare: function (e) {
@@ -152,6 +157,7 @@ define([
         },
 
         _ajaxSkinCareCall: function (type, value) {
+            var self = this;
             var typeKey = type;
             switch (type) {
                 case "ageSpots": {
@@ -179,7 +185,7 @@ define([
             }
             if (typeKey !== "") {
                 $.get(
-                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey,
+                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey + "&form=" + self.formId,
                     {},
                     function(data) {
                         var $container = $("#" + typeKey + "-container");
@@ -208,6 +214,10 @@ define([
             this.resultItems.hide();
             this.resultSliders.hide();
             this.recommendations.show();
+        },
+
+        _setFormId: function (){
+            $("#textinput-formid").attr("type", "hidden").val(this.formId);
         }
     });
 

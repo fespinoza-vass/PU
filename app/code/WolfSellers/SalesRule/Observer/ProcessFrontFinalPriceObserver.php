@@ -184,7 +184,6 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
      * Customer rules.
      * @return array
      */
-
     public function getCustomerGroupRules(): array
     {
         $result = [];
