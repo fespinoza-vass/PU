@@ -24,7 +24,6 @@ use Magento\Framework\View\Result\PageFactory;
 
 
 use WolfSellers\SkinCare\Block\Widget\ProductList;
-use WolfSellers\SkinCare\Helper\GetSessionId;
 
 use WolfSellers\SkinCare\Model\SimulatorFactory;
 use WolfSellers\SkinCare\Model\SimulatorRepository;
@@ -48,7 +47,6 @@ class Index extends Action
     private RequestInterface $request;
     private ResourceConnection $resourceConnection;
     protected customerSession $customerSession;
-    protected GetSessionId $getSessionId;
     private SimulatorFactory $simulatorFactory;
     private SimulatorRepository $simulatorRepository;
 
@@ -60,7 +58,6 @@ class Index extends Action
         LayoutFactory $layoutFactory,
         ProductCollectionFactory $productCollectionFactory,
         customerSession $customerSession,
-        GetSessionId $getSessionId,
         Context $context,
         ResourceConnection $resourceConnection = null,
         SimulatorFactory $simulatorFactory,
@@ -72,7 +69,6 @@ class Index extends Action
         $this->layoutFactory = $layoutFactory;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->customerSession = $customerSession;
-        $this->getSessionId = $getSessionId;
         parent::__construct($context);
         $this->resourceConnection = $resourceConnection
             ?? ObjectManager::getInstance()->create(ResourceConnection::class);

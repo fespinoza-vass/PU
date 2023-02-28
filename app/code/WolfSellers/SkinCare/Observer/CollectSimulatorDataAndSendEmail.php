@@ -65,13 +65,14 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
                 $array = json_decode($json, true);
                 $userEmail = $array['textinput-email']['value'];
                 $formId = $array['textinput-formid']['value'];
-                $this->sendVariablesByEmail($userEmail,$formId);
+                $skinHealth = $array['textinput-skinhealth']['value'];
+                $this->sendVariablesByEmail($userEmail,$formId, $skinHealth);
             }
         } catch (\Exception $e) {
         }
     }
 
-    private function sendVariablesByEmail(string $userEmail, $formId)
+    private function sendVariablesByEmail(string $userEmail, $formId, $skinHealth)
     {
         $simulador = $this->getSimulatorData($formId);
 
@@ -102,6 +103,7 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         $result['results'][Constants::MANCHAS] = $spot->getPercentage();
         $result['results'][Constants::TEXTURA] = $texture->getPercentage();
         $result['results'][Constants::OJERAS] = $darkCircle->getPercentage();
+        $result['results'][Constants::SALUD_DE_PIEL] = $skinHealth;
 
         /**
          * Get UP TO 4 products for each type

@@ -16,6 +16,7 @@ define([
         resultElements: {},
         resultSliders: null,
         formId:null,
+        skinHealth:null,
 
         options: {
             ymk: null,
@@ -134,6 +135,8 @@ define([
 
             if(report['skinHealth']){
                 this.skinHealthPercentage.text(report['skinHealth']);
+                this.skinHealth = report['skinHealth'];
+                self._setSkinHealth();
             }
 
             $.each(this.resultElements, function (key, elements) {
@@ -218,6 +221,10 @@ define([
 
         _setFormId: function (){
             $("#textinput-formid").attr("type", "hidden").val(this.formId);
+        },
+
+        _setSkinHealth: function (){
+            $("#textinput-skinhealth").attr("type", "hidden").val(this.skinHealth);
         }
     });
 
