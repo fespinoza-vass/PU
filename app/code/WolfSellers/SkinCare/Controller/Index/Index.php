@@ -15,22 +15,18 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http;
-use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\DB\Adapter\AdapterInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\LayoutFactory;
 use Magento\Framework\View\Result\PageFactory;
 
 
 use WolfSellers\SkinCare\Block\Widget\ProductList;
-use WolfSellers\SkinCare\Helper\Constants;
-use WolfSellers\SkinCare\Helper\GetSessionId;
 
-use Psr\Log\LoggerInterface;
+use WolfSellers\SkinCare\Model\SimulatorFactory;
+use WolfSellers\SkinCare\Model\SimulatorRepository;
 
 class Index extends Action
 {
@@ -43,10 +39,6 @@ class Index extends Action
      */
     protected $serializer;
     /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-    /**
      * @var Http
      */
     protected $http;
@@ -55,32 +47,33 @@ class Index extends Action
     private RequestInterface $request;
     private ResourceConnection $resourceConnection;
     protected customerSession $customerSession;
-    protected GetSessionId $getSessionId;
+    private SimulatorFactory $simulatorFactory;
+    private SimulatorRepository $simulatorRepository;
 
 
     public function __construct(
         PageFactory $resultPageFactory,
         Json $json,
-        LoggerInterface $logger,
         Http $http,
         LayoutFactory $layoutFactory,
         ProductCollectionFactory $productCollectionFactory,
         customerSession $customerSession,
-        GetSessionId $getSessionId,
         Context $context,
-        ResourceConnection $resourceConnection = null
+        ResourceConnection $resourceConnection = null,
+        SimulatorFactory $simulatorFactory,
+        SimulatorRepository $simulatorRepository
     ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->serializer = $json;
-        $this->logger = $logger;
         $this->http = $http;
         $this->layoutFactory = $layoutFactory;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->customerSession = $customerSession;
-        $this->getSessionId = $getSessionId;
         parent::__construct($context);
         $this->resourceConnection = $resourceConnection
             ?? ObjectManager::getInstance()->create(ResourceConnection::class);
+        $this->simulatorFactory = $simulatorFactory;
+        $this->simulatorRepository = $simulatorRepository;
     }
 
     /**
@@ -91,6 +84,7 @@ class Index extends Action
         $connection = $this->resourceConnection->getConnection();
         $incomingValueParam = $this->getRequest()->getParam("value");
         $type = $this->getRequest()->getParam("type");
+        $formId = $this->getRequest()->getParam("form");
         $incomingValue = $incomingValueParam / 10;
         $attrCodeMin = "{$type}_score_min";
         $attrCodeMax = "{$type}_score_max";
@@ -103,7 +97,7 @@ class Index extends Action
         $productCollection->addAttributeToFilter($attrCodeMax, $maxValue);
         $productCollection->setPageSize(20);
 
-        $this->setSessionVariables($type, $productCollection, $incomingValueParam);
+        $this->setSessionVariables($type, $productCollection, $incomingValueParam, $formId);
         if($productCollection->getSize() < 1) {
             echo ""; die();
         }
@@ -170,45 +164,31 @@ class Index extends Action
      * @param $incomingValue
      * @return void
      */
-    private function setSessionVariables(string $type, ProductCollection $productCollection, $incomingValue){
-        $this->getSessionId->getSessionIdentificator();
-        if($type == Constants::LINEAS_DE_EXPRESION){
-            $this->logger->info("SET SESSION VARIABLES: " . Constants::LINEAS_DE_EXPRESION);
-            $this->logger->info("PERCENTAGE: " . $incomingValue);
-            $this->customerSession->setWrinklePercentage($incomingValue);
-            $this->customerSession->setWrinkleProductIds($this->getProductIdsFromCollection($productCollection));
+    private function setSessionVariables(string $type, ProductCollection $productCollection, $incomingValue, $formId){
+        try{
+            $simulator = $this->simulatorRepository->getByFormType($formId,$type);
+        }catch (\Exception $exception){
+            $simulator = $this->simulatorFactory->create();
         }
-        elseif ($type == Constants::MANCHAS){
-            $this->logger->info("SET SESSION VARIABLES: " . Constants::MANCHAS);
-            $this->logger->info("PERCENTAGE: " . $incomingValue);
-            $this->customerSession->setSpotPercentage($incomingValue);
-            $this->customerSession->setSpotProductIds($this->getProductIdsFromCollection($productCollection));
-        }
-        elseif ($type == Constants::TEXTURA){
-            $this->logger->info("SET SESSION VARIABLES: " . Constants::TEXTURA);
-            $this->logger->info("PERCENTAGE: " . $incomingValue);
-            $this->customerSession->setTexturePercentage($incomingValue);
-            $this->customerSession->setTextureProductIds($this->getProductIdsFromCollection($productCollection));
-        }
-        elseif ($type == Constants::OJERAS){
-            $this->logger->info("SET SESSION VARIABLES: " . Constants::OJERAS);
-            $this->logger->info("PERCENTAGE: " . $incomingValue);
-            $this->customerSession->setDarkCirclePercentage($incomingValue);
-            $this->customerSession->setDarkCircleProductIds($this->getProductIdsFromCollection($productCollection));
-        }
+
+        try {
+            $simulator->setType($type);
+            $simulator->setPercentage($incomingValue);
+            $simulator->setProductIds($this->getProductIdsFromCollection($productCollection));
+            $simulator->setFormId($formId);
+            $this->simulatorRepository->save($simulator);
+        }catch (\Exception $exception){}
     }
 
     /**
      * @param ProductCollection $productCollection
-     * @return array
+     * @return String
      */
     private function getProductIdsFromCollection(ProductCollection $productCollection){
         $productIds = [];
         foreach ($productCollection->getData() as $product){
             $productIds[] = $product['entity_id'];
         }
-        $this->logger->info("PRODUCT IDS");
-        $this->logger->info(print_r($productIds, true));
-        return $productIds;
+        return $this->serializer->serialize($productIds);
     }
 }

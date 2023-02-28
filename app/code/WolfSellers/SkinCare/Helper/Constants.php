@@ -11,4 +11,6 @@ class Constants extends AbstractHelper
     const MANCHAS = 'spot';
     const TEXTURA = 'texture';
     const OJERAS = 'dark_circle';
+
+    const SALUD_DE_PIEL = 'skin_health';
 }
