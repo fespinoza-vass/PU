@@ -36,10 +36,10 @@
         <td style="font-weight: bold">{{trans "Salud de piel: %skin_health %" skin_health=$diagnostico.results.skin_health}}</td>
     </tr>
     <tr>
-        <td>{{trans "Lineas de Expresión: %spot %" spot=$diagnostico.results.spot}}</td>
+        <td>{{trans "Lineas de Expresión: %wrinkle %" wrinkle=$diagnostico.results.wrinkle}}</td>
     </tr>
     <tr>
-        <td>{{trans "Mancha: %wrinkle %" wrinkle=$diagnostico.results.wrinkle}}</td>
+        <td>{{trans "Mancha: %spot %" spot=$diagnostico.results.spot}}</td>
     </tr>
     <tr>
         <td>{{trans "Textura: %texture %" texture=$diagnostico.results.texture}}</td>
@@ -58,11 +58,11 @@
         {{block
         class='Magento\\Framework\\View\\Element\\Template'
         type='core/template'
-        name='diagnostico_spot'
+        name='diagnostico_wrinkle'
         order_id='1'
         area='frontend'
         template='WolfSellers_SkinCare::email/diagnostico.phtml'
-        productsList=$diagnostico.spot
+        productsList=$diagnostico.wrinkle
         }}
     </div>
     <div>
@@ -72,12 +72,11 @@
         {{block
         class='Magento\\Framework\\View\\Element\\Template'
         type='core/template'
-        name='diagnostico_wrinkle'
+        name='diagnostico_spot'
         order_id='2'
         area='frontend'
         template='WolfSellers_SkinCare::email/diagnostico.phtml'
-        productsList=$diagnostico.wrinkle
-
+        productsList=$diagnostico.spot
         }}
     </div>
     <div>
