@@ -195,7 +195,13 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
 
             foreach ($rulesGroup as $rule):
                 if($rule['is_active'] ==1 && $rule['apply_original_price']==1 && $rule['coupon_type'] != 2):
-                    $result[] = $rule['rule_id'];
+                    $result['rules'][] = $rule['rule_id'];
+
+                    if($rule['sort_order'] == 0 && $rule['stop_rules_processing'] == 1):
+                        $result['stop_rules_processing'] = $rule['stop_rules_processing'];
+                        $result['priority_rule'] = $rule['rule_id'];
+                    endif;
+
                 endif;
             endforeach;
 
@@ -208,16 +214,34 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
 
     /**
      * Product validate customer rules.
+     * @param $productId
      * @return bool
      */
-
     public function hasRuleFromProduct($productId): bool
     {
+        $result = false;
         $customerRule=$this->getCustomerGroupRules();
+        if($customerRule['stop_rules_processing'] == 1):
+            $result = $this->applyRuleFromProduct(array($customerRule['priority_rule']), $productId);
+        else:
+            $result = $this->applyRuleFromProduct($customerRule['rules'], $productId);
+        endif;
+
+        return (bool) $result;
+    }
+
+    /**
+     * @param array $rules
+     * @param $productId
+     * @return bool
+     */
+    public function applyRuleFromProduct(array $rules, $productId): bool
+    {
         $_rules = $this->salesRuleFactory->create()->getCollection();
         $validate = false;
+
         foreach($_rules as $rule){
-            if(  in_array($rule->getData('rule_id'), $customerRule) && $rule->getData('is_active') == 1 && $rule->getData('apply_original_price')== 1):
+            if(  in_array($rule->getData('rule_id'), $rules) && $rule->getData('is_active') == 1 && $rule->getData('apply_original_price')== 1):
                 $product = $this->_itemProduct->load($productId);
                 $item = $this->_itemProduct;
                 $item->setProduct($product);
