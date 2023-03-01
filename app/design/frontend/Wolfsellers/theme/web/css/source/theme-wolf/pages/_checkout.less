@@ -723,6 +723,20 @@
 }
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
 	.checkout-index-index {
+		th{
+			&.mark {
+				padding: 6px 170px 6px 0 !important;
+			}
+		}
+		table{
+			&.data{
+				&.table{
+					&.table-totals {
+						display: flex;
+					}
+				}
+			}
+		}
 		.page-wrapper {
 			.page-main {
 				.column.main {
