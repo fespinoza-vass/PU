@@ -23,7 +23,7 @@ use Magento\SalesRule\Model\ResourceModel\RuleFactory as ResourceSalesRuleFactor
 use Magento\SalesRule\Model\RuleFactory as SalesRuleFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory as RulesCollectionFactory;
-use  Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product;
 
 
 /**
@@ -33,6 +33,7 @@ use  Magento\Catalog\Model\Product;
  */
 class ProcessFrontFinalPriceObserver implements ObserverInterface
 {
+    
     /** @var CustomerModelSession */
     protected CustomerModelSession $customerSession;
 
@@ -47,9 +48,12 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
 
     /** @var RulePricesStorage */
     protected RulePricesStorage $rulePricesStorage;
-    protected RulesCollectionFactory $_salesRuleCollectionFactory;
-    protected Product $_itemProduct;
 
+    /** @var RulesCollectionFactory */
+    protected RulesCollectionFactory $_salesRuleCollectionFactory;
+
+    /** @var Product */
+    protected Product $_itemProduct;
 
     /** @var CheckoutSession */
     private CheckoutSession $checkoutSession;
@@ -72,6 +76,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
      * @param CheckoutSession $checkoutSession
      * @param CouponFactory $couponFactory
      * @param SalesRuleFactory $salesRuleFactory
+     * @param RulesCollectionFactory $salesRuleCollectionFactory
+     * @param Product $itemProduct
      * @param ResourceSalesRuleFactory $resourceSalesRuleFactory
      */
     public function __construct(
@@ -192,6 +198,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
             $currentGroupId = $this->checkoutSession->getQuote()->getCustomer()->getGroupId();
             $salesRuleByCustomerGroup = $this->_salesRuleCollectionFactory->create()->addCustomerGroupFilter($currentGroupId);
             $rulesGroup = $salesRuleByCustomerGroup->getData();
+            $result['rules'] = [];
+            $result['stop_rules_processing'] = 0;
 
             foreach ($rulesGroup as $rule):
                 if($rule['is_active'] ==1 && $rule['apply_original_price']==1 && $rule['coupon_type'] != 2):
@@ -221,6 +229,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
     {
         $result = false;
         $customerRule=$this->getCustomerGroupRules();
+
         if($customerRule['stop_rules_processing'] == 1):
             $result = $this->applyRuleFromProduct(array($customerRule['priority_rule']), $productId);
         else:
