@@ -31,28 +31,10 @@
     {{trans "Te compartimos los resultados de tu diagnóstico"}}
 </div>
 <hr>
-<table>
-    <tr>
-        <td style="font-weight: bold">{{trans "Salud de piel: %skin_health %" skin_health=$diagnostico.results.skin_health}}</td>
-    </tr>
-    <tr>
-        <td>{{trans "Lineas de Expresión: %wrinkle %" wrinkle=$diagnostico.results.wrinkle}}</td>
-    </tr>
-    <tr>
-        <td>{{trans "Mancha: %spot %" spot=$diagnostico.results.spot}}</td>
-    </tr>
-    <tr>
-        <td>{{trans "Textura: %texture %" texture=$diagnostico.results.texture}}</td>
-    </tr>
-    <tr>
-        <td>{{trans "Ojeras: %dark_circle %" dark_circle=$diagnostico.results.dark_circle}}</td>
-    </tr>
-</table>
-<div>
-</div>
 <div class="content">
     <div>
-        <h3>Lineas de Expresión</h3>
+        <h3 class="lineas">{{trans "%wrinkle % / 100" wrinkle=$diagnostico.results.wrinkle}}</h3>
+        <h3 class="lineas-1">{{trans "Lineas de Expresión" wrinkle=$diagnostico.results.wrinkle}}</h3>
     </div>
     <div>
         {{block
@@ -66,7 +48,8 @@
         }}
     </div>
     <div>
-        <h3>Manchas</h3>
+        <h3 class="lineas">{{trans "%skin_health % / 100" skin_health=$diagnostico.results.skin_health}}</h3> 
+        <h3 class="lineas-1">{{trans "Salud de piel" skin_health=$diagnostico.results.skin_health}}</h3>
     </div>
     <div>
         {{block
@@ -80,7 +63,8 @@
         }}
     </div>
     <div>
-        <h3>Texturas</h3>
+        <h3 class="lineas">{{trans "%spot % / 100" spot=$diagnostico.results.spot}}</h3> 
+        <h3 class="lineas-1">{{trans "Mancha" spot=$diagnostico.results.spot}}</h3>
     </div>
     <div>
         {{block
@@ -94,7 +78,23 @@
         }}
     </div>
     <div>
-        <h3>Ojeras</h3>
+        <h3 class="lineas">{{trans "%texture % / 100" texture=$diagnostico.results.texture}}</h3> 
+        <h3 class="lineas-1">{{trans "Textura" texture=$diagnostico.results.texture}}</h3>
+    </div>
+    <div>
+        {{block
+        class='Magento\\Framework\\View\\Element\\Template'
+        type='core/template'
+        name='diagnostico_dark_circle'
+        order_id='4'
+        area='frontend'
+        template='WolfSellers_SkinCare::email/diagnostico.phtml'
+        productsList=$diagnostico.dark_circle
+        }}
+    </div>
+    <div>
+        <h3 class="lineas">{{trans "%dark_circle % / 100" dark_circle=$diagnostico.results.dark_circle}}</h3> 
+        <h3 class="lineas-1">{{trans "Ojeras" dark_circle=$diagnostico.results.dark_circle}}</h3>
     </div>
     <div>
         {{block
