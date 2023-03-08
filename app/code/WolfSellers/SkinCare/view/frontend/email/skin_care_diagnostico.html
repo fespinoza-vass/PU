@@ -23,18 +23,22 @@
 {{template config_path="design/email/header_template"}}
 <h3>RESULTADOS DEL DIAGNÓSTICO</h3>
 
-<div class="greeting">Hola {{var customerName}},</div>
+<div class="greeting">Hola, {{var customerName}}</div>
 <!-- Custom Image with your email-->
 <!--img src="{{view url='Magenest_AbandonedCart::images/customimage.png'}}"/-->
 <div>
     {{trans "somos %store_name. " store_name=$store.getFrontendName()}}
-    {{trans "Te compartimos los resultados de tu diagnóstico"}}
+    {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atener las necesidades de tu piel"}}
 </div>
 <hr>
 <div class="content">
     <div>
+        <h3 class="lineas">{{trans "%skin_health % / 100" skin_health=$diagnostico.results.skin_health}}</h3> 
+        <h3 class="lineas-1">{{trans "SALUD DE PIEL" skin_health=$diagnostico.results.skin_health}}</h3>
+    </div>
+    <div>
         <h3 class="lineas">{{trans "%wrinkle % / 100" wrinkle=$diagnostico.results.wrinkle}}</h3>
-        <h3 class="lineas-1">{{trans "Lineas de Expresión" wrinkle=$diagnostico.results.wrinkle}}</h3>
+        <h3 class="lineas-1">{{trans "LINEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
     </div>
     <div>
         {{block
@@ -48,23 +52,8 @@
         }}
     </div>
     <div>
-        <h3 class="lineas">{{trans "%skin_health % / 100" skin_health=$diagnostico.results.skin_health}}</h3> 
-        <h3 class="lineas-1">{{trans "Salud de piel" skin_health=$diagnostico.results.skin_health}}</h3>
-    </div>
-    <div>
-        {{block
-        class='Magento\\Framework\\View\\Element\\Template'
-        type='core/template'
-        name='diagnostico_spot'
-        order_id='2'
-        area='frontend'
-        template='WolfSellers_SkinCare::email/diagnostico.phtml'
-        productsList=$diagnostico.spot
-        }}
-    </div>
-    <div>
         <h3 class="lineas">{{trans "%spot % / 100" spot=$diagnostico.results.spot}}</h3> 
-        <h3 class="lineas-1">{{trans "Mancha" spot=$diagnostico.results.spot}}</h3>
+        <h3 class="lineas-1">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
     </div>
     <div>
         {{block
@@ -79,7 +68,7 @@
     </div>
     <div>
         <h3 class="lineas">{{trans "%texture % / 100" texture=$diagnostico.results.texture}}</h3> 
-        <h3 class="lineas-1">{{trans "Textura" texture=$diagnostico.results.texture}}</h3>
+        <h3 class="lineas-1">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
     </div>
     <div>
         {{block
@@ -94,7 +83,7 @@
     </div>
     <div>
         <h3 class="lineas">{{trans "%dark_circle % / 100" dark_circle=$diagnostico.results.dark_circle}}</h3> 
-        <h3 class="lineas-1">{{trans "Ojeras" dark_circle=$diagnostico.results.dark_circle}}</h3>
+        <h3 class="lineas-1">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
     </div>
     <div>
         {{block
