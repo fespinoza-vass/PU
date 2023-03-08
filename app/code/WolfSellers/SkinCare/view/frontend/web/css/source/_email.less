@@ -22,5 +22,18 @@
     display: grid !important;
 }
 .email-prod-main {
-    display: table-cell;
+    display: grid;
+    width: 25%;
+    float: left;
+}
+.text-email{
+    display: block;
+    display: -webkit-box;
+    max-width: 80%;
+    height: 29px;
+    line-height: 1;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
