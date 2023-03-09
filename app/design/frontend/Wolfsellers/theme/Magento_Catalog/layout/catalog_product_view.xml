@@ -51,5 +51,12 @@
                        template="Magento_Catalog::product/view/additionalgalery.phtml"/>
             </container>
         </referenceContainer>
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Cms\Block\Block" name="boton.compartir" after="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">boton_compartir</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>
