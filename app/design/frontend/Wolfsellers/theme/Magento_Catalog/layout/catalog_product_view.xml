@@ -45,13 +45,11 @@
                     <argument name="block_id" xsi:type="string">transaccion_segura</argument>
                 </arguments>
             </block>
-        </referenceContainer>
-        <referenceContainer name="product.info.main">
-            <block class="Magento\Cms\Block\Block" name="boton.compartir" after="-">
-                <arguments>
-                    <argument name="block_id" xsi:type="string">boton_compartir</argument>
-                </arguments>
-            </block>
+            <container htmlId="product-additional-gallery" htmlTag="div" htmlClass="additional-block" before="product.info.details">
+                <block class="Magento\Catalog\Block\Product\View"
+                       name="product.additional.gallery"
+                       template="Magento_Catalog::product/view/additionalgalery.phtml"/>
+            </container>
         </referenceContainer>
     </body>
 </page>
