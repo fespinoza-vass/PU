@@ -28,6 +28,8 @@ use WolfSellers\SkinCare\Block\Widget\ProductList;
 use WolfSellers\SkinCare\Model\SimulatorFactory;
 use WolfSellers\SkinCare\Model\SimulatorRepository;
 
+use Magento\CatalogInventory\Helper\Stock;
+
 class Index extends Action
 {
     /**
@@ -50,6 +52,9 @@ class Index extends Action
     private SimulatorFactory $simulatorFactory;
     private SimulatorRepository $simulatorRepository;
 
+    /** @var Stock  */
+    protected Stock $_stockFilter;
+
 
     public function __construct(
         PageFactory $resultPageFactory,
@@ -61,7 +66,8 @@ class Index extends Action
         Context $context,
         ResourceConnection $resourceConnection = null,
         SimulatorFactory $simulatorFactory,
-        SimulatorRepository $simulatorRepository
+        SimulatorRepository $simulatorRepository,
+        Stock $stockFilter
     ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->serializer = $json;
@@ -74,6 +80,7 @@ class Index extends Action
             ?? ObjectManager::getInstance()->create(ResourceConnection::class);
         $this->simulatorFactory = $simulatorFactory;
         $this->simulatorRepository = $simulatorRepository;
+        $this->_stockFilter = $stockFilter;
     }
 
     /**
@@ -96,6 +103,8 @@ class Index extends Action
         $productCollection->addAttributeToFilter($attrCodeMin, $minValue);
         $productCollection->addAttributeToFilter($attrCodeMax, $maxValue);
         $productCollection->setPageSize(20);
+
+        $this->_stockFilter->addInStockFilterToCollection($productCollection);
 
         $this->setSessionVariables($type, $productCollection, $incomingValueParam, $formId);
         if($productCollection->getSize() < 1) {
