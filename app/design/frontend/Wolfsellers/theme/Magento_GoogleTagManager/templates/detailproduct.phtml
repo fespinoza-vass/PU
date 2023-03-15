@@ -11,9 +11,10 @@ $product = $block->getCurrentProduct();
 
 $categories = $block->getCategoryName();
 
-$category = ($categories[0]) ? $categories[0] : '';
-$subcategory = ($categories[1]) ? $categories[1] : '';
-$family = ($categories[2]) ? $categories[2] : '';
+$category = isset($categories[0]) ? $categories[0] : '';
+$subcategory = isset($categories[1]) ? $categories[1] : '';
+$family = isset($categories[2]) ? $categories[2] : '';
+
 
 $gender = '';
 $size = '';
@@ -41,13 +42,13 @@ $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
 
 $rules = $block->getRules($product->getId());
 
-$data = '';
+$data = [];
 if($rules){
     foreach ($rules as $rule){
-        $data = $rule;
+        $data[] = $rule;
     }
 }
-
+$data = implode( ', ', $data);
 ?>
 
 <script type="text/x-magento-init">
