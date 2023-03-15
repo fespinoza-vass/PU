@@ -1,16 +1,20 @@
 <table>
 <?php if($this->getProductsList()):?>
     <?php foreach ($this->getProductsList() as $item): ?>
-        <tr>
-            <td>
+        <tr class="email-prod-main">
+            <td class="email-prod-second">
                 <img src="<?= $item['urlImage'] ?>" alt="<?= $item['name']; ?>" title="<?= $item['name']; ?>" height="80" width="80"/>
-            </td>
-            <td>
-                <a href="<?= $item['urlProduct'] ?>" target="__blank">
+
+                <a class="text-email" href="<?= $item['urlProduct'] ?>" target="__blank">
                     <?= $item['name'] ?>
                 </a>
+                <?= $item['price'] ?>
             </td>
-            <td><?= $item['price'] ?></td>
+            <td>
+                <a class="btn action primary" href="<?= $item['urlProduct'] ?>" target="__blank">
+                    <span><?=__('AÑADIR AL CARRITO')?></span>
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?>
 <?php endif;?>
