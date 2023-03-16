@@ -26,7 +26,9 @@
 <!-- Custom Image with your email-->
 <!--img src="{{view url='Magenest_AbandonedCart::images/customimage.png'}}"/-->
 <div>
-    {{trans "Hola, %customer," customer=$diagnostico.customerName}}
+    {{trans "Hola, %customer," customer=$diagnostico.customerName}} 
+</div>
+<div>
     {{trans "somos %store_name. " store_name=$store.getFrontendName()}}
     {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atener las necesidades de tu piel"}}
 </div>
@@ -55,7 +57,7 @@
         productsList=$diagnostico.wrinkle
         }}
     </div>
-    <hr>
+    <hr style="margin-bottom: -35px;">
     <div>
         <h3 class="lineas">{{trans "%spot / 100" spot=$diagnostico.results.spot}}</h3>
         <h3 class="lineas-1">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
@@ -72,7 +74,7 @@
         productsList=$diagnostico.texture
         }}
     </div>
-    <hr>
+    <hr style="margin-bottom: -35px;">
     <div>
         <h3 class="lineas">{{trans "%texture / 100" texture=$diagnostico.results.texture}}</h3>
         <h3 class="lineas-1">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
@@ -89,7 +91,7 @@
         productsList=$diagnostico.dark_circle
         }}
     </div>
-    <hr>
+    <hr style="margin-bottom: -35px;">
     <div>
         <h3 class="lineas">{{trans "%dark_circle / 100" dark_circle=$diagnostico.results.dark_circle}}</h3>
         <h3 class="lineas-1">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
