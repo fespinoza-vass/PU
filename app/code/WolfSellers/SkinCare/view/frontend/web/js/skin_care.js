@@ -2,8 +2,9 @@
  * Skin care.
  */
 define([
-    'jquery'
-], function ($) {
+    'jquery',
+    'mageUtils'
+], function ($, utils) {
     'use strict';
 
     $.widget('wolfsellers.skinCare', {
@@ -14,6 +15,8 @@ define([
         resultItemsBar: null,
         resultElements: {},
         resultSliders: null,
+        formId:null,
+        skinHealth:null,
 
         options: {
             ymk: null,
@@ -26,6 +29,7 @@ define([
             resultItemSelector: '.result-item',
             resultSliderSelector: '.result-slider',
             productsSliderSelector: '.product-items',
+            skinHealthPercentage: '#js_skin_health_percentage',
             limits: {
                 ageSpots: 0,
                 darkCircles: 0,
@@ -46,6 +50,7 @@ define([
             this.recommendations = $(this.options.recommendationsSelector);
             this.result = $(this.options.resultSelector);
             this.resultItemsBar = $(this.options.resultItemBarSelector);
+            this.skinHealthPercentage = $(this.options.skinHealthPercentage);
 
             $(this.resultItemsBar).each(function (index) {
                 var $this = $(this),
@@ -76,6 +81,9 @@ define([
                 hideSkinAnalysisResult: true
             });
 
+            this.formId = utils.uniqueid(15);
+            self._setFormId();
+
             this._bind();
         },
 
@@ -97,7 +105,17 @@ define([
 
             handlers['click ' + this.options.btnOpenSelector] = '_onOpenSkinCare';
 
+            handlers['click .test-it'] = '_testIt';
+
             this._on(handlers);
+        },
+
+        _testIt:function (e) {
+            var self = this;
+            var report = {ageSpots: 74, darkCircles: 77, texture: 65, wrinkles: 86, skinAge: 27, skinHealth:76, timed:2372};
+            console.log('Cargando información de prueba....');
+            self._onAnalysisUpdated(report);
+            console.log('Espera que los 4 servicios respondan...');
         },
 
         _onOpenSkinCare: function (e) {
@@ -114,6 +132,12 @@ define([
             this.resultItems.hide();
             this.resultSliders.show();
             this.result.show();
+
+            if(report['skinHealth']){
+                this.skinHealthPercentage.text(report['skinHealth']);
+                this.skinHealth = report['skinHealth'];
+                self._setSkinHealth();
+            }
 
             $.each(this.resultElements, function (key, elements) {
                 var valReport = report[key];
@@ -136,6 +160,7 @@ define([
         },
 
         _ajaxSkinCareCall: function (type, value) {
+            var self = this;
             var typeKey = type;
             switch (type) {
                 case "ageSpots": {
@@ -163,7 +188,7 @@ define([
             }
             if (typeKey !== "") {
                 $.get(
-                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey,
+                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey + "&form=" + self.formId,
                     {},
                     function(data) {
                         var $container = $("#" + typeKey + "-container");
@@ -192,6 +217,14 @@ define([
             this.resultItems.hide();
             this.resultSliders.hide();
             this.recommendations.show();
+        },
+
+        _setFormId: function (){
+            $("#textinput-formid").attr("type", "hidden").val(this.formId);
+        },
+
+        _setSkinHealth: function (){
+            $("#textinput-skinhealth").attr("type", "hidden").val(this.skinHealth);
         }
     });
 

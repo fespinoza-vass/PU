@@ -9,25 +9,29 @@ namespace WolfSellers\SkinCare\Controller\Index;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
+use Magento\Customer\Model\Session as customerSession;
+
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResourceConnection;
-use WolfSellers\SkinCare\Block\Widget\ProductList;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http;
-use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\DB\Adapter\AdapterInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\LayoutFactory;
 use Magento\Framework\View\Result\PageFactory;
-use Psr\Log\LoggerInterface;
+
+
+use WolfSellers\SkinCare\Block\Widget\ProductList;
+
+use WolfSellers\SkinCare\Model\SimulatorFactory;
+use WolfSellers\SkinCare\Model\SimulatorRepository;
+
+use Magento\CatalogInventory\Helper\Stock;
 
 class Index extends Action
 {
-
     /**
      * @var PageFactory
      */
@@ -37,10 +41,6 @@ class Index extends Action
      */
     protected $serializer;
     /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-    /**
      * @var Http
      */
     protected $http;
@@ -48,34 +48,39 @@ class Index extends Action
     private ProductCollectionFactory $productCollectionFactory;
     private RequestInterface $request;
     private ResourceConnection $resourceConnection;
+    protected customerSession $customerSession;
+    private SimulatorFactory $simulatorFactory;
+    private SimulatorRepository $simulatorRepository;
 
-    /**
-     * Constructor
-     *
-     * @param PageFactory $resultPageFactory
-     * @param Json $json
-     * @param LoggerInterface $logger
-     * @param Http $http
-     */
+    /** @var Stock  */
+    protected Stock $_stockFilter;
+
+
     public function __construct(
         PageFactory $resultPageFactory,
         Json $json,
-        LoggerInterface $logger,
         Http $http,
         LayoutFactory $layoutFactory,
         ProductCollectionFactory $productCollectionFactory,
+        customerSession $customerSession,
         Context $context,
-        ResourceConnection $resourceConnection = null
+        ResourceConnection $resourceConnection = null,
+        SimulatorFactory $simulatorFactory,
+        SimulatorRepository $simulatorRepository,
+        Stock $stockFilter
     ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->serializer = $json;
-        $this->logger = $logger;
         $this->http = $http;
         $this->layoutFactory = $layoutFactory;
         $this->productCollectionFactory = $productCollectionFactory;
+        $this->customerSession = $customerSession;
         parent::__construct($context);
         $this->resourceConnection = $resourceConnection
             ?? ObjectManager::getInstance()->create(ResourceConnection::class);
+        $this->simulatorFactory = $simulatorFactory;
+        $this->simulatorRepository = $simulatorRepository;
+        $this->_stockFilter = $stockFilter;
     }
 
     /**
@@ -84,9 +89,10 @@ class Index extends Action
     public function execute()
     {
         $connection = $this->resourceConnection->getConnection();
-        $incomingValue = $this->getRequest()->getParam("value");
+        $incomingValueParam = $this->getRequest()->getParam("value");
         $type = $this->getRequest()->getParam("type");
-        $incomingValue = $incomingValue / 10;
+        $formId = $this->getRequest()->getParam("form");
+        $incomingValue = $incomingValueParam / 10;
         $attrCodeMin = "{$type}_score_min";
         $attrCodeMax = "{$type}_score_max";
         $minValue = $this->getOptionId($attrCodeMin, floor($incomingValue) * 10, $connection);
@@ -97,6 +103,10 @@ class Index extends Action
         $productCollection->addAttributeToFilter($attrCodeMin, $minValue);
         $productCollection->addAttributeToFilter($attrCodeMax, $maxValue);
         $productCollection->setPageSize(20);
+
+        $this->_stockFilter->addInStockFilterToCollection($productCollection);
+
+        $this->setSessionVariables($type, $productCollection, $incomingValueParam, $formId);
         if($productCollection->getSize() < 1) {
             echo ""; die();
         }
@@ -154,5 +164,40 @@ class Index extends Action
             where attribute_code = '$attributeCode' and eaov.value = '" .
             str_replace("'", "\\'", $value) . "';";
         return $connection->fetchOne($sql);
+    }
+
+    /**
+     *
+     * @param string $type
+     * @param ProductCollection $productCollection
+     * @param $incomingValue
+     * @return void
+     */
+    private function setSessionVariables(string $type, ProductCollection $productCollection, $incomingValue, $formId){
+        try{
+            $simulator = $this->simulatorRepository->getByFormType($formId,$type);
+        }catch (\Exception $exception){
+            $simulator = $this->simulatorFactory->create();
+        }
+
+        try {
+            $simulator->setType($type);
+            $simulator->setPercentage($incomingValue);
+            $simulator->setProductIds($this->getProductIdsFromCollection($productCollection));
+            $simulator->setFormId($formId);
+            $this->simulatorRepository->save($simulator);
+        }catch (\Exception $exception){}
+    }
+
+    /**
+     * @param ProductCollection $productCollection
+     * @return String
+     */
+    private function getProductIdsFromCollection(ProductCollection $productCollection){
+        $productIds = [];
+        foreach ($productCollection->getData() as $product){
+            $productIds[] = $product['entity_id'];
+        }
+        return $this->serializer->serialize($productIds);
     }
 }
