@@ -231,7 +231,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         $customerRule=$this->getCustomerGroupRules();
 
         if( is_array($customerRule) &&
-            isset($customerRule['stop_rules_processing']) && customerRule['stop_rules_processing'] == 1 &&
+            isset($customerRule['stop_rules_processing']) && $customerRule['stop_rules_processing'] == 1 &&
             isset($customerRule['priority_rule']) && is_array($customerRule['priority_rule']))
         {
             $result = $this->applyRuleFromProduct(array($customerRule['priority_rule']), $productId);
