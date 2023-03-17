@@ -33,7 +33,7 @@ use Magento\Catalog\Model\Product;
  */
 class ProcessFrontFinalPriceObserver implements ObserverInterface
 {
-    
+
     /** @var CustomerModelSession */
     protected CustomerModelSession $customerSession;
 
@@ -230,11 +230,15 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         $result = false;
         $customerRule=$this->getCustomerGroupRules();
 
-        if($customerRule['stop_rules_processing'] == 1):
+        if( is_array($customerRule) &&
+            isset($customerRule['stop_rules_processing']) && customerRule['stop_rules_processing'] == 1 &&
+            isset($customerRule['priority_rule']) && is_array($customerRule['priority_rule']))
+        {
             $result = $this->applyRuleFromProduct(array($customerRule['priority_rule']), $productId);
-        else:
+        }
+        elseif(is_array($customerRule) && isset($customerRule['rules']) && is_array($customerRule['rules'])){
             $result = $this->applyRuleFromProduct($customerRule['rules'], $productId);
-        endif;
+        }
 
         return (bool) $result;
     }
