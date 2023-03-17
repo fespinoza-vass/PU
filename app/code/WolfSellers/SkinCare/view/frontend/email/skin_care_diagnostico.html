@@ -29,8 +29,8 @@
     {{trans "Hola, %customer," customer=$diagnostico.customerName}} 
 </div>
 <div>
-    {{trans "somos %store_name. " store_name=$store.getFrontendName()}}
-    {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atener las necesidades de tu piel"}}
+    {{trans "Somos %store_name. " store_name=$store.getFrontendName()}}
+    {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atender las necesidades de tu piel."}}
 </div>
 
 <h3 style="text-align: center;">RESULTADOS DEL DIAGNÓSTICO</h3>
@@ -43,7 +43,7 @@
     </div>
     <div>
         <h3 class="lineas">{{trans "%wrinkle / 100" wrinkle=$diagnostico.results.wrinkle}}</h3>
-        <h3 class="lineas-1">{{trans "LINEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
+        <h3 class="lineas-1">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
         <h2 class="lineas-2">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
     </div>
     <div>
@@ -57,8 +57,8 @@
         productsList=$diagnostico.wrinkle
         }}
     </div>
-    <hr style="margin-bottom: -35px;">
-    <div>
+    <hr>
+    <div class="line_up">
         <h3 class="lineas">{{trans "%spot / 100" spot=$diagnostico.results.spot}}</h3>
         <h3 class="lineas-1">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
         <h2 class="lineas-2">Se pueden originar por exposición solar, cambios hormonales, genética y más. Prevenga y evite su aparición.</h2>
@@ -75,7 +75,7 @@
         }}
     </div>
     <hr style="margin-bottom: -35px;">
-    <div>
+    <div class="line_up">
         <h3 class="lineas">{{trans "%texture / 100" texture=$diagnostico.results.texture}}</h3>
         <h3 class="lineas-1">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
         <h2 class="lineas-2">El exceso de células muertas de la piel pueden acumularse, lo que lleva a una textura desigual de la piel.</h2>
@@ -92,7 +92,7 @@
         }}
     </div>
     <hr style="margin-bottom: -35px;">
-    <div>
+    <div class="line_up">
         <h3 class="lineas">{{trans "%dark_circle / 100" dark_circle=$diagnostico.results.dark_circle}}</h3>
         <h3 class="lineas-1">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
         <h2 class="lineas-2">La falta de sueño, cansancio físico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.</h2>
