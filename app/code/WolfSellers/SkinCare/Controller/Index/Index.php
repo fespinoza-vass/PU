@@ -96,7 +96,11 @@ class Index extends Action
         $attrCodeMin = "{$type}_score_min";
         $attrCodeMax = "{$type}_score_max";
         $minValue = $this->getOptionId($attrCodeMin, floor($incomingValue) * 10, $connection);
-        $maxValue = $this->getOptionId($attrCodeMax, ceil($incomingValue) * 10, $connection);
+        if(is_int($incomingValue)){
+            $maxValue = $this->getOptionId($attrCodeMax, ($incomingValue + 1) * 10, $connection);
+        }else{
+            $maxValue = $this->getOptionId($attrCodeMax, ceil($incomingValue) * 10, $connection);
+        }
 
         $productCollection = $this->productCollectionFactory->create();
         $productCollection->addAttributeToSelect("*");
