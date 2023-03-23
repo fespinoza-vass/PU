@@ -100,19 +100,19 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         /**
          * Set percentages
          */
-        $result['results'][Constants::LINEAS_DE_EXPRESION] = $wrinkle->getPercentage();
-        $result['results'][Constants::MANCHAS] = $spot->getPercentage();
-        $result['results'][Constants::TEXTURA] = $texture->getPercentage();
-        $result['results'][Constants::OJERAS] = $darkCircle->getPercentage();
+        $result['results'][Constants::LINEAS_DE_EXPRESION] = is_bool($wrinkle) ? '' : $wrinkle->getPercentage();
+        $result['results'][Constants::MANCHAS] = is_bool($spot) ? '' : $spot->getPercentage();
+        $result['results'][Constants::TEXTURA] = is_bool($texture) ? '' : $texture->getPercentage();
+        $result['results'][Constants::OJERAS] = is_bool($darkCircle) ? '' : $darkCircle->getPercentage();
         $result['results'][Constants::SALUD_DE_PIEL] = $skinHealth;
-
+        
         /**
          * Get UP TO 4 products for each type
          */
-        $result[Constants::LINEAS_DE_EXPRESION] = $this->getFourProductsByType($wrinkle->getProductIds());
-        $result[Constants::MANCHAS] = $this->getFourProductsByType($spot->getProductIds());
-        $result[Constants::TEXTURA] = $this->getFourProductsByType($texture->getProductIds());
-        $result[Constants::OJERAS] = $this->getFourProductsByType($darkCircle->getProductIds());
+        $result[Constants::LINEAS_DE_EXPRESION] = is_bool($wrinkle) ? '' : $this->getFourProductsByType($wrinkle->getProductIds());
+        $result[Constants::MANCHAS] = is_bool($spot) ? '' : $this->getFourProductsByType($spot->getProductIds());
+        $result[Constants::TEXTURA] = is_bool($texture) ? '' : $this->getFourProductsByType($texture->getProductIds());
+        $result[Constants::OJERAS] = is_bool($darkCircle) ? '' : $this->getFourProductsByType($darkCircle->getProductIds());
 
         /**
          * Set Customer Information
