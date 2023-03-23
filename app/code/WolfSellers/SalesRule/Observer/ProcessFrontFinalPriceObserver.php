@@ -23,7 +23,7 @@ use Magento\SalesRule\Model\ResourceModel\RuleFactory as ResourceSalesRuleFactor
 use Magento\SalesRule\Model\RuleFactory as SalesRuleFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory as RulesCollectionFactory;
-use  Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product;
 
 
 /**
@@ -33,6 +33,7 @@ use  Magento\Catalog\Model\Product;
  */
 class ProcessFrontFinalPriceObserver implements ObserverInterface
 {
+    
     /** @var CustomerModelSession */
     protected CustomerModelSession $customerSession;
 
@@ -47,9 +48,12 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
 
     /** @var RulePricesStorage */
     protected RulePricesStorage $rulePricesStorage;
-    protected RulesCollectionFactory $_salesRuleCollectionFactory;
-    protected Product $_itemProduct;
 
+    /** @var RulesCollectionFactory */
+    protected RulesCollectionFactory $_salesRuleCollectionFactory;
+
+    /** @var Product */
+    protected Product $_itemProduct;
 
     /** @var CheckoutSession */
     private CheckoutSession $checkoutSession;
@@ -72,6 +76,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
      * @param CheckoutSession $checkoutSession
      * @param CouponFactory $couponFactory
      * @param SalesRuleFactory $salesRuleFactory
+     * @param RulesCollectionFactory $salesRuleCollectionFactory
+     * @param Product $itemProduct
      * @param ResourceSalesRuleFactory $resourceSalesRuleFactory
      */
     public function __construct(
@@ -184,7 +190,6 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
      * Customer rules.
      * @return array
      */
-
     public function getCustomerGroupRules(): array
     {
         $result = [];
@@ -193,10 +198,18 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
             $currentGroupId = $this->checkoutSession->getQuote()->getCustomer()->getGroupId();
             $salesRuleByCustomerGroup = $this->_salesRuleCollectionFactory->create()->addCustomerGroupFilter($currentGroupId);
             $rulesGroup = $salesRuleByCustomerGroup->getData();
+            $result['rules'] = [];
+            $result['stop_rules_processing'] = 0;
 
             foreach ($rulesGroup as $rule):
-                if($rule['is_active'] ==1 && $rule['apply_original_price']==1 && $rule['coupon_type'] !== 2):
-                    $result[] = $rule['rule_id'];
+                if($rule['is_active'] ==1 && $rule['apply_original_price']==1 && $rule['coupon_type'] != 2):
+                    $result['rules'][] = $rule['rule_id'];
+
+                    if($rule['sort_order'] == 0 && $rule['stop_rules_processing'] == 1):
+                        $result['stop_rules_processing'] = $rule['stop_rules_processing'];
+                        $result['priority_rule'] = $rule['rule_id'];
+                    endif;
+
                 endif;
             endforeach;
 
@@ -209,16 +222,35 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
 
     /**
      * Product validate customer rules.
+     * @param $productId
      * @return bool
      */
-
     public function hasRuleFromProduct($productId): bool
     {
+        $result = false;
         $customerRule=$this->getCustomerGroupRules();
+
+        if($customerRule['stop_rules_processing'] == 1):
+            $result = $this->applyRuleFromProduct(array($customerRule['priority_rule']), $productId);
+        else:
+            $result = $this->applyRuleFromProduct($customerRule['rules'], $productId);
+        endif;
+
+        return (bool) $result;
+    }
+
+    /**
+     * @param array $rules
+     * @param $productId
+     * @return bool
+     */
+    public function applyRuleFromProduct(array $rules, $productId): bool
+    {
         $_rules = $this->salesRuleFactory->create()->getCollection();
         $validate = false;
+
         foreach($_rules as $rule){
-            if(  in_array($rule->getData('rule_id'), $customerRule) && $rule->getData('is_active') == 1 && $rule->getData('apply_original_price')== 1):
+            if(  in_array($rule->getData('rule_id'), $rules) && $rule->getData('is_active') == 1 && $rule->getData('apply_original_price')== 1):
                 $product = $this->_itemProduct->load($productId);
                 $item = $this->_itemProduct;
                 $item->setProduct($product);

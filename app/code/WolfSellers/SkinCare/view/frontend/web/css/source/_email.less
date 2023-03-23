@@ -4,18 +4,18 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    padding: 40px 17px 34px;
+    padding: 27px 10px 30px;
     color: white;
     float: left;
     font-size: 15px;
     justify-content: center;
     align-items: center;
-    margin-top: 25px;
+    margin-top: 0px;
 }
 .lineas-1{
     display: flex;
     padding-left: 20px;
-    padding-top: 64px;
+    padding-top: 25px;
     font-weight: bold;
 }
 .lineas-2{
@@ -26,6 +26,8 @@
 }
 .linea-3{
     font-weight: bold;
+    text-align: center;
+    font-size: 14px;
 }
 .email-prod-second{
     display: grid !important;
@@ -51,4 +53,63 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-left: 10px;
+}
+.btn{
+    font-size: 0.8rem;
+    border-radius: 10px;
+    line-height: 1;
+    background: #000000;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 5px 4px;
+    text-decoration: none;
+    width: 100px;
+    margin-left: 12px;
+}
+.btn:hover{
+    background: #c5d2df;
+    color: #000000;
+    text-decoration: none;
+}
+.buton-prod{
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    display: grid;
+}
+.anadir-carrito{
+    font-size: 10px;
+}
+
+@media (max-width: 600px) {
+    .email-prod-second{
+        padding-left: 5px !important;
+    }
+    .img-text{
+        padding-left: 5px !important;
+    }
+    .text-email{
+        display: block;
+        display: -webkit-box;
+        max-width: 80%;
+        height: 71px !important;
+        line-height: 1;
+        -webkit-line-clamp: inherit !important;
+        overflow: auto !important;
+        text-overflow: inherit !important;
+        padding-left: 5px !important;
+    }
+    .btn{
+        margin-left: 3px !important;
+        padding: 5px 0px !important;
+        display: grid !important;
+        text-align: center !important;
+        width: 80px !important;
+    }
+    .buton-prod{
+        padding-left: 0px !important;
+    }
+    .anadir-carrito{
+        font-size: 4px !important;
+    }
 }

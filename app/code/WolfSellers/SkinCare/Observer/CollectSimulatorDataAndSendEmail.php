@@ -63,16 +63,17 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
             if ($form->getFormId() == '26' and $answer->getData('response_json')) {
                 $json = $answer->getData('response_json');
                 $array = json_decode($json, true);
+                $userName = $array['textinput-name']['value'] . ' ' . $array['textinput-lastname']['value'];
                 $userEmail = $array['textinput-email']['value'];
                 $formId = $array['textinput-formid']['value'];
                 $skinHealth = $array['textinput-skinhealth']['value'];
-                $this->sendVariablesByEmail($userEmail,$formId, $skinHealth);
+                $this->sendVariablesByEmail($userEmail,$formId, $skinHealth, $userName);
             }
         } catch (\Exception $e) {
         }
     }
 
-    private function sendVariablesByEmail(string $userEmail, $formId, $skinHealth)
+    private function sendVariablesByEmail(string $userEmail, $formId, $skinHealth, $userName)
     {
         $simulador = $this->getSimulatorData($formId);
 
@@ -112,6 +113,11 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         $result[Constants::MANCHAS] = $this->getFourProductsByType($spot->getProductIds());
         $result[Constants::TEXTURA] = $this->getFourProductsByType($texture->getProductIds());
         $result[Constants::OJERAS] = $this->getFourProductsByType($darkCircle->getProductIds());
+
+        /**
+         * Set Customer Information
+         */
+        $result['customerName'] = $userName;
 
         $this->skinCareDiagnostico->sendEmail($userEmail, $result);
         $this->deleteSimulatorData($simulador);
