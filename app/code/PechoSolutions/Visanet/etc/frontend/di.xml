@@ -61,4 +61,9 @@
             </argument>
         </arguments>
     </type>
+    
+    <type name='Magento\Framework\Session\SessionStartChecker'>
+        <plugin name='PechoSolutions_Visanet_Plugin' type='PechoSolutions\Visanet\Plugin\TransparentSessionChecker'
+                sortOrder='10' disabled='false'/>
+    </type>
 </config>
