@@ -100,11 +100,45 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         /**
          * Set percentages
          */
-        $result['results'][Constants::LINEAS_DE_EXPRESION] = is_bool($wrinkle) ? '' : $wrinkle->getPercentage();
+        
+        $skinHealth = 0;
+        $division = 0;
+        
+        if(is_bool($wrinkle) === true){
+            $result['results']['sin_resultado_lineas_expresion'] = '0';
+        }else{
+            $result['results'][Constants::LINEAS_DE_EXPRESION] = $wrinkle->getPercentage();
+            $skinHealth = $skinHealth + intval($wrinkle->getPercentage());
+            $division = $division + 1;
+        }
+        if(is_bool($spot) === true){
+            $result['results']['sin_resultado_manchas'] = '0';
+        }else{
+            $result['results'][Constants::MANCHAS] = $spot->getPercentage();
+            $skinHealth = $skinHealth + intval($spot->getPercentage());
+            $division = $division + 1;
+        }
+        if(is_bool($texture) === true){
+            $result['results']['sin_resultado_textura'] = '0';
+        }else{
+            $result['results'][Constants::TEXTURA] = $texture->getPercentage();
+            $skinHealth = $skinHealth + intval($texture->getPercentage());
+            $division = $division + 1;
+        }
+        if(is_bool($darkCircle) ===  true){
+            $result['results']['sin_resultado_ojeras'] = '0';
+        }else{
+            $result['results'][Constants::OJERAS] = $darkCircle->getPercentage();
+            $skinHealth = $skinHealth + intval($darkCircle->getPercentage());
+            $division = $division + 1;
+        }
+        /*$result['results'][Constants::LINEAS_DE_EXPRESION] = is_bool($wrinkle) ? '' : $wrinkle->getPercentage();
         $result['results'][Constants::MANCHAS] = is_bool($spot) ? '' : $spot->getPercentage();
         $result['results'][Constants::TEXTURA] = is_bool($texture) ? '' : $texture->getPercentage();
-        $result['results'][Constants::OJERAS] = is_bool($darkCircle) ? '' : $darkCircle->getPercentage();
-        $result['results'][Constants::SALUD_DE_PIEL] = $skinHealth;
+        $result['results'][Constants::OJERAS] = is_bool($darkCircle) ? '' : $darkCircle->getPercentage();*/
+        
+        $result['results'][Constants::SALUD_DE_PIEL] = round($skinHealth / $division);
+        
         
         /**
          * Get UP TO 4 products for each type
