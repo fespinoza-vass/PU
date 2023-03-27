@@ -132,12 +132,14 @@ define([
             this.resultItems.hide();
             this.resultSliders.show();
             this.result.show();
+            var division = 0;
+            var skinHealth = 0;
 
-            if(report['skinHealth']){
+            /*if(report['skinHealth']){
                 this.skinHealthPercentage.text(report['skinHealth']);
                 this.skinHealth = report['skinHealth'];
                 self._setSkinHealth();
-            }
+            }*/
 
             $.each(this.resultElements, function (key, elements) {
                 var valReport = report[key];
@@ -152,10 +154,22 @@ define([
 
                 if(key == 'ageSpots' || key == 'darkCircles' || key == 'texture' || key == 'wrinkles'){
                     self._ajaxSkinCareCall(key, parseFloat(valReport));
+                    
+                    console.log(key + ': ' + valReport);
+                	skinHealth = skinHealth + valReport;
+                	division = division + 1;
                 }
 
                 elements.slider.show();
                 elements.productsSlider.slick('refresh');
+                
+                console.log('skinHealth: ' + skinHealth);
+                console.log('division: ' + division);
+                report['skinHealth'] = Math.round(skinHealth / division);
+                console.log(report['skinHealth']);
+
+                this.skinHealthPercentage.text(report['skinHealth']);
+                this.skinHealth = report['skinHealth'];
             });
         },
 
