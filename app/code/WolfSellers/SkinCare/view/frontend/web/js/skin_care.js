@@ -151,7 +151,7 @@ define([
                 elements.percentage.text(valReport);
                 elements.bar.width(valReport + '%');
                 elements.wrapper.show();
-
+                
                 if(key == 'ageSpots' || key == 'darkCircles' || key == 'texture' || key == 'wrinkles'){
                     self._ajaxSkinCareCall(key, parseFloat(valReport));
                     
@@ -167,10 +167,10 @@ define([
                 console.log('division: ' + division);
                 report['skinHealth'] = Math.round(skinHealth / division);
                 console.log(report['skinHealth']);
-
-                this.skinHealthPercentage.text(report['skinHealth']);
-                this.skinHealth = report['skinHealth'];
             });
+            
+            this.skinHealthPercentage.text(report['skinHealth']);
+            this.skinHealth = report['skinHealth'];
         },
 
         _ajaxSkinCareCall: function (type, value) {
