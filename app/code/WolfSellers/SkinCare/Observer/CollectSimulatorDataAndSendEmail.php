@@ -104,28 +104,28 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         $division = 0;
         
         if(is_bool($wrinkle) === true){
-            $result['results']['sin_resultado_lineas_expresion'] = '0';
+            $result['results'][Constants::LINEAS_DE_EXPRESION] = '';
         }else{
             $result['results'][Constants::LINEAS_DE_EXPRESION] = $wrinkle->getPercentage();
             $skinHealth = $skinHealth + intval($wrinkle->getPercentage());
             $division = $division + 1;
         }
         if(is_bool($spot) === true){
-            $result['results']['sin_resultado_manchas'] = '0';
+            $result['results'][Constants::MANCHAS] = '';
         }else{
             $result['results'][Constants::MANCHAS] = $spot->getPercentage();
             $skinHealth = $skinHealth + intval($spot->getPercentage());
             $division = $division + 1;
         }
         if(is_bool($texture) === true){
-            $result['results']['sin_resultado_textura'] = '0';
+            $result['results'][Constants::TEXTURA] = '';
         }else{
             $result['results'][Constants::TEXTURA] = $texture->getPercentage();
             $skinHealth = $skinHealth + intval($texture->getPercentage());
             $division = $division + 1;
         }
         if(is_bool($darkCircle) ===  true){
-            $result['results']['sin_resultado_ojeras'] = '0';
+            $result['results'][Constants::OJERAS] = '';
         }else{
             $result['results'][Constants::OJERAS] = $darkCircle->getPercentage();
             $skinHealth = $skinHealth + intval($darkCircle->getPercentage());
