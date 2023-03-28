@@ -171,6 +171,7 @@ define([
             
             this.skinHealthPercentage.text(report['skinHealth']);
             this.skinHealth = report['skinHealth'];
+            self._setSkinHealth();
         },
 
         _ajaxSkinCareCall: function (type, value) {
