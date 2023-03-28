@@ -25,25 +25,24 @@
 <!--<div class="greeting">Hola, {{var customerName}}</div>-->
 <!-- Custom Image with your email-->
 <!--img src="{{view url='Magenest_AbandonedCart::images/customimage.png'}}"/-->
-<div  class="hola">
-    {{trans "Hola %customer," customer=$diagnostico.customerName}} 
-</div>
-<div class="somos">
-    {{trans "Somos %store_name. " store_name=$store.getFrontendName()}}
-    {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atender las necesidades de tu piel."}}
+<div>
+    {{trans "Hola, %customer," customer=$diagnostico.customerName}}
+    {{trans "somos %store_name. " store_name=$store.getFrontendName()}}
+    {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atener las necesidades de tu piel"}}
 </div>
 
-<h3 style="text-align: center;">RESULTADOS DEL DIAGNÓSTICO</h3>
+<h3>RESULTADOS DEL DIAGNÓSTICO</h3>
+
+<hr>
 
 <div class="content">
     <div>
-        <h3 class="linea-3">{{trans "SALUD DE PIEL %skin_health / 100" skin_health=$diagnostico.results.skin_health}}</h3>
+        <h3 class="linea-3">{{trans "SALUD DE PIEL %skin_health  / 100" skin_health=$diagnostico.results.skin_health}}</h3>
     </div>
     {{depend result_wrinkle}}
-	    <hr>
 	    <div>
-	        <h3 class="lineas">{{trans "%wrinkle/100" wrinkle=$diagnostico.results.wrinkle}}</h3>
-	        <h3 class="lineas-1">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
+	        <h3 class="lineas">{{trans "%wrinkle % / 100" wrinkle=$diagnostico.results.wrinkle}}</h3>
+	        <h3 class="lineas-1">{{trans "LINEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
 	        <h2 class="lineas-2">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
 	    </div>
 	    <div>
@@ -57,11 +56,10 @@
 	        productsList=$diagnostico.wrinkle
 	        }}
 	    </div>
-    {{/depend}}
+	{{/depend}}
 	{{depend result_spot}}
-	    <hr>
-	    <div class="line_up">
-	        <h3 class="lineas">{{trans "%spot/100" spot=$diagnostico.results.spot}}</h3>
+	    <div>
+	        <h3 class="lineas">{{trans "%spot % / 100" spot=$diagnostico.results.spot}}</h3>
 	        <h3 class="lineas-1">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
 	        <h2 class="lineas-2">Se pueden originar por exposición solar, cambios hormonales, genética y más. Prevenga y evite su aparición.</h2>
 	    </div>
@@ -76,11 +74,10 @@
 	        productsList=$diagnostico.spot
 	        }}
 	    </div>
-    {{/depend}}
+	{{/depend}}
 	{{depend result_texture}}
-	    <hr style="margin-bottom: -35px;">
-	    <div class="line_up">
-	        <h3 class="lineas">{{trans "%texture/100" texture=$diagnostico.results.texture}}</h3>
+	    <div>
+	        <h3 class="lineas">{{trans "%texture % / 100" texture=$diagnostico.results.texture}}</h3>
 	        <h3 class="lineas-1">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
 	        <h2 class="lineas-2">El exceso de células muertas de la piel pueden acumularse, lo que lleva a una textura desigual de la piel.</h2>
 	    </div>
@@ -95,11 +92,10 @@
 	        productsList=$diagnostico.texture
 	        }}
 	    </div>
-    {{/depend}}
+	{{/depend}}
 	{{depend result_dark_circle}}
-	    <hr style="margin-bottom: -35px;">
-	    <div class="line_up">
-	        <h3 class="lineas">{{trans "%dark_circle/100" dark_circle=$diagnostico.results.dark_circle}}</h3>
+	    <div>
+	        <h3 class="lineas">{{trans "%dark_circle % / 100" dark_circle=$diagnostico.results.dark_circle}}</h3>
 	        <h3 class="lineas-1">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
 	        <h2 class="lineas-2">La falta de sueño, cansancio físico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.</h2>
 	    </div>
@@ -114,6 +110,6 @@
 	        productsList=$diagnostico.dark_circle
 	        }}
 	    </div>
-    {{/depend}}
+	{{/depend}}
 </div>
 {{template config_path="design/email/footer_template"}}
