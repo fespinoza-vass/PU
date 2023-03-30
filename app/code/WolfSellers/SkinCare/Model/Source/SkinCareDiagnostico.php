@@ -79,6 +79,10 @@ class SkinCareDiagnostico
                 )
                 ->setTemplateVars([
                     'diagnostico' => $diagnostico,
+                    'result_wrinkle' => $diagnostico['results']['wrinkle'],
+                    'result_spot' => $diagnostico['results']['spot'],
+                    'result_texture' => $diagnostico['results']['texture'],
+                    'result_dark_circle' => $diagnostico['results']['dark_circle']
                 ])
                 ->setFrom($sender)
                 ->addTo($email)
