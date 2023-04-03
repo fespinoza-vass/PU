@@ -151,10 +151,10 @@ define([
                 elements.percentage.text(valReport);
                 elements.bar.width(valReport + '%');
                 elements.wrapper.show();
-                
-                if(key == 'ageSpots' || key == 'darkCircles' || key == 'texture' || key == 'wrinkles'){
+
+                if(key === 'ageSpots' || key === 'darkCircles' || key === 'texture' || key === 'wrinkles'){
                     self._ajaxSkinCareCall(key, parseFloat(valReport));
-                    
+
                     console.log(key + ': ' + valReport);
                 	skinHealth = skinHealth + valReport;
                 	division = division + 1;
@@ -162,14 +162,12 @@ define([
 
                 elements.slider.show();
                 elements.productsSlider.slick('refresh');
-                
+
+                console.log('skinHealth: ' + skinHealth);
+                console.log('division: ' + division);
+                report['skinHealth'] = Math.round(skinHealth / division);
+                console.log(report['skinHealth']);
             });
-            
-            console.log('skinHealth: ' + skinHealth);
-            console.log('division: ' + division);
-            report['skinHealth'] = Math.round(skinHealth / division);
-            console.log(report['skinHealth']);
-            
             this.skinHealthPercentage.text(report['skinHealth']);
             this.skinHealth = report['skinHealth'];
             self._setSkinHealth();
