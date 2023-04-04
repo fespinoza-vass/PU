@@ -89,7 +89,27 @@
 .hola{
     text-align: justify;
 }
-
+@media (max-width: 428px) {
+    .text-email{
+        display: block;
+        display: -webkit-box;
+        max-width: 80%;
+        padding-left: 5px !important;
+        font-size: 10px !important;
+        padding-top: 15px !important;
+        position: relative !important;
+        line-height: 1.5em !important;
+        max-height: 3em !important;
+        overflow: hidden !important;
+        &.text-email::after{
+            content: "..." !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            right: 0 !important;
+            
+        }
+    }
+}
 @media (max-width: 600px) {
     .email-prod-second{
         padding-left: 5px !important;
@@ -102,14 +122,20 @@
         display: block;
         display: -webkit-box;
         max-width: 80%;
-        height: 24px !important;
-        line-height: 1;
-        -webkit-line-clamp: 3 !important;
-        overflow: auto !important;
-        text-overflow: inherit !important;
         padding-left: 5px !important;
         font-size: 10px !important;
-        padding-top: 15px;
+        padding-top: 15px !important;
+        position: relative !important;
+        line-height: 1.2em !important;
+        max-height: 3em !important;
+        overflow: hidden !important;
+        &.text-email::after{
+            content: "..." !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            right: 0 !important;
+
+        }
     }
     .btn{
         margin-left: 3px !important;
@@ -132,27 +158,4 @@
         padding-top: 10px;
     }
 }
-@media (max-width: 450px) {
-    .text-email{
-        display: block;
-        display: -webkit-box;
-        max-width: 80%;
-        height: 35px !important;
-        line-height: 1;
-        -webkit-line-clamp: 3 !important;
-        overflow: auto !important;
-        text-overflow: inherit !important;
-        padding-left: 5px !important;
-        font-size: 10px !important;
-        padding-top: 15px;
-    }
-    .lineas-2{
-        height: 80px !important;
-        display: flex;
-        padding-left: 20px;
-        font-size: 14px;
-        margin-bottom: 50px !important;
-        text-align: justify;
-        margin-top: 10px !important;
-    }
-}
+
