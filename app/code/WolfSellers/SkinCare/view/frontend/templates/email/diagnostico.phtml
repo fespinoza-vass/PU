@@ -13,6 +13,7 @@ $splitHelper = $this->helper(WolfSellers\SkinCare\Helper\SplitHelper::class);
                 <a class="text-email" href="<?= $item['urlProduct'] ?>" target="__blank">
                     <?= $splitHelper->splitName($item['name']); ?>
                 <span class="precio-carrito"><?= $item['price'] ?></span>
+                </a>
             </td>
             <td class="buton-prod">
                 <a class="btn action primary" href="<?= $item['urlProduct'] ?>" target="__blank">
