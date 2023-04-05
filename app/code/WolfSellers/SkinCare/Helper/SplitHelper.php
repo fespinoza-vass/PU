@@ -40,11 +40,11 @@ class SplitHelper extends AbstractHelper
         $secondLineLimit = $this->getConfigValue("skincare/characters/second_line") ?? self::SECOND_LINE;
         if (strlen($productName) > ($secondLineLimit + $firstLineLimit)) {
             $productName = trim(ucfirst(strtolower($productName)));
-            $firstLineName =  '<p>' .substr($productName, 0, $firstLineLimit) .'</p>';
+            $firstLineName =  substr($productName, 0, $firstLineLimit) ;
 
             $secondLineName = trim(str_replace($firstLineName, '', $productName));
-            $secondLineName =  '<p>' .substr($secondLineName, 0, $secondLineLimit).'...' .'</p>';
-            return $firstLineName . $secondLineName;
+            $secondLineName =  substr($secondLineName, 0, $secondLineLimit).'...' ;
+            return '<span>' .$firstLineName .'</span>' .'<span>' . $secondLineName .'</span>';
         }
         return $productName;
     }
