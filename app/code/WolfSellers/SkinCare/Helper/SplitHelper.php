@@ -7,7 +7,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class SplitHelper extends AbstractHelper
 {
-    public const LIMIT = 15;
+    public const LIMIT = 22;
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -36,18 +36,7 @@ class SplitHelper extends AbstractHelper
     {
         $strLimit = $this->getConfigValue("skincare/characters/limit") ?? self::LIMIT;
         if (strlen($productName) > $strLimit) {
-            $explodedName = explode(" ", $productName);
-            if (count($explodedName) >= 3) {
-                $firstLine = $explodedName[0] . ' ' . $explodedName[1];
-                $secondLine = str_replace($firstLine. ' ', '', $productName);
-                if (strlen($secondLine) > $strLimit) {
-
-                    $secondLine = substr($secondLine, 0, $strLimit-1). '...';
-                }
-                return $firstLine . '<br>' . $secondLine;
-            } else {
-                return substr($productName, 0, $strLimit-1). '...';
-            }
+            return substr($productName, 0, $strLimit). '...';
         }
         return $productName;
     }
