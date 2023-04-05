@@ -8,8 +8,11 @@
             <resource>Magento_Config::config</resource>
             <group id="characters" translate="label" sortOrder="200" showInWebsite="1" showInStore="1" showInDefault="1">
                 <label>Characters</label>
-                <field id="limit" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
-                    <label>Limit</label>
+                <field id="first_line" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Primer Renglon</label>
+                </field>
+                <field id="second_line" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Segundo Renglon</label>
                 </field>
             </group>
         </section>

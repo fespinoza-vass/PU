@@ -7,7 +7,9 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class SplitHelper extends AbstractHelper
 {
-    public const LIMIT = 22;
+    public const FIRST_LINE = 8;
+
+    public const SECOND_LINE = 8;
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -18,7 +20,7 @@ class SplitHelper extends AbstractHelper
      * Construct Method
      *
      * @param Context $context
-     * @param ScopeInterface $scopeConfig
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(Context $context, ScopeConfigInterface $scopeConfig)
     {
@@ -34,9 +36,15 @@ class SplitHelper extends AbstractHelper
      */
     public function splitName($productName)
     {
-        $strLimit = $this->getConfigValue("skincare/characters/limit") ?? self::LIMIT;
-        if (strlen($productName) > $strLimit) {
-            return substr($productName, 0, $strLimit). '...';
+        $firstLineLimit = $this->getConfigValue("skincare/characters/first_line") ?? self::FIRST_LINE;
+        $secondLineLimit = $this->getConfigValue("skincare/characters/second_line") ?? self::SECOND_LINE;
+        if (strlen($productName) > ($secondLineLimit + $firstLineLimit)) {
+            $productName = trim(ucfirst(strtolower($productName)));
+            $firstLineName =  substr($productName, 0, $firstLineLimit) ;
+
+            $secondLineName = trim(str_replace($firstLineName, '', $productName));
+            $secondLineName =  substr($secondLineName, 0, $secondLineLimit).'...' ;
+            return '<span>' .$firstLineName .'</span>' .'<span>' . $secondLineName .'</span>';
         }
         return $productName;
     }
