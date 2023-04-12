@@ -6,5 +6,10 @@
                 <value id="makeup-par" type="host">plugins-media.makeupar.com</value>
             </values>
         </policy>
+        <policy id="style-src">
+            <values>
+                <value id="cloudflare-style" type="host">cdnjs.cloudflare.com</value>
+            </values>
+        </policy>
     </policies>
 </csp_whitelist>
