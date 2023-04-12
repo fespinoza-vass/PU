@@ -201,10 +201,10 @@ define([
 
             }
             if (typeKey !== "") {
-                $.get(
-                    window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey + "&form=" + self.formId,
-                    {},
-                    function(data) {
+                $.ajax({
+                    url: window.BASE_URL + "skincare/index/index?value=" + value + "&type=" + typeKey + "&form=" + self.formId,
+                    type: 'GET',
+                    success: function(data){
                         var $container = $("#" + typeKey + "-container");
                         var $parentContainer = $("." + typeKey + "-parent-container");
                         $parentContainer.hide();
@@ -216,8 +216,11 @@ define([
                             $('body').trigger('click');
                             $parentContainer.click();
                         }
+                    },
+                    error: function() {
+                        window.location.reload();
                     }
-                );
+                });
             }
         },
 
