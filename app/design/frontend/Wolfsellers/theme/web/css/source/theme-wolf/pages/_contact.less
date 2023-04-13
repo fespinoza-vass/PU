@@ -1,4 +1,4 @@
-& when (@media-common =true) {
+    & when (@media-common =true) {
     .cms-contacto {
         .page-wrapper {
             .page-main-full-width {
@@ -13,12 +13,9 @@
                                 .amform-form-fieldset {
                                     .amcform-multi-page {
                                         .amcform-page-wrap {
-                                            .fb-text {}
-
                                             .fb-h3{
                                                 margin: 25px 0 15px;
                                             }
-
                                             .fb-undefined {
                                                 .control {
 
@@ -27,11 +24,65 @@
                                                     }
                                                 }
                                             }
-
                                             .amcform-toolbar{
                                                 .amcform-submit{
                                                     background: @black;
                                                     width: 100%;
+                                                }
+                                            }
+                                            .field.fb-checkbox{
+                                                margin-top: 20px;
+                                                .lib-css(display, flex) !important; 
+                                                position: relative ;
+                                                .lib-checkboxs;
+                                                label{
+                                                    margin-right: 10px;
+                                                }
+                                                ~ .field.fb-checkbox{
+                                                    margin-top: 0;
+                                                    margin-left: 7px;
+                                                }
+                                                .mage-error{
+                                                    position: absolute;
+                                                    left: 0;
+                                                    min-width: 220px;
+                                                    bottom: -40px;
+                                                }
+                                            }
+                                            .field.fb-wysiwyg{
+                                                @media @mdmax{
+                                                    max-width: 670px;
+                                                }
+                                                p{
+                                                    display: inline;
+                                                    //letter-spacing: -1px;
+                                                    strong{
+                                                        padding-left: 145px;
+                                                        font-weight: normal;
+                                                    }
+                                                }
+                                                .control {
+                                                    > div{
+                                                        margin-top: -66px;
+                                                        margin-bottom: 15px;
+                                                        margin-left: 16px;
+                                                        &.popro{
+                                                            margin-top: -58px;
+                                                        }
+                                                        margin-top: -66px;
+                                                        &.popro{
+                                                            margin-top: -58px;
+                                                            p{
+                                                                margin: 0 0 0 -5px !important;
+                                                                font-size: 14px;
+                                                            }
+                                                        }
+                                                        &.amform-wysiwyg p{
+                                                            margin: 0 0 0 140px;
+                                                            .lib-font-size(14);
+                                                            position: relative;
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -69,14 +120,14 @@
 
                                             .fb-undefined {
                                                 position: absolute;
-                                                height: 70%;
+                                                height: 100%;
+                                                max-height: 270px;
                                                 width: 46%;
                                                 top: 35px;
                                                 right: 0;
 
                                                 .control {
-                                                    height: 70%;
-
+                                                    height: 90%;
                                                     textarea {
                                                         height: 100%;
                                                     }

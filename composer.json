@@ -2,7 +2,7 @@
     "name": "magento/magento-cloud-template",
     "description": "eCommerce Platform for Growth (Enterprise Edition)",
     "type": "project",
-    "version": "2.4.3-p3",
+    "version": "2.4.3",
     "license": "OSL-3.0",
     "config": {
         "preferred-install": "dist",
@@ -23,15 +23,17 @@
         }
     },
     "require": {
+        "amasty/base": "^1.14.2",
         "amasty/checkout-graph-ql": "^1.1",
         "amasty/feed": "^2.6",
         "amasty/label": "^2.1",
-        "amasty/mega-menu": "^2.2",
+        "amasty/mega-menu": "^2.4.2",
         "amasty/mega-menu-graphql": "^1.0",
         "amasty/mega-menu-page-builder": "^1.0",
         "amasty/module-elastic-search": "^1.13",
         "amasty/module-elastic-search-graphql": "^1.0",
         "amasty/module-magento-custom-form": "^1.17",
+        "amasty/module-mega-menu-package-pro": "^2.4.2",
         "amasty/module-one-step-checkout-pro-package": "^2.0",
         "amasty/module-promo-banners": "^1.1",
         "amasty/module-promo-countdown": "^1.1",
@@ -49,6 +51,8 @@
         "magento/composer-root-update-plugin": "~1.1",
         "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4",
         "magento/product-recommendations": "^3.3",
+        "ocramius/proxy-manager": "^2.8",
+        "phpoffice/phpspreadsheet": "^1.27",
         "wolfsellers/module-enabledisabletfa": "^1.0"
     },
     "suggest": {

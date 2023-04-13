@@ -57,12 +57,18 @@
 				    .manufacturer-head{
 				    	display: flex;
 				    	align-items: center;
+						width: 100%;
 				    	.value{
 				    		overflow: hidden;
-				    		img{
-				    			float: left;
-				    			max-height: 40px;
-				    		}
+							width: 100%;
+							a{
+								width: 100%;
+								display: block;
+								img{
+									margin-top: 12px;
+									max-height: 40px;
+								}
+							}
 				    	}
 				    }
 				}
@@ -614,6 +620,26 @@
 					padding: 20px !important;
 					button{
 						margin: 0 10px;
+					}
+				}
+			}
+		}
+	}
+
+	.category-sales{
+		.sidebar{
+			.filter{
+				.filter-content{
+					.filter-options{
+						.filter-options-content{
+							.amshopby-flyout-block{
+								.am-filter-items-category_ids{
+									li[data-label="SALES"]{
+										display: none !important;
+									}
+								}
+							}
+						}
 					}
 				}
 			}

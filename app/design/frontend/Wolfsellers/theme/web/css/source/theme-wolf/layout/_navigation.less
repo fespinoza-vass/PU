@@ -7,14 +7,76 @@
 		margin-bottom: 0;
 		.ammenu-items.-root{
 			justify-content: center;
+			[data-bind*="scope: 'ammenu_topmenu_item_6'"] .ammenu-submenu-wrapper{
+				width: auto !important; //AMASTY important
+			    right: 1px !important; //AMASTY important
+			    left: auto !important; //AMASTY important
+			}
+		}
+		li{
+			&.ammenu-item{
+				&.category-item{
+					.ammenu-submenu-wrapper{
+						&:last-child {
+							width: auto !important;
+							right: 1px !important;
+							left: auto !important;
+						}
+					}
+				}
+			}
+		}
+		a{
+			&.ammenu-link{
+				&.-mobile[aria-label="Go to SALES"] {
+					span{
+						&.ammenu-text {
+							color: @white;
+							margin-left: -4px;
+							background: @black;
+							padding: 5px 8px 5px 8px;
+							font-family: @font-family-name__base;
+							font-size: 1.8rem;
+							border-radius: 10px;
+						}
+					}
+				}
+			}
 		}
 	}
 }
-
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
 	section.ammenu-menu-wrapper{
 		.ammenu-nav-sections.-topmenu{
 			.ammenu-items.-root{
+				li[data-bind*="id: 'category-node-1718'"]{
+					p {
+						background: @white;
+						border-radius: 10px;
+						padding: 5px 10px;
+						margin: 0 -15px 0 0;
+						color: @black;
+					}
+					.ammenu-link{
+						&:after {
+							display: none;
+						}
+					}
+				}
+				li[data-bind*="id: 'category-node-1971'"]{
+					p {
+						background: @white;
+						border-radius: 10px;
+						padding: 5px 10px;
+						margin: 0 -15px 0 0;
+						color: @black;
+					}
+					.ammenu-link{
+						&:after {
+							display: none;
+						}
+					}
+				}
 				> .ammenu-item > .ammenu-link{
 					background: @black !important;
 					text-transform: uppercase;
@@ -88,7 +150,7 @@
 			    padding: 0 20px;
 			    font-size: 1.6rem;
 			    font-weight: 600;
-			    font-family: @font-second;
+			    font-family: @font-family-name__base;
 			}
 			.ammenu-menu-title,
 			.ammenu-tabs-list{
@@ -99,10 +161,10 @@
 				> li > a{
 					color: #000 !important;
 				    border-bottom: 1px solid @lines-input !important;
-				    font-weight: 600 !important;
+				    font-weight: 700 !important;
 				    text-transform: uppercase;
-				    font-size: 1.6rem;
-				    font-family: @font-second;
+				    font-size: 1.8rem;
+				    font-family: @font-family-name__base;
 				    padding: 12px 0 !important;
 				    min-height: auto !important;
                     figure{
@@ -116,7 +178,7 @@
 				            text-transform: uppercase;
 				            text-decoration: none !important;
 				            font-size: 1.6rem;
-				            font-family: @font-second;
+				            font-family: @font-family-name__base;
 				            padding: 10px 0 !important;
 							min-height: auto !important;
                             figure{

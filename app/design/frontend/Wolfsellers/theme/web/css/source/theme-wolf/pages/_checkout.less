@@ -131,9 +131,8 @@
 							display: none;
 						}
 					}
-					&[name="shippingAddress.company"]{
+					&[name="shippingAddress.custom_attributes.company"]{
 						order: 13;
-						display: block !important;
 					}
 					&[name="shippingAddress.custom_attributes.dni"]{
 						order: 14;
@@ -194,7 +193,7 @@
 						&[name="shippingAddress.custom_attributes.invoice_required"]{
 							order: 12;
 						}
-						&[name="shippingAddress.company"]{
+						&[name="shippingAddress.custom_attributes.company"]{
 							order: 13;
 						}
 						&[name="shippingAddress.custom_attributes.dni"]{
@@ -270,7 +269,7 @@
 						.field.amcheckout-comment{
 							float: left;
 							width: 100%;
-							margin-top: 15px;
+							margin-top: 35px;
 						}
 						.checkout-column{
 							.checkout-block{
@@ -338,6 +337,11 @@
 										[name="billing_address_id"] {
 										    padding-right: 30px;
 										}
+										.payment-method:not(:last-child){
+											float: left;
+											width: 100%;
+											margin-bottom: 10px;
+										}
 										.payment-method-title.field.choice{
 											border: 1px solid @lines-input;
 										    margin: 0;
@@ -374,6 +378,33 @@
 									table.table-totals{
 										tbody tr{
 											background: @white;
+											&.grand.totals{
+												~ div{
+													width: 140%;
+													margin-top: 90px;
+													.lib-checkboxs;
+													a{
+														font-weight: bold;
+														font-family: @font-family-name__base;
+														&.aspan{
+															white-space: nowrap;
+														}
+														&:hover {
+															text-decoration: underline;
+														}
+														&:visited {
+															color:@black;
+														}
+													}
+												}
+											}
+										}
+										label{
+											&#receive-promotion{
+												a{
+													white-space: nowrap;
+												}
+											}
 										}
 									}
 								}
@@ -510,11 +541,32 @@
 										background: @white;
 										.lib-checkboxs;
 										.checkout-agreements{
-											margin-bottom: 0;
 											.checkout-agreement{
 												float: left;
 												width: 100%;
-												margin: 15px 0 0;
+												margin-top: -90px;
+												margin-left: -5px;
+												a{
+													font-weight: bold;
+													&:hover {
+														color: @primary;
+														text-decoration: underline;
+													}
+												}
+												input[type='checkbox']:checked + label:before{
+													left: 7px;
+												}
+												label.label{
+													button{
+														margin-left: 8px;
+														margin-top: -5px;
+														color: @primary;
+														font-size: 1.4rem;
+														span{
+															word-break: break-word; 
+														}
+													}
+												}
 											}
 										}
 										.admin__field.admin__field-option{
@@ -669,9 +721,76 @@
 		}
 	}
 }
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+	.checkout-index-index {
+		th{
+			&.mark {
+				padding: 6px 170px 6px 0 !important;
+			}
+		}
+		table{
+			&.data{
+				&.table{
+					&.table-totals {
+						display: flex;
+					}
+				}
+			}
+		}
+		.page-wrapper {
+			.page-main {
+				.column.main {
+					.checkout-container {
+						.opc-wrapper {
+							.checkout-column {
+								.checkout-block{
+									&.-summary{
+										.additional-options{
+											.checkout-agreements {
+												margin-bottom: 20px;
+											}
+										}
+									}
+								}
+								.checkout-block {
+									.opc-block-summary {
+										table.table-totals {
+											tbody {
+												tr.grand.totals~div {
+													a.aspan {
+														white-space: nowrap;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
 	.checkout-index-index{
+		th{
+			&.mark {
+				padding: 6px 120px 6px 0 !important;
+			}
+		}
+		table{
+			&.data{
+				&.table{
+					&.table-totals {
+						display: flex;
+					}
+				}
+			}
+		}
 		.page-wrapper{
 			.page-main .column.main{
 				.checkout-container{
@@ -686,11 +805,33 @@
 					.opc-wrapper{
 						.checkout-column{
 							.checkout-block{
+								&.-summary{
+									.additional-options{
+										.checkout-agreements {
+											margin-bottom: 10px;
+										}
+									}
+								}
 								li{
 									.form-shipping-address{
 										background: transparent;
 										margin: 0;
 										padding: 0;
+									}
+								}
+								.opc-block-summary{
+									table{
+										&.table-totals{
+											tbody{
+												tr{
+													&.grand{
+														&.totals~div {
+															width: 100% !important;
+														}
+													}
+												}
+											}
+										}
 									}
 								}
 							}

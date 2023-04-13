@@ -36,7 +36,7 @@
 			}
 			form.form-create-account{
 				fieldset{
-					&.info{
+					&.info, &.account{
 						.lib-two-columns;
 					}
 					@media @mdmin{
@@ -49,6 +49,9 @@
 								&.field.field-identificacion{
 									margin-left: 2%;
 								}
+                                &.field-numero_de_identificacion, &.field-dob{
+                                    padding: 0 10px 0 0;
+                                }
 							}
 						}
 						&.account{
@@ -60,12 +63,33 @@
 									margin-right: 0;
 								}
 							}
+                            .field{
+                                &.emailaddress{
+                                    padding: 0 10px 0 0;
+                                }
+                            }
 						}
 					}
 				}
+                .checkout-agreements{
+                    .fieldset{
+                        .checkout-agreement{
+                            .action-show{
+                                color: @black;
+                            }
+                        }
+                    }
+                }
 			}
 		}
 	}
+    .customer-account-create{
+        .modals-wrapper{
+            .modal-popup{
+                z-index: 10000;
+            }
+        }
+    }
 	.account{
 		.column.main{
             .fieldset,
@@ -387,10 +411,16 @@
                                 vertical-align: baseline;
                                 width: 100%;
                                 box-sizing: border-box;
+                                display: inline-flex;
+                                position: relative;
                                 input{
                                     border: none;
                                     background: none;
                                     margin: unset;
+                                }
+                                div.mage-error{
+                                    position: absolute;
+                                    top: 45px;
                                 }
                             }
                         }
@@ -423,9 +453,64 @@
                                     font-weight: normal;
                                 }
                                 &:after{
-                                    background-color: @black;
+                                    background-color: @white;
                                     color: @white;
                                 }
+
+                                color: @black;
+                                a {
+                                    color: @black;
+                                    font-weight: bold;
+                                    &:visited {
+                                      color: @black;
+                                    }
+                                    &:hover {
+                                      text-decoration: underline;
+                                    }
+                                }
+                            }
+                            .checkbox{
+                                &:checked{
+                                    +.label{
+                                        &::after{
+                                            background-color: @black;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .checkout-agreement.field.choice.required{
+                            position: relative;
+                            margin: 0 0  30px;
+                            .lib-checkboxs();
+                            .label{
+                                &::after{
+                                    margin: 0;
+                                }
+                                button {
+                                  color: @black;
+                                  a {
+                                    color: @black;
+                                    font-weight: bold;
+                                    &:visited {
+                                      color: @black;
+                                    }
+                                    &:hover {
+                                      text-decoration: underline;
+                                    }
+                                  }
+                                  &.action.action-show {
+                                    color: @black;
+                                    &:hover {
+                                      text-decoration: none;
+                                    }
+                                  }
+                                }
+                            }
+
+                            div.mage-error{
+                                position: absolute;
+                                top: 10px;
                             }
                         }
                     }
@@ -952,7 +1037,9 @@
             .page-main{
                 .form-newsletter-manage{
                     padding: 24px 0 32px 31px;
-
+                    > .fieldset{
+                        box-shadow: none;
+                    }
                     .legend{
 
                         span{
@@ -1453,6 +1540,7 @@
                     .fieldset.create.info{
                         margin-bottom: 20px;
                         .fullname{
+                            padding: 0 0 0 10px;
                             .field.field-name-firstname.required,
                             .field.field-name-lastname.required{
                                 width: 100% !important;
@@ -1461,7 +1549,7 @@
                         }
                         .field.gender.required,
                         .field.field-identificacion.required{
-                            width: calc(~'(50% - 8px)') !important;
+                            width: calc(~'((100%)/2)') !important;
                             margin-right: unset !important;
                         }
                         .field.field-identificacion.required{
@@ -1478,6 +1566,23 @@
                             }
                         }
                     }
+                }
+            }
+        }
+        .checkout-agreements{
+            .checkout-agreement{
+                margin: 0 0 55px !important;
+                .label{
+                    .action-show{
+                        text-align: left;
+                        display: flex;
+                        &::after{
+                            align-self: flex-end;
+                        }
+                    }
+                }
+                div.mage-error{
+                    top: 30px !important;
                 }
             }
         }
