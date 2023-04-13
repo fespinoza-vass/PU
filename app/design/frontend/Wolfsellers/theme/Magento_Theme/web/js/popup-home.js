@@ -7,7 +7,7 @@ define([
     "use strict";
 
     $('.row-popup-home').attr('id', 'modal');
-    if (! $.cookie('cookiemodal')) { //check if cookiemodal doesn't exist
+    if (! $.cookie('cookiemodal') && !window.location.href.includes("simulador")) { //check if cookiemodal doesn't exist
         $.cookie('cookiemodal', 'ok'); //we set a cookie name="cookiemodal" value="ok"
         var options = {
             type: 'popup',

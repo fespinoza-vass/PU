@@ -1,0 +1,26 @@
+<?php
+use WolfSellers\SkinCare\Helper\SplitHelper;
+/** @var $splitHelper SplitHelper */
+$splitHelper = $this->helper(WolfSellers\SkinCare\Helper\SplitHelper::class);
+?>
+<table>
+<?php if($this->getProductsList()):?>
+    <?php foreach ($this->getProductsList() as $item): ?>
+        <tr class="email-prod-main">
+            <td class="email-prod-second">
+                <img class="img-text" src="<?= $item['urlImage'] ?>" alt="<?= $item['name']; ?>" title="<?= $item['name']; ?>" height="80" width="80"/>
+
+                <a class="text-email" href="<?= $item['urlProduct'] ?>" target="__blank">
+                    <?= $splitHelper->splitName($item['name']); ?>
+                <span class="precio-carrito"><?= $item['price'] ?></span>
+                </a>
+            </td>
+            <td class="buton-prod">
+                <a class="btn action primary" href="<?= $item['urlProduct'] ?>" target="__blank">
+                    <span class="anadir-carrito"><?=__('AÑADIR AL CARRITO')?></span>
+                </a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+<?php endif;?>
+</table>
