@@ -11,43 +11,53 @@ declare(strict_types=1);
 
 namespace WolfSellers\ZipCode\Controller\Index;
 
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Json\Helper\Data;
+use Magento\Framework\Serialize\Serializer\Json;
 
 /**
  * Get Cities by region.
  */
-class GetCity extends Action
+class GetCity implements HttpGetActionInterface
 {
-    /** @var JsonFactory */
+    /**
+     * @var JsonFactory
+     */
     private JsonFactory $resultJsonFactory;
 
-    /** @var Data */
-    private Data $jsonHelper;
+    /**
+     * @var Json
+     */
+    private Json $json;
 
-    /** @var ResourceConnection */
+    /**
+     * @var ResourceConnection
+     */
     private ResourceConnection $resourceConnection;
 
     /**
-     * @param Context $context
+     * @var RequestInterface
+     */
+    protected RequestInterface $request;
+
+    /**
      * @param JsonFactory $resultJsonFactory
-     * @param Data $jsonHelper
+     * @param Json $json
      * @param ResourceConnection $resourceConnection
+     * @param RequestInterface $request
      */
     public function __construct(
-        Context $context,
         JsonFactory $resultJsonFactory,
-        Data $jsonHelper,
-        ResourceConnection $resourceConnection
+        Json $json,
+        ResourceConnection $resourceConnection,
+        RequestInterface $request
     ) {
-        parent::__construct($context);
-
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->jsonHelper = $jsonHelper;
+        $this->json = $json;
         $this->resourceConnection = $resourceConnection;
+        $this->request = $request;
     }
 
     /**
@@ -55,7 +65,7 @@ class GetCity extends Action
      */
     public function execute()
     {
-        $regionId = $this->getRequest()->getParam('region_id');
+        $regionId = $this->request->getParam('region_id');
 
         $connection = $this->resourceConnection->getConnection();
         $tableName = $connection->getTableName('wolfsellers_zipcode');
@@ -63,15 +73,15 @@ class GetCity extends Action
             'value' => 'ciudad',
             'label' => 'ciudad',
         ];
+
         $select = $connection->select()
             ->from($tableName, $cols)
             ->where('region_id = ?', $regionId)
             ->order('ciudad ASC')
-            ->distinct()
-        ;
+            ->distinct();
 
         $towns = $connection->fetchAll($select);
 
-        return $this->resultJsonFactory->create()->setData($this->jsonHelper->jsonEncode($towns));
+        return $this->resultJsonFactory->create()->setData($this->json->serialize($towns));
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-
 namespace WolfSellers\ZipCode\Model\ResourceModel;
 
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
-Class ZipCode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class ZipCode extends AbstractDb
 {
 
     /**
@@ -12,15 +12,8 @@ Class ZipCode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @return void
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init('wolfsellers_zipcode', 'zip_id');
-    }
-
-    public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context
-    )
-    {
-        parent::__construct($context);
     }
 }

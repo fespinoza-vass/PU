@@ -7,7 +7,6 @@ declare(strict_types=1);
 
 namespace WolfSellers\SkinCare\Controller\Index;
 
-use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
 use Magento\Customer\Model\Session as customerSession;
 
@@ -46,7 +45,6 @@ class Index extends Action
     protected $http;
     private LayoutFactory $layoutFactory;
     private ProductCollectionFactory $productCollectionFactory;
-    private RequestInterface $request;
     private ResourceConnection $resourceConnection;
     protected customerSession $customerSession;
     private SimulatorFactory $simulatorFactory;
@@ -119,7 +117,7 @@ class Index extends Action
             $attrCodeMin => $minValue,
             $attrCodeMax => $maxValue
         ];
-        //die("\$minDark = [$minDark] -- \$maxDark = [$maxDark]<pre>" . print_r($productCollection->getAllIds(), true));
+
         /** @var ProductList $productBlock */
         $productBlock = $this->layoutFactory->create()
             ->createBlock(

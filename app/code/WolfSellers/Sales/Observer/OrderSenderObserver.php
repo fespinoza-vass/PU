@@ -1,16 +1,10 @@
 <?php
 namespace WolfSellers\Sales\Observer;
+
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\App\ObjectManager;
 
 class OrderSenderObserver implements ObserverInterface
 {
-
-    public function __construct()
-    {
-    }
-
     /**
      *
      * @param \Magento\Framework\Event\Observer $observer

@@ -3,64 +3,102 @@ declare(strict_types=1);
 
 namespace WolfSellers\Consecutive\Controller\Adminhtml\Sequential;
 
+use Magento\Backend\Model\View\Result\Redirect;
+use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Message\ManagerInterface;
+use WolfSellers\Consecutive\Controller\Adminhtml\Sequential;
+use WolfSellers\Consecutive\Model\ConsecutiveRepository;
+use WolfSellers\Consecutive\Model\Data\SequentialFactory;
+use WolfSellers\Consecutive\Model\SequentialRepository;
 
-class Save extends \Magento\Backend\App\Action
+class Save extends Sequential
 {
-
-    protected $dataPersistor;
+    /**
+     * @var DataPersistorInterface
+     */
+    protected DataPersistorInterface $dataPersistor;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor
+     * @var SequentialFactory
+     */
+    protected SequentialFactory $sequentialFactory;
+
+    /**
+     * @param RequestInterface $request
+     * @param RedirectFactory $resultRedirectFactory
+     * @param ManagerInterface $messageManage
+     * @param ConsecutiveRepository $sequentialRepository
+     * @param DataPersistorInterface $dataPersistor
+     * @param SequentialFactory $sequentialFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor
-    ) {
+        RequestInterface $request,
+        RedirectFactory $resultRedirectFactory,
+        ManagerInterface $messageManage,
+        SequentialRepository $sequentialRepository,
+        DataPersistorInterface $dataPersistor,
+        SequentialFactory $sequentialFactory
+    )
+    {
+        parent::__construct($request, $resultRedirectFactory, $messageManage, $sequentialRepository);
+
         $this->dataPersistor = $dataPersistor;
-        parent::__construct($context);
+        $this->sequentialFactory = $sequentialFactory;
     }
 
     /**
      * Save action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
-        $data = $this->getRequest()->getPostValue();
-        if ($data) {
-            $id = $this->getRequest()->getParam('sequential_id');
-        
-            $model = $this->_objectManager->create(\WolfSellers\Consecutive\Model\Sequential::class)->load($id);
-            if (!$model->getId() && $id) {
-                $this->messageManager->addErrorMessage(__('This Sequential no longer exists.'));
-                return $resultRedirect->setPath('*/*/');
-            }
+        $data = $this->request->getParams();
 
-            $model->setData($data);
-        
+        if ($data) {
+            $id = $this->request->getParam('sequential_id');
+
             try {
-                $model->save();
+                $sequential = ($id) ? $this->sequentialRepository->get($id) : $this->sequentialFactory->create();
+
+                if (!$sequential->getSequentialId() && $id) {
+                    $this->messageManager->addErrorMessage(__('This Sequential no longer exists.'));
+
+                    return $resultRedirect->setPath('*/*/');
+                }
+
+                foreach ($data as $key => $value) {
+                    $sequential->setData($key, $value);
+                }
+
+                $this->sequentialRepository->save($sequential);
                 $this->messageManager->addSuccessMessage(__('You saved the Sequential.'));
                 $this->dataPersistor->clear('wolfsellers_consecutive_sequential');
-        
-                if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['sequential_id' => $model->getId()]);
+
+                if ($this->request->getParam('back')) {
+                    return $resultRedirect->setPath('*/*/edit', ['sequential_id' => $id]);
                 }
+
                 return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Sequential.'));
             }
-        
+
             $this->dataPersistor->set('wolfsellers_consecutive_sequential', $data);
-            return $resultRedirect->setPath('*/*/edit', ['sequential_id' => $this->getRequest()->getParam('sequential_id')]);
+
+            return $resultRedirect->setPath('*/*/edit', [
+                'sequential_id' => $this->request->getParam('sequential_id')
+            ]);
         }
+
         return $resultRedirect->setPath('*/*/');
     }
 }

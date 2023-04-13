@@ -88,19 +88,14 @@ class SequentialRepository implements SequentialRepositoryInterface
     public function save(
         \WolfSellers\Consecutive\Api\Data\SequentialInterface $sequential
     ) {
-        /* if (empty($sequential->getStoreId())) {
-            $storeId = $this->storeManager->getStore()->getId();
-            $sequential->setStoreId($storeId);
-        } */
-        
         $sequentialData = $this->extensibleDataObjectConverter->toNestedArray(
             $sequential,
             [],
             \WolfSellers\Consecutive\Api\Data\SequentialInterface::class
         );
-        
+
         $sequentialModel = $this->sequentialFactory->create()->setData($sequentialData);
-        
+
         try {
             $this->resource->save($sequentialModel);
         } catch (\Exception $exception) {
@@ -132,22 +127,22 @@ class SequentialRepository implements SequentialRepositoryInterface
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {
         $collection = $this->sequentialCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
             \WolfSellers\Consecutive\Api\Data\SequentialInterface::class
         );
-        
+
         $this->collectionProcessor->process($criteria, $collection);
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;

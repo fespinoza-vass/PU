@@ -208,7 +208,6 @@ define([
                         var $container = $("#" + typeKey + "-container");
                         var $parentContainer = $("." + typeKey + "-parent-container");
                         $parentContainer.hide();
-                        console.log(typeKey);
 
                         if (data !== "") {
                             $container.html(data);

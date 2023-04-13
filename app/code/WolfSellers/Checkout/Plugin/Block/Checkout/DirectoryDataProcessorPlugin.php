@@ -53,8 +53,8 @@ class DirectoryDataProcessorPlugin
      */
     public function afterProcess(
         DirectoryDataProcessor $subject,
-                               $result,
-                               $jsLayout
+        $result,
+        $jsLayout
     ) {
 
         if (isset($result['components']['checkoutProvider']['dictionaries'])) {
@@ -66,11 +66,14 @@ class DirectoryDataProcessorPlugin
             $dni = $this->getDNI($session_CustomerID);
 
             if ($dni) {
-                $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['value'] = $dni;
+                $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+                    ['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['value'] = $dni;
 
             }
         }
-        $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']["validation"]["required-entry"] = true;
+        $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']["validation"]
+            ["required-entry"] = true;
 
         return $result;
     }
@@ -82,13 +85,17 @@ class DirectoryDataProcessorPlugin
         } catch (NoSuchEntityException|LocalizedException $e) {
             return false;
         }
-        if(is_null($customer->getCustomAttribute('numero_de_identificacion'))) {
+
+        if ($customer->getCustomAttribute('numero_de_identificacion') === null) {
             return false;
         }
+
         $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
-        if (!is_null($dni)){
+
+        if ($dni !== null) {
             return $dni;
         }
+
         return false;
     }
 
@@ -102,15 +109,15 @@ class DirectoryDataProcessorPlugin
         return false;
     }
 
-    public function validateDNI($customerId){
-        if ($this->customerSession->isLoggedIn()){
+    public function validateDNI($customerId)
+    {
+        if ($this->customerSession->isLoggedIn()) {
             $customer = $this->customerRepository->getById($customerId);
             $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
-            if (!is_null($dni)){
-                return true;
-            }
-            return false;
+
+            return ($dni !== null);
         }
+
         return false;
     }
 
