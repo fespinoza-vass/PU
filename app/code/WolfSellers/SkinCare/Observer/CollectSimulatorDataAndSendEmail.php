@@ -56,20 +56,17 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        try {
-            $answer = $observer->getData('answer');
-            $form = $observer->getData('form');
+        $answer = $observer->getData('answer');
+        $form = $observer->getData('form');
 
-            if ($form->getFormId() == '26' and $answer->getData('response_json')) {
-                $json = $answer->getData('response_json');
-                $array = json_decode($json, true);
-                $userName = $array['textinput-name']['value'] . ' ' . $array['textinput-lastname']['value'];
-                $userEmail = $array['textinput-email']['value'];
-                $formId = $array['textinput-formid']['value'];
-                $skinHealth = $array['textinput-skinhealth']['value'];
-                $this->sendVariablesByEmail($userEmail,$formId, $skinHealth, $userName);
-            }
-        } catch (\Exception $e) {
+        if ($form->getCode() == 'PU-Simulador' and $answer->getData('response_json')) {
+            $json = $answer->getData('response_json');
+            $array = json_decode($json, true);
+            $userName = $array['textinput-name']['value'] . ' ' . $array['textinput-lastname']['value'];
+            $userEmail = $array['textinput-email']['value'];
+            $formId = $array['textinput-formid']['value'];
+            $skinHealth = $array['textinput-skinhealth']['value'] ?? '';
+            $this->sendVariablesByEmail($userEmail,$formId, $skinHealth, $userName);
         }
     }
 
@@ -100,10 +97,10 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         /**
          * Set percentages
          */
-        
+
         $skinHealth = 0;
         $division = 0;
-        
+
         if(is_bool($wrinkle) === true){
             $result['results'][Constants::LINEAS_DE_EXPRESION] = '';
         }else{
@@ -136,10 +133,10 @@ class CollectSimulatorDataAndSendEmail implements \Magento\Framework\Event\Obser
         $result['results'][Constants::MANCHAS] = is_bool($spot) ? '' : $spot->getPercentage();
         $result['results'][Constants::TEXTURA] = is_bool($texture) ? '' : $texture->getPercentage();
         $result['results'][Constants::OJERAS] = is_bool($darkCircle) ? '' : $darkCircle->getPercentage();*/
-        
+
         $result['results'][Constants::SALUD_DE_PIEL] = round($skinHealth / $division);
-        
-        
+
+
         /**
          * Get UP TO 4 products for each type
          */
