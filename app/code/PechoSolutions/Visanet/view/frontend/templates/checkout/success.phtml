@@ -5,7 +5,7 @@
  */
 
 // @codingStandardsIgnoreFile
-
+/** @var \PechoSolutions\Visanet\Block\Onepage\Success $block */
 
 $orderItems = $block->getOrderAllVisibleItems();
 $orderData= $block->getOrderData();
@@ -29,10 +29,10 @@ $currencyDesc=$block->getCurrencyCode();
 
                 if ($_SESSION['autorizado']=='1'){
 
-             
+
 
                 $media_dir = $block->getMediaDirectory();
-                
+
                 $imagen= $block->getHelperConfig('payment/visanet_pay/upload_image');
                 $logostore = $media_dir."image/".$imagen;
                 $namestore =  $block->getHelperConfig('general/store_information/name');
@@ -49,7 +49,7 @@ $currencyDesc=$block->getCurrencyCode();
                     $hora = substr($date, 6, 2);
                     $min = substr($date, 8, 2);
                     $seg = substr($date, 10, 2);
-                
+
                     $usoLosPuntos=false;
                     if(isset($_SESSION['USOLOSPUNTOS'])==true){
                         $usoLosPuntos=($_SESSION['USOLOSPUNTOS']);
@@ -82,7 +82,7 @@ $currencyDesc=$block->getCurrencyCode();
                         <div class="subtitle">
                             Hemos recibido su orden y será procesada, le enviamos un email de confirmación con los detalles y información del envío. El detalle de su pedido:
                         </div>
- 
+
         <?php
                 }
                 if($usoLosPuntos==true && $esUnaCombinacionDepago==true)
@@ -103,7 +103,7 @@ $currencyDesc=$block->getCurrencyCode();
                             <p><span><strong>Programa:  </strong> </span> <?=$_SESSION['EXCHANGE_PROGRAM_NAME']?></p>
                             <p><span><strong>Monto con tarjeta:  </strong> </strong> </span><?=$currencyDesc?> </span>  <?=$_SESSION['MONTOTARJETACOMBINADA']?></p>
                             <p><span><strong>Puntos canjeados:   </strong> </span> <?=$_SESSION['REDEEMED_POINTS']?> <span>(<strong>equivale a  </strong> </span></strong> </span><?=$currencyDesc?> <?=$_SESSION['REDEEMED_EQUIVALENT_AMOUNT']?>)</p>
-                            <p><span><strong>ID canje:   </strong> </span> <?=$_SESSION['EXCHANGE_ID']?> 
+                            <p><span><strong>ID canje:   </strong> </span> <?=$_SESSION['EXCHANGE_ID']?>
                             <p><span><strong>Políticas de devolución: </strong> </span>  <a href="<?=$politicas_devolucion;?>" target="_blank">Ver Aquí</a> </p>
                             <p><span><strong>Términos y Condiciones : </strong> </span> <a href="<?=$terminos_condiciones;?>" target="_blank">Ver Aquí</a>  </p>
                             <p><strong>Estima cliente debe imprimir y guardar este recibo de transacción</strong></p>
@@ -131,7 +131,7 @@ $currencyDesc=$block->getCurrencyCode();
                             <p><span><strong>Descripción del código de acción: </strong> </span>  <?=$_SESSION['DSC_COD_ACCION']?></p>
                             <p><span><strong>Programa:  </strong> </span> </strong> </span><?=$currencyDesc?> <?=$_SESSION['EXCHANGE_PROGRAM_NAME']?></p>
                             <p><span><strong>Puntos canjeados:   </strong> </span> <?=$_SESSION['REDEEMED_POINTS']?> <span>(<strong>equivale a   </strong> </span></strong> </span><?=$currencyDesc?> <?=$_SESSION['REDEEMED_EQUIVALENT_AMOUNT']?>)</p>
-                            <p><span><strong>ID canje:   </strong> </span> <?=$_SESSION['EXCHANGE_ID']?> 
+                            <p><span><strong>ID canje:   </strong> </span> <?=$_SESSION['EXCHANGE_ID']?>
                             <p><span><strong>Políticas de devolución: </strong> </span>  <a href="<?=$politicas_devolucion;?>" target="_blank">Ver Aquí</a> </p>
                             <p><span><strong>Términos y Condiciones : </strong> </span> <a href="<?=$terminos_condiciones;?>" target="_blank">Ver Aquí</a>  </p>
                             <p><strong>Estima cliente debe imprimir y guardar este recibo de transacción</strong></p>
@@ -143,7 +143,7 @@ $currencyDesc=$block->getCurrencyCode();
 
 
                     <?php
-                    
+
                 }
 
             }
@@ -161,7 +161,7 @@ $currencyDesc=$block->getCurrencyCode();
         }
 
     ?>
-     
+
         <div class="pedido-numero">
             <a href="<?PHP echo $block->getViewOrderUrl();?>"> Número de pedido: <span style="margin-left: 5px;"> #<?PHP echo $block->escapeHtml($block->getOrderId()); ?> </span> </a>
         </div>
@@ -184,13 +184,13 @@ $currencyDesc=$block->getCurrencyCode();
                 </tr>
 
                 <?php
-                
+
                 $n = 1;
                 $total = 0;
 
                 foreach ($orderItems as $item) {
 
-               
+
                     $_product = $block->getProduct($item->getProductId());
                     $imageHelper  = $this->helper(\Magento\Catalog\Helper\Image::class);
 
@@ -242,7 +242,7 @@ $currencyDesc=$block->getCurrencyCode();
                 }
 
                 ?>
- 
+
 
                 <tr class="pedido_header">
                     <td colspan="2"></td>
@@ -253,10 +253,10 @@ $currencyDesc=$block->getCurrencyCode();
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Costo de envío: </td>
-                    <td align="center"> <?PHP echo $currencyCode.number_format($orderData['shipping_amount'],2);  ?></td>
+                    <td align="center"> <?php echo (!empty($shippingData['shipping_amount'])) ? $currencyCode.number_format($shippingData['shipping_amount'],2) :  "0.00";  ?></td>
                 </tr>
 
-                <?PHP 
+                <?PHP
 
                     if( ($orderData['discount_amount']*1) > 0){
 
@@ -268,7 +268,7 @@ $currencyDesc=$block->getCurrencyCode();
                     <td align="center"> <?PHP echo $currencyCode.number_format($orderData['discount_amount'],2);  ?></td>
                 </tr>
 
-                <?PHP 
+                <?PHP
 
                     }
                 ?>
@@ -355,7 +355,7 @@ $currencyDesc=$block->getCurrencyCode();
 
             </div>
 
-        </div> 
+        </div>
         <div class="">
                 <input class="btn btn-default" type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
 
