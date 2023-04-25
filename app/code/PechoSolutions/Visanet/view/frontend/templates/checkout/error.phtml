@@ -125,7 +125,7 @@ $currencyDesc=$block->getCurrencyCode();
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Costo de envío: </td>
-                    <td align="center"><?PHP echo $currencyCode.number_format($shippingData['shipping_amount'],2);  ?></td>
+                    <td align="center"><?php echo (!empty($shippingData['shipping_amount'])) ? $currencyCode.number_format($shippingData['shipping_amount'],2) :  "0.00";  ?></td>
                 </tr>
 
                 <?PHP
