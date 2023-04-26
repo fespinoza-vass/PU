@@ -110,8 +110,11 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getCurrencyCode()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        $logger = new \Zend\Log\Logger();
+        // $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
+        // $logger = new \Zend\Log\Logger();
+        // $logger->addWriter($writer);
+	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend_Log();
         $logger->addWriter($writer);
         $logger->info("Currency Code");
         $logger->info($this->_storeManagerInterface->getStore()->getBaseCurrencyCode());
@@ -126,8 +129,11 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getCurrency()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        $logger = new \Zend\Log\Logger();
+        // $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
+        // $logger = new \Zend\Log\Logger();
+        // $logger->addWriter($writer);
+	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend_Log();
         $logger->addWriter($writer);
         $logger->info("Currency jp");
         $logger->info($this->currency->getCurrencySymbol());
@@ -153,16 +159,20 @@ class Success extends \Magento\Framework\View\Element\Template
     public function getOrderData()
     {
         /*$writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        $logger = new \Zend\Log\Logger();
+        // $logger = new \Zend\Log\Logger();
+        // $logger->addWriter($writer); 
+
+	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend_Log();
         $logger->addWriter($writer);
         $logger->info("method getOrderBillingAddress");
         $logger->info($this->getOrderId());*/
-
+       
         //$logger->info("get order data");
-        return $this->_orderFactory->create()->loadByIncrementId($this->getOrderId());
+        return $this->_orderFactory->create()->loadByIncrementId($this->getOrderId());       
     }
-
-
+    
+  
    /**
      * Return Get Media Directory
      *
@@ -170,7 +180,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getMediaDirectory()
     {
-        return  $this->_storeManagerInterface->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+        return  $this->_storeManagerInterface->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);     
     }
 
        /**
@@ -180,37 +190,26 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getHelperConfig($config)
     {
-        return  $this->_helperConfig->getConfig($config);
+        return  $this->_helperConfig->getConfig($config);     
     }
 
     /**
      * Return Get Product
      *
-     * @return \Magento\Catalog\Model\Product
+     * @return string
      */
     public function getProduct($productId)
     {
-        return  $this->_product->load($productId);
+        return  $this->_product->load($productId);     
     }
-
     /**
      * Return Get Real Product
      *
-     * @return \Magento\Catalog\Api\Data\ProductInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return string
      */
     public function getRealProduct($SKU)
     {
-        return  $this->_productRepository->get($SKU);
-    }
-
-    /**
-     * @return \Magento\Quote\Api\Data\CartInterface|\Magento\Quote\Model\Quote
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function getQuote() {
-        return $this->_checkoutSession->getQuote();
+        return  $this->_productRepository->get($SKU);     
     }
     /**
      * Return Get Quote Data
@@ -219,7 +218,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getQuoteData()
     {
-        return  $this->_checkoutSession->getQuote()->getData();
+        return  $this->_checkoutSession->getQuote()->getData();     
     }
     /**
      * Return Get Quote Items
@@ -228,7 +227,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getQuoteItems()
     {
-        return  $this->_checkoutSession->getQuote()->getAllVisibleItems();
+        return  $this->_checkoutSession->getQuote()->getAllVisibleItems();     
     }
 
      /**
@@ -238,7 +237,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getQuoteBillingAddress()
     {
-        return  $this->_checkoutSession->getQuote()->getBillingAddress()->getData();
+        return  $this->_checkoutSession->getQuote()->getBillingAddress()->getData();     
     }
  /**
      * Return Get Quote Shipping Address
@@ -247,7 +246,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getQuoteShippingAddress()
     {
-        return  $this->_checkoutSession->getQuote()->getShippingAddress()->getData();
+        return  $this->_checkoutSession->getQuote()->getShippingAddress()->getData();     
     }
  /**
      * Return Get Quote ID
@@ -256,7 +255,7 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getQuoteId()
     {
-        return  $this->_checkoutSession->getQuote()->getId();
+        return  $this->_checkoutSession->getQuote()->getId();     
     }
 
     /**
