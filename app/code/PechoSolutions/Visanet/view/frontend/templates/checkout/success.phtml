@@ -11,7 +11,8 @@ $orderItems = $block->getOrderAllVisibleItems();
 $orderData= $block->getOrderData();
 $billing =  $orderData->getBillingAddress()->getData();
 $shipping = $orderData->getShippingAddress()->getData();
-$currencyCode=$block->getCurrency();
+// $currencyCode=$block->getCurrency();
+$currencyCode="S/"; 
 $currencyDesc=$block->getCurrencyCode();
 ?>
 
@@ -70,6 +71,7 @@ $currencyDesc=$block->getCurrencyCode();
 
                             <p><span><strong>Número de Tarjeta: </strong> </span> <?=$_SESSION['tarjeta']?></p>
                             <p><span><strong>Fecha y hora del pedido: </strong> </span> <?="20".$year."-".$month."-". $day ." ".$hora .":".  $min.":".$seg;?> </p>
+                            <p><span><strong>Importe: </strong> </span> <?=$currencyCode.number_format($block->getOrderGrandTotal(), 2, '.', ',')?></p>
                             <p><span><strong>Moneda: </strong> </span><?=$currencyDesc?>  </p>
                             <p><span><strong>Nombre de tarjetahabiente: </strong> </span> <?=$shipping['firstname'].' '.$shipping['lastname']?> </p>
 
@@ -96,6 +98,7 @@ $currencyDesc=$block->getCurrencyCode();
 
                             <p><span><strong>Número de Tarjeta: </strong> </span> <?=$_SESSION['tarjeta']?></p>
                             <p><span><strong>Fecha y hora del pedido: </strong> </span> <?="20".$year."-".$month."-". $day ." ".$hora .":".  $min.":".$seg;?> </p>
+                            <p><span><strong>Importe: </strong> </span> <?=$currencyCode.number_format($block->getOrderGrandTotal(), 2, '.', ',')?></p>
                             <p><span><strong>Moneda: </strong> </span><?=$currencyDesc?>  </p>
                             <p><span><strong>Nombre de tarjetahabiente: </strong> </span> <?=$shipping['firstname'].' '.$shipping['lastname']?> </p>
 
@@ -125,6 +128,7 @@ $currencyDesc=$block->getCurrencyCode();
                             <p><span><strong>Dirección Comercial: </strong> </span> <?=$direccionstore;?> </p>
 
                             <p><span><strong>Fecha y hora del pedido: </strong> </span> <?="20".$year."-".$month."-". $day ." ".$hora .":".  $min.":".$seg;?> </p>
+                            <p><span><strong>Importe: </strong> </span> <?=$currencyCode.number_format($block->getOrderGrandTotal(), 2, '.', ',')?></p>
                             <p><span><strong>Moneda: </strong> </span><?=$currencyDesc?>  </p>
                             <p><span><strong>Nombre de tarjetahabiente: </strong> </span> <?=$shipping['firstname'].' '.$shipping['lastname']?> </p>
 
