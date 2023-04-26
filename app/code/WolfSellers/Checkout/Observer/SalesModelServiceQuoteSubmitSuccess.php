@@ -1,8 +1,5 @@
 <?php
-
-
 namespace WolfSellers\Checkout\Observer;
-
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -17,7 +14,6 @@ class SalesModelServiceQuoteSubmitSuccess implements ObserverInterface
      * @var Ubigeo $ubigeoHelper
      */
     private Ubigeo $ubigeoHelper;
-
 
     /**
      * Construct for Observer
@@ -42,8 +38,6 @@ class SalesModelServiceQuoteSubmitSuccess implements ObserverInterface
         $logger = new \Laminas\Log\Logger();
         $logger->addWriter($writer);
         try {
-
-            /* @var \Magento\Sales\Model\Order $order */
             $order = $observer->getOrder();
             $postCode = $order->getShippingAddress()->getPostcode();
             $ubigeoInfo = $this->ubigeoHelper->getDays($postCode);
@@ -52,7 +46,6 @@ class SalesModelServiceQuoteSubmitSuccess implements ObserverInterface
             $order->setData("ubigeo_estimated_delivery", $_ubigeoInfo);
             $order->save();
         } catch (\Exception $e) {
-
             $logger->err($e->getMessage());
         }
     }

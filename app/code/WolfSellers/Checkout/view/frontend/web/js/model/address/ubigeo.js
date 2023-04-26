@@ -27,12 +27,10 @@ define([
 
             if (!city || !regionId) {
                 this.listUbigeo(null);
-
                 return;
             }
 
             $('body').trigger('processStart');
-
             var payload = {
                 'region_id': regionId,
                 'city': city

@@ -43,8 +43,8 @@ class CronConfig extends Value{
         $frequency = $this->getData('groups/setting/fields/frequency/value');
 
         $cronExprArray = [
-            intval($time[1]),
-            intval($time[0]),
+            int($time[1]),
+            int($time[0]),
             $frequency == \Magento\Cron\Model\Config\Source\Frequency::CRON_MONTHLY ? '1' : '*',
             '*',
             $frequency == \Magento\Cron\Model\Config\Source\Frequency::CRON_WEEKLY ? '1' : '*',

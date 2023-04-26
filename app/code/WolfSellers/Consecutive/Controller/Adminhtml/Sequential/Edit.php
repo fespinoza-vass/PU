@@ -63,7 +63,6 @@ class Edit extends Sequential
         // 2. Initial checking
         if ($id) {
             $consecutive = $this->sequentialRepository->get($id);
-
             if (!$consecutive->getSequentialId()) {
                 $this->messageManager->addErrorMessage(__('This Sequential no longer exists.'));
                 /** @var Redirect $resultRedirect */

@@ -24,14 +24,24 @@ use Magento\Framework\Exception\NoSuchEntityException;
  */
 class DirectoryDataProcessorPlugin
 {
-    /** @var ResourceConnection */
+    /**
+     * @var ResourceConnection
+     */
     private ResourceConnection $resourceConnection;
+
+    /**
+     * @var Session
+     */
     private CustomerSession $customerSession;
+
+    /**
+     * @var CustomerRepositoryInterface
+     */
     private CustomerRepositoryInterface $customerRepository;
 
     /**
      * @param ResourceConnection $resourceConnection
-     * @param CustomerSession $customerSession
+     * @param Session $customerSession
      * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
@@ -48,7 +58,6 @@ class DirectoryDataProcessorPlugin
      * @param DirectoryDataProcessor $subject
      * @param $result
      * @param $jsLayout
-     *
      * @return array
      */
     public function afterProcess(
@@ -56,7 +65,6 @@ class DirectoryDataProcessorPlugin
         $result,
         $jsLayout
     ) {
-
         if (isset($result['components']['checkoutProvider']['dictionaries'])) {
             $result['components']['checkoutProvider']['dictionaries']['city_id'] = $this->getCities();
         }
@@ -78,6 +86,10 @@ class DirectoryDataProcessorPlugin
         return $result;
     }
 
+    /**
+     * @param $customerId
+     * @return false|mixed
+     */
     public function getDNI($customerId)
     {
         try {
@@ -91,7 +103,6 @@ class DirectoryDataProcessorPlugin
         }
 
         $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
-
         if ($dni !== null) {
             return $dni;
         }
@@ -99,16 +110,28 @@ class DirectoryDataProcessorPlugin
         return false;
     }
 
+    /**
+     * @param $customerId
+     * @return false|mixed
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
     public function getDNI2($customerId)
     {
         $customer = $this->customerRepository->getById($customerId);
         $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
-        if (!is_null($dni)){
+        if ($dni != null){
             return $dni;
         }
         return false;
     }
 
+    /**
+     * @param $customerId
+     * @return bool
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
     public function validateDNI($customerId)
     {
         if ($this->customerSession->isLoggedIn()) {
@@ -122,7 +145,7 @@ class DirectoryDataProcessorPlugin
     }
 
     /**
-     * Get cities.
+     * Get city
      *
      * @return array
      */
