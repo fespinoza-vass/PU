@@ -117,10 +117,10 @@ class Visanet
         curl_setopt($ch, CURLOPT_POSTFIELDS, $request_body);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $response = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);        
         $json = json_decode($response, TRUE);
-        $json["statusCode"]=$status;
-        $json = json_encode($json, JSON_PRETTY_PRINT);
+        $json["statusCode"]=$status;    
+        $json = json_encode($json, JSON_PRETTY_PRINT);        
         return $json;
     }
 
@@ -179,7 +179,7 @@ class Visanet
                 $accessKey=$user;
                 $secretKey=$password;
                 break;
-        }
+        } 
         $header = array("Content-Type: application/json");
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -239,13 +239,8 @@ class Visanet
         $response = curl_exec($ch);
         #var_dump($response);
         $json = json_decode($response);
-
-        try {
-            if (property_exists($json, "sessionKey")){
-                return $json->sessionKey;
-            }
-        } catch (\Exception $e) {
-        }
+        $dato = $json->sessionKey;
+        return $dato;
     }
-
+    
 }
