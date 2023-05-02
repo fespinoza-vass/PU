@@ -219,6 +219,9 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         return $this->cookieHelper->isUserNotAllowSaveCookie();
     }
     
+    /*
+     * Function to obtain product promotion
+     */
     public function getRules($productId)
     {
         $date = $this->_date->date()->format('Y-m-d H:i:s');

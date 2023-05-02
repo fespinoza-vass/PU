@@ -210,6 +210,9 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         return $this->jsonHelper->jsonEncode($customer);
     }
     
+    /*
+     * Function to obtain product promotion
+     */
     public function getRules($productId)
     {
         $date = $this->_date->date()->format('Y-m-d H:i:s');
