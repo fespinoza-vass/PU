@@ -98,22 +98,41 @@ define([
          * @param gender
          * @param size
          */
-        addToCart: function (id, name, price, quantity, category = '', subcategory = '', brand = '', gender = '', size = '') {
+        addToCart: function (id, name, price, quantity, category = '', subcategory = '', brand = '', gender = '', size = '', sku, productURL, imageURL, promotion
+) {
             this.dataLayer.push({
-                'event': 'addToCart',
+                'event': 'add_to_cart',
+                'pagePostAuthor': 'Perfumerias Unidas',
+                'ecomm_pagetype': 'Product',
+                'ecomm_prodid': id,
+                'ecomm_prodsku': sku,
+                'ecomm_totalvalue': price,
+                'cartContent': {
+                    'totals': {
+                       'applied_coupons': [],
+                       'discount_total': 0,
+                       'subtotal': 0,
+                       'total': 0
+                    },
+                    'items': []
+                  },
                 'ecommerce': {
                     'currencyCode': this.dlCurrencyCode,
                     'add': {
                         'products': [{
                             'id': id,
                             'name': name,
+                            'sku': sku,
                             'price': price,
                             'quantity': quantity,
                             'category': category,
                             'sub_categoria': subcategory,
-                            'brand': brand,
                             'genero': gender,
-                            'tamano': size
+                            'tamano': size,
+                            'promotion': promotion,
+                            'brand': brand,
+                            'productURL': productURL,
+                            'imageURL': imageURL
                         }]
                     }
                 }

@@ -4,6 +4,26 @@ namespace WolfSellers\GoogleTagManager\Plugin\Checkout\CustomerData;
 
 class DefaultItem
 {
+    public function __construct(
+        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Customer\Model\Session\Proxy $sessionProxy,
+        \Magento\CatalogRule\Model\ResourceModel\Rule $rule,
+        \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
+        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
+        \Magento\Catalog\Model\ProductRepository $productRepository,
+        \Psr\Log\LoggerInterface $logger)
+    {
+        $this->_date =  $date;
+        $this->_storeManager = $storeManager;
+        $this->sessionProxy= $sessionProxy;
+        $this->ruleResource = $rule;
+        $this->catalogRuleRepository = $catalogRuleRepository;
+        $this->_categoryRepository = $categoryRepository;
+        $this->_productRepository = $productRepository;
+        $this->logger = $logger;
+    }
+    
     public function aroundGetItemData(
         \Magento\Checkout\CustomerData\AbstractItem $subject,
         \Closure $proceed,
@@ -18,12 +38,12 @@ class DefaultItem
         $gender = null;
         $size = null;
         foreach($attributes as $attribute){
-            if($attribute->getName() === 'categoria') {
+            /*if($attribute->getName() === 'categoria') {
                 $category = $attribute->getFrontend()->getValue($item->getProduct());
             }
             if($attribute->getName() === 'sub_categoria') {
                 $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
-            }
+            }*/
             if($attribute->getName() === 'manufacturer') {
                 $brand = $attribute->getFrontend()->getValue($item->getProduct());
             }
@@ -35,15 +55,72 @@ class DefaultItem
                 if( !$size ) $size = null;
             }
         }
+        
+        $product = $this->getProductById($data['product_id']);
+        $rules = $this->getRules($product->getId());
+        $dataRule = [];
+        if($rules){
+            foreach ($rules as $rule){
+                $dataRule[] = $rule;
+            }
+        }
+        $dataRule = implode( ', ', $dataRule);
+        
+        $categories = $this->getCategoryName($product);
+        $category = isset($categories[0]) ? $categories[0] : '';
+        $subcategory = isset($categories[1]) ? $categories[1] : '';
 
         $result['category'] = $category;
         $result['subcategory'] = $subcategory;
         $result['brand'] = $brand;
         $result['gender'] = $gender;
         $result['size'] = $size;
+        $result['promotion'] = $dataRule;
+        
         return \array_merge(
             $result,
             $data
         );
+    }
+    
+    public function getProductById($id)
+    {
+        return $this->_productRepository->getById($id);
+    }
+    
+    public function getProductBySku($sku)
+    {
+        return $this->_productRepository->get($sku);
+    }
+    
+    public function getCategoryName($product){
+        $categories = [];
+        $this->logger->debug('CATEGORYIDS: ');
+        $this->logger->debug(print_r($product->getCategoryIds(), true));
+        foreach($product->getCategoryIds() as $categoryId){
+            array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
+        }
+        return $categories;
+    }
+    
+    public function getRules($productId)
+    {
+        $date = $this->_date->date()->format('Y-m-d H:i:s');
+        $websiteId = $this->_storeManager->getStore()->getWebsiteId();
+        $customerGroupId = $this->sessionProxy->getCustomer()->getGroupId();
+        
+        $this->logger->debug('DATE: '.$date);
+        $this->logger->debug('WEBSITEID: '.$websiteId);
+        $this->logger->debug('CUSTOMERGROUPID: '.$customerGroupId);
+        
+        $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
+        $promos = [];
+        
+        foreach ($rules as $rule){
+            $promo = $this->catalogRuleRepository->get($rule['rule_id']);
+            array_push($promos, $promo->getName());
+        }
+        
+        return $promos;
     }
 }
