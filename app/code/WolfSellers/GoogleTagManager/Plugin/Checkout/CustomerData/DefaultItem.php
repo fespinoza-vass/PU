@@ -1,4 +1,15 @@
 <?php
+/*
+ * The data is added:
+ * category
+ * subcategory
+ * brand
+ * gender
+ * size
+ * promotion
+ * 
+ * In the CustomerData of the product, to be able to send them to the Tag Manager
+ */
 
 namespace WolfSellers\GoogleTagManager\Plugin\Checkout\CustomerData;
 
