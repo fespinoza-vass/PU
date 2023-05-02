@@ -30,6 +30,7 @@ define([
                 'pagePostAuthor': "Perfumerias Unidas",
                 'ecomm_pagetype': "Checkout",
                 'ecomm_prodid': cart.ids, //array de id de los productos
+                'ecomm_prodsku': cart.skus,
                 'ecomm_totalvalue':768, //suma de los valores de los productos
                 'ecomm_totalquantity': cart.items.length,
                 'cartContent': {
