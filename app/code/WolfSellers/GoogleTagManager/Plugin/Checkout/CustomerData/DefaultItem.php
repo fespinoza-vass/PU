@@ -15,6 +15,16 @@ namespace WolfSellers\GoogleTagManager\Plugin\Checkout\CustomerData;
 
 class DefaultItem
 {
+    /*
+     * @param TimezoneInterface $date
+     * @param StoreManagerInterface $storeManager
+     * @param Proxy $sessionProxy
+     * @param Rule $rule
+     * @param CatalogRuleRepositoryInterface $catalogRuleRepository
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param ProductRepository $productRepository
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -97,11 +107,13 @@ class DefaultItem
         );
     }
     
+    /** Function get product by ID */
     public function getProductById($id)
     {
         return $this->_productRepository->getById($id);
     }
     
+    /** Function get product by SKU */
     public function getProductBySku($sku)
     {
         return $this->_productRepository->get($sku);
