@@ -19292,7 +19292,7 @@ N/A. Service not Supported,N/D. No Está Soportado el Servicio,module,Magento_Pa
 N/A. Service not supported,N/D. No Está Soportado el Servicio,module,Magento_Paypal,
 We cannot cancel this order.,No podemos cancelar esta orden.,module,Magento_Paypal,
 PayPal,PayPal,module,Magento_Paypal,
-"Checkout","Productos sujetos a disponibilidad, puedes completar tu orden con Pagos con Débito, Crédito y YAPE.",module,Magento_Paypal,
+"Checkout","Productos sujeto a Disponibilidad – Perfumerías Unidas.",module,Magento_Paypal,
 PayPal Settlement Reports,Reportes de Asentamientos de PayPal,module,Magento_Paypal,
 Require Customer's Billing Address,Requerir Dirección de Facturación del Cliente,module,Magento_Paypal,
 "It is recommended to set this value to ""PayPal"" per store views.","Se recomienda fijar este valor como ""PayPal"" en vistas de tienda.",module,Magento_Paypal,
