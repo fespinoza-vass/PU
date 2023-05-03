@@ -24,4 +24,12 @@ define([
         var popup = modal(options, $('#modal'));
         $('#modal').modal('openModal');
     }
+
+    $(document).on("click",function(e) {
+        var containerPopup = $('.modal-inner-wrap');
+
+        if (!containerPopup.is(e.target) && containerPopup.has(e.target).length === 0) {
+            $('#modal').modal('closeModal');
+        }
+    });   
 });
