@@ -95,6 +95,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         $cart = [];
         $ids = [];
         $items = [];
+        $skus = [];
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->getCheckoutSession()->getQuote();
         /** @var \Magento\Quote\Model\Quote\Item $item */
@@ -108,12 +109,12 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $gender = null;
             $size = null;
             foreach($attributes as $attribute){
-                if($attribute->getName() === 'categoria') {
+                /*if($attribute->getName() === 'categoria') {
                     $category = $attribute->getFrontend()->getValue($item->getProduct());
                 }
                 if($attribute->getName() === 'sub_categoria') {
                     $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
-                }
+                }*/
                 if($attribute->getName() === 'manufacturer') {
                     $brand = $attribute->getFrontend()->getValue($item->getProduct());
                 }
@@ -125,6 +126,26 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                     if( !$size ) $size = null;
                 }
             }
+            
+            /** Get Rules of product */
+            $rules = $this->getRules($item2->getId());
+            $dataRule = [];
+            if($rules){
+                foreach ($rules as $rule){
+                    $dataRule[] = $rule;
+                }
+            }
+            $dataRule = implode( ', ', $dataRule);
+            
+            /** Get Name Categories of product */
+            $categories = [];
+            foreach($item2->getCategoryIds() as $categoryId){
+                array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
+            }
+            
+            $category = isset($categories[0]) ? $categories[0] : '';
+            $subcategory = isset($categories[1]) ? $categories[1] : '';
+            
             $cartItem = [
                 'id' => $item2->getId(),
                 'name' => $item2->getName(),
@@ -132,19 +153,22 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 'price' => $item2->getFinalPrice(),
                 'category' => $category,
                 'sub_categoria' => $subcategory,
-                'brand' => $brand,
+                'genero'    => $gender,
+                'tamano'    => $size,
                 'quantity' => $item->getQty(),
+                'promotion' => $dataRule,
+                'brand' => $brand,
                 'productURL' => $item2->getProductUrl(),
                 'imageURL' => $imageUrl,
-                'genero'    => $gender,
-                'tamano'    => $size
             ];
             array_push($items, $cartItem);
             array_push($ids, $item2->getId());
+            array_push($skus, $item2->getSku());
         }
 
         $cart = [
             'ids'   => $ids,
+            'skus'  => $skus,
             'items' => $items,
             'totals' => [
                 'subtotal' => $quote->getSubtotal(),
@@ -188,6 +212,9 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         return $this->jsonHelper->jsonEncode($customer);
     }
     
+    /*
+     * Function to obtain product promotion
+     */
     public function getRules($productId)
     {
         $date = $this->_date->date()->format('Y-m-d H:i:s');

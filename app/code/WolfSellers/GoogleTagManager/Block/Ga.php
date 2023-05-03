@@ -43,11 +43,25 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         \Magento\Cookie\Helper\Cookie $cookieHelper,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
         \Magento\Catalog\Model\Product\Attribute\Repository $attributerepository,
+        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
+        \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
+        \Magento\CatalogRule\Model\ResourceModel\Rule $rule,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Customer\Model\Session\Proxy $sessionProxy,
+        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
+        \Magento\Catalog\Helper\Image $imageHelper,
         array $data = []
     ) {
         $this->cookieHelper = $cookieHelper;
         $this->jsonHelper = $jsonHelper;
         $this->attributerepository = $attributerepository;
+        $this->_categoryRepository = $categoryRepository;
+        $this->ruleResource = $rule;
+        $this->_storeManager = $storeManager;
+        $this->sessionProxy= $sessionProxy;
+        $this->_date =  $date;
+        $this->catalogRuleRepository = $catalogRuleRepository;
+        $this->imageHelper = $imageHelper;
         parent::__construct($context, $salesOrderCollection, $googleAnalyticsData, $data, $cookieHelper);
     }
 
@@ -128,9 +142,30 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             $products = [];
             /** @var \Magento\Sales\Model\Order\Item $item*/
             foreach ($order->getAllVisibleItems() as $item) {
+                
+                /** Get Name Categories of product */
+                $categories = [];
+                foreach($item->getProduct()->getCategoryIds() as $categoryId){
+                    array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
+                }
+                
+                $category = isset($categories[0]) ? $categories[0] : '';
+                $subcategory = isset($categories[1]) ? $categories[1] : '';
+                
+                /** Get Rules of product */
+                $rules = $this->getRules($item->getProduct()->getId());
+                $dataRule = [];
+                if($rules){
+                    foreach ($rules as $rule){
+                        $dataRule[] = $rule;
+                    }
+                }
+                $dataRule = implode( ', ', $dataRule);
+                
+                $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
 
-                $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
-                $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
+                //$category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
+                //$subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
                 //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
                 
                 $options = $this->attributerepository->get('manufacturer')->getOptions();
@@ -145,15 +180,20 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
 
                 $products[] = [
-                    'id' => $item->getSku(),
+                    'id' => $item->getId(),
                     'name' => $item->getName(),
+                    'sku' => $item->getSku(),
                     'price' => $item->getBasePrice(),
-                    'quantity' => $item->getQtyOrdered(),
                     'category'  => $category,
                     'sub_categoria' => $subcategory,
-                    'brand'     => $brand,
                     'genero'    => $gender,
-                    'tamano'    => $size
+                    'tamano'    => $size,
+                    'quantity' => $item->getQtyOrdered(),
+                    'promotion' => $dataRule,
+                    'brand'     => $brand,
+                    'productURL' => $item->getProduct()->getProductUrl(),
+                    'imageURL' => $imageUrl
+                    
                 ];
             }
 
@@ -179,5 +219,25 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
     public function isUserNotAllowSaveCookie()
     {
         return $this->cookieHelper->isUserNotAllowSaveCookie();
+    }
+    
+    /*
+     * Function to obtain product promotion
+     */
+    public function getRules($productId)
+    {
+        $date = $this->_date->date()->format('Y-m-d H:i:s');
+        $websiteId = $this->_storeManager->getStore()->getWebsiteId();
+        $customerGroupId = $this->sessionProxy->getCustomer()->getGroupId();
+        
+        $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
+        $promos = [];
+        
+        foreach ($rules as $rule){
+            $promo = $this->catalogRuleRepository->get($rule['rule_id']);
+            array_push($promos, $promo->getName());
+        }
+        
+        return $promos;
     }
 }

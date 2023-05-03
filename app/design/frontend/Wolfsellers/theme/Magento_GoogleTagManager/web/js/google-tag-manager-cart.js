@@ -76,7 +76,7 @@ define([
             this.options.actions[events.AJAX_ADD_TO_CART] = function (product) {
                 console.log(product);
                 this.googleAnalyticsUniversal.addToCart(
-                    product['product_sku'],
+                    product['product_id'],
                     product['product_image']['alt'],
                     product['product_price_value'],
                     product.qty,
@@ -84,7 +84,11 @@ define([
                     product['subcategory'],
                     product['brand'],
                     product['gender'],
-                    product['size']
+                    product['size'],
+                    product['product_sku'],
+                    product['product_url'],
+                    product['product_image']['src'],
+                    product['promotion']
                 );
             }.bind(this);
 
