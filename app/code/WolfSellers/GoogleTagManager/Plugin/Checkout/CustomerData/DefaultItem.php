@@ -15,6 +15,16 @@ namespace WolfSellers\GoogleTagManager\Plugin\Checkout\CustomerData;
 
 class DefaultItem
 {
+    /*
+     * @param TimezoneInterface $date
+     * @param StoreManagerInterface $storeManager
+     * @param Proxy $sessionProxy
+     * @param Rule $rule
+     * @param CatalogRuleRepositoryInterface $catalogRuleRepository
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param ProductRepository $productRepository
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -68,6 +78,8 @@ class DefaultItem
         }
         
         $product = $this->getProductById($data['product_id']);
+        
+        /** Get Rules of product */
         $rules = $this->getRules($product->getId());
         $dataRule = [];
         if($rules){
@@ -77,6 +89,7 @@ class DefaultItem
         }
         $dataRule = implode( ', ', $dataRule);
         
+        /** Get Name Categories of product */
         $categories = $this->getCategoryName($product);
         $category = isset($categories[0]) ? $categories[0] : '';
         $subcategory = isset($categories[1]) ? $categories[1] : '';
@@ -94,16 +107,21 @@ class DefaultItem
         );
     }
     
+    /** Function get product by ID */
     public function getProductById($id)
     {
         return $this->_productRepository->getById($id);
     }
     
+    /** Function get product by SKU */
     public function getProductBySku($sku)
     {
         return $this->_productRepository->get($sku);
     }
     
+    /*
+     * Function for get Name Category
+     */
     public function getCategoryName($product){
         $categories = [];
         $this->logger->debug('CATEGORYIDS: ');
@@ -114,6 +132,9 @@ class DefaultItem
         return $categories;
     }
     
+    /*
+     * Function for get Rule of product
+     */
     public function getRules($productId)
     {
         $date = $this->_date->date()->format('Y-m-d H:i:s');

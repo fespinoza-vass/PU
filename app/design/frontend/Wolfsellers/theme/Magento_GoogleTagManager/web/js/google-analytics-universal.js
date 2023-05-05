@@ -97,6 +97,10 @@ define([
          * @param brand
          * @param gender
          * @param size
+         * @param sku
+         * @param productURL
+         * @param imageURL
+         * @param promotion
          */
         addToCart: function (id, name, price, quantity, category = '', subcategory = '', brand = '', gender = '', size = '', sku, productURL, imageURL, promotion
 ) {

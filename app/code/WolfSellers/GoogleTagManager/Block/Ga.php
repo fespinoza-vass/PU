@@ -143,6 +143,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             /** @var \Magento\Sales\Model\Order\Item $item*/
             foreach ($order->getAllVisibleItems() as $item) {
                 
+                /** Get Name Categories of product */
                 $categories = [];
                 foreach($item->getProduct()->getCategoryIds() as $categoryId){
                     array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
@@ -151,6 +152,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 $category = isset($categories[0]) ? $categories[0] : '';
                 $subcategory = isset($categories[1]) ? $categories[1] : '';
                 
+                /** Get Rules of product */
                 $rules = $this->getRules($item->getProduct()->getId());
                 $dataRule = [];
                 if($rules){

@@ -127,6 +127,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 }
             }
             
+            /** Get Rules of product */
             $rules = $this->getRules($item2->getId());
             $dataRule = [];
             if($rules){
@@ -136,6 +137,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             }
             $dataRule = implode( ', ', $dataRule);
             
+            /** Get Name Categories of product */
             $categories = [];
             foreach($item2->getCategoryIds() as $categoryId){
                 array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
