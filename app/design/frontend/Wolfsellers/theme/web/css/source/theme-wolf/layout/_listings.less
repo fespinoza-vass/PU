@@ -1,5 +1,8 @@
 & when (@media-common = true){
     body{
+        &.cms-simulador ol.product-items.widget-product-carousel {
+         display: flex;
+        }
         &.page-products,
         &.page-with-filter{
             .page-wrapper{
@@ -334,6 +337,21 @@
                                     .slick-dots{
                                         display: none !important;
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.cms-simulador{
+            .page-wrapper main[class*="page-main"]{
+                .product-items{
+                    .product-item{
+                        .product-item-info{
+                            .product-item-details{
+                                .price-box {
+                                    display: grid;
                                 }
                             }
                         }

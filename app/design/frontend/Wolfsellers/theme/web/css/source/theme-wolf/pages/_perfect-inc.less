@@ -87,6 +87,20 @@
 	}
 
 	.cms-simulador{
+		.slick-track, .slick-track {
+			min-width: 100%;
+		}
+		.field{
+			&.fb-text{
+				&.form-group{
+					&.field-textinput-formid,&.field-textinput-skinhealth{
+						&.amform-layout-one {
+							display: none !important;
+						}
+					}
+				}
+			}
+		}
 		.pagebuilder-column-group{
 			background: @white;
 			.pagebuilder-column{
@@ -94,7 +108,7 @@
 					font-weight: bold;
 				}
 				[data-content-type="html"]{
-					padding: 15px 12px 0;
+					padding: 0px 0px 10px;
 
 					button{
 						.lib-font-size(14);
@@ -127,10 +141,10 @@
 				    justify-content: center !important; //PageBuilder importants
 				    float: left;
 				    h2{
-				    	margin: 0 0 60px 0;
+				    	margin: 0 0 30px 0;
 				    }
 				    > [data-content-type="html"]{
-				    	padding: 10px;
+				    	padding: 50px 10px 10px;
 				    	text-align: center;
 				    	.skin-care-content{
 				    		button{
@@ -150,14 +164,17 @@
 				    			.pagebuilder-column-group{
 				    				justify-content: space-between;
 				    				.result-item{
-				    					width: 20% !important; //PageBuilder importants
+				    					width: 50% !important; //PageBuilder importants
 				    					&:not(:last-child){
 				    						margin-right: 15px;
 				    					}
 				    					[data-content-type="text"]{
+				    						@media @mdmax{
+				    							margin-bottom: 20px;
+				    						}
 				    						p{
 				    							margin-top: 20px;
-				    							font-size: 1.6rem;	
+				    							font-size: 1.4rem;	
 				    							font-weight: normal;
 				    							&:not(:last-child){
 				    								display: none;
@@ -173,7 +190,7 @@
 				    							font-weight: normal;
 				    							.cont-percentage{
 				    								position: absolute;
-			    								    left: 5px;
+			    								    left: -10px;
 			    								    top: -11px;
 			    								    background: @white;
 			    								    padding: 0 10px;
@@ -231,6 +248,7 @@
 							.amform-form-fieldset{
 								.amcform-multi-page{
 									.amcform-page-wrap{
+										padding: 0 20px;
 										.fb-h3{
 											margin: 25px 0 15px;
 										}
@@ -331,7 +349,7 @@
 			&.slider-skinAge{
 				&.formulario{
 					.pagebuilder-column-group{
-						padding: 85% 0 0;
+						padding: 20% 0 20px;
 					}
 				}
 			}
@@ -345,6 +363,7 @@
 								.amcform-multi-page{
 									.amcform-page-wrap{
 										position: relative;
+										padding: 0 20px;
 										.fb-h3{
 											margin: 25px 0 15px;
 										}
@@ -451,11 +470,13 @@
 
 			.pagebuilder-column{
 				h2{
-					margin: 0 0 40px 0;
+					margin: 0 0 0px 0;
+					width: 100%;
+    				font-size: 2.1rem;
 				}
 
 				[data-content-type="html"]{
-					padding: 15px 12px 0;
+					padding: 15px 3px 0;
 
 					button{
 						.lib-font-size(14);
@@ -470,11 +491,16 @@
 				div{
 					p{
 						text-align: left !important;
-						margin: 0 12px 25px;
-
+						margin: 0 0px 25px;
+						font-size: 2.0rem;
 						img{
 							margin: 0 30px 0 0;
 							width: 50px;
+						}
+						span{
+							&#js_skin_health_percentage {
+								font-size: 20px;
+							}
 						}
 					}
 				}
