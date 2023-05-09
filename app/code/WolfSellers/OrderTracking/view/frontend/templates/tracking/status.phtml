@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @var \WolfSellers\OrderTracking\Block\TrackingStatus $block
  * @var \Magento\Framework\Escaper $escaper
@@ -7,31 +6,31 @@
 ?>
 
 <div class="tracking-status">
-    <div class="item-status status-received <?php echo $block->isReceived() ? 'active' : 'inactive'; ?>">
-        <img src='<?php echo $this->getViewFileUrl('images/recibido.jpeg'); ?>' alt="Demo">
-        <img class="active" src='<?php echo $this->getViewFileUrl('images/recibido-activo.jpeg'); ?>' alt="Demo">
-        <?php echo $escaper->escapeHtml(__('Order received')); ?>
+    <div class="item-status status-received <?= $block->isReceived() ? 'active' : 'inactive'; ?>">
+        <img src="<?= $block->getViewFileUrl('images/recibido.jpeg'); ?>" alt="Demo">
+        <img class="active" src="<?= $block->getViewFileUrl('images/recibido-activo.jpeg'); ?>" alt="Demo">
+        <?= $escaper->escapeHtml(__('Order received')); ?>
     </div>
-    <div class="item-status status-ready <?php echo $block->isReady() ? 'active' : 'inactive'; ?>">
-        <img src='<?php echo $this->getViewFileUrl('images/preparado.jpeg'); ?>' alt="Demo">
-        <img class="active" src='<?php echo $this->getViewFileUrl('images/preparado-activo.jpeg'); ?>' alt="Demo">
-        <?php echo $escaper->escapeHtml(__('Order ready')); ?>
+    <div class="item-status status-ready <?= $block->isReady() ? 'active' : 'inactive'; ?>">
+        <img src="<?= $block->getViewFileUrl('images/preparado.jpeg'); ?>" alt="Demo">
+        <img class="active" src="<?= $block->getViewFileUrl('images/preparado-activo.jpeg'); ?>" alt="Demo">
+        <?= $escaper->escapeHtml(__('Order ready')); ?>
     </div>
-    <div class="item-status status-in-transit <?php echo $block->isInTransit() ? 'active' : 'inactive'; ?>">
-        <img src='<?php echo $this->getViewFileUrl('images/camino.jpeg'); ?>' alt="Demo">
-        <img class="active" src='<?php echo $this->getViewFileUrl('images/camino-activo.jpeg'); ?>' alt="Demo">
-        <?php echo $escaper->escapeHtml(__('Order in transit')); ?>
+    <div class="item-status status-in-transit <?= $block->isInTransit() ? 'active' : 'inactive'; ?>">
+        <img src="<?= $block->getViewFileUrl('images/camino.jpeg'); ?>" alt="Demo">
+        <img class="active" src="<?= $block->getViewFileUrl('images/camino-activo.jpeg'); ?>" alt="Demo">
+        <?= $escaper->escapeHtml(__('Order in transit')); ?>
     </div>
-    <div class="item-status status-delivered <?php echo $block->isDelivered() ? 'active' : 'inactive'; ?>">
-        <img src='<?php echo $this->getViewFileUrl('images/entregado.jpeg'); ?>' alt="Demo">
-        <img class="active" src='<?php echo $this->getViewFileUrl('images/entregado-activo.jpeg'); ?>' alt="Demo">
-        <?php echo $escaper->escapeHtml(__('Order delivered')); ?>
+    <div class="item-status status-delivered <?= $block->isDelivered() ? 'active' : 'inactive'; ?>">
+        <img src="<?= $block->getViewFileUrl('images/entregado.jpeg'); ?>" alt="Demo">
+        <img class="active" src="<?= $block->getViewFileUrl('images/entregado-activo.jpeg'); ?>" alt="Demo">
+        <?= $escaper->escapeHtml(__('Order delivered')); ?>
     </div>
 
-    <?php if ($block->isUndelivered() && !$block->isDelivered()) { ?>
+    <?php if ($block->isUndelivered() && !$block->isDelivered()): ?>
         <div class="item-status status-undelivered active">
-        <img class="active" src='<?php echo $this->getViewFileUrl('images/entregado-error.jpeg'); ?>' alt="Demo">
-            <?php echo $escaper->escapeHtml(__('Order undelivered')); ?>
+        <img class="active" src="<?= $block->getViewFileUrl('images/entregado-error.jpeg'); ?>" alt="Demo">
+            <?= $escaper->escapeHtml(__('Order undelivered')); ?>
         </div>
-    <?php } ?>
+    <?php endif; ?>
 </div>

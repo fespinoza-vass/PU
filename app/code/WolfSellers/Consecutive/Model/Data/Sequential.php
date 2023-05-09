@@ -5,7 +5,7 @@ namespace WolfSellers\Consecutive\Model\Data;
 
 use WolfSellers\Consecutive\Api\Data\SequentialInterface;
 
-class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject implements SequentialInterface
+class Sequential extends \Magento\Framework\Model\AbstractExtensibleModel implements SequentialInterface
 {
 
     /**
@@ -14,7 +14,7 @@ class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject impleme
      */
     public function getSequentialId()
     {
-        return $this->_get(self::SEQUENTIAL_ID);
+        return $this->getData(self::SEQUENTIAL_ID);
     }
 
     /**
@@ -33,7 +33,7 @@ class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject impleme
      */
     public function getName()
     {
-        return $this->_get(self::NAME);
+        return $this->getData(self::NAME);
     }
 
     /**
@@ -72,7 +72,7 @@ class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject impleme
      */
     public function getStartNumber()
     {
-        return $this->_get(self::START_NUMBER);
+        return $this->getData(self::START_NUMBER);
     }
 
     /**
@@ -91,7 +91,7 @@ class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject impleme
      */
     public function getFormat()
     {
-        return $this->_get(self::FORMAT);
+        return $this->getData(self::FORMAT);
     }
 
     /**
@@ -110,7 +110,7 @@ class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject impleme
      */
     public function getWebsiteId()
     {
-        return $this->_get(self::WEBSITE_ID);
+        return $this->getData(self::WEBSITE_ID);
     }
 
     /**
@@ -129,7 +129,7 @@ class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject impleme
      */
     public function getCreatedAt()
     {
-        return $this->_get(self::CREATED_AT);
+        return $this->getData(self::CREATED_AT);
     }
 
     /**
@@ -148,7 +148,7 @@ class Sequential extends \Magento\Framework\Api\AbstractExtensibleObject impleme
      */
     public function getUpdatedAt()
     {
-        return $this->_get(self::UPDATED_AT);
+        return $this->getData(self::UPDATED_AT);
     }
 
     /**

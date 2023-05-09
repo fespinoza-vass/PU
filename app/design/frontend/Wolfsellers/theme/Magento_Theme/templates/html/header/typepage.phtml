@@ -11,9 +11,6 @@ $pageTitle = $data['pageTitle'];
 ?>
 <script>
 	require(['jquery', 'domReady!'],function($){
-		console.log('<?= $pageType ?>');
-		console.log('<?= $pageCategory ?>');
-		console.log('<?= $pageTitle ?>');
 		window.dataLayer = window.dataLayer || [];
 		dataLayer.push({
 			'pageType':'<?= $pageType ?>',

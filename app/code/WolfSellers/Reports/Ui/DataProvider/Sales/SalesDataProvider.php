@@ -183,8 +183,6 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
 
         $this->getSelect()->where("sales_order_item.product_type = 'simple'");
 
-        $this->_logger->info('Query: ' . trim($this->getSelect()->__toString()));
-
         return $this;
     }
 }

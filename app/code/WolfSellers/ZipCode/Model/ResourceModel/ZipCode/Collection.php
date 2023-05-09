@@ -2,10 +2,23 @@
 
 namespace WolfSellers\ZipCode\Model\ResourceModel\ZipCode;
 
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+
+class Collection extends AbstractCollection
 {
+    /**
+     * @var string
+     */
     protected $_idFieldName = 'zip_id';
+
+    /**
+     * @var string
+     */
     protected $_eventPrefix = 'wolfsellers_zipcode_collection';
+
+    /**
+     * @var string
+     */
     protected $_eventObject = 'zipcode_collection';
 
     /**
@@ -13,7 +26,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      *
      * @return void
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init('WolfSellers\ZipCode\Model\ZipCode', 'WolfSellers\ZipCode\Model\ResourceModel\ZipCode');
     }

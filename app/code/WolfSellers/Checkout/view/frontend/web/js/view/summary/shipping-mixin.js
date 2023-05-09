@@ -22,7 +22,6 @@ define([
                     'ubigeo': quote.shippingAddress().postcode
                 };
                 $.ajax({
-                    type: 'POST',
                     url: url.build('zipcode/index/getubigeo'),
                     dataType: 'json',
                     data: payload,

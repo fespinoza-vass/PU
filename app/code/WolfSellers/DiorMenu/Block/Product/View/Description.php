@@ -2,45 +2,54 @@
 
 namespace WolfSellers\DiorMenu\Block\Product\View;
 
-use \Amasty\ShopbyBase\Model\OptionSettingRepository;
-use \Amasty\ShopbyBase\Model\OptionSetting;
+use Amasty\ShopbyBase\Model\OptionSetting;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Element\Template\Context;
 
 class Description extends \Magento\Catalog\Block\Product\View\Description
 {
-    private \Magento\Catalog\Api\ProductAttributeRepositoryInterface $attributeRepository;
-    private OptionSettingRepository $optionSettingRepository;
+    /**
+     * @var OptionSetting
+     */
     private OptionSetting $optionSetting;
 
-    public function __construct
-    (
-        \Magento\Framework\View\Element\Template\Context         $context,
-        \Magento\Catalog\Api\ProductAttributeRepositoryInterface $attributeRepository,
-        OptionSettingRepository                                  $optionSettingRepository,
-        OptionSetting                                            $optionSetting,
-        \Magento\Framework\Registry                              $registry, array $data = []
+    /**
+     * @param Context $context
+     * @param OptionSetting $optionSetting
+     * @param Registry $registry
+     * @param array $data
+     */
+    public function __construct(
+        Context       $context,
+        OptionSetting $optionSetting,
+        Registry      $registry,
+        array         $data = []
     )
     {
         parent::__construct($context, $registry, $data);
-        $this->attributeRepository = $attributeRepository;
-        $this->optionSettingRepository = $optionSettingRepository;
+
         $this->optionSetting = $optionSetting;
     }
 
-    public function getManufactureImage($idAttribute)
+    /**
+     * @param $idAttribute
+     * @return string|null
+     */
+    public function getManufactureImage($idAttribute): ?string
     {
-        $idAttribute = intval($idAttribute);
+        $idAttribute = (int) $idAttribute;
+
         return $this->optionSetting->getByParams("attr_manufacturer", $idAttribute, 1)->getImageUrl();
     }
 
-    public function getManufactureImageSlider($idAttribute)
+    /**
+     * @param $idAttribute
+     * @return string|null
+     */
+    public function getManufactureUrlAlias($idAttribute): ?string
     {
-        $idAttribute = intval($idAttribute);
-        return $this->optionSetting->getByParams("attr_manufacturer", $idAttribute, 1)->getSliderImageUrl();
-    }
+        $idAttribute = (int) $idAttribute;
 
-    public function getManufactureUrlAlias($idAttribute)
-    {
-        $idAttribute = intval($idAttribute);
         return $this->optionSetting->getByParams("attr_manufacturer", $idAttribute, 1)->getUrlAlias();
     }
 }

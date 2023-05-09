@@ -24,14 +24,24 @@ use Magento\Framework\Exception\NoSuchEntityException;
  */
 class DirectoryDataProcessorPlugin
 {
-    /** @var ResourceConnection */
+    /**
+     * @var ResourceConnection
+     */
     private ResourceConnection $resourceConnection;
+
+    /**
+     * @var Session
+     */
     private CustomerSession $customerSession;
+
+    /**
+     * @var CustomerRepositoryInterface
+     */
     private CustomerRepositoryInterface $customerRepository;
 
     /**
      * @param ResourceConnection $resourceConnection
-     * @param CustomerSession $customerSession
+     * @param Session $customerSession
      * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
@@ -48,15 +58,13 @@ class DirectoryDataProcessorPlugin
      * @param DirectoryDataProcessor $subject
      * @param $result
      * @param $jsLayout
-     *
      * @return array
      */
     public function afterProcess(
         DirectoryDataProcessor $subject,
-                               $result,
-                               $jsLayout
+        $result,
+        $jsLayout
     ) {
-
         if (isset($result['components']['checkoutProvider']['dictionaries'])) {
             $result['components']['checkoutProvider']['dictionaries']['city_id'] = $this->getCities();
         }
@@ -66,15 +74,22 @@ class DirectoryDataProcessorPlugin
             $dni = $this->getDNI($session_CustomerID);
 
             if ($dni) {
-                $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['value'] = $dni;
+                $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+                    ['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['value'] = $dni;
 
             }
         }
-        $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']["validation"]["required-entry"] = true;
+        $result['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']["validation"]
+            ["required-entry"] = true;
 
         return $result;
     }
 
+    /**
+     * @param $customerId
+     * @return false|mixed
+     */
     public function getDNI($customerId)
     {
         try {
@@ -82,40 +97,55 @@ class DirectoryDataProcessorPlugin
         } catch (NoSuchEntityException|LocalizedException $e) {
             return false;
         }
-        if(is_null($customer->getCustomAttribute('numero_de_identificacion'))) {
+
+        if ($customer->getCustomAttribute('numero_de_identificacion') === null) {
             return false;
         }
+
         $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
-        if (!is_null($dni)){
+        if ($dni !== null) {
             return $dni;
         }
+
         return false;
     }
 
+    /**
+     * @param $customerId
+     * @return false|mixed
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
     public function getDNI2($customerId)
     {
         $customer = $this->customerRepository->getById($customerId);
         $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
-        if (!is_null($dni)){
+        if ($dni != null){
             return $dni;
-        }
-        return false;
-    }
-
-    public function validateDNI($customerId){
-        if ($this->customerSession->isLoggedIn()){
-            $customer = $this->customerRepository->getById($customerId);
-            $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
-            if (!is_null($dni)){
-                return true;
-            }
-            return false;
         }
         return false;
     }
 
     /**
-     * Get cities.
+     * @param $customerId
+     * @return bool
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function validateDNI($customerId)
+    {
+        if ($this->customerSession->isLoggedIn()) {
+            $customer = $this->customerRepository->getById($customerId);
+            $dni = $customer->getCustomAttribute('numero_de_identificacion')->getValue();
+
+            return ($dni !== null);
+        }
+
+        return false;
+    }
+
+    /**
+     * Get city
      *
      * @return array
      */
