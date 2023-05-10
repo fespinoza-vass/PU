@@ -145,6 +145,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             
             $category = isset($categories[0]) ? $categories[0] : '';
             $subcategory = isset($categories[1]) ? $categories[1] : '';
+            $family = isset($categories[2]) ? $categories[2] : '';
             
             $cartItem = [
                 'id' => $item2->getId(),
@@ -153,6 +154,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 'price' => $item2->getFinalPrice(),
                 'category' => $category,
                 'sub_categoria' => $subcategory,
+                'familia' => $family,
                 'genero'    => $gender,
                 'tamano'    => $size,
                 'quantity' => $item->getQty(),

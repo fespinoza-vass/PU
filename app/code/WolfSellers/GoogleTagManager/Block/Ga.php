@@ -151,6 +151,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 
                 $category = isset($categories[0]) ? $categories[0] : '';
                 $subcategory = isset($categories[1]) ? $categories[1] : '';
+                $family = isset($categories[2]) ? $categories[2] : '';
                 
                 /** Get Rules of product */
                 $rules = $this->getRules($item->getProduct()->getId());
@@ -186,6 +187,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                     'price' => $item->getBasePrice(),
                     'category'  => $category,
                     'sub_categoria' => $subcategory,
+                    'familia' => $family,
                     'genero'    => $gender,
                     'tamano'    => $size,
                     'quantity' => $item->getQtyOrdered(),

@@ -93,9 +93,11 @@ class DefaultItem
         $categories = $this->getCategoryName($product);
         $category = isset($categories[0]) ? $categories[0] : '';
         $subcategory = isset($categories[1]) ? $categories[1] : '';
+        $family = isset($categories[2]) ? $categories[2] : '';
 
         $result['category'] = $category;
         $result['subcategory'] = $subcategory;
+        $result['familia'] = $family;
         $result['brand'] = $brand;
         $result['gender'] = $gender;
         $result['size'] = $size;
