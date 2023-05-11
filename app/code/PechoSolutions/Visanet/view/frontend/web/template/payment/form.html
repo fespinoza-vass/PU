@@ -5,7 +5,6 @@
                    class="radio"
                    data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
             <label class="label" data-bind="attr: {'for': getCode()}">
-                <img data-bind="attr:{src: getLogoVisa()}" style="height: 50px;width: 150px;" />
                 <span data-bind="text: getTitle()"></span>
             </label>
         </div>
@@ -15,14 +14,7 @@
             <!-- ko foreach: getRegion('messages') -->
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
-    
-            <!-- 
-            <div id="visa_mensaje_error" data-bind="afterRender: divErrorAfterRender">
-    
-            </div>
-            -->
-    
-            
+
             <div class="payment-method-billing-address">
                 <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
                 <!-- ko template: getTemplate() --><!-- /ko -->
@@ -34,20 +26,14 @@
                 <!--/ko-->
             </div>
     
-            <div>
-                <input type="checkbox" name="acepto_terminos_condiciones" checked="checked"> <span> Al proceder con la compra estas aceptando los  <a data-bind="attr:{href: getTerminos()}" target="_blank"> t&eacute;rminos y condiciones del sitio </a> </span>
-            </div>
-    
             <div class="actions-toolbar">
                 <div class="primary">
     
                     <form class="form" action="" method="post" data-bind="attr: {'id': getCode() + '-form'}, submit: loadCheckoutJS" target="iframe-visa">
-    
-                        <button type="submit" 
-                                class="start-js-btn modal-opener default" 
-                                style="width: 189px;height:42px;background: url('https://static-content.vnforapps.com/v1/img/button/ES/navy/default/PayWith.png');"></button>
-                   
-                    </form> 
+                        <!-- ko if: hasBillingAddress() -->
+                        <button type="submit" class="action primary checkout"></button>
+                        <!-- /ko -->
+                    </form>
                     
                 </div>
             </div>

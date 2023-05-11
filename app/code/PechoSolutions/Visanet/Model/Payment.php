@@ -5,7 +5,7 @@ namespace PechoSolutions\Visanet\Model;
 
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Payment\Model\Method\AbstractMethod;
-use Magento\Framework\Api\ExtensibleDataInterface; 
+use Magento\Framework\Api\ExtensibleDataInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
 class Payment extends AbstractMethod
@@ -51,7 +51,6 @@ class Payment extends AbstractMethod
         StoreManagerInterface $storeManager,
         \PechoSolutions\Visanet\Model\Library\Visanet $visanetManager,
         array $data = array()
-        
     ) {
 
         parent::__construct(
@@ -64,7 +63,7 @@ class Payment extends AbstractMethod
             $logger,
             null,
             null,
-            $data           
+            $data
         );
 
         $this->_logData = $logData;
@@ -72,7 +71,7 @@ class Payment extends AbstractMethod
         $this->visanetManager = $visanetManager;
         $this->cartRepository = $cartRepository;
         $this->quoteFactory = $quoteFactory;
-        $this->encryptor = $encryptor; 
+        $this->encryptor = $encryptor;
         $this->registry = $registry;
         $this->storeManager = $storeManager;
     }
@@ -86,53 +85,39 @@ class Payment extends AbstractMethod
      */
     public function capture(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
-        // $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        // $logger = new \Zend\Log\Logger();
-        // $logger->addWriter($writer); 
 
-	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
-        $logger = new \Zend_Log();
-        $logger->addWriter($writer);
-    
        if (!$payment->hasAdditionalInformation('token') && trim($this->registry->registry('sessionToken')) == '' ) {
             $this->_logger->error('Payment tokenizer error');
             throw new \Magento\Framework\Validator\Exception(__('Payment tokenizer error.'));
         }
- 
-    
+
+
         $order = $payment->getOrder();
         $billing = $order->getBillingAddress();
         $payment->setIsTransactionClosed(0);
-        $quote_Id = $order->getQuoteId();        
+        $quote_Id = $order->getQuoteId();
         $quote = $this->quoteFactory->create()
                                     ->load($quote_Id);
-        
-        $currency       = $order->getOrderCurrency(); //$order object
-
-        if (is_object($currency)) {
-            $logger->info("currencyjp:". $currency->getCurrencyCode()  ); 
-        }    
-        $logger->info("jose pecho");
 
         if( trim($this->registry->registry('sessionToken')) != ''){
            $sessionToken = trim($this->registry->registry('sessionToken'));
            $transactionToken = $this->registry->registry('transactionToken');
-           $sessionKey = $this->registry->registry('sessionKey');        
+           $sessionKey = $this->registry->registry('sessionKey');
         }
         else{
-           
+
            $sessionKey = $payment->getAdditionalInformation('token'); // Este dato se envia x payment-information
            $transactionToken = $quote->getData('visanet_token');
-        
+
         }
- 
+
 
         $debug = $this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/debug');
         $ambiente = ($debug == '1') ? 'dev' : 'prd';
 
-        $tokenType = $payment->getAdditionalInformation('token_type'); 
+        $tokenType = $payment->getAdditionalInformation('token_type');
 
-        // Esto es para las apps 
+        // Esto es para las apps
         if($tokenType == 'confirm_success'){
 
             $tarjeta = $payment->getAdditionalInformation('PAN');
@@ -162,19 +147,19 @@ class Payment extends AbstractMethod
             unset($_SESSION['tarjeta']);
             unset($_SESSION['fecha_pedido']);
             unset($_SESSION['DSC_COD_ACCION']);
-            unset($_SESSION['CODACCION']); 
-            unset($_SESSION['errorvisa']); 
-            
+            unset($_SESSION['CODACCION']);
+            unset($_SESSION['errorvisa']);
+
             $currencyCode=$this->storeManager->getStore()->getBaseCurrencyCode();
-            
+
             $merchant_id="";
             if($currencyCode=="USD")
             {
-                $merchant_id=$this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id_dollar');    
-              
+                $merchant_id=$this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id_dollar');
+
             }elseif($currencyCode=="PEN"){
                 $merchant_id=$this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id');
-              
+
             }
 
           /*  $merchant_id = $this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/merchant_id');*/
@@ -183,19 +168,19 @@ class Payment extends AbstractMethod
             $debug = $this->helperConfig->getConfig('payment/visanet_pay/visanetConfiguracion/debug');
 
             try {
- 
+
                 if(trim($transactionToken) == ''){
-                    
+
                     throw new \Magento\Framework\Validator\Exception(__('Token de transacción no recibido'));
                 }
                 //$amount = round(($amount * 100),2) /100 ;
                 $rawRespuestaVisa = $this->visanetManager->authorization($ambiente, $sessionKey, $amount,$transactionToken, $quote_Id,$merchant_id,$currencyCode);
-                //var_dump('recibido: ', $rawRespuestaVisa);    
-                $logger->info("rawanswer:". $rawRespuestaVisa  ); 
-                $resultado =  json_decode($rawRespuestaVisa, true);            
-                $statusCode=$resultado['statusCode'];                
-               
-               
+                //var_dump('recibido: ', $rawRespuestaVisa);
+
+                $resultado =  json_decode($rawRespuestaVisa, true);
+                $statusCode=$resultado['statusCode'];
+
+
                 if( trim($statusCode) == 200){
                     //Variable para conocer si se uso los puntos
                     //true o false
@@ -204,30 +189,25 @@ class Payment extends AbstractMethod
 
                     if(isset($resultado['dataMap']['REDEEMED_EQUIVALENT_AMOUNT']))
                     {
-                        $usoLosPuntos=true;                                
+                        $usoLosPuntos=true;
 
                         if($resultado['dataMap']['AMOUNT']!="0.0"){
                             $esUnaCombinacionDepago=true;
                         }
 
                     }
-
-
-
-
-
                     $codaccion = $resultado['dataMap']['ACTION_CODE']; // Código de denegación y aprobación. El Código de aprobación: 000.
                     //$autorizado = $resultado['dataMap']['RESPUESTA'];
 
                    $tarjeta="";
                     if($usoLosPuntos==false){
-                        $tarjeta = $resultado['dataMap']['CARD'];                        
+                        $tarjeta = $resultado['dataMap']['CARD'];
                     }
                     if($esUnaCombinacionDepago==true)
-                    { 
+                    {
                         $tarjeta = $resultado['dataMap']['CARD'];
-                        
-                    } 
+
+                    }
 
 
 
@@ -238,14 +218,11 @@ class Payment extends AbstractMethod
                     //$nrocuota = $resultado['dataMap']['NROCUOTA']; //Nro de cuota
 
                     //$_SESSION['autorizado'] = $autorizado;
-
-
                     $_SESSION['tarjeta'] = $tarjeta;
-
                     $_SESSION['fecha_pedido'] = $fecha_pedido;
                     $_SESSION['DSC_COD_ACCION'] = $dsc_cod_accion;
                     $_SESSION['CODACCION'] = $codaccion;
-                  
+
 
                     $autorizado = 1;
                     $_SESSION['autorizado'] = $autorizado;
@@ -277,7 +254,7 @@ class Payment extends AbstractMethod
                         $_SESSION['REDEEMED_EQUIVALENT_AMOUNT'] = $redeemed_equivalent_amount;
                         $_SESSION['EXCHANGE_PROGRAM_NAME'] = $exchange_program_name;
                         $_SESSION['EXCHANGE_ID'] = $exchange_id;
-                  
+
 
                     }
 
@@ -289,62 +266,42 @@ class Payment extends AbstractMethod
                 elseif( trim($statusCode) == 400)
                 {
                     $autorizado = 1;
+                    $codaccion = $resultado['data']['ACTION_CODE'] ?? ''; // Código de denegación y aprobación. El Código de aprobación: 000.
+                    $dsc_cod_accion = $resultado['data']['ACTION_DESCRIPTION'] ?? ''; // Descripción del código de acción, permite identificar el motivo de rechazo de una operación.
+                    $errorvisa = $resultado['errorMessage'] ?? '';
 
-                    if(isset($resultado['data']['ACTION_CODE']))
-                    {
-                        $codaccion = $resultado['data']['ACTION_CODE']; // Código de denegación y aprobación. El Código de aprobación: 000.
-                    }else{
-                        $codaccion ="";
-                    }
-                    
-                    if(isset($resultado['data']['ACTION_DESCRIPTION']))
-                    {
-                        $dsc_cod_accion = $resultado['data']['ACTION_DESCRIPTION']; // Descripción del código de acción, permite identificar el motivo de rechazo de una operación.    
-                    }else{
-                        $dsc_cod_accion = "";
-                    }
-                    
-                    if(isset($resultado['errorMessage']))
-                    {
-                        $errorvisa = $resultado['errorMessage'];
-                    }else{
-                        $errorvisa = "";
-                    }
-                    
-                    
-
-                    $_SESSION['autorizado'] = $autorizado;     
+                    $_SESSION['autorizado'] = $autorizado;
                     $_SESSION['DSC_COD_ACCION'] = $dsc_cod_accion;
                     $_SESSION['CODACCION'] = $codaccion;
                     $_SESSION['errorvisa'] = $errorvisa;
 
-                    $dsc_cod_accion = "Error Message:". $errorvisa.", Action Code: ".$codaccion.", Action Description:".$dsc_cod_accion ;
+                    $dsc_cod_accion = "Error Message:". $errorvisa.", Action Code: ".$codaccion.", Action Description:".$dsc_cod_accion;
                     if($debug == '1'){
                         $dsc_cod_accion = $rawRespuestaVisa;
                     }
 
                     if($dsc_cod_accion == '') $dsc_cod_accion = 'No se pudo completar la operación';
-  
+
                     throw new \Magento\Framework\Validator\Exception( __($dsc_cod_accion) );
                 }
-                else{                 
-                     
-  
+                else{
+
+
                     throw new \Magento\Framework\Validator\Exception( __("Status Code: $statusCode, No se pudo conectar con visa API") );
 
                 }
- 
+
 
             } catch (\Exception $e) {
 
                 $errorMessage = $e->getMessage();
 
                 throw new \Magento\Framework\Validator\Exception(__($errorMessage));
-      
+
             }
 
         }
- 
+
 
         return $this;
     }
@@ -358,7 +315,7 @@ class Payment extends AbstractMethod
      */
     public function refund(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
-         
+
         return $this;
     }
 
@@ -369,10 +326,10 @@ class Payment extends AbstractMethod
      */
     public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
     {
-  
-  
-        
-        
+
+
+
+
         return parent::isAvailable($quote);
     }
 
