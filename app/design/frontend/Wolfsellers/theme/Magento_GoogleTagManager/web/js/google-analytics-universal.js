@@ -102,7 +102,7 @@ define([
          * @param imageURL
          * @param promotion
          */
-        addToCart: function (id, name, price, quantity, category = '', subcategory = '', brand = '', gender = '', size = '', sku, productURL, imageURL, promotion
+        addToCart: function (id, name, price, quantity, category = '', subcategory = '', brand = '', gender = '', size = '', sku, productURL, imageURL, promotion, family
 ) {
             this.dataLayer.push({
                 'event': 'add_to_cart',
@@ -131,6 +131,7 @@ define([
                             'quantity': quantity,
                             'category': category,
                             'sub_categoria': subcategory,
+                            'familia': family,
                             'genero': gender,
                             'tamano': size,
                             'promotion': promotion,
