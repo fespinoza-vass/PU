@@ -88,7 +88,8 @@ define([
                     product['product_sku'],
                     product['product_url'],
                     product['product_image']['src'],
-                    product['promotion']
+                    product['promotion'],
+                    product['familia']
                 );
             }.bind(this);
 
