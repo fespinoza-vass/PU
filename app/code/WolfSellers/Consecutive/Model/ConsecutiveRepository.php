@@ -88,19 +88,14 @@ class ConsecutiveRepository implements ConsecutiveRepositoryInterface
     public function save(
         \WolfSellers\Consecutive\Api\Data\ConsecutiveInterface $consecutive
     ) {
-        /* if (empty($consecutive->getStoreId())) {
-            $storeId = $this->storeManager->getStore()->getId();
-            $consecutive->setStoreId($storeId);
-        } */
-        
         $consecutiveData = $this->extensibleDataObjectConverter->toNestedArray(
             $consecutive,
             [],
             \WolfSellers\Consecutive\Api\Data\ConsecutiveInterface::class
         );
-        
+
         $consecutiveModel = $this->consecutiveFactory->create()->setData($consecutiveData);
-        
+
         try {
             $this->resource->save($consecutiveModel);
         } catch (\Exception $exception) {
@@ -132,22 +127,22 @@ class ConsecutiveRepository implements ConsecutiveRepositoryInterface
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {
         $collection = $this->consecutiveCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
             \WolfSellers\Consecutive\Api\Data\ConsecutiveInterface::class
         );
-        
+
         $this->collectionProcessor->process($criteria, $collection);
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;

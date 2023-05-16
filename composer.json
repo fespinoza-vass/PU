@@ -2,7 +2,7 @@
     "name": "magento/magento-cloud-template",
     "description": "eCommerce Platform for Growth (Enterprise Edition)",
     "type": "project",
-    "version": "2.4.3",
+    "version": "2.4.5",
     "license": "OSL-3.0",
     "config": {
         "preferred-install": "dist",
@@ -48,8 +48,9 @@
         "amasty/shopby-graphql": "^1.0",
         "amasty/sorting": "^2.10",
         "laminas/laminas-log": "^2.15",
-        "magento/composer-root-update-plugin": "~1.1",
-        "magento/magento-cloud-metapackage": ">=2.4.3 <2.4.4",
+        "magento/composer-root-update-plugin": "~2.0",
+        "magento/magento-cloud-metapackage": "2.4.5",
+        "magento/product-community-edition": "2.4.5",
         "magento/product-recommendations": "^3.3",
         "ocramius/proxy-manager": "^2.8",
         "phpoffice/phpspreadsheet": "^1.27",
@@ -111,7 +112,12 @@
             "tinymce/tinymce": "lib/web/tiny_mce_4"
         },
         "magento-force": true,
-        "magento-deploystrategy": "copy"
+        "magento-deploystrategy": "copy",
+        "magento-deploy-ignore": {
+            "*": [
+                "/.gitignore"
+            ]
+        }
     },
     "scripts": {
         "generate-schema": [

@@ -15,8 +15,6 @@ define([
         var diff = today - birthday;
         var edad = Math.round(Math.round(diff/(1000 * 60 * 60 * 24)) / 360);
 
-        console.log(edad);
-
         if (edad<=0){
             alert({
                 title: $.mage.__('La fecha de nacimiento seleccionada no es válida'),

@@ -2,10 +2,8 @@
 declare(strict_types=1);
 
 namespace WolfSellers\Consecutive\Api\Data;
-
 interface SequentialInterface extends \Magento\Framework\Api\ExtensibleDataInterface
 {
-
     const WEBSITE_ID = 'website_id';
     const START_NUMBER = 'start_number';
     const UPDATED_AT = 'updated_at';

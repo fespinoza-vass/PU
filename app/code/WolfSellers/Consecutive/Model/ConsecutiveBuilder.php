@@ -113,7 +113,7 @@ class ConsecutiveBuilder
 
         if($posStart!==false) {
             $posEnd = (strlen($formato) - 1) - strpos(strrev($formato), strrev($letter));
-            $patternLengh = intval(($posEnd - $posStart) + 1);
+            $patternLengh = (int)($posEnd - $posStart) + 1;
             $content = substr($string,$posStart,$patternLengh);
             return array('start'=>$posStart,'end'=>$posEnd,'length'=>$patternLengh,'content'=>$content);
         }else{
@@ -161,7 +161,7 @@ class ConsecutiveBuilder
         $alfa = $this->getElementByPattern($consecutiveString,$format,"A");
         $consecutivo = $this->getElementByPattern($consecutiveString,$format,"C");
         $renovacion = $this->getElementByPattern($consecutiveString,$format,"R");
-        $sequentialNumber = intval($consecutivo['content']);
+        $sequentialNumber = (int) $consecutivo['content'];
 
         if($next){
             $sequentialNumber++;

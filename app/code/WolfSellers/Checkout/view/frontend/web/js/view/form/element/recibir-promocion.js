@@ -3,11 +3,9 @@ define([
     'uiComponent',
     'jquery'
 ], function (ko, Component,$) {
-
     "use strict";
 
     return Component.extend({
-
         defaults: {
             template: 'WolfSellers_Checkout/form/element/recibir-promocion'
         },
@@ -16,9 +14,7 @@ define([
         initialize: function () {
             var self = this;
             this._super();
-
         }
-
     });
 });
 

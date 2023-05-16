@@ -24,7 +24,6 @@ define([
          */
         onUpdate: function (value) {
             ubigeo.getUbigeos(this.regionId, value);
-
             return this._super();
         }
     });

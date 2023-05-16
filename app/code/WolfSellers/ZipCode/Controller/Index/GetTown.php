@@ -2,32 +2,55 @@
 
 namespace WolfSellers\ZipCode\Controller\Index;
 
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Json\Helper\Data;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Serialize\Serializer\Json;
 
 /**
  * Get Town.
  */
-class GetTown extends Action
+class GetTown implements HttpGetActionInterface
 {
+    /**
+     * @var JsonFactory
+     */
     private JsonFactory $resultJsonFactory;
-    private Data $jsonHelper;
+
+    /**
+     * @var ResourceConnection
+     */
     private ResourceConnection $resourceConnection;
 
+    /**
+     * @var Json
+     */
+    private Json $json;
+
+    /**
+     * @var RequestInterface
+     */
+    protected RequestInterface $request;
+
+    /**
+     * @param JsonFactory $resultJsonFactory
+     * @param Json $json
+     * @param ResourceConnection $resourceConnection
+     * @param RequestInterface $request
+     */
     public function __construct(
-        Context $context,
         JsonFactory $resultJsonFactory,
-        Data $jsonHelper,
-        ResourceConnection $resourceConnection
+        Json $json,
+        ResourceConnection $resourceConnection,
+        RequestInterface $request
     ) {
-        parent::__construct($context);
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->jsonHelper = $jsonHelper;
+        $this->json = $json;
         $this->resourceConnection = $resourceConnection;
+        $this->request = $request;
     }
 
     /**
@@ -35,13 +58,12 @@ class GetTown extends Action
      *
      * Note: Request will be added as operation argument in future
      *
-     * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
+     * @return ResultInterface|ResponseInterface
      */
     public function execute()
     {
-        $regionId = $this->getRequest()->getParam('region_id');
-        $city = $this->getRequest()->getParam('city');
+        $regionId = $this->request->getParam('region_id');
+        $city = $this->request->getParam('city');
 
         $connection = $this->resourceConnection->getConnection();
         $tableName = $connection->getTableName('wolfsellers_zipcode');
@@ -50,15 +72,15 @@ class GetTown extends Action
             'label' => 'localidad',
             'postcode'
         ];
+
         $select = $connection->select()
             ->from($tableName, $cols)
             ->where('region_id = ?', $regionId)
             ->where('ciudad = ?', $city)
-            ->order('localidad ASC')
-        ;
+            ->order('localidad ASC');
 
         $towns = $connection->fetchAll($select);
 
-        return $this->resultJsonFactory->create()->setData($this->jsonHelper->jsonEncode($towns));
+        return $this->resultJsonFactory->create()->setData($this->json->serialize($towns));
     }
 }

@@ -7,52 +7,74 @@
 declare(strict_types=1);
 
 namespace WolfSellers\Flow\Controller\Index;
-use Magento\Framework\App\Action\Context;
+
+use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Data\Form\FormKey\Validator as FormKeyValidator;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NotFoundException;
+use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 use WolfSellers\Flow\Helper\Cart as HelperCart;
 
-class Updateitem extends \Magento\Framework\App\Action\Action
-                 implements \Magento\Framework\App\Action\HttpPostActionInterface
+class Updateitem implements HttpPostActionInterface
 {
 
     /**
      * @var FormKeyValidator
      */
-    private $formKeyValidator;
+    private FormKeyValidator $formKeyValidator;
 
     /**
      * @var Json
      */
-    private $json;
+    private Json $json;
 
     /**
      * @var HelperCart
      */
-    protected $helperCart;
+    protected HelperCart $helperCart;
+
+    /**
+     * @var RequestInterface
+     */
+    protected RequestInterface $request;
+
+    /**
+     * @var ResponseInterface
+     */
+    protected ResponseInterface $response;
+
+    /**
+     * @var ManagerInterface
+     */
+    protected ManagerInterface $messageManager;
 
     /**
      * UpdateItemQty constructor
      *
-     * @param Context $context
      * @param FormKeyValidator $formKeyValidator
      * @param Json $json
-     * @param StockAvailable $stockAvailable
      * @param HelperCart $helperCart
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @param ManagerInterface $messageManager
      */
     public function __construct(
-        Context $context,
         FormKeyValidator $formKeyValidator,
         Json $json,
-        HelperCart $helperCart
+        HelperCart $helperCart,
+        RequestInterface $request,
+        ResponseInterface $response,
+        ManagerInterface $messageManager
     ) {
         $this->formKeyValidator = $formKeyValidator;
         $this->json = $json;
         $this->helperCart = $helperCart;
-        parent::__construct($context);
+        $this->request = $request;
+        $this->response = $response;
+        $this->messageManager = $messageManager;
     }
 
     /**
@@ -60,16 +82,17 @@ class Updateitem extends \Magento\Framework\App\Action\Action
      *
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
         try {
             $this->validateRequest();
             $this->validateFormKey();
 
-            $itemId = (int)$this->getRequest()->getParam('itemId');
-            $qty = (int)$this->getRequest()->getParam('itemQty');
+            $itemId = (int) $this->request->getParam('itemId');
+            $qty = (int) $this->request->getParam('itemQty');
 
-            list($itemFound,$item) = $this->helperCart->getItem($itemId,"getItemId");
+            list($itemFound,$item) = $this->helperCart->getItem($itemId, 'getItemId');
+
             $product = $item->getProduct();
             $qty = isset($qty) ? (double) $qty : 0;
 
@@ -79,17 +102,25 @@ class Updateitem extends \Magento\Framework\App\Action\Action
                 );
             }
 
-            $a = $this->helperCart->updateItemQty($item,$qty);
-            if($a !== true){
-                $msg = !empty($a) ? $a : 'Something went wrong while saving the page. Please refresh the page and try again.';
+            $a = $this->helperCart->updateItemQty($item, $qty);
+
+            if ($a !== true) {
+                $msg = !empty($a) ?
+                    $a :
+                    'Something went wrong while saving the page. Please refresh the page and try again.';
+
                 throw new LocalizedException(__($msg));
             }
+
             $this->messageManager->addComplexSuccessMessage(
-                'addCartSuccessMessage', $this->helperCart->getMessageInformation($product,$item,$qty)
+                'addCartSuccessMessage',
+                $this->helperCart->getMessageInformation($product, $item, $qty)
             );
+
             $this->jsonResponse();
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
+
             $this->jsonResponse($e->getMessage());
         } catch (\Exception $e) {
             $this->jsonResponse('Something went wrong while saving the page. Please refresh the page and try again.');
@@ -102,9 +133,9 @@ class Updateitem extends \Magento\Framework\App\Action\Action
      * @param string $error
      * @return void
      */
-    private function jsonResponse(string $error = '')
+    private function jsonResponse(string $error = ''): void
     {
-        $this->getResponse()->representJson(
+        $this->response->representJson(
             $this->json->serialize($this->getResponseData($error))
         );
     }
@@ -135,9 +166,9 @@ class Updateitem extends \Magento\Framework\App\Action\Action
      * @return void
      * @throws NotFoundException
      */
-    private function validateRequest()
+    private function validateRequest(): void
     {
-        if ($this->getRequest()->isPost() === false) {
+        if ($this->request->isPost() === false) {
             throw new NotFoundException(__('Page Not Found'));
         }
     }
@@ -148,9 +179,9 @@ class Updateitem extends \Magento\Framework\App\Action\Action
      * @return void
      * @throws LocalizedException
      */
-    private function validateFormKey()
+    private function validateFormKey(): void
     {
-        if (!$this->formKeyValidator->validate($this->getRequest())) {
+        if (!$this->formKeyValidator->validate($this->request)) {
             throw new LocalizedException(
                 __('Something went wrong while saving the page. Please refresh the page and try again.')
             );

@@ -5,59 +5,106 @@
  */
 namespace WolfSellers\GoogleTagManager\Block;
 
-use Magento\Banner\Model\ResourceModel\Banner\CollectionFactory;
-use Magento\Catalog\Api\ProductAttributeRepositoryInterface;
-use Magento\Catalog\Model\Layer\Resolver;
-use Magento\Catalog\Model\Product\Attribute\Repository;
-use Magento\Checkout\Helper\Cart;
-use Magento\Customer\Model\Session;
-use Magento\Framework\App\ObjectManager;
-use Magento\Framework\App\Request\Http;
-use Magento\Framework\Json\Helper\Data;
-use Magento\Framework\Module\Manager;
-use Magento\Framework\Registry;
-use Magento\Framework\View\Element\Template\Context;
-use Magento\GoogleTagManager\Model\Banner\Collector;
-use Magento\Checkout\Model\Cart as CartModel;
 use Magento\Catalog\Helper\Image;
+use Magento\Catalog\Api\CategoryRepositoryInterface;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\GoogleTagManager\Helper\Data AS GoogleHelper;
+use Magento\Framework\Json\Helper\Data AS JsonHelperData;
+use Magento\Framework\Registry;
+use Magento\Checkout\Model\Session AS CheckoutSession;
+use Magento\Customer\Model\Session;
+use Magento\Checkout\Helper\Cart;
+use Magento\Catalog\Model\Layer\Resolver;
+use Magento\Framework\Module\Manager;
+use Magento\Framework\App\Request\Http;
+use Magento\Banner\Model\ResourceModel\Banner\CollectionFactory;
+use Magento\GoogleTagManager\Model\Banner\Collector;
+use Magento\CatalogRule\Model\ResourceModel\Rule;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Customer\Model\Session\Proxy;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\CatalogRule\Api\CatalogRuleRepositoryInterface;
 
 class ListJson extends \Magento\GoogleTagManager\Block\ListJson
 {
-    /**
-     * @var \Magento\Catalog\Api\CategoryRepositoryInterface
-     */
-    protected $_categoryRepository;
-    protected $_cart;
-    protected $imageHelper;
 
+    /**
+     * @var CategoryRepositoryInterface
+     */
+    protected CategoryRepositoryInterface $_categoryRepository;
+
+    /**
+     * @var Image
+     */
+    protected Image $imageHelper;
+
+    /**
+     * @var Rule
+     */
+    private Rule $ruleResource;
+
+    /**
+     * @var Proxy
+     */
+    private Proxy $sessionProxy;
+
+    /**
+     * @var TimezoneInterface
+     */
+    private TimezoneInterface $_date;
+
+    /**
+     * @var CatalogRuleRepositoryInterface
+     */
+    private CatalogRuleRepositoryInterface $catalogRuleRepository;
+
+    /**
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param Context $context
+     * @param GoogleHelper $helper
+     * @param JsonHelperData $jsonHelper
+     * @param Registry $registry
+     * @param CheckoutSession $checkoutSession
+     * @param Session $customerSession
+     * @param Cart $checkoutCart
+     * @param Resolver $layerResolver
+     * @param Manager $moduleManager
+     * @param Http $request
+     * @param CollectionFactory $bannerColFactory
+     * @param Collector $bannerCollector
+     * @param Rule $rule
+     * @param StoreManagerInterface $storeManager
+     * @param Proxy $sessionProxy
+     * @param TimezoneInterface $date
+     * @param CatalogRuleRepositoryInterface $catalogRuleRepository
+     * @param Image $imageHelper
+     * @param array $data
+     */
     public function __construct(
-        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\GoogleTagManager\Helper\Data $helper,
-        \Magento\Framework\Json\Helper\Data $jsonHelper,
-        \Magento\Framework\Registry $registry,
-        \Magento\Checkout\Model\Session $checkoutSession,
-        \Magento\Customer\Model\Session $customerSession,
-        \Magento\Checkout\Helper\Cart $checkoutCart,
-        \Magento\Catalog\Model\Layer\Resolver $layerResolver,
-        \Magento\Framework\Module\Manager $moduleManager,
-        \Magento\Framework\App\Request\Http $request,
-        \Magento\Banner\Model\ResourceModel\Banner\CollectionFactory $bannerColFactory,
-        \Magento\GoogleTagManager\Model\Banner\Collector $bannerCollector,
-        \Magento\CatalogRule\Model\ResourceModel\Rule $rule,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Customer\Model\Session\Proxy $sessionProxy,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
-        \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
+        CategoryRepositoryInterface $categoryRepository,
+        Context $context,
+        GoogleHelper $helper,
+        JsonHelperData $jsonHelper,
+        Registry $registry,
+        CheckoutSession $checkoutSession,
+        Session $customerSession,
+        Cart $checkoutCart,
+        Resolver $layerResolver,
+        Manager $moduleManager,
+        Http $request,
+        CollectionFactory $bannerColFactory,
+        Collector $bannerCollector,
+        Rule $rule,
+        StoreManagerInterface $storeManager,
+        Proxy $sessionProxy,
+        TimezoneInterface $date,
+        CatalogRuleRepositoryInterface $catalogRuleRepository,
         Image $imageHelper,
-        array $data = [],
-        CartModel $cart )
+        array $data = []
+    )
     {
         $this->_categoryRepository = $categoryRepository;
-        $this->_cart = $cart;
         $this->imageHelper = $imageHelper;
-        $this->ruleResource = $rule;
-        $this->_storeManager = $storeManager;
         $this->ruleResource = $rule;
         $this->_storeManager = $storeManager;
         $this->sessionProxy= $sessionProxy;
@@ -80,16 +127,19 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         );
     }
 
+    /**
+     * @return string|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function getCurrencyCode() {
         return $this->_storeManager->getStore()->getBaseCurrencyCode();
     }
 
     /**
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     * @throws \Magento\Framework\Exception\SessionException
+     * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-
     public function getCartContentExtended()
     {
         $cart = [];
@@ -183,6 +233,10 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         return $this->jsonHelper->jsonEncode($cart);
     }
 
+    /**
+     * @return CheckoutSession
+     * @throws \Magento\Framework\Exception\SessionException
+     */
     private function getCheckoutSession()
     {
         if (!$this->checkoutSession->isSessionExists()) {
@@ -191,6 +245,10 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         return $this->checkoutSession;
     }
 
+    /**
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function getCategoryName(){
         $product = $this->getCurrentProduct();
         $categories = [];
@@ -200,6 +258,12 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         return $categories;
     }
 
+    /**
+     * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\SessionException
+     */
     public function getCustomerInfo()
     {
         /** @var \Magento\Quote\Model\Quote $quote */
@@ -213,24 +277,26 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
 
         return $this->jsonHelper->jsonEncode($customer);
     }
-    
-    /*
+
+    /**
      * Function to obtain product promotion
+     * 
+     * @param $productId
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getRules($productId)
     {
         $date = $this->_date->date()->format('Y-m-d H:i:s');
         $websiteId = $this->_storeManager->getStore()->getWebsiteId();
         $customerGroupId = $this->sessionProxy->getCustomer()->getGroupId();
-        
         $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
         $promos = [];
-        
         foreach ($rules as $rule){
             $promo = $this->catalogRuleRepository->get($rule['rule_id']);
             array_push($promos, $promo->getName());
         }
-        
+
         return $promos;
     }
 }

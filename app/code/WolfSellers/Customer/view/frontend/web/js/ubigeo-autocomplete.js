@@ -106,13 +106,12 @@ define([
             };
 
             $.ajax({
-                type: 'POST',
                 url: url.build('zipcode/index/getcity'),
                 dataType: 'json',
                 data: payload,
                 global: false
             }).done(function (response) {
-                response = $.parseJSON(response);
+                response = JSON.parse(response);
 
                 $.each(response, function (index, item) {
                     var selected = item.value === defaultValue;
@@ -141,7 +140,7 @@ define([
                 data: payload,
                 global: false
             }).done(function (response) {
-                response = $.parseJSON(response);
+                response = JSON.parse(response);
 
                 $.each(response, function (index, item) {
                     var selected = item.value === defaultValue;

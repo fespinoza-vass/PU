@@ -3,47 +3,74 @@ declare(strict_types=1);
 
 namespace WolfSellers\Consecutive\Controller\Adminhtml\Sequential;
 
-class InlineEdit extends \Magento\Backend\App\Action
+use Magento\Framework\App\ActionInterface;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\LocalizedException;
+use WolfSellers\Consecutive\Model\ConsecutiveRepository;
+
+class InlineEdit implements ActionInterface
 {
 
-    protected $jsonFactory;
+    /**
+     * @var JsonFactory
+     */
+    protected JsonFactory $jsonFactory;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
+     * @var RequestInterface
+     */
+    protected RequestInterface $request;
+
+    /**
+     * @var ConsecutiveRepository
+     */
+    protected ConsecutiveRepository $consecutiveRepository;
+
+    /**
+     * @param JsonFactory $jsonFactory
+     * @param RequestInterface $request
+     * @param ConsecutiveRepository $consecutiveRepository
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
+        JsonFactory $jsonFactory,
+        RequestInterface $request,
+        ConsecutiveRepository $consecutiveRepository
     ) {
-        parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
+        $this->request = $request;
+        $this->consecutiveRepository = $consecutiveRepository;
     }
 
     /**
      * Inline edit action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
+     * @throws LocalizedException
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
-        /** @var \Magento\Framework\Controller\Result\Json $resultJson */
         $resultJson = $this->jsonFactory->create();
         $error = false;
         $messages = [];
-        
-        if ($this->getRequest()->getParam('isAjax')) {
-            $postItems = $this->getRequest()->getParam('items', []);
+
+        if ($this->request->getParam('isAjax')) {
+            $postItems = $this->request->getParam('items', []);
+
             if (!count($postItems)) {
                 $messages[] = __('Please correct the data sent.');
                 $error = true;
             } else {
                 foreach (array_keys($postItems) as $modelid) {
-                    /** @var \WolfSellers\Consecutive\Model\Sequential $model */
-                    $model = $this->_objectManager->create(\WolfSellers\Consecutive\Model\Sequential::class)->load($modelid);
+                    $consecutive = $this->consecutiveRepository->get($modelid);
+
                     try {
-                        $model->setData(array_merge($model->getData(), $postItems[$modelid]));
-                        $model->save();
+                        foreach ($postItems[$modelid] as $key => $value) {
+                            $consecutive->setData($key, $value);
+                        }
+
+                        $this->consecutiveRepository->save($consecutive);
                     } catch (\Exception $e) {
                         $messages[] = "[Sequential ID: {$modelid}]  {$e->getMessage()}";
                         $error = true;
@@ -51,7 +78,7 @@ class InlineEdit extends \Magento\Backend\App\Action
                 }
             }
         }
-        
+
         return $resultJson->setData([
             'messages' => $messages,
             'error' => $error
