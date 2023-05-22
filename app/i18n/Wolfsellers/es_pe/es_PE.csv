@@ -25959,7 +25959,7 @@ Sign Up for Our Newsletter,Suscríbete a nuestro boletín
 "Select default","Seleccione por defecto"
 "Default Addresses","Direcciones por Defecto"
 "Additional Addresses","Direcciones Adicionales"
-"Enter Keyword or Item","Introduce una palabra clave o artuculo"
+"Enter Keyword or Item","Introduce una palabra clave o articulo"
 "Edit Address Shipping","Cambiar Dirección de Envio"
 "Edit Address Billing","Cambiar Dirección de Facturación"
 "Creating an account has many benefits: check out faster, keep more than one address, track orders, and more.","Crear una cuenta tiene muchos beneficios: pagar más rápido, mantener más de una dirección, realizar un seguimiento de los pedidos y más."
@@ -25992,3 +25992,4 @@ Please confirm your password.,Por favor confirme su password.
 No payment shipping address selected,No se seleccionó ninguna dirección de envío de pago
 No payment method selected,No se seleccionó ningún método de pago
 No shipping method selected,No se seleccionó ningún método de envío
+"😔 We could not find anything for <b>""%search_query%""</b>","😔 No pudimos encontrar nada para <b>""%search_query%""</b>"
