@@ -757,16 +757,28 @@
                         padding: 0;
                         width: auto;
                         .amsearch-form-block{
-                            background: #fff;
+                            background: @white;
                             border: none;
                             box-sizing: border-box;
                             left: 0;
                             margin: 0;
                             position: absolute;
                             right: 0;
-                            top: 120%;
+                            top: 100%;
                             z-index: 9;
-                            padding: 0 15px;
+                            padding: 0 15px 10px 15px;
+                            section{
+                                input{
+                                    height: 34px;
+                                    &:focus{
+                                        border: 2px solid @color-input-search;
+                                        transition: none;
+                                    }
+                                }
+                                button.amsearch-button{
+                                    height: 34px;
+                                }
+                            }
                             .amsearch-result-section{
                                 width: calc(~'(100% - 25px)');
                                 left: 15px;
