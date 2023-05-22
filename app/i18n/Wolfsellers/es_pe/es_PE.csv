@@ -25993,3 +25993,4 @@ No payment shipping address selected,No se seleccionó ninguna dirección de env
 No payment method selected,No se seleccionó ningún método de pago
 No shipping method selected,No se seleccionó ningún método de envío
 "😔 We could not find anything for <b>""%search_query%""</b>","😔 No pudimos encontrar nada para <b>""%search_query%""</b>"
+"We could not find anything for %1","No pudimos encontrar nada para %1"
