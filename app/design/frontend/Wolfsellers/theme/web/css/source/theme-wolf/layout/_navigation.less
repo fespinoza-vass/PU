@@ -46,6 +46,44 @@
 	}
 	.ammenu-menu-wrapper{
 		margin-bottom: 0;
+		.ammenu-nav-sections.-opened{
+			background: @white !important;
+			width: 85vw;
+			&:before{
+				content: "MENÚ DE CATEGORÍAS";
+				display: block;
+				margin: 15px 0 30px 0;
+				padding: 0 20px;
+				font-size: 1.6rem;
+				font-weight: 600;
+				font-family: @font-family-name__base;
+			}
+			.ammenu-tabs-list{
+				display: none;
+			}
+			.ammenu-menu-title{
+				padding: 0;
+				button.-close{
+					position: fixed;
+					right: 15px;
+					top: 15px;
+					color: @white !important;
+					width: 30px;
+					height: 30px;
+					&:before,
+					&:after{
+						width: 26px;
+					}
+				}
+			}
+			ul{
+				li{
+					.ammenu-link{
+						border-bottom: 1px solid rgb(41, 41, 41);
+					}
+				}
+			}
+		}
 	}
 }
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
