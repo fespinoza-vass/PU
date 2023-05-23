@@ -379,6 +379,7 @@
 										tbody tr{
 											background: @white;
 											&.grand.totals{
+												border-top: 1px solid @gray5;
 												~ div{
 													width: 140%;
 													margin-top: 90px;
@@ -398,6 +399,15 @@
 														}
 													}
 												}
+												.mark,
+												.amount{
+													border-top: 0px;
+												}
+											}
+											&.totals{
+												display: flex;
+												justify-content: space-between;
+												width: 100%;
 											}
 										}
 										label{
