@@ -127,9 +127,8 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
                     }
 
                     $orderId = $this->cartManagement->placeOrder($quote->getId());
-                    $order = $this->orderRepository->get( $orderId);
+                    $order = $this->orderRepository->get($orderId);
                     if ($order) {
-
                         $orderState = Order::STATE_PROCESSING;
                         $order->setStatus(Order::STATE_COMPLETE);
                         $order->save();
@@ -137,6 +136,7 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
 
                     $this->messageManager->addSuccess('Compra exitosa con Visa');
                     $this->_redirect('checkout/onepage/success');
+
                 } catch (\Exception $e) {
                     $this->messageManager->addWarning($e->getMessage());
                     $this->_redirect('visanet/onepage/error');
