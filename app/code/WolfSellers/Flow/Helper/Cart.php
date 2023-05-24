@@ -104,9 +104,8 @@ class Cart extends AbstractHelper
     /**
      * @param $item
      * @param $qty
-     * @return string|true
      */
-    public function updateItemQty($item, $qty): bool|string
+    public function updateItemQty($item, $qty)
     {
         try {
             $this->updateItemQuantity($item, $qty);
