@@ -156,6 +156,8 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         $shipmentItems = $this->getShipmentItems($request);
         $order = $request->getOrderShipment()->getOrder();
 
+        $weight = intval($request->getPackageWeight());
+
         $data = [
             'linea' => $this->getConfigData('line'),
             'id_contrato' => $this->getConfigData('contract'),
@@ -174,7 +176,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
             'nom_urb' => $request->getRecipientAddressCity(),
             'ubi_direc' => $request->getRecipientAddressPostalCode(),
             'ref_direc' => '',
-            'peso_total' => round($request->getPackageWeight(), 2),
+            'peso_total' => $weight,
             'pieza_total' => count($request->getPackages()),
             'urgente' => (bool) $this->getConfigData('urgent') ? 'SI' : 'NO',
             'picking' => (bool) $this->getConfigData('picking') ? 'SI' : 'NO',
