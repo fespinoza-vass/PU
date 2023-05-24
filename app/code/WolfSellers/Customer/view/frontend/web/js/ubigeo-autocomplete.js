@@ -134,7 +134,7 @@ define([
             };
 
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: url.build('zipcode/index/gettown'),
                 dataType: 'json',
                 data: payload,
