@@ -761,7 +761,9 @@
                         position: relative;
 
                         .wishlist-toolbar{
-
+                            &.wishlist-toolbar-footer{
+                                display: none;
+                            }
                             .limiter{
                                 align-items: center;
                                 display: flex;
@@ -1427,13 +1429,14 @@
 
         .sidebar-main{
             .block-collapsible-nav{
+                z-index: 100;
                 .block-collapsible-nav-title{
                     justify-content: center;
                     align-items: center;
                     background: @black;
                     display: flex;
                     color: @white;
-
+                    padding: 20px 15px 10px 20px;
                     &::after{
                         margin: 0 0 0 16px;
                         .lib-font-size(16);
@@ -1727,8 +1730,8 @@
             .page-main{
                 .columns{
                     .column{
-                        margin: 0 16px;
-
+                        margin: 0;
+                        padding: 0;
                         .wishlist-toolbar{
                             margin:  28px 0 24px;
 
@@ -1739,6 +1742,14 @@
                             .pager{
                                 justify-content: space-between;
                                 display: flex;
+                                .limiter{
+                                    .limiter-options{
+                                        height: 25px;
+                                    }
+                                }
+                            }
+                            span,strong{
+                                .lib-font-size(12);
                             }
                         }
 
@@ -1817,7 +1828,7 @@
                                                             .actions-primary{
                                                                 .tocart{
                                                                     padding: 7px 0 8px;
-                                                                    .lib-font-size(14);
+                                                                    .lib-font-size(10);
                                                                 }
                                                             }
                                                         }
