@@ -1,35 +1,56 @@
-define([
-    "jquery",
-    "Magento_Ui/js/modal/modal",
-    "mage/cookies",
-    "domReady!"
-], function ($, modal) {
-    "use strict";
-
-    $('.row-popup-home').attr('id', 'modal');
-    if (! $.cookie('cookiemodal') && !window.location.href.includes("simulador")) { //check if cookiemodal doesn't exist
-        $.cookie('cookiemodal', 'ok'); //we set a cookie name="cookiemodal" value="ok"
-        var options = {
-            type: 'popup',
-            responsive: true,
-            buttons: [{
-                text: $.mage.__('Ok'),
-                class: '',
-                click: function () {
-                    this.closeModal();
-                }
-            }]
-        };
-
-        var popup = modal(options, $('#modal'));
-        $('#modal').modal('openModal');
-    }
-
-    $(document).on("click",function(e) {
-        var containerPopup = $('.modal-inner-wrap');
-
-        if (!containerPopup.is(e.target) && containerPopup.has(e.target).length === 0) {
-            $('#modal').modal('closeModal');
-        }
-    });   
+define([ 
+	"jquery", 
+	"Magento_Ui/js/modal/modal", 
+	"mage/cookies"
+], function ($, modal) { 
+	"use strict"; 
+	
+	// Crear una función de inicialización 
+	function initializeModalPopup() { 
+		// Establecer constantes 
+		const COOKIE_MODAL = 'cookiemodal'; 
+		const MODAL_ID = 'modal'; 
+		const $modalElement = $('.row-popup-home').first(); 
+		
+		// Configurar id para el elemento modal 
+		$modalElement.attr('id', MODAL_ID); 
+		
+		// Si no existe la cookie 'cookiemodal' y no estamos en la url 'simulador' 
+		if (! $.cookie(COOKIE_MODAL) && !window.location.href.includes("simulador")) { 
+			// Establecer la cookie 'cookiemodal' 
+			$.cookie(COOKIE_MODAL, 'ok'); 
+			
+			// Opciones para el modal 
+			const options = { 
+				type: 'popup', 
+				responsive: true, 
+				innerScroll: true, 
+				buttons: [{ 
+					text: $.mage.__('Ok'), 
+					class: '', 
+					click: function () { 
+						this.closeModal(); 
+					} 
+				}] 
+			}; 
+			
+			// Crear el modal y abrirlo 
+			/*const popup = modal(options, $modalElement); 
+			$modalElement.modal('openModal');*/
+			
+			// Cerrar el modal al hacer click fuera de él 
+			/*$(document).on("click", function(e) { 
+				const $containerPopup = $('.modal-inner-wrap'); 
+				
+				if (!$containerPopup.is(e.target) && $containerPopup.has(e.target).length === 0) { 
+					$modalElement.modal('closeModal'); 
+				} 
+			});*/
+		} 
+	} 
+	
+	// Ejecutar la función de inicialización cuando el DOM esté listo 
+	$(document).ready(function() { 
+		initializeModalPopup(); 
+	}); 
 });
