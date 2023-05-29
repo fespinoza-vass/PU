@@ -35,17 +35,19 @@ define([
 			}; 
 			
 			// Crear el modal y abrirlo 
-			/*const popup = modal(options, $modalElement); 
-			$modalElement.modal('openModal');*/
-			
-			// Cerrar el modal al hacer click fuera de él 
-			/*$(document).on("click", function(e) { 
-				const $containerPopup = $('.modal-inner-wrap'); 
+			if(jQuery('#modal').length){
+				const popup = modal(options, $modalElement); 
+				$modalElement.modal('openModal');
 				
-				if (!$containerPopup.is(e.target) && $containerPopup.has(e.target).length === 0) { 
-					$modalElement.modal('closeModal'); 
-				} 
-			});*/
+				// Cerrar el modal al hacer click fuera de él 
+				$(document).on("click", function(e) { 
+					const $containerPopup = $('.modal-inner-wrap'); 
+					
+					if (!$containerPopup.is(e.target) && $containerPopup.has(e.target).length === 0) { 
+						$modalElement.modal('closeModal'); 
+					} 
+				});
+			}
 		} 
 	} 
 	
