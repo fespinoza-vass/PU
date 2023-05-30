@@ -38,11 +38,13 @@ class GetUbigeo implements HttpGetActionInterface
     public function __construct(
         JsonFactory $resultJsonFactory,
         Json $json,
-        Ubigeo $ubigeoHelper
+        Ubigeo $ubigeoHelper,
+        RequestInterface $request
     ) {
         $this->ubigeoHelper = $ubigeoHelper;
         $this->resultJsonFactory = $resultJsonFactory;
         $this->json = $json;
+        $this->request = $request;
     }
 
     /**

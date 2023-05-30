@@ -173,9 +173,10 @@ class Index extends Action
      * @param string $type
      * @param ProductCollection $productCollection
      * @param $incomingValue
+     * @param $formId
      * @return void
      */
-    private function setSessionVariables(string $type, ProductCollection $productCollection, $incomingValue, $formId){
+    private function setSessionVariables(string $type, $productCollection, $incomingValue, $formId){
         try{
             $simulator = $this->simulatorRepository->getByFormType($formId,$type);
         }catch (\Exception $exception){
@@ -195,7 +196,7 @@ class Index extends Action
      * @param ProductCollection $productCollection
      * @return String
      */
-    private function getProductIdsFromCollection(ProductCollection $productCollection){
+    private function getProductIdsFromCollection($productCollection){
         $productIds = [];
         foreach ($productCollection->getData() as $product){
             $productIds[] = $product['entity_id'];
