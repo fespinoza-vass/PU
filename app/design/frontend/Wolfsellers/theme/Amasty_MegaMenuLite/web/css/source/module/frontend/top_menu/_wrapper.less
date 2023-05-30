@@ -53,6 +53,25 @@
       margin: 0;
       padding: 0;
       list-style: none;
+      li[data-bind*="id: 'category-node-1971'"]{
+        p {
+          background: @white;
+          border-radius: 10px;
+          padding: 5px 10px;
+          margin: 0 -15px 0 0;
+          color: @black;
+        }
+        .ammenu-link{
+          background-color: transparent !important;
+          &:after {
+            display: none;
+          }
+        }
+      }
+      &:hover{
+        background: transparent !important;
+        color: @white !important;
+      }
     }
 
     .ammenu-items.-root > .ammenu-item {
@@ -76,8 +95,21 @@
 
       > .ammenu-link {
         position: relative;
-        padding: 14px;
+        padding: 8px 20px;
         font-size: 1.4rem;
+        text-transform: uppercase;
+        &:after{
+          position: absolute;
+          content: '\e622';
+          font-family: 'theme-icons';
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+        }
+        &:hover{
+          background: transparent !important;
+          color: @white !important;
+        }
       }
 
       > .ammenu-link .ammenu-label {
@@ -86,12 +118,38 @@
         left: 0;
         margin: 0 0 4px;
       }
+
+      &:last-child{
+        .ammenu-submenu-wrapper{
+          width: auto !important; //estilos amasty
+          right: 0;
+          left: auto;
+        }
+      }
+      .ammenu-submenu-block{
+        .category-item{
+          .ammenu-title.-parent{
+            font-size: 1.4rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            border-bottom: 1px solid @gray; 
+          }
+          ul.ammenu-list{
+            li{
+              a{
+                font-size: 1.4rem;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
   .ammenu-nav-sections.-topmenu:not(.-hamburger) .ammenu-main-container .ammenu-items.-root {
     margin: 0 auto;
     max-width: @ammenu-menu__max-width;
+    justify-content: center;
   }
 
   .ammenu-nav-sections.-sidebar {

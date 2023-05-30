@@ -5,7 +5,7 @@ namespace WolfSellers\Consecutive\Model\Data;
 
 use WolfSellers\Consecutive\Api\Data\ConsecutiveInterface;
 
-class Consecutive extends \Magento\Framework\Api\AbstractExtensibleObject implements ConsecutiveInterface
+class Consecutive extends \Magento\Framework\Model\AbstractExtensibleModel implements ConsecutiveInterface
 {
 
     /**
@@ -14,7 +14,7 @@ class Consecutive extends \Magento\Framework\Api\AbstractExtensibleObject implem
      */
     public function getConsecutiveId()
     {
-        return $this->_get(self::CONSECUTIVE_ID);
+        return $this->getData(self::CONSECUTIVE_ID);
     }
 
     /**
@@ -33,7 +33,7 @@ class Consecutive extends \Magento\Framework\Api\AbstractExtensibleObject implem
      */
     public function getConsecutiveNumber()
     {
-        return $this->_get(self::CONSECUTIVE_NUMBER);
+        return $this->getData(self::CONSECUTIVE_NUMBER);
     }
 
     /**
@@ -72,7 +72,7 @@ class Consecutive extends \Magento\Framework\Api\AbstractExtensibleObject implem
      */
     public function getWebsiteId()
     {
-        return $this->_get(self::WEBSITE_ID);
+        return $this->getData(self::WEBSITE_ID);
     }
 
     /**

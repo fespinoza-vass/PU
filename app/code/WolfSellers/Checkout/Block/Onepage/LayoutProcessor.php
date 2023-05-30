@@ -44,10 +44,8 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         $dni = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.dni');
         $dni['visible'] = false;
+
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.dni', $dni);
-
-
-
         $vat = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id');
         $vat['visible'] = false;
         $vat['imports'] = [
@@ -100,7 +98,6 @@ class LayoutProcessor implements LayoutProcessorInterface
                 $payment['children']['form-fields']['children']['fecha_de_nacimiento']['validation'] = [];
             }
         }
-
         $walker->setValue('{PAYMENT}.>>.payments-list', $payments);
 
         return $walker->getResult();

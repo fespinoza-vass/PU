@@ -2,33 +2,53 @@
 
 namespace WolfSellers\ZipCode\Controller\Index;
 
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\NotFoundException;
+use Magento\Framework\Serialize\Serializer\Json;
+use WolfSellers\ZipCode\Model\ZipCodeFactory;
 
-class Index extends Action
+class Index implements HttpGetActionInterface
 {
-    /** @var $model \WolfSellers\ZipCode\Model\ZipCodeFactory */
-    protected $model;
     /**
-     * @var \Magento\Framework\Controller\Result\JsonFactory
+     * @var ZipCodeFactory
      */
-    private $resultJsonFactory;
-    /**
-     * @var \Magento\Framework\Json\Helper\Data
-     */
-    private $jsonHelper;
+    protected ZipCodeFactory $model;
 
+    /**
+     * @var JsonFactory
+     */
+    private JsonFactory $resultJsonFactory;
+
+    /**
+     * @var Json
+     */
+    private Json $json;
+
+    /**
+     * @var RequestInterface
+     */
+    protected RequestInterface $request;
+
+    /**
+     * @param ZipCodeFactory $zipCodeFactory
+     * @param JsonFactory $resultJsonFactory
+     * @param Json $json
+     * @param RequestInterface $request
+     */
     public function __construct(
-        Context $context,
-        \WolfSellers\ZipCode\Model\ZipCodeFactory $zipCodeFactory,
-        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        \Magento\Framework\Json\Helper\Data $jsonHelper
+        ZipCodeFactory $zipCodeFactory,
+        JsonFactory $resultJsonFactory,
+        Json $json,
+        RequestInterface $request
     ) {
-        parent::__construct($context);
         $this->model = $zipCodeFactory;
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->jsonHelper = $jsonHelper;
+        $this->json = $json;
+        $this->request = $request;
     }
 
     /**
@@ -36,17 +56,20 @@ class Index extends Action
      *
      * Note: Request will be added as operation argument in future
      *
-     * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
+     * @return ResultInterface|ResponseInterface
+     * @throws NotFoundException
      */
     public function execute()
     {
-        if ($this->getRequest()->isAjax()) {
-            $zipcode = $this->getRequest()->getParam('zipcode');
+        if ($this->request->isAjax()) {
+            $zipcode = $this->request->getParam('zipcode');
             $zip = $this->model->create();
-            $collection = $zip->getCollection()->addFieldToSelect('*')->addFieldToFilter('cp', ['equals' => $zipcode]);
 
-            return $this->resultJsonFactory->create()->setData($this->jsonHelper->jsonEncode($collection));
+            $collection = $zip->getCollection()//
+                ->addFieldToSelect('*')
+                ->addFieldToFilter('cp', ['equals' => $zipcode]);
+
+            return $this->resultJsonFactory->create()->setData($this->json->serialize($collection));
         }
     }
 }

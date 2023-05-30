@@ -54,9 +54,11 @@ $_helper = $block->getData('outputHelper');
                      data-container="product-<?= /* @noEscape */ $viewMode ?>">
                     <?php
                     $productImage = $block->getImage($_product, $imageDisplayArea);
-                    if ($pos != null) {
+                    if ($pos !== null) {
                         $position = 'left:' . $productImage->getWidth() . 'px;'
                             . 'top:' . $productImage->getHeight() . 'px;';
+                    } else {
+                        $pos = '';
                     }
                     ?>
                     <?php // Product Image ?>

@@ -1,0 +1,21 @@
+diff --git a/vendor/magento/module-config/ViewModel/CountryFilter.php b/vendor/magento/module-config/ViewModel/CountryFilter.php
+index 7dd9353b..076830c5 100644
+--- a/vendor/magento/module-config/ViewModel/CountryFilter.php
++++ b/vendor/magento/module-config/ViewModel/CountryFilter.php
+@@ -40,6 +40,16 @@ class CountryFilter implements ArgumentInterface
+      */
+     public function getEuCountryList(int $storeId = null): array
+     {
++        $euCountries = $this->scopeConfig->getValue(
++            self::XML_PATH_EU_COUNTRIES_LIST,
++            ScopeInterface::SCOPE_STORE,
++            $storeId
++        );
++
++        if ($euCountries === null) {
++            return [];
++        }
++
+         $euCountries = explode(
+             ',',
+             $this->scopeConfig->getValue(

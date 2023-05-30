@@ -9963,7 +9963,7 @@ No records found.,No se encontraron registros.,lib,lib/web/mage/backend/suggest.
 Recent items,Artículos recientes,lib,lib/web/mage/backend/suggest.js,
 Show all...,Mostrar todos...,lib,lib/web/mage/backend/suggest.js,
 Please enter a number greater 0 in this field.,Ingrese un número mayor 0 en este campo.,lib,lib/web/mage/backend/validation.js,
-Please select one of each ratings above.,Please select one of each ratings above.,lib,lib/web/mage/backend/validation.js,
+Please select one of each ratings above.,Por favor selecciona una de las calificaciones anteriores.,lib,lib/web/mage/backend/validation.js,
 Please specify Url.,"Por favor, especifique la URL.",lib,lib/web/mage/backend/validation.js,
 Method %s does not exist on jQuery.decorate,El método %s no existe en jQuery.decorate,lib,lib/web/mage/decorate.js,
 Close,Cerrar,lib,lib/web/mage/dropdown.js,
@@ -20536,7 +20536,7 @@ With Selected,Con seleccionado,module,Magento_RequisitionList,
 You added %1 item(s) to your shopping cart.,Agregaste %1 artículo(s) a tu carrito de compras.,module,Magento_RequisitionList,
 You have no items in this requisition list.,You have no items in this requisition list.,module,Magento_RequisitionList,
 "Click <a href=""%1"">here</a> to see the review.","Click <a href=""%1"">aquí</a> para ver la opinión.",module,Magento_Review,
-Please select one of each of the ratings above.,Please select one of each of the ratings above.,module,Magento_Review,
+Please select one of each of the ratings above.,Por favor selecciona una de las calificaciones anteriores.,module,Magento_Review,
 The storage key wasn't set. Add the storage key and try again.,La clave de almacenamiento no estaba configurada. Agregue la clave de almacenamiento e intente nuevamente.,module,Magento_Review,
 Status,Estatus,module,Magento_Review,
 ID,ID,module,Magento_Review,
@@ -25959,7 +25959,7 @@ Sign Up for Our Newsletter,Suscríbete a nuestro boletín
 "Select default","Seleccione por defecto"
 "Default Addresses","Direcciones por Defecto"
 "Additional Addresses","Direcciones Adicionales"
-"Enter Keyword or Item","Introduce una palabra clave o artuculo"
+"Enter Keyword or Item","Introduce una palabra clave o articulo"
 "Edit Address Shipping","Cambiar Dirección de Envio"
 "Edit Address Billing","Cambiar Dirección de Facturación"
 "Creating an account has many benefits: check out faster, keep more than one address, track orders, and more.","Crear una cuenta tiene muchos beneficios: pagar más rápido, mantener más de una dirección, realizar un seguimiento de los pedidos y más."
@@ -25992,3 +25992,6 @@ Please confirm your password.,Por favor confirme su password.
 No payment shipping address selected,No se seleccionó ninguna dirección de envío de pago
 No payment method selected,No se seleccionó ningún método de pago
 No shipping method selected,No se seleccionó ningún método de envío
+"😔 We could not find anything for <b>""%search_query%""</b>","😔 No pudimos encontrar nada para <b>""%search_query%""</b>"
+"We could not find anything for %1","No pudimos encontrar nada para %1"
+"Show (%1) more","Ver (%1) más"

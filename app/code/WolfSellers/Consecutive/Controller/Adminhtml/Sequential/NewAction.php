@@ -3,34 +3,52 @@ declare(strict_types=1);
 
 namespace WolfSellers\Consecutive\Controller\Adminhtml\Sequential;
 
-class NewAction extends \WolfSellers\Consecutive\Controller\Adminhtml\Sequential
-{
+use Magento\Backend\Model\View\Result\ForwardFactory;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Controller\Result\Forward;
+use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Message\ManagerInterface;
+use WolfSellers\Consecutive\Controller\Adminhtml\Sequential;
+use WolfSellers\Consecutive\Model\SequentialRepository;
 
-    protected $resultForwardFactory;
+class NewAction extends Sequential
+{
+    /**
+     * @var ForwardFactory
+     */
+    protected ForwardFactory $resultForwardFactory;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
+     * @param RequestInterface $request
+     * @param RedirectFactory $resultRedirectFactory
+     * @param ManagerInterface $messageManage
+     * @param SequentialRepository $sequentialRepository
+     * @param ForwardFactory $resultForwardFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
-    ) {
+        RequestInterface $request,
+        RedirectFactory $resultRedirectFactory,
+        ManagerInterface $messageManage,
+        SequentialRepository $sequentialRepository,
+        ForwardFactory $resultForwardFactory
+    )
+    {
+        parent::__construct($request, $resultRedirectFactory, $messageManage, $sequentialRepository);
+
         $this->resultForwardFactory = $resultForwardFactory;
-        parent::__construct($context, $coreRegistry);
     }
 
     /**
      * New action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
-        /** @var \Magento\Framework\Controller\Result\Forward $resultForward */
+        /** @var Forward $resultForward */
         $resultForward = $this->resultForwardFactory->create();
+
         return $resultForward->forward('edit');
     }
 }
