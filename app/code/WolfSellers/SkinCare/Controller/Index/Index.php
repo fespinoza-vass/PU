@@ -164,7 +164,7 @@ class Index extends Action
                 inner join eav_attribute_option eao ON ea.attribute_id = eao.attribute_id
                 inner join eav_attribute_option_value eaov ON eaov.option_id = eao.option_id
             where attribute_code = '$attributeCode' and eaov.value = '" .
-            str_replace("'", "\\'", $value) . "';";
+            str_replace("'", "\\'", (string)$value) . "';";
         return $connection->fetchOne($sql);
     }
 
