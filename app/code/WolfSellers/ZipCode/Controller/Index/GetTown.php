@@ -42,11 +42,12 @@ class GetTown implements HttpGetActionInterface
      * @param RequestInterface $request
      */
     public function __construct(
-        JsonFactory $resultJsonFactory,
-        Json $json,
+        JsonFactory        $resultJsonFactory,
+        Json               $json,
         ResourceConnection $resourceConnection,
-        RequestInterface $request
-    ) {
+        RequestInterface   $request
+    )
+    {
         $this->resultJsonFactory = $resultJsonFactory;
         $this->json = $json;
         $this->resourceConnection = $resourceConnection;
@@ -73,14 +74,25 @@ class GetTown implements HttpGetActionInterface
             'postcode'
         ];
 
-        $select = $connection->select()
+        $select = $connection->select('DISTINCT(localidad)')
             ->from($tableName, $cols)
             ->where('region_id = ?', $regionId)
             ->where('ciudad = ?', $city)
             ->order('localidad ASC');
 
         $towns = $connection->fetchAll($select);
+        // Obtener los valores únicos de 'value'
+        $uniqueValues = array_unique(array_column($towns, 'value'));
 
-        return $this->resultJsonFactory->create()->setData($this->json->serialize($towns));
+        // Construir el arreglo resultante
+        $filteredTowns = [];
+        foreach ($towns as $town) {
+            if (in_array($town['value'], $uniqueValues)) {
+                $filteredTowns[] = $town;
+                $uniqueValues = array_diff($uniqueValues, [$town['value']]);
+            }
+        }
+
+        return $this->resultJsonFactory->create()->setData($this->json->serialize($filteredTowns));
     }
 }
