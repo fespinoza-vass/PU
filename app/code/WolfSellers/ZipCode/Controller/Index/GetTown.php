@@ -74,7 +74,7 @@ class GetTown implements HttpGetActionInterface
             'postcode'
         ];
 
-        $select = $connection->select('DISTINCT(localidad)')
+        $select = $connection->select()
             ->from($tableName, $cols)
             ->where('region_id = ?', $regionId)
             ->where('ciudad = ?', $city)
