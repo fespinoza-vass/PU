@@ -141,6 +141,7 @@ define([
                 self._setSkinHealth();
             }*/
 
+            self._setFormId();
             $.each(this.resultElements, function (key, elements) {
                 var valReport = report[key];
 
