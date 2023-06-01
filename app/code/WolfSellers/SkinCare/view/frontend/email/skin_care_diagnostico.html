@@ -20,190 +20,161 @@
 } @-->
 
 <!--@subject {{trans "Resultados de tu diagnóstico"}} @-->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <style type="text/css">
-        {{var template_styles|raw}}
-
-        {{css file="css/email.css"}}
-    </style>
-</head>
-<body>
-{{inlinecss file="css/email-inline.css"}}
-
-<!-- Begin wrapper table -->
-<table class="wrapper" width="100%">
-    <tr>
-        <td class="wrapper-inner" align="center">
-            <table class="main" align="center">
-                <tr>
-                    <td id="bg-theme" class="header" align="center" style="background:#000000; padding: 30px;">
-                        <a class="logo" href="{{store url=""}}">
-                            <img
-                                {{if logo_width}}
-                                    width="{{var logo_width}}"
-                                {{else}}
-                                    width="180"
-                                {{/if}}
-
-                                {{if logo_height}}
-                                    height="{{var logo_height}}"
-                                {{/if}}
-
-                                src="{{media url="email/logo/stores/1/logo_white.png"}}"
-                                alt="{{var logo_alt}}"
-                                border="0"
-                            />
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="main-content">
-                    <!-- Begin Content -->
-
-<!--<div class="greeting">Hola, {{var customerName}}</div>-->
-<!-- Custom Image with your email-->
-<!--img src="{{view url='Magenest_AbandonedCart::images/customimage.png'}}"/-->
-<div  class="hola">
-    {{trans "Hola %customer," customer=$diagnostico.customerName}}
-</div>
-<div class="somos">
-    {{trans "Somos %store_name. " store_name=$store.getFrontendName()}}
-    {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atender las necesidades de tu piel."}}
-</div>
-
-<h3 style="text-align: center;">RESULTADOS DEL DIAGNÓSTICO</h3>
-
-<div class="content">
-    <div>
-        <h3 class="linea-3">{{trans "SALUD DE PIEL %skin_health / 100" skin_health=$diagnostico.results.skin_health}}</h3>
-    </div>
-    {{depend result_wrinkle}}
-    <hr>
-    <div>
-        <h3 class="lineas">{{trans "%wrinkle/100" wrinkle=$diagnostico.results.wrinkle}}</h3>
-        <h3 class="lineas-1">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
-        <h2 class="lineas-2">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
-    </div>
-    <div>
-        {{block
-        class='Magento\\Framework\\View\\Element\\Template'
-        type='core/template'
-        name='diagnostico_wrinkle'
-        order_id='1'
-        area='frontend'
-        template='WolfSellers_SkinCare::email/diagnostico.phtml'
-        productsList=$diagnostico.wrinkle
-        }}
-    </div>
-    {{/depend}}
-    {{depend result_spot}}
-    <hr>
-    <div class="line_up">
-        <h3 class="lineas">{{trans "%spot/100" spot=$diagnostico.results.spot}}</h3>
-        <h3 class="lineas-1">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
-        <h2 class="lineas-2">Se pueden originar por exposición solar, cambios hormonales, genética y más. Prevenga y evite su aparición.</h2>
-    </div>
-    <div>
-        {{block
-        class='Magento\\Framework\\View\\Element\\Template'
-        type='core/template'
-        name='diagnostico_spot'
-        order_id='3'
-        area='frontend'
-        template='WolfSellers_SkinCare::email/diagnostico.phtml'
-        productsList=$diagnostico.spot
-        }}
-    </div>
-    {{/depend}}
-    {{depend result_texture}}
-    <hr>
-    <div class="line_up">
-        <h3 class="lineas">{{trans "%texture/100" texture=$diagnostico.results.texture}}</h3>
-        <h3 class="lineas-1">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
-        <h2 class="lineas-2">El exceso de células muertas de la piel pueden acumularse, lo que lleva a una textura desigual de la piel.</h2>
-    </div>
-    <div>
-        {{block
-        class='Magento\\Framework\\View\\Element\\Template'
-        type='core/template'
-        name='diagnostico_texture'
-        order_id='4'
-        area='frontend'
-        template='WolfSellers_SkinCare::email/diagnostico.phtml'
-        productsList=$diagnostico.texture
-        }}
-    </div>
-    {{/depend}}
-    {{depend result_dark_circle}}
-    <hr>
-    <div class="line_up">
-        <h3 class="lineas">{{trans "%dark_circle/100" dark_circle=$diagnostico.results.dark_circle}}</h3>
-        <h3 class="lineas-1">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
-        <h2 class="lineas-2">La falta de sueño, cansancio físico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.</h2>
-    </div>
-    <div>
-        {{block
-        class='Magento\\Framework\\View\\Element\\Template'
-        type='core/template'
-        name='diagnostico_dark_circle'
-        order_id='4'
-        area='frontend'
-        template='WolfSellers_SkinCare::email/diagnostico.phtml'
-        productsList=$diagnostico.dark_circle
-        }}
-    </div>
-    {{/depend}}
-</div>
-
-<!-- End Content -->
-                    </td>
-                </tr>
-                <tr>
-                    <td class="footer" style="background:#000; color:#fff; padding: 15px 25px 14px 25px;">
-                        <table>
-     <tr class="stay-connected" style="position: static;padding-bottom:15px;">
-        <td style="width: 100%;text-align: center;">
-            <p style="margin-right: 18px;">
-                {{trans 'Stay connected:'}}
-            </p>
-        </td>
-    </tr>
-    <tr align="center" style="display: flex !important; justify-content: center !important;" class="social-media">
-          <td style="text-align: center;padding-bottom:15px; margin-right: auto; margin-left: auto;">
-            <a href="https://www.facebook.com/perfumeriasunidas" style="margin-right: 50px;" target="_blank">
-                <img style="width:20px; height:20px;" src="{{media url='wysiwyg/facebook-gray.png'}}" alt="facebook"  width="20" height="20"/>
-            </a>
-
-            <a href="https://www.instagram.com/perfumeriasunidasperu/"  style="margin-right: 50px;padding:2px;" target="_blank">
-                <img style="width:20px; height:20px;" src="{{media url='wysiwyg/instagram-gray.png'}}" alt="instagram"  width="20" height="20"/>
-            </a>
-            <a href="https://www.youtube.com/channel/UCyae3rcqjoVwDT0TO5Z9Tag" target="_blank">
-                <img style="width:20px; height:20px;" src="{{media url='wysiwyg/youtube-gray.png'}}" alt="youtube"  width="20" height="20"/>
-            </a>
-
-    </tr>
-    <tr class="contact" style="text-align: center;">
-      <td class="contact" style="display: flex; width: 100%;">
-       <p  style="width: 45%; display:inline-block;padding:0 5px;">
-                <a style="color:#ffffff" href="tel:01 800 123 456"><span><b>T:</b>  01 800 123 456</span></a>
-       </p>
-       <p style="width: 45%;display:inline-block;padding:0 5px;">
-                <a  href="http://contacto@perfumeriasunidas.com.pe" style="color:#ffffff;text-decoration:none;" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://contacto@perfumeriasunidas.com.pe&source=gmail&ust=1680216310175000&usg=AOvVaw0LtZyaX1rcj_bY3mLc--0H"><b>E:</b><span style="color:#000000">.</span>contacto@perfumeriasunidas.<wbr>com.pe</a>
-            </p>
-    </tr>
-<!-- hr style="width: 100%;" -->
-    <tr class="copyright-footer-email " style="border-top: solid 1px #fff;">
-        <td style="width: 100%;text-align: center;left: 0%;padding-top: 20px;">
-        <p>
-            {{trans 'Copyright © 2023 United Perfumeries Peru. All rights reserved'}}
-        </p>
-       
-        </td>
-    </tr>
-</table>
-          
+{{template config_path="design/email/header_template"}}
+    
+                            <!--<div class="greeting">Hola, {{var customerName}}</div>-->
+                            <!-- Custom Image with your email-->
+                            <!--img src="{{view url='Magenest_AbandonedCart::images/customimage.png'}}"/-->
+                            <table width="100%">
+                                <tr>
+                                    <td style="font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; vertical-align:top; background:rgb(0,0,0); padding:30px; text-align: center;">
+                                        <a class="logo">
+                                            <img src="https://www.perfumeriasunidas.com/media/email/logo/stores/1/logo_white.png" style="text-decoration: none; alt='logo'" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div  class="hola">
+                                {{trans "Hola %customer," customer=$diagnostico.customerName}}
+                            </div>
+                            <div class="somos">
+                                {{trans "Somos %store_name. " store_name=$store.getFrontendName()}}
+                                {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atender las necesidades de tu piel."}}
+                            </div>
+    
+                            <h3 style="text-align: center;">RESULTADOS DEL DIAGNÓSTICO</h3>
+    
+                            <div class="content">
+                                <div>
+                                    <h3 class="linea-3">{{trans "SALUD DE PIEL %skin_health / 100" skin_health=$diagnostico.results.skin_health}}</h3>
+                                </div>
+                                {{depend result_wrinkle}}
+                                <hr>
+                                <div>
+                                    <h3 class="lineas">{{trans "%wrinkle/100" wrinkle=$diagnostico.results.wrinkle}}</h3>
+                                    <h3 class="lineas-1">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
+                                    <h2 class="lineas-2">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
+                                </div>
+                                <div>
+                                    {{block
+                                    class='Magento\\Framework\\View\\Element\\Template'
+                                    type='core/template'
+                                    name='diagnostico_wrinkle'
+                                    order_id='1'
+                                    area='frontend'
+                                    template='WolfSellers_SkinCare::email/diagnostico.phtml'
+                                    productsList=$diagnostico.wrinkle
+                                    }}
+                                </div>
+                                {{/depend}}
+                                {{depend result_spot}}
+                                <hr>
+                                <div class="line_up">
+                                    <h3 class="lineas">{{trans "%spot/100" spot=$diagnostico.results.spot}}</h3>
+                                    <h3 class="lineas-1">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
+                                    <h2 class="lineas-2">Se pueden originar por exposición solar, cambios hormonales, genética y más. Prevenga y evite su aparición.</h2>
+                                </div>
+                                <div>
+                                    {{block
+                                    class='Magento\\Framework\\View\\Element\\Template'
+                                    type='core/template'
+                                    name='diagnostico_spot'
+                                    order_id='3'
+                                    area='frontend'
+                                    template='WolfSellers_SkinCare::email/diagnostico.phtml'
+                                    productsList=$diagnostico.spot
+                                    }}
+                                </div>
+                                {{/depend}}
+                                {{depend result_texture}}
+                                <hr>
+                                <div class="line_up">
+                                    <h3 class="lineas">{{trans "%texture/100" texture=$diagnostico.results.texture}}</h3>
+                                    <h3 class="lineas-1">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
+                                    <h2 class="lineas-2">El exceso de células muertas de la piel pueden acumularse, lo que lleva a una textura desigual de la piel.</h2>
+                                </div>
+                                <div>
+                                    {{block
+                                    class='Magento\\Framework\\View\\Element\\Template'
+                                    type='core/template'
+                                    name='diagnostico_texture'
+                                    order_id='4'
+                                    area='frontend'
+                                    template='WolfSellers_SkinCare::email/diagnostico.phtml'
+                                    productsList=$diagnostico.texture
+                                    }}
+                                </div>
+                                {{/depend}}
+                                {{depend result_dark_circle}}
+                                <hr>
+                                <div class="line_up">
+                                    <h3 class="lineas">{{trans "%dark_circle/100" dark_circle=$diagnostico.results.dark_circle}}</h3>
+                                    <h3 class="lineas-1">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
+                                    <h2 class="lineas-2">La falta de sueño, cansancio físico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.</h2>
+                                </div>
+                                <div>
+                                    {{block
+                                    class='Magento\\Framework\\View\\Element\\Template'
+                                    type='core/template'
+                                    name='diagnostico_dark_circle'
+                                    order_id='4'
+                                    area='frontend'
+                                    template='WolfSellers_SkinCare::email/diagnostico.phtml'
+                                    productsList=$diagnostico.dark_circle
+                                    }}
+                                </div>
+                                {{/depend}}
+                            </div>
+                        <!-- End Content -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer" style="background:#000; color:#fff; padding: 15px 25px 14px 25px;">
+                            <table>
+                                <tr class="stay-connected" style="position: static;padding-bottom:15px;">
+                                    <td style="width: 100%;text-align: center;">
+                                        <p style="margin-right: 18px;">
+                                            {{trans 'Stay connected:'}}
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr align="center" style="display: flex !important; justify-content: center !important;" class="social-media">
+                                    <td style="text-align: center;padding-bottom:15px; margin-right: auto; margin-left: auto;">
+                                        <a href="https://www.facebook.com/perfumeriasunidas" style="margin-right: 50px;" target="_blank">
+                                            <img style="width:20px; height:20px;" src="{{media url='wysiwyg/facebook-gray.png'}}" alt="facebook"  width="20" height="20"/>
+                                        </a>
+    
+                                        <a href="https://www.instagram.com/perfumeriasunidasperu/"  style="margin-right: 50px;padding:2px;" target="_blank">
+                                            <img style="width:20px; height:20px;" src="{{media url='wysiwyg/instagram-gray.png'}}" alt="instagram"  width="20" height="20"/>
+                                        </a>
+                                        <a href="https://www.youtube.com/channel/UCyae3rcqjoVwDT0TO5Z9Tag" target="_blank">
+                                            <img style="width:20px; height:20px;" src="{{media url='wysiwyg/youtube-gray.png'}}" alt="youtube"  width="20" height="20"/>
+                                        </a>
+                                    <td>
+                                </tr>
+                                <tr class="contact" style="text-align: center;">
+                                    <td class="contact" style="display: flex; width: 100%;">
+                                        <p  style="width: 45%; display:inline-block;padding:0 5px;">
+                                                    <a style="color:#ffffff" href="tel:01 800 123 456"><span><b>T:</b>  01 800 123 456</span></a>
+                                        </p>
+                                        <p style="width: 45%;display:inline-block;padding:0 5px;">
+                                                    <a  href="http://contacto@perfumeriasunidas.com.pe" style="color:#ffffff;text-decoration:none;" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://contacto@perfumeriasunidas.com.pe&source=gmail&ust=1680216310175000&usg=AOvVaw0LtZyaX1rcj_bY3mLc--0H"><b>E:</b><span style="color:#000000">.</span>contacto@perfumeriasunidas.<wbr>com.pe</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <!-- hr style="width: 100%;" -->
+                                <tr class="copyright-footer-email " style="border-top: solid 1px #fff;">
+                                    <td style="width: 100%;text-align: center;left: 0%;padding-top: 20px;">
+                                        <p>
+                                            {{trans 'Copyright © 2023 United Perfumeries Peru. All rights reserved'}}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        <td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>        
