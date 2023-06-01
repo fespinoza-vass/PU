@@ -3,8 +3,9 @@
  */
 define([
     'jquery',
+    'slick',
     'mageUtils'
-], function ($, utils) {
+], function ($, slick, utils) {
     'use strict';
 
     $.widget('wolfsellers.skinCare', {
@@ -211,9 +212,34 @@ define([
 
                         if (data !== "") {
                             $container.html(data);
+                            var optionsCarrusels = {
+                                dots: true,
+                                infinite: true,
+                                slidesToShow: 4,
+                                slidesToScroll: 3,
+                                responsive: [
+                                    {
+                                        breakpoint: 768,
+                                        settings: {
+                                            slidesToShow: 3,
+                                            slidesToScroll: 3,
+                                            dots: false
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 640,
+                                        settings: {
+                                            slidesToShow: 2,
+                                            slidesToScroll: 2,
+                                            dots: false
+                                        }
+                                    }
+                                ]
+                            };
                             $parentContainer.show();
                             $('body').trigger('click');
                             $parentContainer.click();
+                            $("#"+typeKey+"-container .product-items").slick(optionsCarrusels);
                         }
                     },
                     error: function() {
