@@ -20,8 +20,8 @@
     } @-->
     
     <!--@subject {{trans "Resultados de tu diagnóstico"}} @-->
-    <table id="template-simulador" width="660px" style="margin:0 auto;" >
-        <table width="100%">
+    <table id="template-simulador" width="660px" style="width:660px;margin:0 auto;" >
+        <table width="100%" style="width:660px;margin:0 auto;">
             <tr>
                 <td style="font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; vertical-align:top; background:rgb(0,0,0); padding:30px; text-align: center;">
                     <a class="logo">
@@ -30,7 +30,7 @@
                 </td>
             </tr>
         </table>
-        <table style="background:#fff; padding: 25px 25px 0 25px;">
+        <table style="background:#fff; padding: 25px 25px 0 25px; width:660px;margin:0 auto;">
             <tr>
                 <td  class="hola">
                     <div style="font-size: 16px; line-height: 1.4; font-weight:400">
@@ -48,22 +48,22 @@
             </tr>
             <h3 style="text-align: center;">RESULTADOS DEL DIAGNÓSTICO</h3>
         </table>
-        <table style="background:#fff; padding: 0 25px;">
+        <table style="background:#fff; padding: 0 25px; width:660px;margin:0 auto;">
             <tr>
                 <td style="text-align: center;">
                     <h3 class="linea-3">{{trans "SALUD DE PIEL %skin_health / 100" skin_health=$diagnostico.results.skin_health}}</h3>
+                    <hr>
                 </td>
             </tr>
             {{depend result_wrinkle}}
-            <hr>
             <tr>
                 <td>
                     <h3 class="lineas" style="background: black; color:white; border-radius: 50%;padding: 27px 13px 30px 13px;float: left;">{{trans "%wrinkle/100" wrinkle=$diagnostico.results.wrinkle}}</h3>
                     <h3 class="lineas-1" style="margin: 40px 0 0 0;">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
-                    <h2 class="lineas-2" style="font-size: 14px; font-weight: 400;margin: 0 0 20px 0;">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
+                    <h2 class="lineas-2" style="font-size: 16px; font-weight: 400;margin: 0 0 20px 0;">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
                 </td>
             </tr>
-            <table>
+            <table style="width:660px;margin:0 auto;">
                 {{block
                 class='Magento\\Framework\\View\\Element\\Template'
                 type='core/template'
@@ -73,79 +73,79 @@
                 template='WolfSellers_SkinCare::email/diagnostico.phtml'
                 productsList=$diagnostico.wrinkle
                 }}
+                <hr>
             </table>
             {{/depend}}
             {{depend result_spot}}
-            <hr>
-            <tr>
-                <td class="line_up">
-                    <h3 class="lineas" style="background: black; color:white; border-radius: 50%;padding: 27px 13px 30px 13px;float: left;">{{trans "%spot/100" spot=$diagnostico.results.spot}}</h3>
-                    <h3 class="lineas-1" style="margin: 40px 0 0 0;">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
-                    <h2 class="lineas-2" style="font-size: 14px; font-weight: 400;margin: 0 0 20px 0;">Se pueden originar por exposición solar, cambios hormonales, genética y más. Prevenga y evite su aparición.</h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{block
-                    class='Magento\\Framework\\View\\Element\\Template'
-                    type='core/template'
-                    name='diagnostico_spot'
-                    order_id='3'
-                    area='frontend'
-                    template='WolfSellers_SkinCare::email/diagnostico.phtml'
-                    productsList=$diagnostico.spot
-                    }}
-                </td>
-            </tr>
+            <table style="width:660px;margin:0 auto;">
+                <tr>
+                    <td class="line_up">
+                        <h3 class="lineas" style="background: black; color:white; border-radius: 50%;padding: 27px 13px 30px 13px;float: left;">{{trans "%spot/100" spot=$diagnostico.results.spot}}</h3>
+                        <h3 class="lineas-1" style="margin: 40px 0 0 0;">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
+                        <h2 class="lineas-2" style="font-size: 16px; font-weight: 400;margin: 0 0 20px 0;">Se pueden originar por exposición solar, cambios hormonales, genética y más. Prevenga y evite su aparición.</h2>
+                    </td>
+                </tr>
+            </table>
+            <table style="width:660px;margin:0 auto;">
+                {{block
+                class='Magento\\Framework\\View\\Element\\Template'
+                type='core/template'
+                name='diagnostico_spot'
+                order_id='3'
+                area='frontend'
+                template='WolfSellers_SkinCare::email/diagnostico.phtml'
+                productsList=$diagnostico.spot
+                }}
+                <hr>
+            </table>
             {{/depend}}
             {{depend result_texture}}
-            <hr>
-            <tr>
-                <td class="line_up">
-                    <h3 class="lineas" style="background: black; color:white; border-radius: 50%;padding: 27px 13px 30px 13px;float: left;">{{trans "%texture/100" texture=$diagnostico.results.texture}}</h3>
-                    <h3 class="lineas-1" style="margin: 40px 0 0 0;">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
-                    <h2 class="lineas-2" style="font-size: 14px; font-weight: 400; margin: 0 0 20px 0;">El exceso de células muertas de la piel pueden acumularse, lo que lleva a una textura desigual de la piel.</h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{block
-                    class='Magento\\Framework\\View\\Element\\Template'
-                    type='core/template'
-                    name='diagnostico_texture'
-                    order_id='4'
-                    area='frontend'
-                    template='WolfSellers_SkinCare::email/diagnostico.phtml'
-                    productsList=$diagnostico.texture
-                    }}
-                </td>
-            </tr>
+            <table style="width:660px;margin:0 auto;">
+                <tr>
+                    <td class="line_up">
+                        <h3 class="lineas" style="background: black; color:white; border-radius: 50%;padding: 27px 13px 30px 13px;float: left;">{{trans "%texture/100" texture=$diagnostico.results.texture}}</h3>
+                        <h3 class="lineas-1" style="margin: 40px 0 0 0;">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
+                        <h2 class="lineas-2" style="font-size: 16px; font-weight: 400; margin: 0 0 20px 0;">El exceso de células muertas de la piel pueden acumularse, lo que lleva a una textura desigual de la piel.</h2>
+                    </td>
+                </tr>
+            </table>
+            <table style="width:660px;margin:0 auto;">
+                {{block
+                class='Magento\\Framework\\View\\Element\\Template'
+                type='core/template'
+                name='diagnostico_texture'
+                order_id='4'
+                area='frontend'
+                template='WolfSellers_SkinCare::email/diagnostico.phtml'
+                productsList=$diagnostico.texture
+                }}
+                <hr>
+            </table>
             {{/depend}}
             {{depend result_dark_circle}}
-            <hr>
-            <tr>
-                <td class="line_up">
-                    <h3 class="lineas" style="background: black; color:white; border-radius: 50%;padding: 27px 13px 30px 13px;float: left;">{{trans "%dark_circle/100" dark_circle=$diagnostico.results.dark_circle}}</h3>
-                    <h3 class="lineas-1" style="margin: 40px 0 0 0;">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
-                    <h2 class="lineas-2" style="font-size: 14px; font-weight: 400; margin: 0 0 20px 0;" >La falta de sueño, cansancio físico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.</h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    {{block
-                    class='Magento\\Framework\\View\\Element\\Template'
-                    type='core/template'
-                    name='diagnostico_dark_circle'
-                    order_id='4'
-                    area='frontend'
-                    template='WolfSellers_SkinCare::email/diagnostico.phtml'
-                    productsList=$diagnostico.dark_circle
-                    }}
-                </td>
-            </tr>
+            <table style="width:660px;margin:0 auto;">
+                <tr>
+                    <td class="line_up">
+                        <h3 class="lineas" style="background: black; color:white; border-radius: 50%;padding: 27px 13px 30px 13px;float: left;">{{trans "%dark_circle/100" dark_circle=$diagnostico.results.dark_circle}}</h3>
+                        <h3 class="lineas-1" style="margin: 40px 0 0 0;">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
+                        <h2 class="lineas-2" style="font-size: 16px; font-weight: 400; margin: 0 0 20px 0;" >La falta de sueño, cansancio físico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.</h2>
+                    </td>
+                </tr>
+            </table>
+            <table style="width:660px;margin:0 auto;">
+                {{block
+                class='Magento\\Framework\\View\\Element\\Template'
+                type='core/template'
+                name='diagnostico_dark_circle'
+                order_id='4'
+                area='frontend'
+                template='WolfSellers_SkinCare::email/diagnostico.phtml'
+                productsList=$diagnostico.dark_circle
+                }}
+            </table>
             {{/depend}}
         </table>
-        <table style="width: 100%;">
+        <table style="width: 100%;" style="width:660px;margin:0 auto;">
             <tr>
                 <td class="footer" style="background:#000; color:#fff; padding: 15px 25px 14px 25px;">
                     <table style="width: 100%;">
