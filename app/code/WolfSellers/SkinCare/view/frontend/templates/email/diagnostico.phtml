@@ -6,7 +6,7 @@ $splitHelper = $this->helper(WolfSellers\SkinCare\Helper\SplitHelper::class);
 <table style="width:660px; margin:0 auto ;padding: 0 25px">
 <?php if($this->getProductsList()):?>
     <?php foreach ($this->getProductsList() as $item): ?>
-        <tr class="email-prod-main" style="width:25%; float:left;">
+        <tr class="email-prod-main" style="width:25%; float:left; display:flex; flex-direction:column">
             <td class="email-prod-second" style="text-align:center">
                 <img class="img-text" style="text-align:center;"  src="<?= $item['urlImage'] ?>" alt="<?= $item['name']; ?>" title="<?= $item['name']; ?>" height="80" width="80"/>
 
@@ -15,7 +15,7 @@ $splitHelper = $this->helper(WolfSellers\SkinCare\Helper\SplitHelper::class);
                 <span class="precio-carrito"><?= $item['price'] ?></span>
                 </a>
             </td>
-            <td class="buton-prod" style="display:block">
+            <td class="buton-prod" style="display:block; text-align:center">
                 <a class="btn action primary add-tocart-skin" style="display:block; color:white;background-color:black; width:100px; padding:5px 4px; border-radius:10px;margin:0 auto;text-decoration:none; font-size:10px" href="<?= $item['urlProduct'] ?>" target="__blank">
                     <span class="anadir-carrito"><?=__('AÑADIR AL CARRITO')?></span>
                 </a>
