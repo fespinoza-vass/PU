@@ -10,7 +10,7 @@ $splitHelper = $this->helper(WolfSellers\SkinCare\Helper\SplitHelper::class);
             <td class="email-prod-second" style="text-align:center;display:block">
                 <img class="img-text" style="text-align:center;"  src="<?= $item['urlImage'] ?>" alt="<?= $item['name']; ?>" title="<?= $item['name']; ?>" height="80" width="80"/>
 
-                <a class="text-email" style="display:block; color:#006BB4" href="<?= $item['urlProduct'] ?>" target="__blank">
+                <a class="text-email" style="display:block; color:#006BB4;text-decoration:none" href="<?= $item['urlProduct'] ?>" target="__blank">
                     <?= $splitHelper->splitName($item['name']); ?>
                 <span class="precio-carrito" style="display:block" ><?= $item['price'] ?></span>
                 </a>
