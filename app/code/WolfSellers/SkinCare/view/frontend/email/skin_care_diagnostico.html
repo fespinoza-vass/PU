@@ -57,17 +57,24 @@
             <tr>
                 <td style="text-align: center;">
                     <h3 class="linea-3" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;font-size:14px;font-weight:bold; margin-top:20px;margin-bottom:10px; line-height:1.1">{{trans "SALUD DE PIEL %skin_health / 100" skin_health=$diagnostico.results.skin_health}}</h3>
-                    <hr style="width: 625px; margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;">
+                    <!-- <hr style="width: 625px; margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"> -->
                 </td>
             </tr>
+            <table style="width:660px; padding:0 25px;margin:0 auto;">
+                <tr>
+                    <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
+                </tr>
+            </table>
             {{depend result_wrinkle}}
-            <tr>
-                <td style="padding: 0 25px;">
-                    <h3 class="lineas" style="width: 80px; height: 80px; line-height: 80px; text-align: center; background: black; color:white; border-radius: 50%;padding: 0;float: left; font-weight: normal;">{{trans "%wrinkle/100" wrinkle=$diagnostico.results.wrinkle}}</h3>
-                    <h3 class="lineas-1" style="height: 50px; line-height: 4.3; font-size: 18px; font-weight: bold;padding-left: 20px; margin-bottom: 15px;">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
-                    <h2 class="lineas-2" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;color: #333333; font-size: 14px; font-weight: 300;text-align:justify;height: 80px; margin-top: 10px;margin-bottom: 20px; padding-left: 20px; line-height: 1.1">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
-                </td>
-            </tr>
+            <table style="width:660px;margin:0 auto; padding: 0 25px">
+                <tr>
+                    <td>
+                        <h3 class="lineas" style="width: 80px; height: 80px; line-height: 80px; text-align: center; background: black; color:white; border-radius: 50%;padding: 0;float: left; font-weight: normal;">{{trans "%wrinkle/100" wrinkle=$diagnostico.results.wrinkle}}</h3>
+                        <h3 class="lineas-1" style="height: 50px; line-height: 4.3; font-size: 18px; font-weight: bold;padding-left: 20px; margin-bottom: 15px;">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
+                        <h2 class="lineas-2" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;color: #333333; font-size: 14px; font-weight: 300;text-align:justify;height: 80px; margin-top: 10px;margin-bottom: 20px; padding-left: 20px; line-height: 1.1">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
+                    </td>
+                </tr>
+            </table>
             <table>
                 {{block
                 class='Magento\\Framework\\View\\Element\\Template'
@@ -79,7 +86,12 @@
                 productsList=$diagnostico.wrinkle
                 }}
             </table>
-            <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC; ">
+            <table style="width:660px;margin:0 auto; padding:0 25px">
+                <tr>
+                    <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
+                </tr>
+            </table>
+            <!-- <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC; "> -->
             {{/depend}}
             {{depend result_spot}}
             <table style="width:660px;margin:0 auto; padding: 0 25px">
@@ -102,7 +114,12 @@
                 productsList=$diagnostico.spot
                 }}
             </table>
-            <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;">
+            <table style="width:660px;margin:0 auto;padding:0 25px">
+                <tr>
+                    <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
+                </tr>
+            </table>
+            <!-- <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"> -->
             {{/depend}}
             {{depend result_texture}}
             <table style="width:660px;margin:0 auto;padding: 0 25px">
@@ -125,7 +142,12 @@
                 productsList=$diagnostico.texture
                 }}
             </table>
-            <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;">
+            <table style="width:660px;margin:0 auto;padding:0 25px">
+                <tr>
+                    <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
+                </tr>
+            </table>
+            <!-- <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"> -->
             {{/depend}}
             {{depend result_dark_circle}}
             <table style="width:660px;margin:0 auto; padding: 0 25px">
