@@ -22,7 +22,7 @@
     <!--@subject {{trans "Resultados de tu diagnóstico"}} @-->
     <!DOCTYPE html>
     <table id="template-simulador" width="660px" style="width:660px;margin:0 auto;" >
-        <table width="100%" style="width:660px;margin:0 auto;">
+        <table style="width:660px;margin:0 auto;border-spacing: 0;">
             <tr>
                 <td style="width:660px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; vertical-align:top; background:rgb(0,0,0); padding:30px; text-align: center;">
                     <a class="logo">
@@ -31,16 +31,16 @@
                 </td>
             </tr>
         </table>
-        <table style="background:#fff; padding: 25px 25px 0 25px; width:660px;margin:0 auto;">
+        <table style="background:#fff;width:660px;margin:0 auto;border-spacing: 0;">
             <tr>
-                <td  class="hola">
+                <td  class="hola" style="padding: 25px 25px 0 25px">
                     <div style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;font-size: 14px; line-height: 1.4;text-align:justify; font-weight:400;color: #333333">
                         {{trans "Hola %customer," customer=$diagnostico.customerName}}
                     </div>
                 </td>
             </tr>
             <tr>
-                <td class="somos">
+                <td class="somos" style="padding:0 25px;">
                     <div style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont; font-size: 14px; line-height: 1.4; text-align:justify; font-weight:400;color: #333333;">
                         {{trans "Somos %store_name. " store_name=$store.getFrontendName()}}
                         {{trans "Te compartimos los resultados de tu diagnóstico de la piel y los productos recomendados para atender las necesidades de tu piel."}}
@@ -53,22 +53,23 @@
                 </td>
             </tr>
         </table>
-        <table style="background:#fff; padding: 0 25px; width:660px;margin:0 auto;">
-            <tr>
-                <td style="text-align: center;">
-                    <h3 class="linea-3" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;font-size:14px;font-weight:bold; margin-top:20px;margin-bottom:10px; line-height:1.1">{{trans "SALUD DE PIEL %skin_health / 100" skin_health=$diagnostico.results.skin_health}}</h3>
-                    <!-- <hr style="width: 625px; margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"> -->
-                </td>
-            </tr>
+        <table style="background:#fff;width:660px;margin:0 auto;border-spacing: 0; display: block;">
+            <table style="width:660px; padding: 0 25px;margin: 0 auto;">
+                <tr>
+                    <td style="text-align: center;">
+                        <h3 class="linea-3" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;font-size:14px;font-weight:bold; margin-top:20px;margin-bottom:10px; line-height:1.1">{{trans "SALUD DE PIEL %skin_health / 100" skin_health=$diagnostico.results.skin_health}}</h3>
+                    </td>
+                </tr>
+            </table>
             <table style="width:660px; padding:0 25px;margin:0 auto;">
                 <tr>
                     <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
                 </tr>
             </table>
             {{depend result_wrinkle}}
-            <table style="width:660px;margin:0 auto; padding: 0 25px">
+            <table style="width:660px;margin:0 auto">
                 <tr>
-                    <td>
+                    <td style="padding: 0 25px">
                         <h3 class="lineas" style="width: 80px; height: 80px; line-height: 80px; text-align: center; background: black; color:white; border-radius: 50%;padding: 0;float: left; font-weight: normal;">{{trans "%wrinkle/100" wrinkle=$diagnostico.results.wrinkle}}</h3>
                         <h3 class="lineas-1" style="height: 50px; line-height: 4.3; font-size: 18px; font-weight: bold;padding-left: 20px; margin-bottom: 15px;">{{trans "LÍNEAS DE EXPRESIÓN" wrinkle=$diagnostico.results.wrinkle}}</h3>
                         <h2 class="lineas-2" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;color: #333333; font-size: 14px; font-weight: 300;text-align:justify;height: 80px; margin-top: 10px;margin-bottom: 20px; padding-left: 20px; line-height: 1.1">Suelen aparecer por múltiples factores como edad, sobreexposición al sol, contaminación y más. Hidrata y protege tu piel de forma constante.</h2>
@@ -91,12 +92,11 @@
                     <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
                 </tr>
             </table>
-            <!-- <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC; "> -->
             {{/depend}}
             {{depend result_spot}}
-            <table style="width:660px;margin:0 auto; padding: 0 25px">
+            <table style="width:660px;margin:0 auto">
                 <tr>
-                    <td class="line_up">
+                    <td class="line_up" style="padding: 0 25px">
                         <h3 class="lineas" style="width: 80px; height: 80px; line-height: 80px; text-align: center;background: black; color:white; border-radius: 50%;padding: 0;float: left;font-weight: normal;">{{trans "%spot/100" spot=$diagnostico.results.spot}}</h3>
                         <h3 class="lineas-1" style="height: 50px; line-height: 4.3;font-size: 18px; font-weight: bold; padding-left: 20px; margin-bottom: 10px;">{{trans "MANCHAS" spot=$diagnostico.results.spot}}</h3>
                         <h2 class="lineas-2" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;color: #333333; font-size: 14px; font-weight: 300;text-align:justify;height: 80px; margin-top: 10px;margin-bottom: 20px; padding-left: 20px; line-height: 1.1">Se pueden originar por exposición solar, cambios hormonales, genética y más. Prevenga y evite su aparición.</h2>
@@ -119,12 +119,11 @@
                     <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
                 </tr>
             </table>
-            <!-- <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"> -->
             {{/depend}}
             {{depend result_texture}}
-            <table style="width:660px;margin:0 auto;padding: 0 25px">
+            <table style="width:660px;margin:0 auto">
                 <tr>
-                    <td class="line_up">
+                    <td class="line_up" style="padding: 0 25px">
                         <h3 class="lineas" style="width: 80px; height: 80px; line-height: 80px; text-align: center;background: black; color:white; border-radius: 50%;padding: 0;float: left;font-weight: normal;">{{trans "%texture/100" texture=$diagnostico.results.texture}}</h3>
                         <h3 class="lineas-1" style="height: 50px; line-height: 4.3;font-size: 18px; font-weight: bold; padding-left: 20px; margin-bottom: 10px;">{{trans "TEXTURA" texture=$diagnostico.results.texture}}</h3>
                         <h2 class="lineas-2" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;color: #333333; font-size: 14px; font-weight: 300;text-align:justify;height: 80px; margin-top: 10px;margin-bottom: 20px; padding-left: 20px; line-height: 1.1">El exceso de células muertas de la piel pueden acumularse, lo que lleva a una textura desigual de la piel.</h2>
@@ -147,12 +146,11 @@
                     <td style="width: 100%;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"></td>
                 </tr>
             </table>
-            <!-- <hr style="width: 600px;margin-top: 20px;margin-bottom: 20px;border-width: 1px 0 0 0;border-top-style: solid;border-top-color: #CCCCCC;"> -->
             {{/depend}}
             {{depend result_dark_circle}}
-            <table style="width:660px;margin:0 auto; padding: 0 25px">
+            <table style="width:660px;margin:0 auto">
                 <tr>
-                    <td class="line_up">
+                    <td class="line_up" style="padding: 0 25px">
                         <h3 class="lineas" style="width: 80px; height: 80px; line-height: 80px; text-align: center; background: black; color:white; border-radius: 50%;padding: 0;float: left;font-weight: normal;">{{trans "%dark_circle/100" dark_circle=$diagnostico.results.dark_circle}}</h3>
                         <h3 class="lineas-1" style="height: 50px; line-height: 4.3;font-size: 18px; font-weight: bold; padding-left: 20px; margin-bottom:10px;">{{trans "OJERAS" dark_circle=$diagnostico.results.dark_circle}}</h3>
                         <h2 class="lineas-2" style="font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, serif, EmojiFont;color: #333333; font-size: 14px; font-weight: 300;text-align:justify;height: 80px; margin-top: 10px;margin-bottom: 20px; padding-left: 20px; line-height: 1.1" >La falta de sueño, cansancio físico, estrés, mala alimentación y más pueden provocar círculos debajo de los ojos.</h2>
@@ -172,7 +170,7 @@
             </table>
             {{/depend}}
         </table>
-        <table style="width:660px;margin:0 auto;">
+        <table style="width:660px;margin:0 auto;background: #000000;">
             <tr>
                 <td class="footer" style="background:#000; color:#fff; padding: 15px 25px 14px 25px;">
                     <table style="width: 100%;">
@@ -195,7 +193,7 @@
                                 <a href="https://www.youtube.com/channel/UCyae3rcqjoVwDT0TO5Z9Tag text-decoration: none;" target="_blank">
                                     <img style="width:20px; height:20px;" src="{{media url='wysiwyg/youtube-gray.png'}}" alt="youtube"  width="20" height="20"/>
                                 </a>
-                            <td>
+                            </td>
                         </tr>
                         <tr class="contact" style="text-align: center;">
                             <td class="contact" style="display: flex; width: 100%;">
@@ -216,7 +214,7 @@
                             </td>
                         </tr>
                     </table>
-                <td>
+                </td>
             </tr>
         </table>
     </table>
