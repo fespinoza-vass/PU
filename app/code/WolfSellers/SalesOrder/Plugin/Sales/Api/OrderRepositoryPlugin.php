@@ -36,6 +36,7 @@ class OrderRepositoryPlugin
         $billingAddress = $order->getBillingAddress();
         $billingAddressExtensionAttributes = $billingAddress->getExtensionAttributes();
         $billingAddressExtensionAttributes->setColony($billingAddress->getColony());
+        $billingAddressExtensionAttributes->setReferenciaEnvio($billingAddress->getReferenciaEnvio());
 
         $shippingAddress = $order->getShippingAddress();
 
@@ -48,8 +49,8 @@ class OrderRepositoryPlugin
             $shippingExtensionAttributes->setColony($shippingAddress->getColony());
             $shippingExtensionAttributes->setCompany($shippingAddress->getCompany());
             $shippingExtensionAttributes->setRuc($shippingAddress->getDni());
+            $shippingExtensionAttributes->setReferenciaEnvio($shippingAddress->getReferenciaEnvio());
         }
-
         return $order;
     }
 

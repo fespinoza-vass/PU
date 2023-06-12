@@ -143,10 +143,7 @@ class Index extends Action
 <div data-content-type="row" data-appearance="contained" data-element="main">
 <div class="result-slider slider-wrinkles" data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-background-type="image" data-video-loop="true" data-video-play-only-visible="true" data-video-lazy-load="true" data-video-fallback-src="" data-element="inner" data-pb-style="VSELS4O">
 <div data-content-type="text" data-appearance="default" data-element="main">
-<h2>&nbsp;</h2>
-<script type="text/x-magento-init">
-{"*":{"Magento_PageBuilder/js/widget-initializer":{"config":{"[data-content-type=\"products-' . $type. '\"][data-appearance=\"carousel\"]":{"Amasty_Xsearch/js/content-type/products/appearance/carousel/widget-override":false}},"breakpoints":{"desktop":{"label":"Desktop","stage":true,"default":true,"class":"desktop-switcher","icon":"Magento_PageBuilder::css/images/switcher/switcher-desktop.svg","conditions":{"min-width":"1024px"},"options":{"products":{"default":{"slidesToShow":"4"}}}},"tablet":{"conditions":{"max-width":"1024px","min-width":"768px"},"options":{"products":{"default":{"slidesToShow":"4"},"continuous":{"slidesToShow":"3"}}}},"mobile":{"label":"Mobile","stage":true,"class":"mobile-switcher","icon":"Magento_PageBuilder::css/images/switcher/switcher-mobile.svg","media":"only screen and (max-width: 768px)","conditions":{"max-width":"768px","min-width":"640px"},"options":{"products":{"default":{"slidesToShow":"3"}}}},"mobile-small":{"conditions":{"max-width":"640px"},"options":{"products":{"default":{"slidesToShow":"2"},"continuous":{"slidesToShow":"1"}}}},"mobile-tiny":{"conditions":{"max-width":"480px"},"options":{"products":{"default":{"slidesToShow":"2"},"continuous":{"slidesToShow":"2"}}}}}}}}
-</script>';
+<h2>&nbsp;</h2>';
         die();
 
     }
