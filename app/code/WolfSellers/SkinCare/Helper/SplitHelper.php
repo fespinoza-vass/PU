@@ -44,7 +44,7 @@ class SplitHelper extends AbstractHelper
 
             $secondLineName = trim(str_replace($firstLineName, '', $productName));
             $secondLineName =  substr($secondLineName, 0, $secondLineLimit).'...' ;
-            return '<span style="display:block" >' .$firstLineName .'</span>' .'<span style="display:block">' . $secondLineName .'</span>';
+            return '<span>' .$firstLineName .'</span>' .'<span>' . $secondLineName .'</span>';
         }
         return $productName;
     }
