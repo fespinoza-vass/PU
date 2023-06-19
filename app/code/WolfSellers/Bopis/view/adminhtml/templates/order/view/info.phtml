@@ -1,0 +1,134 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Info $block
+ */
+$order = $block->getOrder();
+$tipo_cedula_order = !empty($order->getData('tipo_cedula_order')) ? "Tipo de Cedula: ".$order->getData('tipo_cedula_order')." <br/>" : "";
+$no_cedula = !empty($order->getData('no_cedula')) ? "No. de Cédula: ".$order->getData('no_cedula')." <br/>" : "";
+$nombre_o_empresa = !empty($order->getData('nombre_o_empresa')) ? "Nombre o Empresa : ".$order->getData('nombre_o_empresa')." <br/>" : "";
+$baseCurrencyCode = (string)$order->getBaseCurrencyCode();
+$globalCurrencyCode = (string)$order->getGlobalCurrencyCode();
+$orderCurrencyCode = (string)$order->getOrderCurrencyCode();
+
+$orderAdminDate = $block->formatDate(
+    $block->getOrderAdminDate($order->getCreatedAt()),
+    \IntlDateFormatter::MEDIUM,
+    true
+);
+
+$orderStoreDate = $block->formatDate(
+    $order->getCreatedAt(),
+    \IntlDateFormatter::SHORT,
+    true,
+    $block->getTimezoneForStore($order->getStore())
+);
+
+$customerUrl = $block->getCustomerViewUrl();
+
+$allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub', 'sup', 'ul'];
+
+$btnClienteRetira = $block->isBtnClienteRetiraAvailable();
+$btnClienteFactura = $block->isBtnClienteFacturaAvailable();
+$btnOrden = $block->isBtnOrdenAvailable();
+?>
+<section class="admin__page-section bopis-data">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-shipping-address ">
+            <?php /* Shipping Address */
+            $shippingAddress = $order->getShippingAddress(); ?>
+            <div class="admin__page-section-item-title icon-retira">
+                <span class="title"><?= $block->escapeHtml(__('Cliente que retira')) ?></span>
+            </div>
+            <address class="admin__page-section-item-content">
+                <span class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></span><br />
+                Número de Cédula: <?= $shippingAddress->getIdentificacion(); ?><br />
+                <?= $shippingAddress->getEmail(); ?><br />
+                T. <?= $shippingAddress->getTelephone(); ?>
+            </address>
+            <?php if ($block->getAdminUserType() == 1):?>
+            <button name="btn-confirmacion-cliente-retira"
+                    value="Confirmar"
+                    class="btn-confirmacion-cliente btn-confirmacion-cliente-retira <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"":"confirmado" ?>"
+                <?= $btnClienteRetira ? "":'disabled="disabled"' ?>
+                    data-order-id="<?= $order->getEntityId() ?>"
+                    data-type="1"
+            >
+                <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
+            </button>
+            <?php endif;?>
+        </div>
+    </div>
+</section>
+<section class="admin__page-section bopis-data">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-billing-address">
+            <?php /* Billing Address */
+            $billingAddress = $order->getBillingAddress(); ?>
+            <div class="admin__page-section-item-title icon-retira">
+                <span class="title"><?= $block->escapeHtml(__('Cliente que factura')) ?></span>
+            </div>
+
+            <address class="admin__page-section-item-content">
+                <span class="color-orange"><?= $billingAddress->getFirstname() . " " . $billingAddress->getLastname(); ?></span><br />
+                <?= $tipo_cedula_order ?>
+                <?= $no_cedula ?>
+                <?= $nombre_o_empresa ?>
+                Número de Cédula: <?= $billingAddress->getIdentificacion(); ?><br />
+                <?= $billingAddress->getEmail(); ?><br />
+                T. <?= $billingAddress->getTelephone(); ?><br />
+                <?php if ($block->isLegalPerson()):?>
+                Razón Social : <?= $order->getData('razon_social'); ?><br />
+                Ruc : <?= $order->getData('ruc'); ?><br />
+                dv : <?= $order->getData('dv'); ?><br />
+                Regimen : <?= $order->getData('regimen'); ?><br />
+                <?php endif;?>
+            </address>
+            <?php if ($block->getAdminUserType() == 1):?>
+            <button name="btn-confirmacion-cliente-factura"
+                    value="Confirmar"
+                    class="btn-confirmacion-cliente btn-confirmacion-cliente-factura <?= $this->getOrder()->getData("verificacion_bopis_cliente_factura") > 0 ?"":"confirmado" ?>"
+                <?= $btnClienteFactura ? "":'disabled="disabled"' ?>
+                    data-order-id="<?= $order->getEntityId() ?>"
+                    data-type="2"
+            >
+                <?= $this->getOrder()->getData("verificacion_bopis_cliente_factura") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
+            </button>
+            <?php endif;?>
+        </div>
+    </div>
+</section>
+<section class="admin__page-section bopis-data">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-orden">
+            <?php /* Billing Address */ ?>
+            <div class="admin__page-section-item-title icon-orden">
+                <span class="title"><?= $block->escapeHtml(__('Orden')) ?></span>
+            </div>
+
+
+            <address class="admin__page-section-item-content">
+                <span class="color-orange">ID de Orden: <?= $order->getIncrementId(); ?></span><br />
+                ID SBX: <?= $order->getId(); ?><br />
+                Creado: <?= $orderStoreDate; ?><br />
+                Entrega: Recoger en Tienda<br />
+                Tienda: <?= $block->getSourceName() ?>
+            </address>
+            <?php if ($block->getAdminUserType() == 1):?>
+            <button name="btn-confirmacion-orden"
+                    value="Confirmar"
+                    class="btn-confirmacion-cliente btn-confirmacion-orden <?= $this->getOrder()->getData("verificacion_bopis_orden") > 0 ?"":"confirmado" ?>"
+                <?= $btnOrden ? "":'disabled="disabled"' ?>
+                    data-order-id="<?= $order->getEntityId() ?>"
+                    data-type="3"
+            >
+                <?= $this->getOrder()->getData("verificacion_bopis_orden") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
+            </button>
+            <?php endif;?>
+        </div>
+    </div>
+</section>
