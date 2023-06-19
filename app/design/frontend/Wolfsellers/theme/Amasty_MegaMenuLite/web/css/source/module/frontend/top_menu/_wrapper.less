@@ -82,7 +82,7 @@
         font-weight: 700;
         font-size: 1.4rem;
         cursor: pointer;
-        transition: .5s
+        transition: .5s;
       }
 
       &:hover + .ammenu-submenu-block {
@@ -157,6 +157,9 @@
       color: @black;
     }
   }
+}
+
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m){
   .ammenu-items.-root >{
     li.ammenu-item{
       &:nth-child(6){
