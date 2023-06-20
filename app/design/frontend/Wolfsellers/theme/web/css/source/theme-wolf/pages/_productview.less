@@ -161,6 +161,14 @@
 					}
 					.product-reviews-summary{
 						order: 2;
+						.reviews-actions{
+							display: none;
+						}
+					}
+					.product-reviews-summary.empty{
+						.reviews-actions{
+							display: block;
+						}
 					}
 					.product-info-price{
 						order: 3;
@@ -548,6 +556,34 @@
 			}
 			.review-add{
 				.block-content{
+					.review-fieldset{
+						legend{
+							margin-bottom: 15px;
+							span{
+								font-weight: 400;
+								font-size: 1.6rem;
+								color: @color-black;
+							}
+							strong{
+								font-family: @font-second;
+								font-weight: bold;
+								font-size: 2rem;
+								color: @color-black;
+							}
+						}
+						.review-field-ratings{
+							margin-bottom: 0;
+							legend{
+								display: none;
+							}
+							label{
+								span{
+									font-weight: 400;
+									font-size: 1.6rem;
+								}
+							}
+						}
+					}
 					.review-form-actions{
 						button.primary{
 							background: @primary;
@@ -559,6 +595,7 @@
 				}
 			}
 			.review-add,
+			.review-list,
 			.block.related,
 			.block.upsell,
 			.amshopby-morefrom{
@@ -602,6 +639,52 @@
 						flex-wrap: nowrap;
 						justify-content: space-around;
 						opacity: 0;
+					}
+				}
+			}
+			.review-list{
+				padding-top: 50px;
+				.block-title{
+					text-align: center;
+					strong{
+						font-family: @font-second;
+						text-transform: uppercase;
+						font-weight: bold;
+					}
+				}
+				.block-content{
+					li{
+						padding: 30px 0 15px 0;
+						.review-title{
+							font-size: 2rem;
+							font-weight: 300;
+							color: @gray8;
+							margin-bottom: 15px;
+						}
+						.review-ratings{
+							.rating-label{
+								display: none;
+							}
+						}
+						.review-content,
+						.review-details{
+							font-size: 1.6rem;
+							font-weight: 300;
+							color: @gray8;
+							text-align: justify;
+						}
+						.review-content{
+							color: @color-black;	
+						}
+						.review-details{
+							font-weight: 400;
+						}
+						&:first-child{
+							.review-title{
+								border-top: 1px solid @gray-c9;
+								padding-top: 30px;
+							}
+						}
 					}
 				}
 			}
@@ -881,6 +964,60 @@
 				h2.product-section-title,
 				.table-wrapper{
 					border: 0;
+				}
+			}
+			.block.review-list,
+			.block.review-add{
+				max-width: 100%;
+				padding: 0 16px;
+			}
+			.block.review-list{
+				margin-bottom: 0;
+				.block-content{
+					li{
+						padding-top: 20px;
+						.review-title{
+							font-size: 1.6rem;
+						}
+						.review-content,
+						.review-details{
+							font-size: 1.4rem;
+						}
+						&:first-child{
+							.review-title{
+								padding-top: 20px;
+							}
+						}
+					}
+				}
+			}
+			.block.review-add{
+				.block-content{
+					.review-fieldset{
+						margin-bottom: 20px;
+						legend{
+							strong{
+								font-size: 1.6rem;
+							}
+						}
+						.review-field-ratings{
+							label{
+								span{
+									font-size: 1.4rem;
+								}
+							}
+						}
+					}
+					.review-form-actions{
+						.primary{
+							text-align: start;
+							button{
+								width: 180px;
+								height: 40px;
+								padding: 10px 20px;
+							}
+						}
+					}
 				}
 			}
 			// .block.amshopby-morefrom,
