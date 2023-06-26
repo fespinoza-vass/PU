@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Backend\Block\Page\RequireJs $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+/** @var \WolfSellers\WebsocketNotification\Helper\Websocket $webSocket */
+$webSocket = $this->helper(\WolfSellers\WebsocketNotification\Helper\Websocket::class);
+
+$scriptString = '
+    var BASE_URL = \'' . /* @noEscape */ $block->getUrl('*') . '\';
+    var FORM_KEY = \'' . /* @noEscape */ $block->getFormKey() . '\';
+    var WS_NOTIFICATION_URL = \'' . /* @noEscape */ $webSocket->getNotificationUrl() . '\';
+    var ADMIN_IS_LOGGED_IN = ' . /* @noEscape */ $webSocket->isAdminLogin() . ';
+    var require = {
+        \'baseUrl\': \'' . /* @noEscape */ $block->getViewFileUrl('/') . '\'
+    };';
+
+echo /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false);

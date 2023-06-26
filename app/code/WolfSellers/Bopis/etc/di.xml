@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="WolfSellers\Bopis\Api\BopisRepositoryInterface" type="WolfSellers\Bopis\Model\BopisRepository"/>
+	<preference for="WolfSellers\Bopis\Api\Data\BopisInterface" type="WolfSellers\Bopis\Model\Bopis"/>
+	<preference for="WolfSellers\Bopis\Api\Data\BopisSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="WolfSellers\Bopis\Api\Data\OrderBopisInterface" type="WolfSellers\Bopis\Model\OrderBopis"/>
+    <preference for="WolfSellers\Bopis\Api\NotificationRepositoryInterface" type="WolfSellers\Bopis\Model\NotificationRepository"/>
+    <preference for="WolfSellers\Bopis\Api\Data\NotificationInterface" type="WolfSellers\Bopis\Model\Notification"/>
+    <preference for="WolfSellers\Bopis\Api\Data\NotificationSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <!--PLUGINS-->
+    <type name="Magento\User\Block\User\Edit\Tab\Main">
+        <plugin name="admin_user_source" type="WolfSellers\Bopis\Plugin\Block\Adminhtml\User\Edit\Tab\UserFieldSource" sortOrder="1"/>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <plugin name="sales_order_for_source" type="WolfSellers\Bopis\Plugin\CustomSalesOrderGridCollection" sortOrder="100" />
+    </type>
+
+    <!---->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="bopis_listnewsorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\NewsOrder\Grid\Collection</item>
+                <item name="bopis_listprocessingorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\ProcessingOrder\Grid\Collection</item>
+                <item name="bopis_listshippingorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\ShippingOrder\Grid\Collection</item>
+                <item name="bopis_listcompleteorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\CompleteOrder\Grid\Collection</item>
+                <item name="bopis_listcanceledorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\CanceledOrder\Grid\Collection</item>
+                <item name="bopis_listholdedorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\HoldedOrder\Grid\Collection</item>
+                <item name="bopis_listorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\AllOrders\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Bopis\Model\ResourceModel\Listnewsorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Bopis\Model\ResourceModel\Listorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Bopis\Model\ResourceModel\Listprocessingorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+     <type name="WolfSellers\Bopis\Model\ResourceModel\Listshippingorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Bopis\Model\ResourceModel\Listcompleteorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Bopis\Model\ResourceModel\Listcanceledorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Bopis\Model\ResourceModel\Listholdedorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\ShippingMethodManagement">
+        <plugin name="wolfsellers_bopis_shipping" type="WolfSellers\Bopis\Plugin\Model\ShippingMethodManagementPlugin" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\Index">
+        <plugin name="wolfsellers_bopis_controller_cart" type="WolfSellers\Bopis\Plugin\Checkout\Controller\CartPlugin" sortOrder="10" disabled="true"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Index\Index">
+        <plugin name="wolfsellers_bopis_controller_index" type="WolfSellers\Bopis\Plugin\Checkout\Controller\IndexPlugin" sortOrder="10" disabled="true"/>
+    </type>
+    <type name="Magento\InventoryApi\Api\SourceRepositoryInterface">
+        <plugin name="plugin_source_save" type="WolfSellers\Bopis\Plugin\SourceSave"/>
+    </type>
+    <type name="Magento\Customer\Model\Address">
+        <plugin name="update_data_bopis" type="WolfSellers\Bopis\Plugin\Model\Customer\AddressPlugin" sortOrder="10" disabled="false"/>
+    </type>
+    <!--<type name="Magento\Checkout\Controller\Cart\Add">
+        <plugin name="validate_qty_source" type="WolfSellers\Bopis\Plugin\Checkout\Controller\Cart\AddPlugin" sortOrder="10" disabled="false"/>
+    </type>-->
+    <type name="Magento\Checkout\Controller\Cart\UpdateItemQty">
+        <plugin name="validate_qty_source_update" type="WolfSellers\Bopis\Plugin\Checkout\Controller\Cart\UpdateItemQtyPlugin" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsSalableWithReservationsCondition">
+        <plugin name="validate_qty_source_update" type="WolfSellers\Bopis\Plugin\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsSalableWithReservationsConditionPlugin" sortOrder="10" disabled="false"/>
+    </type>
+</config>
