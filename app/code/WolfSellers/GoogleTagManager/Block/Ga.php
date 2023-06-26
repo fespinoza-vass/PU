@@ -5,6 +5,20 @@
  */
 namespace WolfSellers\GoogleTagManager\Block;
 
+use Magento\Catalog\Api\CategoryRepositoryInterface;
+use Magento\Catalog\Helper\Image;
+use Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product\Attribute\Repository;
+use Magento\CatalogRule\Api\CatalogRuleRepositoryInterface;
+use Magento\CatalogRule\Model\ResourceModel\Rule;
+use Magento\Cookie\Helper\Cookie;
+use Magento\Customer\Model\Session\Proxy;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\GoogleTagManager\Helper\Data;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
+use Magento\Store\Model\StoreManagerInterface;
+
 /**
  * Google Analytics Block
  *
@@ -27,13 +41,30 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
      * @var \Magento\Framework\Json\Helper\Data
      */
     protected $jsonHelper;
+    private \Magento\Catalog\Helper\Data $_catalogHelper;
+    private \Magento\Catalog\Helper\Image $imageHelper;
+    private \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository;
+    private \Magento\Framework\Stdlib\DateTime\TimezoneInterface $_date;
+    private \Magento\Customer\Model\Session\Proxy $sessionProxy;
+    private \Magento\CatalogRule\Model\ResourceModel\Rule $ruleResource;
+    private \Magento\Catalog\Api\CategoryRepositoryInterface $_categoryRepository;
+    private \Magento\Catalog\Model\Product\Attribute\Repository $attributerepository;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $salesOrderCollection
-     * @param \Magento\GoogleTagManager\Helper\Data $googleAnalyticsData
-     * @param \Magento\Cookie\Helper\Cookie $cookieHelper
+     * @param Context $context
+     * @param CollectionFactory $salesOrderCollection
+     * @param Data $googleAnalyticsData
+     * @param Cookie $cookieHelper
      * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     * @param Repository $attributerepository
+     * @param CategoryRepositoryInterface $categoryRepository
+     * @param CatalogRuleRepositoryInterface $catalogRuleRepository
+     * @param Rule $rule
+     * @param StoreManagerInterface $storeManager
+     * @param Proxy $sessionProxy
+     * @param TimezoneInterface $date
+     * @param Image $imageHelper
+     * @param \Magento\Catalog\Helper\Data $catalogHelper
      * @param array $data
      */
     public function __construct(
@@ -50,6 +81,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         \Magento\Customer\Model\Session\Proxy $sessionProxy,
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
         \Magento\Catalog\Helper\Image $imageHelper,
+        \Magento\Catalog\Helper\Data $catalogHelper,
         array $data = []
     ) {
         $this->cookieHelper = $cookieHelper;
@@ -63,6 +95,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         $this->catalogRuleRepository = $catalogRuleRepository;
         $this->imageHelper = $imageHelper;
         parent::__construct($context, $salesOrderCollection, $googleAnalyticsData, $data, $cookieHelper);
+        $this->_catalogHelper = $catalogHelper;
     }
 
     /**
@@ -142,17 +175,17 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             $products = [];
             /** @var \Magento\Sales\Model\Order\Item $item*/
             foreach ($order->getAllVisibleItems() as $item) {
-                
+
                 /** Get Name Categories of product */
                 $categories = [];
                 foreach($item->getProduct()->getCategoryIds() as $categoryId){
                     array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
                 }
-                
+
                 $category = isset($categories[0]) ? $categories[0] : '';
                 $subcategory = isset($categories[1]) ? $categories[1] : '';
                 $family = isset($categories[2]) ? $categories[2] : '';
-                
+
                 /** Get Rules of product */
                 $rules = $this->getRules($item->getProduct()->getId());
                 $dataRule = [];
@@ -162,21 +195,21 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                     }
                 }
                 $dataRule = implode( ', ', $dataRule);
-                
+
                 $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
 
                 //$category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
                 //$subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
                 //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
-                
+
                 $options = $this->attributerepository->get('manufacturer')->getOptions();
-                
+
                 foreach($options as $options_value){
                     if($options_value->getValue() == $item->getProduct()->getData('manufacturer')){
                         $brand = $options_value->getLabel();
                     }
                 }
-                
+
                 $gender = !empty($item->getProduct()->getAttributeText('genero')) ? $item->getProduct()->getAttributeText('genero') : '';
                 $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
 
@@ -195,7 +228,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                     'brand'     => $brand,
                     'productURL' => $item->getProduct()->getProductUrl(),
                     'imageURL' => $imageUrl
-                    
+
                 ];
             }
 
@@ -222,7 +255,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
     {
         return $this->cookieHelper->isUserNotAllowSaveCookie();
     }
-    
+
     /*
      * Function to obtain product promotion
      */
@@ -231,15 +264,50 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         $date = $this->_date->date()->format('Y-m-d H:i:s');
         $websiteId = $this->_storeManager->getStore()->getWebsiteId();
         $customerGroupId = $this->sessionProxy->getCustomer()->getGroupId();
-        
+
         $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
         $promos = [];
-        
+
         foreach ($rules as $rule){
             $promo = $this->catalogRuleRepository->get($rule['rule_id']);
             array_push($promos, $promo->getName());
         }
-        
+
         return $promos;
+    }
+
+    /**
+     * Retries current product to send via gtag
+     * @return Product|null
+     */
+    public function getProductBlock(): ? Product
+    {
+        return $this->_catalogHelper->getProduct();
+    }
+
+    /**
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getCategoryName(): array
+    {
+
+        $product = $this->getProductBlock();
+        $categories = [];
+
+        foreach($product->getCategoryIds() as $categoryId){
+
+            $categories[] = $this->_categoryRepository->get($categoryId)->getName();
+        }
+        return $categories;
+    }
+
+    /**
+     * @return string|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getCurrencyCode(): ?string
+    {
+        return $this->_storeManager->getStore()->getBaseCurrencyCode();
     }
 }
