@@ -45,7 +45,7 @@ class Save extends Order
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'WolfSellers_BackendBopis::dashboard';
+    const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
     private ConvertOrder $convertOrder;
     private AuthSession $authSession;
     private ShipmentRepository $shipmentRepository;
@@ -182,7 +182,7 @@ class Save extends Order
             if ($orderItem->getIsVirtual()) {
                 continue;
             }
-            
+
             $qtyShipped = $orderItem->getQtyOrdered();
             // Create shipment item with qty
             $shipmentItem
@@ -192,7 +192,7 @@ class Save extends Order
             $shipment->addItem($shipmentItem);
 
             try {
-               
+
                 /** @var SourceItem $sourceItem */
                 /** @var Collection $sourceItemCollection */
                 $sourceItemCollection = $this->sourceItemCollectionFactory->create();
@@ -204,7 +204,7 @@ class Save extends Order
                 }
                 $sourceItem = $sourceItemCollection->getFirstItem();
                 $sourceItem->setQuantity($sourceItem->getQuantity() + $qtyShipped);
-                
+
             } catch (Exception $e) {
                 $sourceItem = $this->sourceItemFactory->create();
                 $sourceItem->setQuantity($qtyShipped);

@@ -36,14 +36,14 @@ class View extends \Magento\Sales\Block\Adminhtml\Order\View
 
     protected function _construct()
     {
-        $this->addButton(
+        /*$this->addButton(
             'bopis_print',
             [
                 'label'   => __('Print'),
                 'class'   => 'bopis_print',
                 'onclick' => 'setLocation(\'' . $this->getPdfPrintUrl() . '\')'
             ]
-        );
+        );*/
 
         parent::_construct();
     }

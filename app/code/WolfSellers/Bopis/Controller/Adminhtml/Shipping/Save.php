@@ -31,7 +31,7 @@ class Save extends Order
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'WolfSellers_BackendBopis::dashboard';
+    const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
 
     /**
      * Core registry
@@ -123,7 +123,7 @@ class Save extends Order
     ) {
         $this->config = $config;
         parent::__construct(
-            $context, 
+            $context,
             $coreRegistry,
             $fileFactory,
             $translateInline,

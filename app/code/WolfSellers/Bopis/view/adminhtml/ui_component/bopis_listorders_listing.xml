@@ -79,7 +79,7 @@
                 <sorting>desc</sorting>
             </settings>
         </selectionsColumn>
-       
+
         <column name="increment_id" sortOrder="5">
             <settings>
                 <draggable>false</draggable>

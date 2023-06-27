@@ -4,7 +4,7 @@
     <update handle="bopis_listing_block"/>
     <body>
         <referenceContainer name="content">
-            <uiComponent name="bopis_listorders_listing" aclResource="WolfSellers_BackendBopis::dashboard"/>
+            <uiComponent name="bopis_listorders_listing" aclResource="WolfSellers_Bopis::principal"/>
         </referenceContainer>
     </body>
 </page>

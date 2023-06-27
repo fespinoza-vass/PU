@@ -17,21 +17,73 @@ use WolfSellers\Bopis\Api\BopisRepositoryInterface;
 use WolfSellers\Bopis\Helper\Data;
 use WolfSellers\Bopis\Model\BopisFactory;
 
+/**
+ *
+ */
 class SaveAddress implements HttpPostActionInterface
 {
+    /**
+     *
+     */
     const SOURCE_PREFIX = 'online_';
+    /**
+     * @var RequestInterface
+     */
     private RequestInterface $request;
+    /**
+     * @var BopisRepositoryInterface
+     */
     private BopisRepositoryInterface $bopisRepository;
+    /**
+     * @var JsonFactory
+     */
     private JsonFactory $jsonFactory;
+    /**
+     * @var Session
+     */
     private Session $checkoutSession;
+    /**
+     * @var BopisFactory
+     */
     private BopisFactory $bopisFactory;
+    /**
+     * @var CustomerSession
+     */
     private CustomerSession $customerSession;
+    /**
+     * @var AddressInterfaceFactory
+     */
     private AddressInterfaceFactory $addressFactory;
+    /**
+     * @var AddressRepositoryInterface
+     */
     private AddressRepositoryInterface $addressRepository;
+    /**
+     * @var RegionInterfaceFactory
+     */
     private RegionInterfaceFactory $regionFactory;
+    /**
+     * @var CartManagementInterface
+     */
     private CartManagementInterface $quoteManagement;
+    /**
+     * @var Data
+     */
     private Data $data;
 
+    /**
+     * @param RequestInterface $request
+     * @param BopisRepositoryInterface $bopisRepository
+     * @param JsonFactory $jsonFactory
+     * @param Session $checkoutSession
+     * @param BopisFactory $bopisFactory
+     * @param CustomerSession $customerSession
+     * @param AddressRepositoryInterface $addressRepository
+     * @param AddressInterfaceFactory $addressFactory
+     * @param RegionInterfaceFactory $regionFactory
+     * @param CartManagementInterface $quoteManagement
+     * @param Data $data
+     */
     public function __construct(
         RequestInterface           $request,
         BopisRepositoryInterface   $bopisRepository,
@@ -59,6 +111,10 @@ class SaveAddress implements HttpPostActionInterface
         $this->data = $data;
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     */
     public function execute()
     {
         $jsonResponse = $this->jsonFactory->create();
@@ -131,6 +187,10 @@ class SaveAddress implements HttpPostActionInterface
         $this->addressRepository->save($address);
     }
 
+    /**
+     * @param $address
+     * @return string
+     */
     private function addressFormatted($address){
         return '<span class="title">Dirección de Envío</span><span class="address">' . $address .'</span>';
     }

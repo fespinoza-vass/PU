@@ -3,6 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
+                <resource id="WolfSellers_Bopis::principal" title="Bopis Dashboard" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::title" title="Bopis" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::listnewsorders" title="Bopis Ordenes confirmadas" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::listprocessingorders" title="Bopis Ordenes en preparación" sortOrder="10" />
