@@ -7,7 +7,7 @@ namespace WolfSellers\Bopis\Controller\Adminhtml\Order;
 class View  extends \Magento\Sales\Controller\Adminhtml\Order
 {
     protected $resultPageFactory = false;
-    const ADMIN_RESOURCE = 'WolfSellers_BackendBopis::dashboard';
+    const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
 
     public function execute()
     {

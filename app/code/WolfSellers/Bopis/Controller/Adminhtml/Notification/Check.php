@@ -39,7 +39,7 @@ class Check extends Order
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'WolfSellers_BackendBopis::dashboard';
+    const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
 
     private InvoiceService $invoiceService;
     private Transaction $transaction;

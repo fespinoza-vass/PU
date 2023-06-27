@@ -34,7 +34,7 @@ class Save extends Order
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'WolfSellers_BackendBopis::dashboard';
+    const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
     private PublisherInterface $publisher;
     private NotificationDataFactory $notificationDataFactory;
     protected OrderFactory $orderFactory;
