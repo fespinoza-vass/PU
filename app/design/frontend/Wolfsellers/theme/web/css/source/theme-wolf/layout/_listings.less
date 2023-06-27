@@ -168,6 +168,9 @@
                                     .list_item_product_manufacturer{
                                         font-size: 1.4rem;
                                         font-weight: bold;
+                                        @media @xssmax{
+                                            font-size: 1.2rem;
+                                        }
                                     }
                                     a.product-item-link{
                                         font-size: 1.4rem;
@@ -371,6 +374,8 @@
                             .product-item-details{
                                 .price-box {
                                     display: grid;
+                                    height: 90px;
+                                    padding: 25px 0;
                                 }
                             }
                         }
