@@ -295,6 +295,11 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         $product = $this->getProductBlock();
         $categories = [];
 
+        if (empty($product)){
+
+            return $categories;
+        }
+
         foreach($product->getCategoryIds() as $categoryId){
 
             $categories[] = $this->_categoryRepository->get($categoryId)->getName();

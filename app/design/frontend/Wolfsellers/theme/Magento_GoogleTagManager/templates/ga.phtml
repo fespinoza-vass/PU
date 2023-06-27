@@ -17,46 +17,51 @@ $subcategory = isset($categories[1]) ? $categories[1] : '';
 $family = isset($categories[2]) ? $categories[2] : '';
 $gender = '';
 $size = '';
-$attr = $_product->getResource()->getAttribute('tamano');
 
-if ($attr->usesSource()) {
+if (!empty($_product)) {
 
-    $size = $attr->getSource()->getOptionText($_product->getTamano());
-}
+    $attr = $_product->getResource()->getAttribute('tamano');
 
-$attr = $_product->getResource()->getAttribute('genero');
+    if ($attr->usesSource()) {
 
-if ($attr->usesSource()) {
-
-    $gender = $attr->getSource()->getOptionText($_product->getGenero());
-}
-
-$attributes = $_product->getAttributes();
-$brand = '';
-
-foreach($attributes as $attribute){
-
-    if($attribute->getName() === 'manufacturer') {
-        $brand = $attribute->getFrontend()->getValue($_product);
+        $size = $attr->getSource()->getOptionText($_product->getTamano());
     }
-}
 
-$imageUrl = $this->helper('Magento\Catalog\Helper\Image')
-    ->init($_product, 'product_base_image')->getUrl();
+    $attr = $_product->getResource()->getAttribute('genero');
 
-$rules = $block->getRules($_product->getId());
+    if ($attr->usesSource()) {
 
-$data = [];
-
-if($rules){
-
-    foreach ($rules as $rule){
-
-        $data[] = $rule;
+        $gender = $attr->getSource()->getOptionText($_product->getGenero());
     }
+
+    $attributes = $_product->getAttributes();
+    $brand = '';
+
+    foreach($attributes as $attribute){
+
+        if($attribute->getName() === 'manufacturer') {
+            $brand = $attribute->getFrontend()->getValue($_product);
+        }
+    }
+
+    $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+        ->init($_product, 'product_base_image')->getUrl();
+
+    $rules = $block->getRules($_product->getId());
+
+    $data = [];
+
+    if($rules){
+
+        foreach ($rules as $rule){
+
+            $data[] = $rule;
+        }
+    }
+
+    $data = implode( ', ', $data);
 }
 
-$data = implode( ', ', $data);
 
  switch ($accountType) {
     case \Magento\GoogleTagManager\Helper\Data::TYPE_TAG_MANAGER:
