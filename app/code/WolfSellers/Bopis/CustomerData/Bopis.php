@@ -8,16 +8,47 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
 use WolfSellers\Bopis\Api\BopisRepositoryInterface;
 
+/**
+ *
+ */
 class Bopis implements SectionSourceInterface
 {
+    /**
+     *
+     */
     const DELIVERY_TITLE = "carriers/tablerate/title";
+    /**
+     * @var Session
+     */
     private Session $checkoutSession;
+    /**
+     * @var BopisRepositoryInterface
+     */
     private BopisRepositoryInterface $bopisRepository;
+    /**
+     * @var \WolfSellers\Bopis\Helper\Bopis
+     */
     private \WolfSellers\Bopis\Helper\Bopis $bopis;
+    /**
+     * @var ScopeConfigInterface
+     */
     private ScopeConfigInterface $scopeConfig;
+    /**
+     * @var \WolfSellers\Bopis\Helper\Config
+     */
     private \WolfSellers\Bopis\Helper\Config $config;
+    /**
+     * @var \Laminas\Log\Logger
+     */
     protected $logger;
 
+    /**
+     * @param Session $checkoutSession
+     * @param BopisRepositoryInterface $bopisRepository
+     * @param \WolfSellers\Bopis\Helper\Bopis $bopis
+     * @param ScopeConfigInterface $scopeConfig
+     * @param \WolfSellers\Bopis\Helper\Config $config
+     */
     public function __construct(
         Session $checkoutSession,
         BopisRepositoryInterface $bopisRepository,
@@ -37,6 +68,9 @@ class Bopis implements SectionSourceInterface
         $this->logger = $logger;
     }
 
+    /**
+     * @return array
+     */
     public function getSectionData()
     {
         try {

@@ -35,9 +35,30 @@ class Save extends Order
      */
     const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
 
+    /**
+     * @var InvoiceService|mixed
+     */
     private InvoiceService $invoiceService;
+    /**
+     * @var Transaction|mixed
+     */
     private Transaction $transaction;
 
+    /**
+     * @param Action\Context $context
+     * @param Registry $coreRegistry
+     * @param FileFactory $fileFactory
+     * @param InlineInterface $translateInline
+     * @param PageFactory $resultPageFactory
+     * @param JsonFactory $resultJsonFactory
+     * @param LayoutFactory $resultLayoutFactory
+     * @param RawFactory $resultRawFactory
+     * @param OrderManagementInterface $orderManagement
+     * @param OrderRepositoryInterface $orderRepository
+     * @param LoggerInterface $logger
+     * @param InvoiceService|null $invoiceService
+     * @param Transaction|null $transaction
+     */
     public function __construct(
         Action\Context $context,
         Registry $coreRegistry,
@@ -129,6 +150,11 @@ class Save extends Order
         return $this->_redirect($this->_redirect->getRefererUrl());
     }
 
+    /**
+     * @param $order
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     protected function invoiceOrder($order) {
         $invoice = $this->invoiceService->prepareInvoice($order);
         $invoice->register();

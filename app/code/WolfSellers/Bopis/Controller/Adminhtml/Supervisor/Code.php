@@ -6,6 +6,9 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Stdlib\CookieManagerInterface;
 
+/**
+ *
+ */
 class Code extends \Magento\Backend\App\Action
 {
     private CookieManagerInterface $cookieManager;
@@ -20,6 +23,12 @@ class Code extends \Magento\Backend\App\Action
         $this->cookieManager = $cookieManager;
     }
 
+    /**
+     * @return void
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Stdlib\Cookie\CookieSizeLimitReachedException
+     * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
+     */
     public function execute()
     {
         $storeCode = $this->getRequest()->getParam("store_code", "all");

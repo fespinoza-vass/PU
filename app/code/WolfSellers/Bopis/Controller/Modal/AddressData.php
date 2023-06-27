@@ -14,7 +14,13 @@ use WolfSellers\Bopis\Api\BopisRepositoryInterface;
 use WolfSellers\Bopis\Helper\Data;
 use WolfSellers\Bopis\Model\BopisFactory;
 
+/**
+ *
+ */
 class AddressData implements HttpGetActionInterface {
+    /**
+     *
+     */
     const SOURCE_PREFIX = 'online_';
     /**
      * @var JsonFactory
@@ -36,9 +42,21 @@ class AddressData implements HttpGetActionInterface {
      */
     private CountryFactory $countryFactory;
 
+    /**
+     * @var Session
+     */
     private Session $checkoutSession;
+    /**
+     * @var BopisRepositoryInterface
+     */
     private BopisRepositoryInterface $bopisRepository;
+    /**
+     * @var BopisFactory
+     */
     private BopisFactory $bopisFactory;
+    /**
+     * @var Data
+     */
     private Data $data;
 
     /**
@@ -90,7 +108,7 @@ class AddressData implements HttpGetActionInterface {
                 'country' => $country->getName(),
                 'region_id' => $address->getRegionId(),
                 'region' => $address->getRegion()->getRegion(),
-              
+
             ];
 
             $street = $address->getStreet();
@@ -112,6 +130,11 @@ class AddressData implements HttpGetActionInterface {
         return $jsonResponse;
     }
 
+    /**
+     * @param $addressData
+     * @return void
+     * @throws LocalizedException
+     */
     protected function saveBopisData($addressData){
         try{
             $bopis = $this->bopisRepository->getByQuoteId($this->checkoutSession->getQuoteId());
@@ -130,6 +153,10 @@ class AddressData implements HttpGetActionInterface {
         $this->bopisRepository->save($bopis);
     }
 
+    /**
+     * @param $addressData
+     * @return String
+     */
     protected function formatAddress($addressData): String {
         return '<span class="title">Dirección de Envío</span><span class="address">' . trim($addressData['street_1'] . " " . ($addressData['street_2'] ?? "") . " " . ($addressData['street_3'] ?? "")). ", " . $addressData['province'] . " " . $addressData['region'] . " " . $addressData['country'] .'</span>';
     }

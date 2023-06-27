@@ -27,6 +27,9 @@ use WolfSellers\Bopis\Model\Queue\NotificationData;
 use WolfSellers\Bopis\Model\Queue\NotificationDataFactory;
 use WolfSellers\Bopis\Observer\Checkout\SubmitAllAfter;
 
+/**
+ *
+ */
 class Save extends Order
 {
 
@@ -36,10 +39,35 @@ class Save extends Order
      * @see _isAllowed()
      */
     const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
+    /**
+     * @var PublisherInterface
+     */
     private PublisherInterface $publisher;
+    /**
+     * @var NotificationDataFactory
+     */
     private NotificationDataFactory $notificationDataFactory;
+    /**
+     * @var Json
+     */
     private Json $json;
 
+    /**
+     * @param Action\Context $context
+     * @param Registry $coreRegistry
+     * @param FileFactory $fileFactory
+     * @param InlineInterface $translateInline
+     * @param PageFactory $resultPageFactory
+     * @param JsonFactory $resultJsonFactory
+     * @param LayoutFactory $resultLayoutFactory
+     * @param RawFactory $resultRawFactory
+     * @param OrderManagementInterface $orderManagement
+     * @param OrderRepositoryInterface $orderRepository
+     * @param LoggerInterface $logger
+     * @param PublisherInterface $publisher
+     * @param NotificationDataFactory $notificationDataFactory
+     * @param Json $json
+     */
     public function __construct(
         Action\Context $context,
         Registry $coreRegistry,
@@ -97,6 +125,10 @@ class Save extends Order
         return $this->_redirect($this->_redirect->getRefererUrl());
     }
 
+    /**
+     * @param OrderInterface $order
+     * @return void
+     */
     private function publishNotification(OrderInterface $order)
     {
 

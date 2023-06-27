@@ -4,11 +4,23 @@
 namespace WolfSellers\Bopis\Controller\Adminhtml\Order;
 
 
+/**
+ *
+ */
 class View  extends \Magento\Sales\Controller\Adminhtml\Order
 {
+    /**
+     * @var bool
+     */
     protected $resultPageFactory = false;
+    /**
+     *
+     */
     const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $order = $this->_initOrder();
