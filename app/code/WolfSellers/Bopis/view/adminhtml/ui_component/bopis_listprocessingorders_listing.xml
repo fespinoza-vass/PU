@@ -72,9 +72,6 @@
                 <sorting>desc</sorting>
             </settings>
         </column>
-  
-  
-      
         <column name="shipping_name" sortOrder="20">
             <settings>
                 <draggable>false</draggable>
@@ -101,7 +98,16 @@
                 <!--dateFormat>dd/MM/YYYY</dateFormat-->
             </settings>
         </column>
-        
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="50">
+            <settings>
+                <filter>dateRange</filter>
+                <draggable>false</draggable>
+                <sortable>false</sortable>
+                <dataType>date</dataType>
+                <label translate="true">Fecha de Entrega</label>
+                <!--dateFormat>dd/MM/YYYY</dateFormat-->
+            </settings>
+        </column>
         <column name="status" component="Magento_Ui/js/grid/cells/sanitizedHtml" class="WolfSellers\Bopis\Ui\Component\Listing\Column\Status"  sortOrder="60">
             <settings>
                 <draggable>false</draggable>

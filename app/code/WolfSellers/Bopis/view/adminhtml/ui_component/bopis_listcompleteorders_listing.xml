@@ -41,7 +41,6 @@
                 <statefull>
                     <property name="applied" xsi:type="boolean">false</property>
                 </statefull>
-
             </settings>
         </filters>
     </listingToolbar>
@@ -64,7 +63,6 @@
                 <sorting>desc</sorting>
             </settings>
         </selectionsColumn>
-  
         <column name="increment_id" sortOrder="5">
             <settings>
                 <draggable>false</draggable>
@@ -73,8 +71,6 @@
                 <sorting>desc</sorting>
             </settings>
         </column>
-
-
         <column name="shipping_name" sortOrder="20">
             <settings>
                 <draggable>false</draggable>
