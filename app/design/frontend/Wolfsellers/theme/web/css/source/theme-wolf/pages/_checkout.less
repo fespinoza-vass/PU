@@ -267,7 +267,7 @@
 							}
 						}
 						.field.amcheckout-comment{
-							float: left;
+							
 							width: 100%;
 							margin-top: 35px;
 						}
@@ -603,40 +603,43 @@
 												}
 											}
 										}
-										.form-discount{
-											position: relative;
-											.payment-option-inner{
-												margin: 0;
-											}
-											.actions-toolbar{
-												.action-apply{
-													position: absolute;
-													right: 0;
-													top: 0;
-													height: 100%;
-													padding: 0 10px;
-													background: @black;
-													color: @white;
-												}
-											}
-											.input-text{
-												padding-right: 70px;
-											}
-										}
-										.discount-code{
-											margin: 0 10px;
-											.payment-option-content{
-												padding: 10px 10px 20px;
-											}
-											span.action-toggle{
-												color: @black;
-												font-weight: 600;
-											}
-										}
+										
+										
 									}
 								}
 								.amcheckout-wrapper{
 									position: relative;
+									.discount-code{
+										margin: 0 10px;
+										.payment-option-content{
+											padding: 10px 10px 20px;
+										}
+										span.action-toggle{
+											color: @black;
+											font-weight: 600;
+										}
+									}
+									.form-discount{
+										position: relative;
+										.payment-option-inner{
+											margin: 0;
+										}
+										.actions-toolbar{
+											position: initial;
+											.action-apply{
+												position: absolute;
+												right: 0;
+												top: 0;
+												height: 100%;
+												padding: 0 10px;
+												background: @black;
+												color: @white;
+											}
+										}
+										.input-text{
+											padding-right: 70px;
+										}
+									}
 									.block.items-in-cart{
 										margin-bottom: 0;
 										.items-in-cart > .title{
