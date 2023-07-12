@@ -553,36 +553,6 @@
 										float: left;
 										width: 100%;
 										background: @white;
-										// .lib-checkboxs;
-										// .checkout-agreements{
-										// 	.checkout-agreement{
-										// 		float: left;
-										// 		width: 100%;
-										// 		margin-top: -90px;
-										// 		margin-left: -5px;
-										// 		a{
-										// 			font-weight: bold;
-										// 			&:hover {
-										// 				color: @primary;
-										// 				text-decoration: underline;
-										// 			}
-										// 		}
-										// 		input[type='checkbox']:checked + label:before{
-										// 			left: 7px;
-										// 		}
-										// 		label.label{
-										// 			button{
-										// 				margin-left: 8px;
-										// 				margin-top: -5px;
-										// 				color: @primary;
-										// 				font-size: 1.4rem;
-										// 				span{
-										// 					word-break: break-word; 
-										// 				}
-										// 			}
-										// 		}
-										// 	}
-										// }
 										.admin__field.admin__field-option{
 											.lib-visually-hidden;
 										}
@@ -599,8 +569,7 @@
 											border-radius: 0 0 @radiusitems @radiusitems;
 											.actions-toolbar{
 												display: flex;
-												margin-left: 20px;
-												margin-right: 20px;
+												margin: 20px 20px 0 20px;
 												@media @mdmin{
 													justify-content: center;
 												}
@@ -616,11 +585,11 @@
 										margin: 0;
 										.payment-option-title{
 											padding: 20px 0 15px 15px;
-											cursor: pointer;
+											pointer-events: none;
 										}
 										.payment-option-content{
 											padding: 10px 0;
-											display: block !important; //Se aplica por estilo en html 
+											display: block !important; //important inline html
 										}
 										span.action-toggle{
 											color: @black;
@@ -651,12 +620,16 @@
 									.checkout-agreements{
 										.lib-checkboxs;
 										height: 50px;
+										margin-bottom: 0px;
 										.fieldset{
 											margin-bottom: 0;
 
 										}
-										input[type='checkbox'] ~ label:after{
-											margin-left: 0;
+										input[type='checkbox'] ~ label{
+											line-height: 15px;
+											&:after{
+												margin-left: 0;
+											}
 										}
 										input[type='checkbox']:checked + label:before{
 											left: 3px;
@@ -664,7 +637,7 @@
 										label.label{
 											button{
 												.lib-font-size(14);
-												margin-left: 8px;
+												margin-left: 0;
 												margin-top: -5px;
 												color: @primary;
 												span{
@@ -679,38 +652,12 @@
 												text-decoration: underline;
 											}
 										}
+										&.field.required{
+											.label:after{
+												content: none;
+											}
+										}
 									}
-
-									// .lib-checkboxs;
-									// 	.checkout-agreements{
-									// 		.checkout-agreement{
-									// 			float: left;
-									// 			width: 100%;
-									// 			margin-top: -90px;
-									// 			margin-left: -5px;
-									// 			a{
-									// 				font-weight: bold;
-									// 				&:hover {
-									// 					color: @primary;
-									// 					text-decoration: underline;
-									// 				}
-									// 			}
-									// 			input[type='checkbox']:checked + label:before{
-									// 				left: 7px;
-									// 			}
-									// 			label.label{
-									// 				button{
-									// 					margin-left: 8px;
-									// 					margin-top: -5px;
-									// 					color: @primary;
-									// 					font-size: 1.4rem;
-									// 					span{
-									// 						word-break: break-word; 
-									// 					}
-									// 				}
-									// 			}
-									// 		}
-									// 	}
 									.form-discount{
 										position: relative;
 										.payment-option-inner{
@@ -938,6 +885,21 @@
 												}
 											}
 										}
+									}
+									.discount-code{
+										.payment-option-title.field{
+											padding: 20px 0 0 0;
+										}
+										.form-discount{
+											.actions-toolbar{
+												.action-apply{
+													width: auto;
+												}
+											}
+										}
+									}
+									.field.amcheckout-comment{
+										margin: 10px 0 25px 0;
 									}
 								}
 							}
