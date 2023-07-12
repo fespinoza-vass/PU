@@ -269,7 +269,7 @@
 						.field.amcheckout-comment{
 							
 							width: 100%;
-							margin-top: 35px;
+							margin: 20px 0 25px 0;
 						}
 						.checkout-column{
 							.checkout-block{
@@ -376,6 +376,9 @@
 								.opc-block-summary{
 									background: transparent;
 									table.table-totals{
+										tbody{
+											width: 100%;
+										}
 										tbody tr{
 											background: @white;
 											&.grand.totals{
@@ -550,36 +553,6 @@
 										float: left;
 										width: 100%;
 										background: @white;
-										.lib-checkboxs;
-										.checkout-agreements{
-											.checkout-agreement{
-												float: left;
-												width: 100%;
-												margin-top: -90px;
-												margin-left: -5px;
-												a{
-													font-weight: bold;
-													&:hover {
-														color: @primary;
-														text-decoration: underline;
-													}
-												}
-												input[type='checkbox']:checked + label:before{
-													left: 7px;
-												}
-												label.label{
-													button{
-														margin-left: 8px;
-														margin-top: -5px;
-														color: @primary;
-														font-size: 1.4rem;
-														span{
-															word-break: break-word; 
-														}
-													}
-												}
-											}
-										}
 										.admin__field.admin__field-option{
 											.lib-visually-hidden;
 										}
@@ -596,8 +569,7 @@
 											border-radius: 0 0 @radiusitems @radiusitems;
 											.actions-toolbar{
 												display: flex;
-												margin-left: 20px;
-												margin-right: 20px;
+												margin: 20px 20px 0 20px;
 												@media @mdmin{
 													justify-content: center;
 												}
@@ -610,13 +582,80 @@
 								.amcheckout-wrapper{
 									position: relative;
 									.discount-code{
-										margin: 0 10px;
+										margin: 0;
+										.payment-option-title{
+											padding: 20px 0 15px 15px;
+											pointer-events: none;
+										}
 										.payment-option-content{
-											padding: 10px 10px 20px;
+											padding: 10px 0;
+											display: block !important; //important inline html
 										}
 										span.action-toggle{
 											color: @black;
 											font-weight: 600;
+											.lib-icon-font(
+												@_icon-font-content: @icon-up,
+												@_icon-font-size: 1.4rem,
+												@_icon-font-line-height: 1,
+												@_icon-font-color: @gray7,
+												@_icon-font-position: after,
+											);
+											&:after{
+												margin-left:7px;
+											}
+										}
+										&._active{
+											span.action-toggle{
+												.lib-icon-font(
+													@_icon-font-content: @icon-down,
+													@_icon-font-size: 1.4rem,
+													@_icon-font-line-height: 1,
+													@_icon-font-color: @gray7,
+													@_icon-font-position: after,
+												);
+											}
+										}
+									}
+									.checkout-agreements{
+										.lib-checkboxs;
+										height: 50px;
+										margin-bottom: 0px;
+										.fieldset{
+											margin-bottom: 0;
+
+										}
+										input[type='checkbox'] ~ label{
+											line-height: 15px;
+											&:after{
+												margin-left: 0;
+											}
+										}
+										input[type='checkbox']:checked + label:before{
+											left: 3px;
+										}
+										label.label{
+											button{
+												.lib-font-size(14);
+												margin-left: 0;
+												margin-top: -5px;
+												color: @primary;
+												span{
+													word-break: break-word; 
+												}
+											}
+										}
+										a{
+											font-weight: bold;
+											&:hover {
+												color: @primary;
+												text-decoration: underline;
+											}
+										}
+										&.field.required{
+											.label:after{
+												content: none;
+											}
 										}
 									}
 									.form-discount{
@@ -846,6 +885,21 @@
 												}
 											}
 										}
+									}
+									.discount-code{
+										.payment-option-title.field{
+											padding: 20px 0 0 0;
+										}
+										.form-discount{
+											.actions-toolbar{
+												.action-apply{
+													width: auto;
+												}
+											}
+										}
+									}
+									.field.amcheckout-comment{
+										margin: 10px 0 25px 0;
 									}
 								}
 							}
