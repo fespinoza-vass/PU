@@ -24,7 +24,6 @@
     },
     "require": {
         "amasty/base": "^1.14.2",
-        "amasty/checkout-graph-ql": "^1.1",
         "amasty/feed": "^2.6",
         "amasty/label": "^2.1",
         "amasty/mega-menu": "^2.4.2",
@@ -34,7 +33,6 @@
         "amasty/module-elastic-search-graphql": "^1.0",
         "amasty/module-magento-custom-form": "^1.17",
         "amasty/module-mega-menu-package-pro": "^2.4.2",
-        "amasty/module-one-step-checkout-pro-package": "^2.0",
         "amasty/module-promo-banners": "^1.1",
         "amasty/module-promo-countdown": "^1.1",
         "amasty/module-shipping-bar": "^1.1",

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace WolfSellers\Checkout\Block\Onepage;
 
-use Amasty\CheckoutCore\Block\Onepage\LayoutWalkerFactory;
+use WolfSellers\Checkout\Block\Onepage\LayoutWalkerFactory;
 use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 
 /**
@@ -69,7 +69,6 @@ class LayoutProcessor implements LayoutProcessorInterface
         $colony = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
         $colony['component'] = 'WolfSellers_Checkout/js/view/form/element/colony';
         $colony['validation'] = ['required-entry' => true];
-        $colony['config']['elementTmpl'] = 'ui/form/element/select';
         $colony['config']['options'] = [[
             'label' => '',
             'value' => '',
