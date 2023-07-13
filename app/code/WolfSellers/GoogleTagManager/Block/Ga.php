@@ -204,6 +204,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
 
                 $options = $this->attributerepository->get('manufacturer')->getOptions();
 
+                $brand = '';
                 foreach($options as $options_value){
                     if($options_value->getValue() == $item->getProduct()->getData('manufacturer')){
                         $brand = $options_value->getLabel();
