@@ -585,7 +585,7 @@
 										margin: 0;
 										.payment-option-title{
 											padding: 20px 0 15px 15px;
-											pointer-events: none;
+											cursor: pointer;
 										}
 										.payment-option-content{
 											padding: 10px 0;
@@ -614,6 +614,9 @@
 													@_icon-font-color: @gray7,
 													@_icon-font-position: after,
 												);
+											}
+											.payment-option-content{
+												display: none !important //important style inline html
 											}
 										}
 									}
