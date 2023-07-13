@@ -251,8 +251,13 @@
                                 }
                                 .discount{
                                     .content{
-                                        display: block !important;
+                                        display: block !important; //Import agregado por estilo en linea html
                                         padding-top: 10px;
+                                    }
+                                    &.active{
+                                        .content{
+                                            display: none !important; //important style inline html
+                                        }
                                     }
                                 }
                             }
