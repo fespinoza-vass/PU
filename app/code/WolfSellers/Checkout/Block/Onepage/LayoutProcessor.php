@@ -69,6 +69,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $colony = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
         $colony['component'] = 'WolfSellers_Checkout/js/view/form/element/colony';
         $colony['validation'] = ['required-entry' => true];
+        $colony['config']['elementTmpl'] = 'ui/form/element/select';
         $colony['config']['options'] = [[
             'label' => '',
             'value' => '',
