@@ -1,0 +1,9 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php if ($item = $block->getItem()) : ?>
+    <span><?= (float) $item->getQtyOrdered() ?></span>
+<?php endif; ?>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="WolfSellers_Bopis::principal" title="Bopis Dashboard" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::title" title="Bopis" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listnewsorders" title="Bopis Ordenes confirmadas" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listprocessingorders" title="Bopis Ordenes en preparación" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listcompleteorders" title="Bopis Ordenes Entregadas" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listcanceledorders" title="Bopis Ordenes Caneladas" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listholdedorders" title="Bopis Ordenes Detenidas" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listorders" title="Bopis Ordenes" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listshippingorders" title="Bopis Ordenes Enviadas" sortOrder="10" />
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="WolfSellers_Bopis::config" title="Bopis" translate="title" sortOrder="999" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
