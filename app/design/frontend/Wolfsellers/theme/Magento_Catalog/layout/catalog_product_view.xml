@@ -58,5 +58,8 @@
                 </arguments>
             </block>
         </referenceContainer>
+        <block class="Magento\Review\Block\Product\Review" name="reviews.tab" as="reviews" template="Magento_Review::review.phtml" group="detailed_info">
+                <block class="Magento\Review\Block\Product\View\ListView" name="product.info.product_additional_data" as="product_additional_data" template="product/view/list.phtml" before="product.review.form" />
+        </block>
     </body>
 </page>
