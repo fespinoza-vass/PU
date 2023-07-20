@@ -7,19 +7,22 @@ class LayoutWalker
     /**
      * @var array
      */
-    private $layoutArray;
+    private array $layoutArray;
 
     /**
      * Path templates
-     *
+     *['customer-data-step']['children']['customer-fieldsets']['children']['customer-data-name']
      * @var array
      */
     public const LAYOUT_PATH_TEMPLATES = [
+        '{CUSTOMER-FIELDSETS}' => '{CUSTOMER-DATA}.>>.customer-fieldsets.>>',
+        '{CUSTOMER-DATA}' => '{CHECKOUT_STEPS}.>>.customer-data-step',
         '{GIFT_WRAP}' => '{ADDITIONAL_STEP}.>>.checkboxes.>>.gift_wrap',
         '{SHIPPING_ADDRESS_FIELDSET}' => '{SHIPPING_ADDRESS}.>>.shipping-address-fieldset',
         '{SHIPPING_RATES_VALIDATION}' =>
             '{CHECKOUT}.>>.steps.>>.shipping-step.>>.step-config.>>.shipping-rates-validation',
         '{AMCHECKOUT_DELIVERY_DATE}' => '{CHECKOUT}.>>.steps.>>.shipping-step.>>.amcheckout-delivery-date',
+        '{CHECKOUT_STEPS}' => '{CHECKOUT}.>>.steps',
         '{SHIPPING_ADDRESS}' => '{CHECKOUT}.>>.steps.>>.shipping-step.>>.shippingAddress',
         '{GIFT_MESSAGE_CONTAINER}' => '{ADDITIONAL_STEP}.>>.checkboxes.>>.gift_message_container',
         '{PAYMENT}' => '{BILLING_STEP}.>>.payment',
@@ -39,12 +42,10 @@ class LayoutWalker
 
     /**
      * isset
-     *
-     * @param string $path
-     *
+     * @param $path
      * @return bool
      */
-    public function isExist($path)
+    public function isExist($path): bool
     {
         $path = $this->parseArrayPath($path);
 
@@ -53,10 +54,10 @@ class LayoutWalker
 
     /**
      * @param string $path
-     *
+     * @param $value
      * @return $this
      */
-    public function setValue($path, $value)
+    public function setValue(string $path, $value): LayoutWalker
     {
         if ($path === '') {
             $this->layoutArray = $value;
@@ -69,9 +70,8 @@ class LayoutWalker
     }
 
     /**
-     * @param string $path
-     *
-     * @return bool|null
+     * @param $path
+     * @return array|bool|float|int|string|null
      */
     public function getValue($path)
     {
@@ -85,12 +85,10 @@ class LayoutWalker
 
     /**
      * unset
-     *
-     * @param string $path
-     *
+     * @param $path
      * @return $this
      */
-    public function unsetByPath($path)
+    public function unsetByPath($path): LayoutWalker
     {
         if ($path === '') {
             unset($this->layoutArray);
@@ -105,14 +103,13 @@ class LayoutWalker
     /**
      * @return array
      */
-    public function getResult()
+    public function getResult(): array
     {
         return $this->layoutArray;
     }
 
     /**
      * @param string $keyPath
-     *
      * @return array
      */
     public function parseArrayPath(string $keyPath): array
@@ -138,7 +135,7 @@ class LayoutWalker
      * @param array $path
      * @param string|int|float|bool|array|null $value
      */
-    protected function arrayWalker(&$haystack, array $path, $value)
+    protected function arrayWalker(array &$haystack, array $path, $value)
     {
         $currentKey = array_shift($path);
         if (!isset($haystack[$currentKey])) {
@@ -157,7 +154,7 @@ class LayoutWalker
      * @param array $haystack
      * @param array $path
      */
-    protected function unsetWalker(&$haystack, array $path)
+    protected function unsetWalker(array &$haystack, array $path)
     {
         $currentKey = array_shift($path);
         if (!array_key_exists($currentKey, $haystack)) {
@@ -179,7 +176,7 @@ class LayoutWalker
      *
      * @return bool
      */
-    protected function issetWalker(&$haystack, array $path)
+    protected function issetWalker(array &$haystack, array $path): bool
     {
         $currentKey = array_shift($path);
         if (!isset($haystack[$currentKey])) {
@@ -197,10 +194,9 @@ class LayoutWalker
     /**
      * @param array $haystack
      * @param array $path
-     *
-     * @return string|int|float|bool|array|null
+     * @return mixed|null
      */
-    protected function getWalker(&$haystack, array $path)
+    protected function getWalker(array &$haystack, array $path)
     {
         $currentKey = array_shift($path);
         if (!isset($haystack[$currentKey])) {
