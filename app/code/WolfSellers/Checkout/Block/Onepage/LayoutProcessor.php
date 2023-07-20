@@ -42,9 +42,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'displayArea' => 'customer-data-step',
             'sortOrder' => '0'
         ];
-        $customerAddressArea = $walker->getValue('{CHECKOUT_STEPS}.>>.customer-data-step');
         $customerAddressArea = $customerDataComponent;
-        //$customerAddressArea['customer-data-step'] = $customerDataComponent;
         $walker->setValue('{CHECKOUT_STEPS}.>>.customer-data-step', $customerAddressArea);
         //customer-fieldsets
         //Customer Data Nombre
@@ -62,12 +60,11 @@ class LayoutProcessor implements LayoutProcessorInterface
             'provider' => 'checkoutProvider',
             'sortOrder' => 1,
             'validation' => [
-
                 'required-entry' => false
             ],
             'filterBy' => null,
             'customEntry' => null,
-            'visible' => false,
+            'visible' => true,
         ];
         $customerFieldsets = [
           'component' => 'uiComponent',
@@ -78,6 +75,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-name'] = $customerDataNombreComponent;
         $customerDataFieldSets['customer-email'] = $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
         $walker->setValue('{CUSTOMER-DATA}.>>', $customerDataFieldSets);
+        $walker->setValue('{SHIPPING_ADDRESS}.>>.customer-email', []);
 
         //var_dump($customerAddressArea);
         //die();

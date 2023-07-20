@@ -7,6 +7,9 @@ define([
 ) {
     'use strict';
     var shippingMixin = {
+        defaults:{
+            template: 'WolfSellers_Checkout/shipping',
+        },
         initialize: function () {
             this._super();
             return this;
