@@ -14,6 +14,9 @@ var config = {
             },
             'Magento_Checkout/js/view/shipping': {
                 'WolfSellers_Checkout/js/view/shipping-mixin': true
+	    },
+            'Amasty_Label/js/label': {
+                'WolfSellers_Checkout/js/label': true
             }
         }
     }

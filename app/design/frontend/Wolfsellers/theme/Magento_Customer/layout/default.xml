@@ -14,6 +14,7 @@
         <referenceBlock name="customer-account-navigation-checkout-sku-link" remove="true"/>
         <referenceBlock name="customer-account-navigation-giftregistry-link" remove="true"/>
         <referenceBlock name="customer-account-navigation-reward-link" remove="true"/>
-
+        <!-- Gift card link -->
+        <referenceBlock name="customer-account-navigation-gift-card-link" remove="true"/>
     </body>
 </page>

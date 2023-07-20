@@ -286,7 +286,7 @@ define([
                         'productURL': item['product_url'],
                         'imageURL': item['product_image']['src'],
                         'category': '',
-                        'brand': ''
+                        'brand': item['brand']
                     };
                 });
             }
