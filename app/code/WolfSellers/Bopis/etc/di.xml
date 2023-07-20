@@ -96,4 +96,9 @@
     <type name="Magento\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsSalableWithReservationsCondition">
         <plugin name="validate_qty_source_update" type="WolfSellers\Bopis\Plugin\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsSalableWithReservationsConditionPlugin" sortOrder="10" disabled="false"/>
     </type>
+    <type name="Magento\InventoryShipping\Model\ResourceModel\ShipmentSource\SaveShipmentSource">
+        <plugin name="duplicate_source_codes"
+                type="WolfSellers\Bopis\Plugin\DuplicateSourceCodes"
+                sortOrder="10"/>
+    </type>
 </config>

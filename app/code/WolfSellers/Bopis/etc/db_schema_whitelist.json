@@ -13,5 +13,10 @@
             "BOPIS_QUOTE_QUOTE_ID_QUOTE_ENTITY_ID": true,
             "BOPIS_QUOTE_QUOTE_ID": true
         }
+    },
+    "sales_order": {
+        "column": {
+            "source_code": true
+        }
     }
 }
