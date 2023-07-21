@@ -25,6 +25,8 @@ define([
 
         isVisible: ko.observable(true),
         email: ko.observable(customer.email()),
+        customerName: ko.observable(customer.customerName()),
+        customerLastName: ko.observable(customer.customerLastName()),
 
         /**
          * @returns {*}
@@ -34,6 +36,10 @@ define([
 
             customer.email.subscribe(function (value) {
                 this.email(value);
+            }, this);
+
+            customer.customerName.subscribe(function (value) {
+                this.customerName(value);
             }, this);
 
             return this;

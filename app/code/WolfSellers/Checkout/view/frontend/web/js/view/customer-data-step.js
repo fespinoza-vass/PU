@@ -61,19 +61,24 @@ define([
          * @returns void
          */
         navigateToNextStep: function () {
-            /**
-             * TO DO validate customer info
-             */
             this.isVisibleEdit(false);
             this.saveCustomerData();
             stepNavigator.next();
         },
 
+        /**
+         * saveCustomerData validate personal information to show in resumen
+         */
         saveCustomerData: function (){
-            var emailValidator = registry.get("checkout.steps.customer-data-step.customer-email")
-            customer.correo(emailValidator.email());
+            var emailValidator = registry.get("checkout.steps.customer-data-step.customer-email"),
+                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-name");
+            customer.email(emailValidator.email());
+            customer.customerName(nameValidator.value());
         },
 
+        /**
+         * Show/Edit customer personal information
+         */
         editPersonalInfo: function (){
             this.isVisibleEdit(true);
         }
