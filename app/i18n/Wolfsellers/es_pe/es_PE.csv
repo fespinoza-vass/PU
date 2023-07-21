@@ -10792,7 +10792,7 @@ Preprocessed view files and static files,Archivos de vista y archivos estáticos
 Web Setup Wizard,Asistente de Configuración de Sitio Web,module,Magento_Backend,
 Base Link URL,Base de Enlace URL,module,Magento_Backend,
 Secure Base Link URL,Base de Enlace URL Segura,module,Magento_Backend,
-"Welcome, please sign in","Bienvenido, por favor ingresa",module,Magento_Backend,
+"Welcome, please sign in","Bienvenido",module,Magento_Backend,
 Delete %1 '%2',Borrar %1 '%2',module,Magento_Backend,
 Delete Web Site,Borrar Sitio Web,module,Magento_Backend,
 Delete Store,Borrar Tienda,module,Magento_Backend,
