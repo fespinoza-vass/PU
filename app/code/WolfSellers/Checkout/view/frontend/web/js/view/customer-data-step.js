@@ -4,14 +4,16 @@ define([
     'underscore',
     'Magento_Checkout/js/model/step-navigator',
     'Magento_Checkout/js/model/quote',
-    'uiRegistry'
+    'uiRegistry',
+    'WolfSellers_Checkout/js/model/customer'
 ], function (
     ko,
     Component,
     _,
     stepNavigator,
     quote,
-    registry
+    registry,
+    customer
 ) {
     'use strict';
 
@@ -27,6 +29,7 @@ define([
         // add here your logic to display step,
         isVisible: ko.observable(true),
         quoteIsVirtual: quote.isVirtual(),
+        isVisibleEdit: ko.observable(true),
 
         /**
          * @returns {*}
@@ -58,7 +61,26 @@ define([
          * @returns void
          */
         navigateToNextStep: function () {
+            this.isVisibleEdit(false);
+            this.saveCustomerData();
             stepNavigator.next();
+        },
+
+        /**
+         * saveCustomerData validate personal information to show in resumen
+         */
+        saveCustomerData: function (){
+            var emailValidator = registry.get("checkout.steps.customer-data-step.customer-email"),
+                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-name");
+            customer.email(emailValidator.email());
+            customer.customerName(nameValidator.value());
+        },
+
+        /**
+         * Show/Edit customer personal information
+         */
+        editPersonalInfo: function (){
+            this.isVisibleEdit(true);
         }
     });
 });
