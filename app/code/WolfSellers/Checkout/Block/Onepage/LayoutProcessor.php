@@ -42,6 +42,10 @@ class LayoutProcessor implements LayoutProcessorInterface
             'displayArea' => 'customer-data-step',
             'sortOrder' => '0'
         ];
+        $resumenCustomerData = [
+            'component' => 'WolfSellers_Checkout/js/view/resumen-customer-data',
+            'displayArea' => 'resumen-personal-information'
+        ];
         $customerAddressArea = $customerDataComponent;
         $walker->setValue('{CHECKOUT_STEPS}.>>.customer-data-step', $customerAddressArea);
         //customer-fieldsets
@@ -74,6 +78,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $customerDataFieldSets['customer-fieldsets'] = $customerFieldsets;
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-name'] = $customerDataNombreComponent;
         $customerDataFieldSets['customer-email'] = $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
+        $customerDataFieldSets['customer-data-resumen'] = $resumenCustomerData;
         $walker->setValue('{CUSTOMER-DATA}.>>', $customerDataFieldSets);
         $walker->setValue('{SHIPPING_ADDRESS}.>>.customer-email', []);
 
