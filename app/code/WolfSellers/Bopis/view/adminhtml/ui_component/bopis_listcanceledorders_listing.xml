@@ -104,8 +104,10 @@
             <settings>
                 <draggable>false</draggable>
                 <sortable>false</sortable>
-                <filter>text</filter>
+                <filter>select</filter>
+                <options class="WolfSellers\Bopis\Model\Config\Source\ShippingOptions"/>
                 <label translate="true">Envío</label>
+                <dataType>select</dataType>
             </settings>
         </column>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="40">
