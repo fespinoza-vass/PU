@@ -36,11 +36,15 @@
                     <label>Shipping</label>
                     <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
                 </field>
+                <field id="readyforpickup" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ready For Pickup</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
                  <field id="complete" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Complete</label>
                      <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
                 </field>
-               
+
             </group>
             <group id="api" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>API Configuration</label>
@@ -139,7 +143,7 @@
                 </field>
             </group>
         </section>
-        
+
         <section id="carriers" sortOrder="1000" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
             <group id="bopis" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                 <label>Bopis</label>
