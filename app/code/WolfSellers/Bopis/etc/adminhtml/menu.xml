@@ -32,6 +32,14 @@
                 resource="WolfSellers_Bopis::listshippingorders"
         />
 
+        <add 	id="WolfSellers_Bopis::listreadyforpickup"
+                title="Ordenes Listas para Recojo"
+                module="WolfSellers_Bopis"
+                sortOrder="225"
+                action="bopis/listreadyforpickup/index"
+                resource="WolfSellers_Bopis::listreadyforpickup"
+        />
+
         <add 	id="WolfSellers_Bopis::listcompleteorders"
                 title="Ordenes Entregadas"
                 module="WolfSellers_Bopis"

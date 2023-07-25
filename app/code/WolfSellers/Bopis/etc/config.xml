@@ -33,6 +33,7 @@
                 <confirmed>payment</confirmed>
                 <preparing>processing</preparing>
                 <shipping>shipping</shipping>
+                <readyforpickup>order_ready_for_pick_up</readyforpickup>
                 <complete>complete</complete>
             </status>
             <api>
