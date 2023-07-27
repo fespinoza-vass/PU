@@ -1,16 +1,27 @@
 define([
     'ko',
-    'Magento_Checkout/js/action/get-payment-information'
+    'Magento_Checkout/js/action/get-payment-information',
+    'Magento_Checkout/js/model/step-navigator',
+    'mage/translate'
 ],function (
     ko,
-    getPaymentInformation
+    getPaymentInformation,
+    stepNavigator,
+    $t
 ) {
     'use strict';
     var paymentMixin = {
         isVisible: ko.observable(true),
+        isActive: ko.observable(false),
+
         initialize: function () {
             var self = this;
             this._super();
+            var modifyData= {
+                title : $t('Resumen de pago')
+            };
+
+            stepNavigator.modifyStep("payment", modifyData);
             getPaymentInformation().done(function () {
                 self.isVisible(true);
             });
