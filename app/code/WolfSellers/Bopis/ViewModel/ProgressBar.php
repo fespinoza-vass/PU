@@ -36,16 +36,8 @@ class ProgressBar implements ArgumentInterface
     /**
      * @return string
      */
-    public function getFastShippingMethodKey(): string
+    public function getPickupShippingMethodKey()
     {
-        return \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::FAST_SHIPPING_METHOD;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRegularShippingMethodKey()
-    {
-        return \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::REGULAR_SHIPPING_METHOD;
+        return \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::PICKUP_SHIPPING_METHOD;
     }
 }

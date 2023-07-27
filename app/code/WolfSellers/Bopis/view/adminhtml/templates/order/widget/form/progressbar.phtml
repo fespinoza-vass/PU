@@ -13,11 +13,13 @@ $stateComplete = true;
 
         <?php foreach ($states as $state => $data): ?>
 
-            <?php if (
-                ($_order->getShippingMethod() == $_progressBar->getFastShippingMethodKey() ||
-                $_order->getShippingMethod() == $_progressBar->getRegularShippingMethodKey()) &&
-                $state == 'readyforpickup'
-            ): ?>
+            <?php if ($_order->getShippingMethod() != $_progressBar->getPickupShippingMethodKey()
+                && $state == 'readyforpickup'): ?>
+                <?php continue; ?>
+            <?php endif; ?>
+
+            <?php if ($_order->getShippingMethod() == $_progressBar->getPickupShippingMethodKey()
+                && $state == 'shipping'): ?>
                 <?php continue; ?>
             <?php endif; ?>
 
