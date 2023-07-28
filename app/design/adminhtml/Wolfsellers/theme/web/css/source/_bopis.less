@@ -22,6 +22,33 @@ body{
         }
     }
     &.admin-bopis{
+        .admin__menu{
+            ul{
+                position: relative;
+                &:before{
+                    content: '';
+                    background: @color-gry10;
+                    height: 2px;
+                    width: 88%;
+                    position: absolute;
+                    z-index: 999;
+                    left: 50%;
+                    top: -10px;
+                    transform: translate(-50%, -50%);
+                }
+                &:after{
+                    content: '';
+                    background: @color-gry10;
+                    height: 2px;
+                    width: 88%;
+                    position: absolute;
+                    z-index: 999;
+                    left: 50%;
+                    bottom: -10px;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
         .data-grid-filters-action-wrap{
             display: block;
         }
@@ -87,6 +114,7 @@ body{
                     font-size: 12px;
                     text-align: left;
                     text-transform: capitalize;
+                    padding: 10px;
                 }
             }
             a[href*="/bopis/"] {
@@ -204,10 +232,10 @@ body{
             .logo{
                 margin-bottom: 30px;
                 img.logo-img{
-                    width: 50%;
+                    width: 90%;
                 }
                 &:before{
-                    content: '\e90a';
+                    content: none;
                     font-family: 'Admin Icons';
                     font-size: 20px;
                     vertical-align: super;
