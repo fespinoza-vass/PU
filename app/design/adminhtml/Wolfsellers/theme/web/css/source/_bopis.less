@@ -47,6 +47,13 @@ body{
                     bottom: -10px;
                     transform: translate(-50%, -50%);
                 }
+                li{
+                    a{
+                        &:after{
+                            content: none !important;
+                        }
+                    }
+                }
             }
         }
         .data-grid-filters-action-wrap{
@@ -114,7 +121,7 @@ body{
                     font-size: 12px;
                     text-align: left;
                     text-transform: capitalize;
-                    padding: 10px;
+                    padding: 5px;
                 }
             }
             a[href*="/bopis/"] {
@@ -141,21 +148,21 @@ body{
                         text-align: center;
                         content: "\e90c" !important;
                     }
-                    &:after{
-                        background-color: @color-gray5;
-                        content: '';
-                        display: block;
-                        height: 1px;
-                        left: 0;
-                        margin-left: 0;
-                        position: absolute;
-                        top: 0;
-                        width: 100%;
-                    }
                 }
             }
             #nav{
                 padding: 10px;
+                .nav-bopis-ordenes{
+                    a{
+                        color: @color-gray11;
+                        font-size: 16px;
+                        font-weight: 500;
+                        &:before{
+                            color: @color-gray11;
+                            padding-right: 5px;
+                        }
+                    }
+                }
             }
             li#menu-wolfsellers-bopis-listnewsorders{
                 display: block;
@@ -209,9 +216,9 @@ body{
     				    	line-height: 7;
     				    }
     				    .user-welcome{
-                            color: @color-naranja;
-
-                            font-weight: bold;
+                            color: @color-gray11;
+                            font-weight: 500;
+                            font-size: 16px;
     				    	&:before{
     				    		font-size: 20px;
     			    		    line-height: 30px;
@@ -224,13 +231,14 @@ body{
     			    		    speak: none;
     			    		    text-align: center;
     			    		    content: '\e906';
+                                padding-right: 10px;
     					    }
     				    }
     				}
     			}
     		}
             .logo{
-                margin-bottom: 30px;
+                margin-bottom: 10px;
                 img.logo-img{
                     width: 90%;
                 }
