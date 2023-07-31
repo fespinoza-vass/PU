@@ -5,10 +5,13 @@
  * See COPYING.txt for license details.
  */
 -->
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">bopis_listprocessingorders_listing.bopis_listprocessingorders_listing_data_source</item>
+            <item name="provider" xsi:type="string">
+                bopis_listprocessingorders_listing.bopis_listprocessingorders_listing_data_source
+            </item>
         </item>
     </argument>
     <settings>
@@ -22,7 +25,8 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>WolfSellers_Bopis::listnewsorders</aclResource>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="bopis_listprocessingorders_listing_data_source">
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
+                      name="bopis_listprocessingorders_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>main_table.entity_id</primaryFieldName>
@@ -34,9 +38,13 @@
             <settings>
                 <childDefaults>
                     <param name="imports" xsi:type="array">
-                        <item name="visible" xsi:type="string">bopis_listprocessingorders_listing.bopis_listprocessingorders_listing.bopis_listorders_columns:${ $.index }.visible</item>
+                        <item name="visible" xsi:type="string">
+                            bopis_listprocessingorders_listing.bopis_listprocessingorders_listing.bopis_listorders_columns:${ $.index }.visible
+                        </item>
                     </param>
-                    <param name="provider" xsi:type="string">bopis_listprocessingorders_listing.bopis_listprocessingorders_listing.listing_top.listing_filters</param>
+                    <param name="provider" xsi:type="string">
+                        bopis_listprocessingorders_listing.bopis_listprocessingorders_listing.listing_top.listing_filters
+                    </param>
                 </childDefaults>
                 <statefull>
                     <property name="applied" xsi:type="boolean">false</property>
@@ -64,12 +72,13 @@
                 <sorting>desc</sorting>
             </settings>
         </selectionsColumn>
-        <column name="entity_id" sortOrder="5">
+        <column name="increment_id" sortOrder="10">
             <settings>
                 <draggable>false</draggable>
                 <filter>text</filter>
                 <label translate="true">ID</label>
                 <sorting>desc</sorting>
+                <sortable>true</sortable>
             </settings>
         </column>
         <column name="shipping_name" sortOrder="20">
@@ -78,45 +87,50 @@
                 <sortable>false</sortable>
                 <filter>text</filter>
                 <label translate="true">Entregar a</label>
+                <visible>false</visible>
             </settings>
         </column>
         <column name="customer_email" sortOrder="30">
             <settings>
                 <draggable>false</draggable>
-                <sortable>false</sortable>
+                <sortable>true</sortable>
                 <filter>text</filter>
                 <label translate="true">Email</label>
             </settings>
         </column>
-        <column name="source_code" sortOrder="35">
+        <column name="source_code" sortOrder="20">
             <settings>
                 <draggable>false</draggable>
-                <sortable>false</sortable>
-                <filter>text</filter>
-                <label translate="true">Sucursal</label>
-            </settings>
-        </column>
-        <column name="shipping_method" sortOrder="37">
-            <settings>
-                <draggable>false</draggable>
-                <sortable>false</sortable>
+                <sortable>true</sortable>
                 <filter>select</filter>
-                <options class="WolfSellers\Bopis\Model\Config\Source\ShippingOptions"/>
-                <label translate="true">Envío</label>
+                <options class="WolfSellers\Bopis\Model\Config\Source\SourceOptions"/>
+                <label translate="true">Tienda</label>
                 <dataType>select</dataType>
             </settings>
         </column>
-        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="40">
+        <column name="shipping_information" sortOrder="40">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <filter>select</filter>
+                <options class="WolfSellers\Bopis\Model\Config\Source\ShippingOptions"/>
+                <label translate="true">Método de entrega</label>
+                <dataType>select</dataType>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date" sortOrder="50">
             <settings>
                 <filter>dateRange</filter>
                 <draggable>false</draggable>
-                <sortable>false</sortable>
+                <sortable>true</sortable>
                 <dataType>date</dataType>
                 <label translate="true">Fecha de Compra</label>
                 <!--dateFormat>dd/MM/YYYY</dateFormat-->
             </settings>
         </column>
-        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="50">
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date" sortOrder="50">
             <settings>
                 <filter>dateRange</filter>
                 <draggable>false</draggable>
@@ -124,12 +138,14 @@
                 <dataType>date</dataType>
                 <label translate="true">Fecha de Entrega</label>
                 <!--dateFormat>dd/MM/YYYY</dateFormat-->
+                <visible>false</visible>
             </settings>
         </column>
-        <column name="status" component="Magento_Ui/js/grid/cells/sanitizedHtml" class="WolfSellers\Bopis\Ui\Component\Listing\Column\Status"  sortOrder="60">
+        <column name="status" component="Magento_Ui/js/grid/cells/sanitizedHtml"
+                class="WolfSellers\Bopis\Ui\Component\Listing\Column\Status" sortOrder="60">
             <settings>
                 <draggable>false</draggable>
-                <sortable>false</sortable>
+                <sortable>true</sortable>
                 <options class="Magento\Sales\Ui\Component\Listing\Column\Status\Options"/>
                 <dataType>select</dataType>
                 <label translate="true">Estatus</label>
@@ -139,7 +155,7 @@
         <column name="grand_total" class="Magento\Sales\Ui\Component\Listing\Column\PurchasedPrice" sortOrder="70">
             <settings>
                 <draggable>false</draggable>
-                <sortable>false</sortable>
+                <sortable>true</sortable>
                 <label translate="true">TOTAL</label>
             </settings>
         </column>
