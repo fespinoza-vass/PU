@@ -45,8 +45,8 @@ class OrderStatus implements DataPatchInterface
             [
                 ['confirmed_order','processing', '0', '1'],
                 ['prepared_order','processing', '0', '1'],
-                ['order_on_the_way','processing', '0', '1'],
-                ['order_ready_for_pick_up','processing', '0', '1'],
+                ['order_on_the_way','complete', '0', '1'],
+                ['order_ready_for_pick_up','complete', '0', '1'],
                 ['order_delivered', 'complete', '0', '1']
             ]
         );
