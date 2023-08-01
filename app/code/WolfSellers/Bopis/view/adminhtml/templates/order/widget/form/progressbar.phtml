@@ -24,6 +24,8 @@ $stateComplete = true;
             <?php endif; ?>
 
             <li class="state-<?= $state ?> <?= ($stateComplete) ? 'step-complete' : '' ?>">
+                <span class="icon-check"></span>
+
                 <span> <?= $data['label'] ?> </span>
 
                 <?php if ($data['action']): ?>
