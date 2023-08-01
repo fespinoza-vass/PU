@@ -22,6 +22,43 @@ body{
         }
     }
     &.admin-bopis{
+        .admin__menu{
+            ul{
+                position: relative;
+                &:before{
+                    content: '';
+                    background: @color-gry10;
+                    height: 2px;
+                    width: 88%;
+                    position: absolute;
+                    z-index: 999;
+                    left: 50%;
+                    top: -10px;
+                    transform: translate(-50%, -50%);
+                }
+                &:after{
+                    content: '';
+                    background: @color-gry10;
+                    height: 2px;
+                    width: 88%;
+                    position: absolute;
+                    z-index: 999;
+                    left: 50%;
+                    bottom: -10px;
+                    transform: translate(-50%, -50%);
+                }
+                li{
+                    a{
+                        &:after{
+                            content: none !important;
+                        }
+                    }
+                }
+                li#menu-magento-backend-stores{
+                    display: none;
+                }
+            }
+        }
         .data-grid-filters-action-wrap{
             display: block;
         }
@@ -87,6 +124,14 @@ body{
                     font-size: 12px;
                     text-align: left;
                     text-transform: capitalize;
+                    padding: 5px;
+                }
+                &._active{
+                    > a{
+                        color: @color-black;
+                        font-weight: 700;
+                        background: transparent;
+                    }
                 }
             }
             a[href*="/bopis/"] {
@@ -113,21 +158,21 @@ body{
                         text-align: center;
                         content: "\e90c" !important;
                     }
-                    &:after{
-                        background-color: @color-gray5;
-                        content: '';
-                        display: block;
-                        height: 1px;
-                        left: 0;
-                        margin-left: 0;
-                        position: absolute;
-                        top: 0;
-                        width: 100%;
-                    }
                 }
             }
             #nav{
                 padding: 10px;
+                .nav-bopis-ordenes{
+                    a{
+                        color: @color-gray11;
+                        font-size: 16px;
+                        font-weight: 500;
+                        &:before{
+                            color: @color-gray11;
+                            padding-right: 5px;
+                        }
+                    }
+                }
             }
             li#menu-wolfsellers-bopis-listnewsorders{
                 display: block;
@@ -181,9 +226,9 @@ body{
     				    	line-height: 7;
     				    }
     				    .user-welcome{
-                            color: @color-naranja;
-
-                            font-weight: bold;
+                            color: @color-gray11;
+                            font-weight: 500;
+                            font-size: 16px;
     				    	&:before{
     				    		font-size: 20px;
     			    		    line-height: 30px;
@@ -196,18 +241,19 @@ body{
     			    		    speak: none;
     			    		    text-align: center;
     			    		    content: '\e906';
+                                padding-right: 10px;
     					    }
     				    }
     				}
     			}
     		}
             .logo{
-                margin-bottom: 30px;
+                margin-bottom: 10px;
                 img.logo-img{
-                    width: 50%;
+                    width: 90%;
                 }
                 &:before{
-                    content: '\e90a';
+                    content: none;
                     font-family: 'Admin Icons';
                     font-size: 20px;
                     vertical-align: super;
@@ -465,6 +511,11 @@ body{
             }
             .page-content{
                 .admin__old{
+                    .data-grid{
+                        td{
+                            border-bottom: 1px solid @color-gray7;
+                        }
+                    }
                     .main-col{
                         section{
                             &.bopis-data{
@@ -482,7 +533,7 @@ body{
                                         }
                                         .admin__page-section-item-content{
                                             .color-orange{
-                                                color: @color-primary;
+                                                color: @color-black;
                                                 margin-bottom: 10px;
                                                 float: left;
                                                 width: 100%;
@@ -613,6 +664,203 @@ body{
                                 color: @color-white;
                                 font-size: 16px;
                                 margin-top: -30px;
+                            }
+                        }
+                    }
+                
+                    .sales_order_progress_bar{
+                        .states-list{
+                            margin-top: auto;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 120px;
+                            li{
+                                 &:not(.step-complete){
+                                    &:before{
+                                        border-bottom: 2px solid @gray-A;
+                                        opacity: 0.5;
+                                    }
+                                    &:after{
+                                        border-bottom: 2px solid @gray-A;
+                                        opacity: 0.5;
+                                    }
+                                    .icon-check{
+                                        border: 1px solid @gray-A;
+                                        &:before{
+                                            color: @gray-A;
+                                            opacity: 0.5;
+                                        }
+                                    }
+                                 }
+                                position: relative;
+                                 display: flex;
+                                 flex-direction: column;
+                                 align-items: center;
+                                 flex: 1;
+                                &:before{
+                                    position: absolute;
+                                    content: "";
+                                    border-bottom: 2px solid @color-black;
+                                    width: 100%;
+                                    top: 20px;
+                                    left: -50%;
+                                    z-index: 2;
+                                }
+                                &:after{
+                                    position: absolute;
+                                    content: "";
+                                    border-bottom: 2px solid @color-black;
+                                    width: 100%;
+                                    top: 20px;
+                                    left: 50%;
+                                    z-index: 2;
+                                }
+                                span{
+                                    position: absolute;
+                                    left: 20px;
+                                    bottom: -75px;
+                                    width: 40%;
+                                }
+                                span.icon-check {
+                                    width: 35px;
+                                    height: 35px;
+                                    background: @color-white;
+                                    border-radius: 100%;
+                                    position: absolute;
+                                    left: 50%;
+                                    top: 0%;
+                                    transform: translate(-50%, 0%);
+                                    border: 1px solid @color-black;
+                                    z-index: 12;
+                                }
+                                form{
+                                    .confirmed-button,
+                                    .unconfirmed-button{
+                                        position: absolute;
+                                        right: 0;
+                                        bottom: -75px;
+                                        width: 33%;
+                                        right: 10px;
+                                        border-radius: 12px;
+                                        padding: 6px;
+                                        font-size: 11px;
+                                    }
+                                }
+                                &.state-confirmed{
+                                    .icon-check{
+                                        width: 35px;
+                                        height: 35px;
+                                        background: @color-black;
+                                        border-radius: 100%;
+                                        position: absolute;
+                                        left: 50%;
+                                        top: 0%;
+                                        transform: translate(-50%, 0%);
+                                        text-align: center;
+                                        &:after{
+                                            content: '\e909';
+                                            font-family: 'Admin Icons';
+                                            color: @color-white;
+                                            font-size: 20px;
+                                            text-align: center;
+                                            line-height: 1.7;
+                                        }
+                                        &:before{
+                                            content: '\e913';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                    form{
+                                        .confirmed-button{
+                                            background: @color-verde2;
+                                            border: 1px solid @color-verde2;
+                                            color: @color-white;
+                                        }
+                                    }
+                                }
+                                &.state-preparing{
+                                    form{
+                                        .unconfirmed-button{
+                                            background: @color-black;
+                                            border: 1px solid @color-black;
+                                            color: @color-white;
+                                        }
+                                    }
+                                    .icon-check{
+                                        &:before{
+                                            content: '\e912';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                }
+                                &.state-shipping {
+                                    form{
+                                        .unconfirmed-button{
+                                            background: @color-black;
+                                            border: 1px solid @color-black;
+                                            color: @color-white;
+                                            opacity: 0.5;
+                                        }
+                                    }
+                                    .icon-check{
+                                        &:before{
+                                            content: '\e911';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                }
+                                &.state-complete {
+                                    .icon-check{
+                                        &:before{
+                                            content: '\e915';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                }
+                                &.step-complete{
+                                    .icon-check{
+                                        width: 35px;
+                                        height: 35px;
+                                        background: @color-black;
+                                        border-radius: 100%;
+                                        position: absolute;
+                                        left: 50%;
+                                        top: 0%;
+                                        transform: translate(-50%, 0%);
+                                        text-align: center;
+                                        &:after{
+                                            content: '\e909';
+                                            font-family: 'Admin Icons';
+                                            color: @color-white;
+                                            font-size: 20px;
+                                            text-align: center;
+                                            line-height: 1.7;
+                                        }
+                                    }
+                                    form{
+                                        .confirmed-button{
+                                            background: @color-verde2;
+                                            border: 1px solid @color-verde2;
+                                            color: @color-white;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -813,6 +1061,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-azul;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -846,6 +1095,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-gray3;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -879,6 +1129,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-verde;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -912,6 +1163,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-rojo;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -945,6 +1197,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-naranja;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
