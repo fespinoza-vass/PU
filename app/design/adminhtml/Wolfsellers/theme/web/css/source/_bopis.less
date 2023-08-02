@@ -14,7 +14,6 @@ body{
                     &._fixed{
                         .page-actions-buttons{
                             box-shadow: @bshadow-menu;
-                            
                         }
                     }
                 }
@@ -68,6 +67,8 @@ body{
         .page-wrapper {
             width: 85%;
             float: right;
+            position: relative;
+            background: @color-gray12;
             .page-content{
                 .page-actions{
                     &._fixed{
@@ -262,12 +263,8 @@ body{
     	}
     	.page-content{
     		.page-main-actions{
-    			background: @color-white;
     			.page-actions{
     				.page-actions-buttons{
-    					float: left;
-    				    display: block;
-    				    width: 100%;
                         #NewsOrdersButton{
                             display: block;
                         }
@@ -466,8 +463,32 @@ body{
     }
     &.bopis-order-view{
         .page-wrapper{
+            .page-columns{
+                .admin__page-section{
+                    .admin__table-wrapper{
+                        background: @color-white;
+                        padding: 10px;
+                        border-radius: 12px;
+                    }
+                }
+            }
             .page-header{
                 .page-title-wrapper{
+                    margin-top: -40px;
+                    padding-left: 40px;
+                    display: flex;
+                    align-items: baseline;
+                    div{
+                        span{
+                            font-size: 19px !important;
+                            padding-left: 10px;
+                        }
+                        button {
+                            background: white;
+                            border-radius: 12px;
+                            border: 1px solid;
+                        }
+                    }
                     .page-title-order-id-bopis{
                         font-size: 24px;
                         color: @color-gray3;
@@ -510,6 +531,35 @@ body{
                 }
             }
             .page-content{
+                .page-main-actions{
+                    background: @color-white;
+                    border-bottom: none;
+                    border-top: none;
+                    background: @color-gray12;
+                    .page-actions{
+                        .page-actions-buttons{
+                            float: left;
+                            display: block;
+                            width: 70px;
+                            position: absolute;
+                            top: 20px;
+                            left: 0;
+                            top: 25px;
+                            left: 0;
+                            button#back{
+                                border: 1px solid;
+                                width: 40px;
+                                text-align: center;
+                                padding: 3px;
+                                border-radius: 12px;
+                                background: @color-white;
+                                span{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }        
+                }
                 .admin__old{
                     .data-grid{
                         td{
@@ -519,10 +569,10 @@ body{
                     .main-col{
                         section{
                             &.bopis-data{
-                                border: 1px solid #C4C4C4 !important;
                                 border-radius: 6px;
                                 padding: 10px;
                                 box-shadow: none !important;
+                                background: @color-white;
                                 .admin__page-section-content{
                                     height: 250px;
                                     width: 100%;
