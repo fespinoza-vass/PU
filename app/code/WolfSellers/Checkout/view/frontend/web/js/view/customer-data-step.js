@@ -71,9 +71,18 @@ define([
          */
         saveCustomerData: function (){
             var emailValidator = registry.get("checkout.steps.customer-data-step.customer-email"),
-                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-name");
-            customer.email(emailValidator.email());
+                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-name"),
+                lastnameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-lastname"),
+                typeIdentificationValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-identificacion"),
+                numberIdentificationValidator  =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion"),
+                telephoneValidator =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-telefono");
+
+            customer.email(email.value());
             customer.customerName(nameValidator.value());
+            customer.customerLastName(lastnameValidator.value());
+            customer.customerTypeIdentification(typeIdentificationValidator.value());
+            customer.customerNumberIdentification(numberIdentificationValidator.value());
+            customer.customerTelephone(telephoneValidator.value());
         },
 
         /**
