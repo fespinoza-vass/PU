@@ -96,6 +96,44 @@ body{
                     }
                 }
             }
+            .admin__old{
+                .admin__data-grid-header{
+                    .admin__data-grid-header-row{
+                        button{
+                            background: transparent;
+                            .action-default{
+                                 ._active{
+                                    &:after{
+                                        color: @color-rojo3;
+                                    }
+                                 }
+                            }
+                        }
+                    }
+                    .admin__data-grid-filters-wrap._show{
+                        .admin__data-grid-filters-footer{
+                            button.action-tertiary{
+                                span{
+                                    color: @color-black;
+                                }
+                            }
+                            button.action-secondary{
+                                background: @color-black;
+                                border-radius: 8px;
+                                span{
+                                    color: @color-white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .page-header.row{
+                border-bottom: 1px solid @color-gray5;
+                width: 95%;
+                margin: auto;
+                margin-bottom: 30px;
+            }
         }
         #account-signout-bopis {
             .account-signout {
@@ -273,8 +311,10 @@ body{
     	}
     	.page-content{
     		.page-main-actions{
+                display: none;
     			.page-actions{
     				.page-actions-buttons{
+                        display: none;
                         #NewsOrdersButton{
                             display: block;
                         }
@@ -413,9 +453,46 @@ body{
                         }
                     }
                 }
+                .admin__data-grid-header-row.row.row-gutter{
+                    .col-xs-12{
+                        .col-xs-9{
+                            .admin__data-grid-pager-wrap{
+                                .selectmenu{
+                                    border-radius: 8px;
+                                    .selectmenu-toggle{
+                                        &:before{
+                                            background: @color-black;
+                                        }
+                                        &:after{
+                                            color: @color-white;
+                                        }
+                                    }
+                                }
+                                .admin__data-grid-pager{
+                                    button{
+                                        border-radius: 8px;
+                                        &.action-next{
+                                            background: @color-black;
+                                            &:before{
+                                                color: @color-white;
+                                                border-color: @color-white transparent transparent transparent;
+                                            }
+                                        }
+                                    }
+                                    .admin__control-text{
+                                        border-radius: 8px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .data-grid td{
                 border-bottom:1px solid @color-gray7;
+                a{
+                    color: @color-rojo3;
+                }
             }
             .admin__data-grid-wrap{
                 .data-grid-draggable{
@@ -466,7 +543,7 @@ body{
                                         font-weight: 600;
                                     }
                                     .complete{
-                                        color: @color-verde;
+                                        color: @color-azul3;
                                         font-weight: 600;
                                     }
                                 }
@@ -759,7 +836,7 @@ body{
                     }
                     .sales_order_progress_bar{
                         .states-list{
-                            margin-top: auto;
+                            margin-top: 40px;
                             display: flex;
                             justify-content: space-between;
                             margin-bottom: 120px;
@@ -1117,7 +1194,7 @@ body{
                                     color: @color-rojo;
                                 }
                                 &.complete{
-                                    color: @color-verde;
+                                    color: @color-azul3;
                                 }
                                 &.processing{
                                     color: @color-gray3;
