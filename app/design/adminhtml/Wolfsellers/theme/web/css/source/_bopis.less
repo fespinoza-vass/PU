@@ -343,8 +343,9 @@ body{
                 .admin__page-section-item-title {
                     span.title {
                         font-weight: bold;
+                        font-size: 15px;
                         &:before{
-                            color: @color-naranja;
+                            color: @color-black;
                             font-size: 20px;
                             line-height: 30px;
                             font-family: 'Admin Icons';
@@ -376,7 +377,7 @@ body{
                     &.icon-tarjeta {
                         span.title {
                             &:before {
-                                content: "\e903" !important;
+                                content: "\e910" !important;
                             }
                         }
                     }
@@ -573,6 +574,8 @@ body{
                                 padding: 10px;
                                 box-shadow: none !important;
                                 background: @color-white;
+                                width: calc(~"20% - 23px");
+                                margin: 10px;
                                 .admin__page-section-content{
                                     height: 250px;
                                     width: 100%;
@@ -580,6 +583,11 @@ body{
                                         .admin__page-section-item-title{
                                             border-bottom: 1px solid #C4C4C4;
                                             width: 100%;
+                                            padding-bottom: 10px;
+                                            .title{
+                                                display: flex;
+                                                align-items: center;
+                                            }
                                         }
                                         .admin__page-section-item-content{
                                             .color-orange{
@@ -618,11 +626,11 @@ body{
                                                     }
                                                 }
                                             }
+                                            display: none;
                                         }
                                         &.bopis-payment-method{
                                             min-height: 250px;
                                             height: 100%;
-                                            overflow-y: scroll;
                                         }
                                     }
                                 }
@@ -717,7 +725,13 @@ body{
                             }
                         }
                     }
-                
+                    div#order-messages{
+                        width: 100%;
+                        float: left;
+                        height: 20px;
+                        border-bottom: 1px solid @color-gray5;
+                        margin-bottom: 30px;
+                    }
                     .sales_order_progress_bar{
                         .states-list{
                             margin-top: auto;
@@ -751,16 +765,16 @@ body{
                                     position: absolute;
                                     content: "";
                                     border-bottom: 2px solid @color-black;
-                                    width: 100%;
+                                    width: 50%;
                                     top: 20px;
-                                    left: -50%;
+                                    left: 00%;
                                     z-index: 2;
                                 }
                                 &:after{
                                     position: absolute;
                                     content: "";
                                     border-bottom: 2px solid @color-black;
-                                    width: 100%;
+                                    width: 50%;
                                     top: 20px;
                                     left: 50%;
                                     z-index: 2;
