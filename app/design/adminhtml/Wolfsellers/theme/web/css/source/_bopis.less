@@ -15,6 +15,11 @@ body{
                         .page-actions-buttons{
                             box-shadow: @bshadow-menu;
                         }
+                        .page-actions-inner{
+                            &:before{
+                                padding-left: 80px;
+                            }
+                        }
                     }
                 }
             }
@@ -76,6 +81,11 @@ body{
                         right: 0;
                         background: @color-white;
                         left: initial;
+                        .page-actions-inner{
+                            &:before{
+                                padding-left: 80px;
+                            }
+                        }
                     }
                 }
                 .page-columns{
@@ -363,7 +373,7 @@ body{
                     &.icon-retira {
                         span.title {
                             &:before{
-                                content: '\e906';
+                                content: '\e919';
                             }
                         }
                     }
@@ -404,6 +414,9 @@ body{
                     }
                 }
             }
+            .data-grid td{
+                border-bottom:1px solid @color-gray7;
+            }
             .admin__data-grid-wrap{
                 .data-grid-draggable{
                     thead{
@@ -418,10 +431,11 @@ body{
                     thead{
                         tr{
                             .data-grid-th{
-                                background: @color-white;
+                                background: transparent;
                                 color: @color-black;
                                 border: none;
                                 border-bottom: 1px solid @color-gray7;
+                                border-top: 1px solid @color-gray7;
                             }
                         }
                     }
@@ -429,6 +443,7 @@ body{
                         .data-row._odd-row{
                             td{
                                 background: @color-white;
+                                border-bottom: 1px solid @color-gray7;
                             }
                         }
                         tr{
@@ -470,6 +485,7 @@ body{
                         background: @color-white;
                         padding: 10px;
                         border-radius: 12px;
+                        margin-top: 15px;
                     }
                 }
             }
@@ -570,7 +586,7 @@ body{
                     .main-col{
                         section{
                             &.bopis-data{
-                                border-radius: 6px;
+                                border-radius: 12px;
                                 padding: 10px;
                                 box-shadow: none !important;
                                 background: @color-white;
@@ -633,18 +649,21 @@ body{
                                             height: 100%;
                                         }
                                     }
+                                    .admin__page-section-item-content,
+                                    .bopis-payment-method{
+                                        font-size: 12px;
+                                    }
                                 }
                             }
                             &.admin__page-section{
                                 border: none;
                                 box-shadow: 2px 2px 10px 1px @color-gray6;
-                                border-radius: 6px;
+                                border-radius: 12px;
                             }
                             &.bopis-footer{
                                 box-shadow: none !important;
                                 .admin__page-section-content{
                                     position: relative;
-                                    display: flex;
                                     align-items: center;
                                     table {
                                         width: 100%;
@@ -661,6 +680,12 @@ body{
                                                 border-bottom: 1px solid #eceff1;
                                             }
                                         }
+                                    }
+                                    button.btn-entregar{
+                                        float: right;
+                                    }
+                                    .btn-detener{
+                                        display: none;
                                     }
                                     .btn-entregado.orden-entregada {
                                         position: absolute;
@@ -783,7 +808,8 @@ body{
                                     position: absolute;
                                     left: 20px;
                                     bottom: -75px;
-                                    width: 40%;
+                                    width: 30%;
+                                    font-weight: 700;
                                 }
                                 span.icon-check {
                                     width: 35px;
