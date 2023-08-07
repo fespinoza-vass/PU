@@ -97,7 +97,7 @@ define(
 
             initObservable: function () {
                 this._super()
-                    .observe({ label: this.defaultLabel })
+                    .observe({ label: this.customLabel ? this.customLabel : this.defaultLabel })
                     .observe('visible warn');
 
                 if (typeof MutationObserver !== 'undefined') {
