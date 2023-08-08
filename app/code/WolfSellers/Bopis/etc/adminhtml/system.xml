@@ -142,6 +142,20 @@
                     </depends>
                 </field>
             </group>
+            <group id="remember_me" sortOrder="70" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <label>Bopis Remember Me</label>
+                <field id="enabled" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Enabled</label>
+                    <comment>Select yes to enable the "remember me" checkbox on the login page. For security reasons, the maximum downtime is 30 days.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="roles" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                    <label>Roles</label>
+                    <comment>Roles that will have the active functionality.</comment>
+                    <source_model>WolfSellers\Bopis\Model\Config\Source\RolesOptions</source_model>
+                    <validate>validate-select</validate>
+                </field>
+            </group>
         </section>
 
         <section id="carriers" sortOrder="1000" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
