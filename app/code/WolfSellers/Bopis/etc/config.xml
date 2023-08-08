@@ -57,6 +57,10 @@
                 <identity>sales</identity>
                 <copy_to>andonidominguez@wolfsellers.com</copy_to>
             </hold_email>
+            <remember_me>
+                <enabled>1</enabled>
+                <roles></roles>
+            </remember_me>
         </bopis>
     </default>
 </config>
