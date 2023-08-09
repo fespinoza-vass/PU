@@ -160,11 +160,17 @@
                                 }
                             }
                             .product-item-details{
+                                position: relative;
                                 .lib-actions-product;
                                 .product-item-name{
+                                    padding: 25px 0;
+                                    margin: 0;
                                     .list_item_product_manufacturer{
                                         font-size: 1.4rem;
                                         font-weight: bold;
+                                        @media @xssmax{
+                                            font-size: 1.2rem;
+                                        }
                                     }
                                     a.product-item-link{
                                         font-size: 1.4rem;
@@ -214,7 +220,6 @@
                                     }
                                 }
                                 .swatch-attribute.color,
-                                .product-reviews-summary.short,
                                 .swatch-attribute.size,
                                 .swatch-attribute.tamano{
                                     .lib-visually-hidden;
@@ -230,6 +235,23 @@
                                         display: none;
                                     }
                                     .lib-actions-product;
+                                }
+                                .product-reviews-summary.short{
+                                    position: absolute;
+                                    width: auto;
+                                    transform: translate(50%,50%);
+                                    top: 40%;
+                                    right: 50%;
+                                    margin: 0 auto;
+                                    .rating-summary{
+                                        margin: 0;
+                                    }
+                                    .reviews-actions{
+                                        display: none;
+                                    }
+                                    @media @mdmax{
+                                        top: 40%;
+                                    }
                                 }
                             }
                         }
@@ -352,6 +374,8 @@
                             .product-item-details{
                                 .price-box {
                                     display: grid;
+                                    height: 90px;
+                                    padding: 25px 0;
                                 }
                             }
                         }

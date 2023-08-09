@@ -134,9 +134,9 @@
 		}
 
 		.perfect-inc{
-			> .pagebuilder-column-group{
+			 .pagebuilder-column-group{
 				border-radius: @radiusitems;
-				> .pagebuilder-column{	
+				.pagebuilder-column{	
 					align-items: center;
 				    justify-content: center !important; //PageBuilder importants
 				    float: left;
@@ -156,13 +156,21 @@
 				    	}		
 				    }
 				    &.skin-care-recomendations{
-				    	padding: 20px;
+						display: flex;
+				    	align-items: start;
+						padding: 20px;
+						.pagebuilder-column{
+							align-items: start;
+						}
 				    	> div{
 				    		float: left;
 				    		width: 100%;
 				    		.skin-care-results{
 				    			.pagebuilder-column-group{
 				    				justify-content: space-between;
+									.pagebuilder-column{
+										justify-content: normal !important; //PageBuilder Importants
+									}
 				    				.result-item{
 				    					width: 50% !important; //PageBuilder importants
 				    					&:not(:last-child){
