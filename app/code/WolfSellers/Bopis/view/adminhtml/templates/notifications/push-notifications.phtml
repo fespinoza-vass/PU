@@ -1,0 +1,10 @@
+<button id="allow_notification">Enable notifications</button>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "WolfSellers_Bopis/js/push-notification" : {"order": "<?= $block->escapeHtml($block->getLastOrder())?>"}
+        }
+    }
+</script>
+ 

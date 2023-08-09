@@ -51,6 +51,7 @@
             </block>
             <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="sales_order_delivered" template="WolfSellers_Bopis::order/widget/form/delivered.phtml" />
             <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="bopis_footer" template="WolfSellers_Bopis::order/footer.phtml" />
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="push_notification" template="WolfSellers_Bopis::notifications/push-notifications.phtml" />
         </referenceContainer>
     </body>
 </page>

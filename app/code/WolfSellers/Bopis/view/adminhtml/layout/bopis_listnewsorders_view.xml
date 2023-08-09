@@ -16,6 +16,7 @@
         <referenceContainer name="admin.scope.col.wrap" htmlClass="admin__old" /> <!-- ToDo UI: remove this wrapper with old styles removal. The class name "admin__old" is for tests only, we shouldn't use it in any way -->
         <referenceContainer name="content">
             <block class="Magento\Sales\Block\Adminhtml\Order\View" name="sales_order_edit"/>
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="push_notification" template="WolfSellers_Bopis::notifications/push-notifications.phtml" />
         </referenceContainer>
         <referenceContainer name="left">
             <block class="Magento\Sales\Block\Adminhtml\Order\View\Tabs" name="sales_order_tabs">
