@@ -1,0 +1,41 @@
+<?php
+/**
+ * @var \WolfSellers\Bopis\Block\ShippingType $block
+ */
+
+/** @var \WolfSellers\Bopis\Helper\Data $bopisHelper */
+$bopisHelper = $this->helper('WolfSellers\Bopis\Helper\Data');
+?>
+<?php if ($block->isActive() && $block->applyStorePickup()): ?>
+    <div class="title-block-tabs">
+        <p>Selecciona tu método de entrega</p>
+    </div>
+    <div id="shipping-type-tabs" class="product data items" data-mage-init='{"mage/tabs": {"openedState": "active", "active":0}}'>
+        <div class="tab-delivery item title active" data-role="collapsible">
+            <a class="switch" id="deliveryId" data-toggle="trigger" href="#tab-delivery"><?= __('Delivery'); ?></a>
+        </div>
+        <div id="tab-delivery" class="" data-role="content">
+            <!--
+            <a class="shipping-address btn-lnk" style="display: none"><?= __('Enter Shipping Address'); ?></a>
+            <p class="shipping-address-shipping"><?= __('(Shipping in 24 hours)'); ?></p>
+            -->
+        </div>
+        <div class="tab-store-pickup item title " data-role="collapsible">
+            <a class="switch" data-toggle="trigger" href="#tab-store-pickup"><?= __('Store Pickup'); ?></a>
+        </div>
+        <div id="tab-store-pickup" class="item content" data-role="content">
+            <a class="select-source btn-lnk" style="display: none"><?= __('Select a Store'); ?></a>
+            <p class="select-source-source"><?= __('(Pick up after 4 business hours)'); ?></p>
+        </div>
+    </div>
+    <div class="bopis-modal" style="display: none;"></div>
+    <script type="text/x-magento-init">
+{
+    "*": {
+        "WolfSellers_Bopis/js/shipping-type": {}
+    }
+}
+</script>
+<?php endif; ?>
+
+
