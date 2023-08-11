@@ -3,6 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
+                <resource id="WolfSellers_Bopis::principal" title="Bopis Dashboard" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::title" title="Bopis" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::listnewsorders" title="Bopis Ordenes confirmadas" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::listprocessingorders" title="Bopis Ordenes en preparación" sortOrder="10" />
@@ -10,6 +11,7 @@
                 <resource id="WolfSellers_Bopis::listcanceledorders" title="Bopis Ordenes Caneladas" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::listholdedorders" title="Bopis Ordenes Detenidas" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::listorders" title="Bopis Ordenes" sortOrder="10" />
+                <resource id="WolfSellers_Bopis::listreadyforpickup" title="Bopis Ordenes Listas para recojo" sortOrder="10" />
                 <resource id="WolfSellers_Bopis::listshippingorders" title="Bopis Ordenes Enviadas" sortOrder="10" />
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">

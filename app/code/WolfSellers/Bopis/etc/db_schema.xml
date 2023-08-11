@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    
-    
+
+
     <table name="quote_bopis" resource="default" engine="innodb" comment="">
         <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
         <column xsi:type="int" name="quote_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Quote ID"/>
@@ -19,7 +19,7 @@
         </constraint>
     </table>
 
- 
+
     <table name="admin_user">
         <column xsi:type="int" name="user_type" nullable="false" comment="user_type" default="0"/>
         <column xsi:type="text" name="source_code" nullable="false" comment="source_code"/>
@@ -38,8 +38,10 @@
         <column xsi:type="varchar" name="cr_distrito" nullable="true" default="" />
     </table>
     -->
-    <!--
+
     <table name="sales_order">
+        <column xsi:type="text" name="source_code" nullable="true" comment="Source Codes"/>
+        <!--
         <column xsi:type="int" name="verificacion_bopis_cliente_retira" padding="5" default="0" />
         <column xsi:type="int" name="verificacion_bopis_cliente_factura" padding="5" default="0" />
         <column xsi:type="int" name="verificacion_bopis_orden" padding="5" default="0" />
@@ -50,8 +52,9 @@
         <column xsi:type="text" name="bopis_hold_comments" nullable="true" />
         <column xsi:type="varchar" name="bopis_store" nullable="false" length="255" comment="Bopis Store ID"/>
         <column xsi:type="varchar" name="bopis_type" nullable="false" length="255" comment="Bopis Shipping Type"/>
+        -->
     </table>
-    -->
+
     <table name="wolfsellers_bopis_notification" resource="default" engine="innodb" comment="wolfsellers_bopis_notification Table">
         <column xsi:type="int" name="notification_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

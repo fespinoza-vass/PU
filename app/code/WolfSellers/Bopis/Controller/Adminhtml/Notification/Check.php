@@ -31,6 +31,9 @@ use WolfSellers\Bopis\Api\BopisRepositoryInterface;
 use WolfSellers\Bopis\Api\Data\NotificationInterface;
 use WolfSellers\Bopis\Model\NotificationRepository;
 
+/**
+ *
+ */
 class Check extends Order
 {
 
@@ -39,13 +42,31 @@ class Check extends Order
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'WolfSellers_BackendBopis::dashboard';
+    const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
 
+    /**
+     * @var InvoiceService
+     */
     private InvoiceService $invoiceService;
+    /**
+     * @var Transaction
+     */
     private Transaction $transaction;
+    /**
+     * @var AuthSession
+     */
     private AuthSession $authSession;
+    /**
+     * @var NotificationRepository
+     */
     private NotificationRepository $notificationRepository;
+    /**
+     * @var BopisRepositoryInterface
+     */
     private BopisRepositoryInterface $bopisRepository;
+    /**
+     * @var UrlInterface
+     */
     private UrlInterface $urlBuilder;
 
     /**
@@ -110,6 +131,9 @@ class Check extends Order
         return $resultJson->setData(["notifications" => $this->getNotifications() ]);
     }
 
+    /**
+     * @return array
+     */
     protected function getNotifications() {
         $notifications = [];
         $userId = $this->authSession->getUser()->getId();

@@ -115,8 +115,9 @@ $btnOrden = $block->isBtnOrdenAvailable();
                 <span class="color-orange">ID de Orden: <?= $order->getIncrementId(); ?></span><br />
                 ID SBX: <?= $order->getId(); ?><br />
                 Creado: <?= $orderStoreDate; ?><br />
-                Entrega: Recoger en Tienda<br />
-                Tienda: <?= $block->getSourceName() ?>
+                Entrega: <?=$order->getShippingMethod()?><br />
+                Tienda: <?= $block->getSourceName() ?> <br>
+                <?=$order->getGiftMessageId() ? 'Esta orden es un regalo' : ''?>
             </address>
             <?php if ($block->getAdminUserType() == 1):?>
             <button name="btn-confirmacion-orden"
@@ -129,6 +130,31 @@ $btnOrden = $block->isBtnOrdenAvailable();
                 <?= $this->getOrder()->getData("verificacion_bopis_orden") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
             </button>
             <?php endif;?>
+        </div>
+    </div>
+</section>
+<section class="admin__page-section bopis-data bopis-data-entrega">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-shipping-address ">
+            <?php /* Shipping Address */
+            $shippingAddress = $order->getShippingAddress(); ?>
+            <div class="admin__page-section-item-title icon-retira">
+                <span class="title"><?= $block->escapeHtml(__('Dirección de entrega')) ?></span>
+            </div>
+
+            <address class="admin__page-section-item-content">
+                <span class="calle">
+                    <b>
+                        <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?>,
+                        <?= $shippingAddress->getData('colony') ?>
+                    </b>
+                </span> <br>
+                <span class="departamento"> <?= $shippingAddress->getRegion() ?></span> <br>
+                <span class="cp"> CP. <?= $shippingAddress->getPostcode() ?> </span> <br>
+                <span class="teléfono">T. <?= $shippingAddress->getTelephone() ?></span> <br>
+                <span class="referencia"> Referencia: <?= $shippingAddress->getData('referencia_envio') ?></span> <br>
+                <span class="provincia"><?= $shippingAddress->getCity() ?></span> <br>
+            </address>
         </div>
     </div>
 </section>

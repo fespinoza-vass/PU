@@ -13,7 +13,7 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 
 class PrintOrder extends \Magento\Backend\App\Action
 {
-    const ADMIN_RESOURCE = 'WolfSellers_BackendBopis::dashboard';
+    const ADMIN_RESOURCE = 'WolfSellers_Bopis::principal';
 
     /**
      * @var \Magento\Framework\App\Response\Http\FileFactory

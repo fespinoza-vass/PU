@@ -32,6 +32,9 @@ $btnAvailable = $block->isBtnMetodoPagoAvailable();
                 <?php if($_order->getPayment()->getMethod() == 'tilopay_fac'):?>
                     <?= $block->getTiloData(); ?>
                 <?php endif;?>
+                <br>
+                <span>No de tarjeta: <?=$_order->getPayment()->getCcLast4() ? '****' . $_order->getPayment()->getCcLast4() : '' ?></span> <br>
+                <span>Nombre: <?=$_order->getBillingAddress()->getFirstname() . $_order->getBillingAddress()->getLastname()?></span>
             </div>
             <?php if ($block->getAdminUserType() == 1):?>
             <button name="btn-confirmacion-cliente-metodo-pago"

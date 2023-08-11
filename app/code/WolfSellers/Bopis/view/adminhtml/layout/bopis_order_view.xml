@@ -15,6 +15,13 @@
         </referenceContainer>
         <referenceContainer name="content">
             <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View" name="sales_order_edit" template="WolfSellers_Bopis::order/widget/form/container.phtml" />
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View" name="sales_order_progress_bar" template="WolfSellers_Bopis::order/widget/form/progressbar.phtml">
+                <arguments>
+                    <argument name="viewModel" xsi:type="object">
+                        WolfSellers\Bopis\ViewModel\ProgressBar
+                    </argument>
+                </arguments>
+            </block>
             <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Tab\Info" name="order_tab_info" template="WolfSellers_Bopis::order/view/tab/info.phtml">
                 <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Info" name="order_info" template="WolfSellers_Bopis::order/view/info.phtml">
                     <container name="extra_customer_info"/>
@@ -51,7 +58,7 @@
             </block>
             <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="sales_order_delivered" template="WolfSellers_Bopis::order/widget/form/delivered.phtml" />
             <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="bopis_footer" template="WolfSellers_Bopis::order/footer.phtml" />
-            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="push_notification" template="WolfSellers_Bopis::notifications/push-notifications.phtml" />
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\Notifications" name="push_notification" template="WolfSellers_Bopis::notifications/push-notifications.phtml" before="-" />
         </referenceContainer>
     </body>
 </page>

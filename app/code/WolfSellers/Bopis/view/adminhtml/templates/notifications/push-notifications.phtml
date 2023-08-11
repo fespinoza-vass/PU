@@ -3,7 +3,13 @@
 <script type="text/x-magento-init">
     {
         "*": {
-            "WolfSellers_Bopis/js/push-notification" : {"order": "<?= $block->escapeHtml($block->getLastOrder())?>"}
+            "WolfSellers_Bopis/js/push-notification" : {
+                "orderId": "<?= $block->escapeHtml($block->getLastOrder())?>",
+                "sound": "<?= $block->escapeHtml($block->getSound())?>",
+                "icon": "<?= $block->escapeHtml($block->getIcon())?>",
+                "url": "<?= $block->escapeHtml($block->getUrl("*/notification/push"))?>",
+                "seconds": "<?= $block->escapeHtml($block->getSeconds())?>"
+            }
         }
     }
 </script>
