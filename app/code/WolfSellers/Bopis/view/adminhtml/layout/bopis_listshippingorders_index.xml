@@ -4,6 +4,7 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="bopis_listshippingorders_listing" aclResource="WolfSellers_Bopis::listshippingorders"/>
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\Notifications" name="push_notification" template="WolfSellers_Bopis::notifications/push-notifications.phtml" before="-" />
         </referenceContainer>
     </body>
 </page>

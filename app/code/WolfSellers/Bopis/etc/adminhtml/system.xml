@@ -46,6 +46,25 @@
                 </field>
 
             </group>
+
+            <group id="pushnotification" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" >
+                <label>Push notification</label>
+                <field id="icon" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload icon</label>
+                    <backend_model>WolfSellers\Bopis\Model\Config\Backend\FileImage</backend_model>
+                    <upload_dir config="system" scope_info="1">pushnotification</upload_dir>
+                </field>
+                <field id="sound" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload audio (MP3)</label>
+                    <backend_model>WolfSellers\Bopis\Model\Config\Backend\FileSound</backend_model>
+                     <upload_dir config="system" scope_info="1">pushnotification</upload_dir>
+                </field>
+                <field id="seconds" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Seconds check</label>
+                    <validate>validate-integer</validate>
+                </field>
+            </group>
+
             <group id="api" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>API Configuration</label>
                 <field id="base_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

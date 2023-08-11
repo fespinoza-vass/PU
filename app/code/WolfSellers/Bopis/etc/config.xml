@@ -36,6 +36,11 @@
                 <readyforpickup>order_ready_for_pick_up</readyforpickup>
                 <complete>complete</complete>
             </status>
+            <pushnotification>
+                <sound></sound>
+                <icon></icon>
+                <seconds>30</seconds>
+            </pushnotification>
             <api>
                 <base_url>https://inventario-stg.tiendasishop.com/</base_url>
             </api>
