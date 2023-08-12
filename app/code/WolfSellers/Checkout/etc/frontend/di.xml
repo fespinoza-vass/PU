@@ -3,6 +3,7 @@
     <type name="Magento\Checkout\Block\Onepage">
         <arguments>
             <argument name="layoutProcessors" xsi:type="array">
+                <item name="checkoutGiftWrap" xsi:type="object" sortOrder="102">WolfSellers\Checkout\Block\Onepage\GiftWrapProcessor</item>
                 <item name="addressFormZipCode" xsi:type="object" sortOrder="200">WolfSellers\Checkout\Block\Onepage\LayoutProcessor</item>
             </argument>
         </arguments>

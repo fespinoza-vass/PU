@@ -4,4 +4,9 @@
     <type name="Magento\Checkout\Block\Checkout\DirectoryDataProcessor">
         <plugin name="WolfSellers_Checkout_DirectoryDataProcessor" type="WolfSellers\Checkout\Plugin\Block\Checkout\DirectoryDataProcessorPlugin" sortOrder="10" disabled="false"/>
     </type>
+    <preference for="WolfSellers\Checkout\Api\GiftMessageInformationManagementInterface"
+                type="WolfSellers\Checkout\Model\GiftMessageInformationManagement" />
+    <preference for="WolfSellers\Checkout\Api\GuestGiftMessageInformationManagementInterface"
+                type="WolfSellers\Checkout\Model\GuestGiftMessageInformationManagement" />
+
 </config>
