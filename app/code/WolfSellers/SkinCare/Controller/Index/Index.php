@@ -123,6 +123,9 @@ class Index extends Action
             ->createBlock(
                 ProductList::class
             );
+
+        $productCollection = $this->intercaleOrder($productCollection);
+
         $productBlock->setData("anchor_text", "");
         $productBlock->setData("id_path", "");
         $productBlock->setData("show_pager", "0");
@@ -135,7 +138,6 @@ class Index extends Action
         $productBlock->setProductCollection($productCollection);
         $productBlock->setTemplate("Magento_PageBuilder::catalog/product/widget/content/carousel.phtml");
         echo '<div data-content-type="products-' . $type. '" data-appearance="carousel" data-autoplay="false" data-autoplay-speed="4000" data-infinite-loop="false" data-show-arrows="true" data-show-dots="true" data-carousel-mode="default" data-center-padding="90px" data-element="main">';
-
 
         echo $productBlock->toHtml();
         echo '</div>
@@ -200,4 +202,35 @@ class Index extends Action
         }
         return $this->serializer->serialize($productIds);
     }
+
+    /**
+     * @param ProductCollection $productCollection
+     * @return String
+     */
+    public function intercaleOrder($productCollection){
+
+        $unorderedProducts = $productCollection->getItems();
+
+        $orderedProducts = [];
+
+        $groupedProducts = [];
+        foreach ($unorderedProducts as $product) {
+            $manufacturer = $product->getData('manufacturer');
+            $groupedProducts[$manufacturer][] = $product;
+        }
+
+        $maxGroupSize = max(array_map('count', $groupedProducts));
+
+        for ($i = 0; $i < $maxGroupSize; $i++) {
+            foreach ($groupedProducts as $manufacturer => $product) {
+                if (isset($product[$i])) {
+                    $orderedProducts[] = $product[$i];
+                }
+            }
+        }
+
+        return $orderedProducts;
+    }
+
+
 }
