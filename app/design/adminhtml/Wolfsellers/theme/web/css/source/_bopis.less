@@ -413,6 +413,13 @@ body{
                     &.icon-retira {
                         span.title {
                             &:before{
+                                content: '\e906';
+                            }
+                        }
+                    }
+                    &.icon-direccion {
+                        span.title {
+                            &:before{
                                 content: '\e919';
                             }
                         }
@@ -462,9 +469,12 @@ body{
                                     .selectmenu-toggle{
                                         &:before{
                                             background: @color-black;
+                                            border-top-right-radius: 8px;
+                                            border-bottom-right-radius: 8px;
                                         }
                                         &:after{
                                             color: @color-white;
+                                            border-color: @color-white transparent transparent transparent;
                                         }
                                     }
                                 }
@@ -509,10 +519,23 @@ body{
                         tr{
                             .data-grid-th{
                                 background: transparent;
-                                color: @color-black;
+                                color: @color-gray13;
                                 border: none;
                                 border-bottom: 1px solid @color-gray7;
                                 border-top: 1px solid @color-gray7;
+                                font-weight: bold;
+                                &:nth-child(2) {
+                                    &::before {
+                                        content: '\e916';
+                                        font-family: 'Admin Icons';
+                                        margin-top: -1em;
+                                        position: absolute;
+                                        right: 1rem;
+                                        top: 50%;
+                                        color: @color-black;
+                                        font-size: 10px;
+                                    }
+                                }
                             }
                         }
                     }
@@ -563,6 +586,21 @@ body{
                         padding: 10px;
                         border-radius: 12px;
                         margin-top: 15px;
+                        .data-table.admin__table-primary.edit-order-table {
+                            .even, .odd {
+                                tr {
+                                    .col-totals.last {
+                                        .subtotales-bopis {
+                                            tr {
+                                                th, td {
+                                                    border-bottom: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -910,7 +948,7 @@ body{
                                         right: 10px;
                                         border-radius: 12px;
                                         padding: 6px;
-                                        font-size: 11px;
+                                        font-size: 10px;
                                     }
                                 }
                                 &.state-confirmed{
@@ -946,6 +984,17 @@ body{
                                             background: @color-verde2;
                                             border: 1px solid @color-verde2;
                                             color: @color-white;
+                                            opacity: 1;
+                                            pointer-events: inherit;
+                                            &::before {
+                                                content: '\e909';
+                                                font-family: 'Admin Icons';
+                                                color: @color-white;
+                                                font-size: 10px;
+                                            }
+                                            span {
+                                                position: initial;
+                                            }
                                         }
                                     }
                                 }
@@ -955,6 +1004,11 @@ body{
                                             background: @color-black;
                                             border: 1px solid @color-black;
                                             color: @color-white;
+                                            opacity: 1;
+                                            pointer-events: inherit;
+                                            span {
+                                                position: initial;
+                                            }
                                         }
                                     }
                                     .icon-check{
@@ -975,6 +1029,10 @@ body{
                                             border: 1px solid @color-black;
                                             color: @color-white;
                                             opacity: 0.5;
+                                            pointer-events: inherit;
+                                            span {
+                                                position: initial;
+                                            }
                                         }
                                     }
                                     .icon-check{
@@ -1025,6 +1083,17 @@ body{
                                             background: @color-verde2;
                                             border: 1px solid @color-verde2;
                                             color: @color-white;
+                                            opacity: 1;
+                                            pointer-events: inherit;
+                                            &::before {
+                                                content: '\e909';
+                                                font-family: 'Admin Icons';
+                                                color: @color-white;
+                                                font-size: 10px;
+                                            }
+                                            span {
+                                                position: initial;
+                                            }
                                         }
                                     }
                                 }
