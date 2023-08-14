@@ -35,10 +35,13 @@ $stateComplete = true;
 
                         <input name="order_id" type="hidden" value="<?= $_order->getEntityId() ?>"/>
 
-                        <input type="submit" class="<?= ($stateComplete) ? 'confirmed-button' : 'unconfirmed-button' ?>"
+                        <button type="submit" class="<?= ($stateComplete) ? 'confirmed-button' : 'unconfirmed-button' ?>"
                             <?= ($stateComplete || !$nextStepAvailable) ? 'disabled' : '' ?>
-                               value="<?= ($stateComplete) ? 'CONFIRMADO' : 'CONFIRMAR' ?>"
-                        >
+                            >
+                            <span>
+                                <?= ($stateComplete) ? 'CONFIRMADO' : 'CONFIRMAR' ?>
+                            </span>
+                        </button>
                     </form>
                 <?php endif; ?>
             </li>
