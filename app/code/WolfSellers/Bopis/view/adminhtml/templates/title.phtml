@@ -50,7 +50,7 @@ $viewModel = $block->getData('viewModel');
             <?=$viewModel->getStateLabel($order->getStatus())?>
         </span>
 
-        <?php if ($block->getAdminUserType() != 1): ?>
+        <?php if ($block->getAdminUserType() == 1): ?>
             <button name="btn-<?=$btn?>"
                     value="Preparar"
                     class="btn-<?=$btn?> <?= $classBtn ?>"
