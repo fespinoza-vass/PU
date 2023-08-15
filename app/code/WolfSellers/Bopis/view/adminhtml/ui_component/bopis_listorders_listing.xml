@@ -58,6 +58,17 @@
                     <property name="applied" xsi:type="boolean">false</property>
                 </statefull>
             </settings>
+            <filterSelect name="source_code" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
+                <settings>
+                    <options class="WolfSellers\Bopis\Model\Config\Source\SourceOptions"/>
+                    <caption translate="true">Select</caption>
+                    <label translate="true">Tienda</label>
+                    <dataScope>source_code</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
         </filters>
     </listingToolbar>
     <columns name="bopis_listorders_columns">
@@ -109,10 +120,17 @@
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>
-                <filter>select</filter>
-                <options class="WolfSellers\Bopis\Model\Config\Source\SourceOptions"/>
+                <filter>multiselect</filter>
                 <label translate="true">Tienda</label>
                 <dataType>select</dataType>
+            </settings>
+        </column>
+        <column name="shipping_name" sortOrder="25">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <filter>text</filter>
+                <label translate="true">Entregar a</label>
             </settings>
         </column>
         <column name="shipping_information" sortOrder="40">
