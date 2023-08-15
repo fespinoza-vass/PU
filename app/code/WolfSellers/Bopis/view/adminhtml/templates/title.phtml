@@ -41,6 +41,11 @@ $viewModel = $block->getData('viewModel');
 ?>
 
 <div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+
+    <button type="button" class="action back customization">
+        <a href="<?=$viewModel->getBackUrl()?>"> &#8592; </a>
+    </button>
+
     <h1 class="page-title"<?= /* @noEscape */
     $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
     <div>
