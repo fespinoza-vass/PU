@@ -92,11 +92,11 @@
                 <visible>false</visible>
             </settings>
         </column>
-        <column name="customer_email" sortOrder="30">
+        <column name="false" sortOrder="30">
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>
-                <filter>text</filter>
+                <filter>false</filter>
                 <label translate="true">Email</label>
             </settings>
         </column>
