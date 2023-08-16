@@ -97,7 +97,7 @@
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>
-                <filter>text</filter>
+                <filter>false</filter>
                 <label translate="true">Email</label>
             </settings>
         </column>
