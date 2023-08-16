@@ -108,7 +108,6 @@ class Index extends Action
 
         $this->_stockFilter->addInStockFilterToCollection($productCollection);
 
-        $this->setSessionVariables($type, $productCollection, $incomingValueParam, $formId);
         if($productCollection->getSize() < 1) {
             echo ""; die();
         }
@@ -125,6 +124,8 @@ class Index extends Action
             );
 
         $productCollection = $this->intercaleOrder($productCollection);
+
+        $this->setSessionVariables($type, $productCollection, $incomingValueParam, $formId);
 
         $productBlock->setData("anchor_text", "");
         $productBlock->setData("id_path", "");
@@ -197,7 +198,7 @@ class Index extends Action
      */
     private function getProductIdsFromCollection($productCollection){
         $productIds = [];
-        foreach ($productCollection->getData() as $product){
+        foreach ($productCollection as $product){
             $productIds[] = $product['entity_id'];
         }
         return $this->serializer->serialize($productIds);
