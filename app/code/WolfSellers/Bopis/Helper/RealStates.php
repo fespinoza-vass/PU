@@ -104,8 +104,21 @@ class RealStates
     public function getMenuOption(string $getStatus)
     {
         foreach ($this->states as $state => $data) {
-            if ($data['state'] == $getStatus){
+            if ($data['state'] == $getStatus) {
                 return $data['menu'];
+            }
+        }
+    }
+
+    /**
+     * @param string $getStatus
+     * @return string|void
+     */
+    public function getStateLabel(string $getStatus)
+    {
+        foreach ($this->states as $state => $data) {
+            if ($data['state'] == $getStatus) {
+                return trim(str_replace('Pedido', '', $data['label']));
             }
         }
     }

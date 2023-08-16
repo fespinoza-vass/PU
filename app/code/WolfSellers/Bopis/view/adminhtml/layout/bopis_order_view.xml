@@ -11,7 +11,13 @@
     </head>
     <body>
         <referenceContainer name="main.top">
-            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Title" name="page.title" template="WolfSellers_Bopis::title.phtml"/>
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Title" name="page.title" template="WolfSellers_Bopis::title.phtml">
+                <arguments>
+                    <argument name="viewModel" xsi:type="object">
+                        WolfSellers\Bopis\ViewModel\GeneralOrder
+                    </argument>
+                </arguments>
+            </block>
         </referenceContainer>
         <referenceContainer name="content">
             <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View" name="sales_order_edit" template="WolfSellers_Bopis::order/widget/form/container.phtml" />
