@@ -175,6 +175,7 @@
                 <draggable>false</draggable>
                 <sortable>true</sortable>
                 <label translate="true">TOTAL</label>
+                <visible>false</visible>
             </settings>
         </column>
         <actionsColumn name="actions" class="Magento\Sales\Ui\Component\Listing\Column\ViewAction" sortOrder="80">
