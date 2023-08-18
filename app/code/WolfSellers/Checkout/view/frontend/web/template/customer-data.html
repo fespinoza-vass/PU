@@ -5,13 +5,13 @@
         <div id="customer_data_edit" class="customer-data-edit" data-bind="fadeVisible: isVisibleEdit">
             <each if="!quoteIsVirtual" args="getRegion('customer-email')" render="" ></each>
 
-            <form data-bind="submit: navigateToNextStep" novalidate="novalidate">
+            <form data-bind="submit: navigateToNextStep" id="stepFormCheck" novalidate="novalidate">
 
                 <render args="customerFormTemplate"></render>
 
                 <div class="actions-toolbar">
                     <div class="primary">
-                        <button data-role="opc-continue" type="submit" class="button action continue primary">
+                        <button data-role="opc-continue" id="stepFormContinue" type="submit" class="button action continue primary">
                             <span><!-- ko i18n: 'Next'--><!-- /ko --></span>
                         </button>
                     </div>

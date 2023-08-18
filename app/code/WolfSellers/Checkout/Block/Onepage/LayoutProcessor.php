@@ -189,6 +189,57 @@ class LayoutProcessor implements LayoutProcessorInterface
         $customerDataAgreementComponent = [
             'component' => 'Magento_CheckoutAgreements/js/view/checkout-agreements'
         ];
+        $customerDataTelefonoComponent = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'displayArea' => 'customer-data-telefono',
+            'config' => [
+                'customScope' => 'customerData.telefono',
+                'customEntry' => null,
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'tooltip' => [
+                    "description" => 'Ingresa Número de Telefono.'
+                ],
+            ],
+            'dataScope' => 'customerData.telefono',
+            'label' => 'Telefono',
+            'provider' => 'checkoutProvider',
+            'sortOrder' => 5,
+            'validation' => [
+                'required-entry' => true,
+                'validate-number' => true,
+                'min_text_length' => 7,
+                'max_text_length' => 12
+            ],
+            'filterBy' => null,
+            'customEntry' => null,
+            'visible' => true,
+            'value'=>$this->getTelefonoCustomer($idCustomer)
+        ];
+        $customerDataConfirmPassComponent = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'displayArea' => 'customer-data-confirm_password',
+            'config' => [
+                'customScope' => 'customerData.confirm_password',
+                'customEntry' => null,
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'tooltip' => [
+                    "description" => 'Confirmar Password.'
+                ],
+            ],
+            'dataScope' => 'customerData.confirm_password',
+            'label' => 'Confirmar password',
+            'provider' => 'checkoutProvider',
+            'sortOrder' => 5,
+            'validation' => [
+                'required-entry' => true,
+            ],
+            'filterBy' => null,
+            'customEntry' => null,
+            'visible' => true
+
+        ];
         $customerFieldsets = [
           'component' => 'uiComponent',
           'displayArea' => 'customer-fieldsets'
@@ -206,14 +257,19 @@ class LayoutProcessor implements LayoutProcessorInterface
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-telefono'] = $customerDataTelefonoComponent;
         //TERMINOSYCONDICIONES
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-agreement'] = $customerDataAgreementComponent;
+        //CONFIRMAR PASSWORD
+        //$customerDataFieldSets['customer-fieldsets']['children']['customer-data-confirm_password'] = $customerDataConfirmPassComponent;
         $customerDataFieldSets['customer-email'] = $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
         $customerDataFieldSets['customer-data-resumen'] = $resumenCustomerData;
         $walker->setValue('{CUSTOMER-DATA}.>>', $customerDataFieldSets);
         $walker->setValue('{SHIPPING_ADDRESS}.>>.customer-email', []);
+        $walker->setValue('{PAYMENT}.>>.customer-email', []);
 
         //var_dump($customerAddressArea);
         //die();
         //
+
+      //  $email= $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
         //******SHIPPING ADDRESS******
         //COMPANY
         $company = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company');

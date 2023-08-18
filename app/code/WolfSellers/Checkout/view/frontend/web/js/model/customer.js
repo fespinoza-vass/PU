@@ -33,6 +33,7 @@ define([
         customerTypeIdentification : ko.observable(customerTypeIdentification),
         customerNumberIdentification : ko.observable(customerNumberIdentification),
         customerTelephone : ko.observable(customerTelephone)
+
     }
 
 });

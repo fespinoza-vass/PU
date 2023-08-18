@@ -45,6 +45,10 @@ define([
                 this.customerName(value);
             }, this);
 
+            customer.customerLastName.subscribe(function (value) {
+                this.customerLastName(value);
+            }, this);
+
             customer.customerTypeIdentification.subscribe(function (value){
                 this.customerTypeIdentification(value);
             },this);
