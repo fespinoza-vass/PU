@@ -30,6 +30,9 @@ define([
         isVisible: ko.observable(true),
         quoteIsVirtual: quote.isVirtual(),
         isVisibleEdit: ko.observable(true),
+        isActive: ko.observable(true),
+        isEdit: ko.observable(false),
+        isEmpty: ko.observable(false),
 
         /**
          * @returns {*}
@@ -39,12 +42,16 @@ define([
             stepNavigator.registerStep(
                 'customer_step',
                 null,
-                'Customer Data',
+                'Identificación',
                 this.isVisible,
                 _.bind(this.navigate, this),
                 1
             );
 
+            this.isVisibleEdit.subscribe(function (value) {
+                console.log(value);
+                //this.isActive(value);
+            }, this);
 
             return this;
         },
@@ -71,24 +78,25 @@ define([
          */
         saveCustomerData: function (){
             var emailValidator = registry.get("checkout.steps.customer-data-step.customer-email"),
-                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-name"),
+                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-firstname"),
                 lastnameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-lastname"),
                 typeIdentificationValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-identificacion"),
                 numberIdentificationValidator  =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion"),
                 telephoneValidator =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-telefono");
 
-            customer.email(email.value());
-            customer.customerName(nameValidator.value());
-            customer.customerLastName(lastnameValidator.value());
-            customer.customerTypeIdentification(typeIdentificationValidator.value());
-            customer.customerNumberIdentification(numberIdentificationValidator.value());
-            customer.customerTelephone(telephoneValidator.value());
+                customer.email(emailValidator.email() === '' ? customer.email() : emailValidator.email());
+                customer.customerName(nameValidator.value());
+                customer.customerLastName(lastnameValidator.value());
+                customer.customerTypeIdentification(typeIdentificationValidator.value());
+                customer.customerNumberIdentification(numberIdentificationValidator.value());
+                customer.customerTelephone(telephoneValidator.value());
         },
 
         /**
          * Show/Edit customer personal information
          */
         editPersonalInfo: function (){
+            stepNavigator.navigateTo("customer_step");
             this.isVisibleEdit(true);
         }
     });

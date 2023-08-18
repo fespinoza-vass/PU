@@ -35,11 +35,26 @@ if($preparar) {
 }
 ?>
 
+<?php
+/** @var  $viewModel \WolfSellers\Bopis\ViewModel\GeneralOrder */
+$viewModel = $block->getData('viewModel');
+?>
+
 <div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+
+    <button type="button" class="action back customization">
+        <a href="<?=$viewModel->getBackUrl()?>"> &#8592; </a>
+    </button>
+
     <h1 class="page-title"<?= /* @noEscape */
     $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
     <div>
         <span class="page-title-order-id-bopis">ID: <?= $order->getIncrementId() ?></span>
+
+        <span class="current-state" title="<?=$order->getStatus()?>">
+            <?=$viewModel->getStateLabel($order->getStatus())?>
+        </span>
+
         <?php if ($block->getAdminUserType() == 1): ?>
             <button name="btn-<?=$btn?>"
                     value="Preparar"
@@ -61,6 +76,12 @@ if($preparar) {
                 ?>
             </button>
         <?php endif; ?>
+
+        <br>
+
+        <span class="current-shipping-method-title" title="<?=$order->getShippingMethod()?>">
+            <b><?=$viewModel->getShippingMethodTitle($order->getShippingMethod());?></b>
+        </span>
     </div>
     <?= $block->getChildHtml() ?>
 </div>

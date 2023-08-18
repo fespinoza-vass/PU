@@ -162,7 +162,8 @@
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m){
   .ammenu-items.-root >{
     li.ammenu-item{
-      &:nth-child(6){
+      a[title="Go to SALE"],
+      a[title="Go to SALES"]{
         p.ammenu-text-block{
           background: @black;
           border-radius: 10px;

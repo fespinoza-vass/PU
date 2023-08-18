@@ -54,14 +54,15 @@ class ShippingOptions implements ArrayInterface
         $mainOrders = $this->_ordersCollection
             ->distinct(true)
             ->addAttributeToSelect('shipping_method')
+            ->addAttributeToSelect('shipping_description')
             ->load();
 
         $options = [];
 
         try {
             foreach ($mainOrders as $data){
-                $methodCode = $data->getShippingMethod();
-                $options[$methodCode] = $this->getAlias($methodCode);
+                $methodCode = trim($data->getShippingDescription());
+                $options[$methodCode] = $methodCode . ' (' .$data->getShippingMethod(). ')';
             }
         }catch (\Throwable $e){
             $this->logger->error($e->getMessage());
