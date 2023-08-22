@@ -1,3 +1,4 @@
+<!-- ko if: window.checkoutConfig.benefitsModal.enable  -->
 <div class="payment-benefits-wrapper">
     <label data-bind="
         i18n: 'Know our benefits with cards',
@@ -6,9 +7,10 @@
     <div id="popup-benefits-container" style="display:none;">
         <div id="popup-benefits-wrapper">
             <img data-bind="attr: {
-                src: require.toUrl('images/benefits.png'),
+                src: window.checkoutConfig.benefitsModal.image,
                 alt: element.getBenefitsImageAlt()
             }">
         </div>
     </div>
 </div>
+<!-- /ko -->

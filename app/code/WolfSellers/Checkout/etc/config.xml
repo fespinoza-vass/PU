@@ -3,8 +3,7 @@
     <default>
         <onepage>
             <benefits_modal>
-                <enable>1</enable>
-                <image>default/benefits.png</image>
+                <enable>0</enable>
             </benefits_modal>
         </onepage>
     </default>

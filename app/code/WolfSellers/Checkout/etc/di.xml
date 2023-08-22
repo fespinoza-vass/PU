@@ -1,7 +1,17 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Checkout\Block\Checkout\DirectoryDataProcessor">
-        <plugin name="WolfSellers_Checkout_DirectoryDataProcessor" type="WolfSellers\Checkout\Plugin\Block\Checkout\DirectoryDataProcessorPlugin" sortOrder="10" disabled="false"/>
+        <plugin name="WolfSellers_Checkout_DirectoryDataProcessor"
+                type="WolfSellers\Checkout\Plugin\Block\Checkout\DirectoryDataProcessorPlugin"
+                sortOrder="10"
+                disabled="false"
+        />
+    </type>
+    <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="WolfSellers_Checkout_Plugin_DefaultConfigProviderPlugin"
+                type="WolfSellers\Checkout\Plugin\Model\DefaultConfigProvider"
+                sortOrder="10"
+                disabled="false"
+        />
     </type>
 </config>
