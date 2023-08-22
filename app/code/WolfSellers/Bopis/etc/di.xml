@@ -22,6 +22,7 @@
             <argument name="collections" xsi:type="array">
                 <item name="bopis_listnewsorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\NewsOrder\Grid\Collection</item>
                 <item name="bopis_listprocessingorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\ProcessingOrder\Grid\Collection</item>
+                <item name="bopis_listreadyforpickup_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\ReadyForPickup\Grid\Collection</item>
                 <item name="bopis_listshippingorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\ShippingOrder\Grid\Collection</item>
                 <item name="bopis_listcompleteorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\CompleteOrder\Grid\Collection</item>
                 <item name="bopis_listcanceledorders_listing_data_source" xsi:type="string">WolfSellers\Bopis\Model\ResourceModel\CanceledOrder\Grid\Collection</item>
@@ -43,6 +44,12 @@
         </arguments>
     </type>
     <type name="WolfSellers\Bopis\Model\ResourceModel\Listprocessingorders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Bopis\Model\ResourceModel\Listreadyforpickup\Grid\Collection">
         <arguments>
             <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
             <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
@@ -95,5 +102,10 @@
     </type>
     <type name="Magento\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsSalableWithReservationsCondition">
         <plugin name="validate_qty_source_update" type="WolfSellers\Bopis\Plugin\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsSalableWithReservationsConditionPlugin" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\InventoryShipping\Model\ResourceModel\ShipmentSource\SaveShipmentSource">
+        <plugin name="duplicate_source_codes"
+                type="WolfSellers\Bopis\Plugin\DuplicateSourceCodes"
+                sortOrder="10"/>
     </type>
 </config>

@@ -48,6 +48,44 @@
                                                 </item>
                                             </item>
                                         </item>
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                         <item name="payments-list" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="before-place-order" xsi:type="array">
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="agreements" xsi:type="array">
+                                                                            <item name="config" xsi:type="array">
+                                                                                <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                                            </item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                        <item name="afterMethods" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="discount" xsi:type="array">
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="componentDisabled" xsi:type="boolean">true</item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="payment-benefits-modal" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/payment/benefits</item>
+                                                                    <item name="displayArea" xsi:type="string">afterMethods</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Magento_Checkout/payment/benefits</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
                                     </item>
                                 </item>
                             </item>
@@ -68,13 +106,41 @@
                                         <item name="summary" xsi:type="array">
                                             <item name="children" xsi:type="array">
                                                 <item name="totals" xsi:type="array">
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="sortOrder" xsi:type="string">10</item>
+                                                    </item>
+                                                </item>
+
+
+                                                <item name="discount" xsi:type="array">
+                                                    <item name="sortOrder" xsi:type="string">100</item>
+                                                    <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount</item>
                                                     <item name="children" xsi:type="array">
-                                                        <item name="checkout" xsi:type="array">
-                                                            <item name="component"
-                                                                  xsi:type="string">WolfSellers_Checkout/js/view/form/element/recibir-promocion</item>
+                                                        <item name="errors" xsi:type="array">
+                                                            <item name="sortOrder" xsi:type="string">0</item>
+                                                            <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount-messages</item>
+                                                            <item name="displayArea" xsi:type="string">messages</item>
+                                                        </item>
+                                                        <item name="captcha" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/captcha</item>
+                                                            <item name="displayArea" xsi:type="string">captcha</item>
+                                                            <item name="formId" xsi:type="string">sales_rule_coupon_request</item>
+                                                            <item name="configSource" xsi:type="string">checkoutConfig</item>
                                                         </item>
                                                     </item>
                                                 </item>
+
+                                                <item name="agreements" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Magento_CheckoutAgreements/js/view/checkout-agreements</item>
+                                                    <item name="sortOrder" xsi:type="string">200</item>
+                                                </item>
+                                                <item name="checkout-che-promo" xsi:type="array">
+                                                    <item name="component"
+                                                            xsi:type="string">WolfSellers_Checkout/js/view/form/element/recibir-promocion</item>
+                                                    <item name="sortOrder" xsi:type="string">300</item>
+                                                </item>
+
+
                                             </item>
                                         </item>
                                     </item>

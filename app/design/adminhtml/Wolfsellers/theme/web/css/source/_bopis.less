@@ -14,7 +14,11 @@ body{
                     &._fixed{
                         .page-actions-buttons{
                             box-shadow: @bshadow-menu;
-                            
+                        }
+                        .page-actions-inner{
+                            &:before{
+                                padding-left: 80px;
+                            }
                         }
                     }
                 }
@@ -22,6 +26,43 @@ body{
         }
     }
     &.admin-bopis{
+        .admin__menu{
+            ul{
+                position: relative;
+                &:before{
+                    content: '';
+                    background: @color-gry10;
+                    height: 2px;
+                    width: 88%;
+                    position: absolute;
+                    z-index: 999;
+                    left: 50%;
+                    top: -10px;
+                    transform: translate(-50%, -50%);
+                }
+                &:after{
+                    content: '';
+                    background: @color-gry10;
+                    height: 2px;
+                    width: 88%;
+                    position: absolute;
+                    z-index: 999;
+                    left: 50%;
+                    bottom: -10px;
+                    transform: translate(-50%, -50%);
+                }
+                li{
+                    a{
+                        &:after{
+                            content: none !important;
+                        }
+                    }
+                }
+                li#menu-magento-backend-stores{
+                    display: none;
+                }
+            }
+        }
         .data-grid-filters-action-wrap{
             display: block;
         }
@@ -31,6 +72,8 @@ body{
         .page-wrapper {
             width: 85%;
             float: right;
+            position: relative;
+            background: @color-gray12;
             .page-content{
                 .page-actions{
                     &._fixed{
@@ -38,6 +81,11 @@ body{
                         right: 0;
                         background: @color-white;
                         left: initial;
+                        .page-actions-inner{
+                            &:before{
+                                padding-left: 80px;
+                            }
+                        }
                     }
                 }
                 .page-columns{
@@ -47,6 +95,44 @@ body{
                         }
                     }
                 }
+            }
+            .admin__old{
+                .admin__data-grid-header{
+                    .admin__data-grid-header-row{
+                        button{
+                            background: transparent;
+                            .action-default{
+                                 ._active{
+                                    &:after{
+                                        color: @color-rojo3;
+                                    }
+                                 }
+                            }
+                        }
+                    }
+                    .admin__data-grid-filters-wrap._show{
+                        .admin__data-grid-filters-footer{
+                            button.action-tertiary{
+                                span{
+                                    color: @color-black;
+                                }
+                            }
+                            button.action-secondary{
+                                background: @color-black;
+                                border-radius: 8px;
+                                span{
+                                    color: @color-white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .page-header.row{
+                border-bottom: 1px solid @color-gray5;
+                width: 95%;
+                margin: auto;
+                margin-bottom: 30px;
             }
         }
         #account-signout-bopis {
@@ -87,6 +173,14 @@ body{
                     font-size: 12px;
                     text-align: left;
                     text-transform: capitalize;
+                    padding: 5px;
+                }
+                &._active{
+                    > a{
+                        color: @color-black;
+                        font-weight: 700;
+                        background: transparent;
+                    }
                 }
             }
             a[href*="/bopis/"] {
@@ -113,21 +207,21 @@ body{
                         text-align: center;
                         content: "\e90c" !important;
                     }
-                    &:after{
-                        background-color: @color-gray5;
-                        content: '';
-                        display: block;
-                        height: 1px;
-                        left: 0;
-                        margin-left: 0;
-                        position: absolute;
-                        top: 0;
-                        width: 100%;
-                    }
                 }
             }
             #nav{
                 padding: 10px;
+                .nav-bopis-ordenes{
+                    a{
+                        color: @color-gray11;
+                        font-size: 16px;
+                        font-weight: 500;
+                        &:before{
+                            color: @color-gray11;
+                            padding-right: 5px;
+                        }
+                    }
+                }
             }
             li#menu-wolfsellers-bopis-listnewsorders{
                 display: block;
@@ -181,9 +275,9 @@ body{
     				    	line-height: 7;
     				    }
     				    .user-welcome{
-                            color: @color-naranja;
-
-                            font-weight: bold;
+                            color: @color-gray11;
+                            font-weight: 500;
+                            font-size: 16px;
     				    	&:before{
     				    		font-size: 20px;
     			    		    line-height: 30px;
@@ -196,18 +290,19 @@ body{
     			    		    speak: none;
     			    		    text-align: center;
     			    		    content: '\e906';
+                                padding-right: 10px;
     					    }
     				    }
     				}
     			}
     		}
             .logo{
-                margin-bottom: 30px;
+                margin-bottom: 10px;
                 img.logo-img{
-                    width: 50%;
+                    width: 90%;
                 }
                 &:before{
-                    content: '\e90a';
+                    content: none;
                     font-family: 'Admin Icons';
                     font-size: 20px;
                     vertical-align: super;
@@ -216,12 +311,10 @@ body{
     	}
     	.page-content{
     		.page-main-actions{
-    			background: @color-white;
+                display: none;
     			.page-actions{
     				.page-actions-buttons{
-    					float: left;
-    				    display: block;
-    				    width: 100%;
+                        display: none;
                         #NewsOrdersButton{
                             display: block;
                         }
@@ -300,8 +393,9 @@ body{
                 .admin__page-section-item-title {
                     span.title {
                         font-weight: bold;
+                        font-size: 15px;
                         &:before{
-                            color: @color-naranja;
+                            color: @color-black;
                             font-size: 20px;
                             line-height: 30px;
                             font-family: 'Admin Icons';
@@ -323,6 +417,13 @@ body{
                             }
                         }
                     }
+                    &.icon-direccion {
+                        span.title {
+                            &:before{
+                                content: '\e919';
+                            }
+                        }
+                    }
                     &.icon-orden {
                         span.title {
                             &:before {
@@ -333,7 +434,7 @@ body{
                     &.icon-tarjeta {
                         span.title {
                             &:before {
-                                content: "\e903" !important;
+                                content: "\e910" !important;
                             }
                         }
                     }
@@ -359,6 +460,49 @@ body{
                         }
                     }
                 }
+                .admin__data-grid-header-row.row.row-gutter{
+                    .col-xs-12{
+                        .col-xs-9{
+                            .admin__data-grid-pager-wrap{
+                                .selectmenu{
+                                    border-radius: 8px;
+                                    .selectmenu-toggle{
+                                        &:before{
+                                            background: @color-black;
+                                            border-top-right-radius: 8px;
+                                            border-bottom-right-radius: 8px;
+                                        }
+                                        &:after{
+                                            color: @color-white;
+                                            border-color: @color-white transparent transparent transparent;
+                                        }
+                                    }
+                                }
+                                .admin__data-grid-pager{
+                                    button{
+                                        border-radius: 8px;
+                                        &.action-next{
+                                            background: @color-black;
+                                            &:before{
+                                                color: @color-white;
+                                                border-color: @color-white transparent transparent transparent;
+                                            }
+                                        }
+                                    }
+                                    .admin__control-text{
+                                        border-radius: 8px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .data-grid td{
+                border-bottom:1px solid @color-gray7;
+                a{
+                    color: @color-rojo3;
+                }
             }
             .admin__data-grid-wrap{
                 .data-grid-draggable{
@@ -374,10 +518,24 @@ body{
                     thead{
                         tr{
                             .data-grid-th{
-                                background: @color-white;
-                                color: @color-black;
+                                background: transparent;
+                                color: @color-gray13;
                                 border: none;
                                 border-bottom: 1px solid @color-gray7;
+                                border-top: 1px solid @color-gray7;
+                                font-weight: bold;
+                                &:nth-child(2) {
+                                    &::before {
+                                        content: '\e916';
+                                        font-family: 'Admin Icons';
+                                        margin-top: -1em;
+                                        position: absolute;
+                                        right: 1rem;
+                                        top: 50%;
+                                        color: @color-black;
+                                        font-size: 10px;
+                                    }
+                                }
                             }
                         }
                     }
@@ -385,6 +543,7 @@ body{
                         .data-row._odd-row{
                             td{
                                 background: @color-white;
+                                border-bottom: 1px solid @color-gray7;
                             }
                         }
                         tr{
@@ -407,7 +566,7 @@ body{
                                         font-weight: 600;
                                     }
                                     .complete{
-                                        color: @color-verde;
+                                        color: @color-azul3;
                                         font-weight: 600;
                                     }
                                 }
@@ -420,8 +579,48 @@ body{
     }
     &.bopis-order-view{
         .page-wrapper{
+            .page-columns{
+                .admin__page-section{
+                    .admin__table-wrapper{
+                        background: @color-white;
+                        padding: 10px;
+                        border-radius: 12px;
+                        margin-top: 15px;
+                        .data-table.admin__table-primary.edit-order-table {
+                            .even, .odd {
+                                tr {
+                                    .col-totals.last {
+                                        .subtotales-bopis {
+                                            tr {
+                                                th, td {
+                                                    border-bottom: none;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             .page-header{
                 .page-title-wrapper{
+                    margin-top: -40px;
+                    padding-left: 40px;
+                    display: flex;
+                    align-items: baseline;
+                    div{
+                        span{
+                            font-size: 19px !important;
+                            padding-left: 10px;
+                        }
+                        button {
+                            background: white;
+                            border-radius: 12px;
+                            border: 1px solid;
+                        }
+                    }
                     .page-title-order-id-bopis{
                         font-size: 24px;
                         color: @color-gray3;
@@ -464,14 +663,50 @@ body{
                 }
             }
             .page-content{
+                .page-main-actions{
+                    background: @color-white;
+                    border-bottom: none;
+                    border-top: none;
+                    background: @color-gray12;
+                    .page-actions{
+                        .page-actions-buttons{
+                            float: left;
+                            display: block;
+                            width: 70px;
+                            position: absolute;
+                            top: 20px;
+                            left: 0;
+                            top: 25px;
+                            left: 0;
+                            button#back{
+                                border: 1px solid;
+                                width: 40px;
+                                text-align: center;
+                                padding: 3px;
+                                border-radius: 12px;
+                                background: @color-white;
+                                span{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }        
+                }
                 .admin__old{
+                    .data-grid{
+                        td{
+                            border-bottom: 1px solid @color-gray7;
+                        }
+                    }
                     .main-col{
                         section{
                             &.bopis-data{
-                                border: 1px solid #C4C4C4 !important;
-                                border-radius: 6px;
+                                border-radius: 12px;
                                 padding: 10px;
                                 box-shadow: none !important;
+                                background: @color-white;
+                                width: calc(~"20% - 23px");
+                                margin: 10px;
                                 .admin__page-section-content{
                                     height: 250px;
                                     width: 100%;
@@ -479,10 +714,15 @@ body{
                                         .admin__page-section-item-title{
                                             border-bottom: 1px solid #C4C4C4;
                                             width: 100%;
+                                            padding-bottom: 10px;
+                                            .title{
+                                                display: flex;
+                                                align-items: center;
+                                            }
                                         }
                                         .admin__page-section-item-content{
                                             .color-orange{
-                                                color: @color-primary;
+                                                color: @color-black;
                                                 margin-bottom: 10px;
                                                 float: left;
                                                 width: 100%;
@@ -517,25 +757,28 @@ body{
                                                     }
                                                 }
                                             }
+                                            display: none;
                                         }
                                         &.bopis-payment-method{
                                             min-height: 250px;
                                             height: 100%;
-                                            overflow-y: scroll;
                                         }
+                                    }
+                                    .admin__page-section-item-content,
+                                    .bopis-payment-method{
+                                        font-size: 12px;
                                     }
                                 }
                             }
                             &.admin__page-section{
                                 border: none;
                                 box-shadow: 2px 2px 10px 1px @color-gray6;
-                                border-radius: 6px;
+                                border-radius: 12px;
                             }
                             &.bopis-footer{
                                 box-shadow: none !important;
                                 .admin__page-section-content{
                                     position: relative;
-                                    display: flex;
                                     align-items: center;
                                     table {
                                         width: 100%;
@@ -552,6 +795,12 @@ body{
                                                 border-bottom: 1px solid #eceff1;
                                             }
                                         }
+                                    }
+                                    button.btn-entregar{
+                                        float: right;
+                                    }
+                                    .btn-detener{
+                                        display: none;
                                     }
                                     .btn-entregado.orden-entregada {
                                         position: absolute;
@@ -613,6 +862,241 @@ body{
                                 color: @color-white;
                                 font-size: 16px;
                                 margin-top: -30px;
+                            }
+                        }
+                    }
+                    div#order-messages{
+                        width: 100%;
+                        float: left;
+                        height: 20px;
+                        border-bottom: 1px solid @color-gray5;
+                        margin-bottom: 30px;
+                    }
+                    .sales_order_progress_bar{
+                        .states-list{
+                            margin-top: 40px;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 120px;
+                            li{
+                                 &:not(.step-complete){
+                                    &:before{
+                                        border-bottom: 2px solid @gray-A;
+                                        opacity: 0.5;
+                                    }
+                                    &:after{
+                                        border-bottom: 2px solid @gray-A;
+                                        opacity: 0.5;
+                                    }
+                                    .icon-check{
+                                        border: 1px solid @gray-A;
+                                        &:before{
+                                            color: @gray-A;
+                                            opacity: 0.5;
+                                        }
+                                    }
+                                 }
+                                position: relative;
+                                 display: flex;
+                                 flex-direction: column;
+                                 align-items: center;
+                                 flex: 1;
+                                &:before{
+                                    position: absolute;
+                                    content: "";
+                                    border-bottom: 2px solid @color-black;
+                                    width: 50%;
+                                    top: 20px;
+                                    left: 00%;
+                                    z-index: 2;
+                                }
+                                &:after{
+                                    position: absolute;
+                                    content: "";
+                                    border-bottom: 2px solid @color-black;
+                                    width: 50%;
+                                    top: 20px;
+                                    left: 50%;
+                                    z-index: 2;
+                                }
+                                span{
+                                    position: absolute;
+                                    left: 20px;
+                                    bottom: -75px;
+                                    width: 30%;
+                                    font-weight: 700;
+                                }
+                                span.icon-check {
+                                    width: 35px;
+                                    height: 35px;
+                                    background: @color-white;
+                                    border-radius: 100%;
+                                    position: absolute;
+                                    left: 50%;
+                                    top: 0%;
+                                    transform: translate(-50%, 0%);
+                                    border: 1px solid @color-black;
+                                    z-index: 12;
+                                }
+                                form{
+                                    .confirmed-button,
+                                    .unconfirmed-button{
+                                        position: absolute;
+                                        right: 0;
+                                        bottom: -75px;
+                                        width: 33%;
+                                        right: 10px;
+                                        border-radius: 12px;
+                                        padding: 6px;
+                                        font-size: 10px;
+                                    }
+                                }
+                                &.state-confirmed{
+                                    .icon-check{
+                                        width: 35px;
+                                        height: 35px;
+                                        background: @color-black;
+                                        border-radius: 100%;
+                                        position: absolute;
+                                        left: 50%;
+                                        top: 0%;
+                                        transform: translate(-50%, 0%);
+                                        text-align: center;
+                                        &:after{
+                                            content: '\e909';
+                                            font-family: 'Admin Icons';
+                                            color: @color-white;
+                                            font-size: 20px;
+                                            text-align: center;
+                                            line-height: 1.7;
+                                        }
+                                        &:before{
+                                            content: '\e913';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                    form{
+                                        .confirmed-button{
+                                            background: @color-verde2;
+                                            border: 1px solid @color-verde2;
+                                            color: @color-white;
+                                            opacity: 1;
+                                            pointer-events: inherit;
+                                            &::before {
+                                                content: '\e909';
+                                                font-family: 'Admin Icons';
+                                                color: @color-white;
+                                                font-size: 10px;
+                                            }
+                                            span {
+                                                position: initial;
+                                            }
+                                        }
+                                    }
+                                }
+                                &.state-preparing{
+                                    form{
+                                        .unconfirmed-button{
+                                            background: @color-black;
+                                            border: 1px solid @color-black;
+                                            color: @color-white;
+                                            opacity: 1;
+                                            pointer-events: inherit;
+                                            span {
+                                                position: initial;
+                                            }
+                                        }
+                                    }
+                                    .icon-check{
+                                        &:before{
+                                            content: '\e912';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                }
+                                &.state-shipping {
+                                    form{
+                                        .unconfirmed-button{
+                                            background: @color-black;
+                                            border: 1px solid @color-black;
+                                            color: @color-white;
+                                            opacity: 0.5;
+                                            pointer-events: inherit;
+                                            span {
+                                                position: initial;
+                                            }
+                                        }
+                                    }
+                                    .icon-check{
+                                        &:before{
+                                            content: '\e911';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                }
+                                &.state-complete {
+                                    .icon-check{
+                                        &:before{
+                                            content: '\e915';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                }
+                                &.step-complete{
+                                    .icon-check{
+                                        width: 35px;
+                                        height: 35px;
+                                        background: @color-black;
+                                        border-radius: 100%;
+                                        position: absolute;
+                                        left: 50%;
+                                        top: 0%;
+                                        transform: translate(-50%, 0%);
+                                        text-align: center;
+                                        &:after{
+                                            content: '\e909';
+                                            font-family: 'Admin Icons';
+                                            color: @color-white;
+                                            font-size: 20px;
+                                            text-align: center;
+                                            line-height: 1.7;
+                                        }
+                                    }
+                                    form{
+                                        .confirmed-button{
+                                            background: @color-verde2;
+                                            border: 1px solid @color-verde2;
+                                            color: @color-white;
+                                            opacity: 1;
+                                            pointer-events: inherit;
+                                            &::before {
+                                                content: '\e909';
+                                                font-family: 'Admin Icons';
+                                                color: @color-white;
+                                                font-size: 10px;
+                                            }
+                                            span {
+                                                position: initial;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -779,7 +1263,7 @@ body{
                                     color: @color-rojo;
                                 }
                                 &.complete{
-                                    color: @color-verde;
+                                    color: @color-azul3;
                                 }
                                 &.processing{
                                     color: @color-gray3;
@@ -813,6 +1297,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-azul;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -846,6 +1331,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-gray3;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -879,6 +1365,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-verde;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -912,6 +1399,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-rojo;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }
@@ -945,6 +1433,7 @@ body{
                                             &:nth-child(9){
                                                 color: @color-naranja;
                                                 font-weight: bold;
+                                                border-bottom: 1px solid @color-gray7;
                                             }
                                         }
                                     }

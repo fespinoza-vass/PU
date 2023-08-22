@@ -112,6 +112,22 @@ define([
         },
 
         /**
+         * Function to modify steps data
+         * @param stepCode
+         * @param modifyData
+         */
+        modifyStep: function (stepCode, modifyData) {
+            steps.each(function (elem, index) {
+                if(elem.code === stepCode){
+                    elem.alias = modifyData.alias != null ? modifyData.alias : elem.alias
+                    elem.title = modifyData.title != null ? modifyData.title : elem.title
+                    elem.isVisible = modifyData.isVisible != null ? modifyData.isVisible : elem.isVisible
+                    elem.sortOrder = modifyData.sortOrder != null ? modifyData.sortOrder : elem.sortOrder
+                }
+            });
+        },
+
+        /**
          * @return {Number}
          */
         getActiveItemIndex: function () {

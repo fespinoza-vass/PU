@@ -10792,7 +10792,7 @@ Preprocessed view files and static files,Archivos de vista y archivos estáticos
 Web Setup Wizard,Asistente de Configuración de Sitio Web,module,Magento_Backend,
 Base Link URL,Base de Enlace URL,module,Magento_Backend,
 Secure Base Link URL,Base de Enlace URL Segura,module,Magento_Backend,
-"Welcome, please sign in","Bienvenido, por favor ingresa",module,Magento_Backend,
+"Welcome, please sign in","Bienvenido",module,Magento_Backend,
 Delete %1 '%2',Borrar %1 '%2',module,Magento_Backend,
 Delete Web Site,Borrar Sitio Web,module,Magento_Backend,
 Delete Store,Borrar Tienda,module,Magento_Backend,
@@ -25995,7 +25995,13 @@ No shipping method selected,No se seleccionó ningún método de envío
 "😔 We could not find anything for <b>""%search_query%""</b>","😔 No pudimos encontrar nada para <b>""%search_query%""</b>"
 "We could not find anything for %1","No pudimos encontrar nada para %1"
 "Show (%1) more","Ver (%1) más"
+"Confirmed order","Pedido confirmado"
+"Prepared order","Pedido preparado"
+"Order on the way","Pedido en camino"
+"Order ready for pick up","Pedido listo para recojo"
+"Order delivered","Pedido entregado"
 "You have new submitted custom form.","Tienes un nuevo formulario de CONTACTO"
 "%form_title form was submitted  by "," El formulario fue enviado por,"
 "which you can see by the following ","Puedes verlo en el siguiente enlace"
 "Submitted Data:","Información enviada:"
+"Know our benefits with cards","Conoce nuestros beneficios con tarjetas"
