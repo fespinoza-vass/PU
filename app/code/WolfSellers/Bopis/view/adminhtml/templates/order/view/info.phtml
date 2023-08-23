@@ -93,7 +93,7 @@ $btnOrden = $block->isBtnOrdenAvailable();
                 Creado: <?= $orderStoreDate; ?><br />
                 Entrega: <?=$order->getShippingMethod()?><br />
                 Tienda: <?= $block->getSourceName() ?> <br>
-                <?=$order->getGiftMessageId() ? 'Esta orden es un regalo' : ''?>
+                <?=$order->getGiftMessageId() ? '<b class="gift">Esta orden es un regalo</b>' : ''?>
             </address>
             <?php if ($block->getAdminUserType() == 1):?>
                 <button name="btn-confirmacion-orden"
