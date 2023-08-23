@@ -45,6 +45,7 @@
         "amasty/shopby": "^2.17",
         "amasty/shopby-graphql": "^1.0",
         "amasty/sorting": "^2.10",
+        "bacon/bacon-qr-code": "^2.0",
         "laminas/laminas-log": "^2.15",
         "magento/composer-root-update-plugin": "~2.0",
         "magento/magento-cloud-metapackage": ">=2.4.5 <2.4.6",
