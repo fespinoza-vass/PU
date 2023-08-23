@@ -44,7 +44,7 @@ abstract class AbstractBopisCollection extends Collection
     const REGULAR_SHIPPING_METHOD = 'urbano';
 
     /** @var string  */
-    const PICKUP_SHIPPING_METHOD = 'instore_instore';
+    const PICKUP_SHIPPING_METHOD = 'instore_pickup';
 
     /**
      * Initialize dependencies.
