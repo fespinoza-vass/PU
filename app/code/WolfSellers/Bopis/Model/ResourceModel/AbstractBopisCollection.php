@@ -44,7 +44,7 @@ abstract class AbstractBopisCollection extends Collection
     const REGULAR_SHIPPING_METHOD = 'urbano';
 
     /** @var string  */
-    const PICKUP_SHIPPING_METHOD = 'instore';
+    const PICKUP_SHIPPING_METHOD = 'instore_pickup';
 
     /**
      * Initialize dependencies.
@@ -146,10 +146,23 @@ abstract class AbstractBopisCollection extends Collection
 
         // $this->getSelect()->where("so.shipping_method = 'bopis_bopis'");
 
-        if ($roleName === self::BOPIS_STORES && !empty($sourceCode) && $sourceCode != "all") {
-            $codes = explode(',', $sourceCode);
-            foreach ($codes as $code) {
-                $this->getSelect()->orWhere("so.source_code LIKE '%" . trim($code) . "%'");
+        if ($roleName === self::BOPIS_STORES) {
+            $this->getSelect()->where("so.shipping_method = '" . self::PICKUP_SHIPPING_METHOD . "'");
+
+            if (!empty($sourceCode) && $sourceCode != "all") {
+                $sql = null;
+                $whereList = [];
+
+                $codes = explode(',', $sourceCode);
+                foreach ($codes as $code) {
+                    $whereList[] = " (so.source_code LIKE '%" . trim($code) . "%') ";
+                }
+
+                if (count($whereList)) {
+                    $sql = implode(' OR ', $whereList);
+                }
+
+                if ($sql) $this->getSelect()->where($sql);
             }
         }
 
