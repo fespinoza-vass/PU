@@ -92,7 +92,7 @@ class QR extends AbstractHelper
         $path = $var->getAbsolutePath().'qrcodes/';
 
         if (!is_dir($path)) {
-            mkdir($path, 0664, true);
+            mkdir($path, 0777, true);
         }
 
 
@@ -124,6 +124,6 @@ class QR extends AbstractHelper
 
     public function getURLQRImage($incrementId){
         $baseUrl = $this->_storeManager->getStore()->getBaseUrl();
-        return $baseUrl."media/".$incrementId.".png";
+        return $baseUrl."pub/media/qrcodes/".$incrementId.".png";
     }
 }
