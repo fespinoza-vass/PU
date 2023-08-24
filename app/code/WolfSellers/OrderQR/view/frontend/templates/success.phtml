@@ -1,0 +1,25 @@
+<?php
+    /** @var $block \WolfSellers\OrderQR\Block\Onepage\Success */
+?>
+
+<div>Order No: <a href="<?= $block->getViewOrderUrl() ?>"><?= $block->getOrderId() ?></a></div>
+
+<p>
+    <?= __("Se enviará un mensaje con <b>toda la información de tu pedido</b> por correo electrónico y podrás recogerlo a partir del día <b>miércoles 1 de febrero</b> en un rango de 8am a 10pm")?>
+</p>
+
+<div class="qr-container">
+    <div class="qr-code"><img src="<?= $block->getQrImage() ?>" alt="qr-code"></div>
+    <div class="qr-description">
+        <?= __("Deberás mostrar este código QR junto con tu documento de identidad para poder retirar tu pedido en tienda."); ?>
+        <div class="qr-share-whatsapp">
+            <?=__("Compartir por Whatsapp") ?>
+        </div>
+    </div>
+</div>
+
+<div class="remember">
+    <?= __("Recuerda que tienes hasta 7 días posteriores para recoger tus productos, de lo contrario tu compra será anuladada y se procederá a la devolucion del dinero") ?>
+</div>
+
+<a class="back-to-store" href="/"><?= __("Regresar a la tienda"); ?></a>
