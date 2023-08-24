@@ -9,6 +9,7 @@ use WolfSellers\OrderQR\Helper\QR;
 
 class Success extends \Magento\Framework\View\Element\Template
 {
+    CONST SHIPPING_METHOD_FOR_QRCODE = "instore_pickup";
     /**
      * @var \Magento\Checkout\Model\Session
      */
@@ -93,7 +94,8 @@ class Success extends \Magento\Framework\View\Element\Template
                 'can_print_order' => $this->isVisible($order),
                 'can_view_order'  => $this->canViewOrder($order),
                 'order_id'  => $order->getIncrementId(),
-                'qr_image'  => $this->_qrHelper->getURLQRImage($order->getIncrementId())
+                'qr_image'  => $this->_qrHelper->getURLQRImage($order->getIncrementId()),
+                'is_pickup'  => boolval(($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE))
             ]
         );
     }
