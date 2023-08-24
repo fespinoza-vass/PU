@@ -2,9 +2,11 @@
 
 namespace WolfSellers\OrderQR\Plugin;
 
+use AWS\CRT\Log;
 use Magento\Sales\Api\OrderManagementInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use WolfSellers\OrderQR\Helper\QR;
+use WolfSellers\OrderQR\Logger\Logger;
 
 /**
  *
@@ -21,12 +23,18 @@ class PlaceOrderQRPlugin
      */
     CONST SHIPPING_METHOD_FOR_QRCODE = "instore_pickup";
 
+    /** @var Logger */
+    protected $_logger;
+
     /**
      * @param QR $qrHelper
      */
     public function __construct(
-        QR $qrHelper
+        QR $qrHelper,
+        Logger $logger
+
     ) {
+        $this->_logger = $logger;
         $this->_qrHelper = $qrHelper;
     }
 
@@ -41,13 +49,13 @@ class PlaceOrderQRPlugin
         $order = $result;
 
         try {
-//            if($order->getPayment()->getMethod() == self::SHIPPING_METHOD_FOR_QRCODE)
-//            {
+            if($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE)
+            {
                 $this->_qrHelper->generateQR($order->getIncrementId());
-//            }
+            }
 
         } catch (\Throwable $error) {
-
+            $this->_logger->error($error->getMessage());
         }
         return $result;
     }
