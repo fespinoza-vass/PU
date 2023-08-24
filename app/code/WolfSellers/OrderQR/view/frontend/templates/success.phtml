@@ -2,6 +2,7 @@
     /** @var $block \WolfSellers\OrderQR\Block\Onepage\Success */
 ?>
 
+<?php if($block->getIsPickup()): ?>
 <div>Order No: <a href="<?= $block->getViewOrderUrl() ?>"><?= $block->getOrderId() ?></a></div>
 
 <p>
@@ -23,3 +24,4 @@
 </div>
 
 <a class="back-to-store" href="/"><?= __("Regresar a la tienda"); ?></a>
+<?php endif; ?>
