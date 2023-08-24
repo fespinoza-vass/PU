@@ -122,6 +122,11 @@ class QR extends AbstractHelper
         );
     }
 
+    /**
+     * @param $incrementId
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function getURLQRImage($incrementId){
         $baseUrl = $this->_storeManager->getStore()->getBaseUrl();
         return $baseUrl."pub/media/qrcodes/".$incrementId.".png";
