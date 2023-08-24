@@ -33,6 +33,7 @@ if($enviar) {
 if($preparar) {
     $btn = 'preparar';
 }
+$enabledBopisFlow = false;
 ?>
 
 <?php
@@ -42,9 +43,9 @@ $viewModel = $block->getData('viewModel');
 
 <div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
 
-    <button type="button" class="action back customization">
-        <a href="<?=$viewModel->getBackUrl()?>"> &#8592; </a>
-    </button>
+    <a href="<?=$viewModel->getBackUrl()?>">
+        <button type="button" class="action back customization"></button>
+    </a>
 
     <h1 class="page-title"<?= /* @noEscape */
     $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
@@ -52,10 +53,17 @@ $viewModel = $block->getData('viewModel');
         <span class="page-title-order-id-bopis">ID: <?= $order->getIncrementId() ?></span>
 
         <span class="current-state" title="<?=$order->getStatus()?>">
-            <?=$viewModel->getStateLabel($order->getStatus())?>
+            <?=strtoupper($viewModel->getStateLabel($order->getStatus()))?>
         </span>
 
-        <?php if ($block->getAdminUserType() == 1): ?>
+        <?php if ($order->getGiftMessageId()): ?>
+            <span class="current-state">
+                <span class="icon-gift"></span>
+                <?=__('ESTA ORDEN ES UN REGALO')?>
+            </span>
+        <?php endif; ?>
+
+        <?php if ($block->getAdminUserType() == 1 && $enabledBopisFlow): ?>
             <button name="btn-<?=$btn?>"
                     value="Preparar"
                     class="btn-<?=$btn?> <?= $classBtn ?>"
