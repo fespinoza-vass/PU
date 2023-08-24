@@ -19,7 +19,7 @@ class PlaceOrderQRPlugin
     /**
      *
      */
-    CONST SHIPPING_METHOD_FOR_QRCODE = "pickup";
+    CONST SHIPPING_METHOD_FOR_QRCODE = "instore_pickup";
 
     /**
      * @param QR $qrHelper
@@ -41,15 +41,13 @@ class PlaceOrderQRPlugin
         $order = $result;
 
         try {
-            if($order->getPayment()->getMethod() == self::SHIPPING_METHOD_FOR_QRCODE)
-            {
+//            if($order->getPayment()->getMethod() == self::SHIPPING_METHOD_FOR_QRCODE)
+//            {
                 $this->_qrHelper->generateQR($order->getIncrementId());
-            }
+//            }
 
         } catch (\Throwable $error) {
-            $this->_logger->addError(
-                "ERROR AFTERPLACE PLUGIN ". $error->getMessage() . $error->getTraceAsString()
-            );
+
         }
         return $result;
     }

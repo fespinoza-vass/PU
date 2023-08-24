@@ -75,11 +75,20 @@ class QR extends AbstractHelper
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function generateQR($incrementId){
+
         $storeId = $this->_storeManager->getStore()->getId();
+        $isActive = $this->getConfigValue(self::XML_PATH_QR_ACTIVE,$storeId);
+
+        if(!$isActive){
+            return;
+        }
+
         $url =  $this->getOrderAdminURLById($incrementId);
         $qrImageSize = $this->getConfigValue(self::QR_SIZE,$storeId);
 
-        $var = $this->_fileSystem->getDirectoryWrite(DirectoryList::VAR_DIR);
+
+
+        $var = $this->_fileSystem->getDirectoryWrite(DirectoryList::MEDIA);
         $path = $var->getAbsolutePath().'qrcodes/';
 
         if (!is_dir($path)) {
@@ -111,5 +120,10 @@ class QR extends AbstractHelper
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
+    }
+
+    public function getURLQRImage($incrementId){
+        $baseUrl = $this->_storeManager->getStore()->getBaseUrl();
+        return $baseUrl."media/".$incrementId.".png";
     }
 }
