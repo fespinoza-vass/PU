@@ -110,8 +110,9 @@ class GiftWrapProcessor implements LayoutProcessorInterface
 
     /**
      * Gift Wrap and Gift Messages processor
+     * @throws NoSuchEntityException
      */
-    public function process($jsLayout)
+    public function process($jsLayout): array
     {
         $quote = $this->checkoutSession->getQuote();
         $store = $this->storeManager->getStore();
@@ -130,7 +131,7 @@ class GiftWrapProcessor implements LayoutProcessorInterface
      *
      * @throws NoSuchEntityException
      */
-    public function processGiftMessage()
+    public function processGiftMessage(): void
     {
         if (empty($messages = $this->giftMessages->getGiftMessages())) {
             $this->walker->unsetByPath('{GIFT_MESSAGE}');
@@ -168,7 +169,7 @@ class GiftWrapProcessor implements LayoutProcessorInterface
             $checkboxComponent = [
                 'component' => 'WolfSellers_Checkout/js/view/checkbox-gift',
                 'displayArea' => 'checkbox',
-                'description' => 'Add a gift message',
+                'description' => '¿Tu compra es un regalo?',
                 'dataScope' => 'checkout.gift_message',
                 'value' => '1'
             ];

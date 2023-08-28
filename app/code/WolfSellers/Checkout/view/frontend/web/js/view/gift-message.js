@@ -1,8 +1,9 @@
 define([
+    'ko',
     'uiElement',
     'Magento_Ui/js/lib/view/utils/async',
     'Magento_Ui/js/form/form'
-], function (uiElement, $, Component) {
+], function (ko, uiElement, $, Component) {
     'use strict';
 
     var provider = uiElement();
@@ -12,13 +13,7 @@ define([
             template: 'WolfSellers_Checkout/form/gift_message'
         },
         observables: {},
-
-        /**
-         *
-         */
-        triggerSubmit: function (){
-            this.trigger('edit_link_click');
-        },
+        giftMessage: ko.observable(''),
 
         /**
          * @returns {void}
@@ -96,7 +91,7 @@ define([
                 item_id: this.item_id,
                 recipient: this.getObservable('recipient')(),
                 sender: this.getObservable('sender')(),
-                message: this.getObservable('message')()
+                message: this.giftMessage()
             }
         }
     });

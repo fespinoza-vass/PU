@@ -35,7 +35,8 @@ define([
     return Component.extend({
         defaults: {
             listens: {
-                'isFormPopUpVisible': 'popUpVisibleObserver'
+                'isFormPopUpVisible': 'popUpVisibleObserver',
+                '${$.ns}.sidebar.summary.container-giftmessage.gift_options.0:giftMessage': 'submit'
             },
             template: 'WolfSellers_Checkout/container-giftmessage'
         },
@@ -130,10 +131,11 @@ define([
          *
          * @returns {void}
          */
-        submit: function (initial) {
+        submit: function () {
             var self = this,
                 data = [],
-                request;
+                request,
+                initial = true;
 
             ['item_messages', 'gift_options'].forEach(function (containerName) {
                 // eslint-disable-next-line vars-on-top
