@@ -12,7 +12,7 @@ define([
             }
             if (Notification.permission !== "granted") {
                 return;
-            } 
+            }
             $.ajax({
                 url:config.url,
                 global: false,
@@ -21,7 +21,7 @@ define([
                 data: {orderId:window.PUSH_ODER_ID,form_key:window.FORM_KEY},
                 async: true
             }).done(
-                function (response) {                                 
+                function (response) {
 
                     if(response.result == 'success')
                     {
@@ -32,7 +32,7 @@ define([
                             icon: "/media/pushnotification/"+config.icon,
                             vibrate: [100,2000,100],
                             //sound: "/media/notification/notification.mp3",
-                            body: "Prueba de contenido",
+                            body: config.notificationtext,
                             requireInteraction: true
                         });
                         notification.onclick = function () {
@@ -41,10 +41,10 @@ define([
                         };
                         window.PUSH_ODER_ID = response.orderId;
                     }
-                    
+
                 }
             ).fail(
-               
+
             );
 
         }
@@ -62,5 +62,5 @@ define([
         });
         setInterval(function(){ showNotification(); }, (config.seconds * 1000));
     }
-  
+
 });
