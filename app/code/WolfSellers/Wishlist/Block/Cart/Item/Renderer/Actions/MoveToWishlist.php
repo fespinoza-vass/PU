@@ -56,6 +56,10 @@ class MoveToWishlist extends Generic
         return $this->wishlistHelper->getMoveFromCartParams($this->getItem()->getId());
     }
 
+    /**
+     * Provides product is salable flag
+     * @return bool
+     */
     public function getIsSalable()
     {
         return $this->getItem()->getProduct()->getIsSalable();
