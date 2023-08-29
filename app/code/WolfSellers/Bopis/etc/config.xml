@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <bopis>
+                <model>WolfSellers\Bopis\Model\Carrier\Bopis</model>
+                <active>1</active>
+                <title>Recoger en tienda</title>
+                <name>Bopis</name>
+                <price>0.00</price>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <sallowspecific>0</sallowspecific>
+            </bopis>
+        </carriers>
+        <bopis>
+            <general>
+                <hold_reasons>
+                    <item1>
+                        <reason>Cliente decide no continuar con la orden.</reason>
+                    </item1>
+                    <item2>
+                        <reason>Pedido excede tiempo en inventario BOPIS.</reason>
+                    </item2>
+                    <item3>
+                        <reason>Intención de Fraude.</reason>
+                    </item3>
+                    <item4>
+                        <reason>Otros motivos - Observaciones.</reason>
+                    </item4>
+                </hold_reasons>
+            </general>
+            <status>
+                <confirmed>payment</confirmed>
+                <preparing>processing</preparing>
+                <shipping>shipping</shipping>
+                <readyforpickup>order_ready_for_pick_up</readyforpickup>
+                <complete>complete</complete>
+            </status>
+            <pushnotification>
+                <sound></sound>
+                <icon></icon>
+                <seconds>30</seconds>
+                <notificationtext>Nota</notificationtext>
+            </pushnotification>
+            <api>
+                <base_url>https://inventario-stg.tiendasishop.com/</base_url>
+            </api>
+            <email>
+                <enabled>1</enabled>
+                <template>bopis_email_template</template>
+                <identity>sales</identity>
+                <copy_to>andonidominguez@wolfsellers.com</copy_to>
+            </email>
+            <cancel_email>
+                <enabled>1</enabled>
+                <template>bopis_cancel_email_template</template>
+                <identity>sales</identity>
+                <copy_to>andonidominguez@wolfsellers.com</copy_to>
+            </cancel_email>
+            <hold_email>
+                <enabled>1</enabled>
+                <template>bopis_hold_email_template</template>
+                <identity>sales</identity>
+                <copy_to>andonidominguez@wolfsellers.com</copy_to>
+            </hold_email>
+            <remember_me>
+                <enabled>1</enabled>
+                <roles></roles>
+            </remember_me>
+        </bopis>
+    </default>
+</config>
