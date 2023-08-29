@@ -40,6 +40,7 @@
                 <sound></sound>
                 <icon></icon>
                 <seconds>30</seconds>
+                <notificationtext>Nota</notificationtext>
             </pushnotification>
             <api>
                 <base_url>https://inventario-stg.tiendasishop.com/</base_url>
