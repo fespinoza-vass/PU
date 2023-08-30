@@ -129,4 +129,12 @@ class Notifications extends Template
     {
         return $this->getConfig("bopis/pushnotification/seconds");
     }
+
+    /**
+     * @return String
+     */
+    public function getNotificationText()
+    {
+        return $this->getConfig("bopis/pushnotification/notificationtext");
+    }
 }

@@ -62,7 +62,7 @@ class ShippingOptions implements ArrayInterface
         try {
             foreach ($mainOrders as $data){
                 $methodCode = trim($data->getShippingDescription());
-                $options[$methodCode] = $methodCode . ' (' .$data->getShippingMethod(). ')';
+                $options[$data->getShippingMethod()] = ' [' .$data->getShippingMethod(). '] ' . $this->getAlias($data->getShippingMethod());
             }
         }catch (\Throwable $e){
             $this->logger->error($e->getMessage());

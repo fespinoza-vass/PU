@@ -63,6 +63,9 @@
                     <label>Seconds check</label>
                     <validate>validate-integer</validate>
                 </field>
+                <field id="notificationtext" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Text</label>
+                </field>
             </group>
 
             <group id="api" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
