@@ -33,6 +33,9 @@ use Magento\Wishlist\Helper\Data;
 use Magento\Wishlist\Model\ResourceModel\Item\CollectionFactory;
 use Magento\Wishlist\Model\ResourceModel\Wishlist as ResourceWishlist;
 use Magento\Wishlist\Model\ResourceModel\Wishlist\Collection;
+use Magento\Wishlist\Model\ItemFactory;
+use Magento\Wishlist\Model\Item;
+
 
 /**
  * Wishlist model
@@ -49,7 +52,7 @@ use Magento\Wishlist\Model\ResourceModel\Wishlist\Collection;
  * @api
  * @since 100.0.2
  */
-class Wishlist extends AbstractModel implements IdentityInterface
+class Wishlist extends \Magento\Wishlist\Model\Wishlist
 {
     /**
      * Wishlist cache tag name
@@ -66,7 +69,7 @@ class Wishlist extends AbstractModel implements IdentityInterface
     /**
      * Wishlist item collection
      *
-     * @var ResourceModel\Item\Collection
+     * @var \Magento\Wishlist\Model\ResourceModel\Item\Collection
      */
     protected $_itemCollection;
 
@@ -105,7 +108,7 @@ class Wishlist extends AbstractModel implements IdentityInterface
     protected $_date;
 
     /**
-     * @var ItemFactory
+     * @var \Magento\Wishlist\Model\ItemFactory
      */
     protected $_wishlistItemFactory;
 
@@ -160,7 +163,7 @@ class Wishlist extends AbstractModel implements IdentityInterface
      * @param Collection $resourceCollection
      * @param StoreManagerInterface $storeManager
      * @param DateTime\DateTime $date
-     * @param ItemFactory $wishlistItemFactory
+     * @param \Magento\Wishlist\Model\ItemFactory $wishlistItemFactory
      * @param CollectionFactory $wishlistCollectionFactory
      * @param ProductFactory $productFactory
      * @param Random $mathRandom
@@ -184,7 +187,7 @@ class Wishlist extends AbstractModel implements IdentityInterface
         Collection $resourceCollection,
         StoreManagerInterface $storeManager,
         DateTime\DateTime $date,
-        ItemFactory $wishlistItemFactory,
+        \Magento\Wishlist\Model\ItemFactory $wishlistItemFactory,
         CollectionFactory $wishlistCollectionFactory,
         ProductFactory $productFactory,
         Random $mathRandom,
