@@ -6,7 +6,7 @@
 
 /** @var \WolfSellers\Wishlist\Block\Cart\Item\Renderer\Actions\MoveToWishlist $block */
 ?>
-<?php if ($block->isAllowInCart() && $block->isProductVisibleInSiteVisibility() && !$block->getIsSalable()) : ?>
+<?php if ($block->isAllowInCart() && $block->isProductVisibleInSiteVisibility()) : ?>
     <a href="#"
        data-post='<?= /* @noEscape */ $block->getMoveFromCartParams() ?>'
        class="use-ajax action towishlist action-towishlist" style="display: block!important;">
