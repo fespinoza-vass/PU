@@ -21,6 +21,7 @@ use Magento\Wishlist\Model\ResourceModel\Wishlist\Collection;
 use Magento\Wishlist\Model\ResourceModel\Wishlist\CollectionFactory;
 use Magento\Wishlist\Model\Wishlist;
 use Magento\Wishlist\Model\WishlistFactory;
+use Zend\Log\Logger;
 
 /**
  * Add cart item to wishlist and remove from cart controller.
@@ -61,6 +62,11 @@ class Fromcart extends \Magento\Wishlist\Controller\AbstractIndex implements Act
     private WishlistFactory $wishlistFactory;
 
     /**
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
      * @param Context $context
      * @param WishlistProviderInterface $wishlistProvider
      * @param WishlistHelper $wishlistHelper
@@ -88,6 +94,10 @@ class Fromcart extends \Magento\Wishlist\Controller\AbstractIndex implements Act
         $this->escaper = $escaper;
         $this->formKeyValidator = $formKeyValidator;
         $this->wishlistFactory = $wishlistFactory;
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/wishlist.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+        $this->logger = $logger;
     }
 
     /**
@@ -119,18 +129,19 @@ class Fromcart extends \Magento\Wishlist\Controller\AbstractIndex implements Act
 
             $productId = $item->getProductId();
             $buyRequest = $item->getBuyRequest();
-
+            $this->logger->info("\WolfSellers\Wishlist\Controller\Index\Fromcart::execute ".$wishlistSaveForLater->count());
             if ($wishlistSaveForLater->count()){
                 /**@var $wishlist Wishlist * */
                 $wishlist = $wishlistSaveForLater->getFirstItem();
             }else{
-                /**@var $wishlist Wishlist * */
-                $wishlist = $this->wishlistFactory->create();
+                $this->logger->info("CUSTOMER ".$this->cart->getQuote()->getCustomerId());
+                /**@var $wishlist Wishlist **/
+                $wishlist = $this->wishlistProvider->getWishlist();
                 $wishlist->setCustomerId($this->cart->getQuote()->getCustomerId());
                 $wishlist->setName("Guardar para más tarde");
                 $wishlist->setShared(1);
-                $wishlist->set("visibility", 0);
-                $wishlist->set("save_for_later", 1);
+                $wishlist->setData("visibility", 0);
+                $wishlist->setData("save_for_later", 1);
             }
             $wishlist->addNewItem($productId, $buyRequest);
             $wishlist->save();
@@ -143,6 +154,8 @@ class Fromcart extends \Magento\Wishlist\Controller\AbstractIndex implements Act
                 $this->escaper->escapeHtml($item->getProduct()->getName())
             ));
         } catch (LocalizedException $e) {
+            $this->logger->info($e->getMessage());
+            $this->logger->info($e->getTraceAsString());
             $this->messageManager->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage($e, __('We can\'t move the item to the wish list.'));

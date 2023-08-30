@@ -7,7 +7,4 @@
     <preference for="Magento\Wishlist\Controller\Index\Fromcart"
                 type="WolfSellers\Wishlist\Controller\Index\Fromcart" />
 
-    <preference for="Magento\Wishlist\Model\Wishlist"
-                type="\WolfSellers\Wishlist\Model\Wishlist" />
-
 </config>
