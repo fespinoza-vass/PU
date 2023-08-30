@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="WolfSellers_Bopis::principal"
+             title="Historial de ordenes"
+             module="WolfSellers_Bopis"
+             sortOrder="200"
+             action="bopis/listorders"
+             resource="WolfSellers_Bopis::principal"/>
+
+        <add 	id="WolfSellers_Bopis::listnewsorders"
+                title="Ordenes Confirmadas"
+                module="WolfSellers_Bopis"
+                sortOrder="210"
+                action="bopis/listnewsorders/index"
+                resource="WolfSellers_Bopis::listnewsorders"
+        />
+
+        <add 	id="WolfSellers_Bopis::listprocessingorders"
+                title="Ordenes En Preparacion"
+                module="WolfSellers_Bopis"
+                sortOrder="220"
+                action="bopis/listprocessingorders/index"
+                resource="WolfSellers_Bopis::listprocessingorders"
+        />
+
+        <add 	id="WolfSellers_Bopis::listshippingorders"
+                title="Ordenes En Camino"
+                module="WolfSellers_Bopis"
+                sortOrder="220"
+                action="bopis/listshippingorders/index"
+                resource="WolfSellers_Bopis::listshippingorders"
+        />
+
+        <add 	id="WolfSellers_Bopis::listreadyforpickup"
+                title="Ordenes Listas para Recojo"
+                module="WolfSellers_Bopis"
+                sortOrder="225"
+                action="bopis/listreadyforpickup/index"
+                resource="WolfSellers_Bopis::listreadyforpickup"
+        />
+
+        <add 	id="WolfSellers_Bopis::listcompleteorders"
+                title="Ordenes Entregadas"
+                module="WolfSellers_Bopis"
+                sortOrder="230"
+                action="bopis/listcompleteorders/index"
+                resource="WolfSellers_Bopis::listcompleteorders"
+        />
+
+        <add 	id="WolfSellers_Bopis::listcanceledorders"
+                title="Ordenes Canceladas"
+                module="WolfSellers_Bopis"
+                sortOrder="240"
+                action="bopis/listcanceledorders/index"
+                resource="WolfSellers_Bopis::listcanceledorders"
+        />
+
+        <add 	id="WolfSellers_Bopis::listholdedorders"
+                title="Ordenes Detenidas"
+                module="WolfSellers_Bopis"
+                sortOrder="250"
+                action="bopis/listholdedorders/index"
+                resource="WolfSellers_Bopis::listholdedorders"
+        />
+
+    </menu>
+</config>

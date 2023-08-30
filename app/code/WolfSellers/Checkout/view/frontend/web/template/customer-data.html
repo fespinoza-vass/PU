@@ -1,0 +1,37 @@
+<li id="customer_step" class="checkout-customer-data" role="presentation" data-bind="fadeVisible: isVisible">
+    <div class="step-title" data-bind="i18n: 'Customer Data'" data-role="title"></div>
+    <div id="checkout-step-title" class="step-content" data-role="content">
+
+        <div id="customer_data_edit" class="customer-data-edit" data-bind="fadeVisible: isVisibleEdit">
+            <each if="!quoteIsVirtual" args="getRegion('customer-email')" render="" ></each>
+
+            <form data-bind="submit: navigateToNextStep" novalidate="novalidate">
+
+                <render args="customerFormTemplate"></render>
+
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button data-role="opc-continue" type="submit" class="button action continue primary">
+                            <span><!-- ko i18n: 'Next'--><!-- /ko --></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="resumen_personal_info" class="resumen-customer-data" data-bind="fadeVisible: !isVisibleEdit()">
+            <!-- ko foreach: getRegion('resumen-personal-information') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+
+            <div class="actions-toolbar">
+                <div class="secondary">
+                    <button type="button" class="button edit" data-bind="click: editPersonalInfo()">
+                        <span><!-- ko i18n: 'Edit'--><!-- /ko --></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</li>

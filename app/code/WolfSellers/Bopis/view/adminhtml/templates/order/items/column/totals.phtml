@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Items\Totals $block */
+
+?>
+<?php if ($item = $block->getItem()) : ?>
+    <table class="subtotales-bopis">
+        <tr>
+            <th style="vertical-align: middle; text-align: left;">Subtotal</th>
+            <td style="vertical-align: middle;">
+                <?=
+                $item->getOrder()->formatPricePrecision($item->getBaseRowTotalInclTax(), 2, false); ?>
+            </td>
+        </tr>
+        <tr>
+            <th style="vertical-align: middle; text-align: left;">Descuento</th>
+            <td style="vertical-align: middle;">
+                <?= (($item->getDiscountAmount() > 0) ? "-" : "")
+                . $item->getOrder()->formatPricePrecision($item->getDiscountAmount(), 2, false); ?>
+            </td>
+        </tr>
+        <tr>
+            <th style="vertical-align: middle; text-align: left;">Total:</th>
+            <td style="vertical-align: middle;">
+                <?=
+                $item->getOrder()->formatPricePrecision($item->getBaseRowTotalInclTax(), 2, false); ?>
+            </td>
+        </tr>
+
+    </table>
+<?php endif; ?>
