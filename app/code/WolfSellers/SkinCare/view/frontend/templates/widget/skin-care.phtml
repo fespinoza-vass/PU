@@ -4,6 +4,11 @@
  * @var \Magento\Framework\Escaper $escaper
  */
 ?>
+<?php
+$_helper = $this->helper('\WolfSellers\SkinCare\Helper\SplitHelper');
+$url = $_helper->getUrlPlugin();
+?>
+
 
 <div class="skin-care-content">
     <script>
@@ -11,7 +16,7 @@
             var s = d.createElement('script');
             s.type = 'text/javascript';
             s.async = true;
-            s.src = 'https://plugins-media.makeupar.com/c41059/sdk.js?apiKey=' + k;
+            s.src = '<?php echo $url; ?>';
             var x = d.getElementsByTagName('script')[0];
             x.parentNode.insertBefore(s, x);
         })(document, '<?php echo $escaper->escapeHtml($block->getApiKey()); ?>');
