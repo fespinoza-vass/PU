@@ -6,6 +6,7 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use WolfSellers\OrderQR\Helper\QR as QRHelper;
 
 
 class QR extends \Magento\Framework\View\Element\Template
@@ -19,6 +20,9 @@ class QR extends \Magento\Framework\View\Element\Template
      */
     private $orderRepository;
 
+
+    protected $_qrHelper;
+
     /**
      * @param Context $context
      * @param array $data
@@ -27,8 +31,12 @@ class QR extends \Magento\Framework\View\Element\Template
     public function __construct(
         Context $context,
         ?OrderRepositoryInterface $orderRepository = null,
-        array $data = [],
+        QRHelper $qrHelper,
+        array $data = []
+
     ) {
+
+        $this->_qrHelper = $qrHelper;
         $this->orderRepository = $orderRepository ?: ObjectManager::getInstance()->get(OrderRepositoryInterface::class);
 
         parent::__construct($context, $data);
@@ -67,17 +75,6 @@ class QR extends \Magento\Framework\View\Element\Template
 
         $this->addData(
             [
-                'is_order_visible' => $this->isVisible($order),
-                'view_order_url' => $this->getUrl(
-                    'sales/order/view/',
-                    ['order_id' => $order->getEntityId()]
-                ),
-                'print_url' => $this->getUrl(
-                    'sales/order/print',
-                    ['order_id' => $order->getEntityId()]
-                ),
-                'can_print_order' => $this->isVisible($order),
-                'can_view_order'  => $this->canViewOrder($order),
                 'order_id'  => $order->getIncrementId(),
                 'qr_image'  => $this->_qrHelper->getURLQRImage($order->getIncrementId()),
                 'is_pickup'  => boolval(($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE))

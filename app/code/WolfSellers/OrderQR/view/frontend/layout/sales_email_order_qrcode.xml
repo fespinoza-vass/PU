@@ -6,7 +6,6 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Order Items List" design_abstraction="custom">
-    <update handle="sales_email_order_renderers"/>
     <body>
             <block class="WolfSellers\OrderQR\Block\Order\Email\QR" name="qr_email_handle" template="WolfSellers_OrderQR::qr_email.phtml" cacheable="false"/>
     </body>
