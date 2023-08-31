@@ -18,6 +18,9 @@ var config = {
             },
             'Amasty_Label/js/label': {
                 'WolfSellers_Checkout/js/label': true
+            },
+            'Magento_Ui/js/form/element/abstract':{
+                'WolfSellers_Checkout/js/view/form/element/abstract': true
             }
         }
     }

@@ -1,11 +1,11 @@
-<li id="customer_step" class="checkout-customer-data" role="presentation" data-bind="fadeVisible: isVisible">
+<li id="customer_step" class="checkout-customer-data" role="presentation" data-bind="visible: isVisible">
     <div class="step-title" data-bind="i18n: 'Customer Data'" data-role="title"></div>
     <div id="checkout-step-title" class="step-content" data-role="content">
 
         <div id="customer_data_edit" class="customer-data-edit" data-bind="fadeVisible: isVisibleEdit">
             <each if="!quoteIsVirtual" args="getRegion('customer-email')" render="" ></each>
 
-            <form data-bind="submit: navigateToNextStep" id="stepFormCheck" novalidate="novalidate">
+            <form data-bind="submit: navigateToNextStep" id="stepFormCheck" novalidate="novalidate" data-form-part="customerData">
 
                 <render args="customerFormTemplate"></render>
 

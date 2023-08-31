@@ -34,7 +34,7 @@ define([
 
     return Component.extend({
         defaults: {
-            template: 'Magento_Checkout/form/element/email',
+            template: 'WolfSellers_Checkout/form/element/email',
             email: checkoutData.getInputFieldEmailValue(),
             emailFocused: false,
             isLoading: false,

@@ -59,6 +59,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $customerDataComponent = [
             'component' => 'WolfSellers_Checkout/js/view/customer-data-step',
             'displayArea' => 'customer-data-step',
+            'provider' => 'checkoutProvider',
             'sortOrder' => '0'
         ];
         $resumenCustomerData = [
@@ -128,6 +129,9 @@ class LayoutProcessor implements LayoutProcessorInterface
             'dataScope' => 'customerData.identificacion',
             'label' => 'Identificacion',
             'provider' => 'checkoutProvider',
+            'validation' => [
+                'required-entry' => true
+            ],
             'sortOrder' => 3,
             'filterBy' => null,
             'customEntry' => null,

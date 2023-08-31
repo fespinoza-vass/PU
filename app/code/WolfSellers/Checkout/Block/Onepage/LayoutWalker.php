@@ -30,7 +30,8 @@ class LayoutWalker
         '{BILLING_STEP}' => '{CHECKOUT}.>>.steps.>>.billing-step',
         '{ADDITIONAL_STEP}' => '{SIDEBAR}.>>.additional', //additional summary fields
         '{SIDEBAR}' => '{CHECKOUT}.>>.sidebar',
-        '{CHECKOUT}' => 'components.checkout'
+        '{CHECKOUT}' => 'components.checkout',
+        '{PROVIDER}' => 'components.checkoutProvider'
     ];
 
     public const ESCAPED_SEPARATOR = '\dot/';
