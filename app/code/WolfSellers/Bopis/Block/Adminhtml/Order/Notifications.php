@@ -81,8 +81,8 @@ class Notifications extends Template
     public function getLastOrder()
     {
         $searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
-        //$searchCriteriaBuilder->addFilter('state', 'processing', 'eq');
-        //$searchCriteriaBuilder->addFilter('status', 'processing', 'eq');
+        $searchCriteriaBuilder->addFilter('state', 'processing', 'eq');
+        $searchCriteriaBuilder->addFilter('status', $this->getConfig('bopis/status/confirmed'), 'eq');
         $searchCriteriaBuilder->setPageSize(1);
         $sortOrder = $this->sortOrderBuilder
             ->setField('created_at')
@@ -128,5 +128,13 @@ class Notifications extends Template
     public function getSeconds()
     {
         return $this->getConfig("bopis/pushnotification/seconds");
+    }
+
+    /**
+     * @return String
+     */
+    public function getNotificationText()
+    {
+        return $this->getConfig("bopis/pushnotification/notificationtext");
     }
 }

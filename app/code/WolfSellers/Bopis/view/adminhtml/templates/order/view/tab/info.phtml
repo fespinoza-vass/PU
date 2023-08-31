@@ -19,7 +19,7 @@ $btnAvailable = $block->isBtnMetodoPagoAvailable();
 <?= $block->getChildHtml('order_info') ?>
 <input type="hidden" name="order_id" value="<?= (int) $_order->getId() ?>"/>
 
-<section class="admin__page-section bopis-data">
+<section class="admin__page-section bopis-data card-payment">
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-payment-method">
             <?php /* Payment Method */ ?>

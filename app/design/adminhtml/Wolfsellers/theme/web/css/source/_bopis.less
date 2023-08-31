@@ -111,6 +111,57 @@ body{
                         }
                     }
                     .admin__data-grid-filters-wrap._show{
+                        .admin__fieldset.admin__data-grid-filters {
+                            display: flex;
+                            flex-wrap: wrap;
+                            :nth-child(3) {
+                                order: 1;
+                            }
+                            :nth-child(4) {
+                                order: 2;
+                            }
+                            :nth-child(5) {
+                                order: 4;
+                            }
+                            :nth-child(6) {
+                                order: 5;
+                            }
+                            :nth-child(7) {
+                                order: 3;
+                            }
+                            .admin__form-field {
+                                .admin__action-multiselect-wrap.action-select-wrap {
+                                    .admin__action-multiselect {
+                                        display: flex;
+                                        align-items: center;
+                                        height: 45px;
+                                        border-radius: 12px;
+                                        &::before {
+                                            background: @color-black;
+                                            border-top-right-radius: 8px;
+                                            border-bottom-right-radius: 8px;
+                                            height: 45px;
+                                            width: 4.2rem;
+                                        }
+                                        &::after {
+                                            color: @color-white;
+                                            border-color: @color-white transparent transparent transparent;
+                                            bottom: 2rem;
+                                            right: 16px;
+                                        }
+                                    }
+                                }
+                                .admin__form-field-control {
+                                    .admin__control-select {
+                                        background-image: url('../images/arrow_1.svg');
+                                        background-position: calc(100% - 0) 0, 100%, calc(100% - 0.2rem) 0;
+                                        &:active {
+                                            background-position: calc(100% - 0) 0, 100%, calc(100% - 0.2rem) 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         .admin__data-grid-filters-footer{
                             button.action-tertiary{
                                 span{
@@ -130,7 +181,7 @@ body{
             }
             .page-header.row{
                 border-bottom: 1px solid @color-gray5;
-                width: 95%;
+                width: 100%;
                 margin: auto;
                 margin-bottom: 30px;
             }
@@ -607,13 +658,44 @@ body{
             .page-header{
                 .page-title-wrapper{
                     margin-top: -40px;
-                    padding-left: 40px;
                     display: flex;
-                    align-items: baseline;
+                    align-items: center;
+                    margin-bottom: 30px;
+                    .action.back.customization {
+                        background: @color-white;
+                        border: 1px solid @color-black;
+                        border-radius: 12px;
+                        margin-right: 10px;
+                        padding: 5px 10px;
+                        &::before {
+                            content: '\e907';
+                            font-family: 'Admin Icons';
+                            color: @color-black;
+                            font-size: 1.8rem;
+                        }
+                        a {
+                            display: none;
+                        }
+                    }
                     div{
                         span{
                             font-size: 19px !important;
                             padding-left: 10px;
+                            &.current-state {
+                                background: @color-white;
+                                border: 1px solid @color-gray13;
+                                border-radius: 6px;
+                                padding: 3px 8px;
+                                margin-left: 5px;
+                                color: @color-gray13;
+                                font-weight: bold;
+                                font-size: 12px !important; //import override span general
+                            }
+                            &.current-shipping-method-title {
+                                position: absolute;
+                                left: 40px;
+                                top: 5px;
+                            }
                         }
                         button {
                             background: white;
@@ -707,6 +789,9 @@ body{
                                 background: @color-white;
                                 width: calc(~"20% - 23px");
                                 margin: 10px;
+                                &.card-bill, &.card-payment {
+                                    float: left;
+                                }
                                 .admin__page-section-content{
                                     height: 250px;
                                     width: 100%;
@@ -944,7 +1029,7 @@ body{
                                         position: absolute;
                                         right: 0;
                                         bottom: -75px;
-                                        width: 33%;
+                                        width: 39%;
                                         right: 10px;
                                         border-radius: 12px;
                                         padding: 6px;

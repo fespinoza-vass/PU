@@ -21,9 +21,6 @@ class Status extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
                 $status = $item[$this->getData('name')];
-                if($item["is_new"] == 1)  {
-                    $status = "new";
-                }
                 $tpl = sprintf(
                     '<span class="grid-status %s">%s</span>',
                     $status,

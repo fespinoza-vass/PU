@@ -133,7 +133,7 @@
                 <label translate="true">Entregar a</label>
             </settings>
         </column>
-        <column name="shipping_information" sortOrder="40">
+        <column name="shipping_method" class="WolfSellers\Bopis\Ui\Component\Listing\Column\ShippingMethod" sortOrder="40">
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>
