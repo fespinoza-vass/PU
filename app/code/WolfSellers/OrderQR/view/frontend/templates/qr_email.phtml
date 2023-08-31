@@ -1,0 +1,19 @@
+<?php
+    /** @var $block \WolfSellers\OrderQR\Block\Order\Email\QR */
+?>
+<h1>prueba diego </h1>
+<?php if($block->getIsPickup()): ?>
+    <div class="qr-container">
+        <div class="qr-code"><img src="<?= $block->getQrImage() ?>" alt="qr-code"></div>
+        <div class="qr-description">
+            <?= __("Deberás mostrar este código QR junto con tu documento de identidad para poder retirar tu pedido en tienda."); ?>
+            <div class="qr-share-whatsapp">
+                <?=__("Compartir por Whatsapp") ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="remember">
+        <?= __("Recuerda que tienes hasta 7 días posteriores para recoger tus productos, de lo contrario tu compra será anuladada y se procederá a la devolucion del dinero.") ?>
+    </div>
+<?php endif; ?>
