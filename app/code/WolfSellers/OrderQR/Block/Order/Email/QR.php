@@ -30,8 +30,8 @@ class QR extends \Magento\Framework\View\Element\Template
      */
     public function __construct(
         Context $context,
-        ?OrderRepositoryInterface $orderRepository = null,
         QRHelper $qrHelper,
+        ?OrderRepositoryInterface $orderRepository = null,
         array $data = []
 
     ) {
