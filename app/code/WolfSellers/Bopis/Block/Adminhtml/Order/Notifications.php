@@ -81,8 +81,8 @@ class Notifications extends Template
     public function getLastOrder()
     {
         $searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
-        //$searchCriteriaBuilder->addFilter('state', 'processing', 'eq');
-        //$searchCriteriaBuilder->addFilter('status', 'processing', 'eq');
+        $searchCriteriaBuilder->addFilter('state', 'processing', 'eq');
+        $searchCriteriaBuilder->addFilter('status', $this->getConfig('bopis/status/confirmed'), 'eq');
         $searchCriteriaBuilder->setPageSize(1);
         $sortOrder = $this->sortOrderBuilder
             ->setField('created_at')
