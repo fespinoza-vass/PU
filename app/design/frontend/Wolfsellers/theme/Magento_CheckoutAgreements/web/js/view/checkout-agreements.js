@@ -88,14 +88,18 @@ define([
             if (jQuery( ".actions-toolbar").find("#createCount").length){
                 if (jQuery('#agreement_' + paymentMethodName + '_' + agreementId).is(":checked")) {
                     $( ".actions-toolbar").find("#createCount").removeAttr("disabled");
-                    //jQuery("#createCount").removeAttr("disabled");
                 } else {
                     $( ".actions-toolbar").find("#createCount").attr("disabled", "disabled");
-                    //jQuery("#createCount").attr("disabled", "disabled");
+                }
+            } else {
+                if (jQuery( ".actions-toolbar").find("#stepFormCheck")){
+                    if(jQuery('#agreement__' + agreementId).is(":checked")){
+                        $( ".actions-toolbar").find("#stepFormContinue").removeAttr("disabled");
+                    } else {
+                        $( ".actions-toolbar").find("#stepFormContinue").attr("disabled", "disabled");
+                    }
                 }
             }
         }
-
-
     });
 });
