@@ -14,4 +14,9 @@
                 disabled="false"
         />
     </type>
+    <preference for="WolfSellers\Checkout\Api\GiftMessageInformationManagementInterface"
+                type="WolfSellers\Checkout\Model\GiftMessageInformationManagement" />
+    <preference for="WolfSellers\Checkout\Api\GuestGiftMessageInformationManagementInterface"
+                type="WolfSellers\Checkout\Model\GuestGiftMessageInformationManagement" />
+
 </config>

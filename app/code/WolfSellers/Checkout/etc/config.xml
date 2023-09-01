@@ -6,5 +6,10 @@
                 <enable>0</enable>
             </benefits_modal>
         </onepage>
+        <email>
+            <email_gift>
+                <email_from>contacto@perfumeriasunidas.com.pe</email_from>
+            </email_gift>
+        </email>
     </default>
 </config>
