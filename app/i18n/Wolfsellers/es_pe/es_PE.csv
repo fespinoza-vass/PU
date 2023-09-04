@@ -26007,3 +26007,15 @@ No shipping method selected,No se seleccionó ningún método de envío
 "Know our benefits with cards","Conoce nuestros beneficios con tarjetas"
 Name of recipient of gift,Nombre de quien recibe el regalo
 Write a short dedication,Escribe una breve dedicatoria
+Hello %customer_name ¡Thank you very much for your purchase!,Hola %customer_name ¡Muchas gracias por tu compra!
+"We have successfully received your order. Next, we send you all the information regarding your purchase:","Hemos recibido satisfactoriamente tu pedido. A continuación, te enviamos toda la información referente a tu compra:",module,Magento_Sales,
+"Your order number is <span class=""no-link"">%increment_id</span>","Tu número de pedido es <span class=""no-link"">%increment_id</span>",module,Magento_Sales,
+"track order","Rastrear pedido"
+"Where can I consult about my order?","¿Dónde puedo consultar sobre mi pedido?"
+"If you have any questions about your order, write to WhatsApp","Si tienes alguna consulta sobre tu pedido escríbenos al WhatsApp"
+"or you can click on the following link:","ó puedes darle clic al siguiente enlace:"
+"We will notify you by email of the status of your order, as well as confirmation that your order is on its way to be delivered.","Te notificaremos por correo electrónico el estado de tu pedido, así como la confirmación de que tu pedido está en camino a ser entregado."
+"Contact an agent","Contactar con un agente",
+"and your delivery method is","y tu método de entrega es"
+"Fast Home Delivery,","Envío a domicilio Rápido,"
+" You can see the status of your order here:"," puedes ver el estado de tu pedido aquí:"
