@@ -52,7 +52,7 @@ $btnOrden = $block->isBtnOrdenAvailable();
                 <?= $tipo_cedula_order ?>
                 <?= $no_cedula ?>
                 <?= $nombre_o_empresa ?>
-                Número de Cédula: <?= $billingAddress->getIdentificacion(); ?><br />
+                Número de documento: <?= $billingAddress->getIdentificacion(); ?><br />
                 <?= $billingAddress->getEmail(); ?><br />
                 T. <?= $billingAddress->getTelephone(); ?><br />
                 <?php if ($block->isLegalPerson()):?>
@@ -82,6 +82,7 @@ $btnOrden = $block->isBtnOrdenAvailable();
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-orden">
             <?php /* Billing Address */ ?>
+            <?php /* Shipping Address */ $shippingAddress = $order->getShippingAddress(); ?>
             <div class="admin__page-section-item-title icon-orden">
                 <span class="title"><?= $block->escapeHtml(__('Orden')) ?></span>
             </div>
@@ -92,7 +93,7 @@ $btnOrden = $block->isBtnOrdenAvailable();
                 ID SBX: <?= $order->getId(); ?><br />
                 Creado: <?= $orderStoreDate; ?><br />
                 Entrega: <?=$order->getShippingMethod()?><br />
-                Tienda: <?= $block->getSourceName() ?> <br>
+                Tienda: <?= $block->getShippingStoreName()?> <br>
                 <?=$order->getGiftMessageId() ? '<b class="gift">Esta orden es un regalo</b>' : ''?>
             </address>
             <?php if ($block->getAdminUserType() == 1):?>
@@ -117,11 +118,11 @@ $btnOrden = $block->isBtnOrdenAvailable();
             <?php /* Shipping Address */
             $shippingAddress = $order->getShippingAddress(); ?>
             <div class="admin__page-section-item-title icon-retira">
-                <span class="title"><?= $block->escapeHtml(__('Cliente que recibe')) ?></span>
+                <span class="title"><?= $block->escapeHtml(__('Cliente que retira')) ?></span>
             </div>
             <address class="admin__page-section-item-content">
                 <span class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></span><br />
-                Número de Cédula: <?= $shippingAddress->getIdentificacion(); ?><br />
+                Número de documento: <?= $shippingAddress->getIdentificacion(); ?><br />
                 <?= $shippingAddress->getEmail(); ?><br />
                 T. <?= $shippingAddress->getTelephone(); ?>
             </address>
@@ -140,6 +141,7 @@ $btnOrden = $block->isBtnOrdenAvailable();
     </div>
 </section>
 
+<?php if(!$block->IsPickup()):?>
 <!-- 05 CARD: DIRECCIÓN DE ENTREGA -->
 <section class="admin__page-section bopis-data bopis-data-entrega">
     <div class="admin__page-section-content">
@@ -166,3 +168,4 @@ $btnOrden = $block->isBtnOrdenAvailable();
         </div>
     </div>
 </section>
+<?php endif;?>
