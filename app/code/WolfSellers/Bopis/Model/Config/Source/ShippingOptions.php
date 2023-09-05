@@ -11,6 +11,8 @@ use Psr\Log\LoggerInterface;
 class ShippingOptions implements ArrayInterface
 {
 
+    const SUFFIX = 'urbano';
+
     /** @var \Magento\Shipping\Model\Carrier\AbstractCarrierInterface[]  */
     private $allDeliveryMethods;
 
@@ -83,9 +85,9 @@ class ShippingOptions implements ArrayInterface
             if (str_contains($methodCode, $deliveryCode)){
                 $deliveryTitle = $this->_scopeConfig->getValue('carriers/'.$deliveryCode.'/title');
                 
-                if(strstr($deliveryCode, "urbano") != false){
+                if(strstr($deliveryCode, self::SUFFIX) != false){
                     $suffix = explode('_', $methodCode);
-                    $deliveryTitle = $deliveryTitle . ' - ' . $suffix[1];
+                    $deliveryTitle = $deliveryTitle . (isset($suffix[1]) ? ' - ' . $suffix[1] : '' );
                 }
 
                 return $deliveryTitle;
