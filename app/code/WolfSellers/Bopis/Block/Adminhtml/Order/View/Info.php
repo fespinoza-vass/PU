@@ -128,6 +128,9 @@ class Info extends \Magento\Sales\Block\Adminhtml\Order\View\Info
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function IsPickup()
     {
         if ($this->getOrder()->getShippingMethod() == \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::PICKUP_SHIPPING_METHOD) {
@@ -136,6 +139,9 @@ class Info extends \Magento\Sales\Block\Adminhtml\Order\View\Info
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function getShippingStoreName()
     {
         if ($this->IsPickup()) {
