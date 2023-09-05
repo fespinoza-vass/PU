@@ -127,4 +127,28 @@ class Info extends \Magento\Sales\Block\Adminhtml\Order\View\Info
         }
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    public function IsPickup()
+    {
+        if ($this->getOrder()->getShippingMethod() == \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::PICKUP_SHIPPING_METHOD) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShippingStoreName()
+    {
+        if ($this->IsPickup()) {
+            $title = explode('-', $this->getOrder()->getShippingDescription());
+            return trim(end($title));
+        }
+
+        return $this->getSourceName();
+    }
 }
