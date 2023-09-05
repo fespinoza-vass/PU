@@ -11,6 +11,8 @@ use Psr\Log\LoggerInterface;
 class ShippingOptions implements ArrayInterface
 {
 
+    const SUFFIX = 'urbano';
+
     /** @var \Magento\Shipping\Model\Carrier\AbstractCarrierInterface[]  */
     private $allDeliveryMethods;
 
@@ -62,7 +64,7 @@ class ShippingOptions implements ArrayInterface
         try {
             foreach ($mainOrders as $data){
                 $methodCode = trim($data->getShippingDescription());
-                $options[$data->getShippingMethod()] = ' [' .$data->getShippingMethod(). '] ' . $this->getAlias($data->getShippingMethod());
+                $options[$data->getShippingMethod()] = $this->getAlias($data->getShippingMethod());
             }
         }catch (\Throwable $e){
             $this->logger->error($e->getMessage());
@@ -82,6 +84,12 @@ class ShippingOptions implements ArrayInterface
         foreach ($this->allDeliveryMethods as $deliveryCode => $deliveryModel){
             if (str_contains($methodCode, $deliveryCode)){
                 $deliveryTitle = $this->_scopeConfig->getValue('carriers/'.$deliveryCode.'/title');
+                
+                if(strstr($deliveryCode, self::SUFFIX) != false){
+                    $suffix = explode('_', $methodCode);
+                    $deliveryTitle = $deliveryTitle . (isset($suffix[1]) ? ' - ' . $suffix[1] : '' );
+                }
+
                 return $deliveryTitle;
             }
         }
