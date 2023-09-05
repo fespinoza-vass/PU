@@ -6,6 +6,7 @@ var config = {
     	'Magento_Theme/js/home',
         'Magento_Theme/js/popup-home',
         'Magento_Theme/js/accordion-footer',
+        'Magento_Theme/js/accordion-questions',
     ],
     "map": {
         "*": {
