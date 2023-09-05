@@ -62,7 +62,7 @@ class ShippingOptions implements ArrayInterface
         try {
             foreach ($mainOrders as $data){
                 $methodCode = trim($data->getShippingDescription());
-                $options[$data->getShippingMethod()] = ' [' .$data->getShippingMethod(). '] ' . $this->getAlias($data->getShippingMethod());
+                $options[$data->getShippingMethod()] = $this->getAlias($data->getShippingMethod());
             }
         }catch (\Throwable $e){
             $this->logger->error($e->getMessage());
@@ -82,6 +82,12 @@ class ShippingOptions implements ArrayInterface
         foreach ($this->allDeliveryMethods as $deliveryCode => $deliveryModel){
             if (str_contains($methodCode, $deliveryCode)){
                 $deliveryTitle = $this->_scopeConfig->getValue('carriers/'.$deliveryCode.'/title');
+                
+                if(strstr($deliveryCode, "urbano") != false){
+                    $suffix = explode('_', $methodCode);
+                    $deliveryTitle = $deliveryTitle . ' - ' . $suffix[1];
+                }
+
                 return $deliveryTitle;
             }
         }
