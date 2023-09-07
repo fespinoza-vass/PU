@@ -22,7 +22,9 @@ class ShippingMethod extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 $shipping = $item[$this->getData('name')];
                 if (isset($item[self::SHIPPING_INFORMATION])) {
-                    $shipping = $item[self::SHIPPING_INFORMATION];
+                    $title = $item[self::SHIPPING_INFORMATION];
+                    $title = explode('-', $title);
+                    $shipping = $title[0];
                 }
                 $item[$this->getData('name')] = $shipping;
             }

@@ -27,6 +27,7 @@ $btnAvailable = $block->isBtnMetodoPagoAvailable();
                 <span class="title"><?= $block->escapeHtml(__('Método de pago')) ?></span>
             </div>
             <div class="admin__page-section-item-content">
+                <b>Método de pago</b>
                 <span class="color-orange"><?= $_order->getPayment()->getMethodInstance()->getTitle(); ?></span><br />
                 <?= $block->getPaymentHtml() ?>
                 <?php if($_order->getPayment()->getMethod() == 'tilopay_fac'):?>

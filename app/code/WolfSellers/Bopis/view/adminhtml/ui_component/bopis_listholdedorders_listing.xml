@@ -99,6 +99,7 @@
                 <sortable>true</sortable>
                 <filter>false</filter>
                 <label translate="true">Email</label>
+                <visible>false</visible>
             </settings>
         </column>
         <column name="source_code" sortOrder="20">
