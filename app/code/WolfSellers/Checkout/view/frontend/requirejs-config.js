@@ -1,7 +1,8 @@
 var config = {
     map:{
       '*':{
-          'Magento_Checkout/js/model/step-navigator':'WolfSellers_Checkout/js/model/step-navigator'
+          'Magento_Checkout/js/model/step-navigator':'WolfSellers_Checkout/js/model/step-navigator',
+          'Magento_Checkout/js/view/form/element/email':'WolfSellers_Checkout/js/view/form/element/email'
       }
     },
     config: {
@@ -17,6 +18,9 @@ var config = {
             },
             'Amasty_Label/js/label': {
                 'WolfSellers_Checkout/js/label': true
+            },
+            'Magento_Ui/js/form/element/abstract':{
+                'WolfSellers_Checkout/js/view/form/element/abstract': true
             }
         }
     }

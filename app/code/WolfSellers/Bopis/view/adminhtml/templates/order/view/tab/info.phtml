@@ -19,7 +19,7 @@ $btnAvailable = $block->isBtnMetodoPagoAvailable();
 <?= $block->getChildHtml('order_info') ?>
 <input type="hidden" name="order_id" value="<?= (int) $_order->getId() ?>"/>
 
-<section class="admin__page-section bopis-data">
+<section class="admin__page-section bopis-data card-payment">
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-payment-method">
             <?php /* Payment Method */ ?>
@@ -27,11 +27,15 @@ $btnAvailable = $block->isBtnMetodoPagoAvailable();
                 <span class="title"><?= $block->escapeHtml(__('Método de pago')) ?></span>
             </div>
             <div class="admin__page-section-item-content">
+                <b>Método de pago</b>
                 <span class="color-orange"><?= $_order->getPayment()->getMethodInstance()->getTitle(); ?></span><br />
                 <?= $block->getPaymentHtml() ?>
                 <?php if($_order->getPayment()->getMethod() == 'tilopay_fac'):?>
                     <?= $block->getTiloData(); ?>
                 <?php endif;?>
+                <br>
+                <span>No de tarjeta: <?=$_order->getPayment()->getCcLast4() ? '****' . $_order->getPayment()->getCcLast4() : '' ?></span> <br>
+                <span>Nombre: <?=$_order->getBillingAddress()->getFirstname() . $_order->getBillingAddress()->getLastname()?></span>
             </div>
             <?php if ($block->getAdminUserType() == 1):?>
             <button name="btn-confirmacion-cliente-metodo-pago"

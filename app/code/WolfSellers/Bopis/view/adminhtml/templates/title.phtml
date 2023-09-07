@@ -33,14 +33,37 @@ if($enviar) {
 if($preparar) {
     $btn = 'preparar';
 }
+$enabledBopisFlow = false;
+?>
+
+<?php
+/** @var  $viewModel \WolfSellers\Bopis\ViewModel\GeneralOrder */
+$viewModel = $block->getData('viewModel');
 ?>
 
 <div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+
+    <a href="<?=$viewModel->getBackUrl()?>">
+        <button type="button" class="action back customization"></button>
+    </a>
+
     <h1 class="page-title"<?= /* @noEscape */
     $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
     <div>
         <span class="page-title-order-id-bopis">ID: <?= $order->getIncrementId() ?></span>
-        <?php if ($block->getAdminUserType() == 1): ?>
+
+        <span class="current-state" title="<?=$order->getStatus()?>">
+            <?=strtoupper($viewModel->getStateLabel($order->getStatus()) ?? '')?>
+        </span>
+
+        <?php if ($order->getGiftMessageId()): ?>
+            <span class="current-state">
+                <span class="icon-gift"></span>
+                <?=__('ESTA ORDEN ES UN REGALO')?>
+            </span>
+        <?php endif; ?>
+
+        <?php if ($block->getAdminUserType() == 1 && $enabledBopisFlow): ?>
             <button name="btn-<?=$btn?>"
                     value="Preparar"
                     class="btn-<?=$btn?> <?= $classBtn ?>"
@@ -61,6 +84,12 @@ if($preparar) {
                 ?>
             </button>
         <?php endif; ?>
+
+        <br>
+
+        <span class="current-shipping-method-title" title="<?=$order->getShippingMethod()?>">
+            <b><?=$viewModel->getShippingMethodTitle($order->getShippingMethod());?></b>
+        </span>
     </div>
     <?= $block->getChildHtml() ?>
 </div>

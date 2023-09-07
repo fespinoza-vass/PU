@@ -17,6 +17,8 @@ class LayoutWalker
     public const LAYOUT_PATH_TEMPLATES = [
         '{CUSTOMER-FIELDSETS}' => '{CUSTOMER-DATA}.>>.customer-fieldsets.>>',
         '{CUSTOMER-DATA}' => '{CHECKOUT_STEPS}.>>.customer-data-step',
+        '{GIFT_MESSAGE}' => '{SUMMARY}.>>.container-giftmessage',
+        '{SUMMARY}' => '{SIDEBAR}.>>.summary',
         '{GIFT_WRAP}' => '{ADDITIONAL_STEP}.>>.checkboxes.>>.gift_wrap',
         '{SHIPPING_ADDRESS_FIELDSET}' => '{SHIPPING_ADDRESS}.>>.shipping-address-fieldset',
         '{SHIPPING_RATES_VALIDATION}' =>
@@ -30,7 +32,8 @@ class LayoutWalker
         '{BILLING_STEP}' => '{CHECKOUT}.>>.steps.>>.billing-step',
         '{ADDITIONAL_STEP}' => '{SIDEBAR}.>>.additional', //additional summary fields
         '{SIDEBAR}' => '{CHECKOUT}.>>.sidebar',
-        '{CHECKOUT}' => 'components.checkout'
+        '{CHECKOUT}' => 'components.checkout',
+        '{PROVIDER}' => 'components.checkoutProvider'
     ];
 
     public const ESCAPED_SEPARATOR = '\dot/';

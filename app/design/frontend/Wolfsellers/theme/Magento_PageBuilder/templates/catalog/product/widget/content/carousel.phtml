@@ -9,12 +9,12 @@ use Magento\Framework\App\Action\Action;
 
 /** @var \Magento\CatalogWidget\Block\Product\ProductsList $block */
 ?>
-<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())) : ?>
+<?php if ($exist = ($block->getProductCollection() &&  count($block->getProductCollection()) > 0)): ?>
     <?php
     $type = 'widget-product-carousel';
 
     $image = 'new_products_content_widget_grid';
-    $items = $block->getProductCollection()->getItems();
+    $items = $block->getProductCollection();
 
     $showWishlist = true;
     $showCompare = true;

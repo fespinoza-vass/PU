@@ -3,4 +3,13 @@
     <type name="Magento\User\Block\User\Edit\Tab\Main">
         <plugin name="admin_user_source" type="WolfSellers\Bopis\Plugin\Block\Adminhtml\User\Edit\Tab\UserFieldSource" sortOrder="1"/>
     </type>
+    <type name="Magento\Backend\Model\Auth">
+        <plugin name="RememberMeCookie" type="WolfSellers\Bopis\Plugin\RememberMeCookie" sortOrder="10"/>
+    </type>
+    <type name="Magento\Backend\Model\Auth\Session">
+        <plugin name="RememberMePlugin" type="WolfSellers\Bopis\Plugin\RememberMePlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Security\Model\Config">
+        <plugin name="RememberMeAdminLifeTime" type="WolfSellers\Bopis\Plugin\RememberMeAdminLifeTime" sortOrder="10"/>
+    </type>
 </config>

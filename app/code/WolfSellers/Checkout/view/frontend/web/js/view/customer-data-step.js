@@ -1,14 +1,16 @@
 define([
+    'jquery',
     'ko',
-    'uiComponent',
+    'Magento_Ui/js/form/form',
     'underscore',
     'Magento_Checkout/js/model/step-navigator',
     'Magento_Checkout/js/model/quote',
     'uiRegistry',
     'WolfSellers_Checkout/js/model/customer'
 ], function (
+    $,
     ko,
-    Component,
+    Form,
     _,
     stepNavigator,
     quote,
@@ -20,13 +22,11 @@ define([
     /**
      * Customer Data Step Component
      */
-    return Component.extend({
+    return Form.extend({
         defaults: {
             template: 'WolfSellers_Checkout/customer-data',
             customerFormTemplate: 'WolfSellers_Checkout/customer-data/form'
         },
-
-        // add here your logic to display step,
         isVisible: ko.observable(true),
         quoteIsVirtual: quote.isVirtual(),
         isVisibleEdit: ko.observable(true),
@@ -48,11 +48,14 @@ define([
                 1
             );
 
-            this.isVisibleEdit.subscribe(function (value) {
-                console.log(value);
-                //this.isActive(value);
-            }, this);
+            return this;
+        },
 
+        /** @inheritdoc */
+        initConfig: function () {
+            this._super();
+            this.namespace = "customerData";
+            this.selector = '[data-form-part=' + this.namespace + ']';
             return this;
         },
 
@@ -65,12 +68,18 @@ define([
         },
 
         /**
+         * Before next step validate if two forms are correct.
          * @returns void
          */
         navigateToNextStep: function () {
-            this.isVisibleEdit(false);
-            this.saveCustomerData();
-            stepNavigator.next();
+            var emailIsValid = this.validateEmailForm();
+            this.source.set('params.customerDataStepInvalid', false);
+            this.triggerValidationCustomerDataForm();
+            if (emailIsValid && !this.source.get('params.customerDataStepInvalid')) { // Verificar si el formulario es válido
+                this.isVisibleEdit(false);
+                this.saveCustomerData();
+                stepNavigator.next();
+            }
         },
 
         /**
@@ -78,10 +87,17 @@ define([
          */
         saveCustomerData: function (){
             var emailValidator = registry.get("checkout.steps.customer-data-step.customer-email"),
-                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-name");
-
-            customer.email(emailValidator.email() === '' ? customer.email() : emailValidator.email());
-            customer.customerName(nameValidator.value());
+                nameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-firstname"),
+                lastnameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-lastname"),
+                typeIdentificationValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-identificacion"),
+                numberIdentificationValidator  =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion"),
+                telephoneValidator =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-telefono");
+                customer.email(emailValidator.email() === '' ? customer.email() : emailValidator.email());
+                customer.customerName(nameValidator.value());
+                customer.customerLastName(lastnameValidator.value());
+                customer.customerTypeIdentification(typeIdentificationValidator.value());
+                customer.customerNumberIdentification(numberIdentificationValidator.value());
+                customer.customerTelephone(telephoneValidator.value());
         },
 
         /**
@@ -90,6 +106,29 @@ define([
         editPersonalInfo: function (){
             stepNavigator.navigateTo("customer_step");
             this.isVisibleEdit(true);
+        },
+        /**
+         * Trigger Customer data Step data validate event.
+         */
+        triggerValidationCustomerDataForm: function () {
+            this.source.trigger('customerData.firstname.data.validate'); // Disparar validación
+            this.source.trigger('customerData.lastname.data.validate'); // Disparar validación
+            this.source.trigger('customerData.identificacion.data.validate'); // Disparar validación
+            this.source.trigger('customerData.numero_de_identificacion.data.validate'); // Disparar validación
+            this.source.trigger('customerData.telefono.data.validate'); // Disparar validación
+        },
+        /**
+         * Validate only email form
+         * @returns {boolean}
+         */
+        validateEmailForm:function () {
+            var emailComponent = registry.get("checkout.steps.customer-data-step.customer-email");
+            if (!emailComponent.validateEmail()){
+                //NOTICE Email component validate with jquery
+                $("form[data-role='email-with-possible-login']").submit();
+                return false
+            }
+            return true;
         }
     });
 });
