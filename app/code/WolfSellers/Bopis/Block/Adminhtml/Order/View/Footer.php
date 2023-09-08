@@ -15,12 +15,16 @@ use Magento\Tax\Helper\Data as TaxHelper;
 use WolfSellers\Bopis\Helper\Config;
 use Magento\Framework\App\ObjectManager;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
+use WolfSellers\Bopis\Helper\RememberMeHelper;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class Footer extends AbstractOrder
 {
     private Json $serializer;
     private AuthSession $authSession;
 
+    /** @var mixed|RememberMeHelper  */
+    private mixed $rememberMeHelper;
 
     /**
      * @param Context $context
@@ -31,6 +35,7 @@ class Footer extends AbstractOrder
      * @param TaxHelper|null $taxHelper
      * @param Json|null $serializer
      * @param AuthSession|null $authSession
+     * @param RememberMeHelper|null $rememberMeHelper
      */
     public function __construct(
         Context $context,
@@ -40,11 +45,13 @@ class Footer extends AbstractOrder
         ?ShippingHelper $shippingHelper = null,
         ?TaxHelper $taxHelper = null,
         ?Json $serializer = null,
-        AuthSession $authSession = null
+        AuthSession $authSession = null,
+        RememberMeHelper $rememberMeHelper = null
     ) {
         parent::__construct($context, $registry, $adminHelper, $data, $shippingHelper, $taxHelper);
         $this->serializer = $serializer ?? ObjectManager::getInstance()->get(Json::class);
         $this->authSession = $authSession ?? ObjectManager::getInstance()->get(AuthSession::class);
+        $this->rememberMeHelper = $rememberMeHelper ?? ObjectManager::getInstance()->get(RememberMeHelper::class);
     }
 
     protected $deliverStatus = [
@@ -187,5 +194,19 @@ class Footer extends AbstractOrder
         return $this->authSession->getUser()->getData('user_type');
     }
 
-    
+    /**
+     * @return bool
+     */
+    public function popupEnabled()
+    {
+        if (!$role = $this->rememberMeHelper->getCurrentUserRole()) return false;
+
+        if ($role == AbstractBopisCollection::BOPIS_SUPER_ADMIN ||
+            $role == AbstractBopisCollection::BOPIS_STORES
+        ) {
+            return true;
+        }
+
+        return false;
+    }
 }

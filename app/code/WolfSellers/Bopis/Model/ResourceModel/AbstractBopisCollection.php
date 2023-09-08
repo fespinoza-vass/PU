@@ -29,6 +29,9 @@ abstract class AbstractBopisCollection extends Collection
     protected $config;
 
     /** @var string */
+    const BOPIS_SUPER_ADMIN = 'gestor_bopis_super_admin';
+
+    /** @var string */
     const BOPIS_STORES = 'gestor_bopis_stores';
 
     /** @var string */

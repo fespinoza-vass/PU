@@ -16,7 +16,8 @@ $comments = $block->isCompleteComments();
         <?php if ($entregar && !$isHolded && $block->getAdminUserType() == 1): ?>
             <button name="btn-entregar"
                     value="Entregar"
-                    class="btn-entregar <?= $entregar ? "" : "deshabilitado" ?>"
+                    class="btn-entregar <?= $entregar ? "" : "deshabilitado" ?>
+                        <?=$block->popupEnabled() ? "popupEnabled" : "" ?>"
                 <?= $entregar ? "" : 'disabled="disabled"' ?>
                     data-order-id="<?= $order->getEntityId() ?>"
             >
