@@ -60,6 +60,12 @@ class RealStates
     private function initializeStates(): void
     {
         $this->states = [
+            'pending' => [
+                'state' => '',
+                'label' => 'Pendiente',
+                'action' => '#',
+                'menu' => 'listnewsorders'
+            ],
             'confirmed' => [
                 'state' => '',
                 'label' => 'Pedido Confirmado',
