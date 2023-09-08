@@ -212,6 +212,80 @@ h1{
             margin: 0 auto;
         }
     }
+    .cmp-content-info-qr{
+        text-align: center;
+        td{
+            padding: 20px 55px;
+            p{
+                display: inline;
+                margin-bottom: 0;
+            }
+        }
+    }
+    .cmp-content-code-qr{
+        border-bottom: 20px solid @mainbackground;
+        .qr-container,
+        .remember{
+            margin:10px 20px;
+            td{
+                padding-bottom: 0;
+                background: @gray-EE;
+            }
+        }
+        .qr-container{
+            .qr-code,
+            .qr-description{
+                display: inline;
+                img{
+                    float: left;
+                    padding: 10px;
+                }
+            }
+            &--img{
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            &--info{
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+                p{
+                    font-size: 16px;
+                    padding: 70px 45px 20px 40px;
+                    margin-bottom: 0;
+                }
+                span{
+                    color: @black;
+                    font-weight: bold;
+                    padding-left: 40px;
+                    font-size: 16px;
+                }
+                img{
+                    vertical-align: middle;
+                }
+            }
+        }
+        .remember{
+            img{
+                float: left;
+                padding: 0 5px;
+            }
+            p{
+                font-size: 12px;
+                margin-bottom: 0px;
+            }
+            &--icon{
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            &--description{
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+                p{
+                    padding: 5px 15px 5px 5px;
+                }
+            }
+        }
+    }
     .email-summary{
        display: none;
     }
@@ -317,6 +391,68 @@ h1{
         }
         p{
             color: @white;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    table.cmp-content-info-customer{
+        tr{
+            td{
+                padding: 25px 25px 0 25px !important; // style added by mailer
+                h1{
+                    font-size: 12px;
+                }
+                p{
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+    .cmp-content-progress{
+        .progress-status{
+            img{
+                width: 250px;
+            }
+        }
+    }
+    .cmp-content-info-qr{
+        td{
+            padding: 20px 15px !important; // style added by mailer
+        }
+    }
+    table.cmp-content-code-qr{
+        tr{
+            .qr-container{
+                td{
+                    display: block;
+                }
+                &--img{
+                    img{
+                        float: initial !important; // style added by mailer
+                        margin: 0 auto;
+                        width: 200px;
+                        display: block;
+                    }
+                }
+                &--info{
+                    padding-bottom: 20px !important; // style added by mailer
+                    p{
+                        font-size: 14px !important; // style added by mailer
+                        padding:15px 45px 20px 40px !important; // style added by mailer
+                    }
+                    span{
+                        font-size: 14px !important;  // style added by mailer
+                    }
+                }
+            }
+        }
+        .remember{
+            &--description{
+                p{
+                    font-size: 10px;
+                }
+            }
         }
     }
 }
