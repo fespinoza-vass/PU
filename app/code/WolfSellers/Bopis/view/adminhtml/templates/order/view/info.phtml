@@ -129,7 +129,9 @@ $btnOrden = $block->isBtnOrdenAvailable();
             <?php if ($block->getAdminUserType() == 1):?>
             <button name="btn-confirmacion-cliente-retira"
                     value="Confirmar"
-                    class="btn-confirmacion-cliente btn-confirmacion-cliente-retira <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"":"confirmado" ?>"
+                    class="btn-confirmacion-cliente btn-confirmacion-cliente-retira
+                        <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"":"confirmado" ?>
+                        is-button-visible"
                 <?= $btnClienteRetira ? "":'disabled="disabled"' ?>
                     data-order-id="<?= $order->getEntityId() ?>"
                     data-type="1"
