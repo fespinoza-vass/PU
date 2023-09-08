@@ -209,7 +209,7 @@ body{
         .image-system-admin-login {
             display: none;
         }
-        background-color: white;
+        background-color: @color-gray12;
         .admin__menu {
             .level-0 {
                 & > a {
@@ -281,10 +281,14 @@ body{
     	.menu-wrapper{
             width: @menu__bopis_width;
             box-shadow: @bshadow-menu;
+            border-radius: 12px;
+            height: 859px;
+            left: 10px;
+            top: 20px;
             &._fixed {
-                left: 0;
+                left: 10px;
                 position: fixed;
-                top: 0;
+                top: 20px !important; //override styles in line
                 ~ .page-wrapper {
                     margin-left: @menu__bopis_width;
                 }
@@ -293,6 +297,10 @@ body{
                 background-color: white;
                 width: @menu__bopis_width;
                 box-shadow: @bshadow-menu;
+                border-radius: 12px;
+                height: 859px;
+                left: 10px;
+                top: 20px;
             }
     		.nav-admin-user{
     			position: relative;
@@ -334,7 +342,6 @@ body{
     			    		    line-height: 30px;
     			    		    font-family: 'Admin Icons';
     			    		    margin: 0;
-    			    		    /* vertical-align: top; */
     			    		    display: inline;
     			    		    font-weight: normal;
     			    		    overflow: hidden;
@@ -349,6 +356,7 @@ body{
     		}
             .logo{
                 margin-bottom: 10px;
+                border-radius: 12px;
                 img.logo-img{
                     width: 90%;
                 }
@@ -705,6 +713,15 @@ body{
                                 color: @color-gray13;
                                 font-weight: bold;
                                 font-size: 12px !important; //import override span general
+                                .icon-gift {
+                                    padding: 0;
+                                    &::before {
+                                        content: '\e914';
+                                        font-family: 'Admin Icons';
+                                        color: @color-gray13;
+                                        font-size: 1rem;
+                                    }
+                                }
                             }
                             &.current-shipping-method-title {
                                 position: absolute;
@@ -858,6 +875,9 @@ body{
                                                 }
                                             }
                                             display: none;
+                                            &.is-button-visible {
+                                                display: block;
+                                            }
                                         }
                                         &.bopis-payment-method{
                                             min-height: 250px;
@@ -868,6 +888,17 @@ body{
                                     .bopis-payment-method{
                                         word-break: break-all;
                                         font-size: 12px;
+                                    }
+                                    .admin__page-section-item-content {
+                                        .gift {
+                                            &::before {
+                                                content: '\e914';
+                                                font-family: 'Admin Icons';
+                                                color: @color-black;
+                                                font-size: 1rem;
+                                                margin-right: 5px;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -1560,6 +1591,59 @@ body{
                                                 font-weight: bold;
                                                 border-bottom: 1px solid @color-gray7;
                                             }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  1024px - 768px
+//  _____________________________________________
+@media (min-width: 768px) and (max-width: 1025px){
+    body {
+        &.bopis-order-view {
+            .menu-wrapper {
+                overflow-y: scroll;
+            }
+            .page-wrapper {
+                .page-content {
+                    .page-columns {
+                        .admin__old {
+                            .main-col {
+                                .sales_order_progress_bar {
+                                    .states-list {
+                                        li {
+                                            span {
+                                                font-size: 10px;
+                                            }
+                                            form {
+                                                .confirmed-button, 
+                                                .unconfirmed-button {
+                                                    width: 50%;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .admin__page-section-item {
+                                    .admin__page-section-item-title {
+                                        span.title {
+                                            font-size: 12px;
+                                        }
+                                    }
+                                    .admin__page-section-item-content {
+                                        font-size: 11px;
+                                    }
+                                    button {
+                                        &.is-button-visible {
+                                            font-size: 10px;
                                         }
                                     }
                                 }
