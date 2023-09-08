@@ -30,6 +30,7 @@
                 </hold_reasons>
             </general>
             <status>
+                <pending>pending</pending>
                 <confirmed>payment</confirmed>
                 <preparing>processing</preparing>
                 <shipping>shipping</shipping>
