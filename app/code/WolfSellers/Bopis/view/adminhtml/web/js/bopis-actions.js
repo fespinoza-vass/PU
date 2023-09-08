@@ -38,9 +38,19 @@ require([
 
         if(!jQuery(".btn-entregar").prop("disabled")) {
 
+            var popupEnabled = true;
+
+            if(!jQuery(".btn-entregar").hasClass("popupEnabled")) {
+                popupEnabled = false;
+            }
+
             var popupEntrega = modal(options, $('#popup-modal-entregar'));
             $(".btn-entregar").on("click", function () {
-                $("#popup-modal-entregar").modal('openModal');
+                if (!popupEnabled){
+                    $('#bopis-deliver').submit();
+                } else {
+                    $("#popup-modal-entregar").modal('openModal');
+                }
             });
             $("#popup-modal-entregar").find(".bopis-popup-btn-regresar").on("click", function (){
                 $("#popup-modal-entregar").modal('closeModal');
