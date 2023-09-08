@@ -640,6 +640,21 @@ body{
         }
     }
     &.bopis-order-view{
+        &.no-pickup {
+            .page-wrapper {
+                .page-content {
+                    .admin__old {
+                        .main-col {
+                            section {
+                                &.bopis-data {
+                                    width: calc(~"20% - 23px");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         .page-wrapper{
             .page-columns{
                 .admin__page-section{
@@ -807,7 +822,7 @@ body{
                                 padding: 10px;
                                 box-shadow: none !important;
                                 background: @color-white;
-                                width: calc(~"20% - 23px");
+                                width: calc(~"25% - 23px");
                                 margin: 10px;
                                 &.card-bill, &.card-payment {
                                     float: left;
@@ -871,6 +886,7 @@ body{
                                     }
                                     .admin__page-section-item-content,
                                     .bopis-payment-method{
+                                        word-break: break-all;
                                         font-size: 12px;
                                     }
                                     .admin__page-section-item-content {
@@ -1039,7 +1055,7 @@ body{
                                     position: absolute;
                                     left: 20px;
                                     bottom: -75px;
-                                    width: 30%;
+                                    width: 34%;
                                     font-weight: 700;
                                 }
                                 span.icon-check {
@@ -1154,6 +1170,30 @@ body{
                                     .icon-check{
                                         &:before{
                                             content: '\e911';
+                                            font-family: 'Admin Icons';
+                                            color: @color-black;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -35px;
+                                        }
+                                    }
+                                }
+                                &.state-readyforpickup  {
+                                    form{
+                                        .unconfirmed-button{
+                                            background: @color-black;
+                                            border: 1px solid @color-black;
+                                            color: @color-white;
+                                            opacity: 0.5;
+                                            pointer-events: inherit;
+                                            span {
+                                                position: initial;
+                                            }
+                                        }
+                                    }
+                                    .icon-check{
+                                        &:before{
+                                            content: '\e917';
                                             font-family: 'Admin Icons';
                                             color: @color-black;
                                             font-size: 20px;

@@ -89,5 +89,8 @@ require([
                 });
             });
         }
+        if($(".bopis-data-entrega").length > 0) {
+            $('body').addClass("no-pickup");
+        }
     }
 );
