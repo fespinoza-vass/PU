@@ -3,17 +3,27 @@
 ?>
 <h1>prueba diego </h1>
 <?php if($block->getIsPickup()): ?>
-    <div class="qr-container">
-        <div class="qr-code"><img src="<?= $block->getQrImage() ?>" alt="qr-code"></div>
-        <div class="qr-description">
-            <?= __("Deberás mostrar este código QR junto con tu documento de identidad para poder retirar tu pedido en tienda."); ?>
-            <div class="qr-share-whatsapp">
-                <?=__("Compartir por Whatsapp") ?>
-            </div>
-        </div>
-    </div>
+    <table class="qr-container">
+        <tr>
+            <td class="qr-container--img">
+                <div class="qr-code"><img src="<?= $block->getQrImage() ?>" alt="qr-code"></div>
+            </td>
+            <td class="qr-container--info">
+                <p><?= __("You must show this voucher or QR and along with your identity document to be able to pick up your order."); ?></p>
+                <span><?=__("Share by Whatsapp") ?></span>
+                <img src="<?= $block->getUrl("media/wysiwyg/Transaccionales/icon-whatsapp-transaccional.png") ?>" alt="icon-whatsapp">
+            </td>
+        </tr>
+    </table>
 
-    <div class="remember">
-        <?= __("Recuerda que tienes hasta 7 días posteriores para recoger tus productos, de lo contrario tu compra será anuladada y se procederá a la devolucion del dinero.") ?>
-    </div>
+    <table class="remember">
+        <tr>
+            <td class="remember--icon">
+                <img src="<?= $block->getUrl("media/wysiwyg/Transaccionales/retiro_tienda.png") ?>" />
+            </td>
+            <td class="remember--description">
+                <p><?= __("Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.") ?></p>
+            </td>
+        </tr>
+    </table>
 <?php endif; ?>
