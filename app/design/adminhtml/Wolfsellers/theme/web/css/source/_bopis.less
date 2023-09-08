@@ -875,6 +875,9 @@ body{
                                                 }
                                             }
                                             display: none;
+                                            &.is-button-visible {
+                                                display: block;
+                                            }
                                         }
                                         &.bopis-payment-method{
                                             min-height: 250px;
@@ -1588,6 +1591,59 @@ body{
                                                 font-weight: bold;
                                                 border-bottom: 1px solid @color-gray7;
                                             }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  1024px - 768px
+//  _____________________________________________
+@media (min-width: 768px) and (max-width: 1025px){
+    body {
+        &.bopis-order-view {
+            .menu-wrapper {
+                overflow-y: scroll;
+            }
+            .page-wrapper {
+                .page-content {
+                    .page-columns {
+                        .admin__old {
+                            .main-col {
+                                .sales_order_progress_bar {
+                                    .states-list {
+                                        li {
+                                            span {
+                                                font-size: 10px;
+                                            }
+                                            form {
+                                                .confirmed-button, 
+                                                .unconfirmed-button {
+                                                    width: 50%;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .admin__page-section-item {
+                                    .admin__page-section-item-title {
+                                        span.title {
+                                            font-size: 12px;
+                                        }
+                                    }
+                                    .admin__page-section-item-content {
+                                        font-size: 11px;
+                                    }
+                                    button {
+                                        &.is-button-visible {
+                                            font-size: 10px;
                                         }
                                     }
                                 }
