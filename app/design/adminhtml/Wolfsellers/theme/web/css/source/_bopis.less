@@ -209,7 +209,7 @@ body{
         .image-system-admin-login {
             display: none;
         }
-        background-color: white;
+        background-color: @color-gray12;
         .admin__menu {
             .level-0 {
                 & > a {
@@ -281,10 +281,15 @@ body{
     	.menu-wrapper{
             width: @menu__bopis_width;
             box-shadow: @bshadow-menu;
+            // margin: 20px 10px;
+            border-radius: 12px;
+            height: 859px;
+            left: 10px;
+            top: 20px;
             &._fixed {
-                left: 0;
+                left: 10px;
                 position: fixed;
-                top: 0;
+                top: 20px !important; //override styles in line
                 ~ .page-wrapper {
                     margin-left: @menu__bopis_width;
                 }
@@ -293,6 +298,11 @@ body{
                 background-color: white;
                 width: @menu__bopis_width;
                 box-shadow: @bshadow-menu;
+                border-radius: 12px;
+                // margin: 20px 10px;
+                height: 859px;
+                left: 10px;
+                top: 20px;
             }
     		.nav-admin-user{
     			position: relative;
@@ -349,6 +359,7 @@ body{
     		}
             .logo{
                 margin-bottom: 10px;
+                border-radius: 12px;
                 img.logo-img{
                     width: 90%;
                 }
@@ -690,6 +701,15 @@ body{
                                 color: @color-gray13;
                                 font-weight: bold;
                                 font-size: 12px !important; //import override span general
+                                .icon-gift {
+                                    padding: 0;
+                                    &::before {
+                                        content: '\e914';
+                                        font-family: 'Admin Icons';
+                                        color: @color-gray13;
+                                        font-size: 1rem;
+                                    }
+                                }
                             }
                             &.current-shipping-method-title {
                                 position: absolute;
@@ -852,6 +872,17 @@ body{
                                     .admin__page-section-item-content,
                                     .bopis-payment-method{
                                         font-size: 12px;
+                                    }
+                                    .admin__page-section-item-content {
+                                        .gift {
+                                            &::before {
+                                                content: '\e914';
+                                                font-family: 'Admin Icons';
+                                                color: @color-black;
+                                                font-size: 1rem;
+                                                margin-right: 5px;
+                                            }
+                                        }
                                     }
                                 }
                             }
