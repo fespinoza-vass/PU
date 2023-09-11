@@ -106,6 +106,6 @@
     <type name="Magento\InventoryShipping\Model\ResourceModel\ShipmentSource\SaveShipmentSource">
         <plugin name="duplicate_source_codes"
                 type="WolfSellers\Bopis\Plugin\DuplicateSourceCodes"
-                sortOrder="10"/>
+                sortOrder="10" disabled="true"/>
     </type>
 </config>
