@@ -4,33 +4,30 @@ require([
     'domReady!'
     ],
     function($, accordion) {
-       window.onload = function(){
-           setTimeout(() => {
-             $(".row-info-questions > div").accordion({
-               heightStyle: "content",
-               active: true,
-               collapsible: true,
-               autoHeight: false
-             });
 
-            //scroll animation function
-            $('.pagebuilder-button-primary').click(function(e){
-                e.preventDefault();
-                var target = $($(this).attr('href'));
-                if(target.length){
-                  var scrollTo = target.offset().top - 160;
-                  $('body, html').animate({scrollTop: scrollTo+'px'}, 500);
-                  $('.content-menu-questions').removeClass('active');
-                  $('.button-primary-mobile-questions').removeClass('active');
-                }
-            });
+        //function for accordion
+        $(".row-info-questions > div").accordion({
+        heightStyle: "content",
+        active: true,
+        collapsible: true,
+        autoHeight: false
+        });
 
-            $(".button-primary-mobile-questions").click(function () {
-                $(this).toggleClass("active");
-                $('.content-menu-questions').toggleClass("active");
-            });
+        //scroll animation function
+        $('.pagebuilder-button-primary').click(function(e){
+            e.preventDefault();
+            var target = $($(this).attr('href'));
+            if(target.length){
+                var scrollTo = target.offset().top - 160;
+                $('body, html').animate({scrollTop: scrollTo+'px'}, 500);
+                $('.content-menu-questions').removeClass('active');
+                $('.button-primary-mobile-questions').removeClass('active');
+            }
+        });
 
-           }, 5000);
-       }
+        $(".button-primary-mobile-questions").click(function () {
+            $(this).toggleClass("active");
+            $('.content-menu-questions').toggleClass("active");
+        });
     }
 );
