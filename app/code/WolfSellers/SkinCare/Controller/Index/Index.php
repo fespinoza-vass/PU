@@ -104,7 +104,7 @@ class Index extends Action
         $productCollection->addAttributeToSelect("*");
         $productCollection->addAttributeToFilter($attrCodeMin, $minValue);
         $productCollection->addAttributeToFilter($attrCodeMax, $maxValue);
-        $productCollection->setPageSize(20);
+        //$productCollection->setPageSize(20);
 
         $this->_stockFilter->addInStockFilterToCollection($productCollection);
 
@@ -205,8 +205,11 @@ class Index extends Action
     }
 
     /**
-     * @param ProductCollection $productCollection
-     * @return String
+     * Return a product from each category
+     * $maxItemsCarrusel = 20
+     *
+     * @param $productCollection
+     * @return array
      */
     public function intercaleOrder($productCollection){
 
@@ -220,17 +223,15 @@ class Index extends Action
             $groupedProducts[$manufacturer][] = $product;
         }
 
-        $maxGroupSize = max(array_map('count', $groupedProducts));
-
-        for ($i = 0; $i < $maxGroupSize; $i++) {
+        $maxItemsCarrusel = 20;
+        for ($i = 0; $i < $maxItemsCarrusel; $i++) {
             foreach ($groupedProducts as $manufacturer => $product) {
                 if (isset($product[$i])) {
                     $orderedProducts[] = $product[$i];
                 }
             }
         }
-
-        return $orderedProducts;
+        return array_slice($orderedProducts, 0, $maxItemsCarrusel);
     }
 
 
