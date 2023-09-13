@@ -7,13 +7,15 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Config;
 use Magento\Sales\Model\ResourceModel\Order\Collection;
 use Psr\Log\LoggerInterface;
+use WolfSellers\Bopis\Helper\RememberMeHelper;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class ShippingOptions implements ArrayInterface
 {
-
+    /** @var string  */
     const SUFFIX = 'urbano';
 
-    /** @var \Magento\Shipping\Model\Carrier\AbstractCarrierInterface[]  */
+    /** @var \Magento\Shipping\Model\Carrier\AbstractCarrierInterface[] */
     private $allDeliveryMethods;
 
     /**
@@ -21,12 +23,14 @@ class ShippingOptions implements ArrayInterface
      * @param ScopeConfigInterface $_scopeConfig
      * @param Collection $_ordersCollection
      * @param LoggerInterface $logger
+     * @param RememberMeHelper $rememberMeHelper
      */
     public function __construct(
-        protected Config $_deliveryModelConfig,
+        protected Config               $_deliveryModelConfig,
         protected ScopeConfigInterface $_scopeConfig,
-        protected Collection $_ordersCollection,
-        protected LoggerInterface $logger
+        protected Collection           $_ordersCollection,
+        protected LoggerInterface      $logger,
+        protected RememberMeHelper     $rememberMeHelper
     )
     {
         $this->allDeliveryMethods = $this->_deliveryModelConfig->getAllCarriers();
@@ -62,11 +66,13 @@ class ShippingOptions implements ArrayInterface
         $options = [];
 
         try {
-            foreach ($mainOrders as $data){
-                $methodCode = trim($data->getShippingDescription());
-                $options[$data->getShippingMethod()] = $this->getAlias($data->getShippingMethod());
+            foreach ($mainOrders as $data) {
+                $methodCode = $data->getShippingMethod();
+                $options[($this->isUrbano($methodCode) && !$this->allUrbanoOptionsAvailable())
+                    ? self::SUFFIX
+                    : $methodCode] = $this->getAlias($methodCode);
             }
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
         }
 
@@ -81,13 +87,13 @@ class ShippingOptions implements ArrayInterface
      */
     private function getAlias($methodCode)
     {
-        foreach ($this->allDeliveryMethods as $deliveryCode => $deliveryModel){
-            if (str_contains($methodCode, $deliveryCode)){
-                $deliveryTitle = $this->_scopeConfig->getValue('carriers/'.$deliveryCode.'/title');
-                
-                if(strstr($deliveryCode, self::SUFFIX) != false){
+        foreach ($this->allDeliveryMethods as $deliveryCode => $deliveryModel) {
+            if (str_contains($methodCode, $deliveryCode)) {
+                $deliveryTitle = $this->_scopeConfig->getValue('carriers/' . $deliveryCode . '/title');
+
+                if ($this->isUrbano($methodCode) && $this->allUrbanoOptionsAvailable()) {
                     $suffix = explode('_', $methodCode);
-                    $deliveryTitle = $deliveryTitle . (isset($suffix[1]) ? ' - ' . $suffix[1] : '' );
+                    $deliveryTitle = $deliveryTitle . (isset($suffix[1]) ? ' - ' . $suffix[1] : '');
                 }
 
                 return $deliveryTitle;
@@ -95,5 +101,31 @@ class ShippingOptions implements ArrayInterface
         }
 
         return $methodCode;
+    }
+
+    /**
+     * @param $methodCode
+     * @return bool
+     */
+    private function isUrbano($methodCode)
+    {
+        if (strstr($methodCode, self::SUFFIX) != false) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    private function allUrbanoOptionsAvailable()
+    {
+        $role = $this->rememberMeHelper->getCurrentUserRole();
+
+        if ($role == AbstractBopisCollection::BOPIS_SUPER_ADMIN) {
+            return true;
+        }
+
+        return false;
     }
 }
