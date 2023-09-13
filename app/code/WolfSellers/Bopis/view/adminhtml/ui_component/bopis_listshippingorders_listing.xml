@@ -54,6 +54,17 @@
                     </imports>
                 </settings>
             </filterSelect>
+            <filterSelect
+                name="shipping_method"
+                provider="${ $.parentName }"
+                class="\WolfSellers\Bopis\Ui\Component\Listing\Filter\ShippingMethod">
+                <settings>
+                    <options class="WolfSellers\Bopis\Model\Config\Source\ShippingOptions"/>
+                    <caption translate="true">All</caption>
+                    <label translate="true">Método de entrega</label>
+                    <dataScope>shipping_method</dataScope>
+                </settings>
+            </filterSelect>
         </filters>
     </listingToolbar>
     <columns name="bopis_listorders_columns">
@@ -123,10 +134,7 @@
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>
-                <filter>select</filter>
-                <options class="WolfSellers\Bopis\Model\Config\Source\ShippingOptions"/>
                 <label translate="true">Método de entrega</label>
-                <dataType>select</dataType>
             </settings>
         </column>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
