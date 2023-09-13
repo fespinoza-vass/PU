@@ -9,11 +9,15 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponentInterface;
 use Magento\Ui\Component\AbstractComponent;
 
-
 class PickupLocationCode extends Column
 {
+    /** @var string  */
     const SHIPPING_INFORMATION = 'shipping_information';
 
+    /**
+     * @param array $dataSource
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
