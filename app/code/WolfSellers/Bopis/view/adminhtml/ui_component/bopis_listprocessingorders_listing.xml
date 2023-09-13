@@ -51,12 +51,12 @@
                 </statefull>
 
             </settings>
-            <filterSelect name="source_code" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
+            <filterSelect name="pickup_location_code" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
                 <settings>
                     <options class="WolfSellers\Bopis\Model\Config\Source\SourceOptions"/>
                     <caption translate="true">Select</caption>
                     <label translate="true">Tienda</label>
-                    <dataScope>source_code</dataScope>
+                    <dataScope>pickup_location_code</dataScope>
                     <imports>
                         <link name="visible">componentType = column, index = ${ $.index }:visible</link>
                     </imports>
@@ -121,7 +121,7 @@
                 <visible>false</visible>
             </settings>
         </column>
-        <column name="source_code" sortOrder="20">
+        <column name="pickup_location_code" class="WolfSellers\Bopis\Ui\Component\Listing\Column\PickupLocationCode" sortOrder="20">
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>
