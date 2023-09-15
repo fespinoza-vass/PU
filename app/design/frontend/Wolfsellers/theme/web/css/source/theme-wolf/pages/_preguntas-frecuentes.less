@@ -11,7 +11,11 @@
                 display: none;
             }
         }
+        .pagebuilder-column-line{
+            padding-bottom: 50px;
+        }
         .content-menu-questions{
+            position: relative;
             padding: 100px 15px 0 15px;
             .row-content-menu{
                 border: 1px solid @gray-A7;
@@ -52,6 +56,10 @@
                         }
                     }
                 }
+            }
+            &.stiky.active{
+                position: fixed;
+                z-index: 999;
             }
         }
         .content-info-questions{
