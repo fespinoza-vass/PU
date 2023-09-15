@@ -8,7 +8,6 @@ require([
         //function for accordion
         $(".row-info-questions > div").accordion({
             heightStyle: "content",
-            // autoHeight : false,
             active: true,
             collapsible: true,
             openedState: true,
