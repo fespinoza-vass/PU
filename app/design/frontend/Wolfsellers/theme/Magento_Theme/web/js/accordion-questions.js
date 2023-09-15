@@ -8,12 +8,14 @@ require([
         //function for accordion
         $(".row-info-questions > div").accordion({
             heightStyle: "content",
-            active: true,
+            active: false,
             collapsible: true,
             openedState: true,
-            activeAll: true,
-            animate:{
-                duration: 700
+            //function when clicking on accordion button
+            activate: function( event, ui ) {
+                if(!$.isEmptyObject(ui.newHeader.offset())) {
+                    $('html:not(:animated), body:not(:animated)').animate({ scrollTop: ui.newHeader.offset().top - 180 }, 'slow');
+                }
             }
         });
 
