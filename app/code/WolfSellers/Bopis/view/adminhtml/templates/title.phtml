@@ -52,9 +52,11 @@ $viewModel = $block->getData('viewModel');
     <div>
         <span class="page-title-order-id-bopis">ID: <?= $order->getIncrementId() ?></span>
 
+        <?php if($viewModel->getStateLabel($order->getStatus())): ?>
         <span class="current-state" title="<?=$order->getStatus()?>">
             <?=strtoupper($viewModel->getStateLabel($order->getStatus()) ?? '')?>
         </span>
+        <?php endif; ?>
 
         <?php if ($order->getGiftMessageId()): ?>
             <span class="current-state">
