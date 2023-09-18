@@ -7,10 +7,16 @@ require([
 
         //function for accordion
         $(".row-info-questions > div").accordion({
-        heightStyle: "content",
-        active: true,
-        collapsible: true,
-        autoHeight: false
+            heightStyle: "content",
+            active: false,
+            collapsible: true,
+            openedState: true,
+            //function when clicking on accordion button
+            activate: function( event, ui ) {
+                if(!$.isEmptyObject(ui.newHeader.offset())) {
+                    $('html:not(:animated), body:not(:animated)').animate({ scrollTop: ui.newHeader.offset().top - 180 }, 'slow');
+                }
+            }
         });
 
         //scroll animation function
@@ -29,5 +35,29 @@ require([
             $(this).toggleClass("active");
             $('.content-menu-questions').toggleClass("active");
         });
+        
+        //function menu fixed
+        if(window.innerWidth > 768 ) {
+            $(window).scroll(function () {
+                var menuSidebar = $('.content-menu-questions .banner-items');
+                var parentwidth = $('.block.block-banners').width();      
+                
+                if($(window).scrollTop() > 200) {
+                    menuSidebar.css('position','fixed');
+                    menuSidebar.css('top','170px');
+                    menuSidebar.toggleClass("fixed").width(parentwidth);  
+                
+                }
+            
+                else if ($(window).scrollTop() <= 200) {
+                    menuSidebar.css('position','');
+                    menuSidebar.css('top','');
+                }  
+                if (menuSidebar.offset().top + menuSidebar.height() > $(".page-footer").offset().top) {
+                    menuSidebar.css('top',-(menuSidebar.offset().top + menuSidebar.height() - $(".page-footer").offset().top) + 150);
+                }
+            });
+        }
+
     }
 );
