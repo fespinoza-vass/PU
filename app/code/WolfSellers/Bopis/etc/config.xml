@@ -64,6 +64,12 @@
                 <identity>sales</identity>
                 <copy_to>andonidominguez@wolfsellers.com</copy_to>
             </hold_email>
+            <satisfaction_survey_email>
+                <enabled>1</enabled>
+                <template>bopis_satisfaction_survey_email_template</template>
+                <identity>sales</identity>
+                <amasty_form>0</amasty_form>
+            </satisfaction_survey_email>
             <remember_me>
                 <enabled>1</enabled>
                 <roles></roles>
