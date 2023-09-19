@@ -1,10 +1,13 @@
 <?php
 
-namespace WolfSellers\Bopis\Helper;
+declare(strict_types=1);
+
+namespace WolfSellers\Email\Helper;
 
 use Magento\Framework\Exception\NoSuchEntityException;
-use WolfSellers\Bopis\Model\Email\SimpleSender;
-use WolfSellers\Bopis\Model\Email\Identity\SatisfactionSurvey;
+use Magento\Sales\Model\Order;
+use WolfSellers\Email\Model\Email\Identity\SatisfactionSurvey;
+use WolfSellers\Email\Model\Email\SimpleSender;
 
 class EmailHelper
 {
@@ -20,11 +23,11 @@ class EmailHelper
 
     /**
      * @param $to
-     * @param $order \Magento\Sales\Model\Order
+     * @param $order Order
      * @return bool
      * @throws NoSuchEntityException
      */
-    public function sendSatisfactionSurveyEmail($to, $order) : bool
+    public function sendSatisfactionSurveyEmail($to, Order $order) : bool
     {
         $surveyEmail = $this->satisfactionSurvey;
 
@@ -56,3 +59,4 @@ class EmailHelper
         return true;
     }
 }
+

@@ -2,11 +2,11 @@
 
 namespace WolfSellers\Bopis\ViewModel;
 
+use Amasty\Customform\Helper\Data;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Amasty\Customform\Helper\Data;
-use WolfSellers\Bopis\Model\Email\Identity\SatisfactionSurvey;
+use WolfSellers\Email\Model\Email\Identity\SatisfactionSurvey;
 
 
 class AmastyForm implements ArgumentInterface
@@ -15,6 +15,7 @@ class AmastyForm implements ArgumentInterface
     /**
      * @param Data $customFormHelper
      * @param SatisfactionSurvey $satisfactionSurvey
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         protected Data                  $customFormHelper,

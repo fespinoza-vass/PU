@@ -1,13 +1,11 @@
 <?php
 
-namespace WolfSellers\Bopis\Model\Email\Identity;
+namespace WolfSellers\Email\Model\Email\Identity;
 
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Store\Model\ScopeInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Store\Model\StoreManagerInterface;
+use WolfSellers\Email\Model\Email\Identity\Identity;
 
-class SatisfactionSurvey
+class SatisfactionSurvey extends Identity
 {
     /** @var string */
     const XML_PATH_EMAIL_ENABLED = 'bopis/satisfaction_survey_email/enabled';
@@ -25,40 +23,12 @@ class SatisfactionSurvey
     const URL_SATISFACTION_SURVEY = 'bopis/survey/satisfaction';
 
     /**
-     * @param ScopeConfigInterface $_scopeConfig
-     * @param StoreManagerInterface $_storeManager
-     */
-    public function __construct(
-        protected ScopeConfigInterface $_scopeConfig,
-        protected StoreManagerInterface $_storeManager
-    ) {
-    }
-
-    /**
-     * @param $path
-     * @return mixed
-     * @throws NoSuchEntityException
-     */
-    public function getConfigValue($path): mixed
-    {
-        return $this->_scopeConfig->getValue(
-            $path,
-            ScopeInterface::SCOPE_STORE,
-            $this->getStore()->getId()
-        );
-    }
-
-    /**
      * @return bool
      * @throws NoSuchEntityException
      */
     public function isEnabled(): bool
     {
-        return $this->_scopeConfig->isSetFlag(
-            self::XML_PATH_EMAIL_ENABLED,
-            ScopeInterface::SCOPE_STORE,
-            $this->getStore()->getId()
-        );
+        return $this->isEmailEnabled(self::XML_PATH_EMAIL_ENABLED);
     }
 
     /**
@@ -89,20 +59,11 @@ class SatisfactionSurvey
     }
 
     /**
-     * @return \Magento\Store\Api\Data\StoreInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    private function getStore()
-    {
-        return $this->_storeManager->getStore();
-    }
-
-    /**
      * @return string
      * @throws NoSuchEntityException
      */
     public function getSatisfactionSurveyUrl()
     {
-        return $this->_storeManager->getStore()->getUrl(self::URL_SATISFACTION_SURVEY);
+        return $this->getStore()->getUrl(self::URL_SATISFACTION_SURVEY);
     }
 }

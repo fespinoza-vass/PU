@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace WolfSellers\Bopis\Model\Email;
+namespace WolfSellers\Email\Model\Email;
 
-use Magento\Framework\Translate\Inline\StateInterface;
-use Magento\Framework\Mail\Template\TransportBuilder;
-use Magento\Framework\Mail\Template\SenderResolverInterface;
 use Magento\Framework\Escaper;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Sales\Model\Order\Address\Renderer;
+use Magento\Framework\Mail\Template\SenderResolverInterface;
+use Magento\Framework\Mail\Template\TransportBuilder;
+use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Address\Renderer;
+use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
 

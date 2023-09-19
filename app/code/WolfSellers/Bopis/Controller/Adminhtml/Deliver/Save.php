@@ -35,7 +35,8 @@ use Magento\Shipping\Model\ShipmentNotifier;
 use Psr\Log\LoggerInterface;
 use Zend\Log\Logger;
 use Magento\Inventory\Model\ResourceModel\SourceItem\SaveMultiple;
-
+use WolfSellers\Email\Helper\EmailHelper;
+use Magento\Sales\Model\OrderFactory;
 
 class Save extends Order
 {
@@ -61,6 +62,10 @@ class Save extends Order
      * @var SaveMultiple
      */
     private SaveMultiple $saveMultiple;
+    /** @var EmailHelper  */
+    private EmailHelper $emailHelper;
+    /** @var OrderFactory  */
+    private OrderFactory $orderFactory;
 
     /**
      * @param ShipmentRepository $shipmentRepository
@@ -81,6 +86,8 @@ class Save extends Order
      * @param SourceItemFactory $sourceItemFactory
      * @param CollectionFactory $sourceItemCollectionFactory
      * @param SaveMultiple $saveMultiple
+     * @param EmailHelper $emailHelper
+     * @param OrderFactory $orderFactory
      */
     public function __construct(
         ShipmentRepository $shipmentRepository,
@@ -100,7 +107,9 @@ class Save extends Order
         LoggerInterface $logger,
         SourceItemFactory $sourceItemFactory,
         CollectionFactory $sourceItemCollectionFactory,
-        SaveMultiple $saveMultiple
+        SaveMultiple $saveMultiple,
+        EmailHelper $emailHelper,
+        OrderFactory $orderFactory
     ){
         parent::__construct(
             $context,
@@ -126,6 +135,8 @@ class Save extends Order
         $logger->addWriter($writer);
         $this->_logger = $logger;
         $this->saveMultiple = $saveMultiple;
+        $this->emailHelper = $emailHelper;
+        $this->orderFactory = $orderFactory;
     }
 
     /**
@@ -155,6 +166,10 @@ class Save extends Order
                     ->addCommentToStatusHistory('Orden Entregada');
                 $order->addCommentToStatusHistory("Comentario de entrega: <br />" . $bopisComment);
                 $this->orderRepository->save($order);
+
+                $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
+                $this->emailHelper->sendSatisfactionSurveyEmail($to, $this->getOrderModel($order));
+
                 $this->messageManager->addSuccessMessage(__('La Orden ha sido entregada.'));
             } catch (Exception $e) {
                 $this->_logger->err(var_export($e->getMessage()));
@@ -221,4 +236,12 @@ class Save extends Order
         return $shipment;
     }
 
+    /**
+     * @param $order
+     * @return ModelOrder
+     */
+    public function getOrderModel($order)
+    {
+        return $this->orderFactory->create()->loadByIncrementId($order->getIncrementId());
+    }
 }
