@@ -5,6 +5,10 @@
     .cms-preguntas-frecuentes{
         .page-wrapper{
             background: @color-white;
+            overflow: visible;
+            .column.main{
+                padding-bottom: 60px;
+            }
         }
         .row-button-mobile-questions{
             .pagebuilder-button-primary{
@@ -14,6 +18,10 @@
         .content-menu-questions{
             position: relative;
             padding: 100px 15px 0 15px;
+            [data-content-type="dynamic_block"]{
+                position: sticky;
+                top: 200px;
+            }
             .row-content-menu{
                 border: 1px solid @gray-A7;
                 margin-bottom: 5px;
