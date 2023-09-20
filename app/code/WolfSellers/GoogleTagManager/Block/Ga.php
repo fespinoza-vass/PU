@@ -177,7 +177,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             foreach ($order->getAllVisibleItems() as $item) {
 
                 /** Get Name Categories of product */
-                $categories = [];
+                /*$categories = [];
                 foreach($item->getProduct()->getCategoryIds() as $categoryId){
                     array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
                 }
@@ -185,6 +185,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 $category = isset($categories[0]) ? $categories[0] : '';
                 $subcategory = isset($categories[1]) ? $categories[1] : '';
                 $family = isset($categories[2]) ? $categories[2] : '';
+                */
 
                 /** Get Rules of product */
                 $rules = $this->getRules($item->getProduct()->getId());
@@ -198,8 +199,9 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
 
                 $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
 
-                //$category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
-                //$subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
+                $category = !empty($item->getProduct()->getAttributeText('categoria')) ? $item->getProduct()->getAttributeText('genero') : '';
+                $subcategory = !empty($item->getProduct()->getAttributeText('sub_categoria')) ? $item->getProduct()->getAttributeText('genero') : '';
+                $family = !empty($item->getProduct()->getAttributeText('familia')) ? $item->getProduct()->getAttributeText('genero') : '';
                 //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
 
                 $options = $this->attributerepository->get('manufacturer')->getOptions();
