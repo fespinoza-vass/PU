@@ -146,47 +146,27 @@ h1{
         .cmp-form-encuesta__form{
             margin: 0 auto;
             text-align: center;
-            ul{
-                list-style: none;
-                padding: 0;
-                margin-bottom: 0;
-                li{
-                    display: inline-block;
-                    text-align: center;
-                    padding: 0 15px;
-                    [type="radio"]{
-                        display: none;
-                    }
-                    [type="radio"]{
-                        + label{
-                            &:before{
-                                content: '';
-                                display: block;
-                                width: 14px;
-                                height: 14px;
-                                border: 1px solid @black;
-                                border-radius: 100%;
-                                margin: 0;
-                            }
-                        }
-                    }
-                    span{
-                        display: block;
-                    }
-                }
-            }
-            button{
+            a{
                 width: 220px;
+                color: @black;
                 padding: 15px 20px;
                 border-radius: 12px;
                 margin-top: 10px;
                 border: 1px solid @color-black;
                 background: @white;
+                cursor: pointer !important; //style added by mailer
                 span{
                     font-size: 18px;
                     font-weight: bold;
                 }
+                &:hover{
+                    color: @black !important; //style added by mailer
+                    text-decoration: none !important; //style added by mailer
+                }
             }
+        }
+        .cmp-form-encuentas__form--img{
+            margin: 0 auto;
         }
         &__recommendation{
             height: 35px;
