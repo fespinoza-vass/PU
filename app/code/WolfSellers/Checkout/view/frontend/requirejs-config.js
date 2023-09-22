@@ -2,8 +2,10 @@ var config = {
     map:{
       '*':{
           'Magento_Checkout/js/model/step-navigator':'WolfSellers_Checkout/js/model/step-navigator',
-          'Magento_Checkout/js/view/form/element/email':'WolfSellers_Checkout/js/view/form/element/email'
-      }
+          'Magento_Checkout/js/view/form/element/email':'WolfSellers_Checkout/js/view/form/element/email',
+          'Magento_Checkout/js/model/shipping-save-processor/default': 'WolfSellers_Checkout/js/model/shipping-save-processor/default',
+          'Magento_Checkout/js/model/shipping-save-processor/payload-extender': 'WolfSellers_Checkout/js/model/shipping-save-processor/payload-extender'
+        }
     },
     config: {
         mixins: {

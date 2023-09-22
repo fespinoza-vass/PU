@@ -4,5 +4,9 @@
     <table name="sales_order">
         <column name="ubigeo_estimated_delivery" nullable="true" xsi:type="text" comment="Estimacioon de Entrega URBANO"/>
     </table>
+    <table name="quote">
+        <column name="customer_apellido" nullable="true" xsi:type="varchar" comment="customer lastname guest" length="200"/>
+        <column name="customer_password" nullable="true" xsi:type="varchar" comment="customer lastname guest" length="200"/>
+    </table>
 </schema>
 
