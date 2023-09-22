@@ -73,9 +73,11 @@ define([
          */
         navigateToNextStep: function () {
             var emailIsValid = this.validateEmailForm();
+            var validatePass = this.validatePassForm();
+            var validateConfirmPass   = this.validatePassConfirm();
             this.source.set('params.customerDataStepInvalid', false);
             this.triggerValidationCustomerDataForm();
-            if (emailIsValid && !this.source.get('params.customerDataStepInvalid')) { // Verificar si el formulario es válido
+            if (emailIsValid &&  validatePass && validateConfirmPass && !this.source.get('params.customerDataStepInvalid')) { // Verificar si el formulario es válido
                 this.isVisibleEdit(false);
                 this.saveCustomerData();
                 stepNavigator.next();
@@ -91,13 +93,16 @@ define([
                 lastnameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-lastname"),
                 typeIdentificationValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-identificacion"),
                 numberIdentificationValidator  =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion"),
-                telephoneValidator =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-telefono");
+                telephoneValidator =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-telefono")
+
                 customer.email(emailValidator.email() === '' ? customer.email() : emailValidator.email());
                 customer.customerName(nameValidator.value());
                 customer.customerLastName(lastnameValidator.value());
                 customer.customerTypeIdentification(typeIdentificationValidator.value());
                 customer.customerNumberIdentification(numberIdentificationValidator.value());
                 customer.customerTelephone(telephoneValidator.value());
+                customer.passwordRegister(emailValidator.passwordRegister());
+                customer.passwordConfirm(emailValidator.passwordConfirm());
         },
 
         /**
@@ -122,6 +127,7 @@ define([
          * @returns {boolean}
          */
         validateEmailForm:function () {
+
             var emailComponent = registry.get("checkout.steps.customer-data-step.customer-email");
             if (!emailComponent.validateEmail()){
                 //NOTICE Email component validate with jquery
@@ -129,6 +135,48 @@ define([
                 return false
             }
             return true;
+        },
+
+        /**
+         * Validate only password register form
+         * @returns {boolean}
+         *
+         */
+        validatePassForm:function () {
+            var emailComponent = registry.get("checkout.steps.customer-data-step.customer-email");
+            if (quote.guestEmail !== null){
+                if (_.isUndefined(emailComponent.passwordRegister())) {
+                    $("form[data-role='email-with-possible-login']").submit();
+                    return false;
+                } else {
+                    $("form[data-role='email-with-possible-login']").submit();
+                    return true;
+                }
+            } else {
+                $("form[data-role='email-with-possible-login']").submit();
+                return true;
+            }
+        },
+
+        /**
+         * Validate only password confirm form
+         * @returns {boolean}
+         *
+         */
+        validatePassConfirm: function (){
+            var emailComponent = registry.get("checkout.steps.customer-data-step.customer-email");
+            if (quote.guestEmail !== null){
+                if (_.isUndefined(emailComponent.passwordConfirm())) {
+                    $("form[data-role='email-with-possible-login']").submit();
+                    return false;
+                }else {
+                    $("form[data-role='email-with-possible-login']").submit();
+                    return true;
+                }
+            } else {
+                 $("form[data-role='email-with-possible-login']").submit();
+                 return true;
+            }
         }
     });
 });

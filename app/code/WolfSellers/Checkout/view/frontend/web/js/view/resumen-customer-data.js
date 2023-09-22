@@ -30,6 +30,8 @@ define([
         customerTypeIdentification:ko.observable(customer.customerTypeIdentification()),
         customerNumberIdentification: ko.observable(customer.customerNumberIdentification()),
         customerTelephone:ko.observable(customer.customerTelephone()),
+       passwordRegister :ko.observable(customer.passwordRegister()),
+        passwordConfirm : ko.observable(customer.passwordConfirm()),
 
         /**
          * @returns {*}
@@ -59,6 +61,14 @@ define([
 
             customer.customerTelephone.subscribe(function (value){
                 this.customerTelephone(value);
+            },this);
+
+            customer.passwordRegister.subscribe(function (value) {
+                this.passwordRegister(value);
+            },this);
+
+            customer.passwordConfirm.subscribe(function (value){
+                this.passwordConfirm(value);
             },this);
 
             return this;

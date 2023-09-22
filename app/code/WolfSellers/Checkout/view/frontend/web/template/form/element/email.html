@@ -65,39 +65,40 @@
             </div>
         </fieldset>
 
-        <!--Hidden fields -->
         <fieldset class="fieldset hidden-fields" data-bind="fadeVisible: isCreateCount">
             <div class="field required">
-                <label class="label" for="customer-password-register">
-                    <span data-bind="i18n: 'Password'"></span>
-                </label>
+                <label class="label" for="customer-password-register"><span data-bind="i18n: 'Password'"></span></label>
                 <div class="control">
                     <input class="input-text"
                            data-bind="
+                                value: passwordRegister,
                                 attr: {
                                     placeholder: $t('Password'),
                                 }"
                            type="password"
                            name="password-register"
                            id="customer-password-register"
+                           data-validate="{required:true, 'validate-customer-password':true}"
                            data-password-min-length="8"
-                           data-validate="{required:true,'validate-customer-password':true}" autocomplete="off"/>
+                           autocomplete="off"/>
+
                 </div>
             </div>
             <div class="field required">
-                <label class="label" for="customer-password-confirm">
-                    <span data-bind="i18n: 'Confirm Password'"></span>
-                </label>
+                <label class="label" for="customer-password-confirm"><span data-bind="i18n: 'Confirm Password'"></span></label>
                 <div class="control">
                     <input class="input-text"
                            data-bind="
+                                value: passwordConfirm,
                                 attr: {
                                     placeholder: $t('Confirm Password'),
                                 }"
                            type="password"
                            name="password-confirm"
                            id="customer-password-confirm"
+                           data-password-min-length="8"
                            data-validate="{required:true, equalTo:'#customer-password-register'}" autocomplete="off"/>
+
                 </div>
             </div>
         </fieldset>

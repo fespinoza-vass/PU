@@ -33,7 +33,9 @@ class LayoutWalker
         '{ADDITIONAL_STEP}' => '{SIDEBAR}.>>.additional', //additional summary fields
         '{SIDEBAR}' => '{CHECKOUT}.>>.sidebar',
         '{CHECKOUT}' => 'components.checkout',
-        '{PROVIDER}' => 'components.checkoutProvider'
+        '{PROVIDER}' => 'components.checkoutProvider',
+        '{STORE-PICKUP'=> '{CHECKOUT}.>>.steps.>>.store-pickup.>>.store-selector'
+
     ];
 
     public const ESCAPED_SEPARATOR = '\dot/';

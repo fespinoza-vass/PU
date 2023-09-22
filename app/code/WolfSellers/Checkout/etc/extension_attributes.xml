@@ -1,0 +1,11 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <!--<extension_attributes for="Magento\Quote\Api\Data\AddressInterface">-->
+    <extension_attributes for="Magento\Checkout\Api\Data\ShippingInformationInterface">
+        <attribute code="customer_name" type="string" />
+        <attribute code="customer_apellido" type="string" />
+        <attribute code="customer_telefono" type="string" />
+        <attribute code="customer_identificacion" type="int" />
+        <attribute code="customer_numero_de_identificacion" type="string" />
+        <attribute code="customer_password" type="string" />
+    </extension_attributes>
+</config>
