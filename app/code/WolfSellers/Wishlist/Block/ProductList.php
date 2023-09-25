@@ -13,6 +13,8 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Wishlist\Model\ItemFactory;
 use Magento\Wishlist\Model\ResourceModel\Wishlist\Collection;
 use Magento\Wishlist\Model\WishlistFactory;
+use Magento\Sales\Model\Order;
+use Magento\Checkout\Model\Session;
 
 class ProductList extends \Magento\Catalog\Block\Product\AbstractProduct  #\Magento\Framework\View\Element\Template
 {
@@ -32,13 +34,24 @@ class ProductList extends \Magento\Catalog\Block\Product\AbstractProduct  #\Mage
     private \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory;
 
     /**
-     * @param Context $context
+     * @var Order
+     */
+    private $order;
+
+    /**
+     * @var Session
+     */
+    private $checkoutSession;
+
+    /**
+     * @param \Magento\Catalog\Block\Product\Context $context
      * @param Data $urlHelper
      * @param ProductFactory $productloader
      * @param FormKey $formKey
      * @param WishlistFactory $wishlistFactory
      * @param ItemFactory $itemFactory
      * @param CollectionFactory $productCollectionFactory
+     * @param Session $checkoutSession
      * @param array $data
      */
     public function __construct(
@@ -49,6 +62,7 @@ class ProductList extends \Magento\Catalog\Block\Product\AbstractProduct  #\Mage
         \Magento\Wishlist\Model\WishlistFactory                        $wishlistFactory,
         \Magento\Wishlist\Model\ItemFactory                            $itemFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        Session                                                        $checkoutSession,
         array                                                          $data = []
     )
     {
@@ -60,6 +74,7 @@ class ProductList extends \Magento\Catalog\Block\Product\AbstractProduct  #\Mage
         $this->itemFactory = $itemFactory;
         $this->context = $context;
         $this->productCollectionFactory = $productCollectionFactory;
+        $this->checkoutSession = $checkoutSession;
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/wishlist.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
@@ -178,6 +193,15 @@ class ProductList extends \Magento\Catalog\Block\Product\AbstractProduct  #\Mage
     {
         return $this->getLayout()->createBlock(\Magento\Framework\Pricing\Render::class, "product.price.render.default" . $product->getSku())
             ->setData('is_product_list', true);
+    }
+
+    /**
+     * return order
+     *
+     * @return Order
+     */
+    public function getOrder() {
+        return $this->checkoutSession->getLastRealOrder();
     }
 
 }
