@@ -49,6 +49,9 @@ abstract class AbstractBopisCollection extends Collection
     /** @var string  */
     const PICKUP_SHIPPING_METHOD = 'instore_pickup';
 
+    /** @var string  */
+    const DEFAULT_SOURCE = 'default';
+
     /**
      * Initialize dependencies.
      *
@@ -150,8 +153,26 @@ abstract class AbstractBopisCollection extends Collection
         // $this->getSelect()->where("so.shipping_method = 'bopis_bopis'");
 
         if ($roleName === self::BOPIS_STORES) {
-            $this->getSelect()->where("so.shipping_method = '" . self::PICKUP_SHIPPING_METHOD . "'");
+            $this->getSelect()->where(
+                "(so.shipping_method = '" . self::PICKUP_SHIPPING_METHOD . "')" .
+                "OR (so.shipping_method = '" . self::FAST_SHIPPING_METHOD . "')"
+            );
+        }
 
+        /*if ($roleName === self::BOPIS_FAST_SHIPPING) {
+            $this->getSelect()->where("so.shipping_method = '" . self::FAST_SHIPPING_METHOD . "'");
+        }*/
+
+        if ($roleName === self::BOPIS_REGULAR_SHIPPING){
+            $this->getSelect()->where(
+                "(so.shipping_method LIKE '%" . self::REGULAR_SHIPPING_METHOD . "%')" .
+                "OR (so.shipping_method = '" . self::FAST_SHIPPING_METHOD . "')"
+            );
+
+            $this->getSelect()->where("so.source_code = '" . self::DEFAULT_SOURCE . "'");
+        }
+
+        if ($roleName !== self::BOPIS_SUPER_ADMIN && $roleName !== self::BOPIS_REGULAR_SHIPPING){
             if (!empty($sourceCode) && $sourceCode != "all") {
                 $sql = null;
                 $whereList = [];
@@ -169,15 +190,7 @@ abstract class AbstractBopisCollection extends Collection
             }
         }
 
-        if ($roleName === self::BOPIS_FAST_SHIPPING) {
-            $this->getSelect()->where("so.shipping_method = '" . self::FAST_SHIPPING_METHOD . "'");
-        }
-
-        if ($roleName === self::BOPIS_REGULAR_SHIPPING){
-            $this->getSelect()->where("so.shipping_method LIKE '" . self::REGULAR_SHIPPING_METHOD . "%'");
-        }
-
-        if ($userType == 2 && is_numeric($websiteId) && $websiteId > 0) {
+        /*if ($userType == 2 && is_numeric($websiteId) && $websiteId > 0) {
 
             $storeCode = $this->cookieManager->getCookie("store_code");
             if (!empty($storeCode) && $storeCode != "all") {
@@ -191,8 +204,13 @@ abstract class AbstractBopisCollection extends Collection
                 ['website_id']
             );
 
-        }
+        }*/
+
+
         //die($this->getSelectSql(true));
+        $this->_writeLog('-----------START SQL-----------');
+        $this->_writeLog($this->getSelectSql(true));
+        $this->_writeLog('------------END SQL------------');
 
         parent::_renderFiltersBefore();
     }
