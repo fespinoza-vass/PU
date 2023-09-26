@@ -1,0 +1,23 @@
+<?php
+/** @var Magento\Framework\View\Element\Template $block */
+
+/** @var WolfSellers\HeaderLinks\ViewModel\Banner\HeaderLinks $headerLinks */
+$headerLinks = $block->getData('view_model');
+$buttons = $headerLinks->isEnabled() ? $headerLinks->getButtons() : false;
+?>
+
+<?php if ($headerLinks->isEnabled()): ?>
+    <div class="nav-header-links">
+        <div class="buttons">
+            <?php if ($buttons): ?>
+                <?php foreach ($buttons as $button): ?>
+                    <a title="<?= $button['name'] ?>" href="<?= $button['link'] ?>" class="button">
+                        <button>
+                            <span class="banner-promo-detail"><?= $button['content'] ?></span>
+                        </button>
+                    </a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
