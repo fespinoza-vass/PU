@@ -6,6 +6,7 @@ namespace WolfSellers\HeaderLinks\ViewModel\Banner;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use WolfSellers\HeaderLinks\Model\ConfigProvider;
+use Magento\Cms\Model\Template\FilterProvider;
 
 class HeaderLinks implements ArgumentInterface
 {
@@ -14,9 +15,11 @@ class HeaderLinks implements ArgumentInterface
 
     /**
      * @param ConfigProvider $configProvider
+     * @param FilterProvider $_filterProvider
      */
     public function __construct(
-        protected ConfigProvider $configProvider
+        protected ConfigProvider $configProvider,
+        protected FilterProvider $_filterProvider
     )
     {
     }
@@ -31,6 +34,7 @@ class HeaderLinks implements ArgumentInterface
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function getButtons(): array
     {
@@ -49,9 +53,19 @@ class HeaderLinks implements ArgumentInterface
             $buttons[$limit] = [
                 'name' => $this->configProvider->call($nameFunction),
                 'link' => $this->configProvider->call($urlFunction),
-                'content' => $this->configProvider->call($contentFunction)
+                'content' => $this->filterOutputHtml($this->configProvider->call($contentFunction))
             ];
         }
         return $buttons ?? [];
+    }
+
+    /**
+     * @param $string
+     * @return mixed
+     * @throws \Exception
+     */
+    public function filterOutputHtml($string): mixed
+    {
+        return $this->_filterProvider->getPageFilter()->filter($string);
     }
 }
