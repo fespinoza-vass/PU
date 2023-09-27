@@ -77,6 +77,7 @@ class Footer extends AbstractOrder
     {
         if(
             in_array($this->getOrder()->getStatus(),[$this->_scopeConfig->getValue('bopis/status/shipping')])
+            || in_array($this->getOrder()->getStatus(),[$this->_scopeConfig->getValue('bopis/status/readyforpickup')])
           //  && $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0
           //  && $this->getOrder()->getData("verificacion_bopis_cliente_factura") > 0
           //  && $this->getOrder()->getData("verificacion_bopis_orden") > 0

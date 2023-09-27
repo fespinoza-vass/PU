@@ -142,9 +142,7 @@
                                                         min-height: 0;
                                                         padding: 0;
 
-                                                        .action-towishlist,
-                                                        .action-edit,
-                                                        .wishlist {
+                                                        .action-towishlist{
                                                             display: none;
                                                         }
 
@@ -154,7 +152,7 @@
                                                             }
                                                         }
 
-                                                        .action-towishlist{
+                                                        .button.wishlist{
                                                             position: absolute;
                                                             bottom: 20px;
                                                             right: 145px;
@@ -162,10 +160,15 @@
                                                             font-weight: 600;
                                                             text-decoration: underline;
                                                             margin-right: 0;
-                                                            &:hover{
-                                                                color: @color-black;
+                                                            .action.split{
+                                                                .lib-font-size(16);
+                                                                font-weight: 600;
+                                                                color: @black;
+                                                                &:hover{
+                                                                    color: @color-black;
+                                                                }
                                                             }
-                                                           span{
+                                                            span{
                                                                .lib-icon-font(
                                                                    @_icon-font-content: @icon-save-later,
                                                                    @_icon-font-color: @color-black,
@@ -174,6 +177,9 @@
                                                                    @_icon-font-margin: 0 5px 0 0,
                                                                    );
                                                                 text-decoration: underline;
+                                                            }
+                                                            .toggle.change{
+                                                                display: none;
                                                             }
                                                         }
                                                     }
@@ -765,7 +771,7 @@
                                                         padding: 0;
 
                                                         .action-delete {
-                                                            bottom: 86px;
+                                                            bottom: 130px;
                                                             right: 16px;
                                                             top: auto;
 
@@ -774,19 +780,26 @@
                                                                 overflow: visible;
                                                             }
                                                         }
-                                                        .towishlist.action-towishlist{
+                                                        .split.button.wishlist{
                                                             position: relative;
-                                                            padding: 15px 0 0 90px;
+                                                            right: 0;
                                                             &:before{
                                                                 content: none;
+                                                            }
+                                                            .action.split{
                                                             }
                                                             span{
                                                                 position: relative;
                                                                 overflow: visible;
+                                                                .lib-font-size(14);
                                                                 width: auto;
                                                                 height: auto;
                                                                 margin: 0;
+                                                                padding: 15px 0 0 90px;
                                                             }
+                                                        }
+                                                        .action-edit{
+                                                            display: none;
                                                         }
                                                     }
                                                 }

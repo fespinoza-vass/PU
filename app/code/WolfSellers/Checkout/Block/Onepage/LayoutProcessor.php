@@ -220,30 +220,6 @@ class LayoutProcessor implements LayoutProcessorInterface
             'visible' => true,
             'value'=>$this->getTelefonoCustomer($idCustomer)
         ];
-        $customerDataConfirmPassComponent = [
-            'component' => 'Magento_Ui/js/form/element/abstract',
-            'displayArea' => 'customer-data-confirm_password',
-            'config' => [
-                'customScope' => 'customerData.confirm_password',
-                'customEntry' => null,
-                'template' => 'ui/form/field',
-                'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Confirmar Password.'
-                ],
-            ],
-            'dataScope' => 'customerData.confirm_password',
-            'label' => 'Confirmar password',
-            'provider' => 'checkoutProvider',
-            'sortOrder' => 5,
-            'validation' => [
-                'required-entry' => true,
-            ],
-            'filterBy' => null,
-            'customEntry' => null,
-            'visible' => true
-
-        ];
         $customerFieldsets = [
           'component' => 'uiComponent',
           'displayArea' => 'customer-fieldsets'
@@ -261,8 +237,6 @@ class LayoutProcessor implements LayoutProcessorInterface
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-telefono'] = $customerDataTelefonoComponent;
         //TERMINOSYCONDICIONES
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-agreement'] = $customerDataAgreementComponent;
-        //CONFIRMAR PASSWORD
-        //$customerDataFieldSets['customer-fieldsets']['children']['customer-data-confirm_password'] = $customerDataConfirmPassComponent;
         $customerDataFieldSets['customer-email'] = $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
         $customerDataFieldSets['customer-data-resumen'] = $resumenCustomerData;
         $walker->setValue('{CUSTOMER-DATA}.>>', $customerDataFieldSets);

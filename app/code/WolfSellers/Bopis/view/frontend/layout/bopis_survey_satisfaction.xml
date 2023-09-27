@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="footer" remove="true"/>
+        <referenceContainer name="navigation.sections" remove="true"/>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="email.satisfaction.survey.bopis"
+                   template="WolfSellers_Bopis::survey/satisfaction-survey-bopis.phtml">
+                <arguments>
+                    <argument name="viewModel" xsi:type="object">
+                        WolfSellers\Bopis\ViewModel\AmastyForm
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

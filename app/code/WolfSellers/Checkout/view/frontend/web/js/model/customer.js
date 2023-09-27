@@ -11,8 +11,9 @@ define([
         customerTelephone = '',
         telephone = "",
         id = "",
-        numId =""
-
+        numId ="",
+        passwordRegister ="",
+        passwordConfirm = ""
 
     if(window.isCustomerLoggedIn){
         id = window.checkoutConfig.customerData.custom_attributes.identificacion;
@@ -33,6 +34,8 @@ define([
         customerTypeIdentification : ko.observable(customerTypeIdentification),
         customerNumberIdentification : ko.observable(customerNumberIdentification),
         customerTelephone : ko.observable(customerTelephone),
+        passwordRegister :ko.observable(passwordRegister),
+        passwordConfirm : ko.observable(passwordConfirm),
         isCustomerStepFinished: ko.observable("_active")
     }
 

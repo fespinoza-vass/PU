@@ -13,8 +13,9 @@ define([
     'Magento_Checkout/js/model/quote',
     'Magento_Checkout/js/checkout-data',
     'Magento_Checkout/js/model/full-screen-loader',
-    'mage/validation'
-], function ($, Component, ko, customer, checkEmailAvailability, loginAction, quote, checkoutData, fullScreenLoader) {
+    'mage/validation',
+    'WolfSellers_Checkout/js/model/customer'
+], function ($, Component, ko, customer, checkEmailAvailability, loginAction, quote, checkoutData, fullScreenLoader,customer_data) {
     'use strict';
 
     var validatedEmail;
@@ -54,6 +55,22 @@ define([
         isCustomerLoggedIn: customer.isLoggedIn,
         forgotPasswordUrl: window.checkoutConfig.forgotPasswordUrl,
         emailCheckTimeout: 0,
+        passwordRegister :ko.observable(customer_data.passwordRegister),
+        passwordConfirm: ko.observable(customer_data.passwordConfirm),
+
+        initialize: function () {
+            this._super();
+
+            this.passwordRegister.subscribe(function(value) {
+                customer_data.passwordRegister = value;
+            }, this);
+
+            this.passwordConfirm.subscribe(function(value) {
+                customer_data.passwordConfirm = value;
+            }, this);
+
+            return this;
+        },
 
         /**
          * Initializes regular properties of instance.
@@ -105,6 +122,7 @@ define([
 
         /**
          * Check email existing.
+         * add validation isCreateCount
          */
         checkEmailAvailability: function () {
             this.validateRequest();
