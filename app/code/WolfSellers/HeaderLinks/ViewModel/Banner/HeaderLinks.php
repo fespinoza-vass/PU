@@ -68,4 +68,12 @@ class HeaderLinks implements ArgumentInterface
     {
         return $this->_filterProvider->getPageFilter()->filter($string);
     }
+
+    /**
+     * @return bool
+     */
+    public function keepSticky(): bool
+    {
+        return $this->configProvider->keepSticky();
+    }
 }

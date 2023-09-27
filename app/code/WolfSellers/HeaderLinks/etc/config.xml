@@ -5,6 +5,7 @@
         <wolfsellers_headerlinks>
             <general>
                 <enabled>1</enabled>
+                <sticky>1</sticky>
             </general>
             <btn1>
                 <button1>0</button1>

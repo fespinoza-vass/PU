@@ -7,7 +7,7 @@ $buttons = $headerLinks->isEnabled() ? $headerLinks->getButtons() : false;
 ?>
 
 <?php if ($headerLinks->isEnabled()): ?>
-    <div class="nav-header-links">
+    <div class="nav-header-links <?=$headerLinks->keepSticky() ? 'sticky-header-buttons' : ''?>">
         <div class="buttons">
             <?php if ($buttons): ?>
                 <?php foreach ($buttons as $button): ?>
