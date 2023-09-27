@@ -155,6 +155,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $attributes = $item2->getAttributes();
             $category = null;
             $subcategory = null;
+            $attribute = null;
             $brand = null;
             $gender = null;
             $size = null;

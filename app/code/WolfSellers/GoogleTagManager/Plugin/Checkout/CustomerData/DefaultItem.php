@@ -45,6 +45,12 @@ class DefaultItem
         $this->logger = $logger;
     }
 
+    /**
+     * @param \Magento\Checkout\CustomerData\AbstractItem $subject
+     * @param \Closure $proceed
+     * @param \Magento\Quote\Model\Quote\Item $item
+     * @return array
+     */
     public function aroundGetItemData(
         \Magento\Checkout\CustomerData\AbstractItem $subject,
         \Closure $proceed,
@@ -55,6 +61,7 @@ class DefaultItem
         $attributes = $item->getProduct()->getAttributes();
         $category = null;
         $subcategory = null;
+        $family = null;
         $brand = null;
         $gender = null;
         $size = null;
