@@ -19,4 +19,10 @@
     <preference for="WolfSellers\Checkout\Api\GuestGiftMessageInformationManagementInterface"
                 type="WolfSellers\Checkout\Model\GuestGiftMessageInformationManagement" />
 
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="save_custom_field_to_quote_table"
+                type="WolfSellers\Checkout\Plugin\Model\ShippingInformationManagement"
+                sortOrder="30" />
+    </type>
+
 </config>

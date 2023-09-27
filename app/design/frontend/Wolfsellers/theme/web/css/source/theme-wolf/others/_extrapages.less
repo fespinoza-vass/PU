@@ -76,6 +76,38 @@
                 height: 60px;
             }
         }
+        .content-info-shipping{
+            text-align: center;
+            .number-order{
+                span{
+                    .lib-font-size(32);
+                    color: @lines-input;
+                    a{
+                        color: @black;
+                        text-decoration: underline;
+                        padding-left: 10px;
+                    }
+                }
+            }
+            .info{
+                padding: 25px 0;
+                p{
+                    .lib-font-size(16);
+                }
+            }
+            .back-to-store{
+                display: block;
+                height: 60px;
+                .lib-font-size(18);
+                font-weight: 600;
+                color: @white;
+                background: @black;
+                text-transform: uppercase;
+                border-radius: 12px;
+                margin: 0 auto;
+                line-height: 3;
+            }
+        }
         .page-wrapper {
             .page-main {
                 .page-title-wrapper {
@@ -250,6 +282,13 @@
                 margin: 40px auto 0;
             }
         }
+        .content-info-shipping{
+            width: 910px;
+            margin: 0 auto;
+            .back-to-store{
+                width: 456px;
+            }
+        }
         .page-wrapper {
             .page-main {
                 .page-title-wrapper {
@@ -388,8 +427,8 @@
                         }
                     }
                 }
-                .content-info-save {
-                    .column.main{
+                .column.main{
+                    .content-info-save {
                         h1{
                             .lib-font-size(18);
                         }
@@ -416,6 +455,22 @@
                     a {
                         .lib-font-size(16);
                         display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:375px){
+    .checkout-onepage-success {
+        .content-info-shipping{
+            .number-order{
+                span{
+                    .lib-font-size(22);
+                    color: @lines-input;
+                    a{
+                        .lib-font-size(22);
                     }
                 }
             }
