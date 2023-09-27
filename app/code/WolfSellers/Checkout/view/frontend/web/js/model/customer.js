@@ -32,8 +32,8 @@ define([
         customerLastName : ko.observable(customerLastName),
         customerTypeIdentification : ko.observable(customerTypeIdentification),
         customerNumberIdentification : ko.observable(customerNumberIdentification),
-        customerTelephone : ko.observable(customerTelephone)
-
+        customerTelephone : ko.observable(customerTelephone),
+        isCustomerStepFinished: ko.observable("_active")
     }
 
 });

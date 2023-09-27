@@ -269,10 +269,6 @@ class LayoutProcessor implements LayoutProcessorInterface
         $walker->setValue('{SHIPPING_ADDRESS}.>>.customer-email', []);
         $walker->setValue('{PAYMENT}.>>.customer-email', []);
 
-        //var_dump($customerAddressArea);
-        //die();
-        //
-
       //  $email= $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
         //******SHIPPING ADDRESS******
         //COMPANY
