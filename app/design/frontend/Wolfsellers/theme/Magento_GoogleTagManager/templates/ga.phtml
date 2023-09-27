@@ -12,26 +12,37 @@ $gtmAccountId = $block->getConfig(\Magento\GoogleTagManager\Helper\Data::XML_PAT
 $gapAccountId = $block->getConfig(\Magento\GoogleTagManager\Helper\Data::XML_PATH_ACCOUNT);
 $_product = $block->getProductBlock();
 $categories = $block->getCategoryName();
-$category = isset($categories[0]) ? $categories[0] : '';
-$subcategory = isset($categories[1]) ? $categories[1] : '';
-$family = isset($categories[2]) ? $categories[2] : '';
+//$category = isset($categories[0]) ? $categories[0] : '';
+//$subcategory = isset($categories[1]) ? $categories[1] : '';
+//$family = isset($categories[2]) ? $categories[2] : '';
 $gender = '';
 $size = '';
 
 if (!empty($_product)) {
 
     $attr = $_product->getResource()->getAttribute('tamano');
-
     if ($attr->usesSource()) {
-
         $size = $attr->getSource()->getOptionText($_product->getTamano());
     }
 
     $attr = $_product->getResource()->getAttribute('genero');
-
     if ($attr->usesSource()) {
-
         $gender = $attr->getSource()->getOptionText($_product->getGenero());
+    }
+
+    $attr = $_product->getResource()->getAttribute('categoria');
+    if ($attr->usesSource()) {
+        $category = $attr->getSource()->getOptionText($_product->getTamano());
+    }
+
+    $attr = $_product->getResource()->getAttribute('sub_categoria');
+    if ($attr->usesSource()) {
+        $subcategory = $attr->getSource()->getOptionText($_product->getTamano());
+    }
+
+    $attr = $_product->getResource()->getAttribute('familia');
+    if ($attr->usesSource()) {
+        $family = $attr->getSource()->getOptionText($_product->getTamano());
     }
 
     $attributes = $_product->getAttributes();

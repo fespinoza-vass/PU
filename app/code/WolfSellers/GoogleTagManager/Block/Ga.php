@@ -199,9 +199,9 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
 
                 $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
 
-                $category = !empty($item->getProduct()->getAttributeText('categoria')) ? $item->getProduct()->getAttributeText('genero') : '';
-                $subcategory = !empty($item->getProduct()->getAttributeText('sub_categoria')) ? $item->getProduct()->getAttributeText('genero') : '';
-                $family = !empty($item->getProduct()->getAttributeText('familia')) ? $item->getProduct()->getAttributeText('genero') : '';
+                $category = !empty($item->getProduct()->getAttributeText('categoria')) ? $item->getProduct()->getAttributeText('categoria') : '';
+                $subcategory = !empty($item->getProduct()->getAttributeText('sub_categoria')) ? $item->getProduct()->getAttributeText('sub_categoria') : '';
+                $family = !empty($item->getProduct()->getAttributeText('familia')) ? $item->getProduct()->getAttributeText('familia') : '';
                 //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
 
                 $options = $this->attributerepository->get('manufacturer')->getOptions();
