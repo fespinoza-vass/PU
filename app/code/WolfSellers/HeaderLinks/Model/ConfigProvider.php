@@ -11,6 +11,9 @@ class ConfigProvider
     /** @var string */
     const CONFIG_PATH_ENABLED = 'wolfsellers_headerlinks/general/enabled';
 
+    /** @var string  */
+    const CONFIG_PATH_STICKY = 'wolfsellers_headerlinks/general/sticky';
+
     /** @var string */
     const CONFIG_PATH_BUTTON_1_VISIBLE = 'wolfsellers_headerlinks/btn1/button1';
 
@@ -62,6 +65,14 @@ class ConfigProvider
     public function isEnabled(): bool
     {
         return $this->_scopeConfig->isSetFlag(self::CONFIG_PATH_ENABLED);
+    }
+
+    /**
+     * @return bool
+     */
+    public function keepSticky(): bool
+    {
+        return $this->_scopeConfig->isSetFlag(self::CONFIG_PATH_STICKY);
     }
 
     /**
