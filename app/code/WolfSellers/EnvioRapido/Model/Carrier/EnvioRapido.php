@@ -56,16 +56,21 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
             if (!$this->getConfigFlag('active')) {
                 return false;
             }
+            $this->_logger->info(__METHOD__);
 
             //Reglas de negocio
             $cumpleReglasEnvioRapido = false;
+            $salableQtySelectedStock = -1;
+
             /** @var Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
                 //$productId = $item->getProductId();
                 //$this->productRepository->getById($productId);
                 $salable = $this->salableQuantityDataBySku->execute($item->getSku());
                 //[0] => [ 'stock_id' => 2, 'stock_name' => 'Perfumerias Unidas', 'qty' => 8000, 'manage_stock' => true ]
-                if($salable[0]['qty'] > 1000){
+                $salableQtySelectedStock = $salable[0]['qty'];
+                $this->_logger->info('salableQtySelectedStock: ' . $salableQtySelectedStock);
+                if($salableQtySelectedStock > 1000){
                     $cumpleReglasEnvioRapido = true;
                 }
             }
@@ -73,7 +78,9 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
             $shippingPrice = $this->getConfigData('price');
 
             if ($shippingPrice !== false) {
+                $this->_logger->info('Diferente de false');
                 if ($cumpleReglasEnvioRapido) {
+                    $this->_logger->info('Si cumple reglas');
                     $result = $this->_rateResultFactory->create();
 
                     $method = $this->_rateMethodFactory->create();
@@ -97,10 +104,11 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
                     return $result;
 
                 } else {
+                    $this->_logger->info('NO cumple reglas');
                     $error = $this->_rateErrorFactory->create();
                     $error->setCarrier($this->_code);
                     $error->setCarrierTitle($this->getConfigData('title'));
-                    $error->setErrorMessage($this->getConfigData('specificerrmsg'));
+                    $error->setErrorMessage($salableQtySelectedStock . ' ' . $this->getConfigData('specificerrmsg'));
                     return $error;
                 }
             }
@@ -109,7 +117,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
             $error = $this->_rateErrorFactory->create();
             $error->setCarrier($this->_code);
             $error->setCarrierTitle($this->getConfigData('title'));
-            $error->setErrorMessage($e->getMessage());
+            $error->setErrorMessage($salableQtySelectedStock . $e->getMessage());
             return $error;
         }
     }
