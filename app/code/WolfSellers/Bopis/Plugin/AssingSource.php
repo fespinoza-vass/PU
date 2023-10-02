@@ -11,8 +11,6 @@ use WolfSellers\OrderQR\Logger\Logger;
 
 class AssingSource
 {
-    const DEFAULT_BOPIS_SOURCE_CODE = '1';
-
     /**
      * @param OrderFactory $_orderRepository
      * @param Logger $_logger
@@ -35,7 +33,7 @@ class AssingSource
         $order = $result;
 
         try {
-            $sourceCode = self::DEFAULT_BOPIS_SOURCE_CODE;
+            $sourceCode = AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE;
 
             if($order->getShippingMethod() == AbstractBopisCollection::PICKUP_SHIPPING_METHOD)
             {

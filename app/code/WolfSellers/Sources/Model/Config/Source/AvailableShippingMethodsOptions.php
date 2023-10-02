@@ -9,10 +9,10 @@ use Magento\Shipping\Model\Config;
 class AvailableShippingMethodsOptions implements OptionSourceInterface
 {
     /** @var string */
-    const FORCED_IN_STORE_CODE = 'forced_instore';
+    const FORCED_IN_STORE_CODE = 'needs_supply_instore';
 
     /** @var string */
-    const FORCED_IN_STORE_TITLE = 'Retiro en tienda por falta de stock';
+    const FORCED_IN_STORE_TITLE = 'Necesita suministro de la fuente principal';
 
     /**
      * @param ScopeConfigInterface $_scopeConfig

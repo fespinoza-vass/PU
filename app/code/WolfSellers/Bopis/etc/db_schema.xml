@@ -41,7 +41,7 @@
 
     <table name="sales_order">
         <column xsi:type="text" name="source_code" nullable="true" comment="Source Codes"/>
-        <column xsi:type="boolean" name="forced_instore" nullable="false" comment="Flag forced delivery in store"/>
+        <column xsi:type="boolean" name="needs_supply_instore" nullable="false" comment="Needs supply from default source"/>
         <!--
         <column xsi:type="int" name="verificacion_bopis_cliente_retira" padding="5" default="0" />
         <column xsi:type="int" name="verificacion_bopis_cliente_factura" padding="5" default="0" />

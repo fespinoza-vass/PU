@@ -57,10 +57,10 @@ abstract class AbstractBopisCollection extends Collection
     const PICKUP_SHIPPING_METHOD = 'instore_pickup';
 
     /** @var string  */
-    const FORCED_INSTORE = 'forced_instore';
+    const NEEDS_SUPPLY_INSTORE = 'needs_supply_instore';
 
     /** @var string  */
-    const DEFAULT_SOURCE = 'default';
+    const DEFAULT_BOPIS_SOURCE_CODE = '1';
 
     /**
      * Initialize dependencies.
@@ -171,12 +171,9 @@ abstract class AbstractBopisCollection extends Collection
             $whereList = [];
             if ($availableShippingMethods) {
                 foreach ($availableShippingMethods as $shippingMethod) {
-                    if ($shippingMethod === self::FORCED_INSTORE){
-                        $whereList[] = "(so." . self::FORCED_INSTORE . " IS TRUE)";
-                    }else{
+                    if ($shippingMethod !== self::NEEDS_SUPPLY_INSTORE){
                         $whereList[] = "(so.shipping_method LIKE '%" . $shippingMethod . "%')";
                     }
-
                 }
 
                 if (count($whereList)) {
@@ -193,10 +190,13 @@ abstract class AbstractBopisCollection extends Collection
 
                 $codes = explode(',', $sourceCode);
                 foreach ($codes as $code) {
-                    $whereList[] = " (so.source_code LIKE '%" . trim($code) . "%') ";
+                    $whereList[] = " (so.source_code = '" . trim($code) . "') ";
                 }
 
                 if (count($whereList)) {
+                    if (in_array(self::NEEDS_SUPPLY_INSTORE, $availableShippingMethods)){
+                        $whereList[] = "(so." . self::NEEDS_SUPPLY_INSTORE . " IS TRUE)";
+                    }
                     $sql = implode(' OR ', $whereList);
                 }
 

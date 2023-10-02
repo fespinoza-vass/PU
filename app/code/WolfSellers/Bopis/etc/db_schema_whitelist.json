@@ -17,7 +17,7 @@
     "sales_order": {
         "column": {
             "source_code": true,
-            "forced_instore": true
+            "needs_supply_instore": true
         }
     }
 }
