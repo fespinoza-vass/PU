@@ -4,6 +4,7 @@
 namespace WolfSellers\Bopis\Model\ResourceModel;
 
 use Magento\Backend\Model\Auth\Session as AuthSession;
+use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use Magento\User\Model\ResourceModel\User\CollectionFactory as UserCollectionFactory;
 use Magento\Framework\Data\Collection\Db\FetchStrategyInterface as FetchStrategy;
 use Magento\Framework\Data\Collection\EntityFactoryInterface as EntityFactory;
@@ -24,6 +25,12 @@ abstract class AbstractBopisCollection extends Collection
 
     /** @var UserCollectionFactory */
     protected UserCollectionFactory $userCollectionFactory;
+
+    /** @var SourceRepositoryInterface  */
+    protected SourceRepositoryInterface $_sourceRepository;
+
+    /** @var array  */
+    protected array $sourceData;
 
     /** @var Config */
     protected $config;
@@ -50,6 +57,9 @@ abstract class AbstractBopisCollection extends Collection
     const PICKUP_SHIPPING_METHOD = 'instore_pickup';
 
     /** @var string  */
+    const FORCED_INSTORE = 'forced_instore';
+
+    /** @var string  */
     const DEFAULT_SOURCE = 'default';
 
     /**
@@ -63,6 +73,7 @@ abstract class AbstractBopisCollection extends Collection
      * @param EventManager $eventManager
      * @param Config $config
      * @param UserCollectionFactory $userCollectionFactory
+     * @param SourceRepositoryInterface $sourceRepository
      * @param string $mainTable
      * @param string $resourceModel
      */
@@ -75,6 +86,7 @@ abstract class AbstractBopisCollection extends Collection
         EventManager           $eventManager,
         Config                 $config,
         UserCollectionFactory  $userCollectionFactory,
+        SourceRepositoryInterface  $sourceRepository,
                                $mainTable = 'sales_order_grid',
                                $resourceModel = \Magento\Sales\Model\ResourceModel\Order::class
     )
@@ -84,6 +96,8 @@ abstract class AbstractBopisCollection extends Collection
         $this->cookieManager = $cookieManager;
         $this->config = $config;
         $this->userCollectionFactory = $userCollectionFactory;
+        $this->_sourceRepository = $sourceRepository;
+        $this->sourceData = $this->getSourceData();
     }
 
     /**
@@ -100,9 +114,10 @@ abstract class AbstractBopisCollection extends Collection
     /**
      * @return void
      */
-    protected function _renderFiltersBefore()
+    protected function _renderFiltersBefore(): void
     {
         $sourceCode = $this->authSession->getUser()->getData('source_code');
+        $availableShippingMethods = $this->getAvailableMethodsBySource($sourceCode);
         $userType = $this->authSession->getUser()->getData('user_type');
         $websiteId = $this->authSession->getUser()->getData('website_id');
         $roleName = $this->getUserRole($this->authSession->getUser());
@@ -153,26 +168,25 @@ abstract class AbstractBopisCollection extends Collection
         // $this->getSelect()->where("so.shipping_method = 'bopis_bopis'");
 
         if ($roleName === self::BOPIS_STORES) {
-            $this->getSelect()->where(
-                "(so.shipping_method = '" . self::PICKUP_SHIPPING_METHOD . "')" .
-                "OR (so.shipping_method = '" . self::FAST_SHIPPING_METHOD . "')"
-            );
+            $whereList = [];
+            if ($availableShippingMethods) {
+                foreach ($availableShippingMethods as $shippingMethod) {
+                    if ($shippingMethod === self::FORCED_INSTORE){
+                        $whereList[] = "(so." . self::FORCED_INSTORE . " IS TRUE)";
+                    }else{
+                        $whereList[] = "(so.shipping_method LIKE '%" . $shippingMethod . "%')";
+                    }
+
+                }
+
+                if (count($whereList)) {
+                    $sql = implode(' OR ', $whereList);
+                    $this->getSelect()->where($sql);
+                }
+            }
         }
 
-        /*if ($roleName === self::BOPIS_FAST_SHIPPING) {
-            $this->getSelect()->where("so.shipping_method = '" . self::FAST_SHIPPING_METHOD . "'");
-        }*/
-
-        if ($roleName === self::BOPIS_REGULAR_SHIPPING){
-            $this->getSelect()->where(
-                "(so.shipping_method LIKE '%" . self::REGULAR_SHIPPING_METHOD . "%')" .
-                "OR (so.shipping_method = '" . self::FAST_SHIPPING_METHOD . "')"
-            );
-
-            $this->getSelect()->where("so.source_code = '" . self::DEFAULT_SOURCE . "'");
-        }
-
-        if ($roleName !== self::BOPIS_SUPER_ADMIN && $roleName !== self::BOPIS_REGULAR_SHIPPING){
+        if ($roleName !== self::BOPIS_SUPER_ADMIN){
             if (!empty($sourceCode) && $sourceCode != "all") {
                 $sql = null;
                 $whereList = [];
@@ -239,5 +253,37 @@ abstract class AbstractBopisCollection extends Collection
         $collection->addFieldToFilter('main_table.user_id', $user->getId());
         $userData = $collection->getFirstItem();
         return $userData->getDataByKey('role_name');
+    }
+
+    /**
+     * @return array
+     */
+    private function getSourceData(): array
+    {
+        $sourceData = [];
+        $sources = $this->_sourceRepository->getList();
+
+        foreach ($sources->getItems() as $source) {
+            $sourceData[$source->getSourceCode()] = $source->getDataByKey('available_shipping_methods');
+        }
+
+        return $sourceData;
+    }
+
+    /**
+     * @param $sourceCode
+     * @return false|string[]
+     */
+    private function getAvailableMethodsBySource($sourceCode): array|bool
+    {
+        if ($sourceCode != 'all' && !empty($sourceCode)) {
+            if (isset($this->sourceData[$sourceCode])
+                && !empty($this->sourceData[$sourceCode])
+            ) {
+                return explode(",", $this->sourceData[$sourceCode]);
+            }
+        }
+
+        return false;
     }
 }
