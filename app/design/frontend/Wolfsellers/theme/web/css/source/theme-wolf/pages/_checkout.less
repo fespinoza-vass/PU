@@ -201,6 +201,11 @@
 						label{
 							display: none;
 						}
+						.control{
+							input::placeholder{
+								opacity: 0.5;
+							}
+						}
 					}
 					.actions-toolbar{
 						position: absolute;
@@ -244,7 +249,14 @@
 					border: 1px solid @gray-7C;
 					position: relative;
 					.add-message {
-						display: block;
+						display: initial;
+					}
+				}
+				.gift-message{
+					.field{
+						label{
+							color: @color-black;
+						}
 					}
 				}
 				input[type="checkbox"] {
@@ -270,6 +282,7 @@
 							margin-top: auto;
 							margin-left: auto;
 							margin-bottom: auto;
+							cursor: pointer;
 						}
 						&:after {
 							width: 23px;
@@ -301,6 +314,7 @@
 								transition: all .3s ease;
 								z-index: 2;
 								opacity: 1;
+								background: black;
 							}
 							&:after {
 								right: 20px;
@@ -380,7 +394,12 @@
 			input[type="email"], 
 			textarea.admin__control-textarea, 
 			select {
+				width: calc(~"100% - 25px");
 				height: 40px;
+				color: @black;
+				&::placeholder{
+					opacity: 0.5;
+				}
 			}
 			.opc {
 				display: grid;
@@ -397,8 +416,12 @@
 				display: grid;
 				gap: 18px;
 				grid-template-columns: 1fr 1fr;
+				border-top: 0.5px solid @lines-input;
+				padding-top: 15px;
 				.field {
 					label {
+						display: block;
+						margin-bottom: 8px;
 						span {
 							&:after {
 								content: '*';
@@ -410,9 +433,12 @@
 					}
 					.control._with-tooltip {  
 						select {
-							width: ~"calc(100% - 36px)";
+							width: ~"calc(100% - 25px)";
 						}
 					}
+				}
+				[name="customerData.identificacion"]{
+					align-self: start;
 				}
 				[data-role="checkout-agreements"] {
 					display: grid;
@@ -456,8 +482,46 @@
 				}
 			}
 		}
+		#checkout-step-title{
+			.resumen-customer-data{
+				.lib-css(display, flex, @_prefix: 1);
+				.lib-css(justify-content,space-between,@_prefix:1);
+				.resumen_personal_information{
+					p{
+						span{
+							&:nth-child(1){
+								font-weight: 600;
+							}
+						}
+					}
+				}
+				.actions-toolbar{
+					button{
+						.lib-icon-font(
+							@_icon-font-content: @icon-edit-checkout,
+							@_icon-font-color: @black,
+							@_icon-font-size: 1.8rem,
+							@_icon-font-position: before,
+							@_icon-font-margin: 0 10px 0 0,
+						);
+						.lib-css(display, flex, @_prefix: 1);
+						.lib-css(align-items,center,@_prefix:1);
+						&:before{
+							display: inline;
+							text-decoration: underline;
+							overflow: initial;
+						}
+						span{
+							text-decoration: underline;
+							.lib-font-size(14);
+						}
+					}
+				}
+			}
+		}
 		form{
 			&.form-login{
+				padding-bottom: 10px;
 				> .fieldset{
 					> .field{
 						margin-bottom: 20px;
@@ -1277,7 +1341,7 @@
 		#customer_step {
 			grid-row-start: 1;
 			grid-row-end: 5;
-			padding: 16px 16px 24px 16px;
+			padding: 16px 16px 24px 0;
 		}
 		#store-pickup {
 			grid-row-start: 1;
@@ -1289,41 +1353,6 @@
 		#checkout-step-title {
 			max-width: 430px;
 			width: 100%;
-			.resumen-customer-data{
-				.lib-css(display, flex, @_prefix: 1);
-				.lib-css(justify-content,space-between,@_prefix:1);
-				.resumen_personal_information{
-					p{
-						span{
-							&:nth-child(1){
-								font-weight: 600;
-							}
-						}
-					}
-				}
-				.actions-toolbar{
-					button{
-						.lib-icon-font(
-							@_icon-font-content: @icon-edit-checkout,
-							@_icon-font-color: @black,
-							@_icon-font-size: 1.8rem,
-							@_icon-font-position: before,
-							@_icon-font-margin: 0 10px 0 0,
-						);
-						.lib-css(display, flex, @_prefix: 1);
-						.lib-css(align-items,center,@_prefix:1);
-						&:before{
-							display: inline;
-							text-decoration: underline;
-							overflow: initial;
-						}
-						span{
-							text-decoration: underline;
-							.lib-font-size(14);
-						}
-					}
-				}
-			}
 		}
 		.step-title {
 			font-size: 2rem;
@@ -1446,12 +1475,20 @@
 				}
 			}
 		}
+		#customer_step{
+			.form-login{
+				background:@color-white;
+				padding: 0 0 20px 0;
+			}
+		}
 		.opc-block-summary {
 			margin:0;
+			padding: 22px 15px;
 			> .title {
 				position: absolute;
 				top: 0;
 			}
+
 		}
 		.opc-summary-wrapper {
 			visibility: visible;
@@ -1463,6 +1500,23 @@
 				#opc-sidebar {
 					position: relative;
 					padding-top:30px;
+					.container-gift-message{
+						&.checked{
+							.admin__field-label{
+								border-bottom: 0;
+								border-bottom-right-radius: 0;
+								border-bottom-left-radius: 0;
+							}
+							.gift-message{
+								border: 1px solid @gray-7C;
+								padding: 10px;
+								border-radius: 12px;
+								border-top: 0;
+								border-top-left-radius: 0;
+								border-top-right-radius: 0;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -1541,6 +1595,26 @@
 									.field.amcheckout-comment{
 										margin: 10px 0 25px 0;
 									}
+								}
+							}
+						}
+						.form-login{
+							.fieldset{
+								.field{
+									.label{
+										margin-bottom: 8px;
+									}
+								}
+							}
+						}
+						#stepFormCheck{
+							.field{
+								label{
+									display: block;
+									margin-bottom: 8px;
+								}
+								&[name="customerData.identificacion"]{
+									align-self: end;
 								}
 							}
 						}
