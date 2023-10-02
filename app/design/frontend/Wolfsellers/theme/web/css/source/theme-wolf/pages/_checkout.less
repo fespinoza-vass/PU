@@ -416,7 +416,6 @@
 				display: grid;
 				gap: 18px;
 				grid-template-columns: 1fr 1fr;
-				border-top: 0.5px solid @lines-input;
 				padding-top: 15px;
 				.field {
 					label {
@@ -483,6 +482,9 @@
 			}
 		}
 		#checkout-step-title{
+			.form-login{
+				border-bottom: 0.5px solid @lines-input;
+			}
 			.resumen-customer-data{
 				.lib-css(display, flex, @_prefix: 1);
 				.lib-css(justify-content,space-between,@_prefix:1);
