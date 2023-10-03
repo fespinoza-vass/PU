@@ -108,4 +108,9 @@
                 type="WolfSellers\Bopis\Plugin\DuplicateSourceCodes"
                 sortOrder="10" disabled="true"/>
     </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="assing_source"
+                type="WolfSellers\Bopis\Plugin\AssingSource"
+                sortOrder="120"/>
+    </type>
 </config>

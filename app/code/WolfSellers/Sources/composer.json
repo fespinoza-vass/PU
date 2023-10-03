@@ -1,0 +1,16 @@
+{
+    "name": "wolfsellers/module-sources",
+    "version": "1.0.0",
+    "description": "Sources Configuration",
+    "type": "magento2-module",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "WolfSellers\\Sources\\": ""
+        }
+    }
+}
