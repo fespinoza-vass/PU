@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<carriers>
+			<envio_rapido>
+				<model>WolfSellers\EnvioRapido\Model\Carrier\EnvioRapido</model>
+				<active>0</active>
+				<title>Envio Rapido</title>
+				<name>Envio Rapido</name>
+				<price>99.99</price>
+				<specificerrmsg>No hay stock disponible para este método de envío por favor, usa otro método de envío</specificerrmsg>
+				<sallowspecific>0</sallowspecific>
+			</envio_rapido>
+		</carriers>
+	</default>
+</config>

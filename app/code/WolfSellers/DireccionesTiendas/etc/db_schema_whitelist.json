@@ -1,0 +1,19 @@
+{
+    "wolfsellers_direccionestiendas_direccionestiendas": {
+        "column": {
+            "direccionestiendas_id": true,
+            "ubigeo": true,
+            "codigo_postal": true,
+            "tienda": true,
+            "departamento": true,
+            "provincia": true,
+            "distrito": true,
+            "direccion": true,
+            "referencia": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "WOLFSELLERS_DIRECCIONESTIENDAS_DIRECCIONESTIENDAS_DISTRITO": true
+        }
+    }
+}

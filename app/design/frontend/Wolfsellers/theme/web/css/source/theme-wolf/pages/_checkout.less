@@ -96,12 +96,9 @@
 				left: 0;
 			}
 			> span {
-				//font-size: 1.6rem;
 				font-weight: 700;
 				&:before,
 				&:after {
-					//height: 50px;
-					//width: 50px;
 					top: 0;
 					margin-left: -19px;
 
@@ -114,8 +111,6 @@
 					top: 0;
 				}
 				&:after {
-					//height: 50px;
-					//width: 50px;
 					top: -2px;
 					counter-increment: i;
 					margin-left: -20px;
@@ -143,9 +138,100 @@
 			}
 			.block.items-in-cart {
 				order: 2;
+				.title{
+					&:after{
+						font-size: 15px;
+					}
+					strong{
+						.lib-font-size(14);
+						font-weight: 400;
+					}
+				}
+				.minicart-items{
+					.product{
+						.product-item-inner{
+							position: relative;
+							.product-item-name{
+								margin: 0 0 20px;
+							}
+							.subtotal{
+								position: absolute;
+								bottom: 0;
+								right: 0;
+								span{
+									margin: 0;
+								}
+							}
+						}
+					}
+				}
 			}
 			.payment-option.discount-code {
 				order: 3;
+				border-top: 1px solid @lines-input;
+				.payment-option-title{
+					width: 100%;
+					padding: 12px 0;
+					cursor: pointer;
+					.lib-icon-font(
+						@_icon-font-content: @icon-down,
+						@_icon-font-color: @black,
+						@_icon-font-size: 1.2rem,
+						@_icon-font-position: after,
+						@_icon-font-margin: 0,
+					);
+					&:after{
+						float: right;
+					}
+				}
+				&._active{
+					.payment-option-title{
+						.lib-icon-font(
+							@_icon-font-content: @icon-up,
+							@_icon-font-color: @black,
+							@_icon-font-size: 1.2rem,
+							@_icon-font-position: after,
+							@_icon-font-margin: 0,
+						);
+					}
+				}
+				.form-discount{
+					position: relative;
+					.field{
+						label{
+							display: none;
+						}
+						.control{
+							input::placeholder{
+								opacity: 0.5;
+							}
+						}
+					}
+					.actions-toolbar{
+						position: absolute;
+						top: 0;
+						right: 0;
+						height: 48px;
+						background-color: @black;
+						border-top-right-radius: 12px;
+						border-bottom-right-radius: 12px;
+						.primary{
+							width: 100%;
+							height: 100%;
+							button{
+								height: 100%;
+								background: @black;
+								margin: 0;
+								padding: 0 15px;
+								span{
+									.lib-font-size(16);
+									color: @white;
+									font-weight: 600;
+								}
+							}
+						}
+					}
+				}
 			}
 			.container-gift-message {
 				order: 4;
@@ -163,7 +249,14 @@
 					border: 1px solid @gray-7C;
 					position: relative;
 					.add-message {
-						display: block;
+						display: initial;
+					}
+				}
+				.gift-message{
+					.field{
+						label{
+							color: @color-black;
+						}
 					}
 				}
 				input[type="checkbox"] {
@@ -189,6 +282,7 @@
 							margin-top: auto;
 							margin-left: auto;
 							margin-bottom: auto;
+							cursor: pointer;
 						}
 						&:after {
 							width: 23px;
@@ -209,6 +303,7 @@
 							margin-top: auto;
 							margin-left: auto;
 							margin-bottom: auto;
+							cursor: pointer;
 						}
 					}
 					&:checked{
@@ -219,10 +314,12 @@
 								transition: all .3s ease;
 								z-index: 2;
 								opacity: 1;
+								background: black;
 							}
 							&:after {
 								right: 20px;
 								z-index: 4;
+								cursor: pointer;
 							}
 						}
 					}
@@ -230,11 +327,60 @@
 				&.checked {
 					height: auto;
 					margin-bottom: 0;
+					.gift-message{
+						.fieldset{
+							margin: 0;
+						}
+					}
 				}
 			}
 			[data-role="checkout-agreements"],
 			.checkout-agreements {
 				order: 5;
+				margin: 10px 0;
+				[type='checkbox']{
+					position: absolute;
+					opacity: 0;
+					visibility: hidden;
+					z-index: -10;
+					~ label{
+						position: relative;
+						float: left;
+						padding-left: 27px;
+						&:after{
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 16px;
+							height: 16px;
+							border: 1px solid @lines-input;
+							border-radius: 2px;
+							cursor: pointer;
+						}
+						a{
+							font-weight: bold;
+							color: @color-black;
+						}
+					}
+					&:checked ~ label {
+						.lib-icon-font(
+							@_icon-font-content: @icon-checkmark,
+							@_icon-font-color: @black,
+							@_icon-font-size: 1.2rem,
+							@_icon-font-position: before,
+							@_icon-font-margin: 0,
+						);
+						&:before{
+							position: absolute;
+							top: 1px;
+							left: 3px;
+						}
+						&:after{
+							border: 1px solid @black;
+						}
+					}
+				}
 			}
 		}
 		.opc-wrapper {
@@ -248,11 +394,15 @@
 			input[type="email"], 
 			textarea.admin__control-textarea, 
 			select {
+				width: calc(~"100% - 25px");
 				height: 40px;
+				color: @black;
+				&::placeholder{
+					opacity: 0.5;
+				}
 			}
 			.opc {
 				display: grid;
-				//grid-template-columns: 1fr 1fr;
 			}
 		}
 		#customer_step {
@@ -266,8 +416,11 @@
 				display: grid;
 				gap: 18px;
 				grid-template-columns: 1fr 1fr;
+				padding-top: 15px;
 				.field {
 					label {
+						display: block;
+						margin-bottom: 8px;
 						span {
 							&:after {
 								content: '*';
@@ -279,9 +432,19 @@
 					}
 					.control._with-tooltip {  
 						select {
-							width: ~"calc(100% - 36px)";
+							width: ~"calc(100% - 25px)";
 						}
 					}
+				}
+				.field-tooltip{
+					.field-tooltip-action{
+						&:before{
+							line-height: 1.8;
+						}
+					}
+				}
+				[name="customerData.identificacion"]{
+					align-self: start;
 				}
 				[data-role="checkout-agreements"] {
 					display: grid;
@@ -325,8 +488,49 @@
 				}
 			}
 		}
+		#checkout-step-title{
+			.form-login{
+				border-bottom: 0.5px solid @lines-input;
+			}
+			.resumen-customer-data{
+				.lib-css(display, flex, @_prefix: 1);
+				.lib-css(justify-content,space-between,@_prefix:1);
+				.resumen_personal_information{
+					p{
+						span{
+							&:nth-child(1){
+								font-weight: 600;
+							}
+						}
+					}
+				}
+				.actions-toolbar{
+					button{
+						.lib-icon-font(
+							@_icon-font-content: @icon-edit-checkout,
+							@_icon-font-color: @black,
+							@_icon-font-size: 1.8rem,
+							@_icon-font-position: before,
+							@_icon-font-margin: 0 10px 0 0,
+						);
+						.lib-css(display, flex, @_prefix: 1);
+						.lib-css(align-items,center,@_prefix:1);
+						&:before{
+							display: inline;
+							text-decoration: underline;
+							overflow: initial;
+						}
+						span{
+							text-decoration: underline;
+							.lib-font-size(14);
+						}
+					}
+				}
+			}
+		}
 		form{
 			&.form-login{
+				padding-bottom: 10px;
 				> .fieldset{
 					> .field{
 						margin-bottom: 20px;
@@ -1146,7 +1350,7 @@
 		#customer_step {
 			grid-row-start: 1;
 			grid-row-end: 5;
-			padding: 16px 16px 24px 16px;
+			padding: 16px 16px 24px 0;
 		}
 		#store-pickup {
 			grid-row-start: 1;
@@ -1157,7 +1361,7 @@
 		}
 		#checkout-step-title {
 			max-width: 430px;
-			width: max-content;
+			width: 100%;
 		}
 		.step-title {
 			font-size: 2rem;
@@ -1280,12 +1484,20 @@
 				}
 			}
 		}
+		#customer_step{
+			.form-login{
+				background:@color-white;
+				padding: 0 0 20px 0;
+			}
+		}
 		.opc-block-summary {
 			margin:0;
+			padding: 22px 15px;
 			> .title {
 				position: absolute;
 				top: 0;
 			}
+
 		}
 		.opc-summary-wrapper {
 			visibility: visible;
@@ -1297,6 +1509,23 @@
 				#opc-sidebar {
 					position: relative;
 					padding-top:30px;
+					.container-gift-message{
+						&.checked{
+							.admin__field-label{
+								border-bottom: 0;
+								border-bottom-right-radius: 0;
+								border-bottom-left-radius: 0;
+							}
+							.gift-message{
+								border: 1px solid @gray-7C;
+								padding: 10px;
+								border-radius: 12px;
+								border-top: 0;
+								border-top-left-radius: 0;
+								border-top-right-radius: 0;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -1375,6 +1604,26 @@
 									.field.amcheckout-comment{
 										margin: 10px 0 25px 0;
 									}
+								}
+							}
+						}
+						.form-login{
+							.fieldset{
+								.field{
+									.label{
+										margin-bottom: 8px;
+									}
+								}
+							}
+						}
+						#stepFormCheck{
+							.field{
+								label{
+									display: block;
+									margin-bottom: 8px;
+								}
+								&[name="customerData.identificacion"]{
+									align-self: end;
 								}
 							}
 						}

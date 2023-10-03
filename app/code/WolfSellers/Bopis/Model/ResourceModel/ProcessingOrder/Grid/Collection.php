@@ -12,7 +12,7 @@ class Collection extends AbstractBopisCollection
     /**
      * @return void
      */
-    protected function _renderFiltersBefore()
+    protected function _renderFiltersBefore(): void
     {
         parent::_renderFiltersBefore();
 
