@@ -38,6 +38,10 @@ define([
 
             return this;
         },
+        /**
+         * Overwrite set shipping information action
+         * @returns {*}
+         */
         setShippingInformation:function () {
             if (this.validateShippingInformation()) {
                 this.isShippingStepFinished("_complete");
@@ -46,6 +50,9 @@ define([
             }
             return this._super();
         },
+        /**
+         * Update progress bar to complete or incomplete state
+         */
         setIsDisabledShippingStep: function () {
             if (customer.isCustomerStepFinished() === '_complete'){
                 this.isDisabledShippingStep(true);

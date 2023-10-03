@@ -18,7 +18,7 @@ define([
         },
         stepOne: ko.observable(Customer.isCustomerStepFinished()),
         stepTwo: ko.observable(StepTwo.isStepTwoFinished()),//depends on model shipping/payment
-        stepTree: ko.observable("_active"),//at placeORderaction changes to _complete
+        stepTree: ko.observable("_active"),//at placeOrderAction changes to _complete
         stepIndexes: ko.observableArray([]) ,
 
         initialize:function () {
@@ -29,10 +29,19 @@ define([
                 this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
             },this);
         },
-
+        /**
+         * Get Progress bar tittles
+         * @param step
+         * @returns {*}
+         */
         getTitle:function (step) {
             return step.title;
         },
+        /**
+         * Get Step Observable by index
+         * @param stepIndex
+         * @returns {*}
+         */
         getStepObservable: function (stepIndex) {
             return this.stepIndexes()[stepIndex];
         }

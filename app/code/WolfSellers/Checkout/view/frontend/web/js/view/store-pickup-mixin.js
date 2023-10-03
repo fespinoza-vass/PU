@@ -1,6 +1,8 @@
 define([
-
-], function () {
+    'ko'
+], function (
+    ko
+) {
    'use strict';
 
    var storePickUpMixin = {
