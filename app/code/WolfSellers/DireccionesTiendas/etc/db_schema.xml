@@ -13,5 +13,8 @@
 		<column name="distrito" nullable="true" xsi:type="text" comment="distrito"/>
 		<column name="direccion" nullable="true" xsi:type="text" comment="direccion"/>
 		<column name="referencia" nullable="true" xsi:type="text" comment="referencia"/>
+        <constraint xsi:type="unique" referenceId="DISTRITO_UNICO">
+            <column name="distrito"/>
+        </constraint>
 	</table>
 </schema>

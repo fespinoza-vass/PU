@@ -70,20 +70,33 @@
 				</validation>
 			</settings>
 		</field>
-		<field name="tienda" formElement="textarea" sortOrder="30">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">DireccionesTiendas</item>
-				</item>
-			</argument>
-			<settings>
-				<dataType>text</dataType>
-				<label translate="true">tienda</label>
-				<dataScope>tienda</dataScope>
-				<validation>
-					<rule name="required-entry" xsi:type="boolean">false</rule>
-				</validation>
-			</settings>
+		<field name="tienda" formElement="select" sortOrder="30" component="Magento_Ui/js/form/element/ui-select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="isRemoveSelectedIcon" xsi:type="boolean">false</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>
+                <label translate="true">Tienda</label>
+                <dataScope>tienda</dataScope>
+                <componentType>field</componentType>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="WolfSellers\DireccionesTiendas\Options\StoreCodes"/>
+                    </settings>
+                </select>
+            </formElements>
 		</field>
 		<field name="departamento" formElement="textarea" sortOrder="40">
 			<argument name="data" xsi:type="array">

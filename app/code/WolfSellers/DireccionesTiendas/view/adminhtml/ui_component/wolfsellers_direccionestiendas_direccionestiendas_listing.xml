@@ -107,14 +107,15 @@
 				</editor>
 			</settings>
 		</column>
-		<column name="tienda">
+		<column name="tienda" component="Magento_Ui/js/grid/columns/select">
 			<settings>
-				<filter>text</filter>
-				<label translate="true">tienda</label>
+				<filter>select</filter>
+                <options class="WolfSellers\DireccionesTiendas\Options\StoreCodes"/>
+                <dataType>select</dataType>
+                <label translate="true">tienda</label>
 				<editor>
-					<editorType>text</editorType>
 					<validation>
-						<rule name="required-entry" xsi:type="boolean">false</rule>
+						<rule name="required-entry" xsi:type="boolean">true</rule>
 					</validation>
 				</editor>
 			</settings>
