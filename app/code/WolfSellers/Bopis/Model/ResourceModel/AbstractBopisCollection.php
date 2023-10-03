@@ -194,8 +194,10 @@ abstract class AbstractBopisCollection extends Collection
                 }
 
                 if (count($whereList)) {
-                    if (in_array(self::NEEDS_SUPPLY_INSTORE, $availableShippingMethods)){
-                        $whereList[] = "(so." . self::NEEDS_SUPPLY_INSTORE . " IS TRUE)";
+                    if ($availableShippingMethods) {
+                        if (in_array(self::NEEDS_SUPPLY_INSTORE, $availableShippingMethods)) {
+                            $whereList[] = "(so." . self::NEEDS_SUPPLY_INSTORE . " IS TRUE)";
+                        }
                     }
                     $sql = implode(' OR ', $whereList);
                 }
