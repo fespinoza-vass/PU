@@ -35,7 +35,8 @@ define([
         customerNumberIdentification : ko.observable(customerNumberIdentification),
         customerTelephone : ko.observable(customerTelephone),
         passwordRegister :ko.observable(passwordRegister),
-        passwordConfirm : ko.observable(passwordConfirm)
+        passwordConfirm : ko.observable(passwordConfirm),
+        isCustomerStepFinished: ko.observable("_active")
     }
 
 });

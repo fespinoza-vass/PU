@@ -54,8 +54,11 @@ class LayoutProcessor implements LayoutProcessorInterface
     {
         $walker = $this->walkerFactory->create(['layoutArray' => $jsLayout]);
         $idCustomer =$this->session->getCustomerId();
-
-        //CUSTOMER DATA AREA
+        //CHECKOUT default template
+        $checkout = $walker->getValue('{CHECKOUT}');
+        $checkout['config']['template'] = "WolfSellers_Checkout/onepage";
+        $walker->setValue('{CHECKOUT}',$checkout);
+        //CUSTOMER DATA STEP
         $customerDataComponent = [
             'component' => 'WolfSellers_Checkout/js/view/customer-data-step',
             'displayArea' => 'customer-data-step',
@@ -68,8 +71,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         ];
         $customerAddressArea = $customerDataComponent;
         $walker->setValue('{CHECKOUT_STEPS}.>>.customer-data-step', $customerAddressArea);
-        //customer-fieldsets
-        //Customer Data Nombre
+        //CUSTOMER DATA FIELDS
         $customerDataNombreComponent = [
             'component' => 'Magento_Ui/js/form/element/abstract',
             'displayArea' => 'customer-data-firstname',
@@ -163,33 +165,6 @@ class LayoutProcessor implements LayoutProcessorInterface
             'visible' => true,
             'value' => $this->getNumIdentificacionCustomer($idCustomer)
         ];
-        $customerDataTelefonoComponent = [
-            'component' => 'Magento_Ui/js/form/element/abstract',
-            'displayArea' => 'customer-data-telefono',
-            'config' => [
-                'customScope' => 'customerData.telefono',
-                'customEntry' => null,
-                'template' => 'ui/form/field',
-                'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Ingresa Número de Telefono.'
-                ],
-            ],
-            'dataScope' => 'customerData.telefono',
-            'label' => 'Telefono',
-            'provider' => 'checkoutProvider',
-            'sortOrder' => 5,
-            'validation' => [
-                'required-entry' => true,
-                'validate-number' => true,
-                'min_text_length' => 7,
-                'max_text_length' => 12
-            ],
-            'filterBy' => null,
-            'customEntry' => null,
-            'visible' => true,
-            'value'=>$this->getTelefonoCustomer($idCustomer)
-        ];
         $customerDataAgreementComponent = [
             'component' => 'Magento_CheckoutAgreements/js/view/checkout-agreements'
         ];
@@ -227,38 +202,25 @@ class LayoutProcessor implements LayoutProcessorInterface
         $customerDataFieldSets = $walker->getValue('{CUSTOMER-DATA}.>>');
         $customerDataFieldSets['customer-fieldsets'] = $customerFieldsets;
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-firstname'] = $customerDataNombreComponent;
-        //APELLIDO
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-lastname'] = $customerDataLastNameComponent;
-        //TIPODEIDENTIFICACION
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-identificacion'] = $customerDataIdentificacionComponent;
-        //IDENTIFICACION
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-numero_de_identificacion'] = $customerDataNumeroIdentificacionComponent;
-        //NUMEROCELULAR
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-telefono'] = $customerDataTelefonoComponent;
-        //TERMINOSYCONDICIONES
         $customerDataFieldSets['customer-fieldsets']['children']['customer-data-agreement'] = $customerDataAgreementComponent;
         $customerDataFieldSets['customer-email'] = $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
         $customerDataFieldSets['customer-data-resumen'] = $resumenCustomerData;
         $walker->setValue('{CUSTOMER-DATA}.>>', $customerDataFieldSets);
         $walker->setValue('{SHIPPING_ADDRESS}.>>.customer-email', []);
         $walker->setValue('{PAYMENT}.>>.customer-email', []);
+        $walker->setValue('{STORE-PICKUP}.>>.customer-email', []);
 
-        //var_dump($customerAddressArea);
-        //die();
-        //
-
-      //  $email= $walker->getValue('{SHIPPING_ADDRESS}.>>.customer-email');
-        //******SHIPPING ADDRESS******
-        //COMPANY
         $company = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company');
         $company['visible'] = false;
         $company['sortOrder'] = 200;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company', $company);
-        //DNI
         $dni = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.dni');
         $dni['visible'] = false;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.dni', $dni);
-        //VAT ID
         $vat = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.vat_id');
         $vat['visible'] = false;
         $vat['imports'] = [
@@ -300,6 +262,17 @@ class LayoutProcessor implements LayoutProcessorInterface
             'altFormat' => 'mm/dd/yy',
         ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
+        //Set displayArea to each step component
+        $shippingStep = $walker->getValue('{SHIPPING-STEP}');
+        $shippingStep['displayArea'] = "shipping-step";
+        $walker->setValue('{SHIPPING-STEP}',$shippingStep);
+        $storePickUpStep = $walker->getValue('{STORE-PICKUP-STEP}');
+        $storePickUpStep['displayArea'] = "store-pickup-step";
+        $walker->setValue('{STORE-PICKUP-STEP}',$storePickUpStep);
+        $billingStep = $walker->getValue('{BILLING-STEP}');
+        $billingStep['displayArea'] = "billing-step";
+        $walker->setValue('{BILLING-STEP}',$billingStep);
+
         //PAYMENTS AREA
         $payments = $walker->getValue('{PAYMENT}.>>.payments-list');
         foreach ($payments['children'] as &$payment) {
@@ -312,7 +285,6 @@ class LayoutProcessor implements LayoutProcessorInterface
             }
         }
         $walker->setValue('{PAYMENT}.>>.payments-list', $payments);
-
         return $walker->getResult();
     }
 

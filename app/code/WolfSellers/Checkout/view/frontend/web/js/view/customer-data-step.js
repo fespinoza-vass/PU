@@ -29,7 +29,7 @@ define([
         },
         isVisible: ko.observable(true),
         quoteIsVirtual: quote.isVirtual(),
-        isVisibleEdit: ko.observable(true),
+        isVisibleEdit: ko.observable(false),
         isActive: ko.observable(true),
         isEdit: ko.observable(false),
         isEmpty: ko.observable(false),
@@ -47,7 +47,13 @@ define([
                 _.bind(this.navigate, this),
                 1
             );
-
+            this.isVisibleEdit.subscribe(function (value) {
+                if (!value){
+                    customer.isCustomerStepFinished('_complete');
+                }else{
+                    customer.isCustomerStepFinished('_active');
+                }
+            },this);
             return this;
         },
 

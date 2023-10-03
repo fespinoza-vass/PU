@@ -10,13 +10,17 @@ class LayoutWalker
     private array $layoutArray;
 
     /**
-     * Path templates
-     *['customer-data-step']['children']['customer-fieldsets']['children']['customer-data-name']
+     * Path templates to avoid: ['customer-data-step']['children']['customer-fieldsets']['children']['customer-data-name']
+     * NOTICE The array keys must be set from the bottom up for the walker path to work
+     * e.g. to use [{SIDEBAR} => '{CHECKOUT}.>>.sidebar'] must first be
+     * defined ['{CHECKOUT}' => 'components.checkout'].
+     *
      * @var array
      */
     public const LAYOUT_PATH_TEMPLATES = [
+        '{STEP-TWO}' => '{CHECKOUT_STEPS}.>>.step-two',
+        '{STORE-PICKUP}' => '{CHECKOUT_STEPS}.>>.store-pickup.>>.store-selector',
         '{CUSTOMER-FIELDSETS}' => '{CUSTOMER-DATA}.>>.customer-fieldsets.>>',
-        '{CUSTOMER-DATA}' => '{CHECKOUT_STEPS}.>>.customer-data-step',
         '{GIFT_MESSAGE}' => '{SUMMARY}.>>.container-giftmessage',
         '{SUMMARY}' => '{SIDEBAR}.>>.summary',
         '{GIFT_WRAP}' => '{ADDITIONAL_STEP}.>>.checkboxes.>>.gift_wrap',
@@ -24,18 +28,19 @@ class LayoutWalker
         '{SHIPPING_RATES_VALIDATION}' =>
             '{CHECKOUT}.>>.steps.>>.shipping-step.>>.step-config.>>.shipping-rates-validation',
         '{AMCHECKOUT_DELIVERY_DATE}' => '{CHECKOUT}.>>.steps.>>.shipping-step.>>.amcheckout-delivery-date',
+        '{PAYMENT}' => '{BILLING-STEP}.>>.payment',
+        '{CUSTOMER-DATA}' => '{CHECKOUT_STEPS}.>>.customer-data-step',
+        '{STORE-PICKUP-STEP}' => '{CHECKOUT_STEPS}.>>.store-pickup',
+        '{BILLING-STEP}' => '{CHECKOUT_STEPS}.>>.billing-step',
+        '{SHIPPING-STEP}' => '{CHECKOUT_STEPS}.>>.shipping-step',
         '{CHECKOUT_STEPS}' => '{CHECKOUT}.>>.steps',
         '{SHIPPING_ADDRESS}' => '{CHECKOUT}.>>.steps.>>.shipping-step.>>.shippingAddress',
         '{GIFT_MESSAGE_CONTAINER}' => '{ADDITIONAL_STEP}.>>.checkboxes.>>.gift_message_container',
-        '{PAYMENT}' => '{BILLING_STEP}.>>.payment',
         '{CART_ITEMS}' => '{SIDEBAR}.>>.summary.>>.cart_items',
-        '{BILLING_STEP}' => '{CHECKOUT}.>>.steps.>>.billing-step',
-        '{ADDITIONAL_STEP}' => '{SIDEBAR}.>>.additional', //additional summary fields
+        '{ADDITIONAL_STEP}' => '{SIDEBAR}.>>.additional',
         '{SIDEBAR}' => '{CHECKOUT}.>>.sidebar',
         '{CHECKOUT}' => 'components.checkout',
-        '{PROVIDER}' => 'components.checkoutProvider',
-        '{STORE-PICKUP'=> '{CHECKOUT}.>>.steps.>>.store-pickup.>>.store-selector'
-
+        '{PROVIDER}' => 'components.checkoutProvider'
     ];
 
     public const ESCAPED_SEPARATOR = '\dot/';
