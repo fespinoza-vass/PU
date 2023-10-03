@@ -26,6 +26,12 @@ var config = {
             },
             'Magento_Checkout/js/view/progress-bar': {
                 'WolfSellers_Checkout/js/view/progress-bar-mixin': true
+            },
+            'Magento_InventoryInStorePickupFrontend/js/view/store-selector': {
+                'WolfSellers_Checkout/js/view/store-selector-mixin': true
+            },
+            'Magento_InventoryInStorePickupFrontend/js/view/store-pickup':{
+                'WolfSellers_Checkout/js/view/store-pickup-mixin':false
             }
         }
     }
