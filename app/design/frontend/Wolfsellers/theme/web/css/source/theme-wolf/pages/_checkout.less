@@ -53,7 +53,7 @@
 									@_icon-font-line-height: 1.4rem,
 									@_icon-font-color: @color-black,
 									@_icon-font-position: before
-								); 
+								);
 								&:before {
 									position: relative;
 									top: -1px;
@@ -178,7 +178,7 @@
 						@_icon-font-color: @black,
 						@_icon-font-size: 1.2rem,
 						@_icon-font-position: after,
-						@_icon-font-margin: 0,
+						@_icon-font-margin: 0
 					);
 					&:after{
 						float: right;
@@ -191,7 +191,7 @@
 							@_icon-font-color: @black,
 							@_icon-font-size: 1.2rem,
 							@_icon-font-position: after,
-							@_icon-font-margin: 0,
+							@_icon-font-margin: 0
 						);
 					}
 				}
@@ -369,7 +369,7 @@
 							@_icon-font-color: @black,
 							@_icon-font-size: 1.2rem,
 							@_icon-font-position: before,
-							@_icon-font-margin: 0,
+							@_icon-font-margin: 0
 						);
 						&:before{
 							position: absolute;
@@ -384,15 +384,15 @@
 			}
 		}
 		.opc-wrapper {
-			input[type="text"], 
-			input[type="password"], 
-			input[type="url"], 
-			input[type="tel"], 
-			input[type="search"], 
-			input[type="number"], 
-			input[type="datetime"], 
-			input[type="email"], 
-			textarea.admin__control-textarea, 
+			input[type="text"],
+			input[type="password"],
+			input[type="url"],
+			input[type="tel"],
+			input[type="search"],
+			input[type="number"],
+			input[type="datetime"],
+			input[type="email"],
+			textarea.admin__control-textarea,
 			select {
 				width: calc(~"100% - 25px");
 				height: 40px;
@@ -430,7 +430,7 @@
 							}
 						}
 					}
-					.control._with-tooltip {  
+					.control._with-tooltip {
 						select {
 							width: ~"calc(100% - 25px)";
 						}
@@ -511,7 +511,7 @@
 							@_icon-font-color: @black,
 							@_icon-font-size: 1.8rem,
 							@_icon-font-position: before,
-							@_icon-font-margin: 0 10px 0 0,
+							@_icon-font-margin: 0 10px 0 0
 						);
 						.lib-css(display, flex, @_prefix: 1);
 						.lib-css(align-items,center,@_prefix:1);
@@ -777,7 +777,7 @@
 							}
 						}
 						.field.amcheckout-comment{
-							
+
 							width: 100%;
 							margin: 20px 0 25px 0;
 						}
@@ -1085,8 +1085,8 @@
 												}
 											}
 										}
-										
-										
+
+
 									}
 								}
 								.amcheckout-wrapper{
@@ -1109,7 +1109,7 @@
 												@_icon-font-size: 1.4rem,
 												@_icon-font-line-height: 1,
 												@_icon-font-color: @gray7,
-												@_icon-font-position: after,
+												@_icon-font-position: after
 											);
 											&:after{
 												margin-left:7px;
@@ -1122,7 +1122,7 @@
 													@_icon-font-size: 1.4rem,
 													@_icon-font-line-height: 1,
 													@_icon-font-color: @gray7,
-													@_icon-font-position: after,
+													@_icon-font-position: after
 												);
 											}
 											.payment-option-content{
@@ -1157,7 +1157,7 @@
 												margin-top: -5px;
 												color: @primary;
 												span{
-													word-break: break-word; 
+													word-break: break-word;
 												}
 											}
 										}
@@ -1288,10 +1288,14 @@
 				}
 			}
 		}
+
+        .payment-method-content .actions-toolbar{
+            display: none;
+        }
 	}
 }
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
-	.checkout-index-index { 
+	.checkout-index-index {
 		.checkoutWrap {
 			margin: 16px 0 24px 0;
 			.pagebuilder-column-group {
@@ -1431,8 +1435,11 @@
 				}
 			}
 		}
+        .payment-method-content .actions-toolbar{
+            display: none;
+        }
 	}
-	
+
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
@@ -1631,6 +1638,9 @@
 				}
 			}
 		}
+        .payment-method-content .actions-toolbar{
+            display: none;
+        }
 	}
 }
 
@@ -1648,6 +1658,9 @@
 				top: -10px;
 			}
 		}
+        .payment-method-content .actions-toolbar{
+            display: none;
+        }
 	}
 
 }
