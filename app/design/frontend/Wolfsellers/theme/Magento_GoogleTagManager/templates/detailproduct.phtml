@@ -14,7 +14,9 @@ $categories = $block->getCategoryName();
 //$category = isset($categories[0]) ? $categories[0] : '';
 //$subcategory = isset($categories[1]) ? $categories[1] : '';
 //$family = isset($categories[2]) ? $categories[2] : '';
-
+$category = '';
+$subcategory = '';
+$family = '';
 
 $gender = '';
 $size = '';
@@ -31,17 +33,17 @@ if ($attr->usesSource()) {
 
 $attr = $product->getResource()->getAttribute('categoria');
 if ($attr->usesSource()) {
-    $category = $attr->getSource()->getOptionText($product->getTamano());
+    $category = $attr->getSource()->getOptionText($product->getCategoria());
 }
 
 $attr = $product->getResource()->getAttribute('sub_categoria');
 if ($attr->usesSource()) {
-    $subcategory = $attr->getSource()->getOptionText($product->getTamano());
+    $subcategory = $attr->getSource()->getOptionText($product->getSubCategoria());
 }
 
 $attr = $product->getResource()->getAttribute('familia');
 if ($attr->usesSource()) {
-    $family = $attr->getSource()->getOptionText($product->getTamano());
+    $family = $attr->getSource()->getOptionText($product->getFamilia());
 }
 $attributes = $product->getAttributes();
 $brand = '';
