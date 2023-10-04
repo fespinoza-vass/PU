@@ -18,10 +18,16 @@ define([
             registry.get('index = direccion_fiscal').hide();
             return this;
         },
+        /**
+         * Detect changes type_payment value
+         */
         click: function(data, event) {
             this.change(event.target.value);
             return true;
         },
+        /**
+         * If invoice require change update billing address data 
+         */
         change: function(value) {
             var billing = quote.billingAddress();
             var customAtributes = billing.customAttributes;

@@ -17,6 +17,10 @@ define([
             this._super();
             return this;
         },
+        /**
+         * Edit data invoice 
+         * Enable input to change billing address data 
+         */
         editInfo: function() {
       
             $('input[name="ruc"]').removeAttr('disabled');
@@ -27,6 +31,7 @@ define([
         },
         /**
          * Form submit handler
+         * If invoice require, change billing address data 
          */
         onSubmit: function() {
             // trigger form validation

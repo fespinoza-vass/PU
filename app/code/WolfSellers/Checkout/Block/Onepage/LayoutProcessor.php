@@ -361,8 +361,6 @@ class LayoutProcessor implements LayoutProcessorInterface
         $direccionFiscal['visible'] = false;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal', $direccionFiscal);
 
-        //$walker->unsetByPath('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal');
-
         /****** END INVOICE REQUIRE FORM *****/
 
         //PAYMENTS AREA
