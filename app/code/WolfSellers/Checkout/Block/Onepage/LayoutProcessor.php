@@ -273,6 +273,96 @@ class LayoutProcessor implements LayoutProcessorInterface
         $billingStep['displayArea'] = "billing-step";
         $walker->setValue('{BILLING-STEP}',$billingStep);
 
+        /****** INVOICE REQUIRE FORM *****/
+        $invoiceComponent = [
+            'component' => 'WolfSellers_Checkout/js/view/invoice-checkout-form',
+            'displayArea' => 'invoice-form',
+            'provider' => 'checkoutProvider',
+            'sortOrder' => '0'
+        ];
+        $invoiceFieldSets = [
+            'component' => 'uiComponent',
+            'displayArea' => 'custom-checkout-form-fields'
+        ];
+        $invoiceDataFieldSets = $walker->getValue('{PAYMENT_FORM_INVOICE}.>>custom-checkout-form-fieldset.>>');
+        $invoiceDataFieldSets['custom-checkout-form-fieldset'] = $invoiceFieldSets;
+        $rucField = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'customScope' => 'customCheckoutForm',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'tooltip' => [
+                    "description" => 'Item information'
+                ],
+            ],
+            'provider' => 'checkoutProvider',
+            'dataScope' => 'customCheckoutForm.ruc',
+            'label' => 'Ruc',
+            'sortOrder' => 20,
+            'validation' => [
+                'required-entry' => true,
+            ],
+        ];
+        $razonField = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'customScope' => 'customCheckoutForm',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'tooltip' => [
+                    "description" => 'Item information'
+                ],
+            ],
+            'provider' => 'checkoutProvider',
+            'dataScope' => 'customCheckoutForm.razon_social',
+            'label' => 'Razon Social',
+            'sortOrder' => 30,
+            'validation' => [
+                'required-entry' => true,
+            ],
+        ];
+        $fiscalField = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'customScope' => 'customCheckoutForm',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'tooltip' => [
+                    "description" => 'Item information'
+                ],
+            ],
+            'provider' => 'checkoutProvider',
+            'dataScope' => 'customCheckoutForm.direccion_fiscal',
+            'label' => 'Direccion fiscal',
+            'sortOrder' => 40,
+            'validation' => [
+                'required-entry' => true,
+            ],
+        ];
+
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required'] = $this->getPaymentType();
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['ruc'] = $rucField;
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['razon_social'] = $razonField;
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['direccion_fiscal'] = $fiscalField;
+
+        $walker->setValue('{PAYMENT}.>>.beforeMethods.>>.invoice-form', $invoiceComponent);
+        $walker->setValue('{PAYMENT}.>>.beforeMethods.>>.invoice-form.>>', $invoiceDataFieldSets);
+
+        $ruc = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc');
+        $ruc['visible'] = false;
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc', $ruc);
+
+        $razonSocial = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.razon_social');
+        $razonSocial['visible'] = false;
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.razon_social', $razonSocial);
+
+        $direccionFiscal = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal');
+        $direccionFiscal['visible'] = false;
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal', $direccionFiscal);
+
+        /****** END INVOICE REQUIRE FORM *****/
+
         //PAYMENTS AREA
         $payments = $walker->getValue('{PAYMENT}.>>.payments-list');
         foreach ($payments['children'] as &$payment) {
@@ -362,5 +452,61 @@ class LayoutProcessor implements LayoutProcessorInterface
             $telCustomer = $customer->getCustomAttribute('telefono')->getValue();
         }
         return $telCustomer;
+    }
+
+    /**
+     * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    protected function getPaymentType()
+    {
+        $customField = [
+            'component' => 'WolfSellers_Checkout/js/view/form/element/payment-type',
+            'config' => [
+                'customScope' => 'customCheckoutForm',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'WolfSellers_Checkout/form/element/payment-type',
+
+            ],
+            'provider' => 'checkoutProvider',
+            'dataScope' => 'customCheckoutForm.invoice_required',
+            'label' => '',
+            'sortOrder' => 10,
+            'validation' => [
+                'required-entry' => false,
+            ],
+        ];
+
+        return $customField;
+    }
+
+    /**
+     * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    protected function getCustomField($name,$scope)
+    {
+        $customField = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'customScope' => $scope,
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'tooltip' => [
+                    "description" => 'Item information'
+                ],
+            ],
+            'provider' => 'checkoutProvider',
+            'dataScope' => $scope.'.'.$name,
+            'label' => '',
+            'sortOrder' => '10',
+            'validation' => [
+                'required-entry' => true
+            ],
+        ];
+
+        return $customField;
     }
 }

@@ -1,0 +1,23 @@
+<div>
+    <!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <form id="custom-checkout-form" class="form" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+        <fieldset class="fieldset">
+            <h4 data-bind="i18n: '1. Tipo de comprobante'"></h4>
+            <!-- ko foreach: getRegion('custom-checkout-form-fields') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </fieldset>
+
+        
+        <button id="submitInvoice" name="submit-invoice" type="button" data-bind="click: onSubmit, visible: false" class="action primary" >
+            <span data-bind="i18n: 'GUARDAR DATOS'"></span>
+        </button>
+        <button id="editInvoice" type="button" data-bind="click: editInfo, visible: false" class="">
+            <span data-bind="i18n: 'Edit'"></span>
+        </button>
+
+    </form>
+    
+</div>

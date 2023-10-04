@@ -28,6 +28,7 @@ class LayoutWalker
         '{SHIPPING_RATES_VALIDATION}' =>
             '{CHECKOUT}.>>.steps.>>.shipping-step.>>.step-config.>>.shipping-rates-validation',
         '{AMCHECKOUT_DELIVERY_DATE}' => '{CHECKOUT}.>>.steps.>>.shipping-step.>>.amcheckout-delivery-date',
+        '{PAYMENT_FORM_INVOICE}' => '{PAYMENT}.>>.invoice-form',
         '{PAYMENT}' => '{BILLING-STEP}.>>.payment',
         '{CUSTOMER-DATA}' => '{CHECKOUT_STEPS}.>>.customer-data-step',
         '{STORE-PICKUP-STEP}' => '{CHECKOUT_STEPS}.>>.store-pickup',
