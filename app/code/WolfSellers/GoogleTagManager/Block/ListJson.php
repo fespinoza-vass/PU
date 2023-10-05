@@ -153,9 +153,9 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $item2 = $item->getProduct();
             $imageUrl = $this->imageHelper->init($item2, 'product_base_image')->getUrl();
             $attributes = $item2->getAttributes();
-            $category = null;
-            $subcategory = null;
-            $family = null;
+            $category = "";
+            $subcategory = "";
+            $family = "";
             $brand = null;
             $gender = null;
             $size = null;

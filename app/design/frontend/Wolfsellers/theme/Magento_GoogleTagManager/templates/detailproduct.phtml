@@ -9,17 +9,11 @@ use Magento\GoogleTagManager\Block\Ga;
 /** @var \WolfSellers\GoogleTagManager\Block\ListJson $block */
 $product = $block->getCurrentProduct();
 
-$categories = $block->getCategoryName();
-
-//$category = isset($categories[0]) ? $categories[0] : '';
-//$subcategory = isset($categories[1]) ? $categories[1] : '';
-//$family = isset($categories[2]) ? $categories[2] : '';
+$gender = '';
+$size = '';
 $category = '';
 $subcategory = '';
 $family = '';
-
-$gender = '';
-$size = '';
 
 $attr = $product->getResource()->getAttribute('tamano');
 if ($attr->usesSource()) {
@@ -31,20 +25,11 @@ if ($attr->usesSource()) {
     $gender = $attr->getSource()->getOptionText($product->getGenero());
 }
 
-$attr = $product->getResource()->getAttribute('categoria');
-if ($attr->usesSource()) {
-    $category = $attr->getSource()->getOptionText($product->getCategoria());
-}
+$category = !empty( $product->getCategoria()) ?  $product->getCategoria() : '';
+$subcategory = !empty( $product->getSubCategoria()) ?  $product->getSubCategoria() : '';
+$family = !empty( $product->getCategoria()) ?  $product->getFamilia() : '';
 
-$attr = $product->getResource()->getAttribute('sub_categoria');
-if ($attr->usesSource()) {
-    $subcategory = $attr->getSource()->getOptionText($product->getSubCategoria());
-}
 
-$attr = $product->getResource()->getAttribute('familia');
-if ($attr->usesSource()) {
-    $family = $attr->getSource()->getOptionText($product->getFamilia());
-}
 $attributes = $product->getAttributes();
 $brand = '';
 
