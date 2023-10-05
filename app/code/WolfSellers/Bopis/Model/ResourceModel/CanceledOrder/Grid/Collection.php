@@ -6,8 +6,10 @@ use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class Collection extends AbstractBopisCollection
 {
-
-    protected function _renderFiltersBefore()
+    /**
+     * @return void
+     */
+    protected function _renderFiltersBefore(): void
     {
         parent::_renderFiltersBefore();
 

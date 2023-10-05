@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="wolfsellers_direccionestiendas_direccionestiendas" resource="default" engine="innodb" comment="wolfsellers_direccionestiendas_direccionestiendas Table">
+		<column xsi:type="int" name="direccionestiendas_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="direccionestiendas_id"/>
+		</constraint>
+		<column name="ubigeo" nullable="true" xsi:type="text" comment="ubigeo"/>
+		<column name="codigo_postal" nullable="true" xsi:type="text" comment="codigo_postal"/>
+		<column name="tienda" nullable="true" xsi:type="text" comment="tienda"/>
+		<column name="departamento" nullable="true" xsi:type="text" comment="departamento"/>
+		<column name="provincia" nullable="true" xsi:type="text" comment="provincia"/>
+		<column name="distrito" nullable="true" xsi:type="text" comment="distrito"/>
+		<column name="direccion" nullable="true" xsi:type="text" comment="direccion"/>
+		<column name="referencia" nullable="true" xsi:type="text" comment="referencia"/>
+        <constraint xsi:type="unique" referenceId="DISTRITO_UNICO">
+            <column name="distrito"/>
+        </constraint>
+	</table>
+</schema>

@@ -16,6 +16,18 @@ $currencyDesc=$block->getCurrencyCode();
 ?>
 
 
+<div class="content-info-shipping">
+        <div class="number-order">
+            <span>Order No:<a href=""><?= $block->getOrderId(); ?></a></span>
+        </div>
+        <div class="info">
+            <p>
+                <?= __("Se enviará un mensaje con <b>toda la información de tu pedido</b> por correo electrónico y/o WhatsApp cuando tu pedido esté listo para ser entregado.Por favor te pedimos que esperes a la confirmación.")?>
+            </p>
+        </div>
+        <a class="back-to-store" href="/"><?= __("Regresar a la tienda"); ?></a>
+</div>
+
 
 <div class="orden_success_page">
 
