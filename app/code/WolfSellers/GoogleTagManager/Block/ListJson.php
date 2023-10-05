@@ -153,8 +153,9 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $item2 = $item->getProduct();
             $imageUrl = $this->imageHelper->init($item2, 'product_base_image')->getUrl();
             $attributes = $item2->getAttributes();
-            $category = null;
-            $subcategory = null;
+            $category = "";
+            $subcategory = "";
+            $family = "";
             $brand = null;
             $gender = null;
             $size = null;
@@ -189,16 +190,6 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 }
             }
             $dataRule = implode( ', ', $dataRule);
-
-            /** Get Name Categories of product */
-            /*$categories = [];
-            foreach($item2->getCategoryIds() as $categoryId){
-                array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
-            }
-
-            $category = isset($categories[0]) ? $categories[0] : '';
-            $subcategory = isset($categories[1]) ? $categories[1] : '';
-            $family = isset($categories[2]) ? $categories[2] : '';*/
 
             $cartItem = [
                 'id' => $item2->getId(),

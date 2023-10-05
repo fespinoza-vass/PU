@@ -53,11 +53,13 @@ class DefaultItem
         $data = $proceed($item);
 
         $attributes = $item->getProduct()->getAttributes();
-        $category = null;
-        $subcategory = null;
+        $category = "";
+        $subcategory = "";
+        $family = "";
         $brand = null;
         $gender = null;
         $size = null;
+
         foreach($attributes as $attribute){
             if($attribute->getName() === 'categoria') {
                 $category = $attribute->getFrontend()->getValue($item->getProduct());
@@ -81,6 +83,12 @@ class DefaultItem
         }
 
         $product = $this->getProductById($data['product_id']);
+        /** Get Name Categories of product */
+        /*$categories = $this->getCategoryName($product);
+        $category = isset($categories[0]) ? $categories[0] : '';
+        $subcategory = isset($categories[1]) ? $categories[1] : '';
+        $family = isset($categories[2]) ? $categories[2] : ''; */
+
 
         /** Get Rules of product */
         $rules = $this->getRules($product->getId());
@@ -92,11 +100,6 @@ class DefaultItem
         }
         $dataRule = implode( ', ', $dataRule);
 
-        /** Get Name Categories of product */
-        /* $categories = $this->getCategoryName($product);
-        $category = isset($categories[0]) ? $categories[0] : '';
-        $subcategory = isset($categories[1]) ? $categories[1] : '';
-        $family = isset($categories[2]) ? $categories[2] : '';*/
 
         $result['category'] = $category;
         $result['subcategory'] = $subcategory;
