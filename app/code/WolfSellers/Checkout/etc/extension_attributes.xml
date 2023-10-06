@@ -7,5 +7,8 @@
         <attribute code="customer_identificacion" type="int" />
         <attribute code="customer_numero_de_identificacion" type="string" />
         <attribute code="customer_password" type="string" />
+        <attribute code="ruc" type="string" />
+        <attribute code="razon_social" type="string" />
+        <attribute code="direccion_fiscal" type="string" />
     </extension_attributes>
 </config>

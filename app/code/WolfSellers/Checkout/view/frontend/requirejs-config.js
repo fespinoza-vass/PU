@@ -21,8 +21,17 @@ var config = {
             'Amasty_Label/js/label': {
                 'WolfSellers_Checkout/js/label': true
             },
-            'Magento_Ui/js/form/element/abstract':{
+            'Magento_Ui/js/form/element/abstract': {
                 'WolfSellers_Checkout/js/view/form/element/abstract': true
+            },
+            'Magento_Checkout/js/view/progress-bar': {
+                'WolfSellers_Checkout/js/view/progress-bar-mixin': true
+            },
+            'Magento_InventoryInStorePickupFrontend/js/view/store-selector': {
+                'WolfSellers_Checkout/js/view/store-selector-mixin': true
+            },
+            'Magento_InventoryInStorePickupFrontend/js/view/store-pickup':{
+                'WolfSellers_Checkout/js/view/store-pickup-mixin':false
             }
         }
     }

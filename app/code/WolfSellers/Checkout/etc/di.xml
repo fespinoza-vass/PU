@@ -24,5 +24,7 @@
                 type="WolfSellers\Checkout\Plugin\Model\ShippingInformationManagement"
                 sortOrder="30" />
     </type>
-
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order" type="WolfSellers\Checkout\Plugin\Order\OrderManagement"/>
+    </type>
 </config>

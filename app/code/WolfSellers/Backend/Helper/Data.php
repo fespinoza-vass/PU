@@ -83,12 +83,20 @@ class Data extends AbstractHelper
         if ($source_code == "all") {
             return "";
         }
-        $sourceData = $this->sourceRepository->get($source_code);
-        return $sourceData->getName();
+
+        $codes = explode(",", $source_code);
+        foreach ($codes as $code){
+            $sourceData = $this->sourceRepository->get($code);
+            if ($sourceData){
+                $names[] = $sourceData->getName();
+            }
+        }
+
+        return $names ? implode(",", $names) : '';
     }
 
     public function isBopis() {
-    
+
         if($this->authSession->getUser() && $this->authSession->getUser()->getUserType() > 0) {
             return true;
         }
@@ -102,5 +110,21 @@ class Data extends AbstractHelper
         $website = $this->websiteRepository->getById($this->authSession->getUser()->getWebsiteId());
 
         return "Administrador de sucursales de " . $website->getName();
+    }
+
+    /**
+     * @return array
+     */
+    public function getSourcesList()
+    {
+        $search = $this->searchCriteriaBuilder->create();
+        $sources = $this->sourceRepository->getList($search);
+        $list = [];
+
+        foreach ($sources->getItems() as $source){
+            $list[$source->getSourceCode()] = $source->getName();
+        }
+
+        return $list;
     }
 }
