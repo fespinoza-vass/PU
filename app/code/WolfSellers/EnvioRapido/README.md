@@ -1,5 +1,7 @@
 # WolfSellers_EnvioRapido
 
+Este módulo contiene lo necesario para crear un método de envío llamado "Envío Rápido" el carrier incluido para este método es "Savar"
+
 1. Create shipping method
    1. WolfSellers/EnvioRapido/etc/adminhtml/system.xml
    2. WolfSellers/EnvioRapido/etc/config.xml
@@ -54,3 +56,4 @@ else{
     $horarios_disponibles = 'tomorrow__1600_2000';
 }
 ```
+
