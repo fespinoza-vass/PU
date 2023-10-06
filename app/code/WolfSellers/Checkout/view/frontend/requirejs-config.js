@@ -31,7 +31,10 @@ var config = {
                 'WolfSellers_Checkout/js/view/store-selector-mixin': true
             },
             'Magento_InventoryInStorePickupFrontend/js/view/store-pickup':{
-                'WolfSellers_Checkout/js/view/store-pickup-mixin':false
+                'WolfSellers_Checkout/js/view/store-pickup-mixin': true
+            },
+            'Magento_Checkout/js/view/payment/list': {
+                'WolfSellers_Checkout/js/view/payment/list-mixin': true
             }
         }
     }
