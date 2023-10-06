@@ -1,10 +1,12 @@
 define([
     'ko',
     'uiRegistry',
+    'underscore',
     'Magento_Ui/js/form/element/abstract',
     'jquery',
     'Magento_Checkout/js/model/quote',
-], function(ko, registry, Abstract, $, quote) {
+    'WolfSellers_Checkout/js/model/shipping-payment'
+], function(ko, registry,_, Abstract, $, quote,shippingPayment) {
     'use strict';
 
     return Abstract.extend({
@@ -26,11 +28,16 @@ define([
             return true;
         },
         /**
-         * If invoice require change update billing address data 
+         * If invoice require change update billing address data
          */
         change: function(value) {
             var billing = quote.billingAddress();
             var customAtributes = billing.customAttributes;
+            var isShippingStepFinished = _.isUndefined(shippingPayment.isShippingStepFinished()) ?
+                    "" : shippingPayment.isShippingStepFinished();
+            if(!isShippingStepFinished.includes('_complete')){
+                return;
+            }
             if (value === 'boleta') {
                 customAtributes.forEach( function(value, index, array) {
                     if (value['attribute_code'] === 'invoice_required') {
@@ -52,7 +59,7 @@ define([
                 registry.get('index = razon_social').show();
                 registry.get('index = direccion_fiscal').show();
 
-                if($('input[name="ruc"]').attr('disabled')=="disabled"){
+                if($('input[name="ruc"]').attr('disabled')==="disabled"){
                     $('#submitInvoice').hide();
                     $('#editInvoice').show();
                 }else{
