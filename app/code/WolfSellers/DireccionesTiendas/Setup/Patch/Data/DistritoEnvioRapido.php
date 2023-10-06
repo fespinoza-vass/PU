@@ -18,7 +18,8 @@ use Magento\Customer\Setup\CustomerSetupFactory;
 use Magento\Customer\Model\Indexer\Address\AttributeProvider;
 
 use WolfSellers\DireccionesTiendas\Options\StoreDistricts;
-
+use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\App\Helper\AbstractHelper;
 
 class DistritoEnvioRapido implements DataPatchInterface, PatchRevertableInterface
 {

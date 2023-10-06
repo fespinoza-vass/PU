@@ -59,12 +59,13 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
             $this->_logger->info(__METHOD__);
 
 
-            // ------------- INICIO REGLAS DE NEGOCIO -------------
+            // -------------------------- INICIO REGLAS DE NEGOCIO --------------------------
             //TODO Las reglas de negocio dependen en la cantidad existente en cada una de las sources
             //TODO Las reglas NO DEPENDEN DEL SALABLE QUANTITY, preguntar con René ¿Quién esta trabajando ese modulo?
             //TODO Creo que existe una limitante, donde Savar SOLO puede enviar UN SOLO producto. Preguntar
             $cumpleReglasEnvioRapido = false;
 
+            //TODO Eliminar el siguiente foreach, solo fue una regla INVENTADA para que se mostrara el error en el checkout
             /** @var Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
                 //$productId = $item->getProductId();

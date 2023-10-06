@@ -1,5 +1,7 @@
 # WolfSellers_DireccionesTiendas
-
+### Esta relacionado con el módulo WolfSellers_EnvioRapido
+### Es la branch PULMDEV-87-MetodosEnvio. Esta branch nacio de integration y ya esta en integration
+### La branch PULMDEV-87 contiene OTRO código NO MEZCLAR!
 This module was created to improve the administration of Sources Address.
 We use a new model "DireccionesTiendas", to add easily the required address attributes for the sources.
 
