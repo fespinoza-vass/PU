@@ -11,18 +11,18 @@ $accountType = $block->getConfig(\Magento\GoogleTagManager\Helper\Data::XML_PATH
 $gtmAccountId = $block->getConfig(\Magento\GoogleTagManager\Helper\Data::XML_PATH_CONTAINER_ID);
 $gapAccountId = $block->getConfig(\Magento\GoogleTagManager\Helper\Data::XML_PATH_ACCOUNT);
 $_product = $block->getProductBlock();
-$categories = $block->getCategoryName();
-//$category = isset($categories[0]) ? $categories[0] : '';
-//$subcategory = isset($categories[1]) ? $categories[1] : '';
-//$family = isset($categories[2]) ? $categories[2] : '';
+
+
 $gender = '';
+$size = '';
 $category = '';
 $subcategory = '';
 $family = '';
 
-$size = '';
-
 if (!empty($_product)) {
+    $category = !empty( $_product->getCategoria()) ?  $_product->getCategoria() : '';
+    $subcategory = !empty( $_product->getSubCategoria()) ?  $_product->getSubCategoria() : '';
+    $family = !empty( $_product->getCategoria()) ?  $_product->getFamilia() : '';
 
     $attr = $_product->getResource()->getAttribute('tamano');
     if ($attr->usesSource()) {
@@ -34,26 +34,11 @@ if (!empty($_product)) {
         $gender = $attr->getSource()->getOptionText($_product->getGenero());
     }
 
-    $attr = $_product->getResource()->getAttribute('categoria');
-    if ($attr->usesSource()) {
-        $category = $attr->getSource()->getOptionText($_product->getCategoria());
-    }
-
-    $attr = $_product->getResource()->getAttribute('sub_categoria');
-    if ($attr->usesSource()) {
-        $subcategory = $attr->getSource()->getOptionText($_product->getSubCategoria());
-    }
-
-    $attr = $_product->getResource()->getAttribute('familia');
-    if ($attr->usesSource()) {
-        $family = $attr->getSource()->getOptionText($_product->getFamilia());
-    }
 
     $attributes = $_product->getAttributes();
     $brand = '';
 
     foreach($attributes as $attribute){
-
         if($attribute->getName() === 'manufacturer') {
             $brand = $attribute->getFrontend()->getValue($_product);
         }
