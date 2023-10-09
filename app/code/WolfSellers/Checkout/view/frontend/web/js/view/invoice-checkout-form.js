@@ -18,11 +18,10 @@ define([
             return this;
         },
         /**
-         * Edit data invoice 
-         * Enable input to change billing address data 
+         * Edit data invoice
+         * Enable input to change billing address data
          */
         editInfo: function() {
-      
             $('input[name="ruc"]').removeAttr('disabled');
             $('input[name="razon_social"]').removeAttr('disabled');
             $('input[name="direccion_fiscal"]').removeAttr('disabled');
@@ -31,7 +30,7 @@ define([
         },
         /**
          * Form submit handler
-         * If invoice require, change billing address data 
+         * If invoice require, change billing address data
          */
         onSubmit: function() {
             // trigger form validation

@@ -6,8 +6,8 @@ define([
    'use strict';
 
    var storePickUpMixin = {
-       default : {
-           template: 'WolfSellers_Checkout/store-pickup'
+       defaults : {
+           deliveryMethodSelectorTemplate: 'WolfSellers_Checkout/delivery-method-selector'
        }
    };
 

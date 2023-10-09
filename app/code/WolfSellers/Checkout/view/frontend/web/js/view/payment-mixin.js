@@ -11,6 +11,9 @@ define([
 ) {
     'use strict';
     var paymentMixin = {
+        defaults:{
+            template:'WolfSellers_Checkout/payment'
+        },
         isVisible: ko.observable(true),
         isActive: ko.observable(false),
 
