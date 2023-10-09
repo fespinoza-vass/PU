@@ -381,13 +381,23 @@
 
 		&.active-buttons-header{
 			&:not(.catalog-product-view){
-				.page-main{
+				.columns{
 					padding-top: 60px;
+				}
+				@media @mdmax{
+					.columns{
+						padding-top: 130px;
+					}
 				}
 			}
 			&.catalog-product-view{
 				.breadcrumbs{
 					padding-top: 60px;
+				}
+				@media @mdmax{
+					.breadcrumbs{
+						padding-top: 140px;
+					}
 				}
 			}
 			[role="alert"]{
@@ -743,7 +753,6 @@
 			}
 		}
 	}
-
 	.details-qty, .field.qty{
 		justify-content: left;
 		align-items: center;

@@ -579,7 +579,7 @@
                         img{
                             width: 48px;
                             height: auto;
-                            margin-right: 10px;
+                            border-radius: 0;
                         }
                         .banner-promo-detail{
                             .lib-css(display, flex, @_prefix: 1);
@@ -592,6 +592,7 @@
                                 font-family: @font-family-name__base;
                                 .lib-css(display, flex, @_prefix: 1);
                                 .lib-css(align-items,center,@_prefix: 1);
+                                padding: 0 5px;
                             }
                         }
                     }
@@ -894,6 +895,37 @@
                     .minicart-wrapper{
                         margin-top: 0;
                         margin-right: 20px;
+                    }
+                    .nav-header-links{
+                        position: absolute;
+                        display: flex;
+                        height: 130px;
+                        top: 90px;
+                        left: 0;
+                        background: @white;
+                        padding-top: 0;
+                        width: 100%;
+                        padding: 0 15px;
+                        .lib-css(align-items,center,@_prefix:1);
+                        .lib-css(justify-content,center,@_prefix:1);
+                        .buttons{
+                            .lib-css(flex-direction,row,@_prefix:1);
+                            gap: 4px;
+                            a{
+                                height: auto;
+                                padding: 5px 0 5px 0;
+                                margin: 5px 0;
+                            }
+                            .banner-promo-detail{
+                                .lib-font-size(10);
+                                flex-direction: column;
+                                p,
+                                span{
+                                    .lib-font-size(10);
+                                    padding: 5px 0;
+                                }
+                            }
+                        }
                     }
                 }
             }
