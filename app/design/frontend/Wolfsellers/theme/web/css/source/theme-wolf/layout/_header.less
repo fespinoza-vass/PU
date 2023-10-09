@@ -557,6 +557,45 @@
                         }
                     }
                 }
+                .nav-header-links{
+                    width: 100%;
+                    padding-top: 15px;
+                    .buttons{
+                        .lib-css(display, flex, @_prefix: 1);
+                        a{
+                            .lib-css(display,flex,@_prefix:1);
+                            .lib-css(align-items,center,@_prefix:1);
+                            .lib-css(justify-content,center,@_prefix:1);
+                            background: @mainbackground;
+                            flex: 1;
+                            height: 38px;
+                            margin-right: 10px;
+                            text-align: center;
+                            border-radius: 8px;
+                            &:last-child{
+                                margin-right: 0;
+                            }
+                        }
+                        img{
+                            width: 48px;
+                            height: auto;
+                            margin-right: 10px;
+                        }
+                        .banner-promo-detail{
+                            .lib-css(display, flex, @_prefix: 1);
+                            .lib-css(align-items,center,@_prefix: 1);
+                            .lib-font-size(14);
+                            font-weight:700;
+                            p,span{
+                                .lib-font-size(14);
+                                font-weight: 700;
+                                font-family: @font-family-name__base;
+                                .lib-css(display, flex, @_prefix: 1);
+                                .lib-css(align-items,center,@_prefix: 1);
+                            }
+                        }
+                    }
+                }
             }
         }
         &.nav-up{
