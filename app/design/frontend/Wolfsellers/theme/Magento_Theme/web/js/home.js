@@ -168,6 +168,11 @@ require([
 				$('.nav-header-links').css('display','block');
 			}
 		});
+
+		if($('.nav-header-links').length === 1){
+			$('body').addClass('active-buttons-header');
+		}
+
     });
 
 });
