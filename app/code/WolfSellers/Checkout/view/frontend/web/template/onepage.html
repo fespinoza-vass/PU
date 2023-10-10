@@ -28,13 +28,16 @@
         <!--/ko-->
 
         <li class="checkout-shipping-address step-two">
-            <!-- ko foreach: getRegion('store-pickup-step') -->
-            <!-- ko template: getTemplate() --><!-- /ko -->
-            <!--/ko-->
+            <div class="step-title" data-bind="i18n: 'Entrega'" data-role="title"></div>
+            <div class="border">
+                <!-- ko foreach: getRegion('store-pickup-step') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
 
-            <!-- ko foreach: getRegion('shipping-step') -->
-            <!-- ko template: getTemplate() --><!-- /ko -->
-            <!--/ko-->
+                <!-- ko foreach: getRegion('shipping-step') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+            </div>
         </li>
 
         <!-- ko foreach: getRegion('billing-step') -->

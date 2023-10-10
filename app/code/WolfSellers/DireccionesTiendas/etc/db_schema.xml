@@ -10,7 +10,7 @@
 		<column name="tienda" nullable="true" xsi:type="text" comment="tienda"/>
 		<column name="departamento" nullable="true" xsi:type="text" comment="departamento"/>
 		<column name="provincia" nullable="true" xsi:type="text" comment="provincia"/>
-		<column name="distrito" nullable="true" xsi:type="text" comment="distrito"/>
+		<column name="distrito" nullable="false" xsi:type="varchar" length="255" comment="distrito"/>
 		<column name="direccion" nullable="true" xsi:type="text" comment="direccion"/>
 		<column name="referencia" nullable="true" xsi:type="text" comment="referencia"/>
         <constraint xsi:type="unique" referenceId="DISTRITO_UNICO">

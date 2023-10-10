@@ -24,5 +24,12 @@
                 type="WolfSellers\Checkout\Plugin\Model\ShippingInformationManagement"
                 sortOrder="30" />
     </type>
-
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order" type="WolfSellers\Checkout\Plugin\Order\OrderManagement"/>
+    </type>
+    <type name="Magento\Customer\Model\Address\CustomerAddressDataFormatter">
+        <plugin name="WolfSellers_Checkout_Plugin_CustomerAddressDataFormatter"
+                type="WolfSellers\Checkout\Plugin\Customer\Address\CustomerAddressDataFormatterPlugin"
+                disabled="false"/>
+    </type>
 </config>
