@@ -80,7 +80,14 @@ h1{
             font-weight: bold;
             margin-bottom: 0;
         }
-
+    }
+    .cmp-content-info-customer__name{
+        &.path{
+            padding: 25px 65px 0 65px;
+        }
+        &.store{
+            padding: 25px 90px 0 90px;
+        }
     }
     .cmp-content-button,
     .cmp-info-contact{
@@ -124,6 +131,13 @@ h1{
             padding: 0 35px;
             a{
                 margin: 20px auto;
+            }
+        }
+        &.path{
+            tr{
+                td{
+                    padding: 0 110px;
+                }
             }
         }
     }
@@ -201,6 +215,18 @@ h1{
             p{
                 display: inline;
                 margin-bottom: 0;
+            }
+        }
+        &.store{
+            text-align: start;
+            h4{
+                text-align: center;
+            }
+            p{
+                display: block;
+            }
+            .remember{
+                margin-top: 10px;
             }
         }
     }
@@ -405,6 +431,15 @@ h1{
     .cmp-content-info-qr{
         td{
             padding: 20px 15px !important; // style added by mailer
+        }
+    }
+    .cmp-content-general-milla{
+        .cmp-content-button{
+            tr{
+                td.info{
+                    padding: 15px 0 !important; // style added by mailer;
+                }
+            }
         }
     }
     table.cmp-content-code-qr{
