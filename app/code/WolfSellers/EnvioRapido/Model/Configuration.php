@@ -25,6 +25,9 @@ class Configuration
 
     protected ScopeConfig $scopeConfig;
 
+    /**
+     * @param ScopeConfig $scopeConfig
+     */
     public function __construct(
         ScopeConfig $scopeConfig
     )

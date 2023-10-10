@@ -12,6 +12,10 @@ class SaveCustomFieldsInOrder implements \Magento\Framework\Event\ObserverInterf
     protected Logger $logger;
     protected DireccionesTiendasRepository $direccionesTiendasRepository;
 
+    /**
+     * @param Logger $logger
+     * @param DireccionesTiendasRepository $direccionesTiendasRepository
+     */
     public function __construct(
         Logger                       $logger,
         DireccionesTiendasRepository $direccionesTiendasRepository
@@ -21,6 +25,11 @@ class SaveCustomFieldsInOrder implements \Magento\Framework\Event\ObserverInterf
         $this->direccionesTiendasRepository = $direccionesTiendasRepository;
     }
 
+    /**
+     * Save address data as Savar request: DEPARTAMENTO|PROVINCIA|DISTRITO
+     * @param Observer $observer
+     * @return $this|void
+     */
     public function execute(Observer $observer)
     {
         //Dirección según lo pide Savar

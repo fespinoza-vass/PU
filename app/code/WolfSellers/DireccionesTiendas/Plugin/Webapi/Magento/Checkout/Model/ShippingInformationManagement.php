@@ -17,6 +17,11 @@ class ShippingInformationManagement
     protected RequestInterface $request;
     protected CartRepositoryInterface $quoteRepository;
 
+    /**
+     * @param Logger $logger
+     * @param RequestInterface $request
+     * @param CartRepositoryInterface $quoteRepository
+     */
     public function __construct(
         Logger                  $logger,
         RequestInterface $request,
@@ -28,6 +33,13 @@ class ShippingInformationManagement
         $this->quoteRepository = $quoteRepository;
     }
 
+    /**
+     * Save direccionestiendas_id in quote
+     * @param \Magento\Checkout\Model\ShippingInformationManagement $subject
+     * @param $cartId
+     * @param $addressInformation
+     * @return array
+     */
     public function beforeSaveAddressInformation(
         \Magento\Checkout\Model\ShippingInformationManagement $subject,
                                                               $cartId,
