@@ -273,13 +273,32 @@ class LayoutProcessor implements LayoutProcessorInterface
         $billingStep['displayArea'] = "billing-step";
         $walker->setValue('{BILLING-STEP}',$billingStep);
 
+        /******* BUTTON PLACE ORDER**********/
+
+        $placeOrderComponent = [
+          'component' => 'WolfSellers_Checkout/js/view/button-place-order',
+          'displayArea' => 'button-place-order',
+          'sortOrder' => 500
+        ];
+        $placeOrderFieldSets = [
+              'component' => 'uiComponent',
+              'displayArea' => 'summary-place-order',
+
+        ];
+        $placeOrderDataFieldSets = $walker->getValue('{SUMMARY}.>>');
+        $placeOrderDataFieldSets['summary-place-order']= $placeOrderFieldSets;
+        $placeOrderDataFieldSets['summary-place-order']['children']['button-place-order']= $placeOrderComponent;
+        $walker->setValue('{SUMMARY}.>>', $placeOrderDataFieldSets);
+
         /****** INVOICE REQUIRE FORM *****/
+
         $invoiceComponent = [
             'component' => 'WolfSellers_Checkout/js/view/invoice-checkout-form',
             'displayArea' => 'invoice-form',
             'provider' => 'checkoutProvider',
             'sortOrder' => '0'
         ];
+
         $invoiceFieldSets = [
             'component' => 'uiComponent',
             'displayArea' => 'custom-checkout-form-fields'
