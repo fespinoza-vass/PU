@@ -55,7 +55,7 @@ class CustomerAddressDataFormatterPlugin
             if($address){
                 $update = false;
                 $resultAddress = $this->addressRepository->getById($address->getId());
-                $address->getCustomAttribute('ruc') ?? $resultAddress->setCustomAttribute('ruc','pp') && $update = true;
+                $address->getCustomAttribute('ruc') ?? $resultAddress->setCustomAttribute('ruc','') && $update = true;
                 $address->getCustomAttribute('razon_social') ?? $resultAddress->setCustomAttribute('razon_social','') && $update = true;
                 $address->getCustomAttribute('direccion_fiscal') ?? $resultAddress->setCustomAttribute('direccion_fiscal','') && $update = true;
                 if($update){
