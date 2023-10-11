@@ -198,9 +198,9 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                         $brand = $options_value->getLabel();
                     }
                 }
-                $category = !empty($item->getProduct()->getAttributeText('categoria')) ? $item->getProduct()->getAttributeText('categoria') : '';
-                $subcategory = !empty($item->getProduct()->getAttributeText('sub_categoria')) ? $item->getProduct()->getAttributeText('sub_categoria') : '';
-                $family = !empty($item->getProduct()->getAttributeText('familia')) ? $item->getProduct()->getAttributeText('familia') : '';
+                $category = !empty($item->getProduct()->getAttributeText('categoria')) ? $item->getProduct()->getAttributeText('categoria') : null;
+                $subcategory = !empty($item->getProduct()->getAttributeText('sub_categoria')) ? $item->getProduct()->getAttributeText('sub_categoria') : null;
+                $family = !empty($item->getProduct()->getAttributeText('familia')) ? $item->getProduct()->getAttributeText('familia') : null;
 
                 $gender = !empty($item->getProduct()->getAttributeText('genero')) ? $item->getProduct()->getAttributeText('genero') : '';
                 $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
