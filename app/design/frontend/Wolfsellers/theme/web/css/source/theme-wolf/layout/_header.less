@@ -577,7 +577,7 @@
                             }
                         }
                         img{
-                            width: 48px;
+                            width: 24px;
                             height: auto;
                             border-radius: 0;
                         }
@@ -586,13 +586,14 @@
                             .lib-css(align-items,center,@_prefix: 1);
                             .lib-font-size(14);
                             font-weight:700;
-                            p,span{
+                            * {
                                 .lib-font-size(14);
                                 font-weight: 700;
                                 font-family: @font-family-name__base;
                                 .lib-css(display, flex, @_prefix: 1);
                                 .lib-css(align-items,center,@_prefix: 1);
                                 padding: 0 5px;
+                                text-align: center;
                             }
                         }
                     }
@@ -898,31 +899,33 @@
                     }
                     .nav-header-links{
                         position: absolute;
-                        display: flex;
-                        height: 130px;
                         top: 90px;
                         left: 0;
                         background: @white;
                         padding-top: 0;
                         width: 100%;
-                        padding: 0 15px;
+                        padding: 10px;
                         .lib-css(align-items,center,@_prefix:1);
                         .lib-css(justify-content,center,@_prefix:1);
                         .buttons{
+                            height: 38px;
                             .lib-css(flex-direction,row,@_prefix:1);
                             gap: 4px;
+                            img{
+                                width: 24px;
+                                margin-right: 8px;
+                            }
                             a{
-                                height: auto;
-                                padding: 5px 0 5px 0;
-                                margin: 5px 0;
+                                height: 38px;
+                                padding: 5px 8px;
+                                margin: 0;
                             }
                             .banner-promo-detail{
-                                .lib-font-size(10);
-                                flex-direction: column;
-                                p,
-                                span{
-                                    .lib-font-size(10);
+                                .lib-font-size(8);
+                                *{
+                                    .lib-font-size(8);
                                     padding: 5px 0;
+                                    line-height: 1;
                                 }
                             }
                         }
