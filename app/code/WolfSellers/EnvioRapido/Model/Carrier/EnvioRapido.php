@@ -51,17 +51,21 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      */
     public function collectRates(RateRequest $request)
     {
+        $salableQtySelectedStock = -1;
         try {
-
             if (!$this->getConfigFlag('active')) {
                 return false;
             }
             $this->_logger->info(__METHOD__);
 
-            //Reglas de negocio
-            $cumpleReglasEnvioRapido = false;
-            $salableQtySelectedStock = -1;
 
+            // -------------------------- INICIO REGLAS DE NEGOCIO --------------------------
+            //TODO Las reglas de negocio dependen en la cantidad existente en cada una de las sources
+            //TODO Las reglas NO DEPENDEN DEL SALABLE QUANTITY, preguntar con René ¿Quién esta trabajando ese modulo?
+            //TODO Creo que existe una limitante, donde Savar SOLO puede enviar UN SOLO producto. Preguntar
+            $cumpleReglasEnvioRapido = false;
+
+            //TODO Eliminar el siguiente foreach, solo fue una regla INVENTADA para que se mostrara el error en el checkout
             /** @var Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
                 //$productId = $item->getProductId();
@@ -74,6 +78,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
                     $cumpleReglasEnvioRapido = true;
                 }
             }
+            // ------------- FIN REGLAS DE NEGOCIO - $cumpleReglasEnvioRapido -------------
 
             $shippingPrice = $this->getConfigData('price');
 
@@ -105,21 +110,21 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
                 } else {
                     $this->_logger->info('NO cumple reglas');
-                    $error = $this->_rateErrorFactory->create();
-                    $error->setCarrier($this->_code);
-                    $error->setCarrierTitle($this->getConfigData('title'));
-                    $error->setErrorMessage($salableQtySelectedStock . ' ' . $this->getConfigData('specificerrmsg'));
-                    return $error;
+                    return $this->createCarrierErrorMessage($salableQtySelectedStock);
                 }
             }
         } catch (\Exception $e) {
             $this->_logger->info($e->getMessage());
-            $error = $this->_rateErrorFactory->create();
-            $error->setCarrier($this->_code);
-            $error->setCarrierTitle($this->getConfigData('title'));
-            $error->setErrorMessage($salableQtySelectedStock . $e->getMessage());
-            return $error;
+            return $this->createCarrierErrorMessage($salableQtySelectedStock);
         }
+    }
+
+    private function createCarrierErrorMessage($salableQtySelectedStock){
+        $error = $this->_rateErrorFactory->create();
+        $error->setCarrier($this->_code);
+        $error->setCarrierTitle($this->getConfigData('title'));
+        $error->setErrorMessage($salableQtySelectedStock . ' ' . $this->getConfigData('specificerrmsg'));
+        return $error;
     }
 
     /**

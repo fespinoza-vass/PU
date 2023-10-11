@@ -4,6 +4,7 @@
         <sequence>
             <module name="Magento_Shipping"/>
             <module name="Magento_Quote"/>
+            <module name="WolfSellers_DireccionesTiendas"/>
         </sequence>
     </module>
 </config>

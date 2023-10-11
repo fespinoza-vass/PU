@@ -1,59 +1,31 @@
 # WolfSellers_EnvioRapido
 
-Este módulo contiene lo necesario para crear un método de envío llamado "Envío Rápido" el carrier incluido para este método es "Savar"
+### Esta relacionado con el módulo WolfSellers_DireccionesTiendas
+
+### Es la branch PULMDEV-87-MetodosEnvio. Esta branch nacio de integration y ya esta en integration
+
+### La branch PULMDEV-87 contiene OTRO código NO MEZCLAR!
+
+
+Este módulo contiene lo necesario para crear un método de envío llamado "Envío Rápido", el carrier incluido para este
+método es "SavarExpress"
 
 1. Create shipping method
-   1. WolfSellers/EnvioRapido/etc/adminhtml/system.xml
-   2. WolfSellers/EnvioRapido/etc/config.xml
-   3. WolfSellers/EnvioRapido/Model/Carrier/EnvioRapido.php
-   4. Add Magento_Shipping & Magento_Quote as dependency in module.xml
-2. Add Customer Address Attributes to save new requested data
-   1. Distrito distrito_envio_rapido -> Display available districts in "savar express zone"
-   2. Horarios Disponibles horarios_disponibles -> 
-      1. HOY de 12:00 a 16:00 today__1200_1600
-      2. HOY de 16:00 a 20:00 today__1600_2000
-      3. MAÑANA de 12:00 a 16:00 tomorrow__1200_1600
-      4. MAÑANA de 16:00 a 20:00 tomorrow__1600_2000
-      5. Reglas
-```php
-// SIEMPRE se muestran las opciones: Entrega de 12:00 a 16:00 y de 16:00 a 20:00
-// Pero dependiendo la hora actual en el navegador, la hora del envío y el texto serán DIFERENTES 
-// Considerando 1 hora para la preparación del paquete y 1 hora de envío.
-// Adicional, se programará con una ventana de 4 horas en caso de devolución.
-// Sus horarios son de 10:00 a 22:00
-if(hora_actual >= 0:00 && hora_actual < 14:00) { 
-    //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00 
-    $textToShowInFront = 'Tu pedido llegará HOY <diaDeLaSemana> <diaDelMes> <mes> en un rango de 12 a 4pm';
-    // La opcion que se deberá elegir en el Address Attribute es today__1200_1600
-    $horarios_disponibles = 'today__1200_1600';
-    
-    //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00
-    $textToShowInFront = 'Tu pedido llegará HOY <diaDeLaSemana> <diaDelMes> <mes> en un rango de 4 a 8pm';
-    // La opcion que se deberá elegir en el Address Attribute es today__1600_2000
-    $horarios_disponibles = 'today__1600_2000';
-}
-elseif(hora_actual >= 14:00 && hora_actual < 18:00){
-    //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00 
-    $textToShowInFront = 'Tu pedido llegará MAÑANA <diaDeLaSemana> <diaDelMes> <mes> en un rango de 12 a 4pm';
-    // La opcion que se deberá elegir en el Address Attribute es tomorrow__1200_1600
-    $horarios_disponibles = 'tomorrow__1200_1600';
-    
-    //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00 
-     $textToShowInFront = 'Tu pedido llegará HOY <diaDeLaSemana> <diaDelMes> <mes> en un rango de 4 a 8pm';
-    // La opcion que se deberá elegir en el Address Attribute es today__1600_2000
-    $horarios_disponibles = 'today__1600_2000';
-
-}
-else{
-    //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00 
-    $textToShowInFront = 'Tu pedido llegará MAÑANA <diaDeLaSemana> <diaDelMes> <mes> en un rango de 12 a 4pm';
-    // La opcion que se deberá elegir en el Address Attribute es tomorrow__1200_1600
-    $horarios_disponibles = 'tomorrow__1200_1600';
-    
-    //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00 
-     $textToShowInFront = 'Tu pedido llegará MAÑANA <diaDeLaSemana> <diaDelMes> <mes> en un rango de 4 a 8pm';
-    // La opcion que se deberá elegir en el Address Attribute es tomorrow__1600_2000
-    $horarios_disponibles = 'tomorrow__1600_2000';
-}
-```
-
+    1. WolfSellers/EnvioRapido/etc/adminhtml/system.xml
+    2. WolfSellers/EnvioRapido/etc/config.xml
+    3. WolfSellers/EnvioRapido/Model/Carrier/EnvioRapido.php
+    4. Add Magento_Shipping & Magento_Quote as dependency in module.xml
+2. Create carrier configuration options and Model/Configuration file to get information
+    1. WolfSellers/EnvioRapido/etc/adminhtml/system.xml
+    2. WolfSellers/EnvioRapido/etc/config.xml
+    3. WolfSellers/EnvioRapido/Model/Configuration.php
+3. Falta crear el API para notificar a Savar Express del envío. NOTA: Recordemos que los desarrolladores quienes esta
+   preparando los dashboards de gestión serán quienes disparen el evento de NOTIFICAR A SAVAR. Incluso podrían utlizar la
+   funcion _doShipmentRequest en el archivo de Model/Carrier/EnvioRapido.php De nuestro lado deberemos dejar listo la
+   lógica en el archivo:
+    1. WolfSellers/EnvioRapido/Model/NotifyToSavar.php
+4. Falta crear el webhook, en el cual Savar nos informará que el pedido fue entregado. Falta una sesión para saber ¿Cómo
+   se harán pruebas?. Incluso, podría terminar siendo un CRON que este consultando cada cierto tiempo el estatus del
+   pedido.
+5. Falta que los PMs nos apoyen con las preguntas escritas en la sección de comentarios del ticket:
+    1. https://wolfsellers.atlassian.net/browse/PULMDEV-87
