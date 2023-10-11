@@ -380,7 +380,7 @@
 		}
 
 		&.active-buttons-header{
-			&:not(.catalog-product-view){
+			&:not(.catalog-product-view):not(.active-counter){
 				.columns{
 					padding-top: 60px;
 				}
@@ -402,6 +402,15 @@
 			}
 			[role="alert"]{
 				padding-top: 60px;
+			}
+			.widget.block-static-block{
+				border-bottom: 0;
+				.row-countdown{
+					height: 150px;
+					.contador{
+						padding-top: 60px;
+					}
+				}
 			}
 		}
 		.amasty-shipbar{
