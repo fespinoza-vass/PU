@@ -22219,7 +22219,7 @@ is one of,es uno de,module,Magento_SalesRule,
 Generate,Generar,module,Magento_SalesRule,
 You deleted the rule.,Ha borrado la regla.,module,Magento_SalesRule,
 You saved the rule.,Ha guardado la regla.,module,Magento_SalesRule,
-Enter discount code,Ingrese el código de descuento,module,Magento_SalesRule,
+Enter discount code,Ingrese el código de cupón,module,Magento_SalesRule,
 NOT FOUND,NO ENCONTRADO,module,Magento_SalesRule,
 is not one of,no es uno de,module,Magento_SalesRule,
 Numeric,Numérico,module,Magento_SalesRule,
@@ -26042,3 +26042,18 @@ Customer Data,Información del cliente
 "Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.","Recuerda que tienes hasta 7 días posteriores a tu compra para recoger tus productos, de lo contrario tu compra será anulada y se procederá a la devolución del dinero."
 "You must show this voucher or QR and along with your identity document to be able to pick up your order.","Deberás de mostrar este comprobante o QR y junto con tu documento de identidad para poder recoger tu pedido."
 "Share by Whatsapp","Compartir por Whatsapp"
+"We will notify you by email of the status of your order, as well as confirmation that your order is ready for pickup and you can visit the selected establishment.","Te notificaremos por correo electrónico el estado de tu pedido, así como la confirmación de que tu pedido está listo para recoger y puedes acercarte al establecimiento seleccionado."
+Hello %customer_name Your order is already prepared…,Hola %customer_name Tu pedido ya se encuentra preparado…
+We are just one step away from being ready to deliver your order.,Estamos a un solo paso de estar listos para entregarte tu pedido.
+¡Hello %customer_name! Your order is already on its way to your home,¡Hola %customer_name! Tu pedido ya se encuentra en camino a tu domicilio
+Your order is already on its way.,Tu pedido ya se encuentra en camino.
+¡Your order will be arriving soon!,¡Pronto te estará llegando tu pedido! 
+"Remember that your delivery will be made today, Thursday, the delivery range is from 4pm to 8pm.","Recuerda que tu entrega se realizará hoy jueves, en el rango de entrega es de 4pm a 8pm."
+¡Hello %customer_name! Your order is now ready to pick up at your selected store,¡Hola %customer_name! Tu pedido ya se encuentra listo para recoger en tu tienda seleccionada
+Your order is now ready to pick up.,Tu pedido ya se encuentra listo para recoger.
+"¡You can now approach the selected establishment!","¡Ya puedes acercarte al establecimiento seleccionado!"
+"Follow the following instructions:","Sigue las siguientes indicaciones:" 
+Come to the service module and our staff will assist you.,Acércate al módulo de atención y nuestro personal te atenderá. 
+"Present your physical ID, your QR code or your email with the order number.","Presenta tu DNI en físico, tu código QR o tu correo con el número de pedido." 
+Receive your order and verify its contents.,Recibe tu pedido y verifica el contenido del mismo. 
+"Remember that if the collection is carried out by a third party, you must present the DNI registered with the purchase and the QR code.","Recuerda que si el recojo lo realiza un tercero, deberá presentar el DNI registrado en la compra y el código QR"

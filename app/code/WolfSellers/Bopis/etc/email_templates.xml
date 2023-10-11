@@ -3,4 +3,8 @@
     <template id="bopis_email_template" label="New Order BOPIS" file="new_order_bopis.html" type="html" module="WolfSellers_Bopis" area="frontend" />
     <template id="bopis_cancel_email_template" label="Cancel Order BOPIS" file="cancel_order_bopis.html" type="html" module="WolfSellers_Bopis" area="frontend" />
     <template id="bopis_hold_email_template" label="Hold Order BOPIS" file="hold_order_bopis.html" type="html" module="WolfSellers_Bopis" area="frontend" />
+    <template id="bopis_satisfaction_survey_email_template" label="BOPIS satisfaction survey" file="satisfaction_survey_bopis.html" type="html" module="WolfSellers_Bopis" area="frontend" />
+    <template id="bopis_prepared_email_template" label="Prepared BOPIS Order" file="prepared_email_bopis.html" type="html" module="WolfSellers_Bopis" area="frontend" />
+    <template id="bopis_ship_email_template" label="Ship BOPIS Order" file="ship_email_bopis.html" type="html" module="WolfSellers_Bopis" area="frontend" />
+    <template id="bopis_ready_to_pickup_email_template" label="Ready to pickup BOPIS Order" file="ready_to_pickup_email_bopis.html" type="html" module="WolfSellers_Bopis" area="frontend" />
 </config>

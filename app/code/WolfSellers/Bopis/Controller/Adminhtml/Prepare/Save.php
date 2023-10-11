@@ -22,6 +22,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\InputException;
 use Psr\Log\LoggerInterface;
 use WolfSellers\Bopis\Helper\Config;
+use WolfSellers\Email\Helper\EmailHelper;
+
 class Save extends Order
 {
 
@@ -89,6 +91,12 @@ class Save extends Order
      * @var Config
      */
     protected $config;
+
+    /**
+     * @var EmailHelper
+     */
+    private EmailHelper $emailHelper;
+
     /**
      * @param Action\Context $context
      * @param Config $config
@@ -102,7 +110,7 @@ class Save extends Order
      * @param OrderManagementInterface $orderManagement
      * @param OrderRepositoryInterface $orderRepository
      * @param LoggerInterface $logger
-     *
+     * @param EmailHelper $emailHelper
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
      */
@@ -118,9 +126,11 @@ class Save extends Order
         RawFactory $resultRawFactory,
         OrderManagementInterface $orderManagement,
         OrderRepositoryInterface $orderRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        EmailHelper $emailHelper
     ) {
         $this->config = $config;
+        $this->emailHelper = $emailHelper;
         parent::__construct(
             $context,
             $coreRegistry,
@@ -155,6 +165,10 @@ class Save extends Order
                     ->addStatusToHistory($order->getStatus())
                     ->addCommentToStatusHistory('Orden Lista para enviar');
                 $this->orderRepository->save($order);
+
+                $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
+                $this->emailHelper->sendPreparedOrderEmail($to, $this->emailHelper->getOrderModel($order));
+
                 $this->logger->critical("La Orden está preparada para ser enviada");
                 $this->messageManager->addSuccessMessage(__('La Orden está preparada para ser envida.'));
             } catch (Exception $e) {

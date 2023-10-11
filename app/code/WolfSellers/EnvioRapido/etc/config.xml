@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<carriers>
+			<envio_rapido>
+				<model>WolfSellers\EnvioRapido\Model\Carrier\EnvioRapido</model>
+				<active>0</active>
+
+                <sanbox_mode>1</sanbox_mode>
+
+				<title>Envio Rapido</title>
+				<name>Envio Rapido</name>
+				<price>99.99</price>
+				<specificerrmsg>No hay stock disponible para este método de envío por favor, usa otro método de envío</specificerrmsg>
+				<sallowspecific>0</sallowspecific>
+
+                <production_ws_url>https://app.savarexpress.com.pe/govari/api/</production_ws_url>
+                <sandbox_ws_url>https://test.savarexpress.com.pe/govari/api/</sandbox_ws_url>
+                <production_order_endpoint>ServicioDelivery</production_order_endpoint>
+                <sandbox_order_endpoint>ServicioDelivery</sandbox_order_endpoint>
+                <production_status_endpoint>servicio</production_status_endpoint>
+                <sandbox_status_endpoint>servicio</sandbox_status_endpoint>
+                <max_package_weight>75</max_package_weight>
+
+			</envio_rapido>
+		</carriers>
+	</default>
+</config>

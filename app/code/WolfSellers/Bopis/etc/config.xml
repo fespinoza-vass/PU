@@ -30,7 +30,6 @@
                 </hold_reasons>
             </general>
             <status>
-                <pending>pending</pending>
                 <confirmed>payment</confirmed>
                 <preparing>processing</preparing>
                 <shipping>shipping</shipping>
@@ -64,6 +63,27 @@
                 <identity>sales</identity>
                 <copy_to>andonidominguez@wolfsellers.com</copy_to>
             </hold_email>
+            <satisfaction_survey_email>
+                <enabled>1</enabled>
+                <template>bopis_satisfaction_survey_email_template</template>
+                <identity>sales</identity>
+                <amasty_form>0</amasty_form>
+            </satisfaction_survey_email>
+            <prepared_email>
+                <enabled>1</enabled>
+                <template>bopis_prepared_email_template</template>
+                <identity>sales</identity>
+            </prepared_email>
+            <ship_email>
+                <enabled>1</enabled>
+                <template>bopis_ship_email_template</template>
+                <identity>sales</identity>
+            </ship_email>
+            <ready_to_pickup_email>
+                <enabled>1</enabled>
+                <template>bopis_ready_to_pickup_email_template</template>
+                <identity>sales</identity>
+            </ready_to_pickup_email>
             <remember_me>
                 <enabled>1</enabled>
                 <roles></roles>
