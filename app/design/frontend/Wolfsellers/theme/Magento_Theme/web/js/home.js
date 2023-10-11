@@ -169,8 +169,14 @@ require([
 			}
 		});
 
+		//Validate if the header buttons are active
 		if($('.nav-header-links').length === 1){
 			$('body').addClass('active-buttons-header');
+		}
+		
+		//Validate if the counter are active
+		if($('.contador').length === 1){
+			$('body').addClass('active-counter');
 		}
 
     });
