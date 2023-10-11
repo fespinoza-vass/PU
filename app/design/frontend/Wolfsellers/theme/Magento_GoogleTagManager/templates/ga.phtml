@@ -15,14 +15,14 @@ $_product = $block->getProductBlock();
 
 $gender = '';
 $size = '';
-$category = '';
-$subcategory = '';
-$family = '';
+$category = null;
+$subcategory = null;
+$family = null;
 
 if (!empty($_product)) {
-    $category = !empty( $_product->getCategoria()) ?  $_product->getCategoria() : '';
-    $subcategory = !empty( $_product->getSubCategoria()) ?  $_product->getSubCategoria() : '';
-    $family = !empty( $_product->getCategoria()) ?  $_product->getFamilia() : '';
+    $category = !empty( $_product->getCategoria()) ?  $_product->getCategoria() : null;
+    $subcategory = !empty( $_product->getSubCategoria()) ?  $_product->getSubCategoria() : null;
+    $family = !empty( $_product->getCategoria()) ?  $_product->getFamilia() : null;
 
     $attr = $_product->getResource()->getAttribute('tamano');
     if ($attr->usesSource()) {

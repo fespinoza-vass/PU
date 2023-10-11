@@ -15,6 +15,11 @@ namespace WolfSellers\GoogleTagManager\Plugin\Checkout\CustomerData;
 
 class DefaultItem
 {
+    /**
+     * @var \Magento\Catalog\Model\ProductFactory
+     */
+    protected $_productloader;
+
     /*
      * @param TimezoneInterface $date
      * @param StoreManagerInterface $storeManager
@@ -33,6 +38,7 @@ class DefaultItem
         \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
         \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
         \Magento\Catalog\Model\ProductRepository $productRepository,
+        \Magento\Catalog\Model\ProductFactory $_productloader,
         \Psr\Log\LoggerInterface $logger)
     {
         $this->_date =  $date;
@@ -43,6 +49,7 @@ class DefaultItem
         $this->_categoryRepository = $categoryRepository;
         $this->_productRepository = $productRepository;
         $this->logger = $logger;
+        $this->_productloader = $_productloader;
     }
 
     /**
@@ -59,12 +66,12 @@ class DefaultItem
         $data = $proceed($item);
 
         $attributes = $item->getProduct()->getAttributes();
-        $category = "";
-        $subcategory = "";
-        $family = "";
+        $category = null;
+        $subcategory = null;
         $brand = null;
         $gender = null;
         $size = null;
+
 
         foreach($attributes as $attribute){
             if($attribute->getName() === 'categoria') {
@@ -86,6 +93,11 @@ class DefaultItem
                 $size = $attribute->getFrontend()->getValue($item->getProduct());
                 if( !$size ) $size = null;
             }
+        }
+
+        if($family == null){
+            $product = $this->getLoadProduct($item->getProductId());
+            $family = !empty($product->getFamilia()) ? $product->getFamilia() : null;
         }
 
         $product = $this->getProductById($data['product_id']);
@@ -168,5 +180,16 @@ class DefaultItem
         }
 
         return $promos;
+    }
+
+    /**
+     * Load data product by Id
+     *
+     * @param $id
+     * @return \Magento\Catalog\Model\Product
+     */
+    public function getLoadProduct($id)
+    {
+        return $this->_productloader->create()->load($id);
     }
 }
