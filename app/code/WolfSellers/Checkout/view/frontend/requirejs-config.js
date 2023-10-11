@@ -35,6 +35,9 @@ var config = {
             },
             'Magento_Checkout/js/view/payment/list': {
                 'WolfSellers_Checkout/js/view/payment/list-mixin': true
+            },
+            'Magento_Checkout/js/view/summary/abstract-total': {
+                'WolfSellers_Checkout/js/view/summary/abstract-total-mixins': true
             }
         }
     }
