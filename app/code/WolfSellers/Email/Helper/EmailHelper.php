@@ -51,6 +51,7 @@ class EmailHelper
         }
 
         $vars = $this->getGeneralVars($order);
+        $vars['satisfaction_survey_url'] = $this->satisfactionSurvey->getSatisfactionSurveyUrl();
 
         $sender = $this->simpleSender;
         $sender->setTemplateIdentifier($surveyEmail->getTemplateId());
