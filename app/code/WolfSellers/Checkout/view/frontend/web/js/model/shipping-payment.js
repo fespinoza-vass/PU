@@ -8,6 +8,7 @@ define([
     return {
         isShippingStepFinished: ko.observable(),
         isPaymentStepFinished: ko.observable(),
-        isStepTwoFinished: ko.observable('_active')
+        isStepTwoFinished: ko.observable('_active'),
+        isPaymentFinished: ko.observable("_complete")
     }
 })
