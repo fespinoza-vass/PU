@@ -1,0 +1,125 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block \WolfSellers\Bopis\Block\Adminhtml\Order\View\Title
+ */
+$titleIdHtml = ($block->getTitleId()) ? ' id="' . $block->escapeHtmlAttr($block->getTitleId()) . '"' : '';
+$titleClass = ($block->getTitleClass()) ? ' ' . $block->getTitleClass() : '';
+$title = $block->getPageTitle();
+$order = $block->getOrder();
+$enviar = $block->isEnviarAvailable();
+$preparar = $block->isPrepararAvailable();
+$preparado = $block->isComplete();
+$enviado = $block->isEnviado();
+$prepararLabel = ($enviar && ($order->getStatus() != "pending_payment" || $order->getStatus() != "pending" || $order->getStatus() != "holded"));
+$isHolded = $order->getStatus() == "holded";
+
+$classBtn = "";
+if ($prepararLabel) {
+    $classBtn = "";
+} elseif ($preparado) {
+    $classBtn = "preparado";
+} elseif ($isHolded) {
+    $classBtn = "holded";
+}
+$btn = "";
+if($enviar) {
+    $btn = 'enviar';
+}
+if($preparar) {
+    $btn = 'preparar';
+}
+$enabledBopisFlow = false;
+?>
+
+<?php
+/** @var  $viewModel \WolfSellers\Bopis\ViewModel\GeneralOrder */
+$viewModel = $block->getData('viewModel');
+?>
+
+<div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+
+    <a href="<?=$viewModel->getBackUrl()?>">
+        <button type="button" class="action back customization"></button>
+    </a>
+
+    <h1 class="page-title"<?= /* @noEscape */
+    $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
+    <div>
+        <span class="page-title-order-id-bopis">ID: <?= $order->getIncrementId() ?></span>
+
+        <?php if($viewModel->getStateLabel($order->getStatus())): ?>
+        <span class="current-state" title="<?=$order->getStatus()?>">
+            <?=strtoupper($viewModel->getStateLabel($order->getStatus()) ?? '')?>
+        </span>
+        <?php endif; ?>
+
+        <?php if ($order->getGiftMessageId()): ?>
+            <span class="current-state">
+                <span class="icon-gift"></span>
+                <?=__('ESTA ORDEN ES UN REGALO')?>
+            </span>
+        <?php endif; ?>
+
+        <?php if ($block->getAdminUserType() == 1 && $enabledBopisFlow): ?>
+            <button name="btn-<?=$btn?>"
+                    value="Preparar"
+                    class="btn-<?=$btn?> <?= $classBtn ?>"
+                <?= $btn ? "" : 'disabled="disabled"' ?>
+                    data-order-id="<?= $order->getEntityId() ?>"
+            >
+                <?php if ($enviar) {
+                    echo "Enviar";
+                } elseif ($preparar) {
+                        echo "Preparar";
+                } elseif ($enviado) {
+                    echo "En camino";
+                } elseif ($preparado) {
+                    echo "Complete";
+                } elseif ($isHolded) {
+                    echo "Detenida";
+                }
+                ?>
+            </button>
+        <?php endif; ?>
+
+        <br>
+
+        <span class="current-shipping-method-title" title="<?=$order->getShippingMethod()?>">
+            <b><?=$viewModel->getShippingMethodTitle($order->getShippingMethod());?></b>
+        </span>
+    </div>
+    <?= $block->getChildHtml() ?>
+</div>
+<!--<script>
+    require([
+            'jquery',
+            'Magento_Ui/js/modal/modal',
+            'Magento_Ui/js/modal/confirm',
+            'domReady!'
+        ], function ($, modal, confirm) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                modalClass: 'modal-bopis',
+                buttons: []
+            };
+            if(!$(".btn-preparar").prop("disabled")) {
+                modal(options, $('#popup-modal-preparar'));
+                jQuery(".btn-preparar").on("click",function () {
+                    console.log("entro");
+                    $("#popup-modal-preparar").modal('openModal');
+                });
+                $("#popup-modal-preparar").find(".bopis-popup-btn-regresar").on("click", function (){
+                    $("#popup-modal-preparar").modal('closeModal');
+                });
+            }
+        }
+    );
+
+</script>-->

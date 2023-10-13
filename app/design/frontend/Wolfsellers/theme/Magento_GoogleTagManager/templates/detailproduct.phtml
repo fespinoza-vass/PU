@@ -11,9 +11,9 @@ $product = $block->getCurrentProduct();
 
 $gender = '';
 $size = '';
-$category = '';
-$subcategory = '';
-$family = '';
+$category = null;
+$subcategory = null;
+$family = null;
 
 $attr = $product->getResource()->getAttribute('tamano');
 if ($attr->usesSource()) {
@@ -25,9 +25,9 @@ if ($attr->usesSource()) {
     $gender = $attr->getSource()->getOptionText($product->getGenero());
 }
 
-$category = !empty( $product->getCategoria()) ?  $product->getCategoria() : '';
-$subcategory = !empty( $product->getSubCategoria()) ?  $product->getSubCategoria() : '';
-$family = !empty( $product->getCategoria()) ?  $product->getFamilia() : '';
+$category = !empty( $product->getCategoria()) ?  $product->getCategoria() : null;
+$subcategory = !empty( $product->getSubCategoria()) ?  $product->getSubCategoria() : null;
+$family = !empty( $product->getCategoria()) ?  $product->getFamilia() : null;
 
 
 $attributes = $product->getAttributes();

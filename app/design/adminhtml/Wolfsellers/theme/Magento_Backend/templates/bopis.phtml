@@ -1,0 +1,10 @@
+<?php
+/** @var \WolfSellers\Bopis\Block\Adminhtml\Bopis $block */
+
+if($block->isBopis()) {
+    ?>
+    <script>
+        document.body.classList.add("admin-bopis");
+    </script>
+<?php
+}

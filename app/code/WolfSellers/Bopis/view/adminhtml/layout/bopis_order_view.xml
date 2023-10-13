@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="WolfSellers_Bopis::js/bopis-actions.js"/>
+    </head>
+    <body>
+        <referenceContainer name="main.top">
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Title" name="page.title" template="WolfSellers_Bopis::title.phtml">
+                <arguments>
+                    <argument name="viewModel" xsi:type="object">
+                        WolfSellers\Bopis\ViewModel\GeneralOrder
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View" name="sales_order_edit" template="WolfSellers_Bopis::order/widget/form/container.phtml" />
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View" name="sales_order_progress_bar" template="WolfSellers_Bopis::order/widget/form/progressbar.phtml">
+                <arguments>
+                    <argument name="viewModel" xsi:type="object">
+                        WolfSellers\Bopis\ViewModel\ProgressBar
+                    </argument>
+                </arguments>
+            </block>
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Tab\Info" name="order_tab_info" template="WolfSellers_Bopis::order/view/tab/info.phtml">
+                <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Info" name="order_info" template="WolfSellers_Bopis::order/view/info.phtml">
+                    <container name="extra_customer_info"/>
+                </block>
+
+                <container name="payment_additional_info" htmlTag="div" htmlClass="order-payment-additional" />
+                <block class="Magento\Sales\Block\Adminhtml\Order\Payment" name="order_payment"/>
+                <block class="Magento\Sales\Block\Adminhtml\Order\View\Items" name="order_items" template="WolfSellers_Bopis::order/view/items.phtml">
+                    <arguments>
+                        <argument name="columns" xsi:type="array">
+                            <item name="product" xsi:type="string" translate="true">Product</item>
+                            <item name="estatus" xsi:type="string" translate="true">Status</item>
+                            <item name="ordered-qty" xsi:type="string" translate="true">Qty</item>
+                            <item name="totals" xsi:type="string" translate="true">Total</item>
+                        </argument>
+                    </arguments>
+                    <block class="Magento\Sales\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer"
+                           as="default" name="default_order_items_renderer" template="Magento_Sales::order/view/items/renderer/default.phtml">
+                        <arguments>
+                            <argument name="columns" xsi:type="array">
+                                <item name="product" xsi:type="string" translate="false">col-product</item>
+                                <item name="estatus" xsi:type="string" translate="false">col-estatus</item>
+                                <item name="qty" xsi:type="string" translate="false">col-ordered-qty</item>
+                                <item name="totals" xsi:type="string" translate="false">col-totals</item>
+                            </argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Sales\Block\Adminhtml\Items\Column\Qty" name="column_qty" template="WolfSellers_Bopis::order/items/column/qty.phtml" group="column"/>
+                    <block class="Magento\Sales\Block\Adminhtml\Items\Column\Name" name="column_name" template="WolfSellers_Bopis::order/items/column/name.phtml" group="column"/>
+                    <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Items\Totals" name="column_totals" template="WolfSellers_Bopis::order/items/column/totals.phtml" group="column"/>
+                    <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Items\Totals" name="column_estatus" template="WolfSellers_Bopis::order/items/column/status.phtml" group="column"/>
+                    <block class="Magento\Framework\View\Element\Text\ListText" name="order_item_extra_info"/>
+                </block>
+            </block>
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="sales_order_delivered" template="WolfSellers_Bopis::order/widget/form/delivered.phtml" />
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer" name="bopis_footer" template="WolfSellers_Bopis::order/footer.phtml" />
+            <block class="WolfSellers\Bopis\Block\Adminhtml\Order\Notifications" name="push_notification" template="WolfSellers_Bopis::notifications/push-notifications.phtml" before="-" />
+        </referenceContainer>
+    </body>
+</page>

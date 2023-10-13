@@ -1,0 +1,235 @@
+body{
+	form{
+		input[type="text"],
+		input[type="password"],
+		input[type="url"],
+		input[type="tel"],
+		input[type="search"],
+		input[type="number"],
+		input[type="datetime"],
+		input[type="email"]{
+			    border-color: @color-grisinput;
+			    height: 35px;
+		}
+	}
+	&.page-layout-admin-login{
+		background-color: @color-gray1;
+		.page-wrapper{
+			border-radius: 4px;
+			max-width: 100%;
+			padding: 0;
+			width: 85%;
+		    display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: -ms-flex;
+		    display: flex;
+		    -webkit-flex-wrap: wrap;
+		    -ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
+		    -webkit-align-items: flex-start;
+		    -ms-align-items: flex-start;
+		    align-items: flex-start;
+		    box-shadow: none;
+		    background: @color-gray8;
+			.login-header{
+				text-align: center;
+				width: 60%;
+				a.logo{
+					margin: -20px auto 0 auto;
+				    display: block;
+				    background: @color-white;
+				    padding: 15px 20px;
+				    max-width: none;
+				    float: right;
+				}
+			}
+			a.logo{
+				order: 1;
+				width: 100%;
+				box-shadow:  0 0px 6px 0 rgba(0, 0, 0, 0.30);
+				background: @color-white;
+				img{
+					margin: auto;
+				    display: block;
+				    width: 15%;
+				    padding-top: 20px;
+				    padding-bottom: 20px;
+				}
+			}
+			.login-content{
+				float: right;
+				width: 40%;
+				padding: 50px;
+				order: 3;
+				form#login-form{
+					width: 80%;
+					margin: auto;
+				}
+				.admin__fieldset{
+					.admin__legend{
+						span{
+							margin-top: 100px;
+						    float: left;
+						    width: 100%;
+						    font-size: 25px;
+						    font-weight: 400;
+						}
+						.admin__field._required.field-username{
+							.admin__field-control{
+								input{
+									&:placeholder{
+										color: @color-gray9;
+										font-size: 12px;
+									}
+								}
+							}
+						}
+					}
+				}
+				.form-actions{
+					display: flex;
+    				flex-direction: column;
+    				.actions{
+    					order: 2;
+    					button.action-login.action-primary{
+    						width: 180px
+    					}
+    				}
+    				.links{
+    					margin-top: 0;
+    					margin-bottom: 25px;
+    					text-align: left;
+    					a{
+    						color: @color-rojo2;
+    					}
+    				}
+				}
+			}
+			legend.admin__legend{
+				color: @color-secondary;
+				font-size: 1.2rem;
+				text-align: center;
+			}
+			.image-system-admin-login{
+				float: left;
+				width: 60%;
+				order: 2;
+				margin-top: 3px;
+				img{
+					width: 100%;
+				}
+			}
+		}
+	}
+	.menu-wrapper{
+		a.logo{
+			background-color: @color-white;
+			padding: 25px 5px;
+			img.logo-img{
+				width: 100%;
+				height: auto;
+			}
+		}	
+	}
+	.header-logo {
+	    width: ~"calc(100% + 60px)";
+	    text-align: center;
+	    margin: 0;
+	    border-bottom: 1px solid @color-gray1;
+	    margin: -25px 0 0 -30px;
+	    padding: 15px;
+	    box-sizing: border-box;
+	    .logo{
+	    	max-width: 200px;
+	    	display: block;
+	    	width: 100%;
+	    	margin: 10px auto;
+	    }
+	}
+
+	.page-actions._fixed,
+	.tabs-horiz .ui-state-default{
+		border: 0;
+	}
+	.admin__menu {
+		> ul{
+			> li{
+				&#menu-wolfsellers-top-level{
+					> a{
+						&:before{
+							content: "\e900";
+							font-size: 3rem;
+	    					height: 3.2rem;
+						}
+						&:hover::before{
+							content: "\e901";
+						}
+					}
+				}
+			}
+		}
+		.level-0{
+			> .submenu{
+			background-color: @color-secondary;
+			}
+		}
+		[class*='level-'] {
+	        &:not(.level-0) {
+	            a {
+	                &:hover {
+	                    background-color: @color-white;
+	                    color: @color-primary;
+	                }
+
+	                &:active {
+	                   background: @color-white;
+	                }
+	            }
+	        }
+	    }
+	}
+
+	.pagebuilder-draggable-content-type a i:before{
+		color: @color-white;
+	}
+
+	.admin__field:not(.admin__field-option) > .admin__field-label{
+		font-size: 1.2rem;	
+		font-weight: normal;
+	}
+
+	p.copyright.col-m-6{
+		display: none;
+	}
+	.footer-legal-system.col-m-6 {
+	    float: left;
+	    width: 100%;
+	    text-align: center;
+	}
+	.login-content{
+		.form-actions{
+			display: block;
+			margin-top: 0;
+			.actions{
+				padding: 0;
+				text-align: center;
+				button{
+					text-shadow: none;
+					font-size: 1.4rem;
+					font-weight: 400;
+					border: 0;
+					border-radius: 4px;
+				}
+			}
+			.links{
+				float: left;
+				width: 100%;
+				text-align: center;
+				margin-top: 25px;
+			}
+		}
+	}
+	.login-footer{
+		display: none;
+	}
+}

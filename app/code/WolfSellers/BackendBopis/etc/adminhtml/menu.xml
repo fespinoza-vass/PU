@@ -1,0 +1,10 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="WolfSellers_BackendBopis::dashboard"
+             title="Historial de ordenes"
+             module="WolfSellers_BackendBopis"
+             sortOrder="200"
+             action="GestorPU/listorders"
+             resource="WolfSellers_BackendBopis::dashboard"/>
+    </menu>
+</config>

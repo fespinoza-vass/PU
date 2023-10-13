@@ -131,7 +131,7 @@
                         .row-footer-icons{
                             padding: 10px;
                             background-color: @white;
-                            margin-top: 50px;
+                            padding: 0 40px;
                             .footer-icons{
                                 ul{
                                     li{
@@ -200,9 +200,11 @@
                                 padding: 0;
                                 .footer-icons{
                                     margin: auto;
-                                    width: 85%;
+                                    width: 100%;
+                                    max-width: 1500px;
                                     .pagebuilder-column-line{
                                         .lib-css(justify-content,space-around, @_prefix: 1);
+                                        margin: 20px 0;
                                         .column-info{
                                             text-align: center;
                                             padding: 10px;
@@ -211,7 +213,7 @@
                                                height: auto;
                                             }
                                             &__title{
-                                                .lib-font-size(20);
+                                                .lib-font-size(18);
                                                 font-weight: 600;
                                             }
                                             &__text{
@@ -243,13 +245,30 @@
                                             }
                                         }
                                     }
+                                    @media screen and (max-width:1440px){
+                                        .pagebuilder-column-line{
+                                            .column-info{
+                                                &__title{
+                                                    .lib-font-size(16);
+                                                }
+                                            }
+                                        }
+                                    }
                                     @media @lgmax{
                                         width: 100%;
                                         .pagebuilder-column-line{
                                             .lib-css(justify-content,space-around, @_prefix: 1);
                                             .column-info{
+                                                img{
+                                                    width: 100px
+                                                }
                                                 &__title{
-                                                    .lib-font-size(18);
+                                                    .lib-font-size(12);
+                                                }
+                                                &__text{
+                                                    *{
+                                                        .lib-font-size(12);  
+                                                    }
                                                 }
                                             }
                                         }
@@ -573,3 +592,20 @@
         }
     }
 }
+@media @lgmax{
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            #maincontent{
+                .columns{
+                    .column.main{
+                        .row-footer-icons{
+                            padding: 0 15px;
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

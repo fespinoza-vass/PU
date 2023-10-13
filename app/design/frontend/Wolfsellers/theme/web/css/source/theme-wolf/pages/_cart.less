@@ -142,15 +142,44 @@
                                                         min-height: 0;
                                                         padding: 0;
 
-                                                        .action-towishlist,
-                                                        .action-edit,
-                                                        .wishlist {
+                                                        .action-towishlist{
                                                             display: none;
                                                         }
 
                                                         .action-delete {
                                                             &::before {
                                                                 color: @gray-4C;
+                                                            }
+                                                        }
+
+                                                        .button.wishlist{
+                                                            position: absolute;
+                                                            bottom: 20px;
+                                                            right: 145px;
+                                                            top: auto;
+                                                            font-weight: 600;
+                                                            text-decoration: underline;
+                                                            margin-right: 0;
+                                                            .action.split{
+                                                                .lib-font-size(16);
+                                                                font-weight: 600;
+                                                                color: @black;
+                                                                &:hover{
+                                                                    color: @color-black;
+                                                                }
+                                                            }
+                                                            span{
+                                                               .lib-icon-font(
+                                                                   @_icon-font-content: @icon-save-later,
+                                                                   @_icon-font-color: @color-black,
+                                                                   @_icon-font-size: 1.8rem,
+                                                                   @_icon-font-position: before,
+                                                                   @_icon-font-margin: 0 5px 0 0,
+                                                                   );
+                                                                text-decoration: underline;
+                                                            }
+                                                            .toggle.change{
+                                                                display: none;
                                                             }
                                                         }
                                                     }
@@ -742,7 +771,7 @@
                                                         padding: 0;
 
                                                         .action-delete {
-                                                            bottom: 86px;
+                                                            bottom: 130px;
                                                             right: 16px;
                                                             top: auto;
 
@@ -750,6 +779,27 @@
                                                                 .lib-font-size(24);
                                                                 overflow: visible;
                                                             }
+                                                        }
+                                                        .split.button.wishlist{
+                                                            position: relative;
+                                                            right: 0;
+                                                            &:before{
+                                                                content: none;
+                                                            }
+                                                            .action.split{
+                                                            }
+                                                            span{
+                                                                position: relative;
+                                                                overflow: visible;
+                                                                .lib-font-size(14);
+                                                                width: auto;
+                                                                height: auto;
+                                                                margin: 0;
+                                                                padding: 15px 0 0 90px;
+                                                            }
+                                                        }
+                                                        .action-edit{
+                                                            display: none;
                                                         }
                                                     }
                                                 }
