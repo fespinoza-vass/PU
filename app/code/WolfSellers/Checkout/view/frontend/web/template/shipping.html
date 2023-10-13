@@ -5,80 +5,117 @@
  */
 -->
 <li id="shipping" class="checkout-shipping-address" data-bind="fadeVisible: visible(), css: isDisabledShippingStep() ? '_disabled' : '' ">
-    <div class="step-title" translate="'Shipping Address'" data-role="title"></div>
+
+    <each args="getRegion('before-form')" render="" ></each>
     <div id="checkout-step-shipping"
          class="step-content"
          data-role="content">
-        <!--each if="!quoteIsVirtual" args="getRegion('customer-email')" render="" ></each-->
-        <each args="getRegion('address-list')" render="" ></each>
-        <each args="getRegion('address-list-additional-addresses')" render="" ></each>
+        <div class="step-title" translate="'2. forma de entrega'" data-role="title"></div>
 
-        <!-- Address form pop up -->
-        <if args="!isFormInline">
-            <div class="new-address-popup">
-                <button type="button"
-                        class="action action-show-popup"
-                        click="showFormPopUp"
-                        visible="!isNewAddressAdded()">
-                    <span translate="'New Address'"></span>
-                </button>
-            </div>
-            <div id="opc-new-shipping-address"
-                 visible="isFormPopUpVisible()"
-                 render="shippingFormTemplate"></div>
-        </if>
-
-        <each args="getRegion('before-form')" render="" ></each>
-
-        <!-- Inline address form -->
-        <render if="isFormInline" args="shippingFormTemplate"></render>
-    </div>
-</li>
-
-<!--Shipping method template-->
-<li id="opc-shipping_method"
-    class="checkout-shipping-method"
-    data-bind="fadeVisible: visible(), blockLoader: isLoading"
-    role="presentation">
-    <div class="checkout-shipping-method">
-        <div class="step-title"
-             translate="'Shipping Methods'"
-             data-role="title"></div>
-
-        <each args="getRegion('before-shipping-method-form')" render="" ></each>
-
-        <div id="checkout-step-shipping_method"
+        <div id="checkout-step-shipping_method-regular"
              class="step-content"
              data-role="content"
              role="tabpanel"
-             aria-hidden="false">
-            <form id="co-shipping-method-form"
-                  class="form methods-shipping"
-                  if="rates().length"
-                  submit="setShippingInformation"
-                  novalidate="novalidate">
-
-                <render args="shippingMethodListTemplate"></render>
-
-                <div id="onepage-checkout-shipping-method-additional-load">
-                    <each args="getRegion('shippingAdditional')" render="" ></each>
-                </div>
-                <div role="alert"
-                     if="errorValidationMessage().length"
-                     class="message notice">
-                    <span text="errorValidationMessage()"></span>
-                </div>
-                <div class="actions-toolbar" id="shipping-method-buttons-container">
-                    <div class="primary">
-                        <button data-role="opc-continue" type="submit" class="button action continue primary">
-                            <span translate="'Next'"></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <div class="no-quotes-block"
-                 ifnot="rates().length > 0"
-                 translate="'Sorry, no quotes are available for this order at this time'"></div>
+             aria-hidden="false"
+             data-bind="css: isRegularShipping() ? 'selected' : '', click:function(e,t){setRegularShipping(e,t)}">
+            <label for="envio_regular">Envíó Regular:</label>
+            <span>S/8.50</span>
+            <input type="radio" id="envio_regular" name="opciones" value="regular">
+            <span>Tú pedido llega entre 24 y 48 horas luego a tu compra*
+                <a href="#">Cónoce más aquí</a>
+            </span>
         </div>
+        <div id="checkout-step-shipping_method-fast"
+             class="step-content"
+             data-role="content"
+             role="tabpanel"
+             aria-hidden="false"
+             data-bind="css: isFastShipping() ? 'selected': '', click:function(e,t){setFastShipping(e,t)}">
+            <label for="envio_rapido">Envio Rápido:</label>
+            <span>s/12.00</span>
+            <input type="radio" id="envio_rapido" name="opciones" value="fast" >
+            <span>Tu pedido llega el mismo día tú comprar*
+                <a href="#">Cónoce más aquí</a>
+            </span>
+        </div>
+
     </div>
+    <!-- ko if: (isRegularShipping) -->
+    //2.1 regular
+    <div id="checkout-step-shipping-regular"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
+        <fieldset>
+            <each args="getRegion('regular')" render="" ></each>
+        </fieldset>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: (isFastShipping) -->
+    //2.1 rapido
+    <div id="checkout-step-shipping-rapido"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
+        <fieldset>
+            <each args="getRegion('fast')" render="" ></each>
+        </fieldset>
+    </div>
+    //2.2 rapido
+    <div id="checkout-step-shipping-time"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.2 Programa el horario de llegada de tu pedido'" data-role="title"></div>
+        <fieldset>
+            <div id="uno"
+                 class="step-content"
+                 data-role="option"
+                 role="option"
+                 aria-hidden="false">
+                <label for="early">Horario de 12 a 4pm:</label>
+                <input type="radio" id="early" name="opciones" value="early">
+            </div>
+            <div id="dos"
+                 class="step-content"
+                 data-role="option"
+                 role="option"
+                 aria-hidden="false">
+                <label for="later">Horario de 4 a 8pm:</label>
+                <input type="radio" id="later" name="opciones" value="later">
+            </div>
+        </fieldset>
+        <span>Tu pedido llegará hoy miercoles 1 de marzo en un rango de 4 a 8pm</span>
+    </div>
+    <!-- /ko -->
+
+
+    <div id="checkout-step-shipping-summary"
+         class="step-content"
+         data-role="content">
+        <div class="step-sub-title" translate="'Costo de envío'" data-role="subtitle"></div>
+        <span class="subtotal">
+            S/12.00
+        </span>
+    </div>
+
+    <form id="co-shipping-method-form"
+          class="form methods-shipping"
+          if="rates().length"
+          submit="setShippingInformation"
+          novalidate="novalidate">
+
+        <div role="alert"
+             if="errorValidationMessage().length"
+             class="message notice">
+            <span text="errorValidationMessage()"></span>
+        </div>
+        <div class="actions-toolbar" id="shipping-method-buttons-container">
+            <div class="primary">
+                <button data-role="opc-continue" type="submit" class="button action continue primary">
+                    <span translate="'Next'"></span>
+                </button>
+            </div>
+        </div>
+    </form>
 </li>
