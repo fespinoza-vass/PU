@@ -1,5 +1,15 @@
 & when (@media-common = true) {
 	.checkout-index-index{
+		h4{
+			.lib-font-size(16);
+			font-weight: 600;
+		}
+		.actions-toolbar{
+			button{
+				margin: 0;
+				text-transform: uppercase;
+			}
+		}
 		@media @mdmin{
 			padding-top: 68px;
 		}
@@ -125,6 +135,22 @@
 			&:first-child:before {
 				border-radius: 6px 0 0 6px;
 			}
+			&._complete{
+				> span{
+					color: @color-black;
+					font-weight: 400;
+					&:before{
+						background: @color-black;
+					}
+					&:after{
+						content: @icon-check-checkout;
+						font-family: @icons__font-name;
+						color: @white;
+						line-height: 2.7;
+						background: @color-black;
+					}
+				}
+			}
 		}
 		.opc-block-summary {
 			display: flex;
@@ -138,7 +164,9 @@
 			}
 			.block.items-in-cart {
 				order: 2;
+				margin-bottom: 10px;
 				.title{
+					border-bottom: 1px solid @gray-E9;
 					&:after{
 						font-size: 15px;
 					}
@@ -148,6 +176,7 @@
 					}
 				}
 				.minicart-items{
+					border-bottom: 1px solid @gray-E9;
 					.product{
 						.product-item-inner{
 							position: relative;
@@ -166,9 +195,32 @@
 					}
 				}
 			}
-			.payment-option.discount-code {
+			.table-totals{
 				order: 3;
-				border-top: 1px solid @lines-input;
+				border-top: 0;
+				tbody{
+					tr{
+						background: @color-white;
+						th{
+							span{
+								color: @color-black;
+							}
+						}
+						&.totals{
+							th,td{
+								border-top: 0;
+								padding-top: 6px;
+								strong{
+									.lib-font-size(14px);
+								}
+							}
+						}
+					}
+				}
+			}
+			.payment-option.discount-code {
+				order: 4;
+				border-top: 1px solid @gray-E9;
 				.payment-option-title{
 					width: 100%;
 					padding: 12px 0;
@@ -182,6 +234,7 @@
 					);
 					&:after{
 						float: right;
+						font-size: 1.5rem;
 					}
 				}
 				&._active{
@@ -189,7 +242,7 @@
 						.lib-icon-font(
 							@_icon-font-content: @icon-up,
 							@_icon-font-color: @black,
-							@_icon-font-size: 1.2rem,
+							@_icon-font-size: 1.5rem,
 							@_icon-font-position: after,
 							@_icon-font-margin: 0
 						);
@@ -215,6 +268,7 @@
 						background-color: @black;
 						border-top-right-radius: 12px;
 						border-bottom-right-radius: 12px;
+						padding-top: 0;
 						.primary{
 							width: 100%;
 							height: 100%;
@@ -234,7 +288,7 @@
 				}
 			}
 			.container-gift-message {
-				order: 4;
+				order: 5;
 				position: relative;
 				display: inline-block;
 				margin-bottom: 23px;
@@ -336,7 +390,7 @@
 			}
 			[data-role="checkout-agreements"],
 			.checkout-agreements {
-				order: 5;
+				order: 6;
 				margin: 10px 0;
 				[type='checkbox']{
 					position: absolute;
@@ -380,6 +434,16 @@
 							border: 1px solid @black;
 						}
 					}
+				}
+			}
+			.actions-toolbar{
+				order: 7;
+				margin: 0 auto;
+				padding-top: 20px;
+				button.button.action{
+					text-transform: uppercase;
+					margin: 0;
+					padding: 16px 31px;
 				}
 			}
 		}
@@ -473,6 +537,138 @@
 				}
 			}
 		}
+		.checkout-shipping-address.step-two,
+		#payment{
+			.step-title{
+				margin-bottom: 16px;
+				font-weight: 600;
+				padding: 0;
+				border: 0;
+			}
+		}
+		.checkout-shipping-address.step-two{
+			padding-top: 16px;
+			.border{
+				padding: 10px 16px;
+				background: @color-white;
+				border-radius: 12px;
+				#store-pickup{
+					.step-content{
+						width: 100%;
+						gap: 4px;
+						button{
+							color: @gray4;
+							font-weight: 400;
+							width: 50%;
+							border: 12px;
+							&.selected{
+								.lib-font-size(14);
+								font-weight: normal;
+								border-radius: 12px;
+								background: @color-black;
+								color: @color-white;
+							}
+						}
+					}
+				}
+			}
+		}
+		#payment{
+			position: relative;
+			padding-top: 25px;
+			.step-content{
+				form#co-payment-form{
+					background: @color-white;
+					border-radius: 12px;
+					margin-top: 20px;
+					padding: 15px;
+					fieldset{
+						br,hr{
+							display: none;
+						}
+						.opc-payment{
+							.payment-method-title{
+								border: 0;
+							}
+						}
+						.payment-option{
+							.payment-option-title{
+								border: 0;
+							}
+						}
+						#custom-checkout-form{
+							.fieldset{
+								.lib-css(display,flex,@_prefix:1);
+								.lib-css(flex-wrap,wrap,@_prefix:1);
+								margin-bottom: 20px;
+								.payment-type{
+									.lib-css(display, flex, @_prefix: 1);
+									.lib-css(flex-wrap,wrap,@_prefix:1);
+									.payment-option-type{
+										width: 50%;
+									}
+									span{
+										display: block;
+										width: 100%;
+										.lib-font-size(12);
+										color: @gray4;
+										padding-top: 15px;
+									}
+								}
+								.field{
+									label{
+										.lib-font-size(14);
+										font-weight: 400;
+									}
+									.field-tooltip{
+										.field-tooltip-action{
+											&:before{
+												line-height: 2;
+											}
+										}
+									}
+									input[type="text"]{
+										height: 48px;
+										border: 1px solid @lines-input;
+									}
+									&[name="customCheckoutForm.razon_social"]{
+										order: 1;
+										width: 45%;
+										padding-left: 25px;
+									}
+									&[name="customCheckoutForm.ruc"]{
+										order: 2;
+										width: 50%;
+										padding-left: 25px;
+									}
+									&[name="customCheckoutForm.direccion_fiscal"]{
+										order: 3; 
+										width: 100%;
+										padding-left: 25px;
+										.field-tooltip{
+											display: none;
+										}
+									}
+								}
+							}
+							.content-buttons-invoice{
+								text-align: center;
+								margin-bottom: 32px;
+							}
+						}
+					}
+					.payment-benefits-wrapper{
+						position: absolute;
+						bottom: 0;
+						right: 10px;
+						label{
+							text-decoration: underline;
+							cursor: pointer;
+						}
+					}
+				}
+			}
+		}
 		#store-pickup {}
 		#shipping {}
 		#checkout-step-title {
@@ -523,6 +719,7 @@
 						span{
 							text-decoration: underline;
 							.lib-font-size(14);
+							text-transform: initial;
 						}
 					}
 				}
@@ -721,6 +918,7 @@
 		}
 		.page-wrapper{
 			.page-header{
+				height: 65px;
 				background: @primary;
 				top: 0;
 				z-index: 10;
@@ -1374,9 +1572,9 @@
 			margin: 0;
 		}
 		.opc-block-summary {
-			margin: 50px 0 0 20px;
+			margin: 60px 0 0 20px;
 			max-width: 430px;
-			padding: 0 30px;
+			padding: 0 30px 25px 30px;
 			> .title {
 				bottom: 40px;
 				left: -30px;
@@ -1390,15 +1588,6 @@
 		th{
 			&.mark {
 				padding: 6px 170px 6px 0 !important;
-			}
-		}
-		table{
-			&.data{
-				&.table{
-					&.table-totals {
-						display: flex;
-					}
-				}
 			}
 		}
 		.page-wrapper {
@@ -1467,27 +1656,37 @@
 				}
 			}
 		}
-		.opc-progress-bar-item {
-			&._active > span:after {
-				line-height: 1.5;
-				font-weight: 600;
-			}
-			&:before {
-				top: 13px;
-			}
-			> span {
-				padding-top: 36px;
-				display: block;
-				font-size: 1.2rem;
-				&:before,
-				&:after {
-					height: 32px;
-					width: 32px;
+		.opc-progress-bar{
+			.opc-progress-bar-item {
+				&._active > span:after {
+					line-height: 1.5;
+					font-weight: 600;
 				}
-				&:after {
-					height: 32px;
-					width: 32px;
-					font-size: 1.8rem;
+				&:before {
+					top: 13px;
+				}
+				> span {
+					padding-top: 36px;
+					display: block;
+					font-size: 1.2rem;
+					&:before,
+					&:after {
+						height: 32px;
+						width: 32px;
+					}
+					&:after {
+						height: 32px;
+						width: 32px;
+						font-size: 1.8rem;
+					}
+				}
+				&._complete{
+					> span{
+						&:after{
+							font-size: 1.4rem;
+							line-height: 2.5;
+						}
+					}
 				}
 			}
 		}
@@ -1495,6 +1694,11 @@
 			.form-login{
 				background:@color-white;
 				padding: 0 0 20px 0;
+			}
+		}
+		#payment{
+			#checkout-step-payment{
+				margin-bottom: 35px;
 			}
 		}
 		.opc-block-summary {
@@ -1539,15 +1743,6 @@
 		th{
 			&.mark {
 				padding: 6px 120px 6px 0 !important;
-			}
-		}
-		table{
-			&.data{
-				&.table{
-					&.table-totals {
-						display: flex;
-					}
-				}
 			}
 		}
 		.page-wrapper{
