@@ -10,12 +10,14 @@
             <!--/ko-->
         </fieldset>
 
-        <button id="submitInvoice" name="submit-invoice" type="button" data-bind="click: onSubmit, visible: false" class="action primary" >
-            <span data-bind="i18n: 'GUARDAR DATOS'"></span>
-        </button>
-        <button id="editInvoice" type="button" data-bind="click: editInfo, visible: false" class="">
-            <span data-bind="i18n: 'Edit'"></span>
-        </button>
+        <div class="content-buttons-invoice">
+            <button id="submitInvoice" name="submit-invoice" type="button" data-bind="click: onSubmit, visible: false" class="action primary" >
+                <span data-bind="i18n: 'GUARDAR DATOS'"></span>
+            </button>
+            <button id="editInvoice" type="button" data-bind="click: editInfo, visible: false" class="">
+                <span data-bind="i18n: 'Edit'"></span>
+            </button>
+        </div>
 
     </form>
 

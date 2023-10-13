@@ -13,6 +13,7 @@ use WolfSellers\Email\Model\Email\Identity\PreparedOrder;
 use WolfSellers\Email\Model\Email\Identity\ShipOrder;
 use WolfSellers\Email\Model\Email\Identity\ReadyToPickupOrder;
 use WolfSellers\Email\Model\Email\SimpleSender;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class EmailHelper
 {
@@ -50,6 +51,7 @@ class EmailHelper
         }
 
         $vars = $this->getGeneralVars($order);
+        $vars['satisfaction_survey_url'] = $this->satisfactionSurvey->getSatisfactionSurveyUrl();
 
         $sender = $this->simpleSender;
         $sender->setTemplateIdentifier($surveyEmail->getTemplateId());
@@ -146,7 +148,8 @@ class EmailHelper
                 'email_customer_note' => $order->getEmailCustomerNote(),
                 'frontend_status_label' => $order->getFrontendStatusLabel()
             ],
-            'created_at_formatted' => $order->getCreatedAtFormatted(2)
+            'created_at_formatted' => $order->getCreatedAtFormatted(2),
+            'delivery' => $this->getDeliveryType($order)
         ];
     }
 
@@ -157,6 +160,32 @@ class EmailHelper
     public function getOrderModel($order)
     {
         return $this->orderFactory->create()->loadByIncrementId($order->getIncrementId());
+    }
+
+    /**
+     * @param $order
+     * @return bool[]
+     */
+    private function getDeliveryType($order): array
+    {
+        $types = [
+            'is_instore' => false,
+            'is_regular' => false,
+            'is_fast' => false
+        ];
+
+        switch ($order->getShippingMethod()) {
+            case AbstractBopisCollection::PICKUP_SHIPPING_METHOD:
+                $types['is_instore'] = true;
+                break;
+            case AbstractBopisCollection::FAST_SHIPPING_METHOD:
+                $types['is_fast'] = true;
+                break;
+            default:
+                $types['is_regular'] = true;
+        }
+
+        return $types;
     }
 }
 
