@@ -8,7 +8,9 @@ define([
     'WolfSellers_Checkout/js/utils-wolf-uicomponents',
     'Magento_Checkout/js/model/quote',
     'WolfSellers_Checkout/js/model/shipping-payment',
-    'WolfSellers_Checkout/js/model/customer'
+    'WolfSellers_Checkout/js/model/customer',
+    'Magento_Catalog/js/price-utils',
+    'Magento_Checkout/js/checkout-data'
 ],function (
     $,
     ko,
@@ -19,7 +21,9 @@ define([
     wolfUtils,
     quote,
     shippingPayment,
-    customer
+    customer,
+    priceUtils,
+    checkoutData
 ) {
     'use strict';
     var shippingAddressPath = "checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.";
@@ -33,10 +37,12 @@ define([
         isActive: ko.observable(false),
         isShippingStepFinished: ko.observable(false),
         isDisabledShippingStep: ko.observable(true),
-        isRegularShipping:ko.observable(),
-        isFastShipping:ko.observable(),
-        shippingMethod:ko.observable(),
-        goToResume:ko.observable(),
+        isRegularShipping: ko.observable(),
+        isFastShipping: ko.observable(),
+        isFastShippingDisabled: ko.observable(false),
+        isRegularShippingDisabled: ko.observable(false),
+        shippingMethod: ko.observable(),
+        goToResume: ko.observable(),
 
         initialize: function () {
             this._super();
@@ -56,12 +62,17 @@ define([
                 //TODO Call here setIsDisabledShippingStep to update isShippingStepFinished
                 console.log("hola");
             },this);
+            customer.isCustomerStepFinished.subscribe(function (value) {
+                if(value.includes('_complete')){
+                    this.validateRates();
+                }
+            },this);
             return this;
         },
         /**
          * Overwrite set shipping information action
          */
-        setShippingInformation:function () {
+        setShippingInformation: function () {
             this.setDataToShippingForm();
             if (this.validateShippingInformation()) {
                 this.isShippingStepFinished("_complete");
@@ -93,7 +104,7 @@ define([
          * @param t
          */
         setRegularShipping: function (e,t) {
-            if(t.currentTarget){
+            if(t.currentTarget && !this.isRegularShippingDisabled()){
                 this.isRegularShipping(true);
                 this.isFastShipping(false);
                 this.setDataToShippingForm();
@@ -106,8 +117,8 @@ define([
          * @param e
          * @param t
          */
-        setFastShipping:function (e,t) {
-            if(t.currentTarget){
+        setFastShipping: function (e,t) {
+            if(t.currentTarget && !this.isFastShippingDisabled()){
                 this.isRegularShipping(false);
                 this.isFastShipping(true);
                 var rate = this.findRateByCarrierCode('envio_rapido');
@@ -143,7 +154,76 @@ define([
             uiComponent.invoice_required.validation = Object.assign({}, uiComponent.invoice_required.validation, newValidationConfig);
             uiComponent.company.validation = Object.assign({}, uiComponent.company.validation, newValidationConfig);
             uiComponent.dni.validation = Object.assign({}, uiComponent.company.dni, newValidationConfig);
-
+        },
+        /**
+         * get text value of carrier amount by method type
+         * @param methodType
+         * @returns {*}
+         */
+        getPriceLabel: function (methodType){
+            var carrier;
+            var selectedShippingRate = checkoutData.getSelectedShippingRate();
+            if (methodType === "selected") {
+                if (!_.isUndefined(selectedShippingRate) &&
+                    !_.isNull(selectedShippingRate) ) {
+                    methodType = selectedShippingRate;
+                } else {
+                    return "No ha seleccionado un precio aun.";
+                }
+            }
+            carrier = this.getCarrierCodeByCarrier(methodType);
+            return priceUtils.formatPrice(carrier.amount);
+        },
+        /**
+         * Get carrier by string that contains carrierCode
+         * @param carrierCode
+         * @returns {*|boolean}
+         */
+        getCarrierCodeByCarrier: function (carrierCode) {
+            if (_.isEmpty(this.rates())){
+                return false;
+            }
+            var carrier = _.find(this.rates(),function(rate) {
+                return carrierCode.includes(rate.carrier_code);
+            });
+            if (carrier){
+                return carrier;
+            }
+            return false;
+        },
+        /**
+         * validate if shippingMethod is Available
+         * @param methodType
+         * @returns {boolean}
+         */
+        isShippingMethodAvailable: function (methodType) {
+            var carrier = this.getCarrierCodeByCarrier(methodType);
+            console.log("Tiene error: " + !!carrier.error_message + " El carrier: " + carrier.carrier_code);
+            if(!!carrier.error_message && carrier.carrier_code.includes('flat')){
+                this.isRegularShippingDisabled(true);
+            }else{
+                this.isRegularShippingDisabled(false);
+            }
+            if (!!carrier.error_message && carrier.carrier_code.includes('rapid')){
+                this.isFastShippingDisabled(true);
+            }else{
+                this.isFastShippingDisabled(false);
+            }
+            return !!carrier.error_message;
+        },
+        /**
+         * validates if some rates have error to disabled
+         */
+        validateRates: function () {
+            console.log(this.rates())
+            var carrierWithErrorMessage = _.find(this.rates(), function(rate) {
+                if(!!rate.error_message){
+                    return rate;
+                }
+            });
+            if(carrierWithErrorMessage){
+                this.isShippingMethodAvailable(carrierWithErrorMessage.carrier_code);
+            }
         }
     }
 

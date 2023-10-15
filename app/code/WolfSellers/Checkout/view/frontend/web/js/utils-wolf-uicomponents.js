@@ -6,6 +6,9 @@ define([
     registry
 ) {
     'use strict';
+    /**
+     * TODO all string passed as parameters turn into vars or observables
+     */
     return {
         /**
          * get uiComponents array by path + [uiComponent names]
