@@ -17,9 +17,12 @@
              data-role="content"
              role="tabpanel"
              aria-hidden="false"
-             data-bind="css: isRegularShipping() ? 'selected' : '', click:function(e,t){setRegularShipping(e,t)}">
+             data-bind="
+                css: isRegularShipping() ? 'selected' : '',
+                css: isShippingMethodAvailable('flatrate_flatrate') ? 'disabled' : '',
+                click: function(e,t){setRegularShipping(e,t)}">
             <label for="envio_regular">Envíó Regular:</label>
-            <span>S/8.50</span>
+            <span data-bind="text: getPriceLabel('flatrate_flatrate')"></span>
             <input type="radio" id="envio_regular" name="opciones" value="regular">
             <span>Tú pedido llega entre 24 y 48 horas luego a tu compra*
                 <a href="#">Cónoce más aquí</a>
@@ -30,9 +33,12 @@
              data-role="content"
              role="tabpanel"
              aria-hidden="false"
-             data-bind="css: isFastShipping() ? 'selected': '', click:function(e,t){setFastShipping(e,t)}">
+             data-bind="
+                css: isFastShipping() ? 'selected': '',
+                css: isShippingMethodAvailable('envio_rapido_envio_rapido') ? 'disabled' : '',
+                click: function(e,t){setFastShipping(e,t)}">
             <label for="envio_rapido">Envio Rápido:</label>
-            <span>s/12.00</span>
+            <span data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
             <input type="radio" id="envio_rapido" name="opciones" value="fast" >
             <span>Tu pedido llega el mismo día tú comprar*
                 <a href="#">Cónoce más aquí</a>
@@ -94,9 +100,7 @@
          class="step-content"
          data-role="content">
         <div class="step-sub-title" translate="'Costo de envío'" data-role="subtitle"></div>
-        <span class="subtotal">
-            S/12.00
-        </span>
+        <span class="subtotal" data-bind="text:getPriceLabel('selected')"></span>
     </div>
 
     <form id="co-shipping-method-form"
