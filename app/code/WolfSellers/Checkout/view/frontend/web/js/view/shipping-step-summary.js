@@ -2,12 +2,12 @@ define([
     'ko',
     'underscore',
     'uiComponent',
-    'Magento_Checkout/js/model/quote'
+    'WolfSellers_Checkout/js/model/shipping-payment',
 ], function (
     ko,
     _,
     Component,
-    quote
+    shippingPayment
 ) {
     'use strict';
 
@@ -19,12 +19,8 @@ define([
         isStorePickUp: ko.observable(false),
         initialize:function () {
             this._super();
-            quote.shippingMethod.subscribe(function (value) {
-                if (_.isUndefined(value) && _.isUndefined(value.carrier_code)){
-                    console.log("undefined");
-                    return;
-                }
-                if (value.carrier_code.includes('instore')){
+            shippingPayment.shippingMethod.subscribe(function (value) {
+                if (value.includes('instore')){
                     this.isShipping(false);
                     this.isStorePickUp(true);
                 }else{
@@ -35,40 +31,61 @@ define([
            return this;
         },
         /**
+         * get text from shipping method
+         * @returns {string}
+         */
+        getShippingMethod:function () {
+            if (this.isReadyToShowSummary()){
+                if (shippingPayment.shippingMethod().includes("flat")){
+                    return "Envió regular a domicilio";
+                }
+                if (shippingPayment.shippingMethod().includes("rapido")){
+                    return "Envió rápido a domicilio";
+                }
+                if (shippingPayment.shippingMethod().includes("instore")){
+                    return "Retiro en Tienda";
+                }
+            }
+            return "Calculando...";
+        },
+        /**
          * Add text value for reference input
-         * @returns {*|boolean|string}
+         * @returns {*|string}
          */
         getReferencia: function () {
-            if (!_.isUndefined(this.getCustomAttributeByAttributeCode('referencia_envio'))){
-                return this.getCustomAttributeByAttributeCode('referencia_envio');
+            if (this.isReadyToShowSummary()){
+                return shippingPayment.referencia();
             }
-            return "Valor de referencia no obtenido";
+            return "Calculando...";
         },
         /**
          * Add text value for store pickup selected input
          * @returns {string}
          */
         getStorePickUpSelected: function () {
-            return "Tienda Seleccionada.-.,-.,-.,-.,-.,";
+            if (this.isReadyToShowSummary()){
+                return shippingPayment.tiendaSeleccionada();
+            }
+            return "Calculando...";
         },
         /**
-         * Gets a custom attribute by attribute code
-         * TODO validate if is customAttributes null or empty
-         * Warning this could be broke checkout until is finished
-         * @param attributeCode
-         * @returns {*|boolean}
+         * Add text value for store pickup address selected
+         * @returns {*|string}
          */
-        getCustomAttributeByAttributeCode: function (attributeCode) {
-            if (_.isUndefined(quote.shippingAddress().customAttributes) ||
-                _.isObject(quote.shippingAddress().customAttributes) ||
-                !_.isEmpty(quote.shippingAddress().customAttributes) ){
-                var result = _.find(quote.shippingAddress().customAttributes,
-                    {'attribute_code':attributeCode});
-                if (result){
-                    return result.value;
-                }
+        getPickupAddress: function () {
+            if (this.isReadyToShowSummary()){
+                return shippingPayment.direccionTienda();
             }
-            return false;
+            return "Calculando...";
+        },
+        /**
+         * validate if it's ready to show summary
+         * @returns {false|*}
+         */
+        isReadyToShowSummary: function () {
+            return (!_.isUndefined(shippingPayment.isShippingStepFinished()) &&
+                shippingPayment.isShippingStepFinished().includes("_complete"));
+
         }
     });
 });

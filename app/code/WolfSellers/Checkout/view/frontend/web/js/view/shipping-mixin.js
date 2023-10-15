@@ -5,6 +5,7 @@ define([
     'uiRegistry',
     'Magento_Checkout/js/model/step-navigator',
     'mage/translate',
+    'WolfSellers_Checkout/js/utils-wolf-uicomponents',
     'Magento_Checkout/js/model/quote',
     'WolfSellers_Checkout/js/model/shipping-payment',
     'WolfSellers_Checkout/js/model/customer'
@@ -15,6 +16,7 @@ define([
     registry,
     stepNavigator,
     $t,
+    wolfUtils,
     quote,
     shippingPayment,
     customer
@@ -44,31 +46,39 @@ define([
             stepNavigator.modifyStep("shipping", modifyData);
             this.setIsDisabledShippingStep();
             this.isShippingStepFinished.subscribe(function (value) {
+                console.log("isShippingStepFinished:" + value);
                 shippingPayment.isShippingStepFinished(value);
+                shippingPayment.setShippingMethodModelData(quote);
+                shippingPayment.setShippingModelData(quote);
                 this.setIsDisabledShippingStep();
             },this);
             this.goToResume.subscribe(function (value) {
+                //TODO Call here setIsDisabledShippingStep to update isShippingStepFinished
                 console.log("hola");
             },this);
             return this;
         },
         /**
          * Overwrite set shipping information action
-         * @returns {*}
          */
         setShippingInformation:function () {
             this.setDataToShippingForm();
             if (this.validateShippingInformation()) {
                 this.isShippingStepFinished("_complete");
+                if (shippingPayment.shippingMethod() === 'instore'){
+                    this.isShippingStepFinished.notifySubscribers("_complete");
+                }
                 this.goToResume(false);
             }else{
                 this.isShippingStepFinished("_active");
                 this.goToResume(true);
             }
-            return this._super();
+            this._super();
         },
         /**
          * Update progress bar to complete or incomplete state
+         * TODO validate isDisabledShippingStep because could be _complete, _active and empty
+         * but empty its not implemented yet
          */
         setIsDisabledShippingStep: function () {
             if (customer.isCustomerStepFinished() === '_complete'){
@@ -122,34 +132,18 @@ define([
                 [validationRuleName]: false
             };
             var uiComponentsRequired = ["firstname","lastname", "telephone"];
-            var uiComponent = this.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
+            var uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
             uiComponent.firstname.value(customer.customerName());
             uiComponent.lastname.value(customer.customerLastName());
             uiComponent.telephone.value(customer.customerTelephone());
             uiComponentsRequired = ["vat_id","distrito_envio_rapido","invoice_required","company","dni"];
-            uiComponent = this.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
+            uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
             uiComponent.vat_id.validation = Object.assign({}, uiComponent.vat_id.validation, newValidationConfig);
             uiComponent.distrito_envio_rapido.validation = Object.assign({}, uiComponent.distrito_envio_rapido.validation, newValidationConfig);
             uiComponent.invoice_required.validation = Object.assign({}, uiComponent.invoice_required.validation, newValidationConfig);
             uiComponent.company.validation = Object.assign({}, uiComponent.company.validation, newValidationConfig);
             uiComponent.dni.validation = Object.assign({}, uiComponent.company.dni, newValidationConfig);
 
-        },
-        /**
-         * get uiComponentsByPath + [names]
-         * @param path
-         * @param uiComponentsRequired
-         * @returns {*}
-         */
-        getUiComponentsArray: function (path, uiComponentsRequired) {
-            return _.chain(uiComponentsRequired)
-                .map(function(componentName) {
-                    var component = registry.get(path + componentName);
-                    return component ? [componentName, component] : null;
-                })
-                .compact()
-                .object()
-                .value();
         }
     }
 

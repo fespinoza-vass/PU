@@ -1,9 +1,22 @@
 <div class="container-summary">
+    <div>
+        <b>Forma de entrega:</b>
+        <p data-bind="text: getShippingMethod()"></p>
+    </div>
     <div data-bind="visible: isShipping">
         <b>Referencia:</b>
         <p data-bind="text: getReferencia()"></p>
     </div>
+    <div data-bind="visible: isStorePickUp">
+        <div>
+            <b>Tienda Seleccionada:</b>
+            <p data-bind="text: getStorePickUpSelected()"></p>
+        </div>
+        <div>
+            <b>Dirección de entrega:</b>
+            <p data-bind="text: getPickupAddress()"></p>
+        </div>
+    </div>
 </div>
-
 
 
