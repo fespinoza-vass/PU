@@ -215,7 +215,6 @@ define([
          * validates if some rates have error to disabled
          */
         validateRates: function () {
-            console.log(this.rates())
             var carrierWithErrorMessage = _.find(this.rates(), function(rate) {
                 if(!!rate.error_message){
                     return rate;

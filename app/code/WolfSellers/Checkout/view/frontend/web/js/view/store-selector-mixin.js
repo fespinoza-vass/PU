@@ -3,18 +3,21 @@ define([
     'WolfSellers_Checkout/js/utils-wolf-uicomponents',
     'Magento_Checkout/js/model/quote',
     'WolfSellers_Checkout/js/model/shipping-payment',
-    'WolfSellers_Checkout/js/model/customer'
+    'WolfSellers_Checkout/js/model/customer',
+    'Magento_InventoryInStorePickupFrontend/js/model/pickup-locations-service'
 ], function (
     ko,
     wolfUtils,
     quote,
     shippingPayment,
-    customer
+    customer,
+    pickupLocationsService
 ) {
     'use strict';
 
     var storeSeletorMixin = {
         defaults:{
+            template: 'WolfSellers_Checkout/store-selector',
             links: {
                 "goToResume":'checkout:isVisibleShipping'
             }
@@ -69,7 +72,19 @@ define([
         validatePickupInformation: function () {
             return true;
         },
-
+        /**
+         * Unselect a location store selected
+         */
+        unSelectLocation:function () {
+            this.selectedLocation(null);
+        },
+        /**
+         * Overrides original selectedPickUpLocatio to avoid modal options
+         * @param location
+         */
+        selectPickupLocation:function (location) {
+            pickupLocationsService.selectForShipping(location);
+        }
     };
 
     return function (storeSelectorTarget) {
