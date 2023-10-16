@@ -54,8 +54,9 @@ class LayoutProcessor implements LayoutProcessorInterface
     {
         $walker = $this->walkerFactory->create(['layoutArray' => $jsLayout]);
         $idCustomer =$this->session->getCustomerId();
-        //CHECKOUT default template
+        //CHECKOUT default template && default component
         $checkout = $walker->getValue('{CHECKOUT}');
+        $checkout['component'] = "WolfSellers_Checkout/js/view/onepage";
         $checkout['config']['template'] = "WolfSellers_Checkout/onepage";
         $walker->setValue('{CHECKOUT}',$checkout);
         //CUSTOMER DATA STEP
@@ -213,7 +214,6 @@ class LayoutProcessor implements LayoutProcessorInterface
         $walker->setValue('{SHIPPING_ADDRESS}.>>.customer-email', []);
         $walker->setValue('{PAYMENT}.>>.customer-email', []);
         $walker->setValue('{STORE-PICKUP}.>>.customer-email', []);
-
         $company = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company');
         $company['visible'] = false;
         $company['sortOrder'] = 200;
@@ -262,6 +262,40 @@ class LayoutProcessor implements LayoutProcessorInterface
             'altFormat' => 'mm/dd/yy',
         ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
+        //Step Two configuration
+        $shippingRegular = [
+            'component' => 'uiComponent',
+            'displayArea' => 'regular'
+        ];
+        $shippingFast= [
+            'component' => 'uiComponent',
+            'displayArea' => 'fast'
+        ];
+        $shippingRegularArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
+        $shippingRegularArea['regular'] = $shippingRegular;
+        $shippingRegularArea['regular']['children']['departamento'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
+        $shippingRegularArea['regular']['children']['hidden-region'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region');
+        $shippingRegularArea['regular']['children']['provincia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
+        $shippingRegularArea['regular']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
+        $shippingRegularArea['regular']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
+        $shippingRegularArea['regular']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
+        $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingRegularArea);
+        $shippingFastArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
+        $shippingFastArea['fast'] = $shippingFast;
+        $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
+        $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
+        $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
+        $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastArea);
+        //Shipping Step Summary Component
+        $resumenShippingStep = [
+            'component' => 'WolfSellers_Checkout/js/view/shipping-step-summary',
+            'displayArea' => 'shipping-step-summary'
+        ];
+        $shippingSummary = $walker->getValue('{CHECKOUT_STEPS}.>>');
+        $shippingSummary['shipping-step-summary'] = $resumenShippingStep;
+        $walker->setValue('{CHECKOUT_STEPS}.>>', $shippingSummary);
+
+
         //Set displayArea to each step component
         $shippingStep = $walker->getValue('{SHIPPING-STEP}');
         $shippingStep['displayArea'] = "shipping-step";
