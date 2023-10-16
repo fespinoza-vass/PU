@@ -1,0 +1,81 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div id="store-selector"class="step-content" data-bind="blockLoader: $parent.isLoading" css="'store-selected': $parent.selectedLocation">
+    //2 Store Pickup
+    <div class="store-pickup-method">
+        <div class="step-title" translate="'2. Selecciona tú Distrito'" data-role="title"></div>
+        <div class="content-when-not-selected" data-bind="fadeVisible:!selectedLocation()">
+            <div class="distrito-uicomponent">
+                <h2>uiComponent Distrito?????</h2>
+            </div>
+
+            <div class="pickup-store-list">
+                <div id="opc-store-selector-popup-noModal" render="storeSelectorPopupTemplate"></div>
+            </div>
+        </div>
+        <div class="content-when-selected" data-bind="fadeVisible:selectedLocation()">
+
+            <render args="selectedLocationTemplate"></render>
+
+            <div class="options">
+                <a href="#" data-bind="click: unSelectLocation()" translate="'Elegir otro lugar de retiro'" ></a>
+            </div>
+        </div>
+    </div>
+    //2.1 tienda retiro
+    <div class="store-pickup-selector">
+        <div class="step-title" translate="'2.1 Selecciona tú tienda de retiro'" data-role="title"></div>
+        <div class="content-picker">
+            <h2>Render new uiComponent for yo | otra persona picker</h2>
+        </div>
+    </div>
+    //2.2 picker
+    <div class="store-pickup-picker">
+        <div class="step-title" translate="'2.2 Selecciona quien recogerá el pedido'" data-role="title"></div>
+        
+    </div>
+    //2.3 comprobante
+    <div class="store-pickup-receipt-address">
+        <div class="step-title" translate="'2.2 Selecciona quien recogerá el pedido'" data-role="title"></div>
+    </div>
+</div>
+
+
+<div id="store-selector-original">
+    <div id="checkout-step-store-selector" class="step-content" data-role="content">
+
+        <each args="getRegion('after-selected-location')" render=""></each>
+        <form class="form-continue" submit="setPickupInformation" novalidate="novalidate">
+            <div class="actions-toolbar">
+                <div class="secondary">
+                    <button type="button" class="button action" click="openPopup">
+                        <span if="selectedLocation">
+                            <translate args="'Select Other'"></translate>
+                        </span>
+                        <span ifnot="selectedLocation">
+                            <translate args="'Select Store'"></translate>
+                        </span>
+                    </button>
+                </div>
+                <div class="primary">
+                    <button data-role="opc-continue"
+                            type="submit"
+                            class="button action continue primary"
+                            css="disabled: !selectedLocation"
+                            enable="selectedLocation"
+                            disabled
+                    >
+                        <span>
+                            <translate args="'Next'"></translate>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
