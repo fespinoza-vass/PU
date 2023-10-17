@@ -50,10 +50,14 @@
                 </span>
             </div>
         </div>
+        <div class="shipping-method-error"
+             data-bind="fadeVisible: isShippingMethodAvailable('envio_rapido_envio_rapido')"
+        >
+            <p>Tu pedido no puede ser procesado por Envio rápido.</p>
+        </div>
 
     </div>
     <!-- ko if: (isRegularShipping) -->
-
     <div id="checkout-step-shipping-regular"
          class="step-content"
          data-role="content">
@@ -69,7 +73,6 @@
     <!-- /ko -->
 
     <!-- ko if: (isFastShipping) -->
-
     <div id="checkout-step-shipping-rapido"
          class="step-content"
          data-role="content">
@@ -78,7 +81,6 @@
             <each args="getRegion('fast')" render="" ></each>
         </fieldset>
     </div>
-
     <div id="checkout-step-shipping-time"
          class="step-content"
          data-role="content">

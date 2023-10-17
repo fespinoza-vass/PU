@@ -294,6 +294,18 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingSummary = $walker->getValue('{CHECKOUT_STEPS}.>>');
         $shippingSummary['shipping-step-summary'] = $resumenShippingStep;
         $walker->setValue('{CHECKOUT_STEPS}.>>', $shippingSummary);
+        //PickUp Step pickerComponent
+        $pickerUiComponent = [
+            'uiComponent' => 'uiComponent',
+            'displayArea' => 'picker'
+        ];
+        $pickerArea = $walker->getValue('{STORE-PICKUP}');
+        $pickerArea['picker'] = $pickerArea;
+        $pickerArea['children']['pickerOption'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.picker');
+        $walker->setValue('STORE-PICKUP',$pickerArea);
+
+
+
 
 
         //Set displayArea to each step component

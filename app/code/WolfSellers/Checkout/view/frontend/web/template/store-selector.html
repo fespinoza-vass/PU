@@ -5,42 +5,40 @@
  */
 -->
 <div id="store-selector"class="step-content" data-bind="blockLoader: $parent.isLoading" css="'store-selected': $parent.selectedLocation">
-    //2 Store Pickup
     <div class="store-pickup-method">
-        <div class="step-title" translate="'2. Selecciona tú Distrito'" data-role="title"></div>
         <div class="content-when-not-selected" data-bind="fadeVisible:!selectedLocation()">
             <div class="distrito-uicomponent">
+                <div class="step-title" translate="'2. Selecciona tú Distrito'" data-role="title"></div>
                 <h2>uiComponent Distrito?????</h2>
             </div>
-
             <div class="pickup-store-list">
+                <div class="step-title" translate="'2.1 Selecciona tú tienda de retiro'" data-role="title"></div>
                 <div id="opc-store-selector-popup-noModal" render="storeSelectorPopupTemplate"></div>
             </div>
         </div>
         <div class="content-when-selected" data-bind="fadeVisible:selectedLocation()">
-
+            <div class="step-title" translate="'2. Selecciona tú tienda de retiro'" data-role="title"></div>
             <render args="selectedLocationTemplate"></render>
-
             <div class="options">
                 <a href="#" data-bind="click: unSelectLocation()" translate="'Elegir otro lugar de retiro'" ></a>
             </div>
         </div>
     </div>
-    //2.1 tienda retiro
     <div class="store-pickup-selector">
-        <div class="step-title" translate="'2.1 Selecciona tú tienda de retiro'" data-role="title"></div>
+        <div class="step-title" translate="'2.1. Selecciona quien recogerá el pedido'" data-role="title" visible="selectedLocation()"></div>
+        <div class="step-title" translate="'2.2. Selecciona quien recogerá el pedido'" data-role="title" visible="!selectedLocation()"></div>
         <div class="content-picker">
-            <h2>Render new uiComponent for yo | otra persona picker</h2>
+            <each args="getRegion('picker')" render=""></each>
         </div>
     </div>
-    //2.2 picker
     <div class="store-pickup-picker">
-        <div class="step-title" translate="'2.2 Selecciona quien recogerá el pedido'" data-role="title"></div>
-        
+        <div class="step-title" translate="'2.2. Selecciona quien recogerá el pedido'" data-role="title" visible="selectedLocation()"></div>
+        <div class="step-title" translate="'2.3. Selecciona quien recogerá el pedido'" data-role="title" visible="!selectedLocation()"></div>
+
     </div>
-    //2.3 comprobante
     <div class="store-pickup-receipt-address">
-        <div class="step-title" translate="'2.2 Selecciona quien recogerá el pedido'" data-role="title"></div>
+        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="selectedLocation()"></div>
+        <div class="step-title" translate="'2.4. Ingresa una dirección para tu comprobante'" data-role="title" visible="!selectedLocation()"></div>
     </div>
 </div>
 
