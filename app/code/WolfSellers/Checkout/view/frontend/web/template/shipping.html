@@ -12,42 +12,48 @@
          data-role="content">
         <div class="step-title" translate="'2. Forma de entrega'" data-role="title"></div>
 
-        <div id="checkout-step-shipping_method-regular"
-             class="step-content"
-             data-role="content"
-             role="tabpanel"
-             aria-hidden="false"
-             data-bind="
-                css: isRegularShipping() ? 'selected' : '',
-                css: isShippingMethodAvailable('flatrate_flatrate') ? 'disabled' : '',
-                click: function(e,t){setRegularShipping(e,t)}">
-            <label for="envio_regular">Envíó Regular:</label>
-            <span data-bind="text: getPriceLabel('flatrate_flatrate')"></span>
-            <input type="radio" id="envio_regular" name="opciones" value="regular">
-            <span>Tú pedido llega entre 24 y 48 horas luego a tu compra*
-                <a href="#">Cónoce más aquí</a>
-            </span>
+        <div class="content-method_regular">
+            <div id="checkout-step-shipping_method-regular"
+                 class="step-content"
+                 data-role="content"
+                 role="tabpanel"
+                 aria-hidden="false"
+                 data-bind="
+                    css: isRegularShipping() ? 'selected' : '',
+                    css: isShippingMethodAvailable('flatrate_flatrate') ? 'disabled' : '',
+                    click: function(e,t){setRegularShipping(e,t)}">
+                <label class="step-content_icon" for="envio_regular">Envíó Regular:</label>
+                <span class="step-content_price" data-bind="text: getPriceLabel('flatrate_flatrate')"></span>
+                <input type="radio" id="envio_regular" name="opciones" value="regular">
+                <label class="step-content_input-regular" for="envio_regular"></label>
+                <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
+                    <a href="#">Cónoce más aquí</a>
+                </span>
+            </div>
         </div>
-        <div id="checkout-step-shipping_method-fast"
-             class="step-content"
-             data-role="content"
-             role="tabpanel"
-             aria-hidden="false"
-             data-bind="
-                css: isFastShipping() ? 'selected': '',
-                css: isShippingMethodAvailable('envio_rapido_envio_rapido') ? 'disabled' : '',
-                click: function(e,t){setFastShipping(e,t)}">
-            <label for="envio_rapido">Envio Rápido:</label>
-            <span data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
-            <input type="radio" id="envio_rapido" name="opciones" value="fast" >
-            <span>Tu pedido llega el mismo día tú comprar*
-                <a href="#">Cónoce más aquí</a>
-            </span>
+        <div class="content-method_fast">
+            <div id="checkout-step-shipping_method-fast"
+                 class="step-content"
+                 data-role="content"
+                 role="tabpanel"
+                 aria-hidden="false"
+                 data-bind="
+                    css: isFastShipping() ? 'selected': '',
+                    css: isShippingMethodAvailable('envio_rapido_envio_rapido') ? 'disabled' : '',
+                    click: function(e,t){setFastShipping(e,t)}">
+                <label class="step-content_icon" for="envio_rapido">Envio Rápido:</label>
+                <span class="step-content_price" data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
+                <input type="radio" id="envio_rapido" name="opciones" value="fast" >
+                <label class="step-content_input-fast" for="envio_rapido"></label>
+                <span class="step-content_info">Tu pedido llega el mismo día tú comprar*
+                    <a href="#">Cónoce más aquí</a>
+                </span>
+            </div>
         </div>
 
     </div>
     <!-- ko if: (isRegularShipping) -->
-    //2.1 regular
+
     <div id="checkout-step-shipping-regular"
          class="step-content"
          data-role="content">
@@ -55,11 +61,15 @@
         <fieldset>
             <each args="getRegion('regular')" render="" ></each>
         </fieldset>
+        <div class="step-content_regular">
+            <span class="step-content_regular-icon"></span>
+            <p>Recibirás tu pedido posterior a un plazo de <span>2 días naturales</span> en <span>un rango de 8 am a 7 pm</span> </p>
+        </div>
     </div>
     <!-- /ko -->
 
     <!-- ko if: (isFastShipping) -->
-    //2.1 rapido
+
     <div id="checkout-step-shipping-rapido"
          class="step-content"
          data-role="content">
@@ -68,7 +78,7 @@
             <each args="getRegion('fast')" render="" ></each>
         </fieldset>
     </div>
-    //2.2 rapido
+
     <div id="checkout-step-shipping-time"
          class="step-content"
          data-role="content">
@@ -79,19 +89,22 @@
                  data-role="option"
                  role="option"
                  aria-hidden="false">
-                <label for="early">Horario de 12 a 4pm:</label>
-                <input type="radio" id="early" name="opciones" value="early">
+                 <input type="radio" id="early" name="opciones" value="early">
+                 <label for="early">Horario de 12 a 4pm</label>
             </div>
             <div id="dos"
                  class="step-content"
                  data-role="option"
                  role="option"
                  aria-hidden="false">
-                <label for="later">Horario de 4 a 8pm:</label>
-                <input type="radio" id="later" name="opciones" value="later">
+                 <input type="radio" id="later" name="opciones" value="later">
+                 <label for="later">Horario de 4 a 8pm</label>
             </div>
         </fieldset>
-        <span>Tu pedido llegará hoy miercoles 1 de marzo en un rango de 4 a 8pm</span>
+        <div class="step-content_fast">
+            <span class="step-content_fast-icon"></span>
+            <p>Tu pedido llegará hoy <span>miercoles 1 de marzo</span> en un rango de 4 a 8pm</p>
+        </div>
     </div>
     <!-- /ko -->
 
