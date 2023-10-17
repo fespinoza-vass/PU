@@ -66,11 +66,12 @@ use Magento\Framework\App\Action\Action;
                                     <div class="actions-primary">
                                         <?php if ($_item->isSaleable()) : ?>
                                             <?php $postParams = $block->getAddToCartPostParams($_item); ?>
-                                            <form data-role="tocart-form" data-product-sku="<?= $block->escapeHtml($_item->getSku()) ?>" action="<?= $block->escapeUrl($postParams['action']) ?>" method="post">
+                                            <form id="formAddProduct" data-role="tocart-form" data-product-sku="<?= $block->escapeHtml($_item->getSku()) ?>" action="<?= $block->escapeUrl($postParams['action']) ?>" method="post">
                                                 <input type="hidden" name="product" value="<?= $block->escapeHtmlAttr($postParams['data']['product']) ?>">
                                                 <input type="hidden" name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>" value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
                                                 <?= $block->getBlockHtml('formkey') ?>
                                                 <button type="submit"
+                                                        id="product-addtocart-button-<?= (int)$_item->getEntityId() ?>"
                                                         title="<?= $block->escapeHtml(__('Add to Cart')) ?>"
                                                         class="action tocart primary">
                                                     <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
@@ -110,3 +111,12 @@ use Magento\Framework\App\Action\Action;
         <?php endforeach ?>
     </ol>
 <?php endif;?>
+
+<script type="text/x-magento-init">
+    {
+        ".tocart": {
+            "ModalCart":{}
+        }
+    }
+
+</script>
