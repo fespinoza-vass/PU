@@ -5,6 +5,7 @@
  */
 -->
 <div id="store-selector"class="step-content" data-bind="blockLoader: $parent.isLoading" css="'store-selected': $parent.selectedLocation">
+
     <div class="store-pickup-method">
         <div class="content-when-not-selected" data-bind="fadeVisible:!selectedLocation()">
             <div class="distrito-uicomponent">
@@ -24,21 +25,27 @@
             </div>
         </div>
     </div>
-    <div class="store-pickup-selector">
+
+    <div class="store-pickup-picker">
         <div class="step-title" translate="'2.1. Selecciona quien recogerá el pedido'" data-role="title" visible="selectedLocation()"></div>
         <div class="step-title" translate="'2.2. Selecciona quien recogerá el pedido'" data-role="title" visible="!selectedLocation()"></div>
         <div class="content-picker">
-            <each args="getRegion('picker')" render=""></each>
+            <each args="getRegion('picker')" render="" ></each>
+            <div class="content-for-other-picker" data-bind="visible: isAnotherPickerAreaVisible()">
+                <form
+                    id="form_another_picker"
+                    class="form-another-picker"
+                    novalidate="novalidate"
+                    data-form-part="anotherPicker">
+                    <each args="getRegion('another-picker')" render="" ></each>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="store-pickup-picker">
-        <div class="step-title" translate="'2.2. Selecciona quien recogerá el pedido'" data-role="title" visible="selectedLocation()"></div>
-        <div class="step-title" translate="'2.3. Selecciona quien recogerá el pedido'" data-role="title" visible="!selectedLocation()"></div>
-
-    </div>
     <div class="store-pickup-receipt-address">
-        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="selectedLocation()"></div>
-        <div class="step-title" translate="'2.4. Ingresa una dirección para tu comprobante'" data-role="title" visible="!selectedLocation()"></div>
+        <div class="step-title" translate="'2.2. Ingresa una dirección para tu comprobante'" data-role="title" visible="selectedLocation()"></div>
+        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="!selectedLocation()"></div>
+
     </div>
 </div>
 
@@ -47,7 +54,11 @@
     <div id="checkout-step-store-selector" class="step-content" data-role="content">
 
         <each args="getRegion('after-selected-location')" render=""></each>
-        <form class="form-continue" submit="setPickupInformation" novalidate="novalidate">
+        <form
+            class="form-continue"
+            submit="setPickupInformation"
+            novalidate="novalidate"
+            >
             <div class="actions-toolbar">
                 <div class="secondary">
                     <button type="button" class="button action" click="openPopup">
