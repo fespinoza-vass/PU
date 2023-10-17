@@ -1,0 +1,25 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="bopis" sortOrder="200">
+        <settings>
+            <label translate="true">Integracion Bopis</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <dataScope>bopis</dataScope>
+        </settings>
+        <field name="available_shipping_methods" formElement="multiselect" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Available Shipping Methods</label>
+                <notice>Use Ctrl+Click for check several values or uncheck value.</notice>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="WolfSellers\Sources\Model\Config\Source\AvailableShippingMethodsOptions"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

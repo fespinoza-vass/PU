@@ -161,7 +161,6 @@ class GiftWrapProcessor implements LayoutProcessorInterface
                             ]
                         ]
                     ]
-                    //'formTemplate' => 'Magento_GiftMessage/gift-message-form'
                 ]
             ];
             $this->walker->setValue('{GIFT_MESSAGE}.>>.gift_options', $giftOptionsComponent);

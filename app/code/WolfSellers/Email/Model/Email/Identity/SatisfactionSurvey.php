@@ -64,6 +64,6 @@ class SatisfactionSurvey extends Identity
      */
     public function getSatisfactionSurveyUrl()
     {
-        return $this->getStore()->getUrl(self::URL_SATISFACTION_SURVEY);
+        return $this->getStore()->getBaseUrl() . self::URL_SATISFACTION_SURVEY;
     }
 }
