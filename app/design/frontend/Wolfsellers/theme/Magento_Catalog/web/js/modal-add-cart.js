@@ -14,11 +14,10 @@ require([
 
 
     $(document).on('click', '.tocart' , function (event) {
-        let idButtonAddProduct = "#" + this.id;
+        var idButtonAddProduct = "#" + this.id;
         event.preventDefault();
 
         //validacion logica de entrega rapida ::
-        //if(n == true) {
 //popup modal code
         var popup = $('<div class="add-to-cart-modal-popup"/>').html($('.page-title span').text() + '<span> has been added to cart.</span>').modal({
             modalClass: 'add-to-cart-popup',
@@ -40,7 +39,6 @@ require([
             ]
         });
         popup.modal('openModal');
-
         //}
         event.preventDefault();
     });
