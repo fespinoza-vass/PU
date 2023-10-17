@@ -10,7 +10,8 @@ define([
     'WolfSellers_Checkout/js/model/shipping-payment',
     'WolfSellers_Checkout/js/model/customer',
     'Magento_Catalog/js/price-utils',
-    'Magento_Checkout/js/checkout-data'
+    'Magento_Checkout/js/checkout-data',
+    'domReady!'
 ],function (
     $,
     ko,

@@ -1,5 +1,7 @@
 define([
     'ko',
+    'underscore',
+    'uiRegistry',
     'WolfSellers_Checkout/js/utils-wolf-uicomponents',
     'Magento_Checkout/js/model/quote',
     'WolfSellers_Checkout/js/model/shipping-payment',
@@ -7,6 +9,8 @@ define([
     'Magento_InventoryInStorePickupFrontend/js/model/pickup-locations-service'
 ], function (
     ko,
+    _,
+    registry,
     wolfUtils,
     quote,
     shippingPayment,
@@ -19,12 +23,14 @@ define([
         defaults:{
             template: 'WolfSellers_Checkout/store-selector',
             links: {
-                "goToResume":'checkout:isVisibleShipping'
+                "goToResume":'checkout:isVisibleShipping',
+                "isAnotherPicker":'checkout.steps.store-pickup.store-selector.picker.pickerOption:value'
             }
         },
         isShippingStepFinished: ko.observable(false),
         isDisabledShippingStep: ko.observable(true),
         goToResume:ko.observable(),
+        isAnotherPicker:ko.observable(),
 
         initialize: function () {
             this._super();
@@ -70,20 +76,35 @@ define([
          * @returns {boolean}
          */
         validatePickupInformation: function () {
+            if(this.isAnotherPickerAreaVisible()){
+                var anotherPickerForm = registry.get("checkout.steps.store-pickup.store-selector.another-picker");
+                if(!anotherPickerForm.validateAnotherPickerForm()){
+                    return false;
+                }
+            }
             return true;
         },
         /**
          * Unselect a location store selected
          */
-        unSelectLocation:function () {
+        unSelectLocation: function () {
             this.selectedLocation(null);
         },
         /**
          * Overrides original selectedPickUpLocatio to avoid modal options
          * @param location
          */
-        selectPickupLocation:function (location) {
+        selectPickupLocation: function (location) {
             pickupLocationsService.selectForShipping(location);
+        },
+        /**
+         * validate if is another Picker Area visible
+         * @returns {boolean|*}
+         */
+        isAnotherPickerAreaVisible: function () {
+            var isAnotherPicker = this.isAnotherPicker();
+            return (_.isString(isAnotherPicker) &&
+                isAnotherPicker.includes("other"));
         }
     };
 
