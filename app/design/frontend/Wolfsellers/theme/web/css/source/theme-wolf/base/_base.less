@@ -402,13 +402,25 @@
 			}
 			.message-success{	
 				margin-top: 75px;
+				@media @mdmax{
+					margin: 65px 20px 10px 20px;
+					margin-top: 65px;
+				}
 			}
 			.widget.block-static-block{
 				border-bottom: 0;
 				.row-countdown{
-					height: 150px;
+					height: 170px;
 					.contador{
-						padding-top: 60px;
+						padding-top: 85px;
+					}
+				}
+				@media @mdmax{
+					.row-countdown{
+						height: 180px;
+						.contador{
+							padding-top: 70px;
+						}
 					}
 				}
 			}

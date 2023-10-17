@@ -560,6 +560,8 @@
                 .nav-header-links{
                     width: 100%;
                     padding-top: 15px;
+                    margin: 10px 0;
+                    
                     .buttons{
                         .lib-css(display, flex, @_prefix: 1);
                         a{
@@ -568,10 +570,9 @@
                             .lib-css(justify-content,center,@_prefix:1);
                             background: @gray-E6;
                             flex: 1;
-                            height: 38px;
+                            height: 45px;
                             margin-right: 10px;
                             text-align: center;
-                            border-radius: 8px;
                             &:last-child{
                                 margin-right: 0;
                             }
@@ -903,7 +904,8 @@
                         background: @white;
                         padding-top: 0;
                         width: 100%;
-                        padding: 10px;
+                        padding: 10px 10px 15px 10px;
+                        margin: 0;
                         .lib-css(align-items,center,@_prefix:1);
                         .lib-css(justify-content,center,@_prefix:1);
                         .buttons{
