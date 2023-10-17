@@ -22,6 +22,32 @@
 				}
 			}
 		}
+		#resumen_personal_info,
+		#resumen_shipping_step{
+			.actions-toolbar{
+				button{
+					.lib-icon-font(
+						@_icon-font-content: @icon-edit-checkout,
+						@_icon-font-color: @black,
+						@_icon-font-size: 1.8rem,
+						@_icon-font-position: before,
+						@_icon-font-margin: 0 10px 0 0
+					);
+					.lib-css(display, flex, @_prefix: 1);
+					.lib-css(align-items,center,@_prefix:1);
+					&:before{
+						display: inline;
+						text-decoration: underline;
+						overflow: initial;
+					}
+					span{
+						text-decoration: underline;
+						.lib-font-size(14);
+						text-transform: initial;
+					}
+				}
+			}
+		}
 		form {
 			> div.address {
 				> .field[name="shippingAddress.country_id"],
@@ -88,12 +114,25 @@
 			position: relative;
 			text-align: center;
 			vertical-align: top;
-			&._active > span:after {
-				content: counter(i);
-				font-family: inherit;
+			&:nth-child(1),
+			&:nth-child(2),
+			&:nth-child(3){
+				span{
+					&:after{
+						content: counter(i);
+						font-family: inherit;
+					}
+				}
 			}
 			&._active {
 				border-color: @color-black;
+				> span:after{
+					color: @color-black;
+				}
+				> span{
+					color: @color-black;
+					font-weight: 700;
+				}
 			}
 			&:before {
 				height: 0;
@@ -106,7 +145,7 @@
 				left: 0;
 			}
 			> span {
-				font-weight: 700;
+				font-weight: 600;
 				&:before,
 				&:after {
 					top: 0;
@@ -115,7 +154,6 @@
 					display: block;
 					transition: background 0.3s;
 					border-radius: 50%;
-					content: '';
 					left: 50%;
 					position: absolute;
 					top: 0;
@@ -124,8 +162,9 @@
 					top: -2px;
 					counter-increment: i;
 					margin-left: -20px;
-					border: 2px solid @color-black;
+					border: 2px solid @gray4;
 					background: @color-white;
+					color: @gray4;
 				}
 				&:before {
 					background: @color-black;
@@ -148,6 +187,7 @@
 						color: @white;
 						line-height: 2.7;
 						background: @color-black;
+						border: 2px solid @black;
 					}
 				}
 			}
@@ -548,7 +588,7 @@
 		}
 		.checkout-shipping-address.step-two{
 			padding-top: 16px;
-			.border{
+			.container.steps{
 				padding: 10px 16px;
 				background: @color-white;
 				border-radius: 12px;
@@ -569,6 +609,279 @@
 								color: @color-white;
 							}
 						}
+					}
+				}
+				#shipping{
+					.step-title{
+						.lib-font-size(16);
+					}
+					.content-method_regular,
+					.content-method_fast{
+						position: relative;
+						.lib-radio();
+						margin-bottom: 10px;
+						#checkout-step-shipping_method-regular,
+						#checkout-step-shipping_method-fast{
+							.lib-css(display,flex,@_prefix:1);
+							.lib-css(flex-wrap,wrap,@_prefix:1);
+							.lib-css(justify-content,space-between,@_prefix:1);
+							border: 1px solid @lines-input;
+							border-radius: 12px;
+							padding: 10px;
+							margin: 0 0 0 40px;
+							> label{
+								width: 70%;
+							}
+							.step-content{
+								&_price{
+									width: auto;
+									font-weight: 600;
+								}
+								&_info{
+									width: 100%;
+									display: block;
+									width: auto;
+									.lib-font-size(12);
+									padding-left: 30px;
+									a{
+										display: inherit;
+										color: @color-black;
+										text-decoration: underline;
+										font-weight: 600;
+									}
+								}
+								&_input-fast,
+								&_input-regular{
+									position: absolute;
+									top: 25px;
+									left: 0;
+								}
+
+							}
+						}
+						#checkout-step-shipping_method-regular{
+							padding: 7px 7px 10px 10px;
+							.step-content{
+								&_icon{
+									.lib-icon-font(
+										@_icon-font-content: @icon-regular-shipping,
+										@_icon-font-color: @black,
+										@_icon-font-size: 2.5rem,
+										@_icon-font-position: before,
+										@_icon-font-margin: 0 5px 0 0,
+									);
+									&:before{
+										line-height: 0.8;
+									}
+								}
+							}
+						}
+						#checkout-step-shipping_method-fast{
+							.step-content{
+								&_icon{
+									.lib-icon-font(
+										@_icon-font-content: @icon-fast-shipping,
+										@_icon-font-color: @black,
+										@_icon-font-size: 1.5rem,
+										@_icon-font-position: before,
+										@_icon-font-margin: 0 5px 0 0,
+									);
+								}
+							}
+						}
+					}
+					#checkout-step-shipping-regular,
+					#checkout-step-shipping-rapido,
+					#checkout-step-shipping-time{
+						margin-bottom: 10px;
+						fieldset{
+							.lib-css(display,flex,@_prefix:1);
+							.lib-css(flex-wrap,wrap,@_prefix:1);
+							border: 0px;
+							padding-left: 50px;
+							.field{
+								margin-bottom: 10px;
+								label,
+								legend{
+									display: block;
+									padding-bottom: 5px;
+									span{
+										&:after{
+											content: '*';
+											color: @color-black;
+											padding-left: 3px;
+										}
+									}
+								}
+								.control{
+									select,
+									input{
+										height: 48px;
+										width: 100%;
+										border: 1px solid @lines-input;
+									}
+								}
+							}
+						}
+					}
+					#checkout-step-shipping-regular{
+						fieldset{
+							.field{
+								margin-bottom: 10px;
+								&[name="shippingAddress.region_id"]{
+									order: 1;
+									width: 100%;
+								}
+								&[name="shippingAddress.city"]{
+									order: 2;
+									width: 50%;
+									padding-right: 10px;
+								}
+								&[name="shippingAddress.custom_attributes.colony"]{
+									order: 3;
+									width: 50%;
+									padding-left: 10px;
+								}
+								&.street{
+									order: 4;
+									width: 50%;
+									padding: 0 10px 0 0;
+									.additional{
+										display: none;
+									}
+								}
+								&[name="shippingAddress.custom_attributes.referencia_envio"]{
+									order: 5;
+									width: 50%;
+									padding-left: 10px;
+								}
+							}
+						}
+						.step-content_regular{
+							.lib-css(display,flex,@_prefix:1);
+							.lib-css(align-items,end,@_prefix:1);
+							padding: 0 0 15px 15px;
+							border-bottom: 1px solid @lines-input;
+							&-icon{
+								.lib-icon-font(
+									@_icon-font-content: @icon-regular-shipping,
+									@_icon-font-color: @black,
+									@_icon-font-size: 2.5rem,
+									@_icon-font-position: before,
+									@_icon-font-margin: 0 10px 0 0,
+								);
+							}
+							p{
+							 .lib-font-size(12);
+							 line-height: 1.1;
+							 border-bottom: 20px;
+							 span{
+								font-weight: 600;
+							 	}	
+							}
+						}
+					}
+					#checkout-step-shipping-rapido{
+						fieldset{
+							.lib-css(display,flex,@_prefix:1);
+							.lib-css(flex-wrap,wrap,@_prefix:1);
+							border: 0;
+							.field{
+								&[name="shippingAddress.custom_attributes.distrito_envio_rapido"]{
+									order: 1;
+									width: 100%;
+								}
+								&.street{
+									order: 2;
+									width: 50%;
+									padding: 0 10px 0 0;
+									.additional{
+										display: none;
+									}
+								}
+								&[name="shippingAddress.custom_attributes.referencia_envio"]{
+									order: 3;
+									width: 50%;
+									padding-left: 10px;
+								}
+
+							}
+						}
+					}
+					#checkout-step-shipping-time{
+						fieldset{
+							padding-left: 0px;
+							.lib-css(justify-content,space-around,@_prefix:1);
+							#uno,
+							#dos{
+								.lib-radio();
+								margin-bottom: 17px;
+							}
+						}
+						.step-content_fast{
+							.lib-css(display,flex,@_prefix:1);
+							.lib-css(align-items,start,@_prefix:1);
+							padding: 0 0 25px 15px;
+							border-bottom: 1px solid @lines-input;
+							margin-bottom: 20px;
+							&-icon{
+								.lib-icon-font(
+									@_icon-font-content: @icon-fast-shipping,
+									@_icon-font-color: @black,
+									@_icon-font-size: 1.2rem,
+									@_icon-font-position: before,
+									@_icon-font-margin: 0 10px 0 0,
+								);
+							}
+							p{
+								.lib-font-size(12);
+								line-height: 1.1;
+								border-bottom: 20px;
+								span{
+									color: @green2;
+									text-decoration: underline;
+								}	
+							}
+						}
+					}
+					#checkout-step-shipping-summary{
+						.lib-css(display,flex,@_prefix:1);
+						.lib-css(justify-content,space-between);
+						margin-bottom: 30px;
+						*{
+							font-weight: 600;
+						}
+					}
+					#co-shipping-method-form{
+						padding-bottom: 24px;
+						background: @color-white;
+						border-bottom: 0;
+						margin: 0;
+						.actions-toolbar{
+							text-align: center;
+							.primary{
+								float: initial;
+								button{
+									margin: 0;
+								}
+							}
+						}
+					}
+				}
+			}
+			#resumen_shipping_step{
+				.lib-css(display,flex,@_prefix:1);
+				.lib-css(justify-content,space-between,@_prefix:1);
+				background: @color-white;
+				padding: 15px;
+				border-radius: 12px;
+				.container-summary{
+					width: 75%;
+					b,p{
+						display: inline;
+					}
+					b{
+						font-weight: 600;
 					}
 				}
 			}
@@ -697,29 +1010,6 @@
 							&:nth-child(1){
 								font-weight: 600;
 							}
-						}
-					}
-				}
-				.actions-toolbar{
-					button{
-						.lib-icon-font(
-							@_icon-font-content: @icon-edit-checkout,
-							@_icon-font-color: @black,
-							@_icon-font-size: 1.8rem,
-							@_icon-font-position: before,
-							@_icon-font-margin: 0 10px 0 0
-						);
-						.lib-css(display, flex, @_prefix: 1);
-						.lib-css(align-items,center,@_prefix:1);
-						&:before{
-							display: inline;
-							text-decoration: underline;
-							overflow: initial;
-						}
-						span{
-							text-decoration: underline;
-							.lib-font-size(14);
-							text-transform: initial;
 						}
 					}
 				}
@@ -1540,6 +1830,11 @@
 					width: 50px;
 				}
 			}
+			&:nth-child(2),
+			&:nth-child(3){
+				line-height: 2.5;
+			}
+
 		}
 		/**/
 		.opc-wrapper {
@@ -1659,8 +1954,9 @@
 		.opc-progress-bar{
 			.opc-progress-bar-item {
 				&._active > span:after {
-					line-height: 1.5;
+					line-height: 1.8;
 					font-weight: 600;
+					border: 2px solid @color-black;
 				}
 				&:before {
 					top: 13px;
@@ -1669,6 +1965,7 @@
 					padding-top: 36px;
 					display: block;
 					font-size: 1.2rem;
+					color: @gray4;
 					&:before,
 					&:after {
 						height: 32px;
@@ -1678,6 +1975,7 @@
 						height: 32px;
 						width: 32px;
 						font-size: 1.8rem;
+						line-height: 1.8;
 					}
 				}
 				&._complete{
@@ -1809,6 +2107,36 @@
 								}
 							}
 						}
+						.checkout-shipping-address.step-two{
+							.container.steps{
+								#shipping{
+									#checkout-step-shipping-rapido,
+									#checkout-step-shipping-regular{
+										fieldset{
+											padding-left: 40px;
+											.street{
+												padding-left: 0;
+											}
+										}
+										.step-content_regular{
+											padding-left: 0;
+										}
+									}
+									#co-shipping-method-form{
+										border-bottom: 0;
+										margin: 0;
+										padding-top: 10px;
+										.actions-toolbar{
+											.primary{
+												button{
+													width: 67%;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 						.form-login{
 							.fieldset{
 								.field{
@@ -1858,4 +2186,61 @@
         }
 	}
 
+}
+//Mobile 375px
+@media @xssmax{
+	.checkout-index-index{
+		.checkout-shipping-address.step-two{
+			.container.steps{
+				#shipping{
+					#checkout-step-shipping-time{
+						fieldset{
+							#uno,
+							#dos{
+								label{
+									.lib-font-size(12);
+								}
+							}
+						}
+						.step-content_fast{
+							padding-left: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Mobile 320px'
+@media @xxsmax{
+	.checkout-index-index{
+		.checkout-shipping-address.step-two{
+			.container.steps{
+				#store-pickup{
+					.step-content{
+						button{
+							.lib-font-size(12);
+							padding: 10px 15px;
+							&.selected{
+								.lib-font-size(12);
+							}
+						}
+					}
+				}
+				#shipping{
+					#checkout-step-shipping-time{
+						fieldset{
+							#uno,
+							#dos{
+								label{
+									.lib-font-size(10);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
