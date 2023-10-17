@@ -265,11 +265,13 @@ class LayoutProcessor implements LayoutProcessorInterface
         //Step Two configuration
         $shippingRegular = [
             'component' => 'uiComponent',
-            'displayArea' => 'regular'
+            'displayArea' => 'regular',
+            'provider' => 'checkoutProvider'
         ];
         $shippingFast= [
             'component' => 'uiComponent',
-            'displayArea' => 'fast'
+            'displayArea' => 'fast',
+            'provider' => 'checkoutProvider'
         ];
         $shippingRegularArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
         $shippingRegularArea['regular'] = $shippingRegular;
@@ -289,11 +291,51 @@ class LayoutProcessor implements LayoutProcessorInterface
         //Shipping Step Summary Component
         $resumenShippingStep = [
             'component' => 'WolfSellers_Checkout/js/view/shipping-step-summary',
-            'displayArea' => 'shipping-step-summary'
+            'displayArea' => 'shipping-step-summary',
+            'provider' => 'checkoutProvider'
         ];
         $shippingSummary = $walker->getValue('{CHECKOUT_STEPS}.>>');
         $shippingSummary['shipping-step-summary'] = $resumenShippingStep;
         $walker->setValue('{CHECKOUT_STEPS}.>>', $shippingSummary);
+        //PickUp Step pickerComponent
+        $pickerUiComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'picker',
+            'provider' => 'checkoutProvider'
+        ];
+        $pickerArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $pickerArea['picker'] = $pickerUiComponent;
+        $pickerArea['picker']['children']['pickerOption'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.picker');
+        $pickerArea['picker']['children']['pickerOption']['component'] = "WolfSellers_Checkout/js/view/form/element/picker";
+        $pickerArea['picker']['children']['pickerOption']['config']['elementTmpl'] = "WolfSellers_Checkout/form/element/radio-btn";
+        $pickerArea['picker']['children']['pickerOption']['label'] = " ";
+        $walker->setValue('{STORE-PICKUP}.>>',$pickerArea);
+        //another-picker
+        $pickerUiComponent = [
+            'component' =>  "WolfSellers_Checkout/js/view/anotherPickerForm",
+            'displayArea' => 'another-picker',
+            'provider' => 'checkoutProvider'
+        ];
+        $pickerArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $pickerArea['another-picker'] = $pickerUiComponent;
+        $pickerArea['another-picker']['children']['identificacion_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.identificacion_picker');
+        $pickerArea['another-picker']['children']['identificacion_picker']['config']['customScope'] = "anotherPicker.identificacion_picker";
+        $pickerArea['another-picker']['children']['identificacion_picker']['dataScope'] = "anotherPicker.identificacion_picker";
+        $pickerArea['another-picker']['children']['numero_identificacion_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.numero_identificacion_picker');
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['config']['customScope'] = "anotherPicker.numero_identificacion_picker";
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['dataScope'] = "anotherPicker.numero_identificacion_picker";
+        $pickerArea['another-picker']['children']['nombre_completo_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.nombre_completo_picker');
+        $pickerArea['another-picker']['children']['nombre_completo_picker']['config']['customScope'] = "anotherPicker.nombre_completo_picker";
+        $pickerArea['another-picker']['children']['nombre_completo_picker']['dataScope'] = "anotherPicker.nombre_completo_picker";
+        $pickerArea['another-picker']['children']['email_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.email_picker');
+        $pickerArea['another-picker']['children']['email_picker']['config']['customScope'] = "anotherPicker.email_picker";
+        $pickerArea['another-picker']['children']['email_picker']['dataScope'] = "anotherPicker.email_picker";
+        $walker->setValue('{STORE-PICKUP}.>>',$pickerArea);
+
 
 
         //Set displayArea to each step component

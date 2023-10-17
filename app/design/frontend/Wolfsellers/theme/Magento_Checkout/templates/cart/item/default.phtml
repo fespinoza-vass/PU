@@ -27,6 +27,8 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
             <?php else :?>
             <span class="product-item-photo">
             <?php endif;?>
+            <div id="amasty-label-<?=$product->getId()?>" data-product="<?=$product->getId()?>" class="amasty-labels">
+            </div>
             <?= $block->getImage($block->getProductForThumbnail(), 'cart_page_product_thumbnail')->toHtml() ?>
             <?php if ($block->hasProductUrl()) :?>
         </a>
@@ -162,6 +164,27 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
          $("input[data-role='cart-item-qty']").on("focusout", function () {
              $("#form-validate").submit();
          });
+
+        var productIds = '';
+
+        $('.amasty-labels').each(function () {
+            productIds += $(this).data('product') + ',';
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: BASE_URL + 'amasty_label/ajax/label',
+            dataType: 'json',
+            data: {
+                product_ids: productIds,
+                in_product_list: true
+            }
+        }).done(function (response) {
+            $.each(response.labels, function (name, value) {
+                $('#amasty-label-'+name).html(value);
+            });
+        });
+
     });
 </script>
 
