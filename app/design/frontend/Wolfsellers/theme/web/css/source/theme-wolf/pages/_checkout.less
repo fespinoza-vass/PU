@@ -44,6 +44,7 @@
 						text-decoration: underline;
 						.lib-font-size(14);
 						text-transform: initial;
+						font-weight: 600;
 					}
 				}
 			}
@@ -967,6 +968,29 @@
 							.content-buttons-invoice{
 								text-align: center;
 								margin-bottom: 32px;
+								#editInvoice{
+									padding-left: 30px;
+									.lib-icon-font(
+										@_icon-font-content: @icon-edit-checkout,
+										@_icon-font-color: @black,
+										@_icon-font-size: 1.8rem,
+										@_icon-font-position: before,
+										@_icon-font-margin: 0 10px 0 0
+									);
+									.lib-css(display, flex, @_prefix: 1);
+									.lib-css(align-items,center,@_prefix:1);
+									&:before{
+										display: inline;
+										text-decoration: underline;
+										overflow: initial;
+									}
+									span{
+										text-decoration: underline;
+										.lib-font-size(14);
+										text-transform: initial;
+										font-weight: 600;
+									}
+								}
 							}
 						}
 					}
@@ -2142,6 +2166,34 @@
 								.field{
 									.label{
 										margin-bottom: 8px;
+									}
+								}
+							}
+						}
+						#payment{
+							.step-content{
+								form#co-payment-form{
+									fieldset{
+										#custom-checkout-form{
+											.fieldset{
+												.field{
+													&[name="customCheckoutForm.razon_social"]{
+														padding-left: 0;
+													}
+													&[name="customCheckoutForm.direccion_fiscal"]{
+														padding-left: 0;
+														input{
+															width: 100%;
+														}
+													}
+												}
+											}
+											.content-buttons-invoice{
+												#editInvoice{
+													padding-left: 0;
+												}
+											}
+										}
 									}
 								}
 							}
