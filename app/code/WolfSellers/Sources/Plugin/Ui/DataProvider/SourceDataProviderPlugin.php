@@ -29,6 +29,7 @@ class SourceDataProviderPlugin
             foreach ($result as $key => $value) {
                 $item = $this->_sourceRepository->get($key);
                 $result[$key]['bopis']['available_shipping_methods'] = $item->getData('available_shipping_methods');
+                $result[$key]['general']['district'] = $item->getData('district');
             }
         }
 
