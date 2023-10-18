@@ -298,6 +298,23 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingSummary['shipping-step-summary'] = $resumenShippingStep;
         $walker->setValue('{CHECKOUT_STEPS}.>>', $shippingSummary);
         //PickUp Step pickerComponent
+        //'distrito-picker'
+        $distritoPickupUiComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'distrito-pickup',
+            'provider' => 'checkoutProvider'
+        ];
+        $distritoPickupArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $distritoPickupArea['distrito-pickup'] = $distritoPickupUiComponent;
+        $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = [[
+            'label' => 'Lista de distritos aquí',
+            'value' => '1',
+        ]];
+        $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
+
         $pickerUiComponent = [
             'component' => 'uiComponent',
             'displayArea' => 'picker',

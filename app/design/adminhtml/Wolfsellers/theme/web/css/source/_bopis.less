@@ -568,6 +568,7 @@ body{
                 border-bottom:1px solid @color-gray7;
                 a{
                     color: @color-rojo3;
+
                 }
             }
             .admin__data-grid-wrap{
@@ -1120,6 +1121,7 @@ body{
                                     }
                                     form{
                                         .confirmed-button{
+                                            right: 80px;
                                             background: @color-verde2;
                                             border: 1px solid @color-verde2;
                                             color: @color-white;
@@ -1139,7 +1141,11 @@ body{
                                 }
                                 &.state-preparing{
                                     form{
+                                        .confirmed-button{
+                                            right: 50px;
+                                        }
                                         .unconfirmed-button{
+                                            right: 50px;
                                             background: @color-black;
                                             border: 1px solid @color-black;
                                             color: @color-white;
@@ -1163,7 +1169,11 @@ body{
                                 }
                                 &.state-shipping {
                                     form{
+                                        .confirmed-button{
+                                            right: 50px;
+                                        }
                                         .unconfirmed-button{
+                                            right: 50px;
                                             background: @color-black;
                                             border: 1px solid @color-black;
                                             color: @color-white;
@@ -1635,6 +1645,7 @@ body{
                                                 .confirmed-button, 
                                                 .unconfirmed-button {
                                                     width: 50%;
+                                                    right: 10px;
                                                 }
                                             }
                                         }
@@ -1657,6 +1668,23 @@ body{
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  1180px - 768px
+//  _____________________________________________
+@media (min-width: 768px) and (max-width: 1180px){
+    body.admin-bopis{
+        .admin__data-grid-outer-wrap{
+            .data-grid{
+                td{
+                    a{
+                        font-size: 15px;
                     }
                 }
             }
