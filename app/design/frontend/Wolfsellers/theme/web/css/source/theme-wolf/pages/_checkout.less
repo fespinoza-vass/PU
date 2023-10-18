@@ -993,6 +993,143 @@
 								}
 							}
 						}
+						#checkout-payment-method-load{
+							.payment-group{
+								.payment-method{
+									position: relative;
+									margin: 12px 0 10px 0;
+									.payment-method-title{
+										.lib-css(display,flex,@_prefix:1);
+										border: 1px solid @lines-input;
+										border-radius: 12px;
+										padding: 20px 10px;
+										margin-left: 30px;
+										.lib-radio();
+										input[type='radio'] {
+											+ label{
+												position: initial;
+												padding-left: 0;
+												&:after{
+													top: 20px;
+												}
+											}
+											&:checked{
+												+ label{
+													&:after{
+														top: 20px;
+														left: 0;
+													}
+													&:before{
+														top: 24px;
+													}
+												}
+											}
+										}
+									}
+									.payment-method-content{
+										padding-left: 0;
+										.checkout-billing-address{
+											.billing-address-same-as-shipping-block{
+												padding-top: 15px;
+												.lib-checkboxs();
+												input[type='checkbox']{
+													~ label{
+														padding-left: 32px;
+														&:after{
+															width: 16px;
+															height: 16px;
+															left: 3px;
+														}
+													}
+													&:checked{
+														~ label{
+															&:after{
+																background: @color-white;
+															}
+															&:before{
+																top: 1px;
+																left: 6px;
+																color: @black;
+															}
+														}
+													}
+												}
+											}
+											.billing-address-details{
+												padding: 10px 0 0 32px;
+											}
+											.fieldset{
+												margin-bottom: 0;
+												padding: 15px 0 0 32px;
+												select{
+													width: 100%;
+													height: 48px;
+												}
+												.billing-address-form{
+													form{
+														fieldset{
+															padding-left: 0;
+															input{
+																width: 100%;
+																height: 48px;
+															}
+															.field{
+																&[name="billingAddresscheckmo.telephone"]{
+																	input{
+																		width: 85%;
+																	}
+																}
+																&[name="billingAddresscheckmo.custom_attributes.invoice_required"],
+																&:last-child{
+																	input[type='checkbox']{
+																		~ label{
+																			padding-left: 32px;
+																			&:after{
+																				width: 16px;
+																				height: 16px;
+																				left: 3px;
+																			}
+																		}
+																		&:checked{
+																			~ label{
+																				&:after{
+																					background: @color-white;
+																				}
+																				&:before{
+																					top: 1px;
+																					left: 6px;
+																					color: @black;
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+									&:nth-child(3){
+										.payment-method-title{
+											span{
+												.lib-icon-font(
+													@_icon-font-content: @icon-yape,
+													@_icon-font-color: @black,
+													@_icon-font-size: 1.5rem,
+													@_icon-font-position: after,
+													@_icon-font-margin: 0 0 0 5px
+												);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					.giftcardaccount{
+						.lib-visually-hidden;
 					}
 					.payment-benefits-wrapper{
 						position: absolute;
@@ -2174,6 +2311,7 @@
 							.step-content{
 								form#co-payment-form{
 									fieldset{
+										margin-bottom: 0;
 										#custom-checkout-form{
 											.fieldset{
 												.field{
@@ -2187,10 +2325,27 @@
 														}
 													}
 												}
+												
 											}
 											.content-buttons-invoice{
 												#editInvoice{
 													padding-left: 0;
+												}
+											}
+										}
+										#checkout-payment-method-load{
+											.payment-methods{
+												margin: 0;
+												.payment-method-content{
+													padding-right: 0;
+													.checkout-billing-address{
+														.billing-address-details{
+															padding-top: 25px;
+														}
+														.fieldset{
+															padding: 25px 0 0 0;
+														}
+													}
 												}
 											}
 										}
