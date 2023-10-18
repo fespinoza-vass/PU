@@ -17,10 +17,15 @@ class SaveAfterObserver implements ObserverInterface
         $source = $observer->getData('source');
 
         $integration = $request->getParam("bopis");
+        $general = $request->getParam("general");
 
         if (!empty($integration["available_shipping_methods"])) {
             $shippingMethods = implode(',', $integration["available_shipping_methods"]);
             $source->setData("available_shipping_methods", $shippingMethods);
+        }
+
+        if (!empty($general["district"])) {
+            $source->setData("district", $general["district"]);
         }
 
         if ($source->hasDataChanges()){

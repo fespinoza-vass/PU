@@ -22,4 +22,15 @@
             </formElements>
         </field>
     </fieldset>
+    <fieldset name="address">
+        <field name="district" formElement="input" sortOrder="35">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">District</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
 </form>
