@@ -22,6 +22,7 @@ define([
     var storeSeletorMixin = {
         defaults:{
             template: 'WolfSellers_Checkout/store-selector',
+            storeSelectorPopupTemplate: 'WolfSellers_Checkout/store-selector/contentSearch',
             links: {
                 "goToResume":'checkout:isVisibleShipping',
                 "isAnotherPicker":'checkout.steps.store-pickup.store-selector.picker.pickerOption:value'

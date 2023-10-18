@@ -8,11 +8,18 @@ define([
     'use strict';
 
     return Select.extend({
-       initialize:function () {
+        defaults:{
+            links:{
+                'searchQuery':'checkout.steps.store-pickup.store-selector:searchQuery'
+            }
+        },
+        searchQuery: ko.observable(),
+        initialize:function () {
            this._super();
            this.value.subscribe(function (value) {
+               this.searchQuery(value);
                console.log("Actualizar lista de distritos");
-           });
+           },this);
        }
     });
 })
