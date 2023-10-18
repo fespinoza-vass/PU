@@ -44,6 +44,7 @@ define([
         isRegularShippingDisabled: ko.observable(false),
         shippingMethod: ko.observable(),
         goToResume: ko.observable(),
+        isShippingMethodError: ko.observable(),
 
         initialize: function () {
             this._super();
@@ -108,8 +109,13 @@ define([
             if(t.currentTarget && !this.isRegularShippingDisabled()){
                 this.isRegularShipping(true);
                 this.isFastShipping(false);
+                var input = t.currentTarget.querySelector('input[id="envio_regular"]');
+                if (input) {
+                    input.checked = true;
+                }
                 this.setDataToShippingForm();
                 var rate = this.findRateByCarrierCode('flatrate');
+                this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
             }
         },
@@ -122,9 +128,33 @@ define([
             if(t.currentTarget && !this.isFastShippingDisabled()){
                 this.isRegularShipping(false);
                 this.isFastShipping(true);
+                var input = t.currentTarget.querySelector('input[id="envio_rapido"]');
+                if (input) {
+                    input.checked = true;
+                }
                 var rate = this.findRateByCarrierCode('envio_rapido');
+                this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
             }
+            if(t.currentTarget && this.isFastShippingDisabled()){
+                this.isRegularShipping(false);
+                this.isFastShipping(false);
+                var input = t.currentTarget.querySelector('input[id="envio_regular"]');
+                if (input) {
+                    input.checked = false;
+                }
+                var rate = this.findRateByCarrierCode('envio_rapido');
+                this.showShippingMethodError(rate);
+                this.selectShippingMethod(rate);
+            }
+        },
+        /**
+         * Show error when shipping method envio_rapido it's not available
+         * @param rate
+         * @returns {*}
+         */
+        showShippingMethodError: function (rate) {
+            return this.isShippingMethodError(!!rate.error_message);
         },
         /**
          * Find a rate or shipping Method by carrier_code
