@@ -31,6 +31,7 @@
             <?php endif; ?>
             <div class="actions">
                 <button type="submit"
+                        name="product-addtocart-button"
                         title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
                         class="action primary tocart"
                         id="product-addtocart-button" disabled>
@@ -41,6 +42,7 @@
         </div>
     </div>
 <?php endif; ?>
+
 <script type="text/x-magento-init">
     {
         "#product_addtocart_form": {
