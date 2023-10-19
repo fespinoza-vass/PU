@@ -16,9 +16,7 @@
             </div>
             <div class="pickup-store-list">
                 <div class="step-title" translate="'2.1 Selecciona tú tienda de retiro'" data-role="title"></div>
-                <div class="empty-input">
-                    <input type="none" name="none" value="none">
-                </div>
+                <span class="pickup-store-list_empty"></span>
                 <div id="opc-store-selector-popup-noModal" render="storeSelectorPopupTemplate"></div>
             </div>
         </div>
@@ -44,6 +42,10 @@
                     data-form-part="anotherPicker">
                     <each args="getRegion('another-picker')" render="" ></each>
                 </form>
+                <div class="content-for-other-picker_info">
+                    <span class="content-for-other-picker_info-icon"></span>
+                    <p translate="'A QR code will be sent to this email to expedite the store pickup of your order'"></p>
+                </div>
             </div>
         </div>
     </div>

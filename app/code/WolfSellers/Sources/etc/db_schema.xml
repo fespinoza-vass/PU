@@ -4,5 +4,6 @@
     <table name="inventory_source">
         <column xsi:type="text" name="available_shipping_methods" nullable="true"
                 comment="Available Shipping Methods to Bopis integration"/>
+        <column xsi:type="text" name="district" nullable="true" comment="source district"/>
     </table>
 </schema>

@@ -1,0 +1,8 @@
+{
+    "inventory_source": {
+        "column": {
+            "available_shipping_methods": true,
+            "district": true
+        }
+    }
+}
