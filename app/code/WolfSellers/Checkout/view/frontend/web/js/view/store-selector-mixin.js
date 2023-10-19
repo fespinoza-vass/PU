@@ -22,7 +22,10 @@ define([
     var storeSeletorMixin = {
         defaults:{
             template: 'WolfSellers_Checkout/store-selector',
-            storeSelectorPopupTemplate: 'WolfSellers_Checkout/store-selector/contentSearch',
+            storeSelectorPopupTemplate:
+                'WolfSellers_Checkout/store-selector/contentSearch',
+            storeSelectorPopupItemTemplate:
+                'WolfSellers_Checkout/store-selector/popup-item',
             links: {
                 "goToResume":'checkout:isVisibleShipping',
                 "isAnotherPicker":'checkout.steps.store-pickup.store-selector.picker.pickerOption:value'
@@ -106,6 +109,20 @@ define([
             var isAnotherPicker = this.isAnotherPicker();
             return (_.isString(isAnotherPicker) &&
                 isAnotherPicker.includes("other"));
+        },
+        /**
+         * generate ID for input and label
+         * @param data
+         * @returns {string}
+         */
+        getId: function (data) {
+            var nombre = data.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            var region = data.region.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+            var nombreUltimos = nombre.slice(-4);
+            var resultado = nombreUltimos + "_" + region;
+            console.log(resultado)
+            return resultado;
         }
     };
 

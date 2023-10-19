@@ -597,6 +597,7 @@
 					.step-content{
 						width: 100%;
 						gap: 4px;
+						margin-bottom: 16px;
 						button{
 							color: @gray4;
 							font-weight: 400;
@@ -608,6 +609,184 @@
 								border-radius: 12px;
 								background: @color-black;
 								color: @color-white;
+							}
+						}
+					}
+					#store-selector{
+						.step-title{
+							.lib-font-size(16);
+						}
+						.field{
+							input,
+							select{
+								height: 48px
+							}
+							label{
+								display: block;
+								padding-bottom: 8px;
+							}
+						}
+						.store-pickup-method{
+							.location-name{
+								.lib-font-size(14);
+							}
+							.location-address{
+								.lib-font-size(12);
+								br{
+									display: none;
+								}
+								a{
+									&:hover{
+										color: @color-black;
+									}
+								}
+							}
+							.distrito-uicomponent{
+								margin-bottom: 24px;
+							}
+							.pickup-store-list{
+								.pickup-store-list_empty{
+									display:block;
+									height: 48px;
+									border-radius: 12px;
+									border: 1px solid @lines-input;
+									margin-bottom: 23px;
+								}
+								#opc-store-selector-popup-noModal{
+									margin-bottom: 23px;
+									#store-selector-popup{
+										border: 1px solid @lines-input;
+										padding: 10px;
+										border-radius: 12px;
+										.store-selector-popup-table{
+											display: block;
+											max-height: 150px;
+											overflow-y: auto;
+											&::-webkit-scrollbar{
+												width: 4px;
+												border-radius: 12px;
+												background-color: @lines-input;
+											}
+											&::-webkit-scrollbar-thumb{
+												border-radius: 12px;
+												background-color: @gray8;
+											}
+											.row.location{
+												position: relative;
+												display: block;
+												padding: 0 0 10px 0;
+												border-top: 0;
+												td{
+													padding: 0;
+													&.col-location-actions{
+														button{
+															width: auto;
+														}
+													}
+												}
+
+											}
+										}
+									}
+								}
+							}
+							.content-when-selected{
+								.selected-location-details{
+									border: 1px solid @lines-input;
+									padding: 10px;
+									border-radius: 12px;
+									margin-bottom: 8px;
+								}
+								.options{
+									text-align: end;
+									margin-bottom: 16px;
+									a{
+										.lib-font-size(12);
+										color: @gray4;
+										text-decoration: underline;
+									}
+								}
+							}
+						}
+						.store-pickup-picker{
+							.content-picker{
+								.field{
+									margin-bottom: 21px;
+									.control{
+										> div{
+											.lib-css(display,flex,@_prefix:1);
+											.lib-css(justify-content,space-between,@_prefix:1);
+										}
+										.admin__field{
+											.lib-radio();
+										}
+									}
+								}
+								.content-for-other-picker{
+									#form_another_picker{
+										.lib-css(display,flex,@_prefix:1);
+										.lib-css(flex-wrap,wrap,@_prefix:1);
+										.field{
+											&[name="anotherPicker.identificacion_picker"],
+											&[name="anotherPicker.numero_identificacion_picker"],
+											&[name="anotherPicker.nombre_completo_picker"]{
+												width: 50%;
+												span{
+													display: inlibe;
+													&:after{
+														content: '*';
+														padding-left: 5px;
+													}
+												}
+											}
+											&[name="anotherPicker.email_picker"]{
+												width: 100%;
+											}
+										}
+									}
+									.content-for-other-picker_info{
+										.lib-css(display,flex,@_prefix:1);
+										margin-bottom: 12px;
+										&-icon{
+											.lib-icon-font(
+												@_icon-font-content: @icon-info-checkout,
+												@_icon-font-color: @black,
+												@_icon-font-size: 1.8rem,
+												@_icon-font-position: before,
+												@_icon-font-margin: 0
+											);
+											padding-right: 5px;
+										}
+										p{
+											.lib-font-size(12);
+											color: @gray4;
+										}
+									}
+								}
+							}
+						}
+					}
+					#store-selector-original{
+						.form-continue{
+							.actions-toolbar{
+								text-align: center;
+								.primary{
+									float: initial;
+									width: 100%;
+									button{
+										width: 220px;
+										font-weight: bold;
+										color: @color-white;
+										margin: 0;
+										float: initial;
+										&:hover{
+											background: @color-black;
+										}
+									}
+								}
+								.secondary{
+									display: none;
+								}
 							}
 						}
 					}
@@ -863,6 +1042,8 @@
 							.primary{
 								float: initial;
 								button{
+									width: 220px;
+									.lib-font-size(18);
 									margin: 0;
 								}
 							}
@@ -2012,6 +2193,36 @@
 		}
 		#store-pickup {
 			grid-row-start: 1;
+			#store-selector{
+				.store-pickup-method{
+					.distrito-uicomponent{
+						.field{
+							&[name="shippingAddress.custom_attributes.distrito_pickup"]{
+								padding-left: 50px;
+							}
+						}
+					}
+					.pickup-store-list{
+						.pickup-store-list_empty{
+							margin: 0 10px;
+						}
+						#opc-store-selector-popup-noModal{
+							padding: 0 10px;
+						}
+					}
+				}
+				.store-pickup-picker{
+					.content-picker{
+						.field{
+							.control{
+								> div{
+									padding: 0 40px;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		#shipping {
 			grid-column-start: 2;
@@ -2270,6 +2481,29 @@
 						}
 						.checkout-shipping-address.step-two{
 							.container.steps{
+								#store-pickup{
+									.step-content{
+										button{
+											padding: 8px 15px;
+										}
+									}
+									#store-selector{
+										.store-pickup-picker{
+											.content-picker{
+												.field{
+													.control{
+														> div{
+															.lib-css(justify-content,flex-start,@_prefix:1);
+															#picker_me{
+																padding-right: 80px;
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
 								#shipping{
 									#checkout-step-shipping-rapido,
 									#checkout-step-shipping-regular{
