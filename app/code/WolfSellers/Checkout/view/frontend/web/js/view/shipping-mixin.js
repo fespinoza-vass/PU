@@ -32,7 +32,8 @@ define([
         defaults:{
             template: 'WolfSellers_Checkout/shipping',
             links: {
-                "goToResume":'checkout:isVisibleShipping'
+                "goToResume":'checkout:isVisibleShipping',
+                "updateOptions":"checkout.steps.shipping-step.shippingAddress.schedule.schedule:updateOptions"
             }
         },
         isActive: ko.observable(false),
@@ -45,6 +46,7 @@ define([
         shippingMethod: ko.observable(),
         goToResume: ko.observable(),
         isShippingMethodError: ko.observable(),
+        updateOptions: ko.observable(),
 
         initialize: function () {
             this._super();
@@ -229,7 +231,11 @@ define([
          */
         isShippingMethodAvailable: function (methodType) {
             var carrier = this.getCarrierCodeByCarrier(methodType);
-            console.log("Tiene error: " + !!carrier.error_message + " El carrier: " + carrier.carrier_code);
+            //console.log("Tiene error: " + !!carrier.error_message + " El carrier: " + carrier.carrier_code);
+            if(_.isObject(carrier)){
+                if(carrier.carrier_code.includes('rapid'))
+                this.updateOptions(carrier.extension_attributes.delivery_time);
+            }
             if(!!carrier.error_message && carrier.carrier_code.includes('flat')){
                 this.isRegularShippingDisabled(true);
             }else{

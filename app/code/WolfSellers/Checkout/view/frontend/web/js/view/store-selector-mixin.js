@@ -29,7 +29,8 @@ define([
             links: {
                 "goToResume":'checkout:isVisibleShipping',
                 "isAnotherPicker":'checkout.steps.store-pickup.store-selector.picker.pickerOption:value'
-            }
+            },
+            defaultCountryId: "PE"
         },
         isShippingStepFinished: ko.observable(false),
         isDisabledShippingStep: ko.observable(true),
@@ -118,7 +119,6 @@ define([
         getId: function (data) {
             var nombre = data.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             var region = data.region.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
             var nombreUltimos = nombre.slice(-4);
             var resultado = nombreUltimos + "_" + region;
             console.log(resultado)
