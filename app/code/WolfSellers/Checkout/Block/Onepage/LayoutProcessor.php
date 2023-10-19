@@ -288,6 +288,19 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
         $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
         $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastArea);
+        //Shipping Step fast shipping schedule
+        $shippingFastScheduleComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'schedule',
+            'provider' => 'checkoutProvider'
+        ];
+        $shippingFastScheduleArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
+        $shippingFastScheduleArea['schedule'] = $shippingFastScheduleComponent;
+        $shippingFastScheduleArea['schedule']['children']['schedule'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.horario_entrega');
+        $shippingFastScheduleArea['schedule']['children']['schedule']['component'] = "WolfSellers_Checkout/js/view/form/element/schedule";
+        $shippingFastScheduleArea['schedule']['children']['schedule']['config']['elementTmpl'] = "WolfSellers_Checkout/form/element/schedule";
+        $shippingFastScheduleArea['schedule']['children']['schedule']['label'] = "";
+        $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastScheduleArea);
         //Shipping Step Summary Component
         $resumenShippingStep = [
             'component' => 'WolfSellers_Checkout/js/view/shipping-step-summary',

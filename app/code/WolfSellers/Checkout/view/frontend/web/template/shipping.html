@@ -85,28 +85,7 @@
          class="step-content"
          data-role="content">
         <div class="step-title" translate="'2.2 Programa el horario de llegada de tu pedido'" data-role="title"></div>
-        <fieldset>
-            <div id="uno"
-                 class="step-content"
-                 data-role="option"
-                 role="option"
-                 aria-hidden="false">
-                 <input type="radio" id="early" name="opciones" value="early">
-                 <label for="early">Horario de 12 a 4pm</label>
-            </div>
-            <div id="dos"
-                 class="step-content"
-                 data-role="option"
-                 role="option"
-                 aria-hidden="false">
-                 <input type="radio" id="later" name="opciones" value="later">
-                 <label for="later">Horario de 4 a 8pm</label>
-            </div>
-        </fieldset>
-        <div class="step-content_fast">
-            <span class="step-content_fast-icon"></span>
-            <p>Tu pedido llegará hoy <span>miercoles 1 de marzo</span> en un rango de 4 a 8pm</p>
-        </div>
+        <each args="getRegion('schedule')" render="" ></each>
     </div>
     <!-- /ko -->
 
