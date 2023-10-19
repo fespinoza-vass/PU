@@ -10,10 +10,18 @@ define([
         options: [],
         value: ko.observable(),
         scheduleDates: ko.observable(""),
+        updateOptions: ko.observable(),
+
         initialize: function () {
             this._super();
             var ahora = new Date();
             this.options = this.getAvailableDates(ahora);
+            this.updateOptions.subscribe(function (value) {
+                for (let i = 0; i < this.options.length; i++) {
+                    this.options[i].value = value[i].option_value;
+                }
+                console.table(this.options);
+            },this);
         },
         /**
          * get timeSensitive by option radio with his own data
