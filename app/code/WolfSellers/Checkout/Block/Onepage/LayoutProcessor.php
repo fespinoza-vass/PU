@@ -15,6 +15,7 @@ use WolfSellers\Checkout\Block\Onepage\LayoutWalkerFactory;
 use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
+use WolfSellers\Checkout\Helper\Source as SourceHelper;
 
 /**
  * Onepage Layout Processor.
@@ -32,16 +33,24 @@ class LayoutProcessor implements LayoutProcessorInterface
      */
     private Session $session;
 
+    /** @var SourceHelper */
+    protected $_sourceHelper;
+
     /**
      * @param \WolfSellers\Checkout\Block\Onepage\LayoutWalkerFactory $walkerFactory
      * @param CustomerRepositoryInterface $customerRepository
      * @param Session $session
      */
-    public function __construct(LayoutWalkerFactory $walkerFactory, CustomerRepositoryInterface $customerRepository, Session $session)
-    {
+    public function __construct(
+        LayoutWalkerFactory $walkerFactory,
+        CustomerRepositoryInterface $customerRepository,
+        Session $session,
+        SourceHelper $sourceHelper
+    ) {
         $this->walkerFactory = $walkerFactory;
         $this->_customerRepository = $customerRepository;
         $this->session = $session;
+        $this->_sourceHelper = $sourceHelper;
     }
 
     /**
@@ -322,20 +331,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
         $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
-        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = [
-            [
-            'label' => 'Lista de distritos aquí',
-            'value' => '1',
-            ],
-            [
-                'label' => 'Label',
-                'value' => 'Value',
-            ],
-            [
-                'label' => 'vacia',
-                'value' => '',
-            ]
-        ];
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
 
         $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
 
