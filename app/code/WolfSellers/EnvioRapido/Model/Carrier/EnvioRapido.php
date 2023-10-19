@@ -95,6 +95,20 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
             }
             $this->_logger->info(__METHOD__);
 
+            foreach ($request->getAllItems() as $item) {
+                //$productId = $item->getProductId();
+                //$this->productRepository->getById($productId);
+                $salable = $this->salableQuantityDataBySku->execute($item->getSku());
+                //[0] => [ 'stock_id' => 2, 'stock_name' => 'Perfumerias Unidas', 'qty' => 8000, 'manage_stock' => true ]
+                $salableQtySelectedStock = $salable[0]['qty'];
+                $this->_logger->info('salableQtySelectedStock: ' . $salableQtySelectedStock);
+                if($salableQtySelectedStock > 1000){
+                    $cumpleReglasEnvioRapido = true;
+                }
+                return false;
+            }
+
+
 
             // -------------------------- INICIO REGLAS DE NEGOCIO --------------------------
             //TODO Las reglas de negocio dependen en la cantidad existente en cada una de las sources
