@@ -7,6 +7,18 @@
                 }
             }
         }
+        &.active-buttons-header{
+            &:not(.checkout-index-index){
+                .page-wrapper{
+                    padding-top: 240px;
+                }
+                @media @mdmax{
+                    .page-wrapper{
+                        padding-top: 170px;
+                    }
+                }
+            }
+        }
         .ammenu-header-container.-sticky .header.content{
             position: static;
             max-width: @layout__max-width;
@@ -973,5 +985,18 @@
                 }
             }
         } 
+    }
+}
+
+
+@media screen and (min-width:990px) and (max-width:1024px){
+    body{
+        &.active-buttons-header{
+            &:not(.checkout-index-index){
+                .page-wrapper{
+                    padding-top: 200px;
+                }
+            }
+        }
     }
 }
