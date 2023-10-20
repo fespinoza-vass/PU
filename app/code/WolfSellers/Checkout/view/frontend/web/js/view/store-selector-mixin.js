@@ -47,8 +47,13 @@ define([
                 this.setIsDisabledShippingStep();
             },this);
             this.goToResume.subscribe(function (value) {
-                //TODO Call here setIsDisabledShippingStep to update isShippingStepFinished
-                console.log("hola");
+                if (!value){
+                    shippingPayment.isShippingStepFinished('_complete');
+                    this.setIsDisabledShippingStep();
+                }else{
+                    shippingPayment.isShippingStepFinished('_active');
+                    this.setIsDisabledShippingStep();
+                }
             },this);
         },
         /**
@@ -121,7 +126,6 @@ define([
             var region = data.region.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             var nombreUltimos = nombre.slice(-4);
             var resultado = nombreUltimos + "_" + region;
-            console.log(resultado)
             return resultado;
         }
     };
