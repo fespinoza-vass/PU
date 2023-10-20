@@ -256,6 +256,9 @@ define([
                     var selectedOptions = [];
 
                     for (var i = 0; i < elem.options.length; i++) {
+                        if (elem.options.length == 6 && elem.options[i].text === 'is not one of' ) {
+                            elem.options[i].remove();
+                        }
                         if (elem.options[i].selected) {
                             selectedOptions.push(elem.options[i].text);
                         }
