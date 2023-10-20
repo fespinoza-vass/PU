@@ -42,10 +42,8 @@ define([
             this.isPaymentFinished.subscribe(function (value){
                 if (!value){
                     shippingPayment.isPaymentStepFinished('_complete');
-                    stepSummary.isPlaceOrderFinished('_active');
                 }else{
                     shippingPayment.isPaymentStepFinished('_active');
-                    stepSummary.isPlaceOrderFinished('');
                 }
                 this.isPaymentFinished(value);
             }, this);

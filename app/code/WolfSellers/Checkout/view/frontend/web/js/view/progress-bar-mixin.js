@@ -30,10 +30,6 @@ define([
                 this.stepOne(value);
                 this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
             },this);
-            StepTwo.isShippingStepFinished.subscribe(function (value){
-                this.stepTwo(value);
-                this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
-            },this);
             StepTwo.isPaymentStepFinished.subscribe(function (value){
                 this.stepTwo(value);
                 this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
