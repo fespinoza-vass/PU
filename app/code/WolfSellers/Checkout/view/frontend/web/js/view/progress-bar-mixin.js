@@ -2,12 +2,14 @@ define([
     'ko',
     'Magento_Checkout/js/model/step-navigator',
     'WolfSellers_Checkout/js/model/customer',
-    'WolfSellers_Checkout/js/model/shipping-payment'
+    'WolfSellers_Checkout/js/model/shipping-payment',
+    'WolfSellers_Checkout/js/model/step-summary'
 ], function (
     ko,
     stepNavigator,
     Customer,
-    StepTwo
+    StepTwo,
+    StepTree
 ) {
     'use strict';
     var steps = stepNavigator.steps;
@@ -18,7 +20,7 @@ define([
         },
         stepOne: ko.observable(Customer.isCustomerStepFinished()),
         stepTwo: ko.observable(StepTwo.isStepTwoFinished()),//depends on model shipping/payment
-        stepTree: ko.observable("_active"),//at placeOrderAction changes to _complete
+        stepTree: ko.observable(StepTree.isStepTreeFinished()),//at placeOrderAction changes to _complete
         stepIndexes: ko.observableArray([]) ,
 
         initialize:function () {
@@ -28,6 +30,18 @@ define([
                 this.stepOne(value);
                 this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
             },this);
+            StepTwo.isShippingStepFinished.subscribe(function (value){
+                this.stepTwo(value);
+                this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
+            },this);
+            StepTwo.isPaymentStepFinished.subscribe(function (value){
+                this.stepTwo(value);
+                this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
+            },this);
+            StepTree.isPlaceOrderFinished.subscribe(function (value){
+                this.stepTree(value);
+                this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
+            });
         },
         /**
          * Get Progress bar tittles

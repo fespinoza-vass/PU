@@ -63,8 +63,13 @@ define([
                 this.setIsDisabledShippingStep();
             },this);
             this.goToResume.subscribe(function (value) {
-                //TODO Call here setIsDisabledShippingStep to update isShippingStepFinished
-                console.log("hola");
+                if (!value){
+                    shippingPayment.isShippingStepFinished('_complete');
+                    this.setIsDisabledShippingStep();
+                }else{
+                    shippingPayment.isShippingStepFinished('_active');
+                    this.setIsDisabledShippingStep();
+                }
             },this);
             customer.isCustomerStepFinished.subscribe(function (value) {
                 if(value.includes('_complete')){
@@ -231,7 +236,6 @@ define([
          */
         isShippingMethodAvailable: function (methodType) {
             var carrier = this.getCarrierCodeByCarrier(methodType);
-            //console.log("Tiene error: " + !!carrier.error_message + " El carrier: " + carrier.carrier_code);
             if(_.isObject(carrier)){
                 if(carrier.carrier_code.includes('rapid'))
                 this.updateOptions(carrier.extension_attributes.delivery_time);
