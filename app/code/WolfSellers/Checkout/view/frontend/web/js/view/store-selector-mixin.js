@@ -52,6 +52,7 @@ define([
                     shippingPayment.isShippingStepFinished('_complete');
                     this.setIsDisabledShippingStep();
                 }else{
+                    shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_active');
                     this.setIsDisabledShippingStep();
                 }
