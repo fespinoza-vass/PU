@@ -399,34 +399,9 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         ];
         $placeOrderDataFieldSets = $walker->getValue('{SUMMARY}.>>');
-        $placeOrderDataFieldSets['summary-place-order']= $placeOrderFieldSets;
+        $placeOrderDataFieldSets['summary-place-order'] = $placeOrderFieldSets;
         $placeOrderDataFieldSets['summary-place-order']['children']['button-place-order']= $placeOrderComponent;
         $walker->setValue('{SUMMARY}.>>', $placeOrderDataFieldSets);
-
-
-
-        /******* BUTTON CONTINUE PAYMENT**********/
-        /*$paymentButtonFieldSets = [
-            'component' => 'uiComponent',
-            'displayArea' => 'payment-continue-method',
-            'provider' => 'checkoutProvider',
-            'sortOrder' => '4'
-        ];
-        $paymentButtonDataFieldSets = $walker->getValue('{PAYMENT}.>>.afterMethods.>>');
-        $paymentButtonDataFieldSets['payment-continue-method'] = $paymentButtonFieldSets;
-        $paymentButtonComponent = [
-            'component' => 'WolfSellers_Checkout/js/view/payment-continue',
-            'displayArea' => 'afterMethods',
-            'config' => [
-                'template' => 'WolfSellers_Checkout/payment-continue'
-            ]
-        ];
-        $paymentButtonDataFieldSets['payment-continue-method'] = $paymentButtonComponent;
-        $walker->setValue('{PAYMENT}.>>.afterMethods.>>', $paymentButtonDataFieldSets);*/
-
-        /******* BUTTON CONTINUE PAYMENT**********/
-
-
 
         /****** INVOICE REQUIRE FORM *****/
 
