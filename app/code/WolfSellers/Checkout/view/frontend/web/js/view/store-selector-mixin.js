@@ -48,6 +48,7 @@ define([
             },this);
             this.goToResume.subscribe(function (value) {
                 if (!value){
+                    shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_complete');
                     this.setIsDisabledShippingStep();
                 }else{
@@ -60,12 +61,14 @@ define([
          * Overwrite set pickup information action
          */
         setPickupInformation: function () {
-            if (this.validatePickupInformation()) {
-                this.isShippingStepFinished.notifySubscribers("_complete");
-                this.goToResume(false);
-            }else{
-                this.isShippingStepFinished("_active");
-                this.goToResume(true);
+            if (customer.isCustomerStepFinished() === '_complete') {
+                if (this.validatePickupInformation()) {
+                    this.isShippingStepFinished.notifySubscribers("_complete");
+                    this.goToResume(false);
+                } else {
+                    this.isShippingStepFinished("_active");
+                    this.goToResume(true);
+                }
             }
             this._super();
         },

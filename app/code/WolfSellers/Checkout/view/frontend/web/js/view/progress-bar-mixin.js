@@ -23,21 +23,23 @@ define([
         stepTree: ko.observable(StepTree.isStepTreeFinished()),//at placeOrderAction changes to _complete
         stepIndexes: ko.observableArray([]) ,
 
+
         initialize:function () {
             this._super();
             this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
+
             Customer.isCustomerStepFinished.subscribe(function (value) {
                 this.stepOne(value);
                 this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
             },this);
-            StepTwo.isPaymentStepFinished.subscribe(function (value){
+            StepTwo.isStepTwoFinished.subscribe(function (value){
                 this.stepTwo(value);
                 this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
             },this);
-            StepTree.isPlaceOrderFinished.subscribe(function (value){
+            StepTree.isStepTreeFinished.subscribe(function (value){
                 this.stepTree(value);
                 this.stepIndexes([this.stepOne(),this.stepTwo(),this.stepTree()]);
-            });
+            },this);
         },
         /**
          * Get Progress bar tittles
