@@ -1028,7 +1028,7 @@
 							 border-bottom: 20px;
 							 span{
 								font-weight: 600;
-							 	}	
+							 	}
 							}
 						}
 					}
@@ -1091,7 +1091,7 @@
 								span{
 									color: @green2;
 									text-decoration: underline;
-								}	
+								}
 							}
 						}
 					}
@@ -1211,7 +1211,7 @@
 										padding-left: 25px;
 									}
 									&[name="customCheckoutForm.direccion_fiscal"]{
-										order: 3; 
+										order: 3;
 										width: 100%;
 										padding-left: 25px;
 										.field-tooltip{
@@ -1284,6 +1284,7 @@
 									.payment-method-content{
 										padding-left: 0;
 										.checkout-billing-address{
+                                            display: none;
 											.billing-address-same-as-shipping-block{
 												padding-top: 15px;
 												.lib-checkboxs();
@@ -2196,6 +2197,12 @@
         .payment-method-content .actions-toolbar{
             display: none;
         }
+        .payment-method-content .checkout-billing-address{
+            display: none;
+        }
+        .payment-method-content .billing-address-details{
+            display: none;
+        }
 	}
 }
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
@@ -2363,6 +2370,13 @@
         .payment-method-content .actions-toolbar{
             display: none;
         }
+        .payment-method-content .checkout-billing-address{
+            display: none;
+        }
+        .payment-method-content .billing-address-details{
+            display: none;
+        }
+
 	}
 
 }
@@ -2633,7 +2647,7 @@
 														}
 													}
 												}
-												
+
 											}
 											.content-buttons-invoice{
 												#editInvoice{
@@ -2647,7 +2661,9 @@
 												.payment-method-content{
 													padding-right: 0;
 													.checkout-billing-address{
+                                                        display: none;
 														.billing-address-details{
+                                                            display: none;
 															padding-top: 25px;
 														}
 														.fieldset{
@@ -2679,6 +2695,12 @@
         .payment-method-content .actions-toolbar{
             display: none;
         }
+        .payment-method-content .checkout-billing-address{
+            display: none;
+        }
+        .payment-method-content .billing-address-details{
+            display: none;
+        }
 	}
 }
 
@@ -2686,8 +2708,8 @@
 
 //
 //  Desktop 1024px
-// 
-@media @lgmax{	
+//
+@media @lgmax{
 	.checkout-index-index{
 		.opc-block-summary{
 			.container-gift-message{
@@ -2744,6 +2766,12 @@
 			}
 		}
         .payment-method-content .actions-toolbar{
+            display: none;
+        }
+        .payment-method-content .checkout-billing-address{
+            display: none;
+        }
+        .payment-method-content .billing-address-details{
             display: none;
         }
 	}
