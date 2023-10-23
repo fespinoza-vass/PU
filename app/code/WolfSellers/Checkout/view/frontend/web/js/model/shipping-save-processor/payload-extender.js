@@ -72,7 +72,6 @@ define([
             envio_rapido: payloadEnvioRapido,
             retiro_tienda: payloadRetiroEnTienda
         }
-        console.log(shippingPayment);
         return payload;
     };
 });
