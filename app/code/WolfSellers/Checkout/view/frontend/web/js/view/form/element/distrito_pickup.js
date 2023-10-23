@@ -15,11 +15,14 @@ define([
         },
         searchQuery: ko.observable(),
         initialize:function () {
-           this._super();
-           this.value.subscribe(function (value) {
-               this.searchQuery(value);
-               console.log("Actualizar lista de distritos");
-           },this);
-       }
+            this._super();
+            this.caption('Seleccionar distrito');
+            this.value.subscribe(function (value) {
+                if(value){
+                    this.searchQuery(value);
+                    console.log("Actualizar lista de distritos");
+                }
+            },this);
+        }
     });
 })

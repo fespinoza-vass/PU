@@ -159,7 +159,45 @@ define([
             searchQuery = searchQuery.replace(':US', ':PE');
             console.log(searchQuery);
             return this._super(searchQuery);
+        },
+        /**
+         * Visible span input
+         * @returns {boolean}
+         */
+        isActiveFade: function(){
+            var distrito = registry.get('checkout.steps.store-pickup.store-selector.distrito-pickup.distrito').value();
+
+            if(distrito){
+                return false;
+            }else{
+                return true;
+            }
+        },
+        /**
+         * Visible store options
+         * @param value
+         * @returns {boolean}
+         */
+        activeOptions: function (value){
+            var distrito = registry.get('checkout.steps.store-pickup.store-selector.distrito-pickup.distrito').value();
+
+            if(distrito){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        /**
+         * Shipping Pickup Date Format
+         */
+        getPickupDateFormat: function (){
+            var date = "";
+            var ahora = new Date();
+            var fechaEntrega = wolfUtils.formatDate(ahora);
+            date = fechaEntrega;
+            return date;
         }
+
     };
 
     return function (storeSelectorTarget) {
