@@ -4,7 +4,7 @@
                 id="continuePayment" type="submit"
                 data-bind="click:setPaymentInformationCustomer"
                 class="button action primary">
-            <span><!-- ko i18n: 'Continue'--><!-- /ko --></span>
+            <span data-bind="text: $data.switchText() ? 'Continuar' : 'CAMBIAR TARJETA'"></span>
         </button>
     </div>
 </div>

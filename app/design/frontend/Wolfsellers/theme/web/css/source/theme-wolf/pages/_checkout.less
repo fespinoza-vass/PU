@@ -852,6 +852,27 @@
 									}
 								}
 							}
+							&_time{
+								.lib-css(display,flex,@_prefix:1);
+								margin: 20px 0;
+								padding: 0 10px;
+								&-icon{
+									.lib-icon-font(
+										@_icon-font-content: @icon-store-checkout,
+										@_icon-font-color: @black,
+										@_icon-font-size: 1.8rem,
+										@_icon-font-position: before,
+										@_icon-font-margin: 0 10px 0 0
+									);
+								}
+								p{
+									.lib-font-size(12);
+									span{
+										color: @green2;
+										text-decoration: underline;
+									}
+								}
+							}
 							&_info{
 								.lib-css(display,flex,@_prefix:1);
 								.lib-css(display,flex-direction,@_prefix:1);
@@ -2704,6 +2725,13 @@
 													select,
 													input{
 														width: 100%;
+													}
+												}
+											}
+											&_time{
+												&-icon{
+													&:before{
+														font-size: 1.5rem;
 													}
 												}
 											}
