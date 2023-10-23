@@ -342,7 +342,6 @@ class LayoutProcessor implements LayoutProcessorInterface
         $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
-
         $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
 
         $pickerUiComponent = [
@@ -382,7 +381,25 @@ class LayoutProcessor implements LayoutProcessorInterface
         $pickerArea['another-picker']['children']['email_picker']['config']['customScope'] = "anotherPicker.email_picker";
         $pickerArea['another-picker']['children']['email_picker']['dataScope'] = "anotherPicker.email_picker";
         $walker->setValue('{STORE-PICKUP}.>>',$pickerArea);
-
+        //picker-voucher
+        $voucherPickupUiComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'picker-voucher',
+            'provider' => 'checkoutProvider'
+        ];
+        $voucherPickupArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $voucherPickupArea['picker-voucher'] = $voucherPickupUiComponent;
+        $distrito = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
+        $voucherPickupArea['picker-voucher']['children']['voucher'] = $distrito;
+        $departamento = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
+        $provincia= $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
+        $voucherPickupArea['picker-voucher']['children']['departamento'] = $departamento;
+        $voucherPickupArea['picker-voucher']['children']['departamento']["validation"] = [];
+        $voucherPickupArea['picker-voucher']['children']['provincia'] = $provincia;
+        $voucherPickupArea['picker-voucher']['children']['provincia']["validation"] = [];
+        $voucherPickupArea['picker-voucher']['children']['direccion_comprobante_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_comprobante_picker');
+        $walker->setValue('{STORE-PICKUP}.>>',$voucherPickupArea);
 
 
         //Set displayArea to each step component

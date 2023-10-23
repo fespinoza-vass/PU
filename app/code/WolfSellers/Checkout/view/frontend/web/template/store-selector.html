@@ -52,7 +52,12 @@
     <div class="store-pickup-receipt-address">
         <div class="step-title" translate="'2.2. Ingresa una dirección para tu comprobante'" data-role="title" visible="selectedLocation()"></div>
         <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="!selectedLocation()"></div>
-
+        <form id="form_another_vaoucher"
+              class="form-picker-voucher"
+              novalidate="novalidate"
+              data-form-part="pickerVoucher">
+            <each args="getRegion('picker-voucher')" render="" ></each>
+        </form>
     </div>
 </div>
 
