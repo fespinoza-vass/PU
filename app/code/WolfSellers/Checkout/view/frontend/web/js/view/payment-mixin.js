@@ -18,6 +18,7 @@ define([
         },
         isVisible: ko.observable(true),
         isActive: ko.observable(false),
+        IsDisabledPaymentStep : ko.observable(true),
 
         /**
          * initialize
@@ -54,9 +55,9 @@ define([
          */
         setIsDisabledPaymentStep: function () {
             if (shippingPayment.isShippingStepFinished() === '_complete'){
-                this.isVisible(true);
+                this.IsDisabledPaymentStep(true);
             }else{
-                this.isVisible(false);
+                this.IsDisabledPaymentStep(false);
             }
         },
     }
