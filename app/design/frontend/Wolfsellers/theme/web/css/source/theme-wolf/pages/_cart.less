@@ -97,6 +97,20 @@
                                                             text-transform: uppercase;
                                                         }
                                                     }
+                                                    .product-item-photo{
+                                                        .amlabel-position-wrapper{
+                                                            &[class*="amlabel-position-top-center"]{
+                                                                left: auto !important; //add style for module amasty
+                                                                right: 40px !important; //add style for module amasty
+                                                            }
+                                                            .amasty-label-container{
+                                                                .amasty-label-image{
+                                                                    width: 36px !important; //add style for amasty
+                                                                    height: auto;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                     .product-item-name{
                                                         a{
                                                             font-weight: 600;
@@ -651,6 +665,35 @@
                                     margin-bottom: -15px;
                                 }
                             }
+                            #form-validate{
+                                .table-wrapper{
+                                    .items{
+                                        tbody{
+                                            .item-info{
+                                                .col{
+                                                    .product-item-photo{
+                                                        .amlabel-position-wrapper{
+                                                            &[class*="amlabel-position-top-center"]{
+                                                                top: 20px !important; //add style for module amasty
+                                                                left: 58px !important; //add style for module amasty
+                                                            }
+                                                            &[class*="amlabel-position-top-right"]{
+                                                                top: 0px !important; //add style for module amasty
+                                                                left: 28px !important; //add style for module amasty
+                                                            }
+                                                            .amasty-label-container{
+                                                                .amasty-label-image{
+                                                                    width: 30px !important; //important add for style amasty
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             .form-cart {
                                 order: 3;
 
@@ -731,7 +774,7 @@
                                                 }
 
                                                 .item {
-                                                    padding: 25px 15px 10px 90px;
+                                                    padding: 25px 15px 10px 110px;
                                                     &.message.notice{
                                                         padding: 5px 0 10px 10px;
                                                         width: 95%;
