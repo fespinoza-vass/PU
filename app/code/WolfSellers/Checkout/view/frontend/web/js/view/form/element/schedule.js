@@ -1,9 +1,13 @@
 define([
     'ko',
-    'Magento_Ui/js/form/element/select'
+    'Magento_Ui/js/form/element/select',
+    'WolfSellers_Checkout/js/model/shipping-payment',
+    'WolfSellers_Checkout/js/utils-wolf-uicomponents'
 ], function (
     ko,
-    Select
+    Select,
+    shippingPayment,
+    wolfUtils
 ) {
     'use strict';
     return Select.extend({
@@ -15,12 +19,11 @@ define([
         initialize: function () {
             this._super();
             var ahora = new Date();
-            this.options = this.getAvailableDates(ahora);
+            this.options = wolfUtils.getAvailableDates(ahora);
             this.updateOptions.subscribe(function (value) {
                 for (let i = 0; i < this.options.length; i++) {
                     this.options[i].value = value[i].option_value;
                 }
-                console.table(this.options);
             },this);
         },
         /**
@@ -31,7 +34,7 @@ define([
          */
         setValueFromTimer: function (radioOption, data) {
             var ahora = new Date();
-            var timeSensitive = this.getAvailableDates(ahora);
+            var timeSensitive = wolfUtils.getAvailableDates(ahora);
             this.value(timeSensitive[radioOption]['value']);
             if(data.includes('lab')){
                 return "Horario de " +
@@ -48,76 +51,16 @@ define([
          */
         getHorarioDisponibles: function (radioOptionSelected) {
             var ahora = new Date();
-            var timeSensitive = this.getAvailableDates(ahora);
-            var fechaEntrega = this.formatDate(ahora);
+            var timeSensitive = wolfUtils.getAvailableDates(ahora);
+            var fechaEntrega = wolfUtils.formatDate(ahora);
             var diaEntrega = timeSensitive[radioOptionSelected].dia;
             var horarioEntrega = timeSensitive[radioOptionSelected].label;
+            shippingPayment.fechaEnvioRapido({
+                dia: diaEntrega,
+                fecha:fechaEntrega,
+                horario: horarioEntrega
+            });
             this.scheduleDates("<p>Tu pedido llegará " + diaEntrega + " <span> "+ fechaEntrega + " </span> en un rango de " + horarioEntrega + "</p>");
-        },
-        /**
-         * Get available Dates with the actual date
-         * Taste this function setting the var ahora like:
-         *      ahora = new Date('2023-10-18T14:00:00');
-         * @param ahora
-         * @returns {[{label: string, value: string, dia: string}]|[{label: string, value: string, dia: string},{label: string, value: string, dia: string}]}
-         */
-        getAvailableDates: function (ahora) {
-            var hora = ahora.getHours();
-            var finRango1 = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 16, 0);
-            var minutosRestantesRango1 = Math.ceil((finRango1 - ahora) / (1000 * 60));
-            var finRango2 = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 20, 0);
-            var minutosRestantesRango2 = Math.ceil((finRango2 - ahora) / (1000 * 60));
-            var manana = "mañana";
-            var hoy = "hoy";
-            if (hora >= 0 && hora < 16) {
-                if(minutosRestantesRango1 > 60){
-                    return [
-                        { value: '12_4_hoy',"label": "12 a 4pm", "dia": hoy },
-                        { value: '4_8_hoy',"label": "4 a 8pm", "dia": hoy }
-                    ];
-                }
-                if (minutosRestantesRango1 <= 60) {
-                    return [
-                        { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                        { value: '4_8_hoy',"label": "4 a 8pm", "dia": hoy }
-                    ];
-                }
-            }else if (hora >= 16 && hora < 20) {
-                if(minutosRestantesRango2 > 60){
-                    return [
-                        { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                        { value: '4_8_hoy',"label": "4 a 8pm", "dia": hoy }
-                    ];
-                }
-                if (minutosRestantesRango2 <= 60) {
-                    return [
-                        { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                        { value: '4_8__manana',"label": "4 a 8pm", "dia": manana }
-                    ];
-                }
-            }else if (hora >= 20 && hora <=23 ){
-                return [
-                    { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                    { value: '4_8__manana',"label": "4 a 8pm", "dia": manana }
-                ];
-            }else {
-                return [
-                    {value: 'noSet',"label": "no disponible", "dia": "no disponible"}
-                ]
-            }
-        },
-        /**
-         * get format date by a date
-         * @param date
-         * @returns {string}
-         */
-        formatDate: function(date) {
-            var daysOfWeek = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-            var months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-            var dayOfWeek = daysOfWeek[date.getDay()];
-            var dayOfMonth = date.getDate();
-            var month = months[date.getMonth()]
-            return dayOfWeek + dayOfMonth + " de " + month;
         }
     });
 })

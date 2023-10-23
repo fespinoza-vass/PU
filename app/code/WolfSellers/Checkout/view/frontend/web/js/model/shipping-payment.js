@@ -25,6 +25,7 @@ define([
         empresa: ko.observable(""),
         ruc: ko.observable(""),
         direccion: ko.observable(""),
+        fechaEnvioRapido: ko.observable(""),
 
         shippingMethod: ko.observable(""),
 
@@ -53,16 +54,24 @@ define([
             this.nombre(quote.shippingAddress().firstname);
             this.apellido(quote.shippingAddress().lastname);
             this.telefono(quote.shippingAddress().telephone);
-            this.referencia(this.getCustomAttributeByAttributeCode(quote,"referencia_envio"));
             this.dni(this.getCustomAttributeByAttributeCode(quote,"vat_id"));
-            this.distritoEnvioRapido(this.getCustomAttributeByAttributeCode(quote,"distrito_envio_rapido"));
-            this.distrito(this.getCustomAttributeByAttributeCode(quote,"colony"));
-            this.provincia(quote.shippingAddress().city);
-            this.departamento(quote.shippingAddress().regionId);
+
             this.factura(this.getCustomAttributeByAttributeCode(quote,"invoice_required"));
             this.empresa(this.getCustomAttributeByAttributeCode(quote,"company"));
             this.ruc(this.getCustomAttributeByAttributeCode(quote,"dni"));
-            this.direccion(quote.shippingAddress().street[0]);
+
+            if(this.shippingMethod().includes("flat")){
+                this.referencia(this.getCustomAttributeByAttributeCode(quote,"referencia_envio"));
+                this.direccion(quote.shippingAddress().street[0]);
+                this.departamento(quote.shippingAddress().region);
+                this.provincia(quote.shippingAddress().city);
+                this.distrito(this.getCustomAttributeByAttributeCode(quote,"colony"));
+            }
+            if(this.shippingMethod().includes("rapido")){
+                this.referencia(this.getCustomAttributeByAttributeCode(quote,"referencia_envio"));
+                this.direccion(quote.shippingAddress().street[0]);
+                this.distritoEnvioRapido(this.getCustomAttributeByAttributeCode(quote,"distrito_envio_rapido"));
+            }
         },
         /**
          * Set data when its pick up

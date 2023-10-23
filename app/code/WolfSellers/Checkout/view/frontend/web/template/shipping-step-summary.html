@@ -4,6 +4,10 @@
         <p data-bind="text: getShippingMethod()"></p>
     </div>
     <div data-bind="visible: isShipping">
+        <b>Dirección de entrega:</b>
+        <p data-bind="text: getShippingAddress()"></p>
+    </div>
+    <div data-bind="visible: isShipping">
         <b>Referencia:</b>
         <p data-bind="text: getReferencia()"></p>
     </div>
@@ -16,6 +20,14 @@
             <b>Dirección de entrega:</b>
             <p data-bind="text: getPickupAddress()"></p>
         </div>
+    </div>
+    <div>
+        <b>Fecha:</b>
+        <p data-bind="text: getShippingDate()"></p>
+    </div>
+    <div>
+        <b>Horario:</b>
+        <p data-bind="text: getShippingTime()"></p>
     </div>
 </div>
 

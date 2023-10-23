@@ -28,6 +28,9 @@ define([
 ) {
     'use strict';
     var shippingAddressPath = "checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.";
+    var regularAddressPath = "checkout.steps.shipping-step.shippingAddress.regular.";
+    var fastAddressPath = "checkout.steps.shipping-step.shippingAddress.fast.";
+
     var shippingMixin = {
         defaults:{
             template: 'WolfSellers_Checkout/shipping',
@@ -65,9 +68,11 @@ define([
                 if (!value){
                     shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_complete');
+                    this.isShippingStepFinished('_complete');
                     this.setIsDisabledShippingStep();
                 }else{
                     shippingPayment.isShippingStepFinished('_active');
+                    this.isShippingStepFinished('_active');
                     shippingPayment.isStepTwoFinished('_active');
                     this.setIsDisabledShippingStep();
                 }
@@ -184,18 +189,142 @@ define([
             var newValidationConfig = {
                 [validationRuleName]: false
             };
-            var uiComponentsRequired = ["firstname","lastname", "telephone"];
+            var uiComponentsRequired = [];
+            var uiComponent;
+            var allShippingPickupComponents = [
+                "region_id",
+                "city",
+                "colony",
+                "street.0",
+                "referencia_envio",
+                "distrito_envio_rapido",
+                "horarios_disponibles",
+                "picker",
+                "identificacion_picker",
+                "distrito_pickup",
+                "numero_identificacion_picker",
+                "nombre_completo_picker",
+                "email_picker",
+                "company",
+                "postcode",
+                "country_id"
+            ];
+            var customerDataInputs = [
+                "firstname",
+                "lastname",
+                "telephone",
+                "vat_id"
+            ];
+            var regular = [
+                "region_id",
+                "city",
+                "colony",
+                "street.0",
+                "referencia_envio"
+            ];
+            var regularComponentsArea = [
+                "provincia",
+                "departamento",
+                "distrito",
+                "provincia",
+                "departamento",
+                "distrito"
+            ]
+            var fastComponentsArea = [
+                'distrito_input',
+                'direccion',
+                'referencia'
+            ];
+            var rapido = [
+                "distrito_envio_rapido",
+                "street.0",
+                "referencia_envio",
+                //"horarios_disponibles"
+            ];
+            /*var pickup = [
+                "picker",
+                "identificacion_picker",
+                "distrito_pickup",
+                "numero_identificacion_picker",
+                "nombre_completo_picker",
+                "email_picker"
+            ];
+            var facturacion = [
+                "dni",
+                "invoice_required",
+                "ruc",
+                "razon_social"
+            ];
+            uiComponentsRequired = ["firstname","lastname", "telephone"];
             var uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
-            uiComponent.firstname.value(customer.customerName());
-            uiComponent.lastname.value(customer.customerLastName());
-            uiComponent.telephone.value(customer.customerTelephone());
             uiComponentsRequired = ["vat_id","distrito_envio_rapido","invoice_required","company","dni"];
             uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
             uiComponent.vat_id.validation = Object.assign({}, uiComponent.vat_id.validation, newValidationConfig);
             uiComponent.distrito_envio_rapido.validation = Object.assign({}, uiComponent.distrito_envio_rapido.validation, newValidationConfig);
             uiComponent.invoice_required.validation = Object.assign({}, uiComponent.invoice_required.validation, newValidationConfig);
             uiComponent.company.validation = Object.assign({}, uiComponent.company.validation, newValidationConfig);
-            uiComponent.dni.validation = Object.assign({}, uiComponent.company.dni, newValidationConfig);
+            uiComponent.dni.validation = Object.assign({}, uiComponent.company.dni, newValidationConfig);*/
+
+            /**
+             * Customer Data
+             */
+            uiComponentsRequired = customerDataInputs;
+            uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
+            uiComponent.firstname.value(customer.customerName());
+            uiComponent.lastname.value(customer.customerLastName());
+            uiComponent.telephone.value(customer.customerTelephone());
+            uiComponent.vat_id.value(customer.customerNumberIdentification());
+            wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, allShippingPickupComponents, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
+            /**
+             * Envio Regular
+             */
+            if(this.isRegularShipping()){
+                newValidationConfig['required-entry'] = true;
+                wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
+                wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
+                uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, regular);
+
+                uiComponent.region_id.value();
+                uiComponent.city.value();
+                uiComponent.colony.value();
+                uiComponent['street.0'].value();
+                uiComponent.referencia_envio.value();
+            }
+            /**
+             * Envio Rápido
+             */
+            if (this.isFastShipping()){
+                newValidationConfig['required-entry'] = true;
+                wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, rapido, newValidationConfig);
+                wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
+                //var horarios_disponibles = registry.get("checkout.steps.shipping-step.shippingAddress.schedule.schedule");
+                var distrito_envio_rapido = registry.get("checkout.steps.shipping-step.shippingAddress.fast.distrito");
+                var direccion = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
+                var referencia = registry.get("checkout.steps.shipping-step.shippingAddress.fast.referencia");
+                uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, rapido);
+
+                uiComponent.distrito_envio_rapido.options(distrito_envio_rapido.options());
+                uiComponent.distrito_envio_rapido.value(distrito_envio_rapido.value());
+                uiComponent['street.0'].value(direccion.value());
+                uiComponent.referencia_envio.value(referencia.value());
+            }
+            var pickup = [
+                "picker",
+                "identificacion_picker",
+                "distrito_pickup",
+                "numero_identificacion_picker",
+                "nombre_completo_picker",
+                "email_picker"
+            ];
+            var facturacion = [
+                "dni",
+                "invoice_required",
+                "ruc",
+                "razon_social"
+            ];
+
         },
         /**
          * get text value of carrier amount by method type

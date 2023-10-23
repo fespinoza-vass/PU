@@ -3,11 +3,13 @@ define([
     'underscore',
     'uiComponent',
     'WolfSellers_Checkout/js/model/shipping-payment',
+    'WolfSellers_Checkout/js/utils-wolf-uicomponents'
 ], function (
     ko,
     _,
     Component,
-    shippingPayment
+    shippingPayment,
+    wolfUtils
 ) {
     'use strict';
 
@@ -77,6 +79,56 @@ define([
                 return shippingPayment.direccionTienda();
             }
             return "Calculando...";
+        },
+        /**
+         * Add text value for shipping address
+         * @returns {string}
+         */
+        getShippingAddress: function () {
+            //Street + Distrito + departameto + provincia
+            var distrito = shippingPayment.distrito();
+            var split = " ";
+            if (shippingPayment.shippingMethod().includes("rapido")){
+                distrito = shippingPayment.distritoEnvioRapido();
+            }
+            return shippingPayment.direccion() +split+ distrito +split+
+                        shippingPayment.departamento() +split+ shippingPayment.provincia();
+        },
+        /**
+         * get shipping Date
+         * @returns {string}
+         */
+        getShippingDate: function () {
+            var date = "";
+            if (shippingPayment.shippingMethod().includes("flat")){
+                date = "2 días naturales";
+            }
+            if (shippingPayment.shippingMethod().includes("rapido")){
+                date = shippingPayment.distritoEnvioRapido();
+            }
+            if (shippingPayment.shippingMethod().includes("instore")){
+                var ahora = new Date();
+                var fechaEntrega = wolfUtils.formatDate(ahora);
+                date = "Hoy " +  fechaEntrega;
+            }
+            return date;
+        },
+        /**
+         * get shipping time for shipping summary
+         * @returns {string}
+         */
+        getShippingTime:function () {
+            var horario = "";
+            if (shippingPayment.shippingMethod().includes("flat")){
+                horario = "en un rango de 8 am a 7 pm";
+            }
+            if (shippingPayment.shippingMethod().includes("rapido")){
+                horario = shippingPayment.distritoEnvioRapido();
+            }
+            if (shippingPayment.shippingMethod().includes("instore")){
+                horario = "8 am a 9:30pm";
+            }
+            return horario;
         },
         /**
          * validate if it's ready to show summary
