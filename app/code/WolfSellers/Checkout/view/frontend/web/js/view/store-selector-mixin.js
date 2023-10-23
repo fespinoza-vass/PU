@@ -42,7 +42,7 @@ define([
             this.isShippingStepFinished.subscribe(function (value) {
                 shippingPayment.isShippingStepFinished(value);
                 shippingPayment.setShippingMethodModelData(quote);
-                shippingPayment.setPickupModelData(this.selectedLocation());
+                shippingPayment.setPickupModelData(this.selectedLocation(),quote);
                 this.setIsDisabledShippingStep();
             },this);
             this.goToResume.subscribe(function (value) {

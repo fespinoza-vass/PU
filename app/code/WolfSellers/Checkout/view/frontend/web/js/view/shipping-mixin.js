@@ -30,6 +30,9 @@ define([
     var shippingAddressPath = "checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.";
     var regularAddressPath = "checkout.steps.shipping-step.shippingAddress.regular.";
     var fastAddressPath = "checkout.steps.shipping-step.shippingAddress.fast.";
+    var voucherPath = 'checkout.steps.store-pickup.store-selector.picker-voucher.';
+    var pickerPath = "checkout.steps.store-pickup.store-selector.picker.";
+    var anotherPicker = "checkout.steps.store-pickup.store-selector.another-picker.";
 
     var shippingMixin = {
         defaults:{
@@ -241,7 +244,19 @@ define([
                 "referencia_envio",
                 //"horarios_disponibles"
             ];
-
+            var pickerVoucherPath = [
+                "voucher",
+                "direccion_comprobante_picker"
+            ];
+            var pickerPickerPath = [
+                "pickerOption"
+            ];
+            var pickerAnotherPicker = [
+                "identificacion_picker",
+                "numero_identificacion_picker",
+                "nombre_completo_picker",
+                "email_picker"
+            ];
             /**
              * Customer Data
              */
@@ -254,6 +269,9 @@ define([
             wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, allShippingPickupComponents, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(voucherPath, pickerVoucherPath, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(pickerPath, pickerPickerPath, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(anotherPicker, pickerAnotherPicker, newValidationConfig);
             /**
              * Envio Regular
              */
@@ -287,14 +305,7 @@ define([
                 uiComponent['street.0'].value(direccion.value());
                 uiComponent.referencia_envio.value(referencia.value());
             }
-            var pickup = [
-                "picker",
-                "identificacion_picker",
-                "distrito_pickup",
-                "numero_identificacion_picker",
-                "nombre_completo_picker",
-                "email_picker"
-            ];
+
             var facturacion = [
                 "dni",
                 "invoice_required",
