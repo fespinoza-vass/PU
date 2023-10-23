@@ -32,6 +32,7 @@ define([
         isVisible: ko.observable(true),
         isPaymentStepFinished : ko.observable(false),
         isPaymentFinished : ko.observable(false),
+        switchText : ko.observable(true),
 
         /**
          * function initialialize
@@ -64,8 +65,9 @@ define([
         /**
          * function get checked payment and change status
          */
-        setPaymentInformationCustomer: function (){
-            if(checkoutData.getSelectedPaymentMethod() == null){
+        setPaymentInformationCustomer: function () {
+            this.switchText(!this.switchText());
+            if (checkoutData.getSelectedPaymentMethod() == null) {
                 messageList.addErrorMessage({message: 'No se seleccionó ningún método de pago.'});
                 this.isPaymentFinished(true);
             } else {
@@ -76,6 +78,6 @@ define([
                     this.isPaymentFinished(true);
                 }
             }
-        }
+        },
     });
 });
