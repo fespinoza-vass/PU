@@ -5,80 +5,117 @@
  */
 -->
 <li id="shipping" class="checkout-shipping-address" data-bind="fadeVisible: visible(), css: isDisabledShippingStep() ? '_disabled' : '' ">
-    <div class="step-title" translate="'Shipping Address'" data-role="title"></div>
+
+    <each args="getRegion('before-form')" render="" ></each>
     <div id="checkout-step-shipping"
          class="step-content"
          data-role="content">
-        <!--each if="!quoteIsVirtual" args="getRegion('customer-email')" render="" ></each-->
-        <each args="getRegion('address-list')" render="" ></each>
-        <each args="getRegion('address-list-additional-addresses')" render="" ></each>
+        <div class="step-title" translate="'2. Forma de entrega'" data-role="title"></div>
 
-        <!-- Address form pop up -->
-        <if args="!isFormInline">
-            <div class="new-address-popup">
-                <button type="button"
-                        class="action action-show-popup"
-                        click="showFormPopUp"
-                        visible="!isNewAddressAdded()">
-                    <span translate="'New Address'"></span>
-                </button>
+        <div class="content-method_regular">
+            <div id="checkout-step-shipping_method-regular"
+                 class="step-content"
+                 data-role="content"
+                 role="tabpanel"
+                 aria-hidden="false"
+                 data-bind="
+                    css: isRegularShipping() ? 'selected' : '',
+                    css: isShippingMethodAvailable('flatrate_flatrate') ? 'disabled' : '',
+                    click: function(e,t){setRegularShipping(e,t)}">
+                <label class="step-content_icon" for="envio_regular">Envíó Regular:</label>
+                <span class="step-content_price" data-bind="text: getPriceLabel('flatrate_flatrate')"></span>
+                <input type="radio" id="envio_regular" name="opciones" value="regular">
+                <label class="step-content_input-regular" for="envio_regular"></label>
+                <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
+                    <a href="#">Cónoce más aquí</a>
+                </span>
             </div>
-            <div id="opc-new-shipping-address"
-                 visible="isFormPopUpVisible()"
-                 render="shippingFormTemplate"></div>
-        </if>
+        </div>
+        <div class="content-method_fast">
+            <div id="checkout-step-shipping_method-fast"
+                 class="step-content"
+                 data-role="content"
+                 role="tabpanel"
+                 aria-hidden="false"
+                 data-bind="
+                    css: isFastShipping() ? 'selected': '',
+                    css: isShippingMethodAvailable('envio_rapido_envio_rapido') ? 'disabled' : '',
+                    click: function(e,t){setFastShipping(e,t)}">
+                <label class="step-content_icon" for="envio_rapido">Envio Rápido:</label>
+                <span class="step-content_price" data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
+                <input type="radio" id="envio_rapido" name="opciones" value="fast" >
+                <label class="step-content_input-fast" for="envio_rapido"></label>
+                <span class="step-content_info">Tu pedido llega el mismo día tú comprar*
+                    <a href="#">Cónoce más aquí</a>
+                </span>
+            </div>
+        </div>
+        <div class="shipping-method-error"
+             data-bind="fadeVisible: isShippingMethodError()"
+        >
+            <p>Tu pedido no puede ser procesado por Envio rápido.</p>
+        </div>
 
-        <each args="getRegion('before-form')" render="" ></each>
-
-        <!-- Inline address form -->
-        <render if="isFormInline" args="shippingFormTemplate"></render>
     </div>
-</li>
-
-<!--Shipping method template-->
-<li id="opc-shipping_method"
-    class="checkout-shipping-method"
-    data-bind="fadeVisible: visible(), blockLoader: isLoading"
-    role="presentation">
-    <div class="checkout-shipping-method">
-        <div class="step-title"
-             translate="'Shipping Methods'"
-             data-role="title"></div>
-
-        <each args="getRegion('before-shipping-method-form')" render="" ></each>
-
-        <div id="checkout-step-shipping_method"
-             class="step-content"
-             data-role="content"
-             role="tabpanel"
-             aria-hidden="false">
-            <form id="co-shipping-method-form"
-                  class="form methods-shipping"
-                  if="rates().length"
-                  submit="setShippingInformation"
-                  novalidate="novalidate">
-
-                <render args="shippingMethodListTemplate"></render>
-
-                <div id="onepage-checkout-shipping-method-additional-load">
-                    <each args="getRegion('shippingAdditional')" render="" ></each>
-                </div>
-                <div role="alert"
-                     if="errorValidationMessage().length"
-                     class="message notice">
-                    <span text="errorValidationMessage()"></span>
-                </div>
-                <div class="actions-toolbar" id="shipping-method-buttons-container">
-                    <div class="primary">
-                        <button data-role="opc-continue" type="submit" class="button action continue primary">
-                            <span translate="'Next'"></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <div class="no-quotes-block"
-                 ifnot="rates().length > 0"
-                 translate="'Sorry, no quotes are available for this order at this time'"></div>
+    <!-- ko if: (isRegularShipping) -->
+    <div id="checkout-step-shipping-regular"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
+        <fieldset>
+            <each args="getRegion('regular')" render="" ></each>
+        </fieldset>
+        <div class="step-content_regular">
+            <span class="step-content_regular-icon"></span>
+            <p>Recibirás tu pedido posterior a un plazo de <span>2 días naturales</span> en <span>un rango de 8 am a 7 pm</span> </p>
         </div>
     </div>
+    <!-- /ko -->
+
+    <!-- ko if: (isFastShipping) -->
+    <div id="checkout-step-shipping-rapido"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
+        <fieldset>
+            <each args="getRegion('fast')" render="" ></each>
+        </fieldset>
+    </div>
+    <div id="checkout-step-shipping-time"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.2 Programa el horario de llegada de tu pedido'" data-role="title"></div>
+        <each args="getRegion('schedule')" render="" ></each>
+    </div>
+    <!-- /ko -->
+
+
+    <div id="checkout-step-shipping-summary"
+         class="step-content"
+         data-role="content">
+        <div class="step-sub-title" translate="'Costo de envío'" data-role="subtitle"></div>
+        <span class="subtotal" data-bind="text:getPriceLabel('selected')"></span>
+    </div>
+
+    <form id="co-shipping-method-form"
+          class="form methods-shipping"
+          if="rates().length"
+          submit="setShippingInformation"
+          novalidate="novalidate">
+
+        <div role="alert"
+             if="errorValidationMessage().length"
+             class="message notice">
+            <span text="errorValidationMessage()"></span>
+        </div>
+        <div class="actions-toolbar" id="shipping-method-buttons-container">
+            <div class="primary">
+                <button data-role="opc-continue" type="submit" class="button action continue primary">
+                    <span translate="'Next'"></span>
+                </button>
+            </div>
+        </div>
+    </form>
 </li>
+<!-- Inline address form -->
+<!--<render if="isFormInline" args="shippingFormTemplate"></render>-->

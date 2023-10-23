@@ -11,4 +11,12 @@
         <attribute code="razon_social" type="string" />
         <attribute code="direccion_fiscal" type="string" />
     </extension_attributes>
+
+    <extension_attributes for="Magento\InventoryApi\Api\Data\SourceInterface">
+        <attribute code="district" type="string" />
+    </extension_attributes>
+
+    <extension_attributes for="Magento\InventoryInStorePickupApi\Api\Data\PickupLocationInterface">
+        <attribute code="district" type="string" />
+    </extension_attributes>
 </config>

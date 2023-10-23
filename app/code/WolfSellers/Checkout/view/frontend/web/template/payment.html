@@ -4,13 +4,12 @@
  * See COPYING.txt for license details.
  */
 -->
-<li id="payment" role="presentation" class="checkout-payment-method" data-bind="fadeVisible: isVisible">
+<li id="payment" role="presentation" class="checkout-payment-method" data-bind="css: setIsDisabledPaymentStep() ? '_active':'bloquear_payment',fadeVisible: isVisible">
     <div id="checkout-step-payment"
          class="step-content"
          data-role="content"
          role="tabpanel"
          aria-hidden="false">
-
         <div class="step-title" data-bind="i18n: 'Pago'" data-role="title"></div>
 
         <!-- ko if: (quoteIsVirtual) -->
@@ -36,6 +35,7 @@
                     <!-- ko template: getTemplate() --><!-- /ko -->
                     <!-- /ko -->
                 </div>
+
                 <div class="no-quotes-block" data-bind="visible: isPaymentMethodsAvailable() == false">
                     <!-- ko i18n: 'No Payment method available.'--><!-- /ko -->
                 </div>

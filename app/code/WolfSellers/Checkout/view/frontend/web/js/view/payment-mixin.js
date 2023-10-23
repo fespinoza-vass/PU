@@ -2,12 +2,14 @@ define([
     'ko',
     'Magento_Checkout/js/action/get-payment-information',
     'Magento_Checkout/js/model/step-navigator',
-    'mage/translate'
+    'mage/translate',
+    'WolfSellers_Checkout/js/model/shipping-payment',
 ],function (
     ko,
     getPaymentInformation,
     stepNavigator,
-    $t
+    $t,
+    shippingPayment
 ) {
     'use strict';
     var paymentMixin = {
@@ -16,7 +18,12 @@ define([
         },
         isVisible: ko.observable(true),
         isActive: ko.observable(false),
+        IsDisabledPaymentStep : ko.observable(true),
 
+        /**
+         * initialize
+         * @return {paymentMixin}
+         */
         initialize: function () {
             var self = this;
             this._super();
@@ -28,8 +35,11 @@ define([
             getPaymentInformation().done(function () {
                 self.isVisible(true);
             });
+
+            this.setIsDisabledPaymentStep();
             return this;
         },
+
         /**
          * Navigate method.
          */
@@ -38,6 +48,17 @@ define([
             getPaymentInformation().done(function () {
                 self.isVisible(true);
             });
+        },
+
+        /**
+         * function is visible payment when is shipping is complete
+         */
+        setIsDisabledPaymentStep: function () {
+            if (shippingPayment.isShippingStepFinished() === '_complete'){
+                this.IsDisabledPaymentStep(true);
+            }else{
+                this.IsDisabledPaymentStep(false);
+            }
         },
     }
 

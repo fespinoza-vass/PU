@@ -15,6 +15,7 @@ use WolfSellers\Checkout\Block\Onepage\LayoutWalkerFactory;
 use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
+use WolfSellers\Checkout\Helper\Source as SourceHelper;
 
 /**
  * Onepage Layout Processor.
@@ -32,16 +33,24 @@ class LayoutProcessor implements LayoutProcessorInterface
      */
     private Session $session;
 
+    /** @var SourceHelper */
+    protected $_sourceHelper;
+
     /**
      * @param \WolfSellers\Checkout\Block\Onepage\LayoutWalkerFactory $walkerFactory
      * @param CustomerRepositoryInterface $customerRepository
      * @param Session $session
      */
-    public function __construct(LayoutWalkerFactory $walkerFactory, CustomerRepositoryInterface $customerRepository, Session $session)
-    {
+    public function __construct(
+        LayoutWalkerFactory $walkerFactory,
+        CustomerRepositoryInterface $customerRepository,
+        Session $session,
+        SourceHelper $sourceHelper
+    ) {
         $this->walkerFactory = $walkerFactory;
         $this->_customerRepository = $customerRepository;
         $this->session = $session;
+        $this->_sourceHelper = $sourceHelper;
     }
 
     /**
@@ -54,8 +63,9 @@ class LayoutProcessor implements LayoutProcessorInterface
     {
         $walker = $this->walkerFactory->create(['layoutArray' => $jsLayout]);
         $idCustomer =$this->session->getCustomerId();
-        //CHECKOUT default template
+        //CHECKOUT default template && default component
         $checkout = $walker->getValue('{CHECKOUT}');
+        $checkout['component'] = "WolfSellers_Checkout/js/view/onepage";
         $checkout['config']['template'] = "WolfSellers_Checkout/onepage";
         $walker->setValue('{CHECKOUT}',$checkout);
         //CUSTOMER DATA STEP
@@ -213,7 +223,6 @@ class LayoutProcessor implements LayoutProcessorInterface
         $walker->setValue('{SHIPPING_ADDRESS}.>>.customer-email', []);
         $walker->setValue('{PAYMENT}.>>.customer-email', []);
         $walker->setValue('{STORE-PICKUP}.>>.customer-email', []);
-
         $company = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.company');
         $company['visible'] = false;
         $company['sortOrder'] = 200;
@@ -262,6 +271,137 @@ class LayoutProcessor implements LayoutProcessorInterface
             'altFormat' => 'mm/dd/yy',
         ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
+        //Step Two configuration
+        $shippingRegular = [
+            'component' => 'uiComponent',
+            'displayArea' => 'regular',
+            'provider' => 'checkoutProvider'
+        ];
+        $shippingFast= [
+            'component' => 'uiComponent',
+            'displayArea' => 'fast',
+            'provider' => 'checkoutProvider'
+        ];
+        $shippingRegularArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
+        $shippingRegularArea['regular'] = $shippingRegular;
+        $shippingRegularArea['regular']['children']['departamento'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
+        $shippingRegularArea['regular']['children']['hidden-region'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region');
+        $shippingRegularArea['regular']['children']['provincia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
+        $shippingRegularArea['regular']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
+        $shippingRegularArea['regular']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
+        $shippingRegularArea['regular']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
+        $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingRegularArea);
+        $shippingFastArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
+        $shippingFastArea['fast'] = $shippingFast;
+        $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
+        $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
+        $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
+        /*$shippingFastArea['fast']['children']['distrito']['config']['options'] = [
+            [
+                'label' => 'opcion 1',
+                'value' => 'value1',
+            ],
+            [
+                'label' => 'opcion 2',
+                'value' => 'value2',
+            ]
+        ];*/
+        $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastArea);
+        //Shipping Step fast shipping schedule
+        $shippingFastScheduleComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'schedule',
+            'provider' => 'checkoutProvider'
+        ];
+        $shippingFastScheduleArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
+        $shippingFastScheduleArea['schedule'] = $shippingFastScheduleComponent;
+        $shippingFastScheduleArea['schedule']['children']['schedule'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.horarios_disponibles');
+        $shippingFastScheduleArea['schedule']['children']['schedule']['component'] = "WolfSellers_Checkout/js/view/form/element/schedule";
+        $shippingFastScheduleArea['schedule']['children']['schedule']['config']['elementTmpl'] = "WolfSellers_Checkout/form/element/schedule";
+        $shippingFastScheduleArea['schedule']['children']['schedule']['label'] = "";
+        $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastScheduleArea);
+        //Shipping Step Summary Component
+        $resumenShippingStep = [
+            'component' => 'WolfSellers_Checkout/js/view/shipping-step-summary',
+            'displayArea' => 'shipping-step-summary',
+            'provider' => 'checkoutProvider'
+        ];
+        $shippingSummary = $walker->getValue('{CHECKOUT_STEPS}.>>');
+        $shippingSummary['shipping-step-summary'] = $resumenShippingStep;
+        $walker->setValue('{CHECKOUT_STEPS}.>>', $shippingSummary);
+        //PickUp Step pickerComponent
+        //'distrito-picker'
+        $distritoPickupUiComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'distrito-pickup',
+            'provider' => 'checkoutProvider'
+        ];
+        $distritoPickupArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $distritoPickupArea['distrito-pickup'] = $distritoPickupUiComponent;
+        $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
+        $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
+
+        $pickerUiComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'picker',
+            'provider' => 'checkoutProvider'
+        ];
+        $pickerArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $pickerArea['picker'] = $pickerUiComponent;
+        $pickerArea['picker']['children']['pickerOption'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.picker');
+        $pickerArea['picker']['children']['pickerOption']['component'] = "WolfSellers_Checkout/js/view/form/element/picker";
+        $pickerArea['picker']['children']['pickerOption']['config']['elementTmpl'] = "WolfSellers_Checkout/form/element/radio-btn";
+        $pickerArea['picker']['children']['pickerOption']['label'] = " ";
+        $walker->setValue('{STORE-PICKUP}.>>',$pickerArea);
+        //another-picker
+        $pickerUiComponent = [
+            'component' =>  "WolfSellers_Checkout/js/view/anotherPickerForm",
+            'displayArea' => 'another-picker',
+            'provider' => 'checkoutProvider'
+        ];
+        $pickerArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $pickerArea['another-picker'] = $pickerUiComponent;
+        $pickerArea['another-picker']['children']['identificacion_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.identificacion_picker');
+        $pickerArea['another-picker']['children']['identificacion_picker']['config']['customScope'] = "anotherPicker.identificacion_picker";
+        $pickerArea['another-picker']['children']['identificacion_picker']['dataScope'] = "anotherPicker.identificacion_picker";
+        $pickerArea['another-picker']['children']['numero_identificacion_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.numero_identificacion_picker');
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['config']['customScope'] = "anotherPicker.numero_identificacion_picker";
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['dataScope'] = "anotherPicker.numero_identificacion_picker";
+        $pickerArea['another-picker']['children']['nombre_completo_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.nombre_completo_picker');
+        $pickerArea['another-picker']['children']['nombre_completo_picker']['config']['customScope'] = "anotherPicker.nombre_completo_picker";
+        $pickerArea['another-picker']['children']['nombre_completo_picker']['dataScope'] = "anotherPicker.nombre_completo_picker";
+        $pickerArea['another-picker']['children']['email_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.email_picker');
+        $pickerArea['another-picker']['children']['email_picker']['config']['customScope'] = "anotherPicker.email_picker";
+        $pickerArea['another-picker']['children']['email_picker']['dataScope'] = "anotherPicker.email_picker";
+        $walker->setValue('{STORE-PICKUP}.>>',$pickerArea);
+        //picker-voucher
+        $voucherPickupUiComponent = [
+            'component' => 'uiComponent',
+            'displayArea' => 'picker-voucher',
+            'provider' => 'checkoutProvider'
+        ];
+        $voucherPickupArea = $walker->getValue('{STORE-PICKUP}.>>');
+        $voucherPickupArea['picker-voucher'] = $voucherPickupUiComponent;
+        $distrito = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
+        $voucherPickupArea['picker-voucher']['children']['voucher'] = $distrito;
+        $departamento = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
+        $provincia= $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
+        $voucherPickupArea['picker-voucher']['children']['departamento'] = $departamento;
+        $voucherPickupArea['picker-voucher']['children']['departamento']["validation"] = [];
+        $voucherPickupArea['picker-voucher']['children']['provincia'] = $provincia;
+        $voucherPickupArea['picker-voucher']['children']['provincia']["validation"] = [];
+        $voucherPickupArea['picker-voucher']['children']['direccion_comprobante_picker'] =
+            $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_comprobante_picker');
+        $walker->setValue('{STORE-PICKUP}.>>',$voucherPickupArea);
+
+
         //Set displayArea to each step component
         $shippingStep = $walker->getValue('{SHIPPING-STEP}');
         $shippingStep['displayArea'] = "shipping-step";
@@ -286,7 +426,7 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         ];
         $placeOrderDataFieldSets = $walker->getValue('{SUMMARY}.>>');
-        $placeOrderDataFieldSets['summary-place-order']= $placeOrderFieldSets;
+        $placeOrderDataFieldSets['summary-place-order'] = $placeOrderFieldSets;
         $placeOrderDataFieldSets['summary-place-order']['children']['button-place-order']= $placeOrderComponent;
         $walker->setValue('{SUMMARY}.>>', $placeOrderDataFieldSets);
 
@@ -380,6 +520,19 @@ class LayoutProcessor implements LayoutProcessorInterface
         $direccionFiscal['visible'] = false;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal', $direccionFiscal);
 
+        /****** Componets payment continue *****/
+        $paymentButtonFieldSets = [
+            'component' => 'uiComponent',
+            'displayArea' => 'payments-continue',
+            'provider' => 'checkoutProvider',
+        ];
+        $paymentButtonComponent = [
+            'component' => 'WolfSellers_Checkout/js/view/payment-continue',
+            'displayArea' => 'payment-button',
+            'config' => [
+                'template' => 'WolfSellers_Checkout/payment-continue'
+            ]
+        ];
         /****** END INVOICE REQUIRE FORM *****/
 
         //PAYMENTS AREA
@@ -392,6 +545,10 @@ class LayoutProcessor implements LayoutProcessorInterface
             ) {
                 $payment['children']['form-fields']['children']['fecha_de_nacimiento']['validation'] = [];
             }
+            // add button continue payment
+            $payment['children']['payments-continue'] = $paymentButtonFieldSets;
+            $payment['children']['payments-continue'] = $paymentButtonComponent;
+
         }
         $walker->setValue('{PAYMENT}.>>.payments-list', $payments);
         return $walker->getResult();

@@ -6,7 +6,7 @@ define([
     'Magento_Checkout/js/model/step-navigator',
     'Magento_Checkout/js/model/quote',
     'uiRegistry',
-    'WolfSellers_Checkout/js/model/customer'
+    'WolfSellers_Checkout/js/model/customer',
 ], function (
     $,
     ko,
@@ -15,7 +15,8 @@ define([
     stepNavigator,
     quote,
     registry,
-    customer
+    customer,
+    shippingPayment
 ) {
     'use strict';
 
@@ -23,9 +24,10 @@ define([
      * Customer Data Step Component
      */
     return Form.extend({
+
         defaults: {
             template: 'WolfSellers_Checkout/customer-data',
-            customerFormTemplate: 'WolfSellers_Checkout/customer-data/form'
+            customerFormTemplate: 'WolfSellers_Checkout/customer-data/form',
         },
         isVisible: ko.observable(true),
         quoteIsVirtual: quote.isVirtual(),
@@ -33,6 +35,7 @@ define([
         isActive: ko.observable(true),
         isEdit: ko.observable(false),
         isEmpty: ko.observable(false),
+
 
         /**
          * @returns {*}
@@ -71,6 +74,7 @@ define([
         navigate: function () {
             //add logic
             this.isVisible(true);
+
         },
 
         /**
@@ -113,11 +117,15 @@ define([
 
         /**
          * Show/Edit customer personal information
+         * update summary shipping is CustomerStepFinished is active
          */
         editPersonalInfo: function (){
             stepNavigator.navigateTo("customer_step");
             this.isVisibleEdit(true);
+            var onepage = registry.get('checkout');
+            onepage.isVisibleShipping(true);
         },
+
         /**
          * Trigger Customer data Step data validate event.
          */
@@ -128,6 +136,7 @@ define([
             this.source.trigger('customerData.numero_de_identificacion.data.validate'); // Disparar validación
             this.source.trigger('customerData.telefono.data.validate'); // Disparar validación
         },
+
         /**
          * Validate only email form
          * @returns {boolean}

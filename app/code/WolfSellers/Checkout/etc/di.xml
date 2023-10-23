@@ -32,4 +32,15 @@
                 type="WolfSellers\Checkout\Plugin\Customer\Address\CustomerAddressDataFormatterPlugin"
                 disabled="false"/>
     </type>
+    <type name="Magento\InventoryApi\Api\Data\SourceInterface">
+        <plugin name="district_extension_atttribute" type="WolfSellers\Checkout\Plugin\SourceInterfaceExtension" />
+    </type>
+
+    <type name="Magento\InventoryInStorePickupApi\Model\Mapper">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="extension_attributes.district" xsi:type="string">extension_attributes.district</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
