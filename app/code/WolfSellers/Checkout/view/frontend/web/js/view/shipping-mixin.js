@@ -241,29 +241,6 @@ define([
                 "referencia_envio",
                 //"horarios_disponibles"
             ];
-            /*var pickup = [
-                "picker",
-                "identificacion_picker",
-                "distrito_pickup",
-                "numero_identificacion_picker",
-                "nombre_completo_picker",
-                "email_picker"
-            ];
-            var facturacion = [
-                "dni",
-                "invoice_required",
-                "ruc",
-                "razon_social"
-            ];
-            uiComponentsRequired = ["firstname","lastname", "telephone"];
-            var uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
-            uiComponentsRequired = ["vat_id","distrito_envio_rapido","invoice_required","company","dni"];
-            uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
-            uiComponent.vat_id.validation = Object.assign({}, uiComponent.vat_id.validation, newValidationConfig);
-            uiComponent.distrito_envio_rapido.validation = Object.assign({}, uiComponent.distrito_envio_rapido.validation, newValidationConfig);
-            uiComponent.invoice_required.validation = Object.assign({}, uiComponent.invoice_required.validation, newValidationConfig);
-            uiComponent.company.validation = Object.assign({}, uiComponent.company.validation, newValidationConfig);
-            uiComponent.dni.validation = Object.assign({}, uiComponent.company.dni, newValidationConfig);*/
 
             /**
              * Customer Data

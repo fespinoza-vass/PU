@@ -40,7 +40,6 @@ define([
         initialize: function () {
             this._super();
             this.isShippingStepFinished.subscribe(function (value) {
-                console.log("isShippingStepFinishedFromPickUp:" + value);
                 shippingPayment.isShippingStepFinished(value);
                 shippingPayment.setShippingMethodModelData(quote);
                 shippingPayment.setPickupModelData(this.selectedLocation());
@@ -96,6 +95,21 @@ define([
                     return false;
                 }
             }
+            var voucher = registry.get("checkout.steps.store-pickup.store-selector.picker-voucher.voucher");
+            if(_.isUndefined(voucher.value())){
+                voucher.error('Este es un campo obligatorio.');
+                return false;
+            }else{
+                voucher.error('');
+            }
+            var direccion_picker_voucher = registry.get("checkout.steps.store-pickup.store-selector.picker-voucher.direccion_comprobante_picker");
+            if(!direccion_picker_voucher.value()){
+                direccion_picker_voucher.error('Este es un campo obligatorio.');
+                return false;
+            }else{
+                direccion_picker_voucher.error('');
+            }
+            //TODO validar los inputs que no son de pick up cómo no requeridos
             return true;
         },
         /**
