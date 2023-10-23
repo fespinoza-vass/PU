@@ -127,6 +127,20 @@ define([
             var nombreUltimos = nombre.slice(-4);
             var resultado = nombreUltimos + "_" + region;
             return resultado;
+        },
+        /**
+         * Update nerby locations
+         * @param searchQuery
+         * @returns {*}
+         */
+        updateNearbyLocations: function (searchQuery) {
+            if (_.isUndefined(searchQuery)){
+                return this._super(searchQuery);
+            }
+            console.log(searchQuery);
+            searchQuery = searchQuery.replace(':US', ':PE');
+            console.log(searchQuery);
+            return this._super(searchQuery);
         }
     };
 

@@ -30,7 +30,9 @@ define([
             if (this.source && this.dataScope.includes('anotherPicker') && !isValid) {
                 this.source.set('params.anotherPicker', true);
             }
-
+            if (this.source && !isValid) {
+                this.source.set('params.invalid', true);
+            }
         }
     };
 

@@ -296,6 +296,16 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
         $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
         $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
+        /*$shippingFastArea['fast']['children']['distrito']['config']['options'] = [
+            [
+                'label' => 'opcion 1',
+                'value' => 'value1',
+            ],
+            [
+                'label' => 'opcion 2',
+                'value' => 'value2',
+            ]
+        ];*/
         $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastArea);
         //Shipping Step fast shipping schedule
         $shippingFastScheduleComponent = [
@@ -305,7 +315,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         ];
         $shippingFastScheduleArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
         $shippingFastScheduleArea['schedule'] = $shippingFastScheduleComponent;
-        $shippingFastScheduleArea['schedule']['children']['schedule'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.horario_entrega');
+        $shippingFastScheduleArea['schedule']['children']['schedule'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.horarios_disponibles');
         $shippingFastScheduleArea['schedule']['children']['schedule']['component'] = "WolfSellers_Checkout/js/view/form/element/schedule";
         $shippingFastScheduleArea['schedule']['children']['schedule']['config']['elementTmpl'] = "WolfSellers_Checkout/form/element/schedule";
         $shippingFastScheduleArea['schedule']['children']['schedule']['label'] = "";
