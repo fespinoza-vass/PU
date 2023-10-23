@@ -43,9 +43,9 @@ define([
                 this._super();
                 this.isStepPlaceOrder.subscribe(function (value){
                     if (!value){
-                        stepSummary.isPlaceOrderFinished('_complete');
+                        stepSummary.isStepTreeFinished('_complete');
                     }else{
-                        stepSummary.isPlaceOrderFinished('_active');
+                        stepSummary.isStepTreeFinished('_active');
                     }
                     this.isStepPlaceOrder(value);
                 }, this);
@@ -62,12 +62,11 @@ define([
                 if (customer.isCustomerStepFinished() === '_complete' &&
                     shippingPayment.isShippingStepFinished() === '_complete' &&
                     shippingPayment.isPaymentStepFinished() === '_complete') {
-                    messageList.addErrorMessage({message: 'Metodo de Pago completado.'});
+
                     var shippingComponent = registry.get(this.shippingFormPrefix);
                     var paymentMethod = quote.paymentMethod();
                     var paymentComponentName = this.paymentsNamePrefix + paymentMethod.method;
                     var paymentComponent = registry.get(paymentComponentName);
-
 
                     if (!_.isUndefined(paymentComponent)) {
                         paymentComponent.placeOrder(paymentComponent, event);

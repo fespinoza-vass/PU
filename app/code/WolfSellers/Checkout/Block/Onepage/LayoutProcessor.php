@@ -409,32 +409,9 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         ];
         $placeOrderDataFieldSets = $walker->getValue('{SUMMARY}.>>');
-        $placeOrderDataFieldSets['summary-place-order']= $placeOrderFieldSets;
+        $placeOrderDataFieldSets['summary-place-order'] = $placeOrderFieldSets;
         $placeOrderDataFieldSets['summary-place-order']['children']['button-place-order']= $placeOrderComponent;
         $walker->setValue('{SUMMARY}.>>', $placeOrderDataFieldSets);
-
-
-        /******* BUTTON CONTINUE PAYMENT**********/
-
-        $paymentButtonFieldSets = [
-            'component' => 'uiComponent',
-            'displayArea' => 'payment-continue-method',
-            'provider' => 'checkoutProvider',
-            'sortOrder' => '4'
-        ];
-
-        $paymentButtonDataFieldSets = $walker->getValue('{PAYMENT}.>>.afterMethods.>>');
-        $paymentButtonDataFieldSets['payment-continue-method'] = $paymentButtonFieldSets;
-        $paymentButtonComponent = [
-            'component' => 'WolfSellers_Checkout/js/view/payment-continue',
-            'displayArea' => 'afterMethods',
-            'config' => [
-                'template' => 'WolfSellers_Checkout/payment-continue'
-            ]
-        ];
-        $paymentButtonDataFieldSets['payment-continue-method'] = $paymentButtonComponent;
-        $walker->setValue('{PAYMENT}.>>.afterMethods.>>', $paymentButtonDataFieldSets);
-
 
         /****** INVOICE REQUIRE FORM *****/
 
@@ -526,6 +503,19 @@ class LayoutProcessor implements LayoutProcessorInterface
         $direccionFiscal['visible'] = false;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal', $direccionFiscal);
 
+        /****** Componets payment continue *****/
+        $paymentButtonFieldSets = [
+            'component' => 'uiComponent',
+            'displayArea' => 'payments-continue',
+            'provider' => 'checkoutProvider',
+        ];
+        $paymentButtonComponent = [
+            'component' => 'WolfSellers_Checkout/js/view/payment-continue',
+            'displayArea' => 'payment-button',
+            'config' => [
+                'template' => 'WolfSellers_Checkout/payment-continue'
+            ]
+        ];
         /****** END INVOICE REQUIRE FORM *****/
 
         //PAYMENTS AREA
@@ -538,6 +528,10 @@ class LayoutProcessor implements LayoutProcessorInterface
             ) {
                 $payment['children']['form-fields']['children']['fecha_de_nacimiento']['validation'] = [];
             }
+            // add button continue payment
+            $payment['children']['payments-continue'] = $paymentButtonFieldSets;
+            $payment['children']['payments-continue'] = $paymentButtonComponent;
+
         }
         $walker->setValue('{PAYMENT}.>>.payments-list', $payments);
         return $walker->getResult();

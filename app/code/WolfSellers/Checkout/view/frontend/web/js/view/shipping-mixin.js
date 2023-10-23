@@ -59,7 +59,6 @@ define([
             stepNavigator.modifyStep("shipping", modifyData);
             this.setIsDisabledShippingStep();
             this.isShippingStepFinished.subscribe(function (value) {
-                console.log("isShippingStepFinished:" + value);
                 shippingPayment.isShippingStepFinished(value);
                 shippingPayment.setShippingMethodModelData(quote);
                 shippingPayment.setShippingModelData(quote);
@@ -67,12 +66,14 @@ define([
             },this);
             this.goToResume.subscribe(function (value) {
                 if (!value){
+                    shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_complete');
                     this.isShippingStepFinished('_complete');
                     this.setIsDisabledShippingStep();
                 }else{
                     shippingPayment.isShippingStepFinished('_active');
                     this.isShippingStepFinished('_active');
+                    shippingPayment.isStepTwoFinished('_active');
                     this.setIsDisabledShippingStep();
                 }
             },this);
@@ -81,22 +82,25 @@ define([
                     this.validateRates();
                 }
             },this);
+
             return this;
         },
         /**
          * Overwrite set shipping information action
          */
         setShippingInformation: function () {
-            this.setDataToShippingForm();
-            if (this.validateShippingInformation()) {
-                this.isShippingStepFinished("_complete");
-                if (shippingPayment.shippingMethod() === 'instore'){
-                    this.isShippingStepFinished.notifySubscribers("_complete");
+            if (customer.isCustomerStepFinished() === '_complete') {
+                this.setDataToShippingForm();
+                if (this.validateShippingInformation()) {
+                    this.isShippingStepFinished("_complete");
+                    if (shippingPayment.shippingMethod() === 'instore') {
+                        this.isShippingStepFinished.notifySubscribers("_complete");
+                    }
+                    this.goToResume(false);
+                } else {
+                    this.isShippingStepFinished("_active");
+                    this.goToResume(true);
                 }
-                this.goToResume(false);
-            }else{
-                this.isShippingStepFinished("_active");
-                this.goToResume(true);
             }
             this._super();
         },
@@ -107,9 +111,9 @@ define([
          */
         setIsDisabledShippingStep: function () {
             if (customer.isCustomerStepFinished() === '_complete'){
-                this.isDisabledShippingStep(true);
-            }else{
                 this.isDisabledShippingStep(false);
+            }else{
+                this.isDisabledShippingStep(true);
             }
         },
         /**
