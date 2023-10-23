@@ -104,7 +104,8 @@ define([
                 date = "2 días naturales";
             }
             if (shippingPayment.shippingMethod().includes("rapido")){
-                date = shippingPayment.distritoEnvioRapido();
+                var horarioSeleccionado = shippingPayment.fechaEnvioRapido();
+                date = horarioSeleccionado.fecha
             }
             if (shippingPayment.shippingMethod().includes("instore")){
                 var ahora = new Date();
@@ -123,7 +124,8 @@ define([
                 horario = "en un rango de 8 am a 7 pm";
             }
             if (shippingPayment.shippingMethod().includes("rapido")){
-                horario = shippingPayment.distritoEnvioRapido();
+                var horarioSeleccionado = shippingPayment.fechaEnvioRapido();
+                horario = horarioSeleccionado.horario;
             }
             if (shippingPayment.shippingMethod().includes("instore")){
                 horario = "8 am a 9:30pm";
