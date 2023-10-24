@@ -5,9 +5,16 @@ namespace WolfSellers\Checkout\Plugin\Model;
 use Magento\Quote\Model\QuoteRepository;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Eav\Model\Config;
+use Magento\Quote\Api\Data\AddressExtensionFactory;
 
 class ShippingInformationManagement
 {
+
+    /** @var AddressExtensionFactory */
+    protected $_addressExtensionFactory;
+    /** @var Config  */
+    protected $_eavConfig;
     /**
      * @var QuoteRepository
      */
@@ -19,8 +26,12 @@ class ShippingInformationManagement
     public function __construct(
         QuoteRepository $quoteRepository,
         Session $sessionRepository,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        Config $eavConfig,
+        AddressExtensionFactory $addressExtensionFactory
     ) {
+        $this->_addressExtensionFactory = $addressExtensionFactory;
+        $this->_eavConfig = $eavConfig;
         $this->quoteRepository = $quoteRepository;
         $this->sessionRepository = $sessionRepository;
         $this->customerRepository = $customerRepository;
@@ -64,5 +75,34 @@ class ShippingInformationManagement
             $quote->setCustomerPassword($extensionAttributes->getCustomerPassword());
             $quote->save();
         }
+
+        // atributos de envio rapido
+        if($extensionAttributes->getEnvioRapido()->getDistrito()){
+
+            $addressInformation->getShippingAddress()->setCustomAttribute('referencia_envio',$extensionAttributes->getEnvioRapido()->getReferencia());
+            $addressInformation->getBillingAddress()->setCustomAttribute('referencia_envio',$extensionAttributes->getEnvioRapido()->getReferencia());
+
+            $addressExtension = $this->_addressExtensionFactory->create();
+
+            $addressExtension->setData('distrito_envio_rapido',$extensionAttributes->getEnvioRapido()->getDistrito());
+            $addressExtension->setData('horarioSeleccionado',$extensionAttributes->getEnvioRapido()->getHorarioSeleccionado());
+
+            $addressInformation->getShippingAddress()->setExtensionAttributes($addressExtension);
+            $addressInformation->getBillingAddress()->setExtensionAttributes($addressExtension);
+        }
+
+    }
+
+    public function getIdOptionByValue($attributeCode,$value){
+        $optionId = null;
+        $attribute = $this->_eavConfig->getAttribute('customer_address', $attributeCode);
+        $options = $attribute->getSource()->getAllOptions();
+        foreach($options as $option) {
+            var_dump($option);
+            if ($option['label'] == $value) {
+                $optionId = $option['id'];
+            }
+        }
+        return $optionId;
     }
 }
