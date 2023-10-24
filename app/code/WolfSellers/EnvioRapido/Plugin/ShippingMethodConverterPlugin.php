@@ -33,9 +33,8 @@ class ShippingMethodConverterPlugin
      */
     public function afterModelToDataObject(ShippingMethodConverter $subject, $result, $rateModel, $quoteCurrencyCode){
         $extensionAttributes = $this->extensionFactory->create();
-        $extensionAttributes->setDeliveryTime($rateModel->getData('method_description'));
+        $extensionAttributes->setDeliveryTime($rateModel->getData('delivery_time'));
         $result->setExtensionAttributes($extensionAttributes);
-        $rateModel->setData('method_description',null);
         return $result;
     }
 
