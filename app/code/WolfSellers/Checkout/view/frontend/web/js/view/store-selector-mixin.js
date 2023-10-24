@@ -57,9 +57,6 @@ define([
                     this.setIsDisabledShippingStep();
                 }
             },this);
-            quote.shippingAddress.subscribe(function (value) {
-                console.log(value);
-            },this);
         },
         /**
          * Overwrite set pickup information action
