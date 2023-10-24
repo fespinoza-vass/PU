@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 -->
-<li id="payment" role="presentation" class="checkout-payment-method" data-bind="css: setIsDisabledPaymentStep() ? '_active':'bloquear_payment',fadeVisible: isVisible">
+<li id="payment" role="presentation" class="checkout-payment-method" data-bind="fadeVisible: isVisible, css: setIsDisabledPaymentStep() ? 'bloquear_payment' : ' '">
     <div id="checkout-step-payment"
          class="step-content"
          data-role="content"

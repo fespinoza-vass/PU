@@ -49,6 +49,14 @@ define([
                 payloadEnvioRapido.direccion = shippingPayment.direccion();
                 payloadEnvioRapido.referencia = shippingPayment.referencia();
                 payloadEnvioRapido.horarioSeleccionado = shippingPayment.horarioSeleccionado();
+                payload.addressInformation.shipping_address.region = "Lima";
+                payload.addressInformation.shipping_address.regionId = '2935';
+                payload.addressInformation.shipping_address.regionCode = 'PE-LIM';
+                payload.addressInformation.shipping_address.city = 'LIMA';
+                payload.addressInformation.billing_address.region = "Lima";
+                payload.addressInformation.billing_address.regionId = '2935';
+                payload.addressInformation.billing_address.regionCode = 'PE-LIM';
+                payload.addressInformation.billing_address.city = 'LIMA';
             }
             if (shippingPayment.shippingMethod() === "instore"){
                 payloadRetiroEnTienda.picker = shippingPayment.picker()
@@ -58,6 +66,7 @@ define([
                 payloadRetiroEnTienda.correoOpcional = shippingPayment.correoOpcional();
                 payloadRetiroEnTienda.distrito_comprobante = shippingPayment.distrito_comprobante();
                 payloadRetiroEnTienda.direccion_comprobante = shippingPayment.direccion_comprobante();
+                payload.addressInformation.billing_address = payload.addressInformation.shipping_address;
             }
         }
 

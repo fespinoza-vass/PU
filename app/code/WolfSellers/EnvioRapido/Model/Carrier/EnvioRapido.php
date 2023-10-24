@@ -131,7 +131,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
                     $method->setMethod($this->_code);
                     $method->setMethodTitle($this->getConfigData('name'));
-                    $method->setMethodDescription($this->getDeliveryTime());
+                    $method->setData('delivery_time',$this->getDeliveryTime());
 
                     if ($request->getFreeShipping() === true) {
                         $shippingPrice = '0.00';

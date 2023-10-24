@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
-        <plugin name="delivery_time" type="WolfSellers\EnvioRapido\Plugin\ShippingMethodConverterPlugin" />
+        <plugin name="delivery_time_shipping_method_converter_plugin" type="WolfSellers\EnvioRapido\Plugin\ShippingMethodConverterPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="delivery_time_address_rate_plugin" type="WolfSellers\EnvioRapido\Plugin\QuoteAddressRatePlugin" />
     </type>
 </config>

@@ -129,6 +129,6 @@ class QR extends AbstractHelper
      */
     public function getURLQRImage($incrementId){
         $baseUrl = $this->_storeManager->getStore()->getBaseUrl();
-        return $baseUrl."pub/media/qrcodes/".$incrementId.".png";
+        return $baseUrl."media/qrcodes/".$incrementId.".png";
     }
 }
