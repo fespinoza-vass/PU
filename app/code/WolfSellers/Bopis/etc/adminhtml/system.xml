@@ -25,6 +25,10 @@
             <group id="status" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Status orders</label>
 
+                <field id="pending" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>pending</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
                 <field id="confirmed" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Confirmed</label>
                      <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>

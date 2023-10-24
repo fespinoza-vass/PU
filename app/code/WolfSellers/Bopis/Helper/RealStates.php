@@ -41,7 +41,8 @@ class RealStates
     {
         if (!$shippingMethodCode) return '';
         $code = explode('_', $shippingMethodCode);
-        return $this->_scopeConfig->getValue('carriers/' . $code[0] . '/title');
+       // return $this->_scopeConfig->getValue('carriers/' . $code[0] . '/title');
+        return "";
     }
 
     /**
@@ -60,6 +61,12 @@ class RealStates
     private function initializeStates(): void
     {
         $this->states = [
+            'pending' => [
+                'state' => '',
+                'label' => 'Pendiente',
+                'action' => '#',
+                'menu' => 'listnewsorders'
+            ],
             'confirmed' => [
                 'state' => '',
                 'label' => 'Pedido Confirmado',

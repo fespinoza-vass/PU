@@ -7,4 +7,18 @@
     <type name="Magento\Quote\Model\Quote\Address\Rate">
         <plugin name="delivery_time_address_rate_plugin" type="WolfSellers\EnvioRapido\Plugin\QuoteAddressRatePlugin" />
     </type>
+
+    <type name="WolfSellers\EnvioRapido\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\EnvioRapido\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">SavarLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">WolfSellers\EnvioRapido\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
