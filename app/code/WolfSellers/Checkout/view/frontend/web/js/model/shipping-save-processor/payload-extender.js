@@ -66,6 +66,7 @@ define([
                 payloadRetiroEnTienda.correoOpcional = shippingPayment.correoOpcional();
                 payloadRetiroEnTienda.distrito_comprobante = shippingPayment.distrito_comprobante();
                 payloadRetiroEnTienda.direccion_comprobante = shippingPayment.direccion_comprobante();
+                payload.addressInformation.billing_address = payload.addressInformation.shipping_address;
             }
         }
 
