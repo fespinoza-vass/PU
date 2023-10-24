@@ -386,6 +386,10 @@
 					// AMASTY IMPORTANTS
 					.amlabel-position-wrapper{
 						margin: 20px;
+						&[class*="amlabel-position-top-center"]{
+							left: auto !important; //add style for module amasty
+							right: 80px !important; //add style for module amasty
+						}
 						.amasty-label-container{
 							position: static !important;
 							height: auto !important;
@@ -394,6 +398,10 @@
 								position: static !important;
 								padding: 5px 10px !important;
 								font-size: 1.4rem;
+							}
+							.amasty-label-image{
+								width: 56px !important; //add style for amasty
+								height: auto;
 							}
 						}
 					}

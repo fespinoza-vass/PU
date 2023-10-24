@@ -16,8 +16,8 @@
             </div>
             <div class="pickup-store-list">
                 <div class="step-title" translate="'2.1 Selecciona tú tienda de retiro'" data-role="title"></div>
-                <span class="pickup-store-list_empty"></span>
-                <div id="opc-store-selector-popup-noModal" render="storeSelectorPopupTemplate"></div>
+                <span class="pickup-store-list_empty" data-bind="visible:isActiveFade()"></span>
+                <div id="opc-store-selector-popup-noModal" data-bind="visible:activeOptions()" render="storeSelectorPopupTemplate" ></div>
             </div>
         </div>
         <div class="content-when-selected" data-bind="fadeVisible:selectedLocation()">
@@ -58,6 +58,19 @@
               data-form-part="pickerVoucher">
             <each args="getRegion('picker-voucher')" render="" ></each>
         </form>
+        <div class="store-pickup-receipt-address_time">
+            <span class="store-pickup-receipt-address_time-icon"></span>
+            <p>
+                Podrás recoger tu pedido a partir del día <span data-bind="text: getPickupDateFormat()"></span> en un rango de 8am a 9:30 pm
+            </p>
+        </div>
+        <div class="store-pickup-receipt-address_info">
+            <span></span>
+            <p translate="'Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.'"></p>
+        </div>
+        <div class="store-pickup-receipt-address_price">
+            <p translate="'Cost of shipping'"></p>
+            <span>S/0.00</span>
     </div>
 </div>
 
