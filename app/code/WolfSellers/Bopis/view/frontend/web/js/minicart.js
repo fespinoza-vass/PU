@@ -8,6 +8,14 @@ define([
 
     return function (Component) {
         return Component.extend({
+            /**
+             * Create Modal
+             */
+            setModalElement: function () {
+                if (proceedPopup.modalContent == null) {
+                    proceedPopup.createModal('#minicart-proceed-confirmation-popup-content');
+                }
+            },
 
             /**
              * @override
@@ -25,7 +33,7 @@ define([
                             route = 1;
                         }
 
-                        proceedPopup.showModal(route);
+                        proceedPopup.validations(route);
                         return false;
                     });
 

@@ -7,11 +7,10 @@ define([
     'use strict';
 
     return {
-        modalContent: '#minicart-proceed-confirmation-popup-content',
-        available: null,
+        modalContent: null,
 
         /** Create modal */
-        createModal: function () {
+        createModal: function (element) {
             var options = {
                 'type': 'popup',
                 'modalClass': 'minicart-proceed-confirmation',
@@ -48,8 +47,8 @@ define([
                 ]
             };
 
+            this.modalContent = element;
             modal(options, this.modalContent);
-            $(this.modalContent).modal('openModal');
         },
 
         /**
@@ -64,7 +63,7 @@ define([
                 dataType: 'json',
                 success: function (response) {
                     if (response.available === '0') {
-                        this.createModal();
+                        this.showModal();
                     } else {
                         if (route === 1) {
                             window.location.href = window.checkout.shoppingCartUrl;
@@ -72,7 +71,6 @@ define([
                             window.location.href = window.checkout.checkoutUrl;
                         }
                     }
-                    console.log('success:' + response.available);
                 },
                 error: function (response) {
                     console.log(response);
@@ -83,8 +81,8 @@ define([
         },
 
         /** Show popup window */
-        showModal: function (route) {
-            this.validations(route);
+        showModal: function () {
+            $(this.modalContent).modal('openModal');
         }
     };
 });
