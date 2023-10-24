@@ -36,6 +36,7 @@ define([
                 self.isVisible(true);
             });
 
+            this.IsDisabledPaymentStep(true);
             this.setIsDisabledPaymentStep();
             return this;
         },
@@ -55,9 +56,9 @@ define([
          */
         setIsDisabledPaymentStep: function () {
             if (shippingPayment.isShippingStepFinished() === '_complete'){
-                this.IsDisabledPaymentStep(true);
-            }else{
                 this.IsDisabledPaymentStep(false);
+            }else{
+                this.IsDisabledPaymentStep(true);
             }
         },
     }
