@@ -39,8 +39,8 @@ define([
             // verify that form data is valid
             if (!this.source.get('params.invalid')) {
                 var formData = this.source.get('customCheckoutForm');
-                var billing = quote.billingAddress();
-                var customAtributes = billing.customAttributes;
+                var shipping = quote.shippingAddress();
+                var customAtributes = shipping.customAttributes;
 
                 customAtributes.forEach( function(value, index, array) {
                     if(value['attribute_code'] === 'invoice_required'){
@@ -64,7 +64,7 @@ define([
                 $('#submitInvoice').hide();
                 $('#editInvoice').show();
 
-                console.log(quote.billingAddress());
+                console.log(quote.shippingAddress());
                 messageList.addSuccessMessage({ message: $.mage.__('Información de facturación gurdada') });
 
             }

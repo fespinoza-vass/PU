@@ -31,8 +31,8 @@ define([
          * If invoice require change update billing address data
          */
         change: function(value) {
-            var billing = quote.billingAddress();
-            var customAtributes = billing.customAttributes;
+            var shipping = quote.shippingAddress();
+            var customAtributes = shipping.customAttributes;
             var isShippingStepFinished = _.isUndefined(shippingPayment.isShippingStepFinished()) ?
                     "" : shippingPayment.isShippingStepFinished();
             if(!isShippingStepFinished.includes('_complete')){
@@ -44,9 +44,13 @@ define([
                         value['value'] = 0;
                     }
                 });
-                registry.get('index = ruc').hide();
-                registry.get('index = razon_social').hide();
-                registry.get('index = direccion_fiscal').hide();
+
+                registry.get("checkout.steps.billing-step.payment.beforeMethods.invoice-form.custom-checkout-form-fieldset.ruc"
+                ).hide();
+                registry.get("checkout.steps.billing-step.payment.beforeMethods.invoice-form.custom-checkout-form-fieldset.razon_social"
+                ).hide();
+                registry.get("checkout.steps.billing-step.payment.beforeMethods.invoice-form.custom-checkout-form-fieldset.direccion_fiscal"
+                ).hide();
                 $('#editInvoice').hide();
                 $('#submitInvoice').hide();
             } else if (value === 'factura') {
@@ -55,9 +59,12 @@ define([
                         value['value'] = 1;
                     }
                 });
-                registry.get('index = ruc').show();
-                registry.get('index = razon_social').show();
-                registry.get('index = direccion_fiscal').show();
+                registry.get("checkout.steps.billing-step.payment.beforeMethods.invoice-form.custom-checkout-form-fieldset.ruc"
+                ).show();
+                registry.get("checkout.steps.billing-step.payment.beforeMethods.invoice-form.custom-checkout-form-fieldset.razon_social"
+                ).show();
+                registry.get("checkout.steps.billing-step.payment.beforeMethods.invoice-form.custom-checkout-form-fieldset.direccion_fiscal"
+                ).show();
 
                 if($('input[name="ruc"]').attr('disabled')==="disabled"){
                     $('#submitInvoice').hide();
