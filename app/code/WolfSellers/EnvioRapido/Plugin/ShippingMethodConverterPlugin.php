@@ -35,6 +35,7 @@ class ShippingMethodConverterPlugin
         $extensionAttributes = $this->extensionFactory->create();
         $extensionAttributes->setDeliveryTime($rateModel->getData('method_description'));
         $result->setExtensionAttributes($extensionAttributes);
+        $rateModel->setData('method_description',null);
         return $result;
     }
 
