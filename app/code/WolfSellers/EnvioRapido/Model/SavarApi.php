@@ -95,7 +95,7 @@ abstract class SavarApi extends \Magento\Framework\DataObject
         $response = $this->curl->getBody();
 
         $result = [
-            'stateCode' => $this->curl->getStatus(),
+            'state_code' => $this->curl->getStatus(),
             'response'  => $this->json->unserialize($response)
         ];
 

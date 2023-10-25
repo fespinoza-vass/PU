@@ -61,9 +61,12 @@ class SavarHelper extends AbstractHelper
         parent::__construct($context);
     }
 
+
     /**
      * @param OrderInterface $order
-     * @return void
+     * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function sendOrderToSavar(OrderInterface $order)
     {
@@ -166,6 +169,12 @@ class SavarHelper extends AbstractHelper
         return implode(",", $skuList);
     }
 
+    /**
+     * @param $attributeCode
+     * @param $optionId
+     * @return mixed|null
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function getValueByOptionId($attributeCode, $optionId)
     {
         $label = null;
