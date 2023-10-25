@@ -36,6 +36,7 @@ define([
         isDisabledShippingStep: ko.observable(true),
         goToResume:ko.observable(),
         isAnotherPicker:ko.observable(),
+        shippingAddressAtPickup: ko.observable(),
 
         initialize: function () {
             this._super();
@@ -64,6 +65,8 @@ define([
             if (customer.isCustomerStepFinished() === '_complete') {
                 if (this.validatePickupInformation()) {
                     this.isShippingStepFinished.notifySubscribers("_complete");
+                    quote.shippingAddress(this.shippingAddressAtPickup());
+                    quote.billingAddress(quote.shippingAddress());
                     this.goToResume(false);
                 } else {
                     this.isShippingStepFinished("_active");
@@ -124,6 +127,7 @@ define([
          */
         selectPickupLocation: function (location) {
             pickupLocationsService.selectForShipping(location);
+            this.shippingAddressAtPickup(quote.shippingAddress());
         },
         /**
          * validate if is another Picker Area visible
@@ -155,9 +159,7 @@ define([
             if (_.isUndefined(searchQuery)){
                 return this._super(searchQuery);
             }
-            console.log(searchQuery);
             searchQuery = searchQuery.replace(':US', ':PE');
-            console.log(searchQuery);
             return this._super(searchQuery);
         },
         /**

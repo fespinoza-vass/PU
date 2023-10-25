@@ -20,7 +20,6 @@ define([
             this.value.subscribe(function (value) {
                 if(value){
                     this.searchQuery(value);
-                    console.log("Actualizar lista de distritos");
                 }
             },this);
         }
