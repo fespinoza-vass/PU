@@ -36,6 +36,16 @@
         <plugin name="district_extension_atttribute" type="WolfSellers\Checkout\Plugin\SourceInterfaceExtension" />
     </type>
 
+    <type name="Magento\Checkout\Api\PaymentInformationManagementInterface">
+        <plugin name="disable-place-order" type="Magento\CheckoutStaging\Plugin\PaymentInformationManagementPlugin" disabled="true"/>
+        <plugin name="wolf-disable-place-order" type="WolfSellers\Checkout\Plugin\PaymentInformationManagementPlugin" disabled="false"/>
+    </type>
+    <type name="Magento\Checkout\Api\GuestPaymentInformationManagementInterface">
+        <plugin name="disable-guest-place-order" type="Magento\CheckoutStaging\Plugin\GuestPaymentInformationManagementPlugin" disabled="true"/>
+        <plugin name="wolf-disable-guest-place-order" type="WolfSellers\Checkout\Plugin\GuestPaymentInformationManagementPlugin" disabled="false"/>
+    </type>
+
+
     <type name="Magento\InventoryInStorePickupApi\Model\Mapper">
         <arguments>
             <argument name="map" xsi:type="array">
@@ -47,4 +57,6 @@
     <preference for="WolfSellers\Checkout\Api\Data\EnvioRegularInterface" type="WolfSellers\Checkout\Model\EnvioRegular"/>
     <preference for="WolfSellers\Checkout\Api\Data\EnvioRapidoInterface" type="WolfSellers\Checkout\Model\EnvioRapido"/>
     <preference for="WolfSellers\Checkout\Api\Data\RetiroTiendaInterface" type="WolfSellers\Checkout\Model\RetiroTienda"/>
+
+    <preference for="\Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule" type="WolfSellers\Checkout\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule"/>
 </config>
