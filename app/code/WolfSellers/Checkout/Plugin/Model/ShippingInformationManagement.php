@@ -51,6 +51,8 @@ class ShippingInformationManagement
         \Magento\Checkout\Api\Data\ShippingInformationInterface $addressInformation
     ) {
         $extensionAttributes = $addressInformation->getExtensionAttributes();
+        $quote = $this->quoteRepository->getActive($cartId);
+
         if(!$extAttributes = $addressInformation->getExtensionAttributes())
         {
             return;
@@ -66,7 +68,7 @@ class ShippingInformationManagement
             $customer->setCustomAttribute('numero_de_identificacion',$extensionAttributes->getCustomerNumeroDeIdentificacion());
             $this->customerRepository->save($customer);
         }else{
-            $quote = $this->quoteRepository->getActive($cartId);
+
             $quote->setCustomerName($extAttributes->getCustomerName());
             $quote->setCustomerApellido($extAttributes->getCustomerApellido());
             $quote->setCustomerTelefono($extensionAttributes->getCustomerTelefono());
@@ -79,18 +81,17 @@ class ShippingInformationManagement
         // atributos de envio rapido
         if($extensionAttributes->getEnvioRapido()->getDistrito()){
 
-            $addressInformation->getShippingAddress()->setCustomAttribute('referencia_envio',$extensionAttributes->getEnvioRapido()->getReferencia());
-            $addressInformation->getBillingAddress()->setCustomAttribute('referencia_envio',$extensionAttributes->getEnvioRapido()->getReferencia());
+            $extension = $this->_addressExtensionFactory->create();
 
-            $addressExtension = $this->_addressExtensionFactory->create();
+            $extension->setData('referencia_envio',$extensionAttributes->getEnvioRapido()->getReferencia());
+            $extension->setData('distrito_envio_rapido',$extensionAttributes->getEnvioRapido()->getDistrito());
+            //$extension->setData('horarios_disponibles',$extensionAttributes->getEnvioRapido()->getDistrito());
 
-            $addressExtension->setData('distrito_envio_rapido',$extensionAttributes->getEnvioRapido()->getDistrito());
-            $addressExtension->setData('horarioSeleccionado',$extensionAttributes->getEnvioRapido()->getHorarioSeleccionado());
+            $quote->getBillingAddress()->setExtensionAttributes($extension);
+            $quote->getShippingAddress()->setExtensionAttributes($extension);
 
-            $addressInformation->getShippingAddress()->setExtensionAttributes($addressExtension);
-            $addressInformation->getBillingAddress()->setExtensionAttributes($addressExtension);
+            $quote->save();
         }
-
     }
 
     public function getIdOptionByValue($attributeCode,$value){
