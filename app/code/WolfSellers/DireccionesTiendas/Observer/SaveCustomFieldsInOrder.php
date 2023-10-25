@@ -3,6 +3,7 @@
 namespace WolfSellers\DireccionesTiendas\Observer;
 
 use Magento\Framework\Event\Observer;
+use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use Psr\Log\LoggerInterface as Logger;
 
 use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface as DireccionesTiendasRepository;
@@ -12,15 +13,21 @@ class SaveCustomFieldsInOrder implements \Magento\Framework\Event\ObserverInterf
     protected Logger $logger;
     protected DireccionesTiendasRepository $direccionesTiendasRepository;
 
+    /** @var SourceRepositoryInterface */
+    protected $_sourceRepository;
+
+
     /**
      * @param Logger $logger
      * @param DireccionesTiendasRepository $direccionesTiendasRepository
      */
     public function __construct(
         Logger                       $logger,
-        DireccionesTiendasRepository $direccionesTiendasRepository
+        DireccionesTiendasRepository $direccionesTiendasRepository,
+        SourceRepositoryInterface $sourceRepository
     )
     {
+        $this->_sourceRepository = $sourceRepository;
         $this->logger = $logger;
         $this->direccionesTiendasRepository = $direccionesTiendasRepository;
     }
@@ -39,12 +46,14 @@ class SaveCustomFieldsInOrder implements \Magento\Framework\Event\ObserverInterf
             $quote = $observer->getEvent()->getQuote();
 
             $direccionEnviadaASavar = "NO uso Savar";
-            if(!is_null($quote->getDireccionestiendasId())){
-                $direccionTienda = $this->direccionesTiendasRepository->get(intval($quote->getDireccionestiendasId()));
-                $depto = $direccionTienda->getDepartamento();
-                $provi = $direccionTienda->getProvincia();
-                $dist = $direccionTienda->getDistrito();
-                $direccionEnviadaASavar = $depto . '|' . $provi . '|' . $dist;
+            if($quote->getShippingAddress()->getDistritoEnvioRapido()){
+                $direccionTienda = $this->direccionesTiendasRepository->get(intval(
+                    $quote->getShippingAddress()->getDistritoEnvioRapido()
+                ));
+
+                $sourceCode = $direccionTienda->getTienda();
+                $source = $this->_sourceRepository->get($sourceCode);
+                $direccionEnviadaASavar = $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict();
                 $direccionEnviadaASavar = strtoupper($direccionEnviadaASavar);
             }
             $order->setData('direcciones_tiendas', $direccionEnviadaASavar);
