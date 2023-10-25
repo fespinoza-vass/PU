@@ -5,9 +5,7 @@
     <form id="custom-checkout-form" class="form" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
         <fieldset class="fieldset">
             <h4 data-bind="i18n: '1. Tipo de comprobante'"></h4>
-            <!-- ko foreach: getRegion('custom-checkout-form-fields') -->
-            <!-- ko template: getTemplate() --><!-- /ko -->
-            <!--/ko-->
+            <each args="getRegion('custom-checkout-form-fields')" render=""></each>
         </fieldset>
 
         <div class="content-buttons-invoice">

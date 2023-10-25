@@ -41,7 +41,27 @@ define([
                 var formData = this.source.get('customCheckoutForm');
                 var shipping = quote.shippingAddress();
                 var customAtributes = shipping.customAttributes;
-
+                if(quote.shippingMethod().carrier_code.includes('instore')){
+                    customAtributes = [
+                        {
+                            "attribute_code": "ruc",
+                            "value": ""
+                        },
+                        {
+                            "attribute_code": "razon_social",
+                            "value": ""
+                        },
+                        {
+                            "attribute_code": "direccion_fiscal",
+                            "value": ""
+                        },
+                        {
+                            "attribute_code": "invoice_required",
+                            "value": false,
+                            "label": "No"
+                        }
+                    ];
+                }
                 customAtributes.forEach( function(value, index, array) {
                     if(value['attribute_code'] === 'invoice_required'){
                         value['value'] = 1;
@@ -63,7 +83,8 @@ define([
                 $('input[name="direccion_fiscal"]').prop('disabled', 'disabled');
                 $('#submitInvoice').hide();
                 $('#editInvoice').show();
-
+                quote.billingAddress().extensionAttributes['customAttributes'] = customAtributes;
+                quote.billingAddress().customAttributes = customAtributes;
                 console.log(quote.shippingAddress());
                 messageList.addSuccessMessage({ message: $.mage.__('Información de facturación gurdada') });
 
