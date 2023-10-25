@@ -431,6 +431,7 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         $invoiceFieldSets = [
             'component' => 'uiComponent',
+            'provider' => 'checkoutProvider',
             'displayArea' => 'custom-checkout-form-fields'
         ];
         $invoiceDataFieldSets = $walker->getValue('{PAYMENT_FORM_INVOICE}.>>custom-checkout-form-fieldset.>>');
