@@ -26,6 +26,13 @@ define([
         contentHeight: ko.observable(null),
         modalWindow: null,
 
+        initialize: function () {
+            this._super();
+            if(this.name.includes('customer-fieldsets')){
+                this.isVisible = true;
+            }
+        },
+
         /**
          * Checks if agreement required
          *
