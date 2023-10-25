@@ -4,6 +4,11 @@
  * See COPYING.txt for license details.
  */
 
+/** @var $block \WolfSellers\Bopis\Block\Adminhtml\Order\View\Info */
+
+/** @var $viewModel \WolfSellers\Bopis\ViewModel\GeneralOrder */
+$viewModel = $block->getData('viewModel');
+
 /**
  * @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Info $block
  */
@@ -35,16 +40,19 @@ $allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub
 $btnClienteRetira = $block->isBtnClienteRetiraAvailable();
 $btnClienteFactura = $block->isBtnClienteFacturaAvailable();
 $btnOrden = $block->isBtnOrdenAvailable();
+
+/** @var  $billingAddress */
+$billingAddress = $order->getBillingAddress();
+/** @var  $shippingAddress */
+$shippingAddress = $order->getShippingAddress();
 ?>
 
 <!-- 01 CARD: CLIENTE QUE FACTURA -->
 <section class="admin__page-section bopis-data card-bill">
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-billing-address">
-            <?php /* Billing Address */
-            $billingAddress = $order->getBillingAddress(); ?>
             <div class="admin__page-section-item-title icon-retira">
-                <span class="title"><?= $block->escapeHtml(__('Cliente que factura')) ?></span>
+                <span class="title"><?= $block->escapeHtml(__('Cliente que compra')) ?></span>
             </div>
 
             <address class="admin__page-section-item-content">
@@ -52,9 +60,21 @@ $btnOrden = $block->isBtnOrdenAvailable();
                 <?= $tipo_cedula_order ?>
                 <?= $no_cedula ?>
                 <?= $nombre_o_empresa ?>
-                Número de documento: <?= $billingAddress->getIdentificacion(); ?><br />
+                Número de documento: <?= $billingAddress->getVatId(); ?><br />
                 <?= $billingAddress->getEmail(); ?><br />
                 T. <?= $billingAddress->getTelephone(); ?><br />
+
+                <br>
+                Comprobante:
+                <?php if ( $shippingAddress->getDataByKey('invoice_required') == '0'):?>
+                    Boleta
+                <?php else: ?>
+                    Factura <br>
+                    <?=$shippingAddress->getDataByKey('ruc') ?? $shippingAddress->getVatId()?> <br>
+                    <?=$shippingAddress->getDataByKey('razon_social') ?? $shippingAddress->getName() ?> <br>
+                <?php endif; ?>
+                <br />
+
                 <?php if ($block->isLegalPerson()):?>
                     Razón Social : <?= $order->getData('razon_social'); ?><br />
                     Ruc : <?= $order->getData('ruc'); ?><br />
@@ -81,19 +101,17 @@ $btnOrden = $block->isBtnOrdenAvailable();
 <section class="admin__page-section bopis-data">
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-orden">
-            <?php /* Billing Address */ ?>
-            <?php /* Shipping Address */ $shippingAddress = $order->getShippingAddress(); ?>
             <div class="admin__page-section-item-title icon-orden">
                 <span class="title"><?= $block->escapeHtml(__('Orden')) ?></span>
             </div>
 
 
             <address class="admin__page-section-item-content">
-                <span class="color-orange">ID de Orden: <?= $order->getIncrementId(); ?></span><br />
-                ID SBX: <?= $order->getId(); ?><br />
+                <span class="color-orange">ID Orden: <?= $order->getIncrementId(); ?></span><br />
+                <!--ID SBX: <?= $order->getId(); ?><br />-->
                 Creado: <?= $orderStoreDate; ?><br />
-                Entrega: <?=$order->getShippingMethod()?><br />
-                Tienda: <?= $block->getShippingStoreName()?> <br>
+                Entrega: <?=$viewModel->getShippingMethodTitle($order->getShippingMethod())?><br />
+                Tienda: <?=$viewModel->getOrderSourceName($order->getData('source_code'))?> <br>
                 <?=$order->getGiftMessageId() ? '<b class="gift">Esta orden es un regalo</b>' : ''?>
             </address>
             <?php if ($block->getAdminUserType() == 1):?>
@@ -115,14 +133,16 @@ $btnOrden = $block->isBtnOrdenAvailable();
 <section class="admin__page-section bopis-data">
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-shipping-address ">
-            <?php /* Shipping Address */
-            $shippingAddress = $order->getShippingAddress(); ?>
             <div class="admin__page-section-item-title icon-retira">
-                <span class="title"><?= $block->escapeHtml(__('Cliente que retira')) ?></span>
+                <span class="title"><?= $block->escapeHtml(__('Cliente que recibe')) ?></span>
             </div>
             <address class="admin__page-section-item-content">
                 <span class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></span><br />
-                Número de documento: <?= $shippingAddress->getIdentificacion(); ?><br />
+                Número de documento:
+                <?= !empty($shippingAddress->getDataByKey('identificacion')) ??
+                    $shippingAddress->getDataByKey('identificacion') . ' - ' ; ?>
+                <?= $shippingAddress->getVatId(); ?><br />
+
                 <?= $shippingAddress->getEmail(); ?><br />
                 T. <?= $shippingAddress->getTelephone(); ?>
             </address>
@@ -148,8 +168,6 @@ $btnOrden = $block->isBtnOrdenAvailable();
 <section class="admin__page-section bopis-data bopis-data-entrega">
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-shipping-address ">
-            <?php /* Shipping Address */
-            $shippingAddress = $order->getShippingAddress(); ?>
             <div class="admin__page-section-item-title icon-direccion">
                 <span class="title"><?= $block->escapeHtml(__('Dirección de entrega')) ?></span>
             </div>
@@ -166,6 +184,7 @@ $btnOrden = $block->isBtnOrdenAvailable();
                 <span class="teléfono">T. <?= $shippingAddress->getTelephone() ?></span> <br>
                 <span class="referencia"> Referencia: <?= $shippingAddress->getData('referencia_envio') ?></span> <br>
                 <span class="provincia"><?= $shippingAddress->getCity() ?></span> <br>
+                <span class="horairo">Horario de entrega:</span>
             </address>
         </div>
     </div>

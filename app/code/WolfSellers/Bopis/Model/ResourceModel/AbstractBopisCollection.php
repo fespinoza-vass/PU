@@ -48,7 +48,7 @@ abstract class AbstractBopisCollection extends Collection
     const BOPIS_REGULAR_SHIPPING = 'gestor_bopis_regular_shipping';
 
     /** @var string  */
-    const FAST_SHIPPING_METHOD = 'flatrate_flatrate';
+    const FAST_SHIPPING_METHOD = 'envio_rapido_envio_rapido';
 
     /** @var string  */
     const REGULAR_SHIPPING_METHOD = 'urbano';

@@ -5,16 +5,22 @@ namespace WolfSellers\Bopis\ViewModel;
 use WolfSellers\Bopis\Helper\RealStates;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\App\Response\RedirectInterface;
+use Magento\InventoryApi\Api\SourceRepositoryInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 
 class GeneralOrder implements ArgumentInterface
 {
     /**
      * @param RealStates $_realStates
      * @param RedirectInterface $redirect
+     * @param SourceRepositoryInterface $_sourceRepository
+     * @param SearchCriteriaBuilder $_searchCriteriaBuilder
      */
     public function __construct(
-        protected RealStates $_realStates,
-        protected RedirectInterface $redirect
+        protected RealStates                $_realStates,
+        protected RedirectInterface         $redirect,
+        protected SourceRepositoryInterface $_sourceRepository,
+        protected SearchCriteriaBuilder     $_searchCriteriaBuilder,
     )
     {
     }
@@ -43,7 +49,27 @@ class GeneralOrder implements ArgumentInterface
     /**
      * @return string
      */
-    public function getBackUrl(){
+    public function getBackUrl()
+    {
         return $this->redirect->getRefererUrl();
+    }
+
+    /**
+     * @param $sourceCode
+     * @return string
+     */
+    public function getOrderSourceName($sourceCode): string
+    {
+        $this->_searchCriteriaBuilder->addFilter('source_code', $sourceCode);
+        $searchCriteria = $this->_searchCriteriaBuilder->create();
+
+        $searchCriteriaResult = $this->_sourceRepository->getList($searchCriteria);
+        $sources = $searchCriteriaResult->getItems();
+
+        $source = current($sources);
+
+        if (!$source) return $sourceCode;
+
+        return $source->getName();
     }
 }
