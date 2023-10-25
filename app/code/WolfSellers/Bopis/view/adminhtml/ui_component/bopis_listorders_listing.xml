@@ -105,7 +105,7 @@
             <settings>
                 <draggable>false</draggable>
                 <filter>text</filter>
-                <label translate="true">ID</label>
+                <label translate="true">Número de Pedido</label>
                 <sorting>desc</sorting>
                 <sortable>true</sortable>
             </settings>
