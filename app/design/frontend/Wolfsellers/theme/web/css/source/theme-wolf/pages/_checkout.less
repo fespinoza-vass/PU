@@ -654,6 +654,9 @@
 							}
 							.distrito-uicomponent{
 								margin-bottom: 24px;
+								select{
+									width: 100%;
+								}
 							}
 							.pickup-store-list{
 								.pickup-store-list_empty{
@@ -835,6 +838,9 @@
 											color: @color-black;
 											padding-left: 5px;
 										}
+									}
+									select,input{
+										width: 100%;
 									}
 									&[name="shippingAddress.custom_attributes.colony"]{
 										order: 3;
@@ -1298,6 +1304,10 @@
 								.lib-css(display,flex,@_prefix:1);
 								.lib-css(flex-wrap,wrap,@_prefix:1);
 								margin-bottom: 20px;
+								h4{
+									width: 100%;
+									padding-bottom: 5px;
+								}
 								.payment-type{
 									.lib-css(display, flex, @_prefix: 1);
 									.lib-css(flex-wrap,wrap,@_prefix:1);
@@ -2417,10 +2427,10 @@
 					}
 					.pickup-store-list{
 						.pickup-store-list_empty{
-							margin: 0 10px;
+							margin: 0 0 0 15px;
 						}
 						#opc-store-selector-popup-noModal{
-							padding: 0 10px;
+							padding: 0 0 0 15px;
 						}
 					}
 				}
@@ -2584,6 +2594,13 @@
 			.form-login{
 				background:@color-white;
 				padding: 0 0 20px 0;
+				.fieldset{
+					.field{
+						input{
+							width: 100%;
+						}
+					}
+				}
 			}
 		}
 		#payment{
@@ -2708,6 +2725,13 @@
 										}
 									}
 									#store-selector{
+										.store-pickup-method{
+											.field{
+												select{
+													width: 100%;
+												}
+											}
+										}
 										.store-pickup-picker{
 											.content-picker{
 												.field{
