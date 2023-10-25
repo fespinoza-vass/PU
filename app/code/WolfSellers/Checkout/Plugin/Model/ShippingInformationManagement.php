@@ -90,6 +90,15 @@ class ShippingInformationManagement
             $quote->getBillingAddress()->setExtensionAttributes($extension);
             $quote->getShippingAddress()->setExtensionAttributes($extension);
 
+
+            $horarioValue = $this->getIdOptionByValue(
+                                'horarios_disponibles',
+                                 $extensionAttributes->getEnvioRapido()->getHorarioSeleccionado()
+                            );
+
+            $quote->getShippingAddress()->setData('horarios_disponibles',$horarioValue);
+            $quote->getShippingAddress()->setCustomAttribute('horarios_disponibles',$horarioValue);
+
             $quote->save();
         }
     }
@@ -99,9 +108,8 @@ class ShippingInformationManagement
         $attribute = $this->_eavConfig->getAttribute('customer_address', $attributeCode);
         $options = $attribute->getSource()->getAllOptions();
         foreach($options as $option) {
-            var_dump($option);
             if ($option['label'] == $value) {
-                $optionId = $option['id'];
+                $optionId = $option['value'];
             }
         }
         return $optionId;
