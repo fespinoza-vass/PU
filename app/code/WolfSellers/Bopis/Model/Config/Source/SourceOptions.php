@@ -5,6 +5,7 @@ namespace WolfSellers\Bopis\Model\Config\Source;
 use Magento\Framework\Option\ArrayInterface;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Backend\Model\Auth\Session as AuthSession;
 use Psr\Log\LoggerInterface;
 
 class SourceOptions implements ArrayInterface
@@ -18,6 +19,7 @@ class SourceOptions implements ArrayInterface
     public function __construct(
         protected SourceRepositoryInterface $_sourceRepository,
         protected SearchCriteriaBuilder     $_searchCriteriaBuilder,
+        protected AuthSession                   $authSession,
         protected LoggerInterface           $logger
     )
     {
@@ -44,6 +46,12 @@ class SourceOptions implements ArrayInterface
      */
     public function getOptions(): array
     {
+        $sourceCode = $this->authSession->getUser()->getData('source_code');
+
+        if ($sourceCode != 'all'){
+            $this->_searchCriteriaBuilder->addFilter('source_code', $sourceCode);
+        }
+
         $this->_searchCriteriaBuilder->addFilter('enabled', true);
         $searchCriteria = $this->_searchCriteriaBuilder->create();
 
