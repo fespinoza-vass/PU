@@ -491,7 +491,15 @@ class LayoutProcessor implements LayoutProcessorInterface
             ],
         ];
 
-        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required'] = $this->getPaymentType();
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.picker');
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['component'] = 'WolfSellers_Checkout/js/view/form/element/payment-type';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['config']['customScope'] = 'customCheckoutForm';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['config']['elementTmpl'] = 'WolfSellers_Checkout/form/element/payment-type';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['dataScope'] = 'customCheckoutForm.invoice_required';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['label'] = '';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['sortOrder'] = '10';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['validation'] = ['required-entry' => false];
+
         $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['ruc'] = $rucField;
         $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['razon_social'] = $razonField;
         $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['direccion_fiscal'] = $fiscalField;
