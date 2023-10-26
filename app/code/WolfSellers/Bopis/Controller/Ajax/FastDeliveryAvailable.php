@@ -36,18 +36,19 @@ class FastDeliveryAvailable implements HttpGetActionInterface
     {
         $items = $this->_checkout->getQuote()->getAllVisibleItems();
 
-        $fastDeliveryAvailable = 1;
-
         foreach ($items as $item) {
             $response = $this->salableQuantityDataBySku->execute($item->getSku());
-            $saleableQuatity = current($response)['qty'];
-            if ($saleableQuatity < self::MINIMUM_SALABLE_QUANTITY) {
-                $fastDeliveryAvailable = 0;
+
+            $saleableQuatity = 0;
+            foreach ($response as $section){
+                if ($section['qty'] >= self::MINIMUM_SALABLE_QUANTITY){
+                    $saleableQuatity = 1;
+                }
             }
         }
 
         $result = $this->jsonResultFactory->create();
-        $data = ['available' => "$fastDeliveryAvailable"];
+        $data = ['available' => "$saleableQuatity"];
         $result->setData($data);
         return $result;
     }
