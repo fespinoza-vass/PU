@@ -86,7 +86,7 @@
                         <field id="sandbox_mode">0</field>
                     </depends>
                 </field>
-                <field id="sandbox_token" translate="label" type="text" sortOrder="91" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
+                <field id="sandbox_token" translate="label" type="obscure" sortOrder="91" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
                     <label>Sandbox Token</label>
                     <depends>
                         <field id="sandbox_mode">1</field>

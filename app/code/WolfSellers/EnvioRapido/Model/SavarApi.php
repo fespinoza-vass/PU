@@ -2,25 +2,46 @@
 
 namespace WolfSellers\EnvioRapido\Model;
 
-use Psr\Log\LoggerInterface;
-
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Framework\Serialize\Serializer\Json;
 use WolfSellers\EnvioRapido\Model\Configuration;
+use WolfSellers\EnvioRapido\Logger\Logger;
 
 
+/**
+ *
+ */
 abstract class SavarApi extends \Magento\Framework\DataObject
 {
-    protected LoggerInterface $logger;
+    /**
+     * @var Logger
+     */
+    protected Logger $logger;
 
+    /**
+     * @var Curl
+     */
     protected Curl $curl;
+    /**
+     * @var Json
+     */
     private Json $json;
 
+    /**
+     * @var \WolfSellers\EnvioRapido\Model\Configuration
+     */
     protected Configuration $configuration;
 
 
+    /**
+     * @param Logger $logger
+     * @param Curl $curl
+     * @param Json $json
+     * @param \WolfSellers\EnvioRapido\Model\Configuration $configuration
+     * @param array $data
+     */
     public function __construct(
-        LoggerInterface $logger,
+        Logger $logger,
         Curl            $curl,
         Json            $json,
         Configuration   $configuration,
@@ -34,15 +55,21 @@ abstract class SavarApi extends \Magento\Framework\DataObject
         parent::__construct($data);
     }
 
+
     /**
      * @param $data
-     * @return string
+     * @return array
      */
     public function execute($data)
     {
-        $this->sentRequest($data);
+        $this->logger->info("REQUEST: ". $this->json->serialize($data));
+        try{
+            $this->sentRequest($data);
 
-        return $this->getResponse();
+            return $this->getResponse();
+        } catch (\Throwable $error){
+            $this->logger->error($error->getMessage());
+        }
     }
 
     /**
@@ -61,18 +88,20 @@ abstract class SavarApi extends \Magento\Framework\DataObject
     abstract protected function getRequest($data);
 
     /**
-     * @return string
+     * @return array
      */
     protected function getResponse()
     {
-        $response = '{}';
-        $body = $this->curl->getBody();
+        $response = $this->curl->getBody();
 
-        if ($body) {
-            $response = $body->getContent();
-        }
+        $result = [
+            'state_code' => $this->curl->getStatus(),
+            'response'  => $this->json->unserialize($response)
+        ];
 
-        return $this->json->unserialize($response);
+        $this->logger->info("RESPONSE: ". $this->json->serialize($result));
+
+        return $result;
     }
 
     /**
@@ -88,7 +117,7 @@ abstract class SavarApi extends \Magento\Framework\DataObject
     /**
      * @return mixed
      */
-    private function getBaseUrl()
+    public function getBaseUrl()
     {
         $baseUrl = $this->configuration->getProductionWsUrl();
 

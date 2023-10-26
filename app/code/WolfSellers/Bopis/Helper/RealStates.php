@@ -8,6 +8,9 @@ use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class RealStates
 {
+    /** @var string  */
+    const ENVIO_RAPIDO = 'envio_rapido';
+
     /** @var string */
     const STATE_PATH = 'bopis/status/';
 
@@ -43,7 +46,7 @@ class RealStates
         if (!$shippingMethodCode) return '';
 
         if ($shippingMethodCode == AbstractBopisCollection::FAST_SHIPPING_METHOD){
-            $code[0] = 'envio_rapido';
+            $code[0] = self::ENVIO_RAPIDO;
         }else{
             $code = explode('_', $shippingMethodCode);
         }

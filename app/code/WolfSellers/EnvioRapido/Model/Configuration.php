@@ -16,8 +16,8 @@ class Configuration
     const SANDBOX_MODE = 'sandbox_mode';
     const SANDBOX_URL = 'sandbox_ws_url';
     const PRODUCTION_URL = 'production_ws_url';
-    const SANDBOX_TOKEN = 'production_token';
-    const PRODUCTION_TOKEN = 'sandbox_token';
+    const SANDBOX_TOKEN = 'sandbox_token';
+    const PRODUCTION_TOKEN = 'production_token';
     const PRODUCTION_ORDER_ENDPOINT = 'production_order_endpoint';
     const SANDBOX_ORDER_ENDPOINT = 'sandbox_order_endpoint';
     const PRODUCTION_STATUS_ENDPOINT = 'production_status_endpoint';
