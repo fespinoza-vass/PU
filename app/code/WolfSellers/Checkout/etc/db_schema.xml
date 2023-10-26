@@ -12,6 +12,18 @@
         <column name="customer_apellido" nullable="true" xsi:type="varchar" comment="customer lastname guest" length="200"/>
         <column name="customer_password" nullable="true" xsi:type="varchar" comment="customer password guest" length="200"/>
     </table>
+    <table name="quote_address">
+        <column name="direccion_fiscal" nullable="true" xsi:type="text" comment="Direccion fiscal"/>
+        <column name="invoice_required" nullable="true" xsi:type="text" comment="Factura requerido"/>
+        <column name="razon_social" nullable="true" xsi:type="text" comment="Razon social"/>
+        <column name="ruc" nullable="true" xsi:type="text" comment="RUC"/>
+    </table>
+    <table name="sales_order_address">
+        <column name="direccion_fiscal" nullable="true" xsi:type="text" comment="Direccion fiscal"/>
+        <column name="invoice_required" nullable="true" xsi:type="text" comment="Factura requerido"/>
+        <column name="razon_social" nullable="true" xsi:type="text" comment="Razon social"/>
+        <column name="ruc" nullable="true" xsi:type="text" comment="RUC"/>
+    </table>
 </schema>
 
 
