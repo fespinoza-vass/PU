@@ -67,7 +67,7 @@ define([
                 shippingPayment.setShippingModelData(quote);
                 this.setIsDisabledShippingStep();
             },this);
-            this.goToResume.subscribe(function (value) {
+            this.goToResume.subscribe(function (value) { 
                 if (!value){
                     shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_complete');
