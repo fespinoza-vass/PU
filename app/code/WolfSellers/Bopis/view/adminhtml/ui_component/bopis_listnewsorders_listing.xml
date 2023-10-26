@@ -64,6 +64,17 @@
                     <dataScope>shipping_method</dataScope>
                 </settings>
             </filterSelect>
+            <filterSelect
+                name="savar_horario"
+                provider="${ $.parentName }"
+                class="\WolfSellers\Bopis\Ui\Component\Listing\Filter\SavarHorario" sortOrder="45">
+                <settings>
+                    <options class="WolfSellers\Bopis\Model\Config\Source\HorariosOptions"/>
+                    <caption translate="true">All</caption>
+                    <label translate="true">Horario</label>
+                    <dataScope>savar_horario</dataScope>
+                </settings>
+            </filterSelect>
         </filters>
     </listingToolbar>
     <columns name="bopis_listorders_columns">
@@ -134,6 +145,13 @@
                 <draggable>false</draggable>
                 <sortable>true</sortable>
                 <label translate="true">Método de entrega</label>
+            </settings>
+        </column>
+        <column name="savar_horario" class="WolfSellers\Bopis\Ui\Component\Listing\Column\HorariosSavar" sortOrder="45">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <label translate="true">Horario</label>
             </settings>
         </column>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"

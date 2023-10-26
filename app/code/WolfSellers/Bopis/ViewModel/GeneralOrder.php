@@ -72,4 +72,19 @@ class GeneralOrder implements ArgumentInterface
 
         return $source->getName();
     }
+
+    /**
+     * @param $schedule
+     * @return string
+     */
+    public function getSchedule($schedule)
+    {
+        return match ($schedule){
+            "12_4_hoy" => "12:00 - 16:00 Hoy",
+            "4_8_hoy" => "16:00 - 20:00 Hoy",
+            "12_4_manana" => "12:00 - 16:00 Mañana",
+            "4_8_manana" => "16:00 - 20:00 Mañana",
+            default => ""
+        };
+    }
 }

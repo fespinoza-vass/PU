@@ -184,7 +184,7 @@ $shippingAddress = $order->getShippingAddress();
                 <span class="teléfono">T. <?= $shippingAddress->getTelephone() ?></span> <br>
                 <span class="referencia"> Referencia: <?= $shippingAddress->getData('referencia_envio') ?></span> <br>
                 <span class="provincia"><?= $shippingAddress->getCity() ?></span> <br>
-                <span class="horairo">Horario de entrega:</span>
+                <span class="horairo">Horario de entrega: <?=$viewModel->getSchedule($order->getDataByKey('savar_horario'))?></span>
             </address>
         </div>
     </div>
