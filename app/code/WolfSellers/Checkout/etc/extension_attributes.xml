@@ -30,4 +30,10 @@
     <extension_attributes for="Magento\InventoryInStorePickupApi\Api\Data\PickupLocationInterface">
         <attribute code="district" type="string" />
     </extension_attributes>
+
+    <extension_attributes for="Magento\Quote\Api\Data\AddressExtension">
+        <attribute code="distrito_envio_rapido" type="string" />
+        <attribute code="referencia_envio" type="string" />
+        <attribute code="horarios_disponibles" type="string" />
+    </extension_attributes>
 </config>

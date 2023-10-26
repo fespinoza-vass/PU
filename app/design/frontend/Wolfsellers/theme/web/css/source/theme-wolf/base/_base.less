@@ -81,6 +81,119 @@
                 }
             }
         }
+		&._has-modal{
+			.modals-wrapper{
+				.modal-popup.minicart-proceed-confirmation{
+					.modal-inner-wrap{
+						background: @color-white;
+						.modal-header{
+							padding: 0;
+							.action-close{
+								&:before{
+									font-size: 24px;
+									color: @lines-input;
+									line-height: 1;
+								}
+							}
+						}
+						.modal-content{
+							.custom-popup-content{
+								&_info{
+									.lib-css(display,flex,1);
+									&-img{
+										img{
+											width: 48px;
+											height: 70px;
+										}
+									}
+									p{
+										.lib-font-size(16);
+									}
+								}
+								&_delivery{
+									&_regular,
+									&_instore{
+										.lib-css(display,flex,1);
+										.lib-css(align-items,center,1);
+										&-tag{
+											.lib-font-size(10);
+											font-weight: 600;
+											background: @color-black;
+											color: @color-white;
+											border-radius: 12px;
+											padding: 0 7px;
+											margin-right: 5px;
+											.lib-icon-font(
+												@_icon-font-content: @icon-regular-shipping,
+												@_icon-font-color: @white,
+												@_icon-font-size: 2rem,
+												@_icon-font-position: before,
+												@_icon-font-margin: 0 1px 0 0
+											);
+										}
+										&-available{
+											color: @green3;
+											margin-right: 5px;
+											.lib-icon-font(
+												@_icon-font-content: @icon-nike,
+												@_icon-font-color: @green3,
+												@_icon-font-size: 2rem,
+												@_icon-font-position: before,
+												@_icon-font-margin: 0 2px 0 0
+											);
+										}
+										&-wait-time{
+											.lib-font-size(12);
+											font-style: italic;
+										}
+									}
+									&_instore{
+										padding-top: 12px;
+										&-tag{
+											padding: 5px 7px;
+											.lib-icon-font(
+												@_icon-font-content: @icon-store-checkout,
+												@_icon-font-color: @white,
+												@_icon-font-size: 1.2rem,
+												@_icon-font-position: before,
+												@_icon-font-margin: 0 1px 0 0
+											);
+										}
+									}
+								}
+								&_footer{
+									.lib-font-size(16);
+								}
+							}
+						}
+						.modal-footer{
+							display: block;
+							border-top: 0;
+							padding-top: 16px;
+							text-align: center;
+							.action-primary,
+							.action-secondary{
+								.lib-font-size(18);
+								font-weight: 700;
+								height: 60px;
+								text-transform: uppercase;
+							}
+							.action-primary{
+								background: @color-black;
+								color: @white;
+								padding: 18px 21px;
+							}
+							.action-secondary{
+								border: 1px solid @black;
+								color: @black;
+								background: @white;
+								padding: 18px 24px;
+							}
+						}
+					}
+				}
+			}
+		}
         // slider-marcas
         .widget.block.block-static-block{
             .am-widget-brand-slider{
@@ -640,6 +753,50 @@
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
     body{
+		&._has-modal{
+			.modals-wrapper{
+				.modal-popup.minicart-proceed-confirmation{
+					left: 0;
+					.modal-inner-wrap{
+						position: absolute;
+						transform: translate(-50%,-50%);
+						top: 50%;
+						left: 50%;
+						padding-right: 0;
+						margin: 0;
+						border-radius: 12px;
+						max-width: 709px;
+						width: 100%;
+						.modal-content{
+							padding: 28px 28px 0 28px;
+							.custom-popup-content{
+								&_info{
+									&-img{
+										width: 8%;
+									}
+									p{
+										width: 86%;
+										padding-left: 17px;
+									}
+								}
+								&_delivery{
+									padding: 18px 100px;
+								}
+								&_footer{
+									padding: 0 65px;
+								}
+							}
+						}
+						.modal-footer{
+							margin-bottom: 32px;
+							.action-secondary{
+								margin-right: 16px;
+							}
+						}
+					}
+				}
+			}
+		}
         //cookis
         .message.global.cookie{
             height: 320px;
@@ -708,6 +865,76 @@
 }
 
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+
+	body{
+		&._has-modal{
+			.modal-popup.minicart-proceed-confirmation{
+				&._show{
+					left: 0;
+					.modal-inner-wrap{
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%,-50%);
+						width: calc(~"100% - 30px");
+						height: auto;
+						border-radius: 11px;
+						max-width: 382px;
+						min-height: initial;
+						.modal-content{
+							padding: 10px;
+							margin: initial;
+							#minicart-proceed-confirmation-popup-content{
+								.custom-popup-content{
+									&_info{
+										.lib-css(flex-direction,column,1);
+										.lib-css(align-items,center);
+										p{
+											text-align: center;
+											padding: 16px 10px;
+										}
+									}
+									&_delivery{
+										&_regular,
+										&_instore{
+											&-tag{
+												.lib-font-size(8);
+											}
+											&-available{
+												.lib-font-size(10);
+												&:before{
+													font-size: 1.8rem;
+												}
+											}
+											&-wait-time{
+												.lib-font-size(8);
+											}
+										}
+									}
+									&_footer{
+										padding-top: 16px;
+									}
+								}
+							}
+						}
+						.modal-footer{
+							padding: 10px 14px;
+							margin: 0;
+							.action-secondary,
+							.action-primary{
+								width: 100%;
+								margin: 0 0 16px 0;
+							}
+							.action-primary{
+								margin-bottom: 24px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	.messages{
 		margin: 16px auto 20px;
 		max-width: @layout__max-width;
@@ -758,6 +985,44 @@
 		.popup-actions{
 			.action.close{
 				top: 20px;
+			}
+		}
+	}
+}
+
+@media @xssmax{
+	body{
+		&._has-modal{
+			.modal-popup.minicart-proceed-confirmation{
+				&._show{
+					.modal-inner-wrap{
+						.modal-content{
+							#minicart-proceed-confirmation-popup-content{
+								.custom-popup-content{
+									&_info{
+										p{
+											.lib-font-size(14);
+										}
+									}
+									&_delivery{
+										&_regular,
+										&_instore{
+											&-tag{
+												.lib-font-size(6);
+											}
+											&-available{
+												.lib-font-size(8);
+											}
+										}
+									}
+									&_footer{
+										.lib-font-size(14);
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}

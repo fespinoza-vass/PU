@@ -4,9 +4,13 @@ namespace WolfSellers\Bopis\Helper;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class RealStates
 {
+    /** @var string  */
+    const ENVIO_RAPIDO = 'envio_rapido';
+
     /** @var string */
     const STATE_PATH = 'bopis/status/';
 
@@ -40,7 +44,13 @@ class RealStates
     public function getShippingMethodTitle($shippingMethodCode): string
     {
         if (!$shippingMethodCode) return '';
-        $code = explode('_', $shippingMethodCode);
+
+        if ($shippingMethodCode == AbstractBopisCollection::FAST_SHIPPING_METHOD){
+            $code[0] = self::ENVIO_RAPIDO;
+        }else{
+            $code = explode('_', $shippingMethodCode);
+        }
+
         return $this->_scopeConfig->getValue('carriers/' . $code[0] . '/title');
     }
 

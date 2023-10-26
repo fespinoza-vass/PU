@@ -48,7 +48,7 @@ abstract class AbstractBopisCollection extends Collection
     const BOPIS_REGULAR_SHIPPING = 'gestor_bopis_regular_shipping';
 
     /** @var string  */
-    const FAST_SHIPPING_METHOD = 'flatrate_flatrate';
+    const FAST_SHIPPING_METHOD = 'envio_rapido_envio_rapido';
 
     /** @var string  */
     const REGULAR_SHIPPING_METHOD = 'urbano';
@@ -139,7 +139,8 @@ abstract class AbstractBopisCollection extends Collection
                 "IF(so.status = 'complete', so.updated_at, null) as updated_at",
                 "IF(so.created_at >= (now() - interval 1 DAY) AND so.status = 'processing',1,0) as is_new",
                 'so.source_code',
-                'so.shipping_method'
+                'so.shipping_method',
+                'so.savar_horario'
             ]
         );
         $orderAddressTable = $this->getTable('sales_order_address');
