@@ -14,12 +14,16 @@ define([
     'use strict';
     var paymentMixin = {
         defaults:{
-            template:'WolfSellers_Checkout/payment'
+            template:'WolfSellers_Checkout/payment',
+            links: {
+                "IsDisablePaymentMethods":"checkout.steps.shipping-step.shippingAddress:goToResume",
+                "IsDisablePaymentMethods":"checkout.steps.store-pickup.store-selector:goToResume"
+            }
         },
         isVisible: ko.observable(true),
         isActive: ko.observable(false),
         IsDisabledPaymentStep : ko.observable(true),
-
+        IsDisablePaymentMethods : ko.observable(true),
         /**
          * initialize
          * @return {paymentMixin}
@@ -38,6 +42,14 @@ define([
 
             this.IsDisabledPaymentStep(true);
             this.setIsDisabledPaymentStep();
+
+            this.IsDisablePaymentMethods.subscribe(function(value){
+                if(value === true){
+                   return true;
+                }else{
+                    return false;
+                }
+            });
             return this;
         },
 
