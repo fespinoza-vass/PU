@@ -306,7 +306,7 @@ h1{
                 h3{
                     font-size: 15px;
                     color: @color-black-transaccional;
-                    font-weight: normal;
+                    font-weight: bold;
                 }
                 span{
                     color: @color-black;
@@ -319,6 +319,9 @@ h1{
             font-weight: normal;
             font-size: 16px;
             padding-left: 0;
+            &.item-subtotal{
+                padding-right: 25px;
+            }
         } 
         td{
             &.product-name,
@@ -327,6 +330,9 @@ h1{
             &.item-subtotal{
                 font-size: 12px;
                 font-weight: bold;
+            }
+            &.item-subtotal{
+                padding-right: 25px;
             }
         }
         .item-info{
@@ -337,6 +343,8 @@ h1{
             border-bottom: 20px solid @mainbackground;
             td{
                 background: @white;
+                padding-right: 25px;
+                padding-left: 0;
                 span{
                     font-size: 12px;
                     font-weight: bold;
@@ -425,6 +433,16 @@ h1{
         .progress-status{
             img{
                 width: 250px;
+            }
+        }
+    }
+    .email-information{
+        .order-details{
+            .address-details{
+                display: table-cell !important; //by added by mailer
+                h3,p{
+                    font-size: 10px !important; //by added by mailer
+                }
             }
         }
     }
