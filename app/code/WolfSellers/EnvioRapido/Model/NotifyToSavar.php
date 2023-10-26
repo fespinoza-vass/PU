@@ -9,18 +9,20 @@ use WolfSellers\EnvioRapido\Model\SavarApi;
 class NotifyToSavar extends SavarApi
 {
 
+    CONST METHOD_TYPE = "post";
+
     protected function getRequest($data)
     {
-        // TODO: Implement getRequest() method.
+        return $data;
     }
 
     protected function getUri()
     {
-        // TODO: Implement getUri() method.
+        return $this->getBaseUrl();
     }
 
     protected function getMethodType()
     {
-        // TODO: Implement getMethodType() method.
+        return self::METHOD_TYPE;
     }
 }

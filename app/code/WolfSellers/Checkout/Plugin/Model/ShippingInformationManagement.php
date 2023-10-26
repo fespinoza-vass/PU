@@ -5,9 +5,16 @@ namespace WolfSellers\Checkout\Plugin\Model;
 use Magento\Quote\Model\QuoteRepository;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Eav\Model\Config;
+use Magento\Quote\Api\Data\AddressExtensionFactory;
 
 class ShippingInformationManagement
 {
+
+    /** @var AddressExtensionFactory */
+    protected $_addressExtensionFactory;
+    /** @var Config  */
+    protected $_eavConfig;
     /**
      * @var QuoteRepository
      */
@@ -19,8 +26,12 @@ class ShippingInformationManagement
     public function __construct(
         QuoteRepository $quoteRepository,
         Session $sessionRepository,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        Config $eavConfig,
+        AddressExtensionFactory $addressExtensionFactory
     ) {
+        $this->_addressExtensionFactory = $addressExtensionFactory;
+        $this->_eavConfig = $eavConfig;
         $this->quoteRepository = $quoteRepository;
         $this->sessionRepository = $sessionRepository;
         $this->customerRepository = $customerRepository;
@@ -40,6 +51,8 @@ class ShippingInformationManagement
         \Magento\Checkout\Api\Data\ShippingInformationInterface $addressInformation
     ) {
         $extensionAttributes = $addressInformation->getExtensionAttributes();
+        $quote = $this->quoteRepository->getActive($cartId);
+
         if(!$extAttributes = $addressInformation->getExtensionAttributes())
         {
             return;
@@ -55,7 +68,7 @@ class ShippingInformationManagement
             $customer->setCustomAttribute('numero_de_identificacion',$extensionAttributes->getCustomerNumeroDeIdentificacion());
             $this->customerRepository->save($customer);
         }else{
-            $quote = $this->quoteRepository->getActive($cartId);
+
             $quote->setCustomerName($extAttributes->getCustomerName());
             $quote->setCustomerApellido($extAttributes->getCustomerApellido());
             $quote->setCustomerTelefono($extensionAttributes->getCustomerTelefono());
@@ -64,5 +77,41 @@ class ShippingInformationManagement
             $quote->setCustomerPassword($extensionAttributes->getCustomerPassword());
             $quote->save();
         }
+
+        // atributos de envio rapido
+        if($extensionAttributes->getEnvioRapido()->getDistrito()){
+
+            $extension = $this->_addressExtensionFactory->create();
+
+            $extension->setData('referencia_envio',$extensionAttributes->getEnvioRapido()->getReferencia());
+            $extension->setData('distrito_envio_rapido',$extensionAttributes->getEnvioRapido()->getDistrito());
+            //$extension->setData('horarios_disponibles',$extensionAttributes->getEnvioRapido()->getDistrito());
+
+            $quote->getBillingAddress()->setExtensionAttributes($extension);
+            $quote->getShippingAddress()->setExtensionAttributes($extension);
+
+
+            $horarioValue = $this->getIdOptionByValue(
+                                'horarios_disponibles',
+                                 $extensionAttributes->getEnvioRapido()->getHorarioSeleccionado()
+                            );
+
+            $quote->getShippingAddress()->setData('horarios_disponibles',$horarioValue);
+            $quote->getShippingAddress()->setCustomAttribute('horarios_disponibles',$horarioValue);
+
+            $quote->save();
+        }
+    }
+
+    public function getIdOptionByValue($attributeCode,$value){
+        $optionId = null;
+        $attribute = $this->_eavConfig->getAttribute('customer_address', $attributeCode);
+        $options = $attribute->getSource()->getAllOptions();
+        foreach($options as $option) {
+            if ($option['label'] == $value) {
+                $optionId = $option['value'];
+            }
+        }
+        return $optionId;
     }
 }
