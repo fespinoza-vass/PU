@@ -60,6 +60,8 @@ class GeneralOrder implements ArgumentInterface
      */
     public function getOrderSourceName($sourceCode): string
     {
+        if (!$sourceCode || $sourceCode == '') return '';
+
         $this->_searchCriteriaBuilder->addFilter('source_code', $sourceCode);
         $searchCriteria = $this->_searchCriteriaBuilder->create();
 
