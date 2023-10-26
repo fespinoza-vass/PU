@@ -45,6 +45,10 @@
         <plugin name="wolf-disable-guest-place-order" type="WolfSellers\Checkout\Plugin\GuestPaymentInformationManagementPlugin" disabled="false"/>
     </type>
 
+    <type name="Magento\Checkout\Api\PaymentInformationManagementInterface">
+        <plugin name="WolfSellers_Checkout_Plugin_Magento_Quote_Model_BillingAddressManagement" sortOrder="10" type="WolfSellers\Checkout\Plugin\Quote\Model\BillingAddressManagement"/>
+    </type>
+
 
     <type name="Magento\InventoryInStorePickupApi\Model\Mapper">
         <arguments>

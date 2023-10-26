@@ -82,6 +82,7 @@ class PaymentInformationManagementPlugin
         $hasDefaultBilling = $customer->getDefaultBilling();
         $hasDefaultShipping = $customer->getDefaultShipping();
 
+
         if ($quoteSameAsBilling === 1) {
             $sameAsBillingFlag = 1;
         } elseif (!empty($quoteShippingAddressData) && !empty($billingAddress)) {
