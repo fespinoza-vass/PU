@@ -4,9 +4,9 @@ namespace WolfSellers\EnvioRapido\Model;
 
 use Psr\Log\LoggerInterface;
 
-use WolfSellers\EnvioRapido\Model\SavarApi;
+use WolfSellers\EnvioRapido\Model\SavarApiCreateOrder;
 
-class NotifyToSavar extends SavarApi
+class NotifyToSavarGetOrder extends SavarApiGetOrder
 {
 
     CONST METHOD_TYPE = "post";

@@ -11,7 +11,7 @@ use WolfSellers\EnvioRapido\Logger\Logger;
 /**
  *
  */
-abstract class SavarApi extends \Magento\Framework\DataObject
+abstract class SavarApiCreateOrder extends \Magento\Framework\DataObject
 {
     /**
      * @var Logger
@@ -119,10 +119,10 @@ abstract class SavarApi extends \Magento\Framework\DataObject
      */
     public function getBaseUrl()
     {
-        $baseUrl = $this->configuration->getProductionWsUrl();
+        $baseUrl = $this->configuration->getProductionOrderEndpoint();
 
         if ($this->configuration->isSandboxMode()) {
-            $baseUrl = $this->configuration->getSandboxWsUrl();
+            $baseUrl = $this->configuration->getSandboxOrderEndpoint();
         }
 
         return $baseUrl;

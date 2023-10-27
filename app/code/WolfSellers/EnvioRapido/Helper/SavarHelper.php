@@ -9,8 +9,8 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
-use WolfSellers\EnvioRapido\Model\NotifyToSavar;
-use WolfSellers\EnvioRapido\Model\SavarApi;
+use WolfSellers\EnvioRapido\Model\NotifyToSavarCreateOrder;
+use WolfSellers\EnvioRapido\Model\SavarApiCreateOrder;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 
 
@@ -35,16 +35,16 @@ class SavarHelper extends AbstractHelper
 
     /** @var OrderRepositoryInterface */
     protected $_orderRepository;
-    /** @var NotifyToSavar */
+    /** @var NotifyToSavarCreateOrder */
     protected $_notifyToSavar;
 
     /**
      * @param Context $context
-     * @param NotifyToSavar $notifyToSavar
+     * @param NotifyToSavarCreateOrder $notifyToSavar
      */
     public function __construct(
         Context                               $context,
-        NotifyToSavar                         $notifyToSavar,
+        NotifyToSavarCreateOrder              $notifyToSavar,
         OrderRepositoryInterface              $orderRepository,
         DireccionesTiendasRepositoryInterface $direccionesTiendasRepository,
         SourceRepositoryInterface             $sourceRepository,

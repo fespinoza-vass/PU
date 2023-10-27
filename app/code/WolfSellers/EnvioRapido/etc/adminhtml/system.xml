@@ -41,20 +41,6 @@
 					<label>Displayed Error Message</label>
 				</field>
 
-
-                <field id="production_ws_url" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Web-Services URL (Production)</label>
-                    <depends>
-                        <field id="sandbox_mode">0</field>
-                    </depends>
-                </field>
-                <field id="sandbox_ws_url" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Web-Services URL (Sandbox)</label>
-                    <depends>
-                        <field id="sandbox_mode">1</field>
-                    </depends>
-                </field>
-
                 <field id="production_order_endpoint" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Create Order Endpoint (Production)</label>
                     <depends>
@@ -80,6 +66,7 @@
                         <field id="sandbox_mode">1</field>
                     </depends>
                 </field>
+
                 <field id="production_token" translate="label" type="obscure" sortOrder="90" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
                     <label>Production Token</label>
                     <depends>

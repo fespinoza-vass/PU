@@ -13,13 +13,10 @@
 				<price>99.99</price>
 				<specificerrmsg>No hay stock disponible para este método de envío por favor, usa otro método de envío</specificerrmsg>
 				<sallowspecific>0</sallowspecific>
-
-                <production_ws_url>https://app.savarexpress.com.pe/govari/api/ServicioDelivery</production_ws_url>
-                <sandbox_ws_url>https://test.savarexpress.com.pe/govari/api/ServicioDelivery</sandbox_ws_url>
-                <production_order_endpoint>ServicioDelivery</production_order_endpoint>
-                <sandbox_order_endpoint>ServicioDelivery</sandbox_order_endpoint>
-                <production_status_endpoint>servicio</production_status_endpoint>
-                <sandbox_status_endpoint>servicio</sandbox_status_endpoint>
+                <production_order_endpoint>https://app.savarexpress.com.pe/govari/api/ServicioDeliver</production_order_endpoint>
+                <sandbox_order_endpoint>https://test.savarexpress.com.pe/govari/api/ServicioDelivery</sandbox_order_endpoint>
+                <production_status_endpoint>https://app.savarexpress.com.pe/govari/api/servicio/#</production_status_endpoint>
+                <sandbox_status_endpoint>https://test.savarexpress.com.pe/govari/api/servicio/#</sandbox_status_endpoint>
                 <max_package_weight>75</max_package_weight>
 
 			</envio_rapido>
