@@ -10,9 +10,6 @@ define([
     'use strict';
 
     return Abstract.extend({
-        defaults: {
-            invoiceFormTemplate: 'WolfSellers_Checkout/payment-data/invoice-form'
-        },
         initialize: function () {
             this._super();
             registry.get('index = ruc').hide();
@@ -38,6 +35,29 @@ define([
             if(!isShippingStepFinished.includes('_complete')){
                 return;
             }
+
+            if(quote.shippingMethod().carrier_code.includes('instore')){
+                customAtributes = [
+                    {
+                        "attribute_code": "ruc",
+                        "value": ""
+                    },
+                    {
+                        "attribute_code": "razon_social",
+                        "value": ""
+                    },
+                    {
+                        "attribute_code": "direccion_fiscal",
+                        "value": ""
+                    },
+                    {
+                        "attribute_code": "invoice_required",
+                        "value": false,
+                        "label": "No"
+                    }
+                ];
+            }
+
             if (value === 'boleta') {
                 customAtributes.forEach( function(value, index, array) {
                     if (value['attribute_code'] === 'invoice_required') {
