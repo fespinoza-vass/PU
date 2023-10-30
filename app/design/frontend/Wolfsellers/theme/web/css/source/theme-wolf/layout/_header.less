@@ -7,6 +7,18 @@
                 }
             }
         }
+        &.active-buttons-header{
+            &:not(.checkout-index-index){
+                .page-wrapper{
+                    padding-top: 240px;
+                }
+                @media @mdmax{
+                    .page-wrapper{
+                        padding-top: 170px;
+                    }
+                }
+            }
+        }
         .ammenu-header-container.-sticky .header.content{
             position: static;
             max-width: @layout__max-width;
@@ -557,6 +569,47 @@
                         }
                     }
                 }
+                .nav-header-links{
+                    width: 100%;
+                    padding-top: 15px;
+                    margin: 10px 0;
+                    
+                    .buttons{
+                        .lib-css(display, flex, @_prefix: 1);
+                        a{
+                            .lib-css(display,flex,@_prefix:1);
+                            .lib-css(align-items,center,@_prefix:1);
+                            .lib-css(justify-content,center,@_prefix:1);
+                            background: @gray-E6;
+                            flex: 1;
+                            height: 45px;
+                            margin-right: 10px;
+                            text-align: center;
+                            &:last-child{
+                                margin-right: 0;
+                            }
+                        }
+                        img{
+                            width: 34px;
+                            height: auto;
+                            border-radius: 0;
+                        }
+                        .banner-promo-detail{
+                            .lib-css(display, flex, @_prefix: 1);
+                            .lib-css(align-items,center,@_prefix: 1);
+                            .lib-font-size(14);
+                            font-weight:700;
+                            * {
+                                .lib-font-size(14);
+                                font-weight: 700;
+                                font-family: @font-family-name__base;
+                                .lib-css(display, flex, @_prefix: 1);
+                                .lib-css(align-items,center,@_prefix: 1);
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
             }
         }
         &.nav-up{
@@ -582,7 +635,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
     body {
-        &:not(.checkout-index-index){
+        &:not(.checkout-index-index):not(.cms-preguntas-frecuentes){
             .page-wrapper{
                 padding-top: 107px;
             }
@@ -856,6 +909,41 @@
                         margin-top: 0;
                         margin-right: 20px;
                     }
+                    .nav-header-links{
+                        position: absolute;
+                        top: 90px;
+                        left: 0;
+                        background: @white;
+                        padding-top: 0;
+                        width: 100%;
+                        padding: 10px 10px 15px 10px;
+                        margin: 0;
+                        .lib-css(align-items,center,@_prefix:1);
+                        .lib-css(justify-content,center,@_prefix:1);
+                        .buttons{
+                            height: 38px;
+                            .lib-css(flex-direction,row,@_prefix:1);
+                            gap: 4px;
+                            img{
+                                width: 30px;
+                                margin-right: 8px;
+                            }
+                            a{
+                                height: 38px;
+                                padding: 5px 8px;
+                                margin: 0;
+                            }
+                            .banner-promo-detail{
+                                .lib-font-size(8);
+                                *{
+                                    .lib-font-size(8);
+                                    padding: 5px 0;
+                                    line-height: 1;
+                                    text-align: start;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -897,5 +985,18 @@
                 }
             }
         } 
+    }
+}
+
+
+@media screen and (min-width:990px) and (max-width:1024px){
+    body{
+        &.active-buttons-header{
+            &:not(.checkout-index-index){
+                .page-wrapper{
+                    padding-top: 200px;
+                }
+            }
+        }
     }
 }

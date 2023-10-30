@@ -5,6 +5,16 @@
     .customer-account-login,
 	.customer-account-create,
 	.customer-account-forgotpassword{
+        &.active-buttons-header{
+            #maincontent{
+                .page-title-wrapper{
+                    padding-top: 40px;
+                }
+                .columns{
+                    padding-top: 0;
+                }
+            }
+        }
 		.page-main{
 			.page-title-wrapper{
 				max-width: @layout-width;
@@ -1485,6 +1495,13 @@
         .page-footer{
             display: none;
         }
+        &.active-buttons-header{
+            .sidebar-main{
+                .block-collapsible-nav{
+                    top: 100px;
+                }
+            }
+        } 
     }
 
  //  ------------LOGIN------------
@@ -1904,6 +1921,22 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+    .customer-account-login,
+	.customer-account-create,
+	.customer-account-forgotpassword{
+        &.active-buttons-header{
+            .page-wrapper{
+                #maincontent{
+                    .page-title-wrapper{
+                        padding-top: 60px;
+                    }
+                    .columns{
+                        padding-top: 0;
                     }
                 }
             }

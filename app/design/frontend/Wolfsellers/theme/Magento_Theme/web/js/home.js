@@ -156,6 +156,29 @@ require([
 	        });
     	}
 
+		//detects scroll and hides buttons if class exists
+		$(window).scroll(function(){
+			if($(window).scrollTop() > 100){
+				if($('.nav-header-links.sticky-header-buttons').length === 0){
+					$('.nav-header-links').css('display','none');
+				}else{
+					$('.nav-header-links').css('display','block');
+				}
+			}else{
+				$('.nav-header-links').css('display','block');
+			}
+		});
+
+		//Validate if the header buttons are active
+		if($('.nav-header-links').length === 1){
+			$('body').addClass('active-buttons-header');
+		}
+		
+		//Validate if the counter are active
+		if($('.contador').length === 1){
+			$('body').addClass('active-counter');
+		}
+
     });
 
 });

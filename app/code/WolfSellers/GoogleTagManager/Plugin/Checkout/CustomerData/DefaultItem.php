@@ -7,7 +7,7 @@
  * gender
  * size
  * promotion
- * 
+ *
  * In the CustomerData of the product, to be able to send them to the Tag Manager
  */
 
@@ -15,6 +15,11 @@ namespace WolfSellers\GoogleTagManager\Plugin\Checkout\CustomerData;
 
 class DefaultItem
 {
+    /**
+     * @var \Magento\Catalog\Model\ProductFactory
+     */
+    protected $_productloader;
+
     /*
      * @param TimezoneInterface $date
      * @param StoreManagerInterface $storeManager
@@ -33,6 +38,7 @@ class DefaultItem
         \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
         \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
         \Magento\Catalog\Model\ProductRepository $productRepository,
+        \Magento\Catalog\Model\ProductFactory $_productloader,
         \Psr\Log\LoggerInterface $logger)
     {
         $this->_date =  $date;
@@ -43,8 +49,15 @@ class DefaultItem
         $this->_categoryRepository = $categoryRepository;
         $this->_productRepository = $productRepository;
         $this->logger = $logger;
+        $this->_productloader = $_productloader;
     }
-    
+
+    /**
+     * @param \Magento\Checkout\CustomerData\AbstractItem $subject
+     * @param \Closure $proceed
+     * @param \Magento\Quote\Model\Quote\Item $item
+     * @return array
+     */
     public function aroundGetItemData(
         \Magento\Checkout\CustomerData\AbstractItem $subject,
         \Closure $proceed,
@@ -58,13 +71,18 @@ class DefaultItem
         $brand = null;
         $gender = null;
         $size = null;
+
+
         foreach($attributes as $attribute){
-            /*if($attribute->getName() === 'categoria') {
+            if($attribute->getName() === 'categoria') {
                 $category = $attribute->getFrontend()->getValue($item->getProduct());
             }
             if($attribute->getName() === 'sub_categoria') {
                 $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
-            }*/
+            }
+            if($attribute->getName() === 'familia') {
+                $family = $attribute->getFrontend()->getValue($item->getProduct());
+            }
             if($attribute->getName() === 'manufacturer') {
                 $brand = $attribute->getFrontend()->getValue($item->getProduct());
             }
@@ -76,9 +94,20 @@ class DefaultItem
                 if( !$size ) $size = null;
             }
         }
-        
+
+        if($family == null){
+            $product = $this->getLoadProduct($item->getProductId());
+            $family = !empty($product->getFamilia()) ? $product->getFamilia() : null;
+        }
+
         $product = $this->getProductById($data['product_id']);
-        
+        /** Get Name Categories of product */
+        /*$categories = $this->getCategoryName($product);
+        $category = isset($categories[0]) ? $categories[0] : '';
+        $subcategory = isset($categories[1]) ? $categories[1] : '';
+        $family = isset($categories[2]) ? $categories[2] : ''; */
+
+
         /** Get Rules of product */
         $rules = $this->getRules($product->getId());
         $dataRule = [];
@@ -88,12 +117,7 @@ class DefaultItem
             }
         }
         $dataRule = implode( ', ', $dataRule);
-        
-        /** Get Name Categories of product */
-        $categories = $this->getCategoryName($product);
-        $category = isset($categories[0]) ? $categories[0] : '';
-        $subcategory = isset($categories[1]) ? $categories[1] : '';
-        $family = isset($categories[2]) ? $categories[2] : '';
+
 
         $result['category'] = $category;
         $result['subcategory'] = $subcategory;
@@ -102,25 +126,25 @@ class DefaultItem
         $result['gender'] = $gender;
         $result['size'] = $size;
         $result['promotion'] = $dataRule;
-        
+
         return \array_merge(
             $result,
             $data
         );
     }
-    
+
     /** Function get product by ID */
     public function getProductById($id)
     {
         return $this->_productRepository->getById($id);
     }
-    
+
     /** Function get product by SKU */
     public function getProductBySku($sku)
     {
         return $this->_productRepository->get($sku);
     }
-    
+
     /*
      * Function for get Name Category
      */
@@ -133,7 +157,7 @@ class DefaultItem
         }
         return $categories;
     }
-    
+
     /*
      * Function for get Rule of product
      */
@@ -142,19 +166,30 @@ class DefaultItem
         $date = $this->_date->date()->format('Y-m-d H:i:s');
         $websiteId = $this->_storeManager->getStore()->getWebsiteId();
         $customerGroupId = $this->sessionProxy->getCustomer()->getGroupId();
-        
+
         $this->logger->debug('DATE: '.$date);
         $this->logger->debug('WEBSITEID: '.$websiteId);
         $this->logger->debug('CUSTOMERGROUPID: '.$customerGroupId);
-        
+
         $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
         $promos = [];
-        
+
         foreach ($rules as $rule){
             $promo = $this->catalogRuleRepository->get($rule['rule_id']);
             array_push($promos, $promo->getName());
         }
-        
+
         return $promos;
+    }
+
+    /**
+     * Load data product by Id
+     *
+     * @param $id
+     * @return \Magento\Catalog\Model\Product
+     */
+    public function getLoadProduct($id)
+    {
+        return $this->_productloader->create()->load($id);
     }
 }

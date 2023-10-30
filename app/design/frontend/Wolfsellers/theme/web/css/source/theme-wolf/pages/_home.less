@@ -131,7 +131,7 @@
                         .row-footer-icons{
                             padding: 10px;
                             background-color: @white;
-                            margin-top: 50px;
+                            padding: 0 40px;
                             .footer-icons{
                                 ul{
                                     li{
@@ -195,7 +195,121 @@
                                 }
                             }
                         }
-
+                        .block-banners{
+                            li.banner-item{
+                                padding: 0;
+                                .footer-icons{
+                                    margin: auto;
+                                    width: 100%;
+                                    max-width: 1500px;
+                                    .pagebuilder-column-line{
+                                        .lib-css(justify-content,space-around, @_prefix: 1);
+                                        margin: 20px 0;
+                                        .column-info{
+                                            text-align: center;
+                                            padding: 10px;
+                                            img{
+                                               width: 150px;
+                                               height: auto;
+                                            }
+                                            &__title{
+                                                .lib-font-size(18);
+                                                font-weight: 600;
+                                            }
+                                            &__text{
+                                                max-width: 185px;
+                                                margin: 0 auto;
+                                                a{
+                                                    color: @black;
+                                                    text-decoration: underline;
+                                                    &:hover{
+                                                        color: @black;
+                                                    }
+                                                }
+                                            }
+                                            [data-content-type="buttons"]{
+                                                display: inline;
+                                                .pagebuilder-button-primary{
+                                                    font-weight: 100;
+                                                    background: transparent;
+                                                    padding: 0;
+                                                    color: @black;
+                                                    text-decoration: underline;
+                                                    margin: 0;
+                                                    cursor: pointer;
+                                                    &:hover{
+                                                        color: @black;
+                                                        text-decoration: underline;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    @media screen and (max-width:1440px){
+                                        .pagebuilder-column-line{
+                                            .column-info{
+                                                &__title{
+                                                    .lib-font-size(16);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    @media @lgmax{
+                                        width: 100%;
+                                        .pagebuilder-column-line{
+                                            .lib-css(justify-content,space-around, @_prefix: 1);
+                                            .column-info{
+                                                img{
+                                                    width: 100px
+                                                }
+                                                &__title{
+                                                    .lib-font-size(12);
+                                                }
+                                                &__text{
+                                                    *{
+                                                        .lib-font-size(12);  
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    @media @mdmax{
+                                        width: 100%;
+                                        .pagebuilder-column-line{
+                                            .lib-css(justify-content,space-around, @_prefix: 1);
+                                            .column-info{
+                                                width: 50%;
+                                                max-width: 50%;
+                                                img{
+                                                    width: 100px;
+                                                    height: auto;
+                                                }
+                                                &__title{
+                                                    .lib-font-size(12);
+                                                    height: auto;
+                                                }
+                                                &__text{
+                                                    .lib-font-size(12);
+                                                    max-width: 185px;
+                                                    margin: 0 auto;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    @media @xssmax{
+                                        .pagebuilder-column-line{
+                                            .column-info{
+                                                &__text{
+                                                    *{
+                                                        .lib-font-size(10); 
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         .row-home{
                             margin: 15px;
 
@@ -222,10 +336,17 @@
         }
         .modals-wrapper{
             .modals-overlay{
-                z-index: 10000;
+                z-index: 10 !important;  //style added by inline style
             }
             .modal-popup{
                 z-index: 10001;
+                &.popup-info-home{
+                    .modal-inner-wrap{
+                        .modal-footer{
+                            display: none;
+                        }
+                    }
+                }
                 .modal-inner-wrap{
                     border-radius: 15px;
                     .modal-header {
@@ -251,9 +372,6 @@
                                 }
                             }
                         }
-                    }
-                    .modal-footer{
-                        display: none;
                     }
                 }
             }
@@ -480,3 +598,58 @@
         }
     }
 }
+@media @lgmax{
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            #maincontent{
+                .columns{
+                    .column.main{
+                        .row-footer-icons{
+                            padding: 0 15px;
+                            .block.block-banners{
+                                .banner-item-content{
+                                    .row-footer-icons{
+                                        padding: 0;
+                                        margin-top: 25px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media @xxsmax{
+    .cms-home.cms-index-index{
+        .page-wrapper{
+            #maincontent{
+                .columns{
+                    .column.main{
+                        .block.block-banners{
+                            margin-top: 15px;
+                            .row-footer-icons{
+                                padding: 0;             
+                            }
+                            .pagebuilder-column-line{
+                                .column-info{
+                                    &__title{
+                                        .lib-font-size(10);
+                                    }
+                                    &__text{
+                                        *{
+                                            .lib-font-size(10);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}  
