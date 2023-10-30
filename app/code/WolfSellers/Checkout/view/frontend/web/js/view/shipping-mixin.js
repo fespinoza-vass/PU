@@ -53,6 +53,7 @@ define([
         goToResume: ko.observable(),
         isShippingMethodError: ko.observable(),
         updateOptions: ko.observable(),
+        isContinueBtnDisabled: ko.observable(true),
 
         initialize: function () {
             this._super();
@@ -67,7 +68,7 @@ define([
                 shippingPayment.setShippingModelData(quote);
                 this.setIsDisabledShippingStep();
             },this);
-            this.goToResume.subscribe(function (value) { 
+            this.goToResume.subscribe(function (value) {
                 if (!value){
                     shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_complete');
@@ -81,8 +82,10 @@ define([
                 }
             },this);
             customer.isCustomerStepFinished.subscribe(function (value) {
+                this.isContinueBtnDisabled(true);
                 if(value.includes('_complete')){
                     this.validateRates();
+                    this.isContinueBtnDisabled(false);
                 }
             },this);
 
