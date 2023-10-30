@@ -88,7 +88,6 @@ define([
                     this.isContinueBtnDisabled(false);
                 }
             },this);
-
             return this;
         },
         /**
@@ -301,12 +300,16 @@ define([
                 var distrito_envio_rapido = registry.get("checkout.steps.shipping-step.shippingAddress.fast.distrito");
                 var direccion = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
                 var referencia = registry.get("checkout.steps.shipping-step.shippingAddress.fast.referencia");
+                var region = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.region_id");
+                var regionId = distrito_envio_rapido.getOption(distrito_envio_rapido.value());
                 uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, rapido);
 
                 uiComponent.distrito_envio_rapido.options(distrito_envio_rapido.options());
                 uiComponent.distrito_envio_rapido.value(distrito_envio_rapido.value());
                 uiComponent['street.0'].value(direccion.value());
                 uiComponent.referencia_envio.value(referencia.value());
+
+                region.value(regionId.region_id);
             }
 
             var facturacion = [
