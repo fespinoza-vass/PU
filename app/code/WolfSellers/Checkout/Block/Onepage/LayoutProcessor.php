@@ -442,13 +442,10 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.ruc',
-            'label' => 'Ruc',
+            'label' => 'RUC',
             'sortOrder' => 20,
             'validation' => [
                 'required-entry' => true,
@@ -460,13 +457,10 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.razon_social',
-            'label' => 'Razon Social',
+            'label' => 'Razón Social',
             'sortOrder' => 30,
             'validation' => [
                 'required-entry' => true,
@@ -478,13 +472,11 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
+
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.direccion_fiscal',
-            'label' => 'Direccion fiscal',
+            'label' => 'Dirección Fiscal',
             'sortOrder' => 40,
             'validation' => [
                 'required-entry' => true,
