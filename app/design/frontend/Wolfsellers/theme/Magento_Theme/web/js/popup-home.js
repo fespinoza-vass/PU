@@ -25,6 +25,7 @@ define([
 				type: 'popup', 
 				responsive: true, 
 				innerScroll: true, 
+				modalClass: 'popup-info-home',
 				buttons: [{ 
 					text: $.mage.__('Ok'), 
 					class: '', 
@@ -40,7 +41,7 @@ define([
 				$modalElement.modal('openModal');
 				
 				// Cerrar el modal al hacer click fuera de él 
-				$(document).on("click", function(e) { 
+				$('.action-close').on("click", function(e) { 
 					const $containerPopup = $('.modal-inner-wrap'); 
 					
 					if (!$containerPopup.is(e.target) && $containerPopup.has(e.target).length === 0) { 

@@ -9,15 +9,11 @@ use Magento\GoogleTagManager\Block\Ga;
 /** @var \WolfSellers\GoogleTagManager\Block\ListJson $block */
 $product = $block->getCurrentProduct();
 
-$categories = $block->getCategoryName();
-
-$category = isset($categories[0]) ? $categories[0] : '';
-$subcategory = isset($categories[1]) ? $categories[1] : '';
-$family = isset($categories[2]) ? $categories[2] : '';
-
-
 $gender = '';
 $size = '';
+$category = null;
+$subcategory = null;
+$family = null;
 
 $attr = $product->getResource()->getAttribute('tamano');
 if ($attr->usesSource()) {
@@ -28,6 +24,11 @@ $attr = $product->getResource()->getAttribute('genero');
 if ($attr->usesSource()) {
     $gender = $attr->getSource()->getOptionText($product->getGenero());
 }
+
+$category = !empty( $product->getCategoria()) ?  $product->getCategoria() : null;
+$subcategory = !empty( $product->getSubCategoria()) ?  $product->getSubCategoria() : null;
+$family = !empty( $product->getCategoria()) ?  $product->getFamilia() : null;
+
 
 $attributes = $product->getAttributes();
 $brand = '';
