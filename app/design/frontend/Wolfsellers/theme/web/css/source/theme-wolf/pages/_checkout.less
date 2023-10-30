@@ -1245,6 +1245,27 @@
 					}
 				}
 			}
+			&.bloquear_shipping{
+				background: @gray-F8;
+				opacity: 0.5;
+				.container.steps{
+					#store-pickup{
+						.step-content{
+							button{
+								pointer-events: none;
+							}
+						}
+					}
+					#shipping{
+						#checkout-step-shipping{
+							.content-method_regular,
+							.content-method_fast{
+								pointer-events: none;
+							}
+						}
+					}
+				}
+			}
 		}
 		#payment{
 			position: relative;

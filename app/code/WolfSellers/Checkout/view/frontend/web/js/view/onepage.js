@@ -12,7 +12,7 @@ define([
     'use strict';
     return Component.extend({
         isVisibleShipping:ko.observable(true),
-        isFirstStepFinished:ko.observable(false),
+        isFirstStepFinished:ko.observable(true),
         /**
          * function initialize
          */
@@ -26,9 +26,9 @@ define([
                 }
             }, this);
             customer.isCustomerStepFinished.subscribe(function (value) {
-                this.isFirstStepFinished(false);
+                this.isFirstStepFinished(true);
                 if(value.includes('_complete')){
-                    this.isFirstStepFinished(true);
+                    this.isFirstStepFinished(false);
                 }
             }, this);
             return this;
