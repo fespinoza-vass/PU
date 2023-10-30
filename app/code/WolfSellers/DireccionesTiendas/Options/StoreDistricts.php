@@ -69,10 +69,7 @@ class StoreDistricts extends \Magento\Eav\Model\Entity\Attribute\Source\Table
     {
         $sources = $this->sourceRepository->getList();
         foreach ($sources->getItems() as $source){
-            $this->allSources[$source->getSourceCode()] = [
-                'region_id' => $source->getRegionId(),
-                'region' => $source->getRegion()
-            ];
+            $this->allSources[$source->getSourceCode()] = $source->getData();
         }
     }
 }
