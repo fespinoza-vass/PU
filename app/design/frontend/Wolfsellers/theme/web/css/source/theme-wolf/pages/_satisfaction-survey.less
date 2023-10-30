@@ -1,0 +1,176 @@
+& when (@media-common =true) {
+    body.cms-encuesta-de-satisfaccion{
+        .page-wrapper{
+            background: @color-white;
+            .row-content-satisfaction,
+            .row-form-satisfaction{
+                max-width: 800px;
+                width: 100%;
+                margin: 0 auto;
+                .title-satisfaction,
+                .title-form{
+                    text-align: center;
+                    padding: 10px 0 25px 0;
+                    *{
+                       .lib-font-size(14);
+                       font-weight: 700; 
+                    }
+                }
+                .content-info{
+                    text-align: center;
+                    *{
+                        .lib-font-size(14px);
+                        font-weight: 500;
+                    }
+                }
+                .title-form{
+                    max-width: 430px;
+                    margin: 0 auto;
+                }
+            }
+            .row-form-satisfaction{
+                form{
+                    max-width: 100%;
+                    margin: 0 auto;
+                    text-align: center;
+                    margin-top: 25px;
+                    .amform-form-fieldset{
+                        .field{
+                            > label{
+                                display: none;
+                            }
+                            .control{
+                                .radio-group{
+                                    > div{
+                                        .lib-radio();
+                                        input[type='radio']{
+                                            + label{
+                                                &:after{
+                                                    top: -25px;
+                                                    left: 22px;
+                                                }
+                                            }
+                                            &:checked{
+                                                + label{
+                                                    &:before{
+                                                        top: -21px;
+                                                        left: 26px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &-text-left,
+                            &-text-right{
+                                margin: 0;
+                                width: 50%;
+                                .control{
+                                    div{
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+                            &-text-left{
+                                text-align: center;
+                                .control{
+                                    width: 135px;
+                                }
+                            }
+                            &-text-right{
+                                .lib-css(align-items,flex-end,1);
+                                .control{
+                                    width: 135px;
+                                }
+                            }
+                        }
+                        .amcform-toolbar{
+                            width: 100%;
+                            text-align: center;
+                            margin-top: 25px;
+                            button{
+                                width: 220px;
+                                border: 1px solid @black;
+                                background: @white;
+                                color: @black;
+                                .lib-font-size(0);
+                                &:before{
+                                    content: 'Realizar encuesta';
+                                    .lib-font-size(18);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    body.cms-encuesta-de-satisfaccion{
+        .page-wrapper{
+            .row-form-satisfaction{
+                form{
+                    .amform-form-fieldset{
+                        .field{
+                            &-text-right{
+                                padding-right: 60px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media @mdmax{
+    body.cms-encuesta-de-satisfaccion{
+        .page-wrapper{
+            .row-content-satisfaction,
+            .row-form-satisfaction{
+                padding: 15px;
+                .title-form{
+                    padding-bottom: 0;
+                }
+            }
+            .row-form-satisfaction{
+                form{
+                    margin-top: 0;
+                    .amform-form-fieldset{
+                        .field{
+                            .control{
+                                text-align: start;
+                                padding-left: 15px;
+                                .radio-group{
+                                    > div{
+                                        margin-bottom: 5px;
+                                        margin-top: 25px;
+                                    }
+                                }
+                            }
+                            &-text-left,
+                            &-text-right{
+                                .lib-css(justify-content,start,1);
+                                .control{
+                                    div{
+                                        .lib-font-size(10);
+                                    }
+                                }
+                            }
+                        }
+                        .amcform-toolbar{
+                            margin-top: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
