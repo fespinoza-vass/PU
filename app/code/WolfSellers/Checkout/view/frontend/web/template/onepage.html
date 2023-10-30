@@ -27,7 +27,7 @@
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->
 
-        <li class="checkout-shipping-address step-two">
+        <li class="checkout-shipping-address step-two" data-bind="css: $parent.isFirstStepFinished() ? 'bloquear_shipping' : ''">
             <div class="step-title" data-bind="i18n: 'Entrega'" data-role="title"></div>
             <div class="container steps" data-bind="fadeVisible: $parent.isVisibleShipping">
                 <!-- ko foreach: getRegion('store-pickup-step') -->
