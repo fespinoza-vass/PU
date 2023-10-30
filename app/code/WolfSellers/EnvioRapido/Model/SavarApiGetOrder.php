@@ -78,7 +78,8 @@ abstract class SavarApiGetOrder extends \Magento\Framework\DataObject
     protected function sentRequest($data)
     {
         $this->prepareClient();
-        $this->curl->{$this->getMethodType()}($this->getUri(), $this->getRequest($data));
+        $url = str_replace("#",$data,$this->getUri());
+        $this->curl->{$this->getMethodType()}($url, $this->getRequest($data));
     }
 
     /**

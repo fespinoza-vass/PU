@@ -3,6 +3,7 @@
 namespace WolfSellers\EnvioRapido\Helper;
 
 use Magento\Eav\Model\Config;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Serialize\Serializer\Json;
@@ -10,7 +11,11 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
 use WolfSellers\EnvioRapido\Model\NotifyToSavarCreateOrder;
-use WolfSellers\EnvioRapido\Model\SavarApiCreateOrder;
+use WolfSellers\EnvioRapido\Model\GetSavarOrder;
+use Magento\Sales\Model\OrderFactory;
+use Magento\Sales\Model\Convert\Order as OrderConverter;
+use Magento\Shipping\Model\ShipmentNotifier as OrderShipmentNotifier;
+
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 
 
@@ -20,6 +25,22 @@ use Magento\InventoryApi\Api\SourceRepositoryInterface;
  */
 class SavarHelper extends AbstractHelper
 {
+    CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
+
+    /** @var SearchCriteriaBuilder */
+    protected $_searchCriteriaBuilder;
+
+    /** @var OrderShipmentNotifier */
+    protected $_orderShipmentNotifier;
+
+    /** @var OrderConverter */
+    protected $_orderConverter;
+
+    /** @var OrderFactory */
+    protected $_orderFactory;
+
+    /** @var GetSavarOrder */
+    protected $_getSavarOrder;
     /**
      * @var Json
      */
@@ -49,9 +70,20 @@ class SavarHelper extends AbstractHelper
         DireccionesTiendasRepositoryInterface $direccionesTiendasRepository,
         SourceRepositoryInterface             $sourceRepository,
         Config                                $eavConfig,
-        Json                                  $json
+        Json                                  $json,
+        GetSavarOrder                         $getSavarOrder,
+        OrderFactory                          $orderFactory,
+        OrderConverter                        $orderConverter,
+        OrderShipmentNotifier                 $orderShipmentNotifier,
+        SearchCriteriaBuilder                 $searchCriteriaBuilder
+
     )
     {
+        $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->_orderShipmentNotifier = $orderShipmentNotifier;
+        $this->_orderConverter = $orderConverter;
+        $this->_orderFactory = $orderFactory;
+        $this->_getSavarOrder = $getSavarOrder;
         $this->json = $json;
         $this->_sourceRepository = $sourceRepository;
         $this->_orderRepository = $orderRepository;
@@ -136,6 +168,7 @@ class SavarHelper extends AbstractHelper
                     $horaInici1 = "12:00";
                     $horaFin1   = "16:00";
                     $subServicio = "Next Day";
+
                 case '4_8_manana':
                     $horaInici1 = "16:00";
                     $horaFin1   = "20:00";
@@ -151,9 +184,80 @@ class SavarHelper extends AbstractHelper
 
         $order->setSavarStatus($this->json->serialize($result));
 
+
+        if($result['state_code'] == 200){
+            $order->addStatusHistoryComment('Se genero correctamente la orden en SAVAR con registro: '.$result['response']);
+        }else{
+            $order->addStatusHistoryComment("No fue posible generar la orden en savar, estatus: ".$result['state_code']. " ". $result['response']);
+        }
+
         $this->_orderRepository->save($order);
 
         return $result;
+    }
+
+    /**
+     * @param $orderIncremental
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getSavarOrder($orderIncremental)
+    {
+        $result = $this->_getSavarOrder->execute($orderIncremental);
+
+        $order = $this->_orderFactory->create()->loadByIncrementId($orderIncremental);
+
+        if($result['state_code'] == 200){
+            $order->addStatusHistoryComment('Se realizo consulta de orden en SAVAR: '.$result['response']);
+        }else{
+            $order->addStatusHistoryComment("No fue posible consultar la orden $orderIncremental: ".$result['state_code']. " ". $result['response']);
+        }
+
+
+        if (!$order->canShip()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('You can\'t create an shipment.')
+            );
+        }
+
+        $this->generateShipment($order);
+
+    }
+
+    /**
+     * @param $order
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function generateShipment($order){
+        $shipment = $this->_orderConverter->toShipment($order);
+
+        foreach ($order->getAllItems() AS $orderItem) {
+            if (! $orderItem->getQtyToShip() || $orderItem->getIsVirtual()) {
+                continue;
+            }
+            $qtyShipped = $orderItem->getQtyToShip();
+            $shipmentItem = $this->_orderConverter->itemToShipmentItem($orderItem)->setQty($qtyShipped);
+            $shipment->addItem($shipmentItem);
+        }
+
+        $shipment->register();
+        $shipment->getOrder()->setIsInProcess(true);
+
+        try {
+
+            $shipment->save();
+            $shipment->getOrder()->save();
+
+            $this->_orderShipmentNotifier
+                ->notify($shipment);
+
+            $shipment->save();
+        } catch (\Exception $e) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __($e->getMessage())
+            );
+        }
     }
 
     /**
@@ -186,5 +290,25 @@ class SavarHelper extends AbstractHelper
             }
         }
         return $label;
+    }
+
+    public function updateSavarOrders(){
+        $searchCriteria = $this->_searchCriteriaBuilder
+            ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
+            ->addFilter('status',"order_on_the_way","eq")
+            ->create();
+
+        $orders = $this->_orderRepository->getList($searchCriteria);
+
+        if($orders->getTotalCount() > 0){
+            /** @var OrderInterface $order */
+            foreach($orders as $order){
+                try {
+                    $this->getSavarOrder($order->getIncrementId());
+                }catch (\Throwable $error){
+                    continue;
+                }
+            }
+        }
     }
 }

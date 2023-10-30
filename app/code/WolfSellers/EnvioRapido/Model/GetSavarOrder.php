@@ -6,10 +6,10 @@ use Psr\Log\LoggerInterface;
 
 use WolfSellers\EnvioRapido\Model\SavarApiCreateOrder;
 
-class NotifyToSavarGetOrder extends SavarApiGetOrder
+class GetSavarOrder extends SavarApiGetOrder
 {
 
-    CONST METHOD_TYPE = "post";
+    CONST METHOD_TYPE = "get";
 
     protected function getRequest($data)
     {
