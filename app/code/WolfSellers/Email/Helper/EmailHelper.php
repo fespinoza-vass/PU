@@ -14,6 +14,7 @@ use WolfSellers\Email\Model\Email\Identity\ShipOrder;
 use WolfSellers\Email\Model\Email\Identity\ReadyToPickupOrder;
 use WolfSellers\Email\Model\Email\SimpleSender;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
+use WolfSellers\Bopis\Helper\RealStates;
 
 class EmailHelper
 {
@@ -24,6 +25,7 @@ class EmailHelper
      * @param ShipOrder $shipOrder
      * @param ReadyToPickupOrder $readyToPickupOrder
      * @param OrderFactory $orderFactory
+     * @param RealStates $realStates
      */
     public function __construct(
         protected SimpleSender       $simpleSender,
@@ -31,7 +33,8 @@ class EmailHelper
         protected PreparedOrder      $preparedOrder,
         protected ShipOrder          $shipOrder,
         protected ReadyToPickupOrder $readyToPickupOrder,
-        protected OrderFactory       $orderFactory
+        protected OrderFactory       $orderFactory,
+        protected RealStates         $realStates
     )
     {
     }
@@ -142,6 +145,7 @@ class EmailHelper
             'store' => $order->getStore(),
             'formattedShippingAddress' => $this->simpleSender->getFormattedShippingAddress($order),
             'formattedBillingAddress' => $this->simpleSender->getFormattedBillingAddress($order),
+            'shipping_method_name' => $this->realStates->getShippingMethodTitle($order->getShippingMethod()),
             'order_data' => [
                 'customer_name' => $order->getCustomerName(),
                 'is_not_virtual' => $order->getIsNotVirtual(),
@@ -166,7 +170,7 @@ class EmailHelper
      * @param $order
      * @return bool[]
      */
-    private function getDeliveryType($order): array
+    public function getDeliveryType($order): array
     {
         $types = [
             'is_instore' => false,
