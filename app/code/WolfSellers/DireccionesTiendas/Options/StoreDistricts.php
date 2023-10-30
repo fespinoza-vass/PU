@@ -10,14 +10,27 @@ use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
 
 class StoreDistricts extends \Magento\Eav\Model\Entity\Attribute\Source\Table
 {
+    /** @var LoggerInterface  */
     private LoggerInterface $logger;
+    /** @var SearchCriteriaBuilderFactory  */
     private SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory;
     /** @var SourceRepositoryInterface  */
     private SourceRepositoryInterface $sourceRepository;
+    /** @var DireccionesTiendasRepositoryInterface  */
     private DireccionesTiendasRepositoryInterface $tiendasRepository;
 
+    /** @var array  */
     protected array $allSources = [];
 
+
+    /**
+     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory
+     * @param \Magento\Eav\Model\ResourceModel\Entity\Attribute\OptionFactory $attrOptionFactory
+     * @param LoggerInterface $logger
+     * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
+     * @param SourceRepositoryInterface $sourceRepository
+     * @param DireccionesTiendasRepositoryInterface $tiendasRepository
+     */
     public function __construct(
         \Magento\Eav\Model\ResourceModel\Entity\Attribute\Option\CollectionFactory $attrOptionCollectionFactory,
         \Magento\Eav\Model\ResourceModel\Entity\Attribute\OptionFactory $attrOptionFactory,
