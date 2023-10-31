@@ -76,7 +76,7 @@ class QR extends \Magento\Framework\View\Element\Template
         $this->addData(
             [
                 'order_id'  => $order->getIncrementId(),
-                'qr_image'  => $this->_qrHelper->getURLQRImage($order->getIncrementId()),
+                'qr_image'  => $this->_qrHelper->getURLQRImage($order->getEntity()),
                 'is_pickup'  => boolval(($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE))
             ]
         );

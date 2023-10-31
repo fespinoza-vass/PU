@@ -21,4 +21,11 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="savarUpdateOrders" xsi:type="object">WolfSellers\EnvioRapido\Console\SavarUpdateOrderCommand</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

@@ -11,7 +11,7 @@ use WolfSellers\EnvioRapido\Logger\Logger;
 /**
  *
  */
-abstract class SavarApi extends \Magento\Framework\DataObject
+abstract class SavarApiGetOrder extends \Magento\Framework\DataObject
 {
     /**
      * @var Logger
@@ -78,7 +78,8 @@ abstract class SavarApi extends \Magento\Framework\DataObject
     protected function sentRequest($data)
     {
         $this->prepareClient();
-        $this->curl->{$this->getMethodType()}($this->getUri(), $this->getRequest($data));
+        $url = str_replace("#",$data,$this->getUri());
+        $this->curl->{$this->getMethodType()}($url, $this->getRequest($data));
     }
 
     /**
@@ -119,10 +120,10 @@ abstract class SavarApi extends \Magento\Framework\DataObject
      */
     public function getBaseUrl()
     {
-        $baseUrl = $this->configuration->getProductionWsUrl();
+        $baseUrl = $this->configuration->getProductionStatusEndpoint();
 
         if ($this->configuration->isSandboxMode()) {
-            $baseUrl = $this->configuration->getSandboxWsUrl();
+            $baseUrl = $this->configuration->getSandboxStatusEndpoint();
         }
 
         return $baseUrl;

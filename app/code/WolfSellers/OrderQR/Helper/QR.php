@@ -21,7 +21,7 @@ class QR extends AbstractHelper
     /**
      *
      */
-    CONST URI_ORDER_VIEW_CONTROLLER = "admin/sales/order/view/order_id/";
+    CONST URI_ORDER_VIEW_CONTROLLER = "admin/GestorPU/order/view/order_id/";
     /**
      *
      */

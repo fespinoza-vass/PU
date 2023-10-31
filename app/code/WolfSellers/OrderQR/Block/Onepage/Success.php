@@ -94,7 +94,7 @@ class Success extends \Magento\Framework\View\Element\Template
                 'can_print_order' => $this->isVisible($order),
                 'can_view_order'  => $this->canViewOrder($order),
                 'order_id'  => $order->getIncrementId(),
-                'qr_image'  => $this->_qrHelper->getURLQRImage($order->getIncrementId()),
+                'qr_image'  => $this->_qrHelper->getURLQRImage($order->getEntityId()),
                 'is_pickup'  => boolval(($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE))
             ]
         );
