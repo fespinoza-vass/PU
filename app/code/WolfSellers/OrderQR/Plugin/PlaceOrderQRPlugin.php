@@ -51,7 +51,7 @@ class PlaceOrderQRPlugin
         try {
             if($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE)
             {
-                $this->_qrHelper->generateQR($order->getIncrementId());
+                $this->_qrHelper->generateQR($order->getEntityId());
             }
 
         } catch (\Throwable $error) {
