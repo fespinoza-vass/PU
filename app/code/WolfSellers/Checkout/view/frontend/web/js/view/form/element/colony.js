@@ -2,10 +2,11 @@
  * @api
  */
 define([
+    'underscore',
     'Magento_Ui/js/form/element/select',
     'WolfSellers_Checkout/js/model/address/ubigeo',
     'uiRegistry'
-], function (Select, ubigeo, registry) {
+], function (_, Select, ubigeo, registry) {
     'use strict';
 
     return Select.extend({
@@ -36,7 +37,9 @@ define([
         onUpdate: function (value) {
             var ubigeo = ubigeo;
             var optSelected;
-
+            if(_.isUndefined(ubigeo) && _.isEmpty(value)){
+                return;
+            }
             if (typeof this.getOption !== 'function') {
                 return;
             }
