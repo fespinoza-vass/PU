@@ -177,13 +177,15 @@ class Save extends Order
                     $this->logger->critical("No fue posible mandar la orden a Savar Express.");
                     $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
 
+                    if($result["state_code"] == 500){
+                        $this->logger->critical("Servicio no disponible Savar Express.");
+                        $this->messageManager->addErrorMessage(__('Servicio no disponible Savar Express.'));
+                    }
+
                     $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);
                     return $resultRedirect;
                 }
             }
-
-
-
 
             try {
                 $order->setStatus($this->config->getConfig('bopis/status/shipping'))

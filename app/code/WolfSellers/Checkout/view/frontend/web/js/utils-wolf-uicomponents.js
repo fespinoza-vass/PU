@@ -84,13 +84,13 @@ define([
                 if (minutosRestantesRango2 <= 60) {
                     return [
                         { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                        { value: '4_8__manana',"label": "4 a 8pm", "dia": manana }
+                        { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
                     ];
                 }
             }else if (hora >= 20 && hora <=23 ){
                 return [
                     { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                    { value: '4_8__manana',"label": "4 a 8pm", "dia": manana }
+                    { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
                 ];
             }else {
                 return [

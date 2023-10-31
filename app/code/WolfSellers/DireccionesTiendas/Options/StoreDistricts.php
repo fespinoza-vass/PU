@@ -47,6 +47,7 @@ class StoreDistricts extends \Magento\Eav\Model\Entity\Attribute\Source\Table
         $this->tiendasRepository = $tiendasRepository;
     }
 
+
     /**
      * @inheritdoc
      */
