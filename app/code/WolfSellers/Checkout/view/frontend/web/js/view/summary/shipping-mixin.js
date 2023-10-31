@@ -62,14 +62,11 @@ define([
                 }
             });
         },
+        /**
+         * disable title that was 15 in the title
+         */
         getShippingMethodTitle: function () {
-            var shippingMethod = '',
-                shippingMethodTitle = '';
-
-            if (!this.isCalculated()) {
-                return '';
-            }
-            return this.customTitle();
+            this._super();
         },
     };
 
