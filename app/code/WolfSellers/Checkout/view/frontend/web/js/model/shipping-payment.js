@@ -47,6 +47,9 @@ define([
          * @param quote
          */
         setShippingMethodModelData: function (quote) {
+            if(_.isNull(quote.shippingMethod()) || _.isUndefined(quote.shippingMethod())){
+                return false;
+            }
             if (quote.shippingMethod().carrier_code.includes("flat")){
                 this.shippingMethod("flat");
             }
