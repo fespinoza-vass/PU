@@ -94,6 +94,13 @@ define([
          * Overwrite set shipping information action
          */
         setShippingInformation: function () {
+            if (!this.isFastShipping() && !this.isRegularShipping()){
+                quote.shippingMethod(null);
+                this.errorValidationMessage(
+                    $t('The shipping method is missing. Select the shipping method and try again.')
+                );
+                return false;
+            }
             if (customer.isCustomerStepFinished() === '_complete') {
                 this.setDataToShippingForm();
                 if (this.validateShippingInformation()) {
@@ -123,17 +130,13 @@ define([
         },
         /**
          * Set shipping method flatRate for regular shipping
-         * @param e
-         * @param t
          */
-        setRegularShipping: function (e,t) {
-            if(t.currentTarget && !this.isRegularShippingDisabled()){
+        setRegularShipping: function () {
+            if(!this.isRegularShippingDisabled()){
+                var departamentoRegular = registry.get("checkout.steps.shipping-step.shippingAddress.regular.departamento");
+                departamentoRegular.reset();
                 this.isRegularShipping(true);
                 this.isFastShipping(false);
-                var input = t.currentTarget.querySelector('input[id="envio_regular"]');
-                if (input) {
-                    input.checked = true;
-                }
                 this.setDataToShippingForm();
                 var rate = this.findRateByCarrierCode('flatrate');
                 this.showShippingMethodError(rate);
@@ -142,28 +145,20 @@ define([
         },
         /**
          * Set shipping method for fast shipping
-         * @param e
-         * @param t
          */
-        setFastShipping: function (e,t) {
-            if(t.currentTarget && !this.isFastShippingDisabled()){
+        setFastShipping: function () {
+            if(!this.isFastShippingDisabled()){
+                var street = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
+                street.reset();
                 this.isRegularShipping(false);
                 this.isFastShipping(true);
-                var input = t.currentTarget.querySelector('input[id="envio_rapido"]');
-                if (input) {
-                    input.checked = true;
-                }
                 var rate = this.findRateByCarrierCode('envio_rapido');
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
             }
-            if(t.currentTarget && this.isFastShippingDisabled()){
+            if(this.isFastShippingDisabled()){
                 this.isRegularShipping(false);
                 this.isFastShipping(false);
-                var input = t.currentTarget.querySelector('input[id="envio_regular"]');
-                if (input) {
-                    input.checked = false;
-                }
                 var rate = this.findRateByCarrierCode('envio_rapido');
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
