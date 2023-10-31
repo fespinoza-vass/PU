@@ -331,6 +331,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
         $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['caption'] = "Seleccionar distrito";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
         $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
 
@@ -442,13 +443,10 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.ruc',
-            'label' => 'Ruc',
+            'label' => 'RUC',
             'sortOrder' => 20,
             'validation' => [
                 'required-entry' => true,
@@ -460,13 +458,10 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.razon_social',
-            'label' => 'Razon Social',
+            'label' => 'Razón Social',
             'sortOrder' => 30,
             'validation' => [
                 'required-entry' => true,
@@ -478,13 +473,11 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
+
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.direccion_fiscal',
-            'label' => 'Direccion fiscal',
+            'label' => 'Dirección Fiscal',
             'sortOrder' => 40,
             'validation' => [
                 'required-entry' => true,
