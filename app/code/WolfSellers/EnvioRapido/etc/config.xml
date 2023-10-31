@@ -10,7 +10,7 @@
 
 				<title>Envio Rapido</title>
 				<name>Envio Rapido</name>
-				<price>99.99</price>
+				<price>0</price>
 				<specificerrmsg>No hay stock disponible para este método de envío por favor, usa otro método de envío</specificerrmsg>
 				<sallowspecific>0</sallowspecific>
                 <production_order_endpoint>https://app.savarexpress.com.pe/govari/api/ServicioDeliver</production_order_endpoint>
@@ -18,7 +18,6 @@
                 <production_status_endpoint>https://app.savarexpress.com.pe/govari/api/servicio/#</production_status_endpoint>
                 <sandbox_status_endpoint>https://test.savarexpress.com.pe/govari/api/servicio/#</sandbox_status_endpoint>
                 <max_package_weight>75</max_package_weight>
-
 			</envio_rapido>
 		</carriers>
 	</default>

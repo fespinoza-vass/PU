@@ -83,7 +83,6 @@
                 <field id="max_package_weight" type="label" sortOrder="100">
                     <label>MAx Package Weight</label>
                 </field>
-
             </group>
 		</section>
 	</system>

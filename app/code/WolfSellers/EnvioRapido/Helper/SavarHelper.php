@@ -15,8 +15,9 @@ use WolfSellers\EnvioRapido\Model\GetSavarOrder;
 use Magento\Sales\Model\OrderFactory;
 use Magento\Sales\Model\Convert\Order as OrderConverter;
 use Magento\Shipping\Model\ShipmentNotifier as OrderShipmentNotifier;
-
+use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
+
 
 
 
@@ -27,6 +28,9 @@ class SavarHelper extends AbstractHelper
 {
     CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
 
+
+    /** @var SavarLogger */
+    protected $_savarLogger;
     /** @var SearchCriteriaBuilder */
     protected $_searchCriteriaBuilder;
 
@@ -75,10 +79,12 @@ class SavarHelper extends AbstractHelper
         OrderFactory                          $orderFactory,
         OrderConverter                        $orderConverter,
         OrderShipmentNotifier                 $orderShipmentNotifier,
-        SearchCriteriaBuilder                 $searchCriteriaBuilder
+        SearchCriteriaBuilder                 $searchCriteriaBuilder,
+        SavarLogger                           $savarLogger
 
     )
     {
+        $this->_savarLogger = $savarLogger;
         $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->_orderShipmentNotifier = $orderShipmentNotifier;
         $this->_orderConverter = $orderConverter;
@@ -184,11 +190,13 @@ class SavarHelper extends AbstractHelper
 
         $order->setSavarStatus($this->json->serialize($result));
 
-
+        $response = $this->json->serialize($result['response']);
         if($result['state_code'] == 200){
-            $order->addStatusHistoryComment('Se genero correctamente la orden en SAVAR con registro: '.$result['response']);
+            $order->addStatusHistoryComment('Se genero correctamente la orden en SAVAR con registro: '.$response);
+            $this->_savarLogger->info("Se creo en savar la orden:".$order->getIncrementId());
         }else{
-            $order->addStatusHistoryComment("No fue posible generar la orden en savar, estatus: ".$result['state_code']. " ". $result['response']);
+            $order->addStatusHistoryComment("No fue posible generar la orden en savar, estatus: ".$result['state_code']. " ". $response);
+            $this->_savarLogger->error("No fue posible generar la orden en savar, estatus: ".$result['state_code']. " ". $response);
         }
 
         $this->_orderRepository->save($order);
@@ -198,7 +206,7 @@ class SavarHelper extends AbstractHelper
 
     /**
      * @param $orderIncremental
-     * @return void
+     * @return bool
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getSavarOrder($orderIncremental)
@@ -207,21 +215,17 @@ class SavarHelper extends AbstractHelper
 
         $order = $this->_orderFactory->create()->loadByIncrementId($orderIncremental);
 
-        if($result['state_code'] == 200){
-            $order->addStatusHistoryComment('Se realizo consulta de orden en SAVAR: '.$result['response']);
-        }else{
-            $order->addStatusHistoryComment("No fue posible consultar la orden $orderIncremental: ".$result['state_code']. " ". $result['response']);
+        $response = $this->json->serialize($result['response']);
+        if($result['state_code'] != 200){
+            $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']. " ". $response));
+            return false;
         }
 
-
-        if (!$order->canShip()) {
-            throw new \Magento\Framework\Exception\LocalizedException(
-                __('You can\'t create an shipment.')
-            );
+        if(intval($result['response']['vcodestado']) == 9){
+            if (!$order->canShip() || !$order->hasShipments()) {
+                $this->_savarLogger->error( __('You can\'t create an shipment.'));
+            }
         }
-
-        $this->generateShipment($order);
-
     }
 
     /**
@@ -243,6 +247,7 @@ class SavarHelper extends AbstractHelper
 
         $shipment->register();
         $shipment->getOrder()->setIsInProcess(true);
+        $shipment->getExtensionAttributes()->setSourceCode('1');
 
         try {
 
@@ -293,6 +298,7 @@ class SavarHelper extends AbstractHelper
     }
 
     public function updateSavarOrders(){
+        $this->_savarLogger->error("consulta de ordenes savar");
         $searchCriteria = $this->_searchCriteriaBuilder
             ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
             ->addFilter('status',"order_on_the_way","eq")
@@ -306,6 +312,7 @@ class SavarHelper extends AbstractHelper
                 try {
                     $this->getSavarOrder($order->getIncrementId());
                 }catch (\Throwable $error){
+                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId());
                     continue;
                 }
             }
