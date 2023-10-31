@@ -12,6 +12,7 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Magento\Framework\Filesystem;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use \Magento\Backend\Helper\Data as BackendHelper;
 
 /**
  *
@@ -21,7 +22,7 @@ class QR extends AbstractHelper
     /**
      *
      */
-    CONST URI_ORDER_VIEW_CONTROLLER = "admin/sales/order/view/order_id/";
+    CONST URI_ORDER_VIEW_CONTROLLER = "GestorPU/order/view/order_id/";
     /**
      *
      */
@@ -31,6 +32,8 @@ class QR extends AbstractHelper
      */
     CONST QR_SIZE = "bopis/qrcode_configuration/qr_size";
 
+    /** @var BackendHelper */
+    protected $_backendHelper;
     /**
      * @var StoreManagerInterface
      */
@@ -49,9 +52,11 @@ class QR extends AbstractHelper
     public function __construct(
         Context $context,
         StoreManagerInterface $storeManager,
-        Filesystem $fileSystem
+        Filesystem $fileSystem,
+        BackendHelper $backendHelper
 
     ) {
+        $this->_backendHelper = $backendHelper;
         $this->_fileSystem = $fileSystem;
         $this->_storeManager = $storeManager;
         parent::__construct($context);
@@ -64,8 +69,9 @@ class QR extends AbstractHelper
      */
     private function getOrderAdminURLById($incrementId){
         $baseUrl = $this->_storeManager->getStore()->getBaseUrl();
+        $adminuri = $this->_backendHelper->getAreaFrontName();
 
-        return $baseUrl . self::URI_ORDER_VIEW_CONTROLLER . $incrementId ;
+        return $baseUrl . $adminuri . "/". self::URI_ORDER_VIEW_CONTROLLER . $incrementId ;
     }
 
     /**

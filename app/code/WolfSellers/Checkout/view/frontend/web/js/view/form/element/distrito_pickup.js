@@ -16,7 +16,6 @@ define([
         searchQuery: ko.observable(),
         initialize:function () {
             this._super();
-            this.caption('Seleccionar distrito');
             this.value.subscribe(function (value) {
                 if(value){
                     this.searchQuery(value);

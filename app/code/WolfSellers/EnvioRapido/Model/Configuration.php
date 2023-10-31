@@ -14,8 +14,6 @@ class Configuration
 
     const XML_PATH = 'carriers/envio_rapido/';
     const SANDBOX_MODE = 'sandbox_mode';
-    const SANDBOX_URL = 'sandbox_ws_url';
-    const PRODUCTION_URL = 'production_ws_url';
     const SANDBOX_TOKEN = 'sandbox_token';
     const PRODUCTION_TOKEN = 'production_token';
     const PRODUCTION_ORDER_ENDPOINT = 'production_order_endpoint';
@@ -54,22 +52,6 @@ class Configuration
     /**
      * @return mixed
      */
-    public function getProductionWsUrl()
-    {
-        return $this->scopeConfig->getValue(self::XML_PATH . self::PRODUCTION_URL, ScopeInterface::SCOPE_STORE);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSandboxWsUrl()
-    {
-        return $this->scopeConfig->getValue(self::XML_PATH . self::SANDBOX_URL, ScopeInterface::SCOPE_STORE);
-    }
-
-    /**
-     * @return mixed
-     */
     public function getSandboxToken()
     {
         return $this->scopeConfig->getValue(self::XML_PATH . self::SANDBOX_TOKEN, ScopeInterface::SCOPE_STORE);
@@ -89,7 +71,7 @@ class Configuration
     public function getSandboxOrderEndpoint()
     {
         return $this->scopeConfig->getValue(
-            self::XML_PATH . self::SANDBOX_STATUS_ENDPOINT, ScopeInterface::SCOPE_STORE
+            self::XML_PATH . self::SANDBOX_ORDER_ENDPOINT, ScopeInterface::SCOPE_STORE
         );
     }
 

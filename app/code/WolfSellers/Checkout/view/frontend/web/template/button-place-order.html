@@ -2,7 +2,9 @@
     <div class="primary">
         <button data-role="opc-place-order"
                 id="placeOrder" type="submit"
-                data-bind="click: function(component,event){placeOrder(component,event)}"
+                data-bind="
+                    click: function(component,event){placeOrder(component,event)},
+                    attr:{disabled:isPlaceOrderDisabled()}"
                 class="button action primary">
             <span><!-- ko i18n: 'Place Order'--><!-- /ko --></span>
         </button>

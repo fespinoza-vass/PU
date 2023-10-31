@@ -30,7 +30,7 @@ define([
         customerTypeIdentification:ko.observable(customer.customerTypeIdentification()),
         customerNumberIdentification: ko.observable(customer.customerNumberIdentification()),
         customerTelephone:ko.observable(customer.customerTelephone()),
-       passwordRegister :ko.observable(customer.passwordRegister()),
+        passwordRegister :ko.observable(customer.passwordRegister()),
         passwordConfirm : ko.observable(customer.passwordConfirm()),
 
         /**

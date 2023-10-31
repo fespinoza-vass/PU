@@ -10,7 +10,8 @@ define([
             template: 'WolfSellers_Checkout/form/element/recibir-promocion'
         },
 
-        isSubscribed: false,
+        isSubscribed: ko.observable(false),
+
         initialize: function () {
             var self = this;
             this._super();

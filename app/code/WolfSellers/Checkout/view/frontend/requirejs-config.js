@@ -38,6 +38,9 @@ var config = {
             },
             'Magento_Checkout/js/view/summary/abstract-total': {
                 'WolfSellers_Checkout/js/view/summary/abstract-total-mixins': true
+            },
+            "Magento_Tax/js/view/checkout/summary/shipping": {
+                "WolfSellers_Checkout/js/view/checkout/summary/shipping-mixin" : true
             }
         }
     }
