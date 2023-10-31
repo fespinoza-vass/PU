@@ -53,6 +53,7 @@ define([
         goToResume: ko.observable(),
         isShippingMethodError: ko.observable(),
         updateOptions: ko.observable(),
+        isContinueBtnDisabled: ko.observable(true),
 
         initialize: function () {
             this._super();
@@ -67,7 +68,7 @@ define([
                 shippingPayment.setShippingModelData(quote);
                 this.setIsDisabledShippingStep();
             },this);
-            this.goToResume.subscribe(function (value) { 
+            this.goToResume.subscribe(function (value) {
                 if (!value){
                     shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_complete');
@@ -81,11 +82,12 @@ define([
                 }
             },this);
             customer.isCustomerStepFinished.subscribe(function (value) {
+                this.isContinueBtnDisabled(true);
                 if(value.includes('_complete')){
                     this.validateRates();
+                    this.isContinueBtnDisabled(false);
                 }
             },this);
-
             return this;
         },
         /**
@@ -298,12 +300,16 @@ define([
                 var distrito_envio_rapido = registry.get("checkout.steps.shipping-step.shippingAddress.fast.distrito");
                 var direccion = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
                 var referencia = registry.get("checkout.steps.shipping-step.shippingAddress.fast.referencia");
+                var region = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.region_id");
+                var regionId = distrito_envio_rapido.getOption(distrito_envio_rapido.value());
                 uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, rapido);
 
                 uiComponent.distrito_envio_rapido.options(distrito_envio_rapido.options());
                 uiComponent.distrito_envio_rapido.value(distrito_envio_rapido.value());
                 uiComponent['street.0'].value(direccion.value());
                 uiComponent.referencia_envio.value(referencia.value());
+
+                region.value(regionId.region_id);
             }
 
             var facturacion = [

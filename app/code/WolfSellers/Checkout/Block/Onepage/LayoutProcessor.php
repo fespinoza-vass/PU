@@ -331,6 +331,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
         $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['caption'] = "Seleccionar distrito";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
         $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
 
@@ -431,6 +432,7 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         $invoiceFieldSets = [
             'component' => 'uiComponent',
+            'provider' => 'checkoutProvider',
             'displayArea' => 'custom-checkout-form-fields'
         ];
         $invoiceDataFieldSets = $walker->getValue('{PAYMENT_FORM_INVOICE}.>>custom-checkout-form-fieldset.>>');
@@ -441,13 +443,10 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.ruc',
-            'label' => 'Ruc',
+            'label' => 'RUC',
             'sortOrder' => 20,
             'validation' => [
                 'required-entry' => true,
@@ -459,13 +458,10 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.razon_social',
-            'label' => 'Razon Social',
+            'label' => 'Razón Social',
             'sortOrder' => 30,
             'validation' => [
                 'required-entry' => true,
@@ -477,20 +473,26 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'customScope' => 'customCheckoutForm',
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
-                'tooltip' => [
-                    "description" => 'Item information'
-                ],
+
             ],
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.direccion_fiscal',
-            'label' => 'Direccion fiscal',
+            'label' => 'Dirección Fiscal',
             'sortOrder' => 40,
             'validation' => [
                 'required-entry' => true,
             ],
         ];
 
-        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required'] = $this->getPaymentType();
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.picker');
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['component'] = 'WolfSellers_Checkout/js/view/form/element/payment-type';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['config']['customScope'] = 'customCheckoutForm';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['config']['elementTmpl'] = 'WolfSellers_Checkout/form/element/payment-type';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['dataScope'] = 'customCheckoutForm.invoice_required';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['label'] = '';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['sortOrder'] = '10';
+        $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['invoice_required']['validation'] = ['required-entry' => false];
+
         $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['ruc'] = $rucField;
         $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['razon_social'] = $razonField;
         $invoiceDataFieldSets['custom-checkout-form-fieldset']['children']['direccion_fiscal'] = $fiscalField;

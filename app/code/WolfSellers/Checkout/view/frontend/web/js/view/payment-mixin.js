@@ -17,6 +17,7 @@ define([
             template:'WolfSellers_Checkout/payment',
             links: {
                 "IsDisablePaymentMethods":"checkout.steps.shipping-step.shippingAddress:goToResume",
+                // noinspection JSUnresolvedVariable
                 "IsDisablePaymentMethods":"checkout.steps.store-pickup.store-selector:goToResume"
             }
         },
@@ -44,11 +45,7 @@ define([
             this.setIsDisabledPaymentStep();
 
             this.IsDisablePaymentMethods.subscribe(function(value){
-                if(value === true){
-                   return true;
-                }else{
-                    return false;
-                }
+                return value === true;
             });
             return this;
         },

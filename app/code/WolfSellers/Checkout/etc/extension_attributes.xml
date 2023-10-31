@@ -16,6 +16,13 @@
         <attribute code="retiro_tienda" type="WolfSellers\Checkout\Api\Data\RetiroTiendaInterface" />
     </extension_attributes>
 
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+        <attribute code="ruc" type="string" />
+        <attribute code="razon_social" type="string" />
+        <attribute code="direccion_fiscal" type="string" />
+        <attribute code="invoice_required" type="string" />
+    </extension_attributes>
+
     <extension_attributes for="Magento\InventoryApi\Api\Data\SourceInterface">
         <attribute code="district" type="string" />
     </extension_attributes>
