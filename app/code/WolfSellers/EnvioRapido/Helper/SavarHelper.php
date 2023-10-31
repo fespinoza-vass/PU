@@ -26,6 +26,9 @@ use Magento\InventoryApi\Api\SourceRepositoryInterface;
  */
 class SavarHelper extends AbstractHelper
 {
+    /**
+     *
+     */
     CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
 
 
@@ -297,6 +300,9 @@ class SavarHelper extends AbstractHelper
         return $label;
     }
 
+    /**
+     * @return void
+     */
     public function updateSavarOrders(){
         $this->_savarLogger->error("consulta de ordenes savar");
         $searchCriteria = $this->_searchCriteriaBuilder
