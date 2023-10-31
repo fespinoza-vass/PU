@@ -29,11 +29,16 @@ define([
         return Component.extend({
             defaults: {
                 template: 'WolfSellers_Checkout/button-place-order',
-                paymentsNamePrefix: 'checkout.steps.billing-step.payment.payments-list.'
+                paymentsNamePrefix: 'checkout.steps.billing-step.payment.payments-list.',
+                links: {
+                    'isSubscribed' : 'checkout.sidebar.summary.checkout-che-promo:isSubscribed'
+                }
             },
             isStepTreeFinished: ko.observable(""),
             isPlaceOrderFinished: ko.observable(""),
             isStepPlaceOrder : ko.observable(false),
+            isPlaceOrderDisabled: ko.observable(),
+            isSubscribed: ko.observable(),
 
             /**
              * change status progress bar
@@ -49,6 +54,13 @@ define([
                     }
                     this.isStepPlaceOrder(value);
                 }, this);
+
+                this.isPlaceOrderDisabled = ko.computed(function () {
+                    return !(customer.isCustomerStepFinished() === '_complete' &&
+                        shippingPayment.isShippingStepFinished() === '_complete' &&
+                        shippingPayment.isPaymentStepFinished() === '_complete' &&
+                        this.isSubscribed() === true);
+                }, this);
                 return this;
             },
 
@@ -59,9 +71,14 @@ define([
              * @return {boolean}
              */
             placeOrder: function (data, event) {
+                if (!this.isSubscribed()){
+                    messageList.addErrorMessage({message: 'Es necesario Acepte la Política de Envío de Comunicaciones de Publicidad y Promociones'});
+                    return false;
+                }
                 if (customer.isCustomerStepFinished() === '_complete' &&
-                    shippingPayment.isShippingStepFinished() === '_complete' &&
-                    shippingPayment.isPaymentStepFinished() === '_complete') {
+                        shippingPayment.isShippingStepFinished() === '_complete' &&
+                            shippingPayment.isPaymentStepFinished() === '_complete' &&
+                                this.isSubscribed() === true) {
 
                     var shippingComponent = registry.get(this.shippingFormPrefix);
                     var paymentMethod = quote.paymentMethod();
