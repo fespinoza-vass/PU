@@ -1,0 +1,145 @@
+<?php
+/** @var $block \WolfSellers\Bopis\Block\Address\Form */
+/** @var \Magento\Customer\Helper\Address $addressHelper */
+$addressHelper = $this->helper('Magento\Customer\Helper\Address');
+/** @var \WolfSellers\Bopis\Helper\Data $bopisHelper */
+$bopisHelper = $this->helper('WolfSellers\Bopis\Helper\Data');
+/** @var \Omnipro\CustomerAddress\Helper\Data$omniproCustomerAddressHelper */
+$omniproCustomerAddressHelper = $this->helper('Omnipro\CustomerAddress\Helper\Data');
+
+$regions = $omniproCustomerAddressHelper->getFilteredShippingRegions($omniproCustomerAddressHelper->getRegionCollection());
+$provicias = $omniproCustomerAddressHelper->getFilteredProvices();
+
+#die(var_export($provicias));
+?>
+<?php $requiredAttributesPrechecked = $block->getData('required_attributes_prechecked'); ?>
+<?php $isLoggedIn = $this->getIsLoggedIn(); ?>
+<div class="modal-address-form">
+    <span class="info-title"><?= $block->escapeHtml(__('Shipping Address')); ?></span>
+    <form class="form-address" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off"
+          data-hasrequired="<?= /* @escapeNotVerified */ __('* Required Fields') ?>">
+        <?= $block->getBlockHtml('formkey') ?>
+        <div class="field address-type required">
+            <div class="control">
+                <?php $addressTypes = $bopisHelper->getAddressTypes(); ?>
+                <select id="address-type" name="address_type" title="<?= __('Address Type'); ?>" class="validate-select">
+                    <option value=""><?= __('Address Type'); ?></option>
+                    <?php foreach ($addressTypes as $key => $value): ?>
+                        <?php if ($key === '') continue; ?>
+                        <option value="<?= $key; ?>"><?= $value; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <?php $_streetValidationClass = $addressHelper->getAttributeValidationClass('street'); ?>
+        <div class="field content-street col-3">
+            <div class="item-street">
+                <div class="control">
+                    <input type="text"
+                           name="street[]"
+                           value="<?= $block->escapeHtml($block->getStreetLine(1)) ?>"
+                           title="<?= /* @escapeNotVerified */ __('Street Address') ?>"
+                           id="street_1"
+                           class="input-text <?= /* @escapeNotVerified */ $_streetValidationClass ?>"/>
+                    <span class="pre-street">#</span>
+                </div>
+            </div>
+            <?php for ($_i = 2, $_n = $addressHelper->getStreetLines(); $_i <= $_n; $_i++): ?>
+                <div class="item-street col-3">
+                    <div class="control">
+                        <input type="text"
+                               name="street[]"
+                               value="<?= $block->escapeHtml($block->getStreetLine($_i)) ?>"
+                               title="<?= /* @escapeNotVerified */ __('Street Address %1', $_i) ?>" id="street_<?= /* @escapeNotVerified */ $_i ?>"
+                               class="input-text <?= /* @escapeNotVerified */ $_streetValidationClass ?>"/>
+                        <?php if($_i == 2): ?>
+                            <span class="pre-street">-</span>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endfor; ?>
+            <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+        </div>
+        <div class="field additional-information">
+            <div class="control">
+                <input class="input-text" type="text" id="additional-information" name="informacion_adicional" placeholder="Información Adicional" />
+            </div>
+        </div>
+        <div class="field country required" style="display: none;" >
+            <div class="control">
+                <?= $block->getCountryHtmlSelect() ?>
+            </div>
+        </div>
+        <div class="field region required">
+            <div class="control">
+                <select id="region-id" name="region_id" title="<?= __('Departamento') ?>"
+                        class="validate-select region_id"
+                    <?= (!$block->getConfig('general/region/display_all')) ? ' disabled="disabled"' : '';?>>
+                    <option value=""><?= $block->escapeHtml(__('Please select a region, state or province.')) ?></option>
+                    <?php foreach ($regions AS $region):?>
+                        <option value="<?= $region["value"] ?>"><?= $region["title"] ?></option>
+                    <?php endforeach;?>
+                </select>
+                <input style="display: none;" type="text" id="region" name="region" value="<?= $block->escapeHtml($block->getRegion()) ?>"
+                       title="<?= __('Departamento') ?>" class="input-text <?= /* @escapeNotVerified */ $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('region') ?>"<?= (!$block->getConfig('general/region/display_all')) ? ' disabled="disabled"' : '';?>/>
+            </div>
+        </div>
+        <div class="field region required">
+            <div class="control">
+                <select class="validate-select province_id" name="province_id" id="province-id">
+                    <option value=""><?= /* @escapeNotVerified */ __('City') ?></option>
+                    <?php foreach ($provicias AS $provicia):?>
+                        <option value="<?= $provicia["value"] ?>"><?= $provicia["title"] ?></option>
+                    <?php endforeach;?>
+                </select>
+                <input style="display: none;" type="text" id="province" name="province" value="<?= $block->escapeHtml($block->getCity()) ?>"
+                       title="<?= __('City') ?>" class="input-text <?= /* @escapeNotVerified */ $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('city') ?>"<?= (!$block->getConfig('general/region/display_all')) ? ' disabled="disabled"' : ''; ?>/>
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="button" class="action submit primary add-address" data-action="add-address"
+                        title="<?= /* @escapeNotVerified */ __('Add') ?>">
+                    <span class="add-address"><?= /* @escapeNotVerified */ __('Add address') ?></span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <?php if (!$isLoggedIn): ?>
+        <span class="address-modal-messages not-logged-in">
+            <span>Ingrese a su 
+                <a href="<?= $bopisHelper->getLoggedInUrl() ?>">cuenta</a> 
+                o abra una <a href="<?= $bopisHelper->getLoggedInUrl() ?>">cuenta nueva</a>.  De lo contrario continue con invitado y llene el formulario. 
+            </span>
+        </span>
+    <?php endif; ?>
+</div>
+<script type="text/x-magento-init">
+{
+    "#country": {
+        "regionUpdater": {
+            "optionalRegionAllowed": <?= /* @escapeNotVerified */ ($block->getConfig('general/region/display_all') ? 'true' : 'false') ?>,
+            "regionListId": "#region-id",
+            "regionInputId": "#region",
+            "postcodeId": "#zip",
+            "form": "#form-validate",
+            "regionJson": <?= /* @escapeNotVerified */ $this->helper('Omnipro\CustomerAddress\Helper\Data')->getRegionJson() ?>,
+            "defaultRegion": "",
+            "countriesWithOptionalZip": <?= /* @escapeNotVerified */ $this->helper('Omnipro\CustomerAddress\Helper\Data')->getCountriesWithOptionalZip(true) ?>
+        }
+    },
+    "#region-id": {
+        "provinceUpdater": {
+            "optionalRegionAllowed": <?= /* @escapeNotVerified */ ($block->getConfig('general/region/display_all') ? 'true' : 'false') ?>,
+            "regionListId": "#province-id",
+            "regionInputId": "#province",
+            "currentRegion": "",
+            "postcodeId": "#zip",
+            "form": "#form-validate",
+            "regionJson": <?= /* @escapeNotVerified */ $this->helper('Omnipro\CustomerAddress\Helper\Data')->getProvinceJson() ?>,
+            "defaultRegion": "",
+            "countriesWithOptionalZip": <?= /* @escapeNotVerified */ $this->helper('Magento\Directory\Helper\Data')->getCountriesWithOptionalZip(true) ?>
+        }
+    }
+}
+</script>

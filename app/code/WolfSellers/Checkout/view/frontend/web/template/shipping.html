@@ -1,0 +1,119 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<li id="shipping" class="checkout-shipping-address" data-bind="fadeVisible: visible(), css: isDisabledShippingStep() ? '_disabled' : '' ">
+
+    <each args="getRegion('before-form')" render="" ></each>
+    <div id="checkout-step-shipping"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2. Forma de entrega'" data-role="title"></div>
+
+        <div class="content-method_regular">
+            <div id="checkout-step-shipping_method-regular"
+                 class="step-content"
+                 data-role="content"
+                 role="tabpanel"
+                 aria-hidden="false"
+                 data-bind="
+                    css: isRegularShipping() ? 'selected' : '',
+                    css: isShippingMethodAvailable('flatrate_flatrate') ? 'disabled' : '',
+                    click: setRegularShipping">
+                <label class="step-content_icon" for="envio_regular">Envío Regular:</label>
+                <span class="step-content_price" data-bind="text: getPriceLabel('flatrate_flatrate')"></span>
+                <input type="radio" id="envio_regular" name="opciones" value="regular" attr="{checked: isRegularShipping()}">
+                <label class="step-content_input-regular" for="envio_regular"></label>
+                <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
+                    <a href="#">Cónoce más aquí</a>
+                </span>
+            </div>
+        </div>
+        <div class="content-method_fast">
+            <div id="checkout-step-shipping_method-fast"
+                 class="step-content"
+                 data-role="content"
+                 role="tabpanel"
+                 aria-hidden="false"
+                 data-bind="
+                    css: isFastShipping() ? 'selected': '',
+                    css: isShippingMethodAvailable('envio_rapido_envio_rapido') ? 'disabled' : '',
+                    click: setFastShipping">
+                <label class="step-content_icon" for="envio_rapido">Envío Rápido:</label>
+                <span class="step-content_price" data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
+                <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping()}">
+                <label class="step-content_input-fast" for="envio_rapido"></label>
+                <span class="step-content_info">Tu pedido llega el mismo día tú comprar*
+                    <a href="#">Cónoce más aquí</a>
+                </span>
+            </div>
+        </div>
+        <div class="shipping-method-error"
+             data-bind="fadeVisible: isShippingMethodError()"
+        >
+            <p>Tu pedido no puede ser procesado por Envío rápido.</p>
+        </div>
+
+    </div>
+    <!-- ko if: (isRegularShipping) -->
+    <div id="checkout-step-shipping-regular"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
+        <fieldset>
+            <each args="getRegion('regular')" render="" ></each>
+        </fieldset>
+        <div class="step-content_regular">
+            <span class="step-content_regular-icon"></span>
+            <p>Recibirás tu pedido posterior a un plazo de <span>2 días naturales</span> en <span>un rango de 8 am a 7 pm</span> </p>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: (isFastShipping) -->
+    <div id="checkout-step-shipping-rapido"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
+        <fieldset>
+            <each args="getRegion('fast')" render="" ></each>
+        </fieldset>
+    </div>
+    <div id="checkout-step-shipping-time"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.2 Programa el horario de llegada de tu pedido'" data-role="title"></div>
+        <each args="getRegion('schedule')" render="" ></each>
+    </div>
+    <!-- /ko -->
+
+
+    <div id="checkout-step-shipping-summary"
+         class="step-content"
+         data-role="content">
+        <div class="step-sub-title" translate="'Costo de envío'" data-role="subtitle"></div>
+        <span class="subtotal" data-bind="text:getPriceLabel('selected')"></span>
+    </div>
+
+    <form id="co-shipping-method-form"
+          class="form methods-shipping"
+          if="rates().length"
+          submit="setShippingInformation"
+          novalidate="novalidate">
+
+        <div role="alert"
+             if="errorValidationMessage().length"
+             class="message notice">
+            <span text="errorValidationMessage()"></span>
+        </div>
+        <div class="actions-toolbar" id="shipping-method-buttons-container">
+            <div class="primary">
+                <button data-role="opc-continue" type="submit" class="button action continue primary" data-bind="attr:{disabled:isContinueBtnDisabled}">
+                    <span translate="'Next'"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+</li>

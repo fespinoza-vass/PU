@@ -4,11 +4,12 @@
  */
 define([
     'ko',
+    'underscore',
     'mage/utils/wrapper',
     'Magento_Checkout/js/model/quote',
     'jquery',
     'mage/url'
-], function (ko, wrapper, quote, $,url) {
+], function (ko, _, wrapper, quote, $,url) {
     'use strict';
 
     var mixin = {
@@ -17,26 +18,26 @@ define([
           var self = this;
           this._super();
           quote.shippingMethod.subscribe(function (value) {
-            if (value && value.method_title) {
-                var payload = {
-                    'ubigeo': quote.shippingAddress().postcode
-                };
-                $.ajax({
-                    url: url.build('zipcode/index/getubigeo'),
-                    dataType: 'json',
-                    data: payload,
-                    global: false
-                }).done(function (estimated) {
-                    if (estimated) {
-                        estimated = JSON.parse(estimated);
-                        self.customTitle(value['method_title'] + ' ' + estimated.data );
-                    } else {
-                        self.customTitle(value['method_title']);
+                if(!_.isUndefined(value) && !_.isNull(value) && !value.carrier_code.includes('instore')){
+                    if (value && value.method_title) {
+                        var payload = {
+                            'ubigeo': quote.shippingAddress().postcode
+                        };
+                        $.ajax({
+                            url: url.build('zipcode/index/getubigeo'),
+                            dataType: 'json',
+                            data: payload,
+                            global: false
+                        }).done(function (estimated) {
+                            if (estimated) {
+                                estimated = JSON.parse(estimated);
+                                self.customTitle(value['method_title'] + ' ' + estimated.data );
+                            } else {
+                                self.customTitle(value['method_title']);
+                            }
+                        })
                     }
-                })
-            }
-
-
+                }
           });
         quote.shippingAddress.subscribe(function (value) {
             var _shippingMethod = quote.shippingMethod();
@@ -62,14 +63,11 @@ define([
                 }
             });
         },
+        /**
+         * disable title that was 15 in the title
+         */
         getShippingMethodTitle: function () {
-            var shippingMethod = '',
-                shippingMethodTitle = '';
-
-            if (!this.isCalculated()) {
-                return '';
-            }
-            return this.customTitle();
+            this._super();
         },
     };
 

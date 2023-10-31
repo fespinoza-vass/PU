@@ -109,10 +109,11 @@ define([
                 customerData.reload(['cart'], false);
             }
 
-            $('.showcart').click(function (e) { 
+            $('.showcart').click(function (e) {
                 $('body').toggleClass('cart-open');
             });
 
+            this.setModalElement();
             return this._super();
         },
         //jscs:enable requireCamelCaseOrUpperCaseIdentifiers

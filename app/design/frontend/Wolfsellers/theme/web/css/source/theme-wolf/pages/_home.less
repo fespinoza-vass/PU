@@ -131,7 +131,7 @@
                         .row-footer-icons{
                             padding: 10px;
                             background-color: @white;
-                            padding: 0 40px;
+                            margin-top: 50px;
                             .footer-icons{
                                 ul{
                                     li{
@@ -321,6 +321,7 @@
                                 }
                             }
                         }
+
                         .row-home{
                             margin: 15px;
 
@@ -347,7 +348,7 @@
         }
         .modals-wrapper{
             .modals-overlay{
-                z-index: 10 !important;  //style added by inline style
+                z-index: 10000;
             }
             .modal-popup{
                 z-index: 10001;
@@ -376,6 +377,9 @@
                                 }
                             }
                         }
+                    }
+                    .modal-footer{
+                        display: none;
                     }
                 }
             }
@@ -602,58 +606,3 @@
         }
     }
 }
-@media @lgmax{
-    .cms-home.cms-index-index{
-        .page-wrapper{
-            #maincontent{
-                .columns{
-                    .column.main{
-                        .row-footer-icons{
-                            padding: 0 15px;
-                            .block.block-banners{
-                                .banner-item-content{
-                                    .row-footer-icons{
-                                        padding: 0;
-                                        margin-top: 25px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-@media @xxsmax{
-    .cms-home.cms-index-index{
-        .page-wrapper{
-            #maincontent{
-                .columns{
-                    .column.main{
-                        .block.block-banners{
-                            margin-top: 15px;
-                            .row-footer-icons{
-                                padding: 0;             
-                            }
-                            .pagebuilder-column-line{
-                                .column-info{
-                                    &__title{
-                                        .lib-font-size(10);
-                                    }
-                                    &__text{
-                                        *{
-                                            .lib-font-size(10);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}  

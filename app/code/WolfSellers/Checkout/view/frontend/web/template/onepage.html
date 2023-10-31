@@ -1,0 +1,64 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko foreach: getRegion('authentication') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('progressBar') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('estimation') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+
+<!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->
+<div class="opc-wrapper">
+    <ol class="opc" id="checkoutSteps">
+    <!-- ko foreach: getRegion('steps') -->
+
+        <!-- ko foreach: getRegion('customer-data-step') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <li class="checkout-shipping-address step-two" data-bind="css: $parent.isFirstStepFinished() ? 'bloquear_shipping' : ''">
+            <div class="step-title" data-bind="i18n: 'Entrega'" data-role="title"></div>
+            <div class="container steps" data-bind="fadeVisible: $parent.isVisibleShipping">
+                <!-- ko foreach: getRegion('store-pickup-step') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+
+                <!-- ko foreach: getRegion('shipping-step') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+            </div>
+            <div id="resumen_shipping_step" class="resumen-shipping-step" data-bind="fadeVisible: !$parent.isVisibleShipping()">
+                <!-- ko foreach: getRegion('shipping-step-summary') -->
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+                <div class="actions-toolbar">
+                    <div class="secondary">
+                        <button type="button" class="button edit" data-bind="click: $parent.showShippingStep($parent)">
+                            <span><!-- ko i18n: 'Edit'--><!-- /ko --></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- ko foreach: getRegion('billing-step') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    <!--/ko-->
+    </ol>
+</div>
+
+<!-- ko foreach: getRegion('sidebar') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+<!--/ko-->

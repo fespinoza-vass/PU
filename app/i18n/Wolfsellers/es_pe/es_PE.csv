@@ -6198,7 +6198,7 @@ Method Title,Título de Método,module,Magento_Checkout,
 Carrier Title,Título de Transportista,module,Magento_Checkout,
 Next,Siguiente,module,Magento_Checkout,
 "Sorry, no quotes are available for this order at this time","Lo sentimos, no hay cotizaciones disponibles para esta orden en este momento",module,Magento_Checkout,
-Order Summary,Resumen de la Orden,module,Magento_Checkout,
+Order Summary,Resumen,module,Magento_Checkout,
 Item in Cart,Item en el carrito,module,Magento_Checkout,
 Items in Cart,Elementos en Carrito,module,Magento_Checkout,
 View Details,Ver Detalles,module,Magento_Checkout,
@@ -6377,10 +6377,10 @@ Customer Service,Servicio a Clientes,theme,frontend/Magento/luma,
 Credit memo for your %store_name order,Nota de crédito para su orden en %store_name,theme,frontend/Magento/luma,
 Thank you for your order from %store_name.,Gracias por su orden en %store_name.,theme,frontend/Magento/luma,
 "You can check the status of your order by <a href=""%account_url"">logging into your account</a>.","Puede ver el estado de su orden al <a href=""%account_url"">ingresar a su cuenta</a>.",theme,frontend/Magento/luma,
-"If you have questions about your order, you can email us at <a href=""mailto:%store_email"">%store_email</a>","Si tiene preguntas acerca de su orden, puede enviarnos un email a <a href=""mailto:%store_email"">%store_email</a>.",theme,frontend/Magento/luma,
+"If you have questions about your order, you can email us at <a href=""mailto:%store_email"">%store_email</a>.","Si tiene preguntas acerca de su orden, puede enviarnos un email a <a href=""mailto:%store_email"">%store_email</a>.",theme,frontend/Magento/luma,
 Your Credit Memo #%creditmemo_id for Order #%order_id,Su Nota de Crédito #%creditmemo_id para la Orden #%order_id,theme,frontend/Magento/luma,
-Billing Info,Información de Facturación,theme,frontend/Magento/luma,
-Shipping Info,Información de Envío,theme,frontend/Magento/luma,
+Billing Info,Información de contacto,theme,frontend/Magento/luma,
+Shipping Info,Información de entrega,theme,frontend/Magento/luma,
 Payment Method,Método de Pago,theme,frontend/Magento/luma,
 Shipping Method,Método de Envío,theme,frontend/Magento/luma,
 Update to your %store_name credit memo,Actualización para su %store_name nota de crédito,theme,frontend/Magento/luma,
@@ -10792,7 +10792,7 @@ Preprocessed view files and static files,Archivos de vista y archivos estáticos
 Web Setup Wizard,Asistente de Configuración de Sitio Web,module,Magento_Backend,
 Base Link URL,Base de Enlace URL,module,Magento_Backend,
 Secure Base Link URL,Base de Enlace URL Segura,module,Magento_Backend,
-"Welcome, please sign in","Bienvenido, por favor ingresa",module,Magento_Backend,
+"Welcome, please sign in","Bienvenido",module,Magento_Backend,
 Delete %1 '%2',Borrar %1 '%2',module,Magento_Backend,
 Delete Web Site,Borrar Sitio Web,module,Magento_Backend,
 Delete Store,Borrar Tienda,module,Magento_Backend,
@@ -13068,7 +13068,7 @@ We can't remove the item.,No podemos remover el elemento.,module,Magento_Checkou
 "Carrier with such method not found: %1, %2","No se encontró al transportista con ese método: %1, %2",module,Magento_Checkout,
 We don't have some of the products you want.,No tenemos algunos de los productos que quiere.,module,Magento_Checkout,
 We don't have as many of some products as you want.,No tenemos tantos de algunos de los productos que quiere.,module,Magento_Checkout,
-You have no items in your shopping cart.,No tienes elementos en su carrito de compras.,module,Magento_Checkout,
+You have no items in your shopping cart.,No tienes elementos en tu carrito de compras.,module,Magento_Checkout,
 For delivery questions.,Para preguntas de envíos.,module,Magento_Checkout,
 Allow Guest Checkout,Permitir Ordenar como Invitado,module,Magento_Checkout,
 Payment Failed Template,Plantilla de Pago No Exitoso,module,Magento_Checkout,
@@ -21436,7 +21436,7 @@ Anchor Custom Title,Título Personalizado de Anclaje,module,Magento_Sales,
 Add New Address,+ Nueva Dirección,module,Magento_Sales,
 Add Products,Añadir Productos,module,Magento_Sales,
 Qty Shipped,Cantidad Enviada,module,Magento_Sales,
-Closed,Cancelado,module,Magento_Sales,
+Closed,Cerrado,module,Magento_Sales,
 Create,Crear,module,Magento_Sales,
 From:,De:,module,Magento_Sales,
 Unassign,Desasignar,module,Magento_Sales,
@@ -22219,7 +22219,7 @@ is one of,es uno de,module,Magento_SalesRule,
 Generate,Generar,module,Magento_SalesRule,
 You deleted the rule.,Ha borrado la regla.,module,Magento_SalesRule,
 You saved the rule.,Ha guardado la regla.,module,Magento_SalesRule,
-Enter discount code,Ingrese el código de descuento,module,Magento_SalesRule,
+Enter discount code,Ingrese el código de cupón,module,Magento_SalesRule,
 NOT FOUND,NO ENCONTRADO,module,Magento_SalesRule,
 is not one of,no es uno de,module,Magento_SalesRule,
 Numeric,Numérico,module,Magento_SalesRule,
@@ -23435,7 +23435,7 @@ Void,inválido,module,Magento_Support,
 Environment,Ambiente,module,Magento_Support,
 File,Archivo,module,Magento_Support,
 Cron,Cron,module,Magento_Support,
-Shipping Methods,Métodos de Entrega,module,Magento_Support,
+Shipping Methods,Entrega,module,Magento_Support,
 Payment Methods,Métodos de Pago,module,Magento_Support,
 Path,Ruta,module,Magento_Support,
 Stores,Tiendas,module,Magento_Support,
@@ -25592,7 +25592,7 @@ Products,Productos,module,Temando_Shipping,
 Disabled,Inactivo,module,Temando_Shipping,
 Add,Añadir,module,Temando_Shipping,
 Shipping Method,Método de Envío,module,Temando_Shipping,
-Payment Method,Método de Pago,module,Temando_Shipping,
+Payment Method,Pago,module,Temando_Shipping,
 Search,ENVIAR,module,Temando_Shipping,
 Configure,Configuración,module,Temando_Shipping,
 Billing Address,Dirección de Facturación,module,Temando_Shipping,
@@ -25995,7 +25995,69 @@ No shipping method selected,No se seleccionó ningún método de envío
 "😔 We could not find anything for <b>""%search_query%""</b>","😔 No pudimos encontrar nada para <b>""%search_query%""</b>"
 "We could not find anything for %1","No pudimos encontrar nada para %1"
 "Show (%1) more","Ver (%1) más"
+"Confirmed order","Pedido confirmado"
+"Prepared order","Pedido preparado"
+"Order on the way","Pedido en camino"
+"Order ready for pick up","Pedido listo para recojo"
+"Order delivered","Pedido entregado"
 "You have new submitted custom form.","Tienes un nuevo formulario de CONTACTO"
 "%form_title form was submitted  by "," El formulario fue enviado por,"
 "which you can see by the following ","Puedes verlo en el siguiente enlace"
 "Submitted Data:","Información enviada:"
+"Know our benefits with cards","Conoce nuestros beneficios con tarjetas"
+Name of recipient of gift,Nombre de quien recibe el regalo
+Write a short dedication,Escribe una breve dedicatoria
+Hello %customer_name ¡Thank you very much for your purchase!,Hola %customer_name ¡Muchas gracias por tu compra!
+"We have successfully received your order. Next, we send you all the information regarding your purchase:","Hemos recibido satisfactoriamente tu pedido. A continuación, te enviamos toda la información referente a tu compra:",module,Magento_Sales,
+"Your order number is <span class=""no-link"">%increment_id</span>","Tu número de pedido es <span class=""no-link"">%increment_id</span>",module,Magento_Sales,
+"track order","Rastrear pedido"
+"Where can I consult about my order?","¿Dónde puedo consultar sobre mi pedido?"
+"If you have any questions about your order, write to WhatsApp","Si tienes alguna consulta sobre tu pedido escríbenos al WhatsApp"
+"or you can click on the following link:","ó puedes darle clic al siguiente enlace:"
+"We will notify you by email of the status of your order, as well as confirmation that your order is on its way to be delivered.","Te notificaremos por correo electrónico el estado de tu pedido, así como la confirmación de que tu pedido está en camino a ser entregado."
+"Contact an agent","Contactar con un agente",
+"and your delivery method is","y tu método de entrega es"
+"Fast Home Delivery,","Envío a domicilio Rápido,"
+" You can see the status of your order here:"," puedes ver el estado de tu pedido aquí:"
+"regular home delivery,","Envío a domicilio regular,"
+"Withdrawal in store,","Retiro en tienda"
+"We will notify you by email of the status of your order, as well as confirmation that your order is ready to be picked up and you can go to the selected establishment.","Te notificaremos por correo electrónico el estado de tu pedido, así como la confirmación de que tu pedido está listo para recoger y puedes acercarte al establecimiento seleccionado."
+"Your order has already been successfully delivered.","Tu pedido ya fue entregado satisfactoriamente."
+"was delivered successfully.","fue entregado con éxito."
+"We are very happy that you chose us!","¡Estamos muy felices de que nos hayas elegido!"
+"We want to continue improving, that is why we would like to know your opinion regarding the service and attention provided, therefore, we ask for your support with a 2-minute survey to learn about your shopping experience.","Queremos seguir mejorando, por eso nos gustaría saber tu opinión respecto al servicio y atención brindada, por ello, te pedimos tu apoyo con una encuesta de 2 minutos para conocer tu experiencia de compra."
+"The information you provide us will be strictly confidential.","La información que nos brindes será estrictamente confidencial."
+"¿How likely is it that you would recommend Perfumerías Unidas to your friends or family?","¿Qué tan probable es que recomiendes Perfumerías Unidas a sus amigos o familiares?"
+"I would definitely not recommend it","Definitivamente No la recomendaría"
+"Definitely I would recommend it","Definitivamente Si la recomendaría"
+Hello %customer_name,Hola %customer_name
+"conduct survey","Realizar encuesta "
+Customer Data,Información del cliente
+"We have successfully received your order.","Hemos recibido satisfactoriamente tu pedido."
+"A message will be sent with ","Se enviará un mensaje con"
+"all the information of your order","toda la información de tu pedido"
+"by email and/or WhatsApp and you can pick it up from the day","por correo electrónico y/o WhatsApp y podrás recogerlo a partir del día"
+"wednesday february 1","miércoles 1 de febrero"
+"in a range from 8am to 10pm.","en un rango de 8am a 10pm."
+"Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.","Recuerda que tienes hasta 7 días posteriores a tu compra para recoger tus productos, de lo contrario tu compra será anulada y se procederá a la devolución del dinero."
+"You must show this voucher or QR and along with your identity document to be able to pick up your order.","Deberás de mostrar este comprobante o QR y junto con tu documento de identidad para poder recoger tu pedido."
+"Share by Whatsapp","Compartir por Whatsapp"
+"We will notify you by email of the status of your order, as well as confirmation that your order is ready for pickup and you can visit the selected establishment.","Te notificaremos por correo electrónico el estado de tu pedido, así como la confirmación de que tu pedido está listo para recoger y puedes acercarte al establecimiento seleccionado."
+Hello %customer_name Your order is already prepared…,Hola %customer_name Tu pedido ya se encuentra preparado…
+We are just one step away from being ready to deliver your order.,Estamos a un solo paso de estar listos para entregarte tu pedido.
+¡Hello %customer_name! Your order is already on its way to your home,¡Hola %customer_name! Tu pedido ya se encuentra en camino a tu domicilio
+Your order is already on its way.,Tu pedido ya se encuentra en camino.
+¡Your order will be arriving soon!,¡Pronto te estará llegando tu pedido! 
+"Remember that your delivery will be made today, Thursday, the delivery range is from 4 pm to 8 pm.","Recuerda que tu entrega se realizará hoy jueves, en el rango de entrega es de 4 pm a 8 pm."
+¡Hello %customer_name! Your order is now ready to pick up at your selected store,¡Hola %customer_name! Tu pedido ya se encuentra listo para recoger en tu tienda seleccionada
+Your order is now ready to pick up.,Tu pedido ya se encuentra listo para recoger.
+"¡You can now approach the selected establishment!","¡Ya puedes acercarte al establecimiento seleccionado!"
+"Follow the following instructions:","Sigue las siguientes indicaciones:" 
+Come to the service module and our staff will assist you.,Acércate al módulo de atención y nuestro personal te atenderá. 
+"Present your physical ID, your QR code or your email with the order number.","Presenta tu DNI en físico, tu código QR o tu correo con el número de pedido." 
+Receive your order and verify its contents.,Recibe tu pedido y verifica el contenido del mismo. 
+"Remember that if the collection is carried out by a third party, you must present the DNI registered with the purchase and the QR code.","Recuerda que si el recojo lo realiza un tercero, deberá presentar el DNI registrado en la compra y el código QR"
+Your receipt address will be the registered delivery address,Tu dirección del comprobante será la dirección de entrega registrada
+"A QR code will be sent to this email to expedite the store pickup of your order","Un código QR será enviado a este e-mail para agilizar el recojo en tienda de tu pedido"
+"Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.","Recuerda que tienes hasta 7 días posteriores a tu compra para recoger tus productos, de lo contrario tu compra será anulada y se procederá a la devolución del dinero."
+"Cost of shipping","Costo de envío"

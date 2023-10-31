@@ -1,0 +1,28 @@
+<?php
+    /** @var $block \WolfSellers\OrderQR\Block\Order\Email\QR */
+?>
+<?php if($block->getIsPickup()): ?>
+    <table class="qr-container">
+        <tr>
+            <td class="qr-container--img">
+                <div class="qr-code"><img src="<?= $block->getQrImage() ?>" alt="qr-code"></div>
+            </td>
+            <td class="qr-container--info">
+                <p><?= __("You must show this voucher or QR and along with your identity document to be able to pick up your order."); ?></p>
+                <span><?=__("Share by Whatsapp") ?></span>
+                <img src="<?= $block->getViewFileUrl('images/icon-whatsapp-transaccional.png'); ?>" />
+            </td>
+        </tr>
+    </table>
+
+    <table class="remember">
+        <tr>
+            <td class="remember--icon">
+                <img src="<?= $block->getViewFileUrl('images/icon-transaccional-qr.png'); ?>" />
+            </td>
+            <td class="remember--description">
+                <p><?= __("Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.") ?></p>
+            </td>
+        </tr>
+    </table>
+<?php endif; ?>

@@ -13,6 +13,6 @@
                 <argument name="logo_image_src" xsi:type="string">images/logo_admin.png</argument>
             </arguments>
         </referenceBlock>
-
+        <move element="logo" before="-" destination="root" />
     </body>
 </page>
