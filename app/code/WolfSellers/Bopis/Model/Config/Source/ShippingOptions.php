@@ -52,10 +52,24 @@ class ShippingOptions implements ArrayInterface
         return $result;
     }
 
+    public function getOptions(): array
+    {
+        $options = [];
+
+        $enableCarriers = $this->_deliveryModelConfig->getActiveCarriers();
+        foreach ($enableCarriers as $deliveryCode => $deliveryModel) {
+            $options[($this->isUrbano($deliveryCode) && !$this->allUrbanoOptionsAvailable())
+                ? self::SUFFIX
+                : $deliveryCode] = $this->getAlias($deliveryCode);
+        }
+
+        return $options;
+    }
+
     /**
      * @return array
      */
-    public function getOptions(): array
+    public function getOptionsOrderBased(): array
     {
         $mainOrders = $this->_ordersCollection
             ->distinct(true)

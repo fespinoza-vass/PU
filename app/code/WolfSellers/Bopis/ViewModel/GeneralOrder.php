@@ -2,11 +2,14 @@
 
 namespace WolfSellers\Bopis\ViewModel;
 
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use WolfSellers\Bopis\Helper\RealStates;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 
 class GeneralOrder implements ArgumentInterface
 {
@@ -15,12 +18,14 @@ class GeneralOrder implements ArgumentInterface
      * @param RedirectInterface $redirect
      * @param SourceRepositoryInterface $_sourceRepository
      * @param SearchCriteriaBuilder $_searchCriteriaBuilder
+     * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
-        protected RealStates                $_realStates,
-        protected RedirectInterface         $redirect,
-        protected SourceRepositoryInterface $_sourceRepository,
-        protected SearchCriteriaBuilder     $_searchCriteriaBuilder,
+        protected RealStates                  $_realStates,
+        protected RedirectInterface           $redirect,
+        protected SourceRepositoryInterface   $_sourceRepository,
+        protected SearchCriteriaBuilder       $_searchCriteriaBuilder,
+        protected CustomerRepositoryInterface $customerRepository
     )
     {
     }
@@ -76,17 +81,54 @@ class GeneralOrder implements ArgumentInterface
     }
 
     /**
-     * @param $schedule
+     * @param $attributeCode
+     * @param $value
+     * @return bool|string
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getRealAddrOptionValue($attributeCode, $value): bool|string
+    {
+        return $this->_realStates->getRealAddrOptionValue('customer_address', $attributeCode, $value);
+    }
+
+    /**
+     * @param $horarioDeEntrega
      * @return string
      */
-    public function getSchedule($schedule)
+    public function getSchedule($horarioDeEntrega)
     {
-        return match ($schedule){
-            "12_4_hoy" => "12:00 - 16:00 Hoy",
-            "4_8_hoy" => "16:00 - 20:00 Hoy",
-            "12_4_manana" => "12:00 - 16:00 Mañana",
-            "4_8_manana" => "16:00 - 20:00 Mañana",
-            default => ""
-        };
+        return $this->_realStates->getSchedule($horarioDeEntrega);
+    }
+
+    /**
+     * @param $customerId
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getCustomerIdentificacion($customerId)
+    {
+        $identification_type = $this->getCustomerAttributeValue($customerId, 'identificacion');
+        $identification_number = $this->getCustomerAttributeValue($customerId, 'numero_de_identificacion');
+
+        $type = $this->_realStates->getRealAddrOptionValue('customer', 'identificacion', $identification_type);
+
+        return ($type ? $type . ' - ' : '') . $identification_number;
+    }
+
+    /**
+     * @param $customerId
+     * @param $attr
+     * @return mixed|string
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function getCustomerAttributeValue($customerId, $attr)
+    {
+        $customer = $this->customerRepository->getById($customerId);
+        $attribute = $customer->getCustomAttribute($attr);
+
+        if (!$attribute) return '';
+
+        return $attribute->getValue();
     }
 }
