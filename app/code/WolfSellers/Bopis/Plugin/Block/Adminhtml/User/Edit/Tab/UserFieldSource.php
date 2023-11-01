@@ -29,7 +29,7 @@ class UserFieldSource
     /**
      * Core registry
      *
-     * @var \Magento\Framework\Registry
+     * @var Registry
      */
     protected Registry $_coreRegistry;
 
@@ -43,7 +43,7 @@ class UserFieldSource
         SearchCriteriaBuilder       $searchCriteriaBuilder,
         SourceRepositoryInterface   $sourceRepository,
         WebsiteFactory              $websiteFactory,
-        \Magento\Framework\Registry $registry,
+        Registry $registry,
     )
     {
         $this->sourceRepository = $sourceRepository;
