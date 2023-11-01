@@ -96,8 +96,9 @@ abstract class SavarApiCreateOrder extends \Magento\Framework\DataObject
 
         $result = [
             'state_code' => $this->curl->getStatus(),
-            'response'  => $this->json->unserialize($response)
         ];
+
+        $result['response'] = $response ? $this->json->unserialize($response) : "";
 
         $this->logger->info("RESPONSE: ". $this->json->serialize($result));
 
