@@ -19,7 +19,7 @@
                 <sandbox_status_endpoint>https://test.savarexpress.com.pe/govari/api/servicio/#</sandbox_status_endpoint>
                 <max_package_weight>75</max_package_weight>
                 <production_token></production_token>
-                <sandbox_token>cb841e32-a1c1-41b1-8260-1e1a9c6d27b0</sandbox_token>
+                <sandbox_token></sandbox_token>
 			</envio_rapido>
 		</carriers>
 	</default>
