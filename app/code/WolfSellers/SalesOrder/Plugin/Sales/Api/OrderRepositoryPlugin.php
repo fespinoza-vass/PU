@@ -33,23 +33,27 @@ class OrderRepositoryPlugin
         OrderRepositoryInterface $subject,
         OrderInterface $order
     ) {
-        $billingAddress = $order->getBillingAddress();
-        $billingAddressExtensionAttributes = $billingAddress->getExtensionAttributes();
-        $billingAddressExtensionAttributes->setColony($billingAddress->getColony());
-        $billingAddressExtensionAttributes->setReferenciaEnvio($billingAddress->getReferenciaEnvio());
+        try{
+            $billingAddress = $order->getBillingAddress();
+            $billingAddressExtensionAttributes = $billingAddress->getExtensionAttributes();
+            $billingAddressExtensionAttributes->setColony($billingAddress->getColony());
+            $billingAddressExtensionAttributes->setReferenciaEnvio($billingAddress->getReferenciaEnvio());
 
-        $shippingAddress = $order->getShippingAddress();
+            $shippingAddress = $order->getShippingAddress();
 
-        $orderExtensionAttributes = $order->getExtensionAttributes();
-        if ($shipmentAssigments = $orderExtensionAttributes->getShippingAssignments()) {
-            /** @var ShippingAssignmentInterface $shippingAssignment */
-            $shipmentAssigment = $shipmentAssigments[0];
-            $shipping = $shipmentAssigment->getShipping();
-            $shippingExtensionAttributes = $shipping->getAddress()->getExtensionAttributes();
-            $shippingExtensionAttributes->setColony($shippingAddress->getColony());
-            $shippingExtensionAttributes->setCompany($shippingAddress->getCompany());
-            $shippingExtensionAttributes->setRuc($shippingAddress->getDni());
-            $shippingExtensionAttributes->setReferenciaEnvio($shippingAddress->getReferenciaEnvio());
+            $orderExtensionAttributes = $order->getExtensionAttributes();
+            if ($shipmentAssigments = $orderExtensionAttributes->getShippingAssignments()) {
+                /** @var ShippingAssignmentInterface $shippingAssignment */
+                $shipmentAssigment = $shipmentAssigments[0];
+                $shipping = $shipmentAssigment->getShipping();
+                $shippingExtensionAttributes = $shipping->getAddress()->getExtensionAttributes();
+                $shippingExtensionAttributes->setColony($shippingAddress->getColony());
+                $shippingExtensionAttributes->setCompany($shippingAddress->getCompany());
+                $shippingExtensionAttributes->setRuc($shippingAddress->getDni());
+                $shippingExtensionAttributes->setReferenciaEnvio($shippingAddress->getReferenciaEnvio());
+            }
+        } catch (\Throwable $error){
+
         }
         return $order;
     }

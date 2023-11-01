@@ -86,7 +86,11 @@ define([
                     var paymentComponent = registry.get(paymentComponentName);
 
                     if (!_.isUndefined(paymentComponent)) {
-                        paymentComponent.placeOrder(paymentComponent, event);
+                        if(paymentMethod.method === 'visanet_pay'){
+                            paymentComponent.loadCheckoutJS();
+                        }else{
+                            paymentComponent.placeOrder(paymentComponent, event);
+                        }
                     }
                 }else {
                     messageList.addErrorMessage({message: 'Complete la informacion solicitada.'});
