@@ -26,11 +26,12 @@ define([
         onUpdate: function (value) {
 
             var region_id = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.region_id");
-            if(_.isEmpty(value)){
-                return;
-            }
+
             if (!_.isUndefined(region_id) && !_.isUndefined(region_id.value())) {
                 ubigeo.getUbigeos(region_id.value(), value);
+            }
+            if(_.isEmpty(value)){
+                return;
             }
             return this._super();
         }
