@@ -27,8 +27,6 @@ class UserFieldSource
     private WebsiteFactory $websiteFactory;
 
     /**
-     * Core registry
-     *
      * @var Registry
      */
     protected Registry $_coreRegistry;
@@ -40,10 +38,10 @@ class UserFieldSource
      * @param Registry $registry
      */
     public function __construct(
-        SearchCriteriaBuilder       $searchCriteriaBuilder,
-        SourceRepositoryInterface   $sourceRepository,
-        WebsiteFactory              $websiteFactory,
-        Registry $registry,
+        SearchCriteriaBuilder     $searchCriteriaBuilder,
+        SourceRepositoryInterface $sourceRepository,
+        WebsiteFactory            $websiteFactory,
+        Registry                  $registry,
     )
     {
         $this->sourceRepository = $sourceRepository;
