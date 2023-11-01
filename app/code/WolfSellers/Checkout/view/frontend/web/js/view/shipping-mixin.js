@@ -95,23 +95,31 @@ define([
          */
         setShippingInformation: function () {
             if (!this.isFastShipping() && !this.isRegularShipping()){
-                quote.shippingMethod(null);
+                if(!customer.isCustomerLoggedIn){
+                    quote.shippingMethod(null);
+                }
                 this.errorValidationMessage(
                     $t('The shipping method is missing. Select the shipping method and try again.')
                 );
                 return false;
             }
             if (customer.isCustomerStepFinished() === '_complete') {
-                this.setDataToShippingForm();
-                if (this.validateShippingInformation()) {
-                    this.isShippingStepFinished("_complete");
-                    if (shippingPayment.shippingMethod() === 'instore') {
-                        this.isShippingStepFinished.notifySubscribers("_complete");
+                this.source.set('params.invalid', false);
+                this.triggerShippingDataValidateEvent();
+                if (!this.source.get('params.invalid')) {
+                    this.setDataToShippingForm();
+                    if (this.validateShippingInformation()) {
+                        this.isShippingStepFinished("_complete");
+                        if (shippingPayment.shippingMethod() === 'instore') {
+                            this.isShippingStepFinished.notifySubscribers("_complete");
+                        }
+                        this.goToResume(false);
+                    } else {
+                        this.isShippingStepFinished("_active");
+                        this.goToResume(true);
                     }
-                    this.goToResume(false);
-                } else {
-                    this.isShippingStepFinished("_active");
-                    this.goToResume(true);
+                }else{
+                    return false;
                 }
             }
             this._super();
@@ -137,7 +145,7 @@ define([
                 departamentoRegular.reset();
                 this.isRegularShipping(true);
                 this.isFastShipping(false);
-                this.setDataToShippingForm();
+                //this.setDataToShippingForm();
                 var rate = this.findRateByCarrierCode('flatrate');
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
