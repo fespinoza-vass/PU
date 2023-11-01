@@ -129,8 +129,7 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
                     $orderId = $this->cartManagement->placeOrder($quote->getId());
                     $order = $this->orderRepository->get($orderId);
                     if ($order) {
-                        $orderState = Order::STATE_PROCESSING;
-                        $order->setStatus(Order::STATE_COMPLETE);
+                        $order->setStatus(Order::STATE_PROCESSING);
                         $order->save();
                     }
 
