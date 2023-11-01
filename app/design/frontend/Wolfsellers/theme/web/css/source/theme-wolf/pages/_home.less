@@ -198,7 +198,7 @@
                         .block-banners{
                             li.banner-item{
                                 padding: 0;
-                                .footer-icons{
+                                .columns-icons{
                                     margin: auto;
                                     width: 100%;
                                     max-width: 1500px;
@@ -215,6 +215,11 @@
                                             &__title{
                                                 .lib-font-size(18);
                                                 font-weight: 600;
+                                                a{
+                                                    &:visited {
+                                                        color: @black;
+                                                    }
+                                                }
                                             }
                                             &__text{
                                                 max-width: 185px;
@@ -223,6 +228,9 @@
                                                     color: @black;
                                                     text-decoration: underline;
                                                     &:hover{
+                                                        color: @black;
+                                                    }
+                                                    &:visited {
                                                         color: @black;
                                                     }
                                                 }
@@ -289,9 +297,15 @@
                                                     height: auto;
                                                 }
                                                 &__text{
-                                                    .lib-font-size(12);
+                                                    .lib-font-size(11);
                                                     max-width: 185px;
                                                     margin: 0 auto;
+                                                    p {
+                                                        .lib-font-size(11);
+                                                        a {
+                                                            .lib-font-size(11);
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
