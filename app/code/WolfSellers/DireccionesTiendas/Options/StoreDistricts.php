@@ -62,12 +62,14 @@ class StoreDistricts extends \Magento\Eav\Model\Entity\Attribute\Source\Table
             $tiendas = $this->tiendasRepository->getList($searchCriteria)->getItems();
             foreach ($tiendas as $tienda) {
                 //$this->logger->info('source->getDistrito(): ' . $source->getDistrito() . ' source->getDireccionestiendasId(): ' . $source->getDireccionestiendasId());
-                $result[] = [
-                    'value' => $tienda->getDireccionestiendasId(),
-                    'label' => $tienda->getDistrito(),
-                    'region_id' => $this->allSources[$tienda->getTienda()]['region_id'] ?? '',
-                    'region' => $this->allSources[$tienda->getTienda()]['region'] ?? ''
-                ];
+                if($this->allSources[$tienda->getTienda()]['region_id']){
+                    $result[] = [
+                        'value' => $tienda->getDireccionestiendasId(),
+                        'label' => $tienda->getDistrito(),
+                        'region_id' => $this->allSources[$tienda->getTienda()]['region_id'] ?? '',
+                        'region' => $this->allSources[$tienda->getTienda()]['region'] ?? ''
+                    ];
+                }
             }
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
