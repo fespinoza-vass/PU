@@ -14,10 +14,10 @@ define([
         numId ="",
         passwordRegister ="",
         passwordConfirm = "",
-        isCustomerLoggedIn;
+        isCustomerLoggedIn = false;
 
     if(window.isCustomerLoggedIn){
-        isCustomerLoggedIn = window.isCustomerLoggedIn;
+        isCustomerLoggedIn = true;
         id = window.checkoutConfig.customerData.custom_attributes.identificacion;
         telephone =window.checkoutConfig.customerData.custom_attributes.telefono;
         numId =window.checkoutConfig.customerData.custom_attributes.numero_de_identificacion;

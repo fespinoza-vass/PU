@@ -15,6 +15,7 @@ define([
         value: ko.observable(),
         scheduleDates: ko.observable(""),
         updateOptions: ko.observable(),
+        optionSelected: ko.observable(),
 
         initialize: function () {
             this._super();
@@ -23,6 +24,11 @@ define([
             this.updateOptions.subscribe(function (value) {
                 for (let i = 0; i < this.options.length; i++) {
                     this.options[i].value = value[i].option_value;
+                }
+            },this);
+            this.value.subscribe(function (value) {
+                if(value){
+                    this.optionSelected(this.setValueFromTimer(value, 'value'));
                 }
             },this);
         },
@@ -35,7 +41,7 @@ define([
         setValueFromTimer: function (radioOption, data) {
             var ahora = new Date();
             var timeSensitive = wolfUtils.getAvailableDates(ahora);
-            this.value(timeSensitive[radioOption]['value']);
+            this.optionSelected(timeSensitive[radioOption]['value']);
             if(data.includes('lab')){
                 return "Horario de " +
                     timeSensitive[radioOption].label +

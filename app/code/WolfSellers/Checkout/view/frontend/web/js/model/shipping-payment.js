@@ -85,7 +85,8 @@ define([
                 this.referencia(this.getCustomAttributeByAttributeCode(quote,"referencia_envio"));
                 this.direccion(quote.shippingAddress().street[0]);
                 this.distritoEnvioRapido(this.getCustomAttributeByAttributeCode(quote,"distrito_envio_rapido"));
-                this.horarioSeleccionado(this.getCustomAttributeByAttributeCode(quote, "horarios_disponibles"));
+                var horarios_disponibles = registry.get("checkout.steps.shipping-step.shippingAddress.schedule.schedule");
+                this.horarioSeleccionado(horarios_disponibles.optionSelected());
             }
         },
         /**

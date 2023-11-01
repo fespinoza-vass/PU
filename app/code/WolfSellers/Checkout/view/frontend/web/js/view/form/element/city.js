@@ -24,7 +24,11 @@ define([
          * @returns {*}
          */
         onUpdate: function (value) {
-
+            var shipping = registry.get("checkout.steps.shipping-step.shippingAddress");
+            if(_.isUndefined(shipping)){
+                if(shipping.isFastShipping())
+                return;
+            }
             var region_id = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.region_id");
 
             if (!_.isUndefined(region_id) && !_.isUndefined(region_id.value())) {
