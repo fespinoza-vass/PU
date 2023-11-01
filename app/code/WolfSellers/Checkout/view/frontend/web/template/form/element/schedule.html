@@ -7,8 +7,8 @@
         <input type="radio"
                name="schedule"
                data-bind="
-                    checked: setValueFromTimer(0,'value'),
-                    value: setValueFromTimer(0,'value'),
+                    checked: value,
+                    value: '0',
                     attr: {id: setValueFromTimer(0,'value')}">
         <label data-bind="
                     attr: {for: setValueFromTimer(0,'value')},
@@ -22,8 +22,8 @@
         <input type="radio"
                name="schedule"
                data-bind="
-                    checked: setValueFromTimer(1,'value'),
-                    value: setValueFromTimer(1,'value'),
+                    checked: value,
+                    value: '1',
                     attr: {id: setValueFromTimer(1,'value')}">
         <label data-bind="
                     attr: {for: setValueFromTimer(1,'value')},

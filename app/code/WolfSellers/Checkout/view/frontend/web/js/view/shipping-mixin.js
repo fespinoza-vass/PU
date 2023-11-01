@@ -145,10 +145,10 @@ define([
                 departamentoRegular.reset();
                 this.isRegularShipping(true);
                 this.isFastShipping(false);
-                //this.setDataToShippingForm();
                 var rate = this.findRateByCarrierCode('flatrate');
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
+                this.updateShippingValidations();
             }
         },
         /**
@@ -163,6 +163,7 @@ define([
                 var rate = this.findRateByCarrierCode('envio_rapido');
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
+                this.updateShippingValidations();
             }
             if(this.isFastShippingDisabled()){
                 this.isRegularShipping(false);
@@ -239,7 +240,7 @@ define([
                 "distrito"
             ]
             var fastComponentsArea = [
-                'distrito_input',
+                'distrito',
                 'direccion',
                 'referencia'
             ];
@@ -247,7 +248,7 @@ define([
                 "distrito_envio_rapido",
                 "street.0",
                 "referencia_envio",
-                //"horarios_disponibles"
+                "horarios_disponibles"
             ];
             var pickerVoucherPath = [
                 "voucher",
@@ -299,28 +300,125 @@ define([
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, rapido, newValidationConfig);
                 wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
-                //var horarios_disponibles = registry.get("checkout.steps.shipping-step.shippingAddress.schedule.schedule");
+                var horarios_disponibles = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.horarios_disponibles");
                 var distrito_envio_rapido = registry.get("checkout.steps.shipping-step.shippingAddress.fast.distrito");
                 var direccion = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
-                var referencia = registry.get("checkout.steps.shipping-step.shippingAddress.fast.referencia");
                 var region = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.region_id");
+                var referenciaRapida = registry.get("checkout.steps.shipping-step.shippingAddress.fast.referencia");
                 var regionId = distrito_envio_rapido.getOption(distrito_envio_rapido.value());
+                horarios_disponibles.validation = [{'required-entry':false}];
                 uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, rapido);
 
                 uiComponent.distrito_envio_rapido.options(distrito_envio_rapido.options());
                 uiComponent.distrito_envio_rapido.value(distrito_envio_rapido.value());
                 uiComponent['street.0'].value(direccion.value());
-                uiComponent.referencia_envio.value(referencia.value());
+                uiComponent.referencia_envio.value(referenciaRapida.value());
+                referenciaRapida.validate();
+                if(referenciaRapida.error()){
+                    uiComponent.referencia_envio.validate();
+                    referenciaRapida.error(referenciaRapida.error());
+                    return;
+                }
+
 
                 region.value(regionId.region_id);
             }
-
             var facturacion = [
                 "dni",
                 "invoice_required",
                 "ruc",
                 "razon_social"
             ];
+
+        },
+        /**
+         * Set validation for each input according to shipping Method
+         */
+        updateShippingValidations: function () {
+            var validationRuleName = 'required-entry';
+            var newValidationConfig = {
+                [validationRuleName]: false
+            };
+            var allShippingPickupComponents = [
+                "region_id",
+                "city",
+                "colony",
+                "street.0",
+                "referencia_envio",
+                "distrito_envio_rapido",
+                "horarios_disponibles",
+                "picker",
+                "identificacion_picker",
+                "distrito_pickup",
+                "numero_identificacion_picker",
+                "nombre_completo_picker",
+                "email_picker",
+                "company",
+                "postcode",
+                "country_id"
+            ];
+            var regular = [
+                "region_id",
+                "city",
+                "colony",
+                "street.0",
+                "referencia_envio"
+            ];
+            var regularComponentsArea = [
+                "provincia",
+                "departamento",
+                "distrito",
+                "provincia",
+                "departamento",
+                "distrito"
+            ]
+            var fastComponentsArea = [
+                'distrito',
+                'direccion',
+                'referencia'
+            ];
+            var pickerVoucherPath = [
+                "voucher",
+                "direccion_comprobante_picker"
+            ];
+            var pickerPickerPath = [
+                "pickerOption"
+            ];
+            var pickerAnotherPicker = [
+                "identificacion_picker",
+                "numero_identificacion_picker",
+                "nombre_completo_picker",
+                "email_picker"
+            ];
+            var customerDataInputs = [
+                "firstname",
+                "lastname",
+                "telephone",
+                "vat_id"
+            ];
+            var uiComponentsRequired = [];
+            var uiComponent;
+            uiComponentsRequired = customerDataInputs;
+            uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, uiComponentsRequired);
+            uiComponent.firstname.value(customer.customerName());
+            uiComponent.lastname.value(customer.customerLastName());
+            uiComponent.telephone.value(customer.customerTelephone());
+            uiComponent.vat_id.value(customer.customerNumberIdentification());
+            wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, allShippingPickupComponents, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(voucherPath, pickerVoucherPath, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(pickerPath, pickerPickerPath, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(anotherPicker, pickerAnotherPicker, newValidationConfig);
+            if(this.isRegularShipping()){
+                newValidationConfig['required-entry'] = true;
+                wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
+                wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
+            }
+            if(this.isFastShipping()){
+                newValidationConfig['required-entry'] = true;
+                wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
+            }
 
         },
         /**
