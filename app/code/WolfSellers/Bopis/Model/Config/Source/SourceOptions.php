@@ -7,6 +7,8 @@ use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Backend\Model\Auth\Session as AuthSession;
 use Psr\Log\LoggerInterface;
+use Magento\User\Model\ResourceModel\User\CollectionFactory as UserCollectionFactory;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class SourceOptions implements ArrayInterface
 {
@@ -14,13 +16,16 @@ class SourceOptions implements ArrayInterface
     /**
      * @param SourceRepositoryInterface $_sourceRepository
      * @param SearchCriteriaBuilder $_searchCriteriaBuilder
+     * @param AuthSession $authSession
      * @param LoggerInterface $logger
+     * @param UserCollectionFactory $userCollectionFactory
      */
     public function __construct(
         protected SourceRepositoryInterface $_sourceRepository,
         protected SearchCriteriaBuilder     $_searchCriteriaBuilder,
-        protected AuthSession                   $authSession,
-        protected LoggerInterface           $logger
+        protected AuthSession               $authSession,
+        protected LoggerInterface           $logger,
+        protected UserCollectionFactory     $userCollectionFactory
     )
     {
     }
@@ -47,8 +52,9 @@ class SourceOptions implements ArrayInterface
     public function getOptions(): array
     {
         $sourceCode = $this->authSession->getUser()->getData('source_code');
+        $roleName = $this->getUserRole($this->authSession->getUser());
 
-        if ($sourceCode != 'all'){
+        if ($sourceCode != 'all' && $roleName !== AbstractBopisCollection::BOPIS_SUPER_ADMIN ) {
             $this->_searchCriteriaBuilder->addFilter('source_code', $sourceCode);
         }
 
@@ -71,5 +77,17 @@ class SourceOptions implements ArrayInterface
         $options[''] = 'Todo';
 
         return $options;
+    }
+
+    /**
+     * @param \Magento\User\Model\User $user
+     * @return mixed|null
+     */
+    private function getUserRole(\Magento\User\Model\User $user)
+    {
+        $collection = $this->userCollectionFactory->create();
+        $collection->addFieldToFilter('main_table.user_id', $user->getId());
+        $userData = $collection->getFirstItem();
+        return $userData->getDataByKey('role_name');
     }
 }
