@@ -14,6 +14,8 @@ use Magento\Quote\Model\Quote\Address\RateResult\Error;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
 use Magento\Shipping\Model\Rate\ResultFactory;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
+use Magento\InventoryApi\Api\Data\SourceItemInterface;
 
 
 /**
@@ -52,6 +54,9 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      */
     protected $_timezone;
 
+    /** @var GetSourceItemsBySkuInterface */
+    protected $_sourceItemsBySku;
+
     /**
      * @param ScopeConfigInterface $scopeConfig
      * @param ErrorFactory $rateErrorFactory
@@ -72,9 +77,11 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
         ProductRepository    $productRepository,
         SalableQtyBySku      $salableQuantityDataBySku,
         TimezoneInterface    $timezone,
+        GetSourceItemsBySkuInterface $sourceItemsBySku,
         array                $data = []
     )
     {
+        $this->_sourceItemsBySku = $sourceItemsBySku;
         $this->_rateResultFactory = $rateResultFactory;
         $this->_rateMethodFactory = $rateMethodFactory;
         $this->productRepository = $productRepository;
@@ -88,16 +95,34 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      */
     public function collectRates(RateRequest $request)
     {
+        $salableQtySelectedStock = -1;
+
         try {
             if (!$this->getConfigFlag('active')) {
                 return false;
             }
 
+            $cumpleReglasEnvioRapido = false;
+
+            /** @var \Magento\Quote\Model\Quote\Item $item */
+            foreach ($request->getAllItems() as $item) {
+                $inventory = $this->_sourceItemsBySku->execute($item->getSku());
+                /** @var SourceItemInterface $source */
+                foreach ($inventory as $source) {
+                    if (!$source->getStatus()) continue;
+
+                    if ($source->getQuantity() >= 2) {
+                        $cumpleReglasEnvioRapido = true;
+                    }
+                }
+            }
+
             $shippingPrice = $this->getConfigData('price');
 
             if ($shippingPrice !== false) {
-                    $result = $this->_rateResultFactory->create();
+                if ($cumpleReglasEnvioRapido) {
 
+                    $result = $this->_rateResultFactory->create();
                     $method = $this->_rateMethodFactory->create();
 
                     $method->setCarrier($this->_code);
@@ -116,9 +141,14 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
                     $result->append($method);
                     return $result;
+
+                } else {
+                    return $this->createCarrierErrorMessage($salableQtySelectedStock);
+                }
             }
         } catch (\Exception $e) {
             $this->_logger->info($e->getMessage());
+            return $this->createCarrierErrorMessage($salableQtySelectedStock);
         }
     }
 

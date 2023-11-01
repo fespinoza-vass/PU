@@ -66,12 +66,12 @@ $shippingAddress = $order->getShippingAddress();
 
                 <br>
                 Comprobante:
-                <?php if ( $shippingAddress->getDataByKey('invoice_required') == '0'):?>
+                <?php if ( $billingAddress->getDataByKey('invoice_required') == '0'):?>
                     Boleta
                 <?php else: ?>
                     Factura <br>
-                    <?=$shippingAddress->getDataByKey('ruc') ?? $shippingAddress->getVatId()?> <br>
-                    <?=$shippingAddress->getDataByKey('razon_social') ?? $shippingAddress->getName() ?> <br>
+                    <?=$billingAddress->getDataByKey('ruc')?> <br>
+                    <?=$billingAddress->getDataByKey('razon_social')?> <br>
                 <?php endif; ?>
                 <br />
 
