@@ -41,7 +41,6 @@ define([
         setValueFromTimer: function (radioOption, data) {
             var ahora = new Date();
             var timeSensitive = wolfUtils.getAvailableDates(ahora);
-            this.optionSelected(timeSensitive[radioOption]['value']);
             if(data.includes('lab')){
                 return "Horario de " +
                     timeSensitive[radioOption].label +

@@ -6,12 +6,11 @@
          aria-hidden="false">
         <input type="radio"
                name="schedule"
+               id="inputUno"
                data-bind="
                     checked: value,
-                    value: '0',
-                    attr: {id: setValueFromTimer(0,'value')}">
-        <label data-bind="
-                    attr: {for: setValueFromTimer(0,'value')},
+                    value: '0'">
+        <label for="inputUno" data-bind="
                     text: setValueFromTimer(0,'label')" ></label>
     </div>
     <div class="admin__field admin__field-option"
@@ -20,13 +19,12 @@
          role="option"
          aria-hidden="false">
         <input type="radio"
+               id="inputDos"
                name="schedule"
                data-bind="
                     checked: value,
-                    value: '1',
-                    attr: {id: setValueFromTimer(1,'value')}">
-        <label data-bind="
-                    attr: {for: setValueFromTimer(1,'value')},
+                    value: '1'">
+        <label for="inputDos" data-bind="
                     text: setValueFromTimer(1,'label')" ></label>
     </div>
 </fieldset>

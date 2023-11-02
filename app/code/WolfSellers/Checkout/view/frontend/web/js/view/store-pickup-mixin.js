@@ -27,10 +27,18 @@ define([
         */
        selectShippingMethod: function (shippingMethod) {
            if(!shippingMethod.carrier_code.includes('instore')){
+               //shippingMethod = null;
                var shipping = registry.get("checkout.steps.shipping-step.shippingAddress");
-               shippingMethod = null;
-               shipping.isFastShipping(false);
-               shipping.isRegularShipping(false);
+               console.log(shipping);
+               shipping.setRegularShipping();
+               /*if(shipping.isRegularShipping()){
+                   shipping.setRegularShipping();
+               }
+               if(shipping.isFastShipping()){
+                   shipping.setFastShipping();
+               }*/
+               /*shipping.isFastShipping(false);
+               shipping.isRegularShipping(false);*/
            }
            this._super(shippingMethod);
        }
