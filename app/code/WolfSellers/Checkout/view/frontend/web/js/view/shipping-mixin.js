@@ -42,11 +42,12 @@ define([
                 "updateOptions":"checkout.steps.shipping-step.shippingAddress.schedule.schedule:updateOptions"
             }
         },
+        isFormInline: true,
         isActive: ko.observable(false),
         isShippingStepFinished: ko.observable(false),
         isDisabledShippingStep: ko.observable(true),
-        isRegularShipping: ko.observable(),
-        isFastShipping: ko.observable(),
+        isRegularShipping: ko.observable(false),
+        isFastShipping: ko.observable(false),
         isFastShippingDisabled: ko.observable(false),
         isRegularShippingDisabled: ko.observable(false),
         shippingMethod: ko.observable(),
@@ -106,8 +107,11 @@ define([
             if (customer.isCustomerStepFinished() === '_complete') {
                 this.source.set('params.invalid', false);
                 this.triggerShippingDataValidateEvent();
+                this.validateShippingInformation();
                 if (!this.source.get('params.invalid')) {
-                    this.setDataToShippingForm();
+                    if (!this.setDataToShippingForm()){
+                        return false;
+                    }
                     if (this.validateShippingInformation()) {
                         this.isShippingStepFinished("_complete");
                         if (shippingPayment.shippingMethod() === 'instore') {
@@ -149,7 +153,9 @@ define([
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
+                return true;
             }
+            return false;
         },
         /**
          * Set shipping method for fast shipping
@@ -164,6 +170,7 @@ define([
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
+                return true;
             }
             if(this.isFastShippingDisabled()){
                 this.isRegularShipping(false);
@@ -172,6 +179,7 @@ define([
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
             }
+            return false
         },
         /**
          * Show error when shipping method envio_rapido it's not available
@@ -235,9 +243,7 @@ define([
                 "provincia",
                 "departamento",
                 "distrito",
-                "provincia",
-                "departamento",
-                "distrito"
+                "referencia"
             ]
             var fastComponentsArea = [
                 'distrito',
@@ -286,12 +292,15 @@ define([
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
                 wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
                 uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, regular);
-
+                var referenciaRegular = registry.get("checkout.steps.shipping-step.shippingAddress.regular.referencia")
                 uiComponent.region_id.value();
                 uiComponent.city.value();
                 uiComponent.colony.value();
                 uiComponent['street.0'].value();
-                uiComponent.referencia_envio.value();
+                uiComponent.referencia_envio.value(referenciaRegular.value());
+                if(referenciaRegular.value()){
+
+                }
             }
             /**
              * Envio Rápido
@@ -300,36 +309,32 @@ define([
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, rapido, newValidationConfig);
                 wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
-                var horarios_disponibles = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.horarios_disponibles");
+                var horarios_disponiblesFast = registry.get("checkout.steps.shipping-step.shippingAddress.schedule.schedule");
                 var distrito_envio_rapido = registry.get("checkout.steps.shipping-step.shippingAddress.fast.distrito");
                 var direccion = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
                 var region = registry.get("checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.region_id");
                 var referenciaRapida = registry.get("checkout.steps.shipping-step.shippingAddress.fast.referencia");
                 var regionId = distrito_envio_rapido.getOption(distrito_envio_rapido.value());
-                horarios_disponibles.validation = [{'required-entry':false}];
                 uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, rapido);
 
+                uiComponent.horarios_disponibles.validation = [{'required-entry':false}];
                 uiComponent.distrito_envio_rapido.options(distrito_envio_rapido.options());
                 uiComponent.distrito_envio_rapido.value(distrito_envio_rapido.value());
                 uiComponent['street.0'].value(direccion.value());
                 uiComponent.referencia_envio.value(referenciaRapida.value());
+                if(_.isUndefined(horarios_disponiblesFast.value())){
+                    horarios_disponiblesFast.error("Seleccione un horario de entrega");
+                    return false;
+                }
                 referenciaRapida.validate();
                 if(referenciaRapida.error()){
                     uiComponent.referencia_envio.validate();
                     referenciaRapida.error(referenciaRapida.error());
-                    return;
+                    return false;
                 }
-
-
                 region.value(regionId.region_id);
             }
-            var facturacion = [
-                "dni",
-                "invoice_required",
-                "ruc",
-                "razon_social"
-            ];
-
+            return true;
         },
         /**
          * Set validation for each input according to shipping Method
@@ -368,9 +373,7 @@ define([
                 "provincia",
                 "departamento",
                 "distrito",
-                "provincia",
-                "departamento",
-                "distrito"
+                "referencia"
             ]
             var fastComponentsArea = [
                 'distrito',

@@ -45,6 +45,10 @@ $btnOrden = $block->isBtnOrdenAvailable();
 $billingAddress = $order->getBillingAddress();
 /** @var  $shippingAddress */
 $shippingAddress = $order->getShippingAddress();
+$horarioDeEntrega = $viewModel->getRealAddrOptionValue(
+    'horarios_disponibles',
+    $shippingAddress->getHorariosDisponibles()
+);
 ?>
 
 <!-- 01 CARD: CLIENTE QUE FACTURA -->
@@ -107,7 +111,7 @@ $shippingAddress = $order->getShippingAddress();
 
 
             <address class="admin__page-section-item-content">
-                <span class="color-orange">ID Orden: <?= $order->getIncrementId(); ?></span><br />
+                <b><span class="color-orange">ID de Orden: <?= $order->getIncrementId(); ?></span></b><br />
                 <!--ID SBX: <?= $order->getId(); ?><br />-->
                 Creado: <?= $orderStoreDate; ?><br />
                 Entrega: <?=$viewModel->getShippingMethodTitle($order->getShippingMethod())?><br />
@@ -138,11 +142,7 @@ $shippingAddress = $order->getShippingAddress();
             </div>
             <address class="admin__page-section-item-content">
                 <span class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></span><br />
-                Número de documento:
-                <?= !empty($shippingAddress->getDataByKey('identificacion')) ??
-                    $shippingAddress->getDataByKey('identificacion') . ' - ' ; ?>
-                <?= $shippingAddress->getVatId(); ?><br />
-
+                Número de documento: <?=$viewModel->getCustomerIdentificacion($order->getCustomerId())?><br />
                 <?= $shippingAddress->getEmail(); ?><br />
                 T. <?= $shippingAddress->getTelephone(); ?>
             </address>
@@ -184,7 +184,11 @@ $shippingAddress = $order->getShippingAddress();
                 <span class="teléfono">T. <?= $shippingAddress->getTelephone() ?></span> <br>
                 <span class="referencia"> Referencia: <?= $shippingAddress->getData('referencia_envio') ?></span> <br>
                 <span class="provincia"><?= $shippingAddress->getCity() ?></span> <br>
-                <span class="horairo">Horario de entrega: <?=$viewModel->getSchedule($order->getDataByKey('savar_horario'))?></span>
+                <?php if ($horarioDeEntrega): ?>
+                    <span class="horario" title="<?=$horarioDeEntrega?>">Horario de entrega:
+                        <?= $viewModel->getSchedule($horarioDeEntrega)?>
+                    </span>
+                <?php endif; ?>
             </address>
         </div>
     </div>

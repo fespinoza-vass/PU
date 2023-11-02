@@ -24,7 +24,7 @@
                     click: setRegularShipping">
                 <label class="step-content_icon" for="envio_regular">Envío Regular:</label>
                 <span class="step-content_price" data-bind="text: getPriceLabel('flatrate_flatrate')"></span>
-                <input type="radio" id="envio_regular" name="opciones" value="regular" attr="{checked: isRegularShipping()}">
+                <input type="radio" id="envio_regular" name="opciones" value="regular" attr="{checked: isRegularShipping}">
                 <label class="step-content_input-regular" for="envio_regular"></label>
                 <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
                     <a href="#">Cónoce más aquí</a>
@@ -43,7 +43,7 @@
                     click: setFastShipping">
                 <label class="step-content_icon" for="envio_rapido">Envío Rápido:</label>
                 <span class="step-content_price" data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
-                <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping()}">
+                <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping}">
                 <label class="step-content_input-fast" for="envio_rapido"></label>
                 <span class="step-content_info">Tu pedido llega el mismo día tú comprar*
                     <a href="#">Cónoce más aquí</a>

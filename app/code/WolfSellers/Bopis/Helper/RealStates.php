@@ -2,13 +2,15 @@
 
 namespace WolfSellers\Bopis\Helper;
 
+use Magento\Eav\Model\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\ScopeInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class RealStates
 {
-    /** @var string  */
+    /** @var string */
     const ENVIO_RAPIDO = 'envio_rapido';
 
     /** @var string */
@@ -19,9 +21,11 @@ class RealStates
 
     /**
      * @param ScopeConfigInterface $_scopeConfig
+     * @param Config $_eavConfig
      */
     public function __construct(
-        protected ScopeConfigInterface $_scopeConfig
+        protected ScopeConfigInterface $_scopeConfig,
+        protected Config               $_eavConfig
     )
     {
         $this->initializeStates();
@@ -45,9 +49,9 @@ class RealStates
     {
         if (!$shippingMethodCode) return '';
 
-        if ($shippingMethodCode == AbstractBopisCollection::FAST_SHIPPING_METHOD){
+        if ($shippingMethodCode == AbstractBopisCollection::FAST_SHIPPING_METHOD) {
             $code[0] = self::ENVIO_RAPIDO;
-        }else{
+        } else {
             $code = explode('_', $shippingMethodCode);
         }
 
@@ -131,5 +135,36 @@ class RealStates
                 return trim(str_replace('Pedido', '', $data['label']));
             }
         }
+    }
+
+    /**
+     * @param $schedule
+     * @return string
+     */
+    public function getSchedule($schedule)
+    {
+        return match ($schedule) {
+            "12_4_hoy" => "Hoy de 12:00 - 16:00",
+            "4_8_hoy" => "Hoy de 16:00 - 20:00",
+            "12_4_manana" => "Mañana de 12:00 - 16:00",
+            "4_8_manana" => "Mañana de 16:00 - 20:00",
+            default => ""
+        };
+    }
+
+    /**
+     * @param $component
+     * @param $attributeCode
+     * @param $value
+     * @return bool|string
+     * @throws LocalizedException
+     */
+    public function getRealAddrOptionValue($component, $attributeCode, $value)
+    {
+        $attribute = $this->_eavConfig->getAttribute($component, $attributeCode);
+        if (!$attribute) return '';
+
+        $optionLabel = $attribute->getSource()->getOptionText($value);
+        return $optionLabel ?? '';
     }
 }
