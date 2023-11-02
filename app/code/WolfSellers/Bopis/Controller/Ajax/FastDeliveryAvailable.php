@@ -4,7 +4,7 @@ namespace WolfSellers\Bopis\Controller\Ajax;
 
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\InventorySalesAdminUi\Model\GetSalableQuantityDataBySku;
+use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\Checkout\Model\Session;
 
 class FastDeliveryAvailable implements HttpGetActionInterface
@@ -15,12 +15,12 @@ class FastDeliveryAvailable implements HttpGetActionInterface
     /**
      * @param JsonFactory $jsonResultFactory
      * @param Session $_checkout
-     * @param GetSalableQuantityDataBySku $salableQuantityDataBySku
+     * @param GetSourceItemsBySkuInterface $sourceItemsBySku
      */
     public function __construct(
         protected JsonFactory                 $jsonResultFactory,
         protected Session                     $_checkout,
-        protected GetSalableQuantityDataBySku $salableQuantityDataBySku
+        protected GetSourceItemsBySkuInterface $sourceItemsBySku
     )
     {
     }
@@ -37,13 +37,11 @@ class FastDeliveryAvailable implements HttpGetActionInterface
         $items = $this->_checkout->getQuote()->getAllVisibleItems();
 
         foreach ($items as $item) {
-            $response = $this->salableQuantityDataBySku->execute($item->getSku());
+            $max = $this->getMaxQtyPerSource($item->getSku());
 
             $saleableQuatity = 0;
-            foreach ($response as $section){
-                if ($section['qty'] >= self::MINIMUM_SALABLE_QUANTITY){
-                    $saleableQuatity = 1;
-                }
+            if ($max >= self::MINIMUM_SALABLE_QUANTITY){
+                $saleableQuatity = 1;
             }
         }
 
@@ -51,5 +49,23 @@ class FastDeliveryAvailable implements HttpGetActionInterface
         $data = ['available' => "$saleableQuatity"];
         $result->setData($data);
         return $result;
+    }
+
+
+    private function getMaxQtyPerSource($sku): int
+    {
+        $max = 0;
+
+        $inventory = $this->sourceItemsBySku->execute($sku);
+
+        foreach ($inventory as $source) {
+            if (!$source->getStatus()) continue;
+
+            if ($source->getQuantity() > $max) {
+                $max = $source->getQuantity();
+            }
+        }
+
+        return (int)$max;
     }
 }
