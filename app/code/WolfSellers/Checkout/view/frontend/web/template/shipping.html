@@ -43,7 +43,7 @@
                     click: setFastShipping">
                 <label class="step-content_icon" for="envio_rapido">Envío Rápido:</label>
                 <span class="step-content_price" data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
-                <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping}">
+                <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping, disabled:isFastShippingDisabled}">
                 <label class="step-content_input-fast" for="envio_rapido"></label>
                 <span class="step-content_info">Tu pedido llega el mismo día tú comprar*
                     <a href="#">Cónoce más aquí</a>
