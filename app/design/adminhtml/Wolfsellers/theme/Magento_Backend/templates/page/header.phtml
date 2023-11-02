@@ -46,10 +46,10 @@ if ($part === 'logo') : ?>
              title="<?= $block->escapeHtml(__('Magento Admin Panel')) ?>"/>
     </a>
     <?php if (!empty($block->getUser())):?>
-        
+
         <?php if ($block->getUser()->getData('user_type') == '1' || $block->getUser()->getData('user_type') == '2'): ?>
             <div class="admin-user">
-          
+
             </div>
             <nav class="nav-admin-user">
                 <ul>
@@ -75,8 +75,8 @@ if ($part === 'logo') : ?>
                             href="<?= /* @noEscape */
                             $block->getLogoutLink() ?>"
                             class="account-signout"
-                            title="<?= $block->escapeHtml(__('Sign Out')) ?>">
-                            <?= $block->escapeHtml(__('Sign Out')) ?>
+                            title="<?= $block->escapeHtml(__('Cerrar Sesión')) ?>">
+                            <?= $block->escapeHtml(__('Cerrar Sesión')) ?>
                         </a>
                     </li>
                 </ul>
@@ -128,8 +128,8 @@ if ($part === 'logo') : ?>
                         href="<?= /* @noEscape */
                         $block->getLogoutLink() ?>"
                         class="account-signout"
-                        title="<?= $block->escapeHtml(__('Sign Out')) ?>">
-                        <?= $block->escapeHtml(__('Sign Out')) ?>
+                        title="<?= $block->escapeHtml(__('Cerrar Sesión')) ?>">
+                        <?= $block->escapeHtml(__('Cerrar Sesión')) ?>
                     </a>
                 </li>
             </ul>

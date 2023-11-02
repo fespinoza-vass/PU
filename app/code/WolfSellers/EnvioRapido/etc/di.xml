@@ -28,4 +28,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order_envio_rapido" type="WolfSellers\EnvioRapido\Plugin\PlaceOrderPlugin"/>
+    </type>
 </config>
