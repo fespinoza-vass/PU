@@ -468,8 +468,7 @@ define([
         isShippingMethodAvailable: function (methodType) {
             var carrier = this.getCarrierCodeByCarrier(methodType);
             if(_.isObject(carrier)){
-                if(carrier.carrier_code.includes('rapid'))
-                this.updateOptions(carrier.extension_attributes.delivery_time);
+                return false;
             }
             if(!!carrier.error_message && carrier.carrier_code.includes('flat')){
                 this.isRegularShippingDisabled(true);
@@ -479,6 +478,9 @@ define([
             if (!!carrier.error_message && carrier.carrier_code.includes('rapid')){
                 this.isFastShippingDisabled(true);
             }else{
+                if (carrier.carrier_code.includes('rapid')){
+                    this.updateOptions(carrier.extension_attributes.delivery_time);
+                }
                 this.isFastShippingDisabled(false);
             }
             return !!carrier.error_message;
