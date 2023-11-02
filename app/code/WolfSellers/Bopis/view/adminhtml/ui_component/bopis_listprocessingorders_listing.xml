@@ -54,7 +54,7 @@
             <filterSelect name="source_code" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
                 <settings>
                     <options class="WolfSellers\Bopis\Model\Config\Source\SourceOptions"/>
-                    <caption translate="true">Select</caption>
+                    <caption translate="true">--Todo--</caption>
                     <label translate="true">Tienda</label>
                     <dataScope>source_code</dataScope>
                     <imports>
@@ -68,7 +68,7 @@
                 class="\WolfSellers\Bopis\Ui\Component\Listing\Filter\ShippingMethod">
                 <settings>
                     <options class="WolfSellers\Bopis\Model\Config\Source\ShippingOptions"/>
-                    <caption translate="true">All</caption>
+                    <caption translate="true">--Todo--</caption>
                     <label translate="true">Método de entrega</label>
                     <dataScope>shipping_method</dataScope>
                 </settings>
@@ -79,7 +79,7 @@
                 class="\WolfSellers\Bopis\Ui\Component\Listing\Filter\SavarHorario" sortOrder="45">
                 <settings>
                     <options class="WolfSellers\Bopis\Model\Config\Source\HorariosOptions"/>
-                    <caption translate="true">All</caption>
+                    <caption translate="true">--Todo--</caption>
                     <label translate="true">Horario</label>
                     <dataScope>savar_horario</dataScope>
                 </settings>
