@@ -6198,7 +6198,7 @@ Method Title,Título de Método,module,Magento_Checkout,
 Carrier Title,Título de Transportista,module,Magento_Checkout,
 Next,Siguiente,module,Magento_Checkout,
 "Sorry, no quotes are available for this order at this time","Lo sentimos, no hay cotizaciones disponibles para esta orden en este momento",module,Magento_Checkout,
-Order Summary,Resumen,module,Magento_Checkout,
+Order Summary,Resumen de tu Compra,module,Magento_Checkout,
 Item in Cart,Item en el carrito,module,Magento_Checkout,
 Items in Cart,Elementos en Carrito,module,Magento_Checkout,
 View Details,Ver Detalles,module,Magento_Checkout,
@@ -26008,7 +26008,7 @@ No shipping method selected,No se seleccionó ningún método de envío
 Name of recipient of gift,Nombre de quien recibe el regalo
 Write a short dedication,Escribe una breve dedicatoria
 Hello %customer_name ¡Thank you very much for your purchase!,Hola %customer_name ¡Muchas gracias por tu compra!
-"We have successfully received your order. Next, we send you all the information regarding your purchase:","Hemos recibido satisfactoriamente tu pedido. A continuación, te enviamos toda la información referente a tu compra:",module,Magento_Sales,
+"We have successfully received your order. Next, we send you all the information regarding your purchase:","Hemos recibido satisfactoriamente tu pedido.",module,Magento_Sales,
 "Your order number is <span class=""no-link"">%increment_id</span>","Tu número de pedido es <span class=""no-link"">%increment_id</span>",module,Magento_Sales,
 "track order","Rastrear pedido"
 "Where can I consult about my order?","¿Dónde puedo consultar sobre mi pedido?"
