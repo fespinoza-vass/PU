@@ -5,11 +5,14 @@ namespace WolfSellers\OrderQR\Block\Onepage;
 use Magento\Customer\Model\Context;
 use Magento\Sales\Model\Order;
 use WolfSellers\OrderQR\Helper\QR;
-
+use WolfSellers\OrderQR\Helper\SourceQuantityHelper;
 
 class Success extends \Magento\Framework\View\Element\Template
 {
     CONST SHIPPING_METHOD_FOR_QRCODE = "instore_pickup";
+
+    /** @var SourceQuantityHelper */
+    protected $_sourceQuantityHelper;
     /**
      * @var \Magento\Checkout\Model\Session
      */
@@ -35,6 +38,7 @@ class Success extends \Magento\Framework\View\Element\Template
      * @param array $data
      */
     public function __construct(
+        SourceQuantityHelper $sourceQuantityHelper,
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Sales\Model\Order\Config $orderConfig,
@@ -43,6 +47,7 @@ class Success extends \Magento\Framework\View\Element\Template
         array $data = []
     ) {
         parent::__construct($context, $data);
+        $this->_sourceQuantityHelper = $sourceQuantityHelper;
         $this->_qrHelper = $qrHelper;
         $this->_checkoutSession = $checkoutSession;
         $this->_orderConfig = $orderConfig;
@@ -95,7 +100,10 @@ class Success extends \Magento\Framework\View\Element\Template
                 'can_view_order'  => $this->canViewOrder($order),
                 'order_id'  => $order->getIncrementId(),
                 'qr_image'  => $this->_qrHelper->getURLQRImage($order->getEntityId()),
-                'is_pickup'  => boolval(($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE))
+                'is_pickup'  => boolval(($order->getShippingMethod() == self::SHIPPING_METHOD_FOR_QRCODE)),
+                'delivery_date' => $this->_sourceQuantityHelper->getFormat(
+                    $this->_sourceQuantityHelper->getEstimatedDeliveryDateByOrderId($order->getId())
+                )
             ]
         );
     }
