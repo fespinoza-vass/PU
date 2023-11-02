@@ -153,6 +153,7 @@ define([
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
+                this.isShippingMethodError(false);
                 return true;
             }
             return false;
@@ -162,23 +163,23 @@ define([
          */
         setFastShipping: function () {
             if(!this.isFastShippingDisabled()){
+                var rate = this.findRateByCarrierCode('envio_rapido');
+                if(!this.showShippingMethodError(rate)){
+
+                    return false
+                }
                 var street = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
                 street.reset();
                 this.isRegularShipping(false);
                 this.isFastShipping(true);
-                var rate = this.findRateByCarrierCode('envio_rapido');
-                this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
                 return true;
             }
-            if(this.isFastShippingDisabled()){
-                this.isRegularShipping(false);
-                this.isFastShipping(false);
-                var rate = this.findRateByCarrierCode('envio_rapido');
-                this.showShippingMethodError(rate);
-                this.selectShippingMethod(rate);
-            }
+            this.isShippingMethodError(true);
+            setTimeout(function () {
+                shippingMixin.isShippingMethodError(false);
+            }, 4000);
             return false
         },
         /**
@@ -467,23 +468,26 @@ define([
          */
         isShippingMethodAvailable: function (methodType) {
             var carrier = this.getCarrierCodeByCarrier(methodType);
-            if(_.isObject(carrier)){
-                return false;
-            }
-            if(!!carrier.error_message && carrier.carrier_code.includes('flat')){
-                this.isRegularShippingDisabled(true);
-            }else{
-                this.isRegularShippingDisabled(false);
-            }
-            if (!!carrier.error_message && carrier.carrier_code.includes('rapid')){
-                this.isFastShippingDisabled(true);
-            }else{
-                if (carrier.carrier_code.includes('rapid')){
-                    this.updateOptions(carrier.extension_attributes.delivery_time);
+            if (carrier){
+                if(!_.isObject(carrier)){
+                    return false;
                 }
-                this.isFastShippingDisabled(false);
+                if(!!carrier.error_message && carrier.carrier_code.includes('flat')){
+                    this.isRegularShippingDisabled(true);
+                }else{
+                    this.isRegularShippingDisabled(false);
+                }
+                if (!!carrier.error_message && carrier.carrier_code.includes('rapid')){
+                    this.isFastShippingDisabled(true);
+                }else{
+                    if (carrier.carrier_code.includes('rapid')){
+                        this.updateOptions(carrier.extension_attributes.delivery_time);
+                    }
+                    this.isFastShippingDisabled(false);
+                }
+                return !!carrier.error_message;
             }
-            return !!carrier.error_message;
+            return false;
         },
         /**
          * validates if some rates have error to disabled
