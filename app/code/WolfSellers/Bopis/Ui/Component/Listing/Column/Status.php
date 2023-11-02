@@ -24,12 +24,39 @@ class Status extends Column
                 $tpl = sprintf(
                     '<span class="grid-status %s">%s</span>',
                     $status,
-                    ucfirst($status)
+                    ucfirst($this->toSpanish($status))
                 );
                 $item[$this->getData('name')] = $tpl;
             }
         }
 
         return $dataSource;
+    }
+
+    /**
+     * @param $status
+     * @return string
+     */
+    public function toSpanish($status): string
+    {
+        return match ($status) {
+            'received' => 'Recibido',
+            'confirmed_order' => 'Pedido confirmado',
+            'prepared_order' => 'Pedido preparado',
+            'processing' => 'Procesando',
+            'fraud' => 'Sospecha de fraude',
+            'pending_payment' => 'Pago pendiente',
+            'payment_review' => 'Revisión de pagos',
+            'pending' => 'Pendiente',
+            'holded' => 'En espera',
+            'order_delivered' => 'Pedido entregado',
+            'order_on_the_way' => 'Pedido en camino',
+            'complete' => 'Completa',
+            'order_ready_for_pick_up' => 'Pedido listo para recojo',
+            'closed' => 'Cerrada',
+            'rejected' => 'Rechazada',
+            'canceled' => 'Cancelada',
+            default => $status,
+        };
     }
 }

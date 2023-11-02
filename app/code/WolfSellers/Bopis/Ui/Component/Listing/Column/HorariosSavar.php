@@ -2,10 +2,22 @@
 
 namespace WolfSellers\Bopis\Ui\Component\Listing\Column;
 
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use WolfSellers\Bopis\Helper\RealStates;
 
 class HorariosSavar extends Column
 {
+    /** @var RealStates */
+    protected RealStates $realStates;
+
+    public function __construct(ContextInterface $context, UiComponentFactory $uiComponentFactory, RealStates $realStates, array $components = [], array $data = [])
+    {
+        parent::__construct($context, $uiComponentFactory, $components, $data);
+        $this->realStates = $realStates;
+    }
+
     /**
      * Prepare Data Source
      *
@@ -17,25 +29,11 @@ class HorariosSavar extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
                 $horario = $item[$this->getData('name')];
-                $item[$this->getData('name')] = $this->getSchedule($horario);
+                $formated = $this->realStates->getSchedule($horario);
+                $item[$this->getData('name')] = $formated != "" ? $formated : 'NA';
             }
         }
 
         return $dataSource;
-    }
-
-    /**
-     * @param $schedule
-     * @return string|void
-     */
-    protected function getSchedule($schedule)
-    {
-        return match ($schedule){
-            "12_4_hoy" => "12:00 - 16:00 Hoy",
-            "4_8_hoy" => "16:00 - 20:00 Hoy",
-            "12_4_manana" => "12:00 - 16:00 Mañana",
-            "4_8_manana" => "16:00 - 20:00 Mañana",
-            default => ""
-        };
     }
 }
