@@ -53,8 +53,10 @@ class SaveCustomFieldsInOrder implements \Magento\Framework\Event\ObserverInterf
 
                 $sourceCode = $direccionTienda->getTienda();
                 $source = $this->_sourceRepository->get($sourceCode);
-                $direccionEnviadaASavar = $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict();
-                $direccionEnviadaASavar = strtoupper($direccionEnviadaASavar);
+                if($source->getRegion() && $source->getCity() && $source->getDistrict()){
+                    $direccionEnviadaASavar = $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict();
+                    $direccionEnviadaASavar = strtoupper($direccionEnviadaASavar);
+                }
             }
             $order->setData('direcciones_tiendas', $direccionEnviadaASavar);
         } catch (\Exception $e) {
