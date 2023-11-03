@@ -17,6 +17,21 @@ define([
                 setOptions: 'index = checkoutProvider:dictionaries.city_id'
             }
         },
+        initialize: function () {
+            this._super();
+            this.options.subscribe(function (value) {
+                value = _.map(value, function (item) {
+                    if(!_.isUndefined(item)){
+                        if(item.label.length >= 3){
+                            item.label = item.label.charAt(0).toUpperCase() + item.label.slice(1).toLowerCase();
+                        }
+                        return item;
+                    }
+                    return item;
+                });
+            }, this);
+            return this;
+        },
 
         /**
          * @param value
