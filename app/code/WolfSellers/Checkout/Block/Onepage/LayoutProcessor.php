@@ -500,13 +500,13 @@ class LayoutProcessor implements LayoutProcessorInterface
         $walker->setValue('{PAYMENT}.>>.beforeMethods.>>.invoice-form', $invoiceComponent);
         $walker->setValue('{PAYMENT}.>>.beforeMethods.>>.invoice-form.>>', $invoiceDataFieldSets);
 
-        $ruc = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc');
-        $ruc['visible'] = false;
-        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc', $ruc);
-
         $razonSocial = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.razon_social');
         $razonSocial['visible'] = false;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.razon_social', $razonSocial);
+
+        $ruc = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc');
+        $ruc['visible'] = false;
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc', $ruc);
 
         $direccionFiscal = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal');
         $direccionFiscal['visible'] = false;
