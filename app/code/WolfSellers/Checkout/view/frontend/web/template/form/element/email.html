@@ -73,13 +73,13 @@
                            data-bind="
                                 value: passwordRegister,
                                 attr: {
-                                    placeholder: $t('Password'),
+                                    placeholder: $t('Password')
                                 }"
                            type="password"
                            name="password-register"
                            id="customer-password-register"
-                           data-validate="{required:true, 'validate-customer-password':true}"
-                           data-password-min-length="8"
+                           data-password-min-length = "0"
+                           data-validate="{required:false, 'validate-customer-password':true}"
                            autocomplete="off"/>
 
                 </div>
@@ -91,13 +91,13 @@
                            data-bind="
                                 value: passwordConfirm,
                                 attr: {
-                                    placeholder: $t('Confirm Password'),
+                                    placeholder: $t('Confirm Password')
                                 }"
                            type="password"
                            name="password-confirm"
                            id="customer-password-confirm"
-                           data-password-min-length="8"
-                           data-validate="{required:true, equalTo:'#customer-password-register'}" autocomplete="off"/>
+                           data-password-min-length = "0"
+                           data-validate="{required:false, equalTo:'#customer-password-register'}" autocomplete="off"/>
 
                 </div>
             </div>
