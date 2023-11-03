@@ -27,7 +27,7 @@
                 <input type="radio" id="envio_regular" name="opciones" value="regular" attr="{checked: isRegularShipping}">
                 <label class="step-content_input-regular" for="envio_regular"></label>
                 <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
-                    <a href="#">Cónoce más aquí</a>
+                    <a href="#" data-bind="click: showRSInformation">Cónoce más aquí</a>
                 </span>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping, disabled:isFastShippingDisabled}">
                 <label class="step-content_input-fast" for="envio_rapido"></label>
                 <span class="step-content_info">Tu pedido llega el mismo día tú comprar*
-                    <a href="#">Cónoce más aquí</a>
+                    <a href="#" data-bind="click: showFSInformation">Cónoce más aquí</a>
                 </span>
             </div>
         </div>
