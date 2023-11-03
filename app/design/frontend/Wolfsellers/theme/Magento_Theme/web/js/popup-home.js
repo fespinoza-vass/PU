@@ -41,7 +41,7 @@ define([
 				$modalElement.modal('openModal');
 				
 				// Cerrar el modal al hacer click fuera de él 
-				$('.popup-info-home').on("click", function(e) {
+				$('.modal-popup').on("click", function(e) {
 					const $containerPopup = $('.modal-inner-wrap'); 
 					
 					if (!$containerPopup.is(e.target) && $containerPopup.has(e.target).length === 0) { 
