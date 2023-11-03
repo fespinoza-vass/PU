@@ -294,6 +294,22 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingFastArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
         $shippingFastArea['fast'] = $shippingFast;
         $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
+        $shippingFastArea['fast']['children']['distrito']['config']['options'] = [
+            ['label' => "La Molina", 'value' => 'LA MOLINA'],
+            ['label' => "Los Olivos", 'value' => 'LOS OLIVOS'],
+            ['label' => "San Isidro", 'value' => 'SAN ISIDRO'],
+            ['label' => "Jesús María", 'value' => 'JESUS MARIA'],
+            ['label' => "Pueblo Libre", 'value' => 'PUEBLO LIBRE'],
+            ['label' => "Magdalena del Mar", 'value' => 'MAGDALENA DEL MAR'],
+            ['label' => "San Miguel", 'value' => 'SAN MIGUEL'],
+            ['label' => "San Borja", 'value' => 'SAN BORJA'],
+            ['label' => "Barranco", 'value' => 'BARRANCO '],
+            ['label' => "Santiago de surco", 'value' => 'SANTIAGO DE SURCO '],
+            ['label' => "Chorrillos", 'value' => 'CHORILLOS'],
+            ['label' => "Surquillo", 'value' => 'SURQUILLO'],
+            ['label' => "Miraflores", 'value' => 'MIRAFLORES']
+        ];
+        $shippingFastArea['fast']['children']['distrito']['config']['caption'] = "Selecciona un distrito...";
         $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
         $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
         $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastArea);
@@ -382,12 +398,8 @@ class LayoutProcessor implements LayoutProcessorInterface
         $voucherPickupArea['picker-voucher'] = $voucherPickupUiComponent;
         $distrito = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
         $voucherPickupArea['picker-voucher']['children']['voucher'] = $distrito;
-        $departamento = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
-        $provincia= $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
-        $voucherPickupArea['picker-voucher']['children']['departamento'] = $departamento;
-        $voucherPickupArea['picker-voucher']['children']['departamento']["validation"] = [];
-        $voucherPickupArea['picker-voucher']['children']['provincia'] = $provincia;
-        $voucherPickupArea['picker-voucher']['children']['provincia']["validation"] = [];
+        $voucherPickupArea['picker-voucher']['children']['voucher']['component'] = "WolfSellers_Checkout/js/view/form/element/voucher";
+        $voucherPickupArea['picker-voucher']['children']['voucher']['caption'] = "Selecciona un distrito...";
         $voucherPickupArea['picker-voucher']['children']['direccion_comprobante_picker'] =
             $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_comprobante_picker');
         $walker->setValue('{STORE-PICKUP}.>>',$voucherPickupArea);
