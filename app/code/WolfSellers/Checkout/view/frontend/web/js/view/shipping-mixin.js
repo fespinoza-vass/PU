@@ -320,7 +320,9 @@ define([
 
                 uiComponent.horarios_disponibles.validation = [{'required-entry':false}];
                 uiComponent.distrito_envio_rapido.options(distrito_envio_rapido.options());
-                uiComponent.distrito_envio_rapido.value(distrito_envio_rapido.value());
+                var valueDistrito = _.findIndex(distrito_envio_rapido.options(), {value:distrito_envio_rapido.value()});
+                valueDistrito = distrito_envio_rapido.options()[valueDistrito].labeltitle;
+                uiComponent.distrito_envio_rapido.value(valueDistrito);
                 uiComponent['street.0'].value(direccion.value());
                 uiComponent.referencia_envio.value(referenciaRapida.value());
                 if(_.isUndefined(horarios_disponiblesFast.value())){
