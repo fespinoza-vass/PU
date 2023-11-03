@@ -388,7 +388,51 @@
 						margin: 20px;
 						&[class*="amlabel-position-top-center"]{
 							left: auto !important; //add style for module amasty
-							right: 80px !important; //add style for module amasty
+							right: 150px !important; //add style for module amasty
+							.amasty-label-container{
+								.amlabel-text{
+									.lib-font-size(10); //add style for module amasty
+									font-weight: 600; //add style for module amasty
+									background: @color-label-fast; //add style for module amasty
+									border-radius: 12px;
+									.lib-icon-font(
+										@_icon-font-content: @icon-fast-shipping,
+										@_icon-font-color: @black,
+										@_icon-font-size: 1.4rem,
+										@_icon-font-position: before,
+										@_icon-font-margin: 0
+									);
+									&:before{
+										vertical-align: bottom;
+									}
+								}
+								.amasty-label-image{
+									display: none !important; //add style for module amasty
+								}
+							}
+						}
+						&[class*="amlabel-position-top-right"]{
+							.amasty-label-container{
+								.amlabel-text{
+									.lib-font-size(10); //add style for module amasty
+									font-weight: 600; //add style for module amasty
+									background: @color-label-store; //add style for module amasty
+									border-radius: 12px;
+									.lib-icon-font(
+										@_icon-font-content: @icon-store-checkout,
+										@_icon-font-color: @black,
+										@_icon-font-size: 1.4rem,
+										@_icon-font-position: before,
+										@_icon-font-margin: 0
+									);
+									&:before{
+										vertical-align: bottom;
+									}
+								}
+								.amasty-label-image{
+									display: none;
+								}
+							}
 						}
 						.amasty-label-container{
 							position: static !important;
@@ -969,6 +1013,30 @@
 										}
 									}
 								}
+							}
+						}
+					}
+				}
+				.product.media{
+					.gallery-placeholder{
+						.amlabel-position-wrapper{
+							&[class*="amlabel-position-top-center"],
+							&[class*="amlabel-position-top-right"]{
+								width: auto !important; //add style for module amasty
+								.amasty-label-container{
+									.amlabel-text{
+										.lib-font-size(7) !important; //add style for module amasty
+										&:before{
+											font-size: 1rem !important; //add style for module amasty
+										}
+									}
+								}
+							}
+							&[class*="amlabel-position-top-center"]{
+								right: 120px !important; //add style for module amasty
+							}
+							&[class*="amlabel-position-top-right"]{
+								margin-left: 0 !important; //add style for module amasty
 							}
 						}
 					}
