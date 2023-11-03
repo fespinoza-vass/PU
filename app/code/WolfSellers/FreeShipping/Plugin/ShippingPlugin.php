@@ -16,11 +16,18 @@ class ShippingPlugin
 
         $ratesResult = $subject->getResult();
 
+        $freeShipping = false;
         foreach ($ratesResult->getAllRates() as $rate) {
             if( $rate->getCarrier() == "freeshipping" ) {
-                $ratesResult->reset();
-                $ratesResult->append($rate);
-                return $result;
+                $freeShipping = true;
+            }
+        }
+
+        if($freeShipping){
+            foreach ($ratesResult->getAllRates() as $rate) {
+                if( $rate->getCarrier() != "freeshipping" ) {
+                    $rate->setPrice(0);
+                }
             }
         }
 
