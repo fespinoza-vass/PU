@@ -447,7 +447,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.ruc',
             'label' => 'RUC',
-            'sortOrder' => 20,
+            'sortOrder' => 30,
             'validation' => [
                 'required-entry' => true,
             ],
@@ -462,7 +462,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.razon_social',
             'label' => 'Razón Social',
-            'sortOrder' => 30,
+            'sortOrder' => 20,
             'validation' => [
                 'required-entry' => true,
             ],
