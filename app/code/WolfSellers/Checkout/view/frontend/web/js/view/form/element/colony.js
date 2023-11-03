@@ -5,11 +5,57 @@ define([
     'underscore',
     'Magento_Ui/js/form/element/select',
     'WolfSellers_Checkout/js/model/address/ubigeo',
-    'uiRegistry'
-], function (_, Select, ubigeo, registry) {
+    'uiRegistry',
+    'jquery'
+], function (_, Select, ubigeo, registry, $) {
     'use strict';
 
     return Select.extend({
+        distritosUno: [
+            "Lima",
+            "Ate",
+            "Barranco",
+            "Breña",
+            "Carabaylio",
+            "Chorrillos",
+            "Comas",
+            "El Augustino",
+            "Independencia",
+            "Jesus María",
+            "La Molina",
+            "La Victoria",
+            "Lince",
+            "Los Olivos",
+            "Magdalena del Mar",
+            "Pueblo Libre",
+            "Miraflores",
+            "Rimac",
+            "San Borja",
+            "SMP",
+            "San Miguel",
+            "Santa Anita",
+            "Santiago de Surco",
+            "Surquillo",
+            "VES",
+            "VMT",
+            "Callao"
+        ],
+        distritosDos: [
+            "Ancón",
+            "Chaclacayo",
+            "Cieneguilla",
+            "Lurigancho",
+            "Lurín",
+            "Pachacamac",
+            "Pucusana",
+            "Puente Piedra",
+            "Punta Hermosa",
+            "Punta Negra",
+            "San Bartolo",
+            "Santa María del Mar",
+            "Santa Rosa"
+        ],
+
         defaults: {
             skipValidation: false
         },
@@ -63,8 +109,46 @@ define([
                 postcodeField.value(ubigeo);
             }.bind(this));
 
+            this._showShippingTimeLabel(value);
+
             return this._super();
-        }
+        },
+
+        _showShippingTimeLabel: function (distrito) {
+            var distritoNumber = this._getDistritoNumber(distrito);
+            $(".shipping-time-label-uno").hide();
+            $(".shipping-time-label-dos").hide();
+            $(".shipping-time-label-tres").hide();
+            switch (distritoNumber) {
+                case 1: {
+                    $(".shipping-time-label-uno").show();
+                    break;
+                }
+                case 2: {
+                    $(".shipping-time-label-dos").show();
+                    break;
+                }
+                default: {
+                    $(".shipping-time-label-tres").show();
+                    break;
+                }
+            }
+        },
+
+        _getDistritoNumber: function(distrito) {
+            var i;
+            for(i = 0; i < this.distritosUno.length; i++) {
+                if (distrito.toUpperCase() === this.distritosUno[i].toUpperCase()) {
+                    return 1;
+                }
+            }
+            for(i = 0; i < this.distritosDos.length; i++) {
+                if (distrito.toUpperCase() === this.distritosDos[i].toUpperCase()) {
+                    return 2;
+                }
+            }
+            return 3;
+        },
     });
 });
 
