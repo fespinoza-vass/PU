@@ -87,12 +87,30 @@ define([
         getShippingAddress: function () {
             //Street + Distrito + departameto + provincia
             var distrito = shippingPayment.distrito();
+            var departamento = shippingPayment.departamento();
+            var provincia = shippingPayment.provincia();
             var split = " ";
             if (shippingPayment.shippingMethod().includes("rapido")){
                 distrito = shippingPayment.distritoEnvioRapido();
             }
+            if (shippingPayment.shippingMethod().includes("flat")){
+                if(distrito.length >= 3){
+                    distrito = distrito.charAt(0).toUpperCase() + distrito.slice(1).toLowerCase();
+                }
+                if(departamento.length >= 3){
+                    departamento = departamento.charAt(0).toUpperCase() + departamento.slice(1).toLowerCase();
+                }
+                if(provincia.length >= 3){
+                    provincia = provincia.charAt(0).toUpperCase() + provincia.slice(1).toLowerCase();
+                }
+            }
+            if (shippingPayment.shippingMethod().includes("rapido")){
+                if(distrito.length >= 3){
+                    distrito = distrito.charAt(0).toUpperCase() + distrito.slice(1).toLowerCase();
+                }
+            }
             return shippingPayment.direccion() +split+ distrito +split+
-                        shippingPayment.departamento() +split+ shippingPayment.provincia();
+                departamento +split+ provincia;
         },
         /**
          * get shipping Date

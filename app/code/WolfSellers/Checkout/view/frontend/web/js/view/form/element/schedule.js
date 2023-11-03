@@ -43,9 +43,7 @@ define([
             var timeSensitive = wolfUtils.getAvailableDates(ahora);
             if(data.includes('lab')){
                 return "Horario de " +
-                    timeSensitive[radioOption].label +
-                    ' de ' +
-                    timeSensitive[radioOption].dia;
+                    timeSensitive[radioOption].label;
             }
             this.getHorarioDisponibles(radioOption);
             return timeSensitive[radioOption][data];

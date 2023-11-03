@@ -103,16 +103,18 @@ define([
                 lastnameValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-lastname"),
                 typeIdentificationValidator = registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-identificacion"),
                 numberIdentificationValidator  =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion"),
-                telephoneValidator =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-telefono")
-
-                customer.email(emailValidator.email() === '' ? customer.email() : emailValidator.email());
-                customer.customerName(nameValidator.value());
-                customer.customerLastName(lastnameValidator.value());
-                customer.customerTypeIdentification(typeIdentificationValidator.value());
-                customer.customerNumberIdentification(numberIdentificationValidator.value());
-                customer.customerTelephone(telephoneValidator.value());
-                customer.passwordRegister(emailValidator.passwordRegister());
-                customer.passwordConfirm(emailValidator.passwordConfirm());
+                telephoneValidator =registry.get("checkout.steps.customer-data-step.customer-fieldsets.customer-data-telefono");
+            var identificacionLabel = typeIdentificationValidator.getOption(typeIdentificationValidator.value());
+            identificacionLabel = identificacionLabel.label;
+            customer.email(emailValidator.email() === '' ? customer.email() : emailValidator.email());
+            customer.customerName(nameValidator.value());
+            customer.customerLastName(lastnameValidator.value());
+            customer.customerTypeIdentification(typeIdentificationValidator.value());
+            customer.customerTypeIdentificationLabel(identificacionLabel);
+            customer.customerNumberIdentification(numberIdentificationValidator.value());
+            customer.customerTelephone(telephoneValidator.value());
+            customer.passwordRegister(emailValidator.passwordRegister());
+            customer.passwordConfirm(emailValidator.passwordConfirm());
         },
 
         /**

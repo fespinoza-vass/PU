@@ -139,7 +139,7 @@ class LayoutProcessor implements LayoutProcessorInterface
 
             ],
             'dataScope' => 'customerData.identificacion',
-            'label' => 'Identificacion',
+            'label' => 'Tipo de documento',
             'provider' => 'checkoutProvider',
             'validation' => [
                 'required-entry' => true
@@ -149,8 +149,8 @@ class LayoutProcessor implements LayoutProcessorInterface
             'customEntry' => null,
             'visible' => true,
             'options' => [
-                ["label"=>"Pasaporte","value"=>865],
-                ["label"=>"DNI","value"=>868]
+                ["label"=>"DNI","value"=>868],
+                ["label"=>"Pasaporte","value"=>865]
             ],
             'value' => $this->getIdentificacionCustomer($idCustomer)
         ];
@@ -191,7 +191,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 ],
             ],
             'dataScope' => 'customerData.telefono',
-            'label' => 'Telefono',
+            'label' => 'Número de celular',
             'provider' => 'checkoutProvider',
             'sortOrder' => 5,
             'validation' => [
@@ -447,7 +447,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.ruc',
             'label' => 'RUC',
-            'sortOrder' => 20,
+            'sortOrder' => 30,
             'validation' => [
                 'required-entry' => true,
             ],
@@ -462,7 +462,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'provider' => 'checkoutProvider',
             'dataScope' => 'customCheckoutForm.razon_social',
             'label' => 'Razón Social',
-            'sortOrder' => 30,
+            'sortOrder' => 20,
             'validation' => [
                 'required-entry' => true,
             ],
@@ -500,13 +500,13 @@ class LayoutProcessor implements LayoutProcessorInterface
         $walker->setValue('{PAYMENT}.>>.beforeMethods.>>.invoice-form', $invoiceComponent);
         $walker->setValue('{PAYMENT}.>>.beforeMethods.>>.invoice-form.>>', $invoiceDataFieldSets);
 
-        $ruc = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc');
-        $ruc['visible'] = false;
-        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc', $ruc);
-
         $razonSocial = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.razon_social');
         $razonSocial['visible'] = false;
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.razon_social', $razonSocial);
+
+        $ruc = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc');
+        $ruc['visible'] = false;
+        $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.ruc', $ruc);
 
         $direccionFiscal = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_fiscal');
         $direccionFiscal['visible'] = false;
