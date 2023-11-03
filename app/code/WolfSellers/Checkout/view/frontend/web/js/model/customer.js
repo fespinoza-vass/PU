@@ -35,6 +35,7 @@ define([
         customerName : ko.observable(customerName),
         customerLastName : ko.observable(customerLastName),
         customerTypeIdentification : ko.observable(customerTypeIdentification),
+        customerTypeIdentificationLabel : ko.observable(''),
         customerNumberIdentification : ko.observable(customerNumberIdentification),
         customerTelephone : ko.observable(customerTelephone),
         passwordRegister :ko.observable(passwordRegister),

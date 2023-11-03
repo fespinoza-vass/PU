@@ -139,7 +139,7 @@ class LayoutProcessor implements LayoutProcessorInterface
 
             ],
             'dataScope' => 'customerData.identificacion',
-            'label' => 'Identificacion',
+            'label' => 'Tipo de documento',
             'provider' => 'checkoutProvider',
             'validation' => [
                 'required-entry' => true
@@ -149,8 +149,8 @@ class LayoutProcessor implements LayoutProcessorInterface
             'customEntry' => null,
             'visible' => true,
             'options' => [
-                ["label"=>"Pasaporte","value"=>865],
-                ["label"=>"DNI","value"=>868]
+                ["label"=>"DNI","value"=>868],
+                ["label"=>"Pasaporte","value"=>865]
             ],
             'value' => $this->getIdentificacionCustomer($idCustomer)
         ];
@@ -191,7 +191,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 ],
             ],
             'dataScope' => 'customerData.telefono',
-            'label' => 'Telefono',
+            'label' => 'Número de celular',
             'provider' => 'checkoutProvider',
             'sortOrder' => 5,
             'validation' => [
