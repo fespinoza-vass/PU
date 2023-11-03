@@ -102,7 +102,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
                 return false;
             }
 
-            $cumpleReglasEnvioRapido = false;
+            $cumpleReglasEnvioRapido = true;
 
             /** @var \Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
@@ -111,8 +111,8 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
                 foreach ($inventory as $source) {
                     if (!$source->getStatus()) continue;
 
-                    if ($source->getQuantity() >= 2) {
-                        $cumpleReglasEnvioRapido = true;
+                    if ($source->getQuantity() < 2) {
+                        $cumpleReglasEnvioRapido = false;
                     }
                 }
             }
@@ -131,10 +131,6 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
                     $method->setMethod($this->_code);
                     $method->setMethodTitle($this->getConfigData('name'));
                     $method->setData('delivery_time',$this->getDeliveryTime());
-
-                    if ($request->getFreeShipping() === true) {
-                        $shippingPrice = '0.00';
-                    }
 
                     $method->setPrice($shippingPrice);
                     $method->setCost($shippingPrice);

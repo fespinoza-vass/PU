@@ -8,6 +8,42 @@
         .orden_success_page {
             display: none;
         }
+        .general-order-data{
+            max-width: 790px;
+            margin: 0 auto;
+            .order-consecutive-id{
+                text-align: center;
+                span{
+                    .lib-font-size(32);
+                    color: @lines-input;
+                    font-weight: 400;
+                    a{  
+                        text-decoration: underline;
+                        font-weight: 600;
+                    }
+                }
+            }
+            .order-info{
+                padding: 36px 0 40px 0;
+                p{
+                    .lib-font-size(16);
+                    font-weight: 400;
+                    text-align: center;
+                }
+            }
+            .order-back-to-store{
+                width: 456px;
+                display: block;
+                .lib-font-size(18);
+                background: @black;
+                text-align: center;
+                padding: 18px 0;
+                border-radius: 12px;
+                margin: 0 auto;
+                color: @color-white;
+                text-transform: uppercase;
+            }
+        }
         .qrWrap {
             text-align: center;
             .qrOrderNumber {
@@ -350,6 +386,21 @@
 ///MOVIL
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
     .checkout-onepage-success {
+        .page-title-wrapper{
+            .general-order-data{
+                .order-consecutive-id{
+                    span{
+                        .lib-font-size(30);
+                    }
+                }
+                .order-info{
+                    padding: 30px 5px;
+                }
+                .order-back-to-store{
+                    width: auto;
+                }
+            }
+        }
         .qrWrap {
             text-align: center;
             .qrOrderNumber {
