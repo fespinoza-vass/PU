@@ -29,4 +29,6 @@
             </argument>
         </arguments>
     </virtualType>
+
+    <preference for="WolfSellers\DireccionesTiendas\Api\SourceStockInterface" type="WolfSellers\DireccionesTiendas\Model\SourceStockModel"/>
 </config>
