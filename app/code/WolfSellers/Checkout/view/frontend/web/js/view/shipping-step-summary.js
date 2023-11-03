@@ -108,6 +108,8 @@ define([
                 date = horarioSeleccionado.fecha
             }
             if (shippingPayment.shippingMethod().includes("instore")){
+                //Buscar y valida si se usa date o el valor de horarioTienda
+                //shippingPayment.horarioTienda()
                 var ahora = new Date();
                 var fechaEntrega = wolfUtils.formatDate(ahora);
                 date = "Hoy " +  fechaEntrega;

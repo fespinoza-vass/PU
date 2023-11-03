@@ -37,6 +37,7 @@ define([
         goToResume:ko.observable(),
         isAnotherPicker:ko.observable(),
         shippingAddressAtPickup: ko.observable(),
+        isAvailable: ko.observable(false),
 
         initialize: function () {
             this._super();
@@ -128,6 +129,11 @@ define([
         selectPickupLocation: function (location) {
             pickupLocationsService.selectForShipping(location);
             this.shippingAddressAtPickup(quote.shippingAddress());
+            /**
+             * consumir ajax y actualizar etiqueta
+             */
+            shippingPayment.horarioTienda() //Guardar valor aquí
+            this.isAvailable();
         },
         /**
          * validate if is another Picker Area visible
