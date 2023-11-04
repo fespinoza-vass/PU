@@ -23,7 +23,7 @@ define([
             getCartParam: function (name) {
 
                 if (name === 'possible_onepage_checkout') {
-                    $('#top-cart-btn-checkout,.action.viewcart').click(function (event) {
+                    $(document).on('click','#top-cart-btn-checkout,.action.viewcart',function(event){
                         event.preventDefault();
 
                         var route = 0;
