@@ -103,7 +103,7 @@ class IsLurinOnly implements HttpGetActionInterface
                 continue;
             }
 
-            if ($sourceItem->getSourceCode() !== '1') {
+            if ($sourceItem->getSourceCode() != 1) {
                 // Found stock in another source, not Lurin.
                 if ($sourceItem->getQuantity() > 0) {
                     $isOnlyInLurin = false;
