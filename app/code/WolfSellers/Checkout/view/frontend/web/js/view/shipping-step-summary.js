@@ -126,12 +126,27 @@ define([
                 date = horarioSeleccionado.fecha
             }
             if (shippingPayment.shippingMethod().includes("instore")){
-                //Buscar y valida si se usa date o el valor de horarioTienda
-                //shippingPayment.horarioTienda()
-                var ahora = new Date();
-                var fechaEntrega = wolfUtils.formatDate(ahora);
-                date = "Hoy " +  fechaEntrega;
+                var isFastDeliveryAvailable = shippingPayment.horarioTienda() === '1';
+
+                var now = new Date();
+
+                if (isFastDeliveryAvailable) {
+                    now.setDate(now.getDate() + 2);
+                }
+
+                var formattedDate = wolfUtils.formatDate(now);
+
+                date = (isFastDeliveryAvailable ? 'El ' : 'Hoy ') + formattedDate;
+
+                // var ahora = new Date();
+                // var fechaEntrega = wolfUtils.formatDate(ahora);
+                //
+                // <p>
+                //     Podrás recoger tu pedido a partir del día <span data-bind="text: getPickupDateFormat()"></span> en un rango de 8am a 9:30 pm
+                // </p>
+                // date = "Hoy " +  fechaEntrega;
             }
+
             return date;
         },
         /**
