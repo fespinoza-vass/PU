@@ -525,6 +525,18 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'template' => 'WolfSellers_Checkout/payment-continue'
             ]
         ];
+
+        /*********** Componets payment Agreement ***********************************************/
+        $customerDataAgreementsComponent = [
+            'component' => 'Magento_CheckoutAgreements/js/view/checkout-agreements'
+        ];
+
+        $paymentAgreementSets = [
+            'component' => 'uiComponent',
+            'displayArea' => 'payment-agreement',
+            'provider' => 'checkoutProvider',
+        ];
+
         /****** END INVOICE REQUIRE FORM *****/
 
         //PAYMENTS AREA
@@ -538,6 +550,9 @@ class LayoutProcessor implements LayoutProcessorInterface
                 $payment['children']['form-fields']['children']['fecha_de_nacimiento']['validation'] = [];
             }
             // add button continue payment
+
+            $payment['children']['payment-agreement'] = $paymentAgreementSets;
+            $payment['children']['payment-agreement'] = $agreementsComponent;
             $payment['children']['payments-continue'] = $paymentButtonFieldSets;
             $payment['children']['payments-continue'] = $paymentButtonComponent;
 
