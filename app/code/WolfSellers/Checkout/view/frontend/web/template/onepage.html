@@ -66,9 +66,7 @@
 <div id="fastshipping-additional-info-modal" style="display: none;">
     <div class="custom-popup-content">
         <div class="custom-popup-content_info">
-            <div class="custom-popup-content_info-img">
-                <img data-bind="attr: { src: require.toUrl('')+'images/compra-popup-minicart.svg' }">
-            </div>
+            <span class="icon-fast"></span>
             <p>
                 ENVÍO RÁPIDO A DOMICILIO <br>
                 <span>Tu pedido llega el mismo día de tu compra*</span>
@@ -80,7 +78,7 @@
 
                 <p> <b>Distritos de Cobertura:</b> La Molina, Los Olivos, Lince, San Isidro, Jesus María, Pueblo Libre,
                     Magdalena, San Miguel, San borja, Surco, Barranco, Chorrillos, Surquillo, Miraflores. </p>
-
+                <br>
                 <p> <b>Horarios de envío:</b> De lunes a Sábado de 12 pm a 8 pm. de acuerdo al horario de entrega
                     seleccionado por el cliente.</p>
 
@@ -93,7 +91,7 @@
                     rangos:
                 </p>
 
-                <ul>
+                <ul class="section_list">
                     <li><b>Rango 1:</b> De 12 pm a 4 pm</li>
                     <li><b>Rango 2:</b> De 4 pm a 8 pm</li>
                 </ul>
@@ -101,7 +99,7 @@
                 <p>Si tu compra la ralizas entre las <b>11 am y 3 pm</b> podrás recibir tu compra en los siguientes
                     rangos:</p>
 
-                <ul>
+                <ul class="section_listTwo">
                     <li><b>Rango 1:</b> De 4 pm a 8 pm</li>
                 </ul>
 
@@ -110,9 +108,10 @@
                 <b>LIMA PERIFÉRICA:</b>
                 <p> Este Servicio no aplica para ciertos distritos de Lima Metropolitana y Callao, así como distritos
                     periféricos.</p>
-
-                <b>PROVINCIAS:</b>
-                <p> Este Servicio no aplica para provincias.</p>
+                <div class="section_provinces">
+                    <b>PROVINCIAS:</b>
+                    <p> Este Servicio no aplica para provincias.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -121,9 +120,7 @@
 <div id="regularshipping-additional-info-modal" style="display: none;">
     <div class="custom-popup-content">
         <div class="custom-popup-content_info">
-            <div class="custom-popup-content_info-img">
-                <img data-bind="attr: { src: require.toUrl('')+'images/compra-popup-minicart.svg' }">
-            </div>
+            <span class="icon-regular"></span>
             <p>
                 ENVÍO REGULAR A DOMICILIO
                 <span>Tu pedido llega entre 24 y 48 horas luego de tu compra*</span>
@@ -137,7 +134,7 @@
                     Augustino, Independencia, Jesus María, La Molina, La Victoria, Lince, Los Olivos, Magdalena del Mar,
                     Pueblo Libre, Miraflores, Rimac, San Borja, San Isidro, SJL, SJM, San Luis, SMP, San Miguel, Santa
                     Anita, Santiago de Surco, Surquillo, VES, VMT, Callao. <br>
-
+                    <br>
                     <b>Horarios de envío</b> De lunes a viernes, desde las 8 am hasta las  7 pm y sábados desde las 8 am
                      hasta las 2 pm.
                 </p>
@@ -153,13 +150,17 @@
                 </p>
             </div>
             <div class="section">
-                PROVINCIAS:
-                <p>
-                    <b>Provicias:</b> Llegamos a todas las provincias de Perú. <br>
-                    <b>Horarios de envío:</b> De lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am
-                    hasta las 2pm. <br>
-                    <b>Tienpo de entrega:</b> 5 a 15 días de acuerdo a la provincia y distrito de la entrega. <br>
-                </p>
+                <b>PROVINCIAS:</b>
+                <div class="section_provinces">
+                    <span>Provicias:</span> Llegamos a todas las provincias de Perú. <br>
+                </div>
+                <div class="section_hour">
+                    <span>Horarios de envío:</span> De lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am
+                    hasta las 2pm.
+                </div>
+                <div class="section_time">
+                    <span>Tienpo de entrega:</span> 5 a 15 días de acuerdo a la provincia y distrito de la entrega. <br>
+                </div>
             </div>
         </div>
     </div>
