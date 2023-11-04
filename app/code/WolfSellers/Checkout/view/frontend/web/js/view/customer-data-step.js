@@ -87,9 +87,17 @@ define([
             var validateConfirmPass   = this.validatePassConfirm();
             this.source.set('params.customerDataStepInvalid', false);
             this.triggerValidationCustomerDataForm();
-            if (emailIsValid &&  validatePass && validateConfirmPass && !this.source.get('params.customerDataStepInvalid')) { // Verificar si el formulario es válido
-                this.isVisibleEdit(false);
+            if (emailIsValid && !this.source.get('params.customerDataStepInvalid')) { // Verificar si el formulario es válido
                 this.saveCustomerData();
+                if(!_.isUndefined(customer.passwordRegister()) && customer.passwordRegister().length >= 5){
+                    if(validatePass && validateConfirmPass){
+                        this.isVisibleEdit(false);
+                        stepNavigator.next();
+                    }else{
+                        return;
+                    }
+                }
+                this.isVisibleEdit(false);
                 stepNavigator.next();
             }
         },
