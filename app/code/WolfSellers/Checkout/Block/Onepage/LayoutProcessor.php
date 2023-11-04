@@ -525,18 +525,15 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'template' => 'WolfSellers_Checkout/payment-continue'
             ]
         ];
-
         /*********** Componets payment Agreement ***********************************************/
-        $customerDataAgreementsComponent = [
-            'component' => 'Magento_CheckoutAgreements/js/view/checkout-agreements'
+        $agreementsComponent = [
+            'component' => 'WolfSellers_Checkout/js/view/payment-agrements'
         ];
-
         $paymentAgreementSets = [
             'component' => 'uiComponent',
             'displayArea' => 'payment-agreement',
             'provider' => 'checkoutProvider',
         ];
-
         /****** END INVOICE REQUIRE FORM *****/
 
         //PAYMENTS AREA
