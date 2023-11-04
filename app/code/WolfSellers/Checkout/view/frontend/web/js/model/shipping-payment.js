@@ -42,6 +42,7 @@ define([
         correoOpcional: ko.observable(""),
         distrito_comprobante: ko.observable(""),
         direccion_comprobante: ko.observable(""),
+        horarioTienda: ko.observable(""),
         /**
          * Set shipping method to model with text values
          * @param quote

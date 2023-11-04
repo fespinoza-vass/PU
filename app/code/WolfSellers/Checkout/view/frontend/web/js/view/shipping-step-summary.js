@@ -126,10 +126,19 @@ define([
                 date = horarioSeleccionado.fecha
             }
             if (shippingPayment.shippingMethod().includes("instore")){
-                var ahora = new Date();
-                var fechaEntrega = wolfUtils.formatDate(ahora);
-                date = "Hoy " +  fechaEntrega;
+                var isFastDeliveryAvailable = shippingPayment.horarioTienda() === '1';
+
+                var now = new Date();
+
+                if (isFastDeliveryAvailable) {
+                    now.setDate(now.getDate() + 2);
+                }
+
+                var formattedDate = wolfUtils.formatDate(now);
+
+                date = (isFastDeliveryAvailable ? 'El ' : 'Hoy ') + formattedDate;
             }
+
             return date;
         },
         /**
