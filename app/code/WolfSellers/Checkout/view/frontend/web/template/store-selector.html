@@ -64,10 +64,12 @@
                 Podrás recoger tu pedido a partir del día <span data-bind="text: getPickupDateFormat()"></span> en un rango de 8am a 9:30 pm
             </p>
         </div>
+
         <div class="store-pickup-receipt-address_info">
             <span></span>
-            <p translate="'Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.'"></p>
+            <p data-bind="text: messageBasedOnAvailability"></p>
         </div>
+
         <div class="store-pickup-receipt-address_price">
             <p translate="'Cost of shipping'"></p>
             <span>S/0.00</span>

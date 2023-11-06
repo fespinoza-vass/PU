@@ -1,4 +1,5 @@
 define([
+    'jquery',
     'ko',
     'underscore',
     'uiRegistry',
@@ -6,8 +7,9 @@ define([
     'Magento_Checkout/js/model/quote',
     'WolfSellers_Checkout/js/model/shipping-payment',
     'WolfSellers_Checkout/js/model/customer',
-    'Magento_InventoryInStorePickupFrontend/js/model/pickup-locations-service'
+    'Magento_InventoryInStorePickupFrontend/js/model/pickup-locations-service',
 ], function (
+    $,
     ko,
     _,
     registry,
@@ -37,9 +39,11 @@ define([
         goToResume:ko.observable(),
         isAnotherPicker:ko.observable(),
         shippingAddressAtPickup: ko.observable(),
+        isAvailable: ko.observable(false),
 
         initialize: function () {
-            this._super();
+            var self = this;
+            self._super();
             this.isShippingStepFinished.subscribe(function (value) {
                 shippingPayment.isShippingStepFinished(value);
                 shippingPayment.setShippingMethodModelData(quote);
@@ -57,6 +61,12 @@ define([
                     this.setIsDisabledShippingStep();
                 }
             },this);
+
+            self.messageBasedOnAvailability = ko.computed(function() {
+                return self.isAvailable() ?
+                    'Recuerda que tienes hasta 7 días posteriores a tu compra para recoger tus productos, de lo contrario tu compra será anulada y se procederá a la devolución del dinero.' :
+                    'Podrás recoger tu pedido en un lapso de 24 a 48 horas.';
+            });
         },
         /**
          * Overwrite set pickup information action
@@ -121,14 +131,40 @@ define([
         unSelectLocation: function () {
             this.selectedLocation(null);
         },
+
         /**
-         * Overrides original selectedPickUpLocatio to avoid modal options
-         * @param location
+         * Sets the pickup location and fetches fast delivery availability.
+         * @param {Object} location - The location object representing the pickup point.
          */
-        selectPickupLocation: function (location) {
+        selectPickupLocation(location) {
             pickupLocationsService.selectForShipping(location);
             this.shippingAddressAtPickup(quote.shippingAddress());
+            this.getLurinDeliveryData();
         },
+
+        /**
+         * Fetches lurin delivery availability data from the server and updates availability.
+         */
+        getLurinDeliveryData() {
+            const lurinDeliveryUrl = `${BASE_URL}/bopis/ajax/islurinonly`;
+
+            $.ajax({
+                url: lurinDeliveryUrl,
+                type: 'GET',
+                dataType: 'json',
+                context: this,
+                success: function(response) {
+                    this.isAvailable(!(response && (response.available === '1')));
+                    shippingPayment.horarioTienda(response.available);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(`AJAX request failed: ${textStatus}, ${errorThrown}`);
+                    this.isAvailable(false);
+                }
+            });
+        },
+
+
         /**
          * validate if is another Picker Area visible
          * @returns {boolean|*}
@@ -138,6 +174,7 @@ define([
             return (_.isString(isAnotherPicker) &&
                 isAnotherPicker.includes("other"));
         },
+
         /**
          * generate ID for input and label
          * @param data
@@ -189,16 +226,25 @@ define([
                 return false;
             }
         },
+
         /**
-         * Shipping Pickup Date Format
+         * Returns the pickup date based on availability and store timing.
+         * @return {string} Formatted date.
          */
-        getPickupDateFormat: function (){
-            var date = "";
-            var ahora = new Date();
-            var fechaEntrega = wolfUtils.formatDate(ahora);
-            date = fechaEntrega;
-            return date;
+        getPickupDateFormat: function() {
+            var isFastDeliveryAvailable = shippingPayment.horarioTienda() === '1';
+
+            var now = new Date();
+
+            if (isFastDeliveryAvailable) {
+                now.setDate(now.getDate() + 2);
+            }
+
+            var formattedDate = wolfUtils.formatDate(now);
+
+            return formattedDate;
         }
+
 
     };
 
@@ -207,3 +253,4 @@ define([
     }
 
 });
+
