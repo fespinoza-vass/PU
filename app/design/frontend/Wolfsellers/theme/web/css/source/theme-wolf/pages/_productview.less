@@ -7,6 +7,69 @@
 		}
 		.fotorama--fullscreen{
 			z-index: 10000 !important;
+			.fotorama__wrap{
+				.amlabel-position-wrapper{
+					width: 54px !important;
+					.amlabel-text{
+						font-size: 0 !important;
+					}
+					&[class*="amlabel-position-top-center"]{
+						left: auto !important; //add style for module amasty
+						right: 290px !important; //add style for module amasty
+						top: 25px !important; //add style for module amasty
+						.amlabel-text{
+							width: auto !important; //add style for module amasty
+							.lib-font-size(10) !important; //add style for module amasty
+							font-weight: 600; 
+							background: @color-label-fast; 
+							border-radius: 12px;
+							padding: 5px 10px !important;  //add style for module amasty
+							.lib-icon-font(
+								@_icon-font-content: @icon-fast-shipping,
+								@_icon-font-color: @black,
+								@_icon-font-size: 1.4rem,
+								@_icon-font-position: before,
+								@_icon-font-margin: 0 5px 0 0
+							);
+							&:before{
+								vertical-align: bottom;
+							}
+							&.-am-centered{
+								transform: initial !important; //add style for module amasty;
+							}
+						}
+						.amasty-label-image{
+							display: none !important; //add style for module amasty;
+						}
+					}
+					&[class*="amlabel-position-top-right"]{
+						left: auto !important; //add style for module amasty
+						right: 155px !important; //add style for module amasty
+						top: 40px !important; //add style for module amasty
+						.amlabel-text{
+							width: auto !important; //add style for module amasty
+							.lib-font-size(10) !important; //add style for module amasty
+							font-weight: 600;
+							background: @color-label-store;
+							border-radius: 12px;
+							padding: 5px 10px !important; //add style for module amasty
+							.lib-icon-font(
+								@_icon-font-content: @icon-store-checkout,
+								@_icon-font-color: @black,
+								@_icon-font-size: 1.4rem,
+								@_icon-font-position: before,
+								@_icon-font-margin: 0
+							);
+							&:before{
+								vertical-align: bottom;
+							}
+							&.-am-centered{
+								transform: initial;
+							}
+						}
+					}
+				}
+			}
 		}
 		.modals-wrapper{
 			.modals-overlay{
@@ -410,6 +473,9 @@
 									&:before{
 										vertical-align: bottom;
 									}
+									&.-am-centered{
+										transform: initial !important; //add style for module amasty;
+									}
 								}
 								.amasty-label-image{
 									display: none !important; //add style for module amasty
@@ -432,6 +498,9 @@
 									);
 									&:before{
 										vertical-align: bottom;
+									}
+									&.-am-centered{
+										transform: initial;
 									}
 								}
 								.amasty-label-image{
@@ -905,6 +974,22 @@
 	}
 
 	.catalog-product-view{
+		.fotorama--fullscreen{
+			.fotorama__wrap{
+				.fotorama__stage{
+					.amlabel-position-wrapper{
+						&[class*="amlabel-position-top-center"]{
+							right: 85px !important;
+							top: 90px !important;
+						}
+						&[class*="amlabel-position-top-right"]{
+							right: 85px !important;
+							top: 70px !important;
+						}
+					}
+				}
+			}
+		}
 		.page-wrapper {
 			padding-bottom: 70px;
 			.page-main {
@@ -1034,11 +1119,20 @@
 										&:before{
 											.lib-font-size(10) !important; //add style for module amasty
 										}
+										&.-am-centered{
+											transform: initial !important; //add style for module amasty;
+										}
 									}
 								}
 							}
 							&[class*="amlabel-position-top-center"]{
-								right: 120px !important; //add style for module amasty
+								right: 20px !important; //add style for module amasty
+								top: 30px !important; //add style for module amasty
+								.amasty-label-container{
+									.amlabel-text{
+										padding: 5px 12px !important; //add style for module amastys
+									}
+								}
 							}
 							&[class*="amlabel-position-top-right"]{
 								margin-left: 0 !important; //add style for module amasty
