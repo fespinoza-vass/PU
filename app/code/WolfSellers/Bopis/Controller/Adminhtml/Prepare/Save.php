@@ -169,8 +169,8 @@ class Save extends Order
                 $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
                 $this->emailHelper->sendPreparedOrderEmail($to, $this->emailHelper->getOrderModel($order));
 
-                $this->logger->critical("La Orden está preparada para ser enviada");
-                $this->messageManager->addSuccessMessage(__('La Orden está preparada para ser envida.'));
+                $this->logger->critical("La orden está preparada para ser enviada");
+                $this->messageManager->addSuccessMessage(__('La orden está preparada para ser enviada.'));
             } catch (Exception $e) {
                 $this->messageManager->addErrorMessage(__('No se pudo preparar la orden.'));
                 $this->logger->critical($e->getMessage());
