@@ -37,6 +37,21 @@ define([
                         return false;
                     });
 
+                    const button = document.querySelector("#top-cart-btn-checkout");
+                    button.addEventListener("click", function (event) {
+                        event.stopPropagation();
+
+                        var route = 0;
+                        if ($(this).hasClass('viewcart')) {
+                            $('[data-block="minicart"]').find('[data-role="dropdownDialog"]').dropdownDialog('close');
+                            $('body').removeClass('cart-open');
+                            route = 1;
+                        }
+
+                        proceedPopup.validations(route);
+                    });
+
+
                 }
                 return this._super(name);
             },
