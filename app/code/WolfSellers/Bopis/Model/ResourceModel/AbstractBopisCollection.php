@@ -153,6 +153,8 @@ abstract class AbstractBopisCollection extends Collection
             ]
         );
 
+        $this->addFilterToMap('created_at', 'main_table.created_at');
+
       /*  $this->getSelect()->joinInner(
             ['qb' => $quoteBopisTable],
             "qb.quote_id = so.quote_id and qb.type = 'store-pickup'",
