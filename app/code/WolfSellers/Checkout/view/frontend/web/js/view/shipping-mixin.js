@@ -89,6 +89,7 @@ define([
                 if(value.includes('_complete')){
                     this.validateRates();
                     this.isContinueBtnDisabled(false);
+                    shippingPayment.isStepTwoFinished('_active');
                 }
             },this);
             this.createInformationModals();

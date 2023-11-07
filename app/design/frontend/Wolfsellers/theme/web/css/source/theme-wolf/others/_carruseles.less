@@ -359,7 +359,31 @@
 			}
 		}
 	}
-
+	.page-wrapper{
+		#maincontent{
+			.columns{
+				.column.main{
+					.row-slider-products{
+						.slick-list{
+							.slick-slide{
+								.product-item{
+									.product-image-container{
+										.amlabel-position-wrapper{
+											width: 34px !important; //add style for module amasty
+											&[class*="amlabel-position-top-center"]{
+												right: 10px !important; //add style for module amasty
+												top: 25px !important; //add style for module amasty
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	.carrusel-ultimos-lanzamientos{
 		flex-direction: row !important;
 		align-items: center;
@@ -385,7 +409,7 @@
 		}
 		.slick-list{
 			padding: 10px 50px 10px 0;
-			
+
 			.slick-track{
 				.slick-slide{
 					figure{
