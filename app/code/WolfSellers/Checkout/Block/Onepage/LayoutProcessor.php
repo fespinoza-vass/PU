@@ -164,7 +164,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'elementTmpl' => 'ui/form/element/input'
             ],
             'dataScope' => 'customerData.numero_de_identificacion',
-            'label' => 'Numero de Identificación',
+            'label' => 'Número de Identificación',
             'provider' => 'checkoutProvider',
             'sortOrder' => 4,
             'validation' => [
