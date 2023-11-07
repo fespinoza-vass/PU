@@ -171,16 +171,25 @@ class Save extends Order
         if ($order) {
 
             if($order->getShippingMethod() == self::SHIPPING_METHOD_ENVIO_RAPIDO){
-                $result  = $this->_savarHelper->sendOrderToSavar($order);
 
-                if(!($result["state_code"] == 200 && $result['response'] == $order->getIncrementId())){
+                try{
+                    $result  = $this->_savarHelper->sendOrderToSavar($order);
+
+                    if(!($result["state_code"] == 200 && $result['response'] == $order->getIncrementId())){
+                        $this->logger->critical("No fue posible mandar la orden a Savar Express.");
+                        $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
+
+                        if($result["state_code"] == 500){
+                            $this->logger->critical("Servicio no disponible Savar Express.");
+                            $this->messageManager->addErrorMessage(__('Servicio no disponible Savar Express.'));
+                        }
+
+                        $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);
+                        return $resultRedirect;
+                    }
+                } catch (\Throwable $error){
                     $this->logger->critical("No fue posible mandar la orden a Savar Express.");
                     $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
-
-                    if($result["state_code"] == 500){
-                        $this->logger->critical("Servicio no disponible Savar Express.");
-                        $this->messageManager->addErrorMessage(__('Servicio no disponible Savar Express.'));
-                    }
 
                     $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);
                     return $resultRedirect;
