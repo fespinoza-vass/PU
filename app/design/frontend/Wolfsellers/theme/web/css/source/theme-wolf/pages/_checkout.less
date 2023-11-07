@@ -542,7 +542,7 @@
 			}
 			#stepFormCheck {
 				display: grid;
-				gap: 18px;
+				gap: 10px;
 				grid-template-columns: 1fr 1fr;
 				padding-top: 15px;
 				.field {
@@ -578,6 +578,7 @@
 					display: grid;
 					grid-column-start: 1;
 					grid-column-end: 3;
+					margin-top: 15px;
 					.checkout-agreement.field.choice {
 						display: flex;
 						justify-content: center;
@@ -659,15 +660,22 @@
 									display: none;
 								}
 								a{
-									&:hover{
-										color: @color-black;
-									}
+									display: none;
 								}
 							}
 							.distrito-uicomponent{
 								margin-bottom: 24px;
 								select{
 									width: 100%;
+								}
+								.field{
+									label{
+										span:after{
+											content: '*';
+											color:@red;
+											padding-left: 5px;
+										}
+									}
 								}
 							}
 							.pickup-store-list{
@@ -808,6 +816,7 @@
 													&:after{
 														content: '*';
 														padding-left: 5px;
+														color: @red;
 													}
 												}
 											}
@@ -847,7 +856,7 @@
 									label{
 										&:after{
 											content: '*';
-											color: @color-black;
+											color: @red;
 											padding-left: 5px;
 										}
 									}
@@ -859,11 +868,6 @@
 									}
 									&[name="shippingAddress.custom_attributes.direccion_comprobante_picker"]{
 										order: 4;
-										label{
-											&:after{
-												content: none;
-											}
-										}
 									}
 									&[name="shippingAddress.city"]{
 										order: 2;
@@ -1070,7 +1074,7 @@
 									span{
 										&:after{
 											content: '*';
-											color: @color-black;
+											color: @red;
 											padding-left: 3px;
 										}
 									}
@@ -2893,14 +2897,16 @@
 								}
 							}
 						}
-						#stepFormCheck{
-							.field{
-								label{
-									display: block;
-									margin-bottom: 8px;
-								}
-								&[name="customerData.identificacion"]{
-									align-self: end;
+						#customer_data_edit{
+							#stepFormCheck{
+								.field{
+									label{
+										display: block;
+										margin-bottom: 8px;
+									}
+									&[name="customerData.identificacion"]{
+										align-self: end;
+									}
 								}
 							}
 						}
@@ -2969,6 +2975,35 @@
 		}
 	}
 }
+
+@media screen and (min-width:770px) and (max-width:1274px){
+	.checkout-index-index{
+		#checkoutSteps{
+			#customer_step{
+			   #stepFormCheck{
+					.field{
+						&[name="customerData.identificacion"]{
+							.lib-css(display,flex,1);
+							.lib-css(flex-direction,column,1);
+							.lib-css(justify-content,end,1);
+							height: 90px;
+						}
+					}
+			    } 
+		    } 
+			.checkout-shipping-address.step-two{
+				.container.steps {
+					#store-pickup {
+						.step-content{
+							gap: 1px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 //
 //  Mobile 640 - 768
 //  _____________________________________________
