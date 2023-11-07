@@ -9,7 +9,7 @@
              resource="WolfSellers_Bopis::principal"/>
 
         <add 	id="WolfSellers_Bopis::listnewsorders"
-                title="Ordenes Confirmadas"
+                title="Órdenes Confirmadas"
                 module="WolfSellers_Bopis"
                 sortOrder="210"
                 action="bopis/listnewsorders/index"
@@ -17,7 +17,7 @@
         />
 
         <add 	id="WolfSellers_Bopis::listprocessingorders"
-                title="Ordenes En Preparacion"
+                title="Órdenes En Preparacion"
                 module="WolfSellers_Bopis"
                 sortOrder="220"
                 action="bopis/listprocessingorders/index"
@@ -25,7 +25,7 @@
         />
 
         <add 	id="WolfSellers_Bopis::listshippingorders"
-                title="Ordenes En Camino"
+                title="Órdenes En Camino"
                 module="WolfSellers_Bopis"
                 sortOrder="220"
                 action="bopis/listshippingorders/index"
@@ -33,7 +33,7 @@
         />
 
         <add 	id="WolfSellers_Bopis::listreadyforpickup"
-                title="Ordenes Listas para Recojo"
+                title="Órdenes Listas para Recojo"
                 module="WolfSellers_Bopis"
                 sortOrder="225"
                 action="bopis/listreadyforpickup/index"
@@ -41,7 +41,7 @@
         />
 
         <add 	id="WolfSellers_Bopis::listcompleteorders"
-                title="Ordenes Entregadas"
+                title="Órdenes Entregadas"
                 module="WolfSellers_Bopis"
                 sortOrder="230"
                 action="bopis/listcompleteorders/index"
@@ -49,7 +49,7 @@
         />
 
         <add 	id="WolfSellers_Bopis::listcanceledorders"
-                title="Ordenes Canceladas"
+                title="Órdenes Canceladas"
                 module="WolfSellers_Bopis"
                 sortOrder="240"
                 action="bopis/listcanceledorders/index"
@@ -57,7 +57,7 @@
         />
 
         <add 	id="WolfSellers_Bopis::listholdedorders"
-                title="Ordenes Detenidas"
+                title="Órdenes Detenidas"
                 module="WolfSellers_Bopis"
                 sortOrder="250"
                 action="bopis/listholdedorders/index"

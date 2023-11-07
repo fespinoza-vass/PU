@@ -32,7 +32,7 @@ class Index extends \Magento\Backend\App\Action
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('WolfSellers_Bopis::listreadyforpickup');
-        $resultPage->getConfig()->getTitle()->prepend(__('Listo paras recojo'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Listo para recojo'));
         return $resultPage;
     }
 

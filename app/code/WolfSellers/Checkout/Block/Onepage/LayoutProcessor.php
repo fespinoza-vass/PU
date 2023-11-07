@@ -164,7 +164,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'elementTmpl' => 'ui/form/element/input'
             ],
             'dataScope' => 'customerData.numero_de_identificacion',
-            'label' => 'Numero de Identificacion',
+            'label' => 'Número de Identificación',
             'provider' => 'checkoutProvider',
             'sortOrder' => 4,
             'validation' => [
@@ -346,7 +346,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $distritoPickupArea['distrito-pickup'] = $distritoPickupUiComponent;
         $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
         $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
-        $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['caption'] = "Seleccionar distrito";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
         $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
@@ -402,6 +402,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $voucherPickupArea['picker-voucher']['children']['voucher']['caption'] = "Selecciona un distrito...";
         $voucherPickupArea['picker-voucher']['children']['direccion_comprobante_picker'] =
             $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_comprobante_picker');
+        $voucherPickupArea['picker-voucher']['children']['direccion_comprobante_picker']["label"]  = "Dirección";
         $walker->setValue('{STORE-PICKUP}.>>',$voucherPickupArea);
 
 
