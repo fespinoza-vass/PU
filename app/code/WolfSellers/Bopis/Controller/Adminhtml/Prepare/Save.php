@@ -23,9 +23,14 @@ use Magento\Framework\Exception\InputException;
 use Psr\Log\LoggerInterface;
 use WolfSellers\Bopis\Helper\Config;
 use WolfSellers\Email\Helper\EmailHelper;
+use WolfSellers\EnvioRapido\Helper\SavarHelper;
 
 class Save extends Order
 {
+    /** @var SavarHelper */
+    protected $_savarHelper;
+
+    CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
 
     /**
      * Authorization level of a basic admin session
@@ -127,10 +132,12 @@ class Save extends Order
         OrderManagementInterface $orderManagement,
         OrderRepositoryInterface $orderRepository,
         LoggerInterface $logger,
-        EmailHelper $emailHelper
+        EmailHelper $emailHelper,
+        SavarHelper $savarHelper
     ) {
         $this->config = $config;
         $this->emailHelper = $emailHelper;
+        $this->_savarHelper = $savarHelper;
         parent::__construct(
             $context,
             $coreRegistry,
@@ -161,6 +168,33 @@ class Save extends Order
         $order = $this->_initOrder();
         if ($order) {
             try {
+
+                if($order->getShippingMethod() == self::SHIPPING_METHOD_ENVIO_RAPIDO){
+
+                    try{
+                        $result  = $this->_savarHelper->sendOrderToSavar($order);
+
+                        if(!($result["state_code"] == 200 && $result['response'] == $order->getIncrementId())){
+                            $this->logger->critical("No fue posible mandar la orden a Savar Express.");
+                            $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
+
+                            if($result["state_code"] == 500){
+                                $this->logger->critical("Servicio no disponible Savar Express.");
+                                $this->messageManager->addErrorMessage(__('Servicio no disponible Savar Express.'));
+                            }
+
+                            $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);
+                            return $resultRedirect;
+                        }
+                    } catch (\Throwable $error){
+                        $this->logger->critical("No fue posible mandar la orden a Savar Express.");
+                        $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
+
+                        $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);
+                        return $resultRedirect;
+                    }
+                }
+
                 $order->setStatus($this->config->getConfig('bopis/status/preparing'))
                     ->addStatusToHistory($order->getStatus())
                     ->addCommentToStatusHistory('Orden Lista para enviar');

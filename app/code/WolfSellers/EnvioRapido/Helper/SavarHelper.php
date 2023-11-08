@@ -17,9 +17,8 @@ use Magento\Sales\Model\Convert\Order as OrderConverter;
 use Magento\Shipping\Model\ShipmentNotifier as OrderShipmentNotifier;
 use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
-
-
-
+use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
+use WolfSellers\Email\Helper\EmailHelper;
 
 /**
  *
@@ -30,7 +29,17 @@ class SavarHelper extends AbstractHelper
      *
      */
     CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
+    CONST SAVAR_STATUS_RECOGIDO = 5;
+    CONST SAVAR_STATUS_ENTREGADO = 9;
 
+
+    /**
+     * @var EmailHelper
+     */
+    protected $emailHelper;
+
+    /** @var DistrictGeoname */
+    protected $_districtGeoname;
 
     /** @var SavarLogger */
     protected $_savarLogger;
@@ -71,6 +80,7 @@ class SavarHelper extends AbstractHelper
      * @param NotifyToSavarCreateOrder $notifyToSavar
      */
     public function __construct(
+        DistrictGeoname                       $districtGeoname,
         Context                               $context,
         NotifyToSavarCreateOrder              $notifyToSavar,
         OrderRepositoryInterface              $orderRepository,
@@ -83,10 +93,12 @@ class SavarHelper extends AbstractHelper
         OrderConverter                        $orderConverter,
         OrderShipmentNotifier                 $orderShipmentNotifier,
         SearchCriteriaBuilder                 $searchCriteriaBuilder,
-        SavarLogger                           $savarLogger
-
+        SavarLogger                           $savarLogger,
+        EmailHelper                           $emailHelper
     )
     {
+        $this->emailHelper = $emailHelper;
+        $this->_districtGeoname = $districtGeoname;
         $this->_savarLogger = $savarLogger;
         $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->_orderShipmentNotifier = $orderShipmentNotifier;
@@ -113,8 +125,13 @@ class SavarHelper extends AbstractHelper
     {
         $distrito = $order->getShippingAddress()->getDistritoEnvioRapido();
 
-        $distritoTienda = $this->_direccionesTiendasRepository->get($distrito);
-        $sourceCode = $distritoTienda->getTienda();
+        $sources = $this->_districtGeoname->getNearestWarehouses($order);
+
+        if(empty($sources)){
+            throw new \Exception('No fue posible encontrar Sources que puedan surtir el pedido. ');
+        }
+
+        $sourceCode = $sources[0]['source_code'];
 
         $source = $this->_sourceRepository->get($sourceCode);
 
@@ -122,7 +139,7 @@ class SavarHelper extends AbstractHelper
             "CodPaquete" => $order->getIncrementId(),
             "NomRemitente" => "Perfumerias Unidas",
             "DireccionRemitente" => $source->getStreet(),
-            "DistritoRemitente" => $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict(),
+            "DistritoRemitente" => strtoupper($source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict()),
             "TelefonoRemitente" => $source->getPhone(),
             "CodigoProducto" => $this->getSkuList($order),
             "MarcaProducto" => "",
@@ -134,7 +151,7 @@ class SavarHelper extends AbstractHelper
             "NomConsignado" => $order->getCustomerFirstname() . " " . $order->getCustomerLastname(),
             "NumDocConsignado" => $order->getShippingAddress()->getVatId(),
             "DireccionConsignado" => implode(",",$order->getShippingAddress()->getStreet()),
-            "DistritoConsignado" => $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict(),
+            "DistritoConsignado" => strtoupper("Lima" . "|" . $order->getShippingAddress()->getCity() . "|" . $order->getShippingAddress()->getData('colony')),
             "Referencia" => $order->getShippingAddress()->getReferenciaEnvio(),
             "TelefonoConsignado" => $order->getShippingAddress()->getTelephone(),
             "CorreoConsignado" => $order->getCustomerEmail(),
@@ -156,6 +173,8 @@ class SavarHelper extends AbstractHelper
             "Latitud" => "",
             "Longitud" => ""
         ];
+
+        $distritoEnvioRapido = $order->getShippingAddress()->getData('distrito_envio_rapido');
 
         if ($order->getShippingAddress()->getHorariosDisponibles()) {
             $label = $this->getValueByOptionId('horarios_disponibles', $order->getShippingAddress()->getHorariosDisponibles());
@@ -224,7 +243,12 @@ class SavarHelper extends AbstractHelper
             return false;
         }
 
-        if(intval($result['response']['vcodestado']) == 9){
+        if(intval($result['response']['vcodestado']) == self::SAVAR_STATUS_RECOGIDO){
+            $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
+            $this->emailHelper->sendShipOrderEmail($to, $this->emailHelper->getOrderModel($order));
+        }
+
+        if(intval($result['response']['vcodestado']) == self::SAVAR_STATUS_ENTREGADO){
             if (!$order->canShip() || !$order->hasShipments()) {
                 $this->_savarLogger->error( __('You can\'t create an shipment.'));
             }
@@ -261,10 +285,8 @@ class SavarHelper extends AbstractHelper
                 ->notify($shipment);
 
             $shipment->save();
-        } catch (\Exception $e) {
-            throw new \Magento\Framework\Exception\LocalizedException(
-                __($e->getMessage())
-            );
+        } catch (\Throwable $e) {
+
         }
     }
 
