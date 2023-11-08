@@ -169,33 +169,6 @@ class Save extends Order
         }
         $order = $this->_initOrder();
         if ($order) {
-
-            if($order->getShippingMethod() == self::SHIPPING_METHOD_ENVIO_RAPIDO){
-
-                try{
-                    $result  = $this->_savarHelper->sendOrderToSavar($order);
-
-                    if(!($result["state_code"] == 200 && $result['response'] == $order->getIncrementId())){
-                        $this->logger->critical("No fue posible mandar la orden a Savar Express.");
-                        $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
-
-                        if($result["state_code"] == 500){
-                            $this->logger->critical("Servicio no disponible Savar Express.");
-                            $this->messageManager->addErrorMessage(__('Servicio no disponible Savar Express.'));
-                        }
-
-                        $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);
-                        return $resultRedirect;
-                    }
-                } catch (\Throwable $error){
-                    $this->logger->critical("No fue posible mandar la orden a Savar Express.");
-                    $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
-
-                    $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);
-                    return $resultRedirect;
-                }
-            }
-
             try {
                 $order->setStatus($this->config->getConfig('bopis/status/shipping'))
                     ->addStatusToHistory($order->getStatus())
@@ -207,7 +180,7 @@ class Save extends Order
 
                 $this->logger->critical("La Orden está preparada para ser entregada");
                 $this->messageManager->addSuccessMessage(__('La Orden está preparada para ser entregada.'));
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage(__('No se pudo enviar la orden.'));
                 $this->logger->critical($e->getMessage());
             }

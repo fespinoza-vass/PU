@@ -85,7 +85,6 @@ class ShippingInformationManagement
 
             $extension->setData('referencia_envio',$extensionAttributes->getEnvioRapido()->getReferencia());
             $extension->setData('distrito_envio_rapido',$extensionAttributes->getEnvioRapido()->getDistrito());
-            //$extension->setData('horarios_disponibles',$extensionAttributes->getEnvioRapido()->getDistrito());
 
             $quote->getBillingAddress()->setExtensionAttributes($extension);
             $quote->getShippingAddress()->setExtensionAttributes($extension);
@@ -98,6 +97,10 @@ class ShippingInformationManagement
 
             $quote->getShippingAddress()->setData('horarios_disponibles',$horarioValue);
             $quote->getShippingAddress()->setCustomAttribute('horarios_disponibles',$horarioValue);
+
+            $quote->getShippingAddress()->setData('colony',$extensionAttributes->getEnvioRapido()->getDistrito());
+            $quote->getShippingAddress()->setCustomAttribute('colony',$extensionAttributes->getEnvioRapido()->getDistrito());
+
 
             $quote->save();
         }

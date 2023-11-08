@@ -2,6 +2,8 @@
     "inventory_source": {
         "column": {
             "available_shipping_methods": true,
+            "is_fastshipping_active": true,
+            "range_radius": true,
             "district": true
         }
     }

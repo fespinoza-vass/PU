@@ -2,7 +2,6 @@
 
 namespace WolfSellers\EnvioRapido\Helper;
 
-use Magento\Eav\Model\Config;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
@@ -17,9 +16,9 @@ use Magento\Sales\Model\Convert\Order as OrderConverter;
 use Magento\Shipping\Model\ShipmentNotifier as OrderShipmentNotifier;
 use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
-
-
-
+use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
+use WolfSellers\Email\Helper\EmailHelper;
+use WolfSellers\Bopis\Helper\Config;
 
 /**
  *
@@ -30,7 +29,22 @@ class SavarHelper extends AbstractHelper
      *
      */
     CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
+    CONST SAVAR_STATUS_RECOGIDO = 5;
+    CONST SAVAR_STATUS_ENTREGADO = 9;
 
+
+    /**
+     * @var Config
+     */
+    protected $config;
+
+    /**
+     * @var EmailHelper
+     */
+    protected $emailHelper;
+
+    /** @var DistrictGeoname */
+    protected $_districtGeoname;
 
     /** @var SavarLogger */
     protected $_savarLogger;
@@ -71,6 +85,7 @@ class SavarHelper extends AbstractHelper
      * @param NotifyToSavarCreateOrder $notifyToSavar
      */
     public function __construct(
+        DistrictGeoname                       $districtGeoname,
         Context                               $context,
         NotifyToSavarCreateOrder              $notifyToSavar,
         OrderRepositoryInterface              $orderRepository,
@@ -83,10 +98,14 @@ class SavarHelper extends AbstractHelper
         OrderConverter                        $orderConverter,
         OrderShipmentNotifier                 $orderShipmentNotifier,
         SearchCriteriaBuilder                 $searchCriteriaBuilder,
-        SavarLogger                           $savarLogger
-
+        SavarLogger                           $savarLogger,
+        EmailHelper                           $emailHelper,
+        Config $config
     )
     {
+        $this->config = $config;
+        $this->emailHelper = $emailHelper;
+        $this->_districtGeoname = $districtGeoname;
         $this->_savarLogger = $savarLogger;
         $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->_orderShipmentNotifier = $orderShipmentNotifier;
@@ -113,8 +132,13 @@ class SavarHelper extends AbstractHelper
     {
         $distrito = $order->getShippingAddress()->getDistritoEnvioRapido();
 
-        $distritoTienda = $this->_direccionesTiendasRepository->get($distrito);
-        $sourceCode = $distritoTienda->getTienda();
+        $sources = $this->_districtGeoname->getNearestWarehouses($order);
+
+        if(empty($sources)){
+            throw new \Exception('No fue posible encontrar Sources que puedan surtir el pedido. ');
+        }
+
+        $sourceCode = $sources[0]['source_code'];
 
         $source = $this->_sourceRepository->get($sourceCode);
 
@@ -122,7 +146,7 @@ class SavarHelper extends AbstractHelper
             "CodPaquete" => $order->getIncrementId(),
             "NomRemitente" => "Perfumerias Unidas",
             "DireccionRemitente" => $source->getStreet(),
-            "DistritoRemitente" => $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict(),
+            "DistritoRemitente" => strtoupper($source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict()),
             "TelefonoRemitente" => $source->getPhone(),
             "CodigoProducto" => $this->getSkuList($order),
             "MarcaProducto" => "",
@@ -134,7 +158,7 @@ class SavarHelper extends AbstractHelper
             "NomConsignado" => $order->getCustomerFirstname() . " " . $order->getCustomerLastname(),
             "NumDocConsignado" => $order->getShippingAddress()->getVatId(),
             "DireccionConsignado" => implode(",",$order->getShippingAddress()->getStreet()),
-            "DistritoConsignado" => $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict(),
+            "DistritoConsignado" => strtoupper("Lima" . "|" . $order->getShippingAddress()->getCity() . "|" . $order->getShippingAddress()->getData('colony')),
             "Referencia" => $order->getShippingAddress()->getReferenciaEnvio(),
             "TelefonoConsignado" => $order->getShippingAddress()->getTelephone(),
             "CorreoConsignado" => $order->getCustomerEmail(),
@@ -156,6 +180,8 @@ class SavarHelper extends AbstractHelper
             "Latitud" => "",
             "Longitud" => ""
         ];
+
+        $distritoEnvioRapido = $order->getShippingAddress()->getData('distrito_envio_rapido');
 
         if ($order->getShippingAddress()->getHorariosDisponibles()) {
             $label = $this->getValueByOptionId('horarios_disponibles', $order->getShippingAddress()->getHorariosDisponibles());
@@ -224,11 +250,31 @@ class SavarHelper extends AbstractHelper
             return false;
         }
 
-        if(intval($result['response']['vcodestado']) == 9){
-            if (!$order->canShip() || !$order->hasShipments()) {
-                $this->_savarLogger->error( __('You can\'t create an shipment.'));
+        if(in_array(intval($result['response']['vcodestado']),array(5,6,7,8))){
+            if($order->getStatus() == 'prepared_order'){
+                $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
+                $this->emailHelper->sendShipOrderEmail($to, $this->emailHelper->getOrderModel($order));
+
+                $nextStatus = $this->config->getConfig('bopis/status/shipping');
+                $order->setStatus($nextStatus)
+                    ->addStatusToHistory($order->getStatus())
+                    ->addCommentToStatusHistory('Orden Lista para ser entregada');
+                $this->_orderRepository->save($order);
+
+                $this->_savarLogger->error( __('Se actualizo estatus de orden: '. $order->getIncrementId(). " status: ". $order->getStatus()));
             }
         }
+
+        if(intval($result['response']['vcodestado']) == self::SAVAR_STATUS_ENTREGADO){
+            if($order->getStatus() == 'order_on_the_way'){
+                if ($order->canShip() && !$order->hasShipments()) {
+                    $this->generateShipment($order);
+                }else{
+                    $this->_savarLogger->error( __('You can\'t create an shipment.'));
+                }
+            }
+        }
+
     }
 
     /**
@@ -261,10 +307,8 @@ class SavarHelper extends AbstractHelper
                 ->notify($shipment);
 
             $shipment->save();
-        } catch (\Exception $e) {
-            throw new \Magento\Framework\Exception\LocalizedException(
-                __($e->getMessage())
-            );
+        } catch (\Throwable $e) {
+
         }
     }
 
@@ -307,7 +351,8 @@ class SavarHelper extends AbstractHelper
         $this->_savarLogger->error("consulta de ordenes savar");
         $searchCriteria = $this->_searchCriteriaBuilder
             ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
-            ->addFilter('status',"order_on_the_way","eq")
+            ->addFilter('status',["prepared_order",'order_on_the_way'],"in")
+            ->addFilter('state',"processing","eq")
             ->create();
 
         $orders = $this->_orderRepository->getList($searchCriteria);
@@ -318,7 +363,9 @@ class SavarHelper extends AbstractHelper
                 try {
                     $this->getSavarOrder($order->getIncrementId());
                 }catch (\Throwable $error){
-                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId());
+                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId().
+                        $error->getMessage()
+                    );
                     continue;
                 }
             }

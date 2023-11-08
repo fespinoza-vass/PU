@@ -16,12 +16,19 @@ use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
 use WolfSellers\Checkout\Helper\Source as SourceHelper;
+use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
+
+
 
 /**
  * Onepage Layout Processor.
  */
 class LayoutProcessor implements LayoutProcessorInterface
 {
+
+    /** @var DistrictGeoname */
+    protected $_districtGeoname;
+
     /** @var LayoutWalkerFactory */
     private LayoutWalkerFactory $walkerFactory;
     /**
@@ -36,17 +43,22 @@ class LayoutProcessor implements LayoutProcessorInterface
     /** @var SourceHelper */
     protected $_sourceHelper;
 
+
     /**
+     * @param DistrictGeoname $districtGeoname
      * @param \WolfSellers\Checkout\Block\Onepage\LayoutWalkerFactory $walkerFactory
      * @param CustomerRepositoryInterface $customerRepository
      * @param Session $session
+     * @param SourceHelper $sourceHelper
      */
     public function __construct(
+        DistrictGeoname $districtGeoname,
         LayoutWalkerFactory $walkerFactory,
         CustomerRepositoryInterface $customerRepository,
         Session $session,
         SourceHelper $sourceHelper
     ) {
+        $this->_districtGeoname = $districtGeoname;
         $this->walkerFactory = $walkerFactory;
         $this->_customerRepository = $customerRepository;
         $this->session = $session;
@@ -294,21 +306,8 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingFastArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
         $shippingFastArea['fast'] = $shippingFast;
         $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
-        $shippingFastArea['fast']['children']['distrito']['config']['options'] = [
-            ['label' => "La Molina", 'value' => 'LA MOLINA'],
-            ['label' => "Los Olivos", 'value' => 'LOS OLIVOS'],
-            ['label' => "San Isidro", 'value' => 'SAN ISIDRO'],
-            ['label' => "Jesús María", 'value' => 'JESUS MARIA'],
-            ['label' => "Pueblo Libre", 'value' => 'PUEBLO LIBRE'],
-            ['label' => "Magdalena del Mar", 'value' => 'MAGDALENA DEL MAR'],
-            ['label' => "San Miguel", 'value' => 'SAN MIGUEL'],
-            ['label' => "San Borja", 'value' => 'SAN BORJA'],
-            ['label' => "Barranco", 'value' => 'BARRANCO '],
-            ['label' => "Santiago de surco", 'value' => 'SANTIAGO DE SURCO '],
-            ['label' => "Chorrillos", 'value' => 'CHORILLOS'],
-            ['label' => "Surquillo", 'value' => 'SURQUILLO'],
-            ['label' => "Miraflores", 'value' => 'MIRAFLORES']
-        ];
+        $shippingFastArea['fast']['children']['distrito']['config']['options'] = $this->_districtGeoname->getDistrictActiveList();
+
         $shippingFastArea['fast']['children']['distrito']['config']['caption'] = "Selecciona un distrito...";
         $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
         $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');

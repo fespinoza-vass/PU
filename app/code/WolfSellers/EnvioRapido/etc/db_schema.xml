@@ -8,4 +8,9 @@
         <column xsi:type="text" name="savar_status" nullable="true"/>
         <column xsi:type="varchar" name="savar_horario" nullable="true"/>
     </table>
+
+    <table name="inventory_geoname" resource="default" engine="innodb">
+        <column xsi:type="tinyint" name="district_active" default="0" unsigned="true" nullable="true"/>
+        <column xsi:type="varchar" name="nombre_completo" nullable="true"/>
+    </table>
 </schema>
