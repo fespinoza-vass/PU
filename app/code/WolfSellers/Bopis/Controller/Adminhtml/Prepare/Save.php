@@ -187,7 +187,7 @@ class Save extends Order
                             return $resultRedirect;
                         }
                     } catch (\Throwable $error){
-                        $this->logger->critical("No fue posible mandar la orden a Savar Express.");
+                        $this->logger->critical("No fue posible mandar la orden a Savar Express.".$error->getMessage());
                         $this->messageManager->addErrorMessage(__('No fue posible mandar la orden a Savar Express.'));
 
                         $resultRedirect->setPath('bopis/order/view', ['order_id' => $order->getId()]);

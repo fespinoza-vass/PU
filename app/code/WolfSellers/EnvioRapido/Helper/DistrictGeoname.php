@@ -146,8 +146,7 @@ class DistrictGeoname extends AbstractHelper
         $collection = $this->_sourceCollectionFactory->create()
             ->addFieldToSelect('*')
             ->addFieldToFilter('enabled', true)
-            ->addFieldToFilter('is_fastshipping_active', true)
-            ->addFieldToFilter('range_radius', ['notnull' => 0]);
+            ->addFieldToFilter('is_fastshipping_active', true);
 
         if(count($collection->getItems())<=0){
             return false;
@@ -162,11 +161,10 @@ class DistrictGeoname extends AbstractHelper
      */
     public function getNearestWarehouses(OrderInterface $order){
         $sourceResult = array();
-        $distritoId = $order->getShippingAddress()->getDistritoEnvioRapido();
         $clientDistrict = $this->getDistrictByName($order->getShippingAddress()->getData('colony'));
         $sources = $this->getEnvioRapidoSources();
 
-        if(!$sources || !$distritoId){
+        if(!$sources || !$clientDistrict){
             return false;
         }
 
@@ -227,9 +225,8 @@ class DistrictGeoname extends AbstractHelper
                     );
                 }
             }
-
-            return $sourceResult;
         }
+        return $sourceResult;
     }
 
 }
