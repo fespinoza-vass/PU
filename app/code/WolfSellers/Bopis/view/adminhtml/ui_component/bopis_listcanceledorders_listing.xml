@@ -135,7 +135,7 @@
                 <dataType>select</dataType>
             </settings>
         </column>
-        <column name="shipping_name" sortOrder="25">
+        <column name="shipping_name" class="WolfSellers\Bopis\Ui\Component\Listing\Column\ShippTo" sortOrder="25">
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>

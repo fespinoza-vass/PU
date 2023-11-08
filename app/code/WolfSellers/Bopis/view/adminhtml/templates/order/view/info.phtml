@@ -13,9 +13,6 @@ $viewModel = $block->getData('viewModel');
  * @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Info $block
  */
 $order = $block->getOrder();
-$tipo_cedula_order = !empty($order->getData('tipo_cedula_order')) ? "Tipo de Cedula: ".$order->getData('tipo_cedula_order')." <br/>" : "";
-$no_cedula = !empty($order->getData('no_cedula')) ? "No. de Cédula: ".$order->getData('no_cedula')." <br/>" : "";
-$nombre_o_empresa = !empty($order->getData('nombre_o_empresa')) ? "Nombre o Empresa : ".$order->getData('nombre_o_empresa')." <br/>" : "";
 $baseCurrencyCode = (string)$order->getBaseCurrencyCode();
 $globalCurrencyCode = (string)$order->getGlobalCurrencyCode();
 $orderCurrencyCode = (string)$order->getOrderCurrencyCode();
@@ -60,14 +57,24 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
             </div>
 
             <address class="admin__page-section-item-content">
-                <span class="color-orange"><?= $billingAddress->getFirstname() . " " . $billingAddress->getLastname(); ?></span><br />
-                <?= $tipo_cedula_order ?>
-                <?= $no_cedula ?>
-                <?= $nombre_o_empresa ?>
-                Número de documento: <?= $billingAddress->getVatId(); ?><br />
-                <?= $billingAddress->getEmail(); ?><br />
-                T. <?= $billingAddress->getTelephone(); ?><br />
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                    <?php $customer = $viewModel->getCustomerData($order->getCustomerId())?>
 
+                    <span class="color-orange">
+                        <?= $customer->getFirstname()?> <?=$customer->getLastname()?>
+                    </span><br>
+                    Número de documento:
+                    <?=$viewModel->getCustomerIdentificacion($customer->getId(), false)?><br>
+                    <?=$customer->getEmail()?> <br>
+                    T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                <?php else: ?>
+                    <span class="color-orange">
+                        <?= $billingAddress->getFirstname() . " " . $billingAddress->getLastname(); ?>
+                    </span><br>
+                    Número de documento: <?= $billingAddress->getVatId(); ?><br />
+                    <?= $billingAddress->getEmail(); ?><br />
+                    T. <?= $billingAddress->getTelephone(); ?><br />
+                <?php endif; ?>
                 <br>
                 Comprobante:
                 <?php if ( $billingAddress->getDataByKey('invoice_required') == '0'):?>

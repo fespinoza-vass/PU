@@ -153,6 +153,17 @@ abstract class AbstractBopisCollection extends Collection
             ]
         );
 
+        $this->getSelect()->joinLeft(
+            ['customer' => $this->getTable('customer_entity')],
+            "customer.entity_id = main_table.customer_id",
+            [
+                'firstname',
+                'lastname',
+                "IF (so.shipping_method = '" . self::PICKUP_SHIPPING_METHOD . "' ,
+                    CONCAT(customer.firstname, ' ', customer.lastname) ,main_table.shipping_name) AS entregar_a"
+            ]
+        );
+
         $this->addFilterToMap('created_at', 'main_table.created_at');
 
       /*  $this->getSelect()->joinInner(
