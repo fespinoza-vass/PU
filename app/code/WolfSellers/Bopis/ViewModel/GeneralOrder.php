@@ -102,17 +102,23 @@ class GeneralOrder implements ArgumentInterface
 
     /**
      * @param $customerId
+     * @param bool $whitType
      * @return string
      * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
-    public function getCustomerIdentificacion($customerId)
+    public function getCustomerIdentificacion($customerId, bool $whitType = true): string
     {
         $identification_type = $this->getCustomerAttributeValue($customerId, 'identificacion');
         $identification_number = $this->getCustomerAttributeValue($customerId, 'numero_de_identificacion');
 
-        $type = $this->_realStates->getRealAddrOptionValue('customer', 'identificacion', $identification_type);
+        if ($whitType) {
+            $type = $this->_realStates->getRealAddrOptionValue('customer', 'identificacion', $identification_type);
+            return ($type ? $type . ' - ' : '') . $identification_number;
+        }
 
-        return ($type ? $type . ' - ' : '') . $identification_number;
+
+        return $identification_number;
     }
 
     /**
@@ -130,5 +136,24 @@ class GeneralOrder implements ArgumentInterface
         if (!$attribute) return '';
 
         return $attribute->getValue();
+    }
+
+    /**
+     * @param $customerId
+     * @return \Magento\Customer\Api\Data\CustomerInterface
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function getCustomerData($customerId)
+    {
+        return $this->customerRepository->getById($customerId);
+    }
+
+    /**
+     * @return string
+     */
+    public function getInStoreCode(): string
+    {
+        return \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::PICKUP_SHIPPING_METHOD;
     }
 }
