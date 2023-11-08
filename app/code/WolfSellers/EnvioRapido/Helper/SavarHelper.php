@@ -2,7 +2,6 @@
 
 namespace WolfSellers\EnvioRapido\Helper;
 
-use Magento\Eav\Model\Config;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
@@ -19,6 +18,7 @@ use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\Email\Helper\EmailHelper;
+use WolfSellers\Bopis\Helper\Config;
 
 /**
  *
@@ -32,6 +32,11 @@ class SavarHelper extends AbstractHelper
     CONST SAVAR_STATUS_RECOGIDO = 5;
     CONST SAVAR_STATUS_ENTREGADO = 9;
 
+
+    /**
+     * @var Config
+     */
+    protected $config;
 
     /**
      * @var EmailHelper
@@ -94,9 +99,11 @@ class SavarHelper extends AbstractHelper
         OrderShipmentNotifier                 $orderShipmentNotifier,
         SearchCriteriaBuilder                 $searchCriteriaBuilder,
         SavarLogger                           $savarLogger,
-        EmailHelper                           $emailHelper
+        EmailHelper                           $emailHelper,
+        Config $config
     )
     {
+        $this->config = $config;
         $this->emailHelper = $emailHelper;
         $this->_districtGeoname = $districtGeoname;
         $this->_savarLogger = $savarLogger;
@@ -243,16 +250,31 @@ class SavarHelper extends AbstractHelper
             return false;
         }
 
-        if(intval($result['response']['vcodestado']) == self::SAVAR_STATUS_RECOGIDO){
-            $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
-            $this->emailHelper->sendShipOrderEmail($to, $this->emailHelper->getOrderModel($order));
+        if(in_array(intval($result['response']['vcodestado']),array(5,6,7,8))){
+            if($order->getStatus() == 'prepared_order'){
+                $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
+                $this->emailHelper->sendShipOrderEmail($to, $this->emailHelper->getOrderModel($order));
+
+                $nextStatus = $this->config->getConfig('bopis/status/shipping');
+                $order->setStatus($nextStatus)
+                    ->addStatusToHistory($order->getStatus())
+                    ->addCommentToStatusHistory('Orden Lista para ser entregada');
+                $this->_orderRepository->save($order);
+
+                $this->_savarLogger->error( __('Se actualizo estatus de orden: '. $order->getIncrementId(). " status: ". $order->getStatus()));
+            }
         }
 
         if(intval($result['response']['vcodestado']) == self::SAVAR_STATUS_ENTREGADO){
-            if (!$order->canShip() || !$order->hasShipments()) {
-                $this->_savarLogger->error( __('You can\'t create an shipment.'));
+            if($order->getStatus() == 'order_on_the_way'){
+                if ($order->canShip() && !$order->hasShipments()) {
+                    $this->generateShipment($order);
+                }else{
+                    $this->_savarLogger->error( __('You can\'t create an shipment.'));
+                }
             }
         }
+
     }
 
     /**
@@ -329,7 +351,8 @@ class SavarHelper extends AbstractHelper
         $this->_savarLogger->error("consulta de ordenes savar");
         $searchCriteria = $this->_searchCriteriaBuilder
             ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
-            ->addFilter('status',"order_on_the_way","eq")
+            ->addFilter('status',["prepared_order",'order_on_the_way'],"in")
+            ->addFilter('state',"processing","eq")
             ->create();
 
         $orders = $this->_orderRepository->getList($searchCriteria);
@@ -340,7 +363,9 @@ class SavarHelper extends AbstractHelper
                 try {
                     $this->getSavarOrder($order->getIncrementId());
                 }catch (\Throwable $error){
-                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId());
+                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId().
+                        $error->getMessage()
+                    );
                     continue;
                 }
             }
