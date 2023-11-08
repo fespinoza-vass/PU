@@ -269,6 +269,8 @@ class SavarHelper extends AbstractHelper
             if($order->getStatus() == 'order_on_the_way'){
                 if ($order->canShip() && !$order->hasShipments()) {
                     $this->generateShipment($order);
+                    $order->setStatus('complete');
+                    $this->_orderRepository->save($order);
                 }else{
                     $this->_savarLogger->error( __('You can\'t create an shipment.'));
                 }
@@ -282,7 +284,7 @@ class SavarHelper extends AbstractHelper
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function generateShipment($order){
+    public function generateShipment($order,$sourceCode=null){
         $shipment = $this->_orderConverter->toShipment($order);
 
         foreach ($order->getAllItems() AS $orderItem) {
@@ -296,7 +298,7 @@ class SavarHelper extends AbstractHelper
 
         $shipment->register();
         $shipment->getOrder()->setIsInProcess(true);
-        $shipment->getExtensionAttributes()->setSourceCode('1');
+        $shipment->getExtensionAttributes()->setSourceCode("1");
 
         try {
 
@@ -307,8 +309,8 @@ class SavarHelper extends AbstractHelper
                 ->notify($shipment);
 
             $shipment->save();
-        } catch (\Throwable $e) {
-
+        } catch (\Throwable $error) {
+            $this->_savarLogger->error($error->getMessage());
         }
     }
 
