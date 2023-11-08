@@ -30,7 +30,7 @@
 							font-weight: 600; 
 							background: @color-label-fast; 
 							border-radius: 12px;
-							padding: 10px 10px !important;  //add style for module amasty
+							padding: 12px !important;  //add style for module amasty
 							.lib-icon-font(
 								@_icon-font-content: @icon-fast-shipping,
 								@_icon-font-color: @black,
@@ -464,12 +464,12 @@
 						&[class*="amlabel-position-top-center"]{
 							left: auto !important; //add style for module amasty
 							right: 175px !important; //add style for module amasty
+							background: @color-label-fast; //add style for module amasty
+							border-radius: 12px;
 							.amasty-label-container{
 								.amlabel-text{
 									.lib-font-size(10); //add style for module amasty
 									font-weight: 600; //add style for module amasty
-									background: @color-label-fast; //add style for module amasty
-									border-radius: 12px;
 									padding: 10px !important; //add style for module amasty
 									line-height: initial;
 									.lib-icon-font(
@@ -492,12 +492,12 @@
 							}
 						}
 						&[class*="amlabel-position-top-right"]{
+							background: @color-label-store; //add style for module amasty
+							border-radius: 12px;
 							.amasty-label-container{
 								.amlabel-text{
 									.lib-font-size(10); //add style for module amasty
 									font-weight: 600; //add style for module amasty
-									background: @color-label-store; //add style for module amasty
-									border-radius: 12px;
 									padding: 10px !important; //add style for module amasty
 									line-height: initial;
 									.lib-icon-font(
@@ -1126,7 +1126,8 @@
 						.amlabel-position-wrapper{
 							&[class*="amlabel-position-top-center"],
 							&[class*="amlabel-position-top-right"]{
-								width: 100px !important; //add style for module amasty
+								width: 95px !important; //add style for module amasty
+								height: 30px !important; //add style for module amasty
 								.amasty-label-container{
 									.amlabel-text{
 										.lib-font-size(7) !important; //add style for module amasty
@@ -1151,7 +1152,9 @@
 								}
 							}
 							&[class*="amlabel-position-top-right"]{
-								margin-left: 0 !important; //add style for module amasty
+								margin: 0 !important; //add style for module amasty
+								top: 20px !important; //add style for module amasty
+								right: 20px !important; //add style for module amasty
 							}
 						}
 					}
