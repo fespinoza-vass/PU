@@ -104,6 +104,53 @@ class ShippingInformationManagement
 
             $quote->save();
         }
+
+        if ($extensionAttributes->getRetiroTienda()->getPicker()) {
+
+            $picker = $this->getIdOptionByValue('picker', $extensionAttributes->getRetiroTienda()->getPicker());
+            $quote->getShippingAddress()->setData('picker', $picker);
+            $quote->getShippingAddress()->setCustomAttribute('picker', $picker);
+
+            $quote->getShippingAddress()->setData('identificacion_picker', $extensionAttributes->getRetiroTienda()->getIdentificacion());
+            $quote->getShippingAddress()->setCustomAttribute('identificacion_picker', $extensionAttributes->getRetiroTienda()->getIdentificacion());
+
+            $quote->getShippingAddress()->setData('numero_identificacion_picker',
+                $extensionAttributes->getRetiroTienda()->getNumeroIdentificacion()
+            );
+            $quote->getShippingAddress()->setCustomAttribute('numero_identificacion_picker',
+                $extensionAttributes->getRetiroTienda()->getNumeroIdentificacion()
+            );
+
+            $quote->getShippingAddress()->setData('nombre_completo_picker',
+                $extensionAttributes->getRetiroTienda()->getNombreApellido()
+            );
+            $quote->getShippingAddress()->setCustomAttribute('nombre_completo_picker',
+                $extensionAttributes->getRetiroTienda()->getNombreApellido()
+            );
+
+            $quote->getShippingAddress()->setData('email_picker',
+                $extensionAttributes->getRetiroTienda()->getCorreoOpcional()
+            );
+            $quote->getShippingAddress()->setCustomAttribute('email_picker',
+                $extensionAttributes->getRetiroTienda()->getCorreoOpcional()
+            );
+
+            $quote->getShippingAddress()->setData('distrito_pickup',
+                $extensionAttributes->getRetiroTienda()->getDistritoComprobante()
+            );
+            $quote->getShippingAddress()->setCustomAttribute('distrito_pickup',
+                $extensionAttributes->getRetiroTienda()->getDistritoComprobante()
+            );
+
+            $quote->getShippingAddress()->setData('direccion_comprobante_picker',
+                $extensionAttributes->getRetiroTienda()->getDireccionComprobante()
+            );
+            $quote->getShippingAddress()->setCustomAttribute('direccion_comprobante_picker',
+                $extensionAttributes->getRetiroTienda()->getDireccionComprobante()
+            );
+
+            $quote->save();
+        }
     }
 
     public function getIdOptionByValue($attributeCode,$value){
