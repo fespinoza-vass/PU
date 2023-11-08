@@ -2,6 +2,7 @@
 
 namespace WolfSellers\EnvioRapido\Helper;
 
+use Magento\Eav\Model\Config;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
@@ -18,7 +19,7 @@ use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\Email\Helper\EmailHelper;
-use WolfSellers\Bopis\Helper\Config;
+use WolfSellers\Bopis\Helper\Config as BopisConfig;
 
 /**
  *
@@ -34,7 +35,7 @@ class SavarHelper extends AbstractHelper
 
 
     /**
-     * @var Config
+     * @var BopisConfig
      */
     protected $config;
 
@@ -100,7 +101,7 @@ class SavarHelper extends AbstractHelper
         SearchCriteriaBuilder                 $searchCriteriaBuilder,
         SavarLogger                           $savarLogger,
         EmailHelper                           $emailHelper,
-        Config $config
+        BopisConfig $config
     )
     {
         $this->config = $config;
@@ -135,6 +136,7 @@ class SavarHelper extends AbstractHelper
         $sources = $this->_districtGeoname->getNearestWarehouses($order);
 
         if(empty($sources)){
+            $this->_savarLogger->error("No fue posible encontrar Sources que puedan surtir el pedido.");
             throw new \Exception('No fue posible encontrar Sources que puedan surtir el pedido. ');
         }
 
@@ -180,8 +182,6 @@ class SavarHelper extends AbstractHelper
             "Latitud" => "",
             "Longitud" => ""
         ];
-
-        $distritoEnvioRapido = $order->getShippingAddress()->getData('distrito_envio_rapido');
 
         if ($order->getShippingAddress()->getHorariosDisponibles()) {
             $label = $this->getValueByOptionId('horarios_disponibles', $order->getShippingAddress()->getHorariosDisponibles());
@@ -269,6 +269,8 @@ class SavarHelper extends AbstractHelper
             if($order->getStatus() == 'order_on_the_way'){
                 if ($order->canShip() && !$order->hasShipments()) {
                     $this->generateShipment($order);
+                    $order->setStatus('complete');
+                    $this->_orderRepository->save($order);
                 }else{
                     $this->_savarLogger->error( __('You can\'t create an shipment.'));
                 }
@@ -282,7 +284,7 @@ class SavarHelper extends AbstractHelper
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function generateShipment($order){
+    public function generateShipment($order,$sourceCode=null){
         $shipment = $this->_orderConverter->toShipment($order);
 
         foreach ($order->getAllItems() AS $orderItem) {
@@ -296,7 +298,7 @@ class SavarHelper extends AbstractHelper
 
         $shipment->register();
         $shipment->getOrder()->setIsInProcess(true);
-        $shipment->getExtensionAttributes()->setSourceCode('1');
+        $shipment->getExtensionAttributes()->setSourceCode("1");
 
         try {
 
@@ -307,8 +309,8 @@ class SavarHelper extends AbstractHelper
                 ->notify($shipment);
 
             $shipment->save();
-        } catch (\Throwable $e) {
-
+        } catch (\Throwable $error) {
+            $this->_savarLogger->error($error->getMessage());
         }
     }
 
