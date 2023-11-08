@@ -2,6 +2,7 @@
 
 namespace WolfSellers\EnvioRapido\Helper;
 
+use Magento\Eav\Model\Config;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
@@ -18,7 +19,7 @@ use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\Email\Helper\EmailHelper;
-use WolfSellers\Bopis\Helper\Config;
+use WolfSellers\Bopis\Helper\Config as BopisConfig;
 
 /**
  *
@@ -34,7 +35,7 @@ class SavarHelper extends AbstractHelper
 
 
     /**
-     * @var Config
+     * @var BopisConfig
      */
     protected $config;
 
@@ -100,7 +101,7 @@ class SavarHelper extends AbstractHelper
         SearchCriteriaBuilder                 $searchCriteriaBuilder,
         SavarLogger                           $savarLogger,
         EmailHelper                           $emailHelper,
-        Config $config
+        BopisConfig $config
     )
     {
         $this->config = $config;
@@ -135,6 +136,7 @@ class SavarHelper extends AbstractHelper
         $sources = $this->_districtGeoname->getNearestWarehouses($order);
 
         if(empty($sources)){
+            $this->_savarLogger->error("No fue posible encontrar Sources que puedan surtir el pedido.");
             throw new \Exception('No fue posible encontrar Sources que puedan surtir el pedido. ');
         }
 
@@ -143,7 +145,7 @@ class SavarHelper extends AbstractHelper
         $source = $this->_sourceRepository->get($sourceCode);
 
         $requestPayload = [
-            "CodPaquete" => $order->getIncrementId(),
+            "CodPaquete" => $order->getIncrementId()."s",
             "NomRemitente" => "Perfumerias Unidas",
             "DireccionRemitente" => $source->getStreet(),
             "DistritoRemitente" => strtoupper($source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict()),
@@ -180,8 +182,6 @@ class SavarHelper extends AbstractHelper
             "Latitud" => "",
             "Longitud" => ""
         ];
-
-        $distritoEnvioRapido = $order->getShippingAddress()->getData('distrito_envio_rapido');
 
         if ($order->getShippingAddress()->getHorariosDisponibles()) {
             $label = $this->getValueByOptionId('horarios_disponibles', $order->getShippingAddress()->getHorariosDisponibles());
