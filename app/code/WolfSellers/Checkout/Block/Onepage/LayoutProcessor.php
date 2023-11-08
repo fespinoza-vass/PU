@@ -164,7 +164,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'elementTmpl' => 'ui/form/element/input'
             ],
             'dataScope' => 'customerData.numero_de_identificacion',
-            'label' => 'Número de Identificación',
+            'label' => 'Número de documento',
             'provider' => 'checkoutProvider',
             'sortOrder' => 4,
             'validation' => [
@@ -176,7 +176,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'value' => $this->getNumIdentificacionCustomer($idCustomer)
         ];
         $customerDataAgreementComponent = [
-            'component' => 'Magento_CheckoutAgreements/js/view/checkout-agreements'
+            'component' => 'WolfSellers_Checkout/js/view/customer-agrements'
         ];
         $customerDataTelefonoComponent = [
             'component' => 'Magento_Ui/js/form/element/abstract',
