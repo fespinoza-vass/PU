@@ -145,7 +145,7 @@ class SavarHelper extends AbstractHelper
         $source = $this->_sourceRepository->get($sourceCode);
 
         $requestPayload = [
-            "CodPaquete" => $order->getIncrementId()."s",
+            "CodPaquete" => $order->getIncrementId(),
             "NomRemitente" => "Perfumerias Unidas",
             "DireccionRemitente" => $source->getStreet(),
             "DistritoRemitente" => strtoupper($source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict()),
