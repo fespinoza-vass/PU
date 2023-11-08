@@ -148,10 +148,26 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
                 <span class="title"><?= $block->escapeHtml(__('Cliente que recibe')) ?></span>
             </div>
             <address class="admin__page-section-item-content">
-                <span class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></span><br />
-                Número de documento: <?=$viewModel->getCustomerIdentificacion($order->getCustomerId())?><br />
-                <?= $shippingAddress->getEmail(); ?><br />
-                T. <?= $shippingAddress->getTelephone(); ?>
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                    <?php $picker = $viewModel->getRealAddrOptionValue('picker', $shippingAddress->getPicker()); ?>
+                    <?php if ($picker == 'other'): ?>
+                        <span class="color-orange" title="pick <?=$picker?>"><?= $shippingAddress->getNombreCompletoPicker() ?></span><br />
+                        Número de documento: <?=$viewModel->getRealAddrOptionValue('identificacion_picker', $shippingAddress->getIdentificacionPicker())?>
+                            - <?=$shippingAddress->getNumeroIdentificacionPicker()?><br />
+                        <?= $shippingAddress->getEmailPicker() ?? $customer->getEmail(); ?><br />
+                        T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                    <?php else: ?>
+                        <span class="color-orange" title="<?=$picker?>"><?= $customer->getFirstname()?> <?=$customer->getLastname()?></span><br />
+                        Número de documento: <?=$viewModel->getCustomerIdentificacion($customer->getId())?><br>
+                        <?=$customer->getEmail()?> <br>
+                        T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <span class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></span><br />
+                    Número de documento: <?=$viewModel->getCustomerIdentificacion($order->getCustomerId())?><br />
+                    <?= $shippingAddress->getEmail(); ?><br />
+                    T. <?= $shippingAddress->getTelephone(); ?>
+                <?php endif; ?>
             </address>
             <?php if ($block->getAdminUserType() == 1):?>
             <button name="btn-confirmacion-cliente-retira"
