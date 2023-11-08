@@ -176,7 +176,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'value' => $this->getNumIdentificacionCustomer($idCustomer)
         ];
         $customerDataAgreementComponent = [
-            'component' => 'Magento_CheckoutAgreements/js/view/checkout-agreements'
+            'component' => 'WolfSellers_Checkout/js/view/customer-agrements'
         ];
         $customerDataTelefonoComponent = [
             'component' => 'Magento_Ui/js/form/element/abstract',
