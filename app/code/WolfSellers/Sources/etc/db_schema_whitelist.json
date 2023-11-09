@@ -3,6 +3,7 @@
         "column": {
             "available_shipping_methods": true,
             "is_fastshipping_active": true,
+            "conductor": true,
             "range_radius": true,
             "district": true
         }
