@@ -149,7 +149,7 @@ class SourceQuantityHelper extends AbstractHelper
      */
     public function getEstimatedDeliveryDateByCartId($cartId, $source){
         $currentDate = $this->_timezone->date()->format('Y-m-d');;
-        $sourceHasStock = $this->hasStockInSource($cartId,$source);
+        $sourceHasStock = $this->hasStockInSourceByCardId($cartId,$source);
 
         if($sourceHasStock){
             // hay stock en sucursal, puede recoger el mismo dia

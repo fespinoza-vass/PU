@@ -36,12 +36,14 @@ class FastDeliveryAvailable implements HttpGetActionInterface
     {
         $items = $this->_checkout->getQuote()->getAllVisibleItems();
 
+        $saleableQuatity = 1;
+
         foreach ($items as $item) {
             $max = $this->getMaxQtyPerSource($item->getSku());
 
-            $saleableQuatity = 0;
-            if ($max >= self::MINIMUM_SALABLE_QUANTITY){
-                $saleableQuatity = 1;
+
+            if ($max < self::MINIMUM_SALABLE_QUANTITY){
+                $saleableQuatity = 0;
             }
         }
 

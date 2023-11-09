@@ -385,6 +385,13 @@ $formData = $block->getFormData();
             "passwordStrengthIndicator": {
                 "formSelector": "form.form-create-account"
             }
+        },
+        "#form-validate": {
+            "validation": {
+                "rules": {
+                    "numero_de_identificacion": {"required":true}
+                }
+            }
         }
     }
 </script>

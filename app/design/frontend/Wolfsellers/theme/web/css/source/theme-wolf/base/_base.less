@@ -82,6 +82,9 @@
             }
         }
 		&._has-modal{
+			.modals-overlay{
+				z-index: 1000 !important; //style add by inline
+			}
 			.modals-wrapper{
 				.modal-popup.minicart-proceed-confirmation{
 					.modal-inner-wrap{
@@ -757,7 +760,7 @@
 			.modals-wrapper{
 				.modal-popup.minicart-proceed-confirmation{
 					left: 0;
-					z-index: 99999 !important;//inline style
+					z-index: 999999 !important;//inline style
 					.modal-inner-wrap{
 						position: absolute;
 						transform: translate(-50%,-50%);

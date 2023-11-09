@@ -109,7 +109,6 @@
         <selectionsColumn name="ids">
             <settings>
                 <indexField>entity_id</indexField>
-                <sorting>desc</sorting>
             </settings>
         </selectionsColumn>
         <column name="increment_id" sortOrder="10">
@@ -117,7 +116,6 @@
                 <draggable>false</draggable>
                 <filter>text</filter>
                 <label translate="true">Número de Pedido</label>
-                <sorting>desc</sorting>
                 <sortable>true</sortable>
             </settings>
         </column>
@@ -148,7 +146,7 @@
                 <dataType>select</dataType>
             </settings>
         </column>
-        <column name="shipping_name" sortOrder="25">
+        <column name="entregar_a" sortOrder="25">
             <settings>
                 <draggable>false</draggable>
                 <sortable>true</sortable>
@@ -173,9 +171,10 @@
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
                 component="Magento_Ui/js/grid/columns/date" sortOrder="50">
             <settings>
+                <sorting>desc</sorting>
+                <sortable>true</sortable>
                 <filter>dateRange</filter>
                 <draggable>false</draggable>
-                <sortable>true</sortable>
                 <dataType>date</dataType>
                 <label translate="true">Fecha de Compra</label>
                 <!--dateFormat>dd/MM/YYYY</dateFormat-->

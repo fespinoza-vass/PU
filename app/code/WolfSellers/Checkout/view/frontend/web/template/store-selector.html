@@ -9,19 +9,19 @@
     <div class="store-pickup-method">
         <div class="content-when-not-selected" data-bind="fadeVisible:!selectedLocation()">
             <div class="distrito-uicomponent">
-                <div class="step-title" translate="'2. Selecciona tú Distrito'" data-role="title"></div>
+                <div class="step-title" translate="'2. Selecciona tu Distrito'" data-role="title"></div>
 
                 <each args="getRegion('distrito-pickup')" render="" ></each>
 
             </div>
             <div class="pickup-store-list">
-                <div class="step-title" translate="'2.1 Selecciona tú tienda de retiro'" data-role="title"></div>
+                <div class="step-title" translate="'2.1 Selecciona tu tienda de retiro'" data-role="title"></div>
                 <span class="pickup-store-list_empty" data-bind="visible:isActiveFade()"></span>
                 <div id="opc-store-selector-popup-noModal" data-bind="visible:activeOptions()" render="storeSelectorPopupTemplate" ></div>
             </div>
         </div>
         <div class="content-when-selected" data-bind="fadeVisible:selectedLocation()">
-            <div class="step-title" translate="'2. Selecciona tú tienda de retiro'" data-role="title"></div>
+            <div class="step-title" translate="'2. Selecciona tu tienda de retiro'" data-role="title"></div>
             <render args="selectedLocationTemplate"></render>
             <div class="options">
                 <a href="#" data-bind="click: unSelectLocation()" translate="'Elegir otro lugar de retiro'" ></a>
@@ -64,10 +64,12 @@
                 Podrás recoger tu pedido a partir del día <span data-bind="text: getPickupDateFormat()"></span> en un rango de 8am a 9:30 pm
             </p>
         </div>
+
         <div class="store-pickup-receipt-address_info">
             <span></span>
-            <p translate="'Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.'"></p>
+            <p data-bind="text: messageBasedOnAvailability"></p>
         </div>
+
         <div class="store-pickup-receipt-address_price">
             <p translate="'Cost of shipping'"></p>
             <span>S/0.00</span>

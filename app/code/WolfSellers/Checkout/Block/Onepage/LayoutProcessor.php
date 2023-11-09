@@ -16,12 +16,19 @@ use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
 use WolfSellers\Checkout\Helper\Source as SourceHelper;
+use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
+
+
 
 /**
  * Onepage Layout Processor.
  */
 class LayoutProcessor implements LayoutProcessorInterface
 {
+
+    /** @var DistrictGeoname */
+    protected $_districtGeoname;
+
     /** @var LayoutWalkerFactory */
     private LayoutWalkerFactory $walkerFactory;
     /**
@@ -36,17 +43,22 @@ class LayoutProcessor implements LayoutProcessorInterface
     /** @var SourceHelper */
     protected $_sourceHelper;
 
+
     /**
+     * @param DistrictGeoname $districtGeoname
      * @param \WolfSellers\Checkout\Block\Onepage\LayoutWalkerFactory $walkerFactory
      * @param CustomerRepositoryInterface $customerRepository
      * @param Session $session
+     * @param SourceHelper $sourceHelper
      */
     public function __construct(
+        DistrictGeoname $districtGeoname,
         LayoutWalkerFactory $walkerFactory,
         CustomerRepositoryInterface $customerRepository,
         Session $session,
         SourceHelper $sourceHelper
     ) {
+        $this->_districtGeoname = $districtGeoname;
         $this->walkerFactory = $walkerFactory;
         $this->_customerRepository = $customerRepository;
         $this->session = $session;
@@ -164,7 +176,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'elementTmpl' => 'ui/form/element/input'
             ],
             'dataScope' => 'customerData.numero_de_identificacion',
-            'label' => 'Numero de Identificacion',
+            'label' => 'Número de documento',
             'provider' => 'checkoutProvider',
             'sortOrder' => 4,
             'validation' => [
@@ -176,7 +188,7 @@ class LayoutProcessor implements LayoutProcessorInterface
             'value' => $this->getNumIdentificacionCustomer($idCustomer)
         ];
         $customerDataAgreementComponent = [
-            'component' => 'Magento_CheckoutAgreements/js/view/checkout-agreements'
+            'component' => 'WolfSellers_Checkout/js/view/customer-agrements'
         ];
         $customerDataTelefonoComponent = [
             'component' => 'Magento_Ui/js/form/element/abstract',
@@ -294,6 +306,9 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingFastArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
         $shippingFastArea['fast'] = $shippingFast;
         $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
+        $shippingFastArea['fast']['children']['distrito']['config']['options'] = $this->_districtGeoname->getDistrictActiveList();
+
+        $shippingFastArea['fast']['children']['distrito']['config']['caption'] = "Selecciona un distrito...";
         $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
         $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
         $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastArea);
@@ -330,7 +345,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $distritoPickupArea['distrito-pickup'] = $distritoPickupUiComponent;
         $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
         $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
-        $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito *";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['caption'] = "Seleccionar distrito";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
         $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
@@ -357,10 +372,14 @@ class LayoutProcessor implements LayoutProcessorInterface
         $pickerArea['another-picker'] = $pickerUiComponent;
         $pickerArea['another-picker']['children']['identificacion_picker'] =
             $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.identificacion_picker');
+        $pickerArea['another-picker']['children']['identificacion_picker']['component'] = "WolfSellers_Checkout/js/view/form/element/select-identificacion-anotherpicker";
+        $pickerArea['another-picker']['children']['identificacion_picker']['label'] = "Tipo de documento";
         $pickerArea['another-picker']['children']['identificacion_picker']['config']['customScope'] = "anotherPicker.identificacion_picker";
         $pickerArea['another-picker']['children']['identificacion_picker']['dataScope'] = "anotherPicker.identificacion_picker";
         $pickerArea['another-picker']['children']['numero_identificacion_picker'] =
             $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.numero_identificacion_picker');
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['component'] = "WolfSellers_Checkout/js/view/form/element/input-numero_identificacion";
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['label'] = "Número de documento";
         $pickerArea['another-picker']['children']['numero_identificacion_picker']['config']['customScope'] = "anotherPicker.numero_identificacion_picker";
         $pickerArea['another-picker']['children']['numero_identificacion_picker']['dataScope'] = "anotherPicker.numero_identificacion_picker";
         $pickerArea['another-picker']['children']['nombre_completo_picker'] =
@@ -382,14 +401,11 @@ class LayoutProcessor implements LayoutProcessorInterface
         $voucherPickupArea['picker-voucher'] = $voucherPickupUiComponent;
         $distrito = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
         $voucherPickupArea['picker-voucher']['children']['voucher'] = $distrito;
-        $departamento = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
-        $provincia= $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
-        $voucherPickupArea['picker-voucher']['children']['departamento'] = $departamento;
-        $voucherPickupArea['picker-voucher']['children']['departamento']["validation"] = [];
-        $voucherPickupArea['picker-voucher']['children']['provincia'] = $provincia;
-        $voucherPickupArea['picker-voucher']['children']['provincia']["validation"] = [];
+        $voucherPickupArea['picker-voucher']['children']['voucher']['component'] = "WolfSellers_Checkout/js/view/form/element/voucher";
+        $voucherPickupArea['picker-voucher']['children']['voucher']['caption'] = "Selecciona un distrito...";
         $voucherPickupArea['picker-voucher']['children']['direccion_comprobante_picker'] =
             $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.direccion_comprobante_picker');
+        $voucherPickupArea['picker-voucher']['children']['direccion_comprobante_picker']["label"]  = "Dirección";
         $walker->setValue('{STORE-PICKUP}.>>',$voucherPickupArea);
 
 
@@ -525,6 +541,15 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'template' => 'WolfSellers_Checkout/payment-continue'
             ]
         ];
+        /*********** Componets payment Agreement ***********************************************/
+        $agreementsComponent = [
+            'component' => 'WolfSellers_Checkout/js/view/payment-agrements'
+        ];
+        $paymentAgreementSets = [
+            'component' => 'uiComponent',
+            'displayArea' => 'payment-agreement',
+            'provider' => 'checkoutProvider',
+        ];
         /****** END INVOICE REQUIRE FORM *****/
 
         //PAYMENTS AREA
@@ -538,6 +563,9 @@ class LayoutProcessor implements LayoutProcessorInterface
                 $payment['children']['form-fields']['children']['fecha_de_nacimiento']['validation'] = [];
             }
             // add button continue payment
+
+            $payment['children']['payment-agreement'] = $paymentAgreementSets;
+            $payment['children']['payment-agreement'] = $agreementsComponent;
             $payment['children']['payments-continue'] = $paymentButtonFieldSets;
             $payment['children']['payments-continue'] = $paymentButtonComponent;
 

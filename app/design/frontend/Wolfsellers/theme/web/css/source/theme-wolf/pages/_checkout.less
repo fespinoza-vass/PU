@@ -25,6 +25,151 @@
 				}
 			}
 		}
+		&._has-modal{
+			.modals-wrapper{
+				.regular-additional-info-modal,
+				.fast-additional-info-modal{
+					.modal-inner-wrap{
+						position: absolute;
+						transform: translate(-50%,-50%);
+						top: 50%;
+						left: 50%;
+						right: 50%;
+						border-radius: 20px;
+						max-width: 1000px;
+						width: 100%;
+						max-height: 100%;
+						overflow-y: auto;
+						margin: 0 auto;
+						background: @color-white;
+						.modal-header{
+							padding: 0;
+							.action-close{
+								margin: 0;
+								top: 20px;
+								right: 20px;
+								border: 1px solid @lines-input;
+								width: 35px;
+								height: 35px;
+								border-radius: 100%;
+								background: @lines-input;
+								&:before{
+									.lib-font-size(20);
+									overflow: initial;
+									color: @white;
+									line-height: 1.3;
+									font-weight: bold;
+								}
+								&:hover{
+									&:before{
+										color: @color-white;
+									}
+								}
+							}
+						}
+						.modal-content{
+							padding: 25px;
+							.custom-popup-content{
+								&_info{
+									.lib-css(display,flex,1);
+									.lib-css(align-items,center,1);
+									padding-bottom: 20px;
+									.icon-regular,
+									.icon-fast{
+										.lib-icon-font(
+											@_icon-font-content: @icon-regular-shipping,
+											@_icon-font-color: @black,
+											@_icon-font-size: 6rem,
+											@_icon-font-position: before,
+											@_icon-font-margin: 0 10px 0 0
+										);
+									}
+									p{
+										.lib-font-size(16);
+										font-weight: 600;
+										span{
+											display: block;
+											.lib-font-size(14);
+											font-weight: 400;
+										}
+									}
+								}
+								&_delivery{
+									.lib-css(display,flex,1);
+									.lib-css(justify-content,space-between,1);
+									.section{
+										width: calc(~'(100% - 4%) / 3');
+										border: 1px solid @lines-input;
+										border-radius: 12px;
+										padding: 10px;
+										b{
+											display: block;
+											padding-bottom: 10px;
+										}
+										p{
+											b{
+												display: initial;
+											}
+										}
+										span{
+											font-weight: bold;
+										}
+										&_provinces,
+										&_hour{
+											padding-bottom: 25px;
+										}
+									}
+								}
+							}
+						}
+						.modal-footer{
+							display: none;
+						}
+					}
+				}
+				.fast-additional-info-modal{
+					.modal-inner-wrap{
+						.modal-content{
+							.custom-popup-content{
+								&_info{
+									.icon-fast{
+										&:before{
+											content: @icon-fast-shipping;
+											.lib-font-size(40);
+										}
+									}
+								}
+								&_delivery{
+									.section{
+										padding: 25px 10px 10px 10px;
+										ul{
+											li{
+												list-style: disc;
+												b{
+													display: inline;
+												}
+											}
+										}
+										&_list{
+											padding: 5px 0 20px 30px;
+											li{
+												margin-bottom: 0;
+											}
+										}
+										&_listTwo{
+											padding: 15px 0 0 30px;
+										}
+										&_provinces{
+											padding-top: 30px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		#resumen_personal_info,
 		#resumen_shipping_step{
 			.actions-toolbar{
@@ -542,7 +687,7 @@
 			}
 			#stepFormCheck {
 				display: grid;
-				gap: 18px;
+				gap: 10px;
 				grid-template-columns: 1fr 1fr;
 				padding-top: 15px;
 				.field {
@@ -578,10 +723,12 @@
 					display: grid;
 					grid-column-start: 1;
 					grid-column-end: 3;
+					margin-top: 15px;
 					.checkout-agreement.field.choice {
 						display: flex;
 						justify-content: center;
 						align-items: flex-start;
+						.lib-checkboxs();
 						label {
 							&:after {
 								content: none;
@@ -594,6 +741,34 @@
 								font-size: 1.4rem;
 								a {
 									font-weight: 700;
+								}
+							}
+						}
+					}
+					.checkout-agreements.fieldset{
+						.checkout-agreement.field.choice{
+							[type='checkbox'] {
+								~ label{
+									padding-left: 27px;
+									&:after{
+										width: 18px;
+										height: 18px;
+										border: 1px solid @lines-input;
+										margin: 0;
+									}
+	
+								}
+								&:checked{
+									~ label{
+										&:before{
+											top: 2px;
+											left: 4px;
+											color: @color-black;
+										}
+										&:after{
+											background: @color-white;
+										}
+									}
 								}
 							}
 						}
@@ -659,15 +834,22 @@
 									display: none;
 								}
 								a{
-									&:hover{
-										color: @color-black;
-									}
+									display: none;
 								}
 							}
 							.distrito-uicomponent{
 								margin-bottom: 24px;
 								select{
 									width: 100%;
+								}
+								.field{
+									label{
+										span:after{
+											content: '*';
+											color:@red;
+											padding-left: 5px;
+										}
+									}
 								}
 							}
 							.pickup-store-list{
@@ -811,6 +993,7 @@
 													&:after{
 														content: '*';
 														padding-left: 5px;
+														color: @red;
 													}
 												}
 											}
@@ -851,7 +1034,7 @@
 									label{
 										&:after{
 											content: '*';
-											color: @color-black;
+											color: @red;
 											padding-left: 5px;
 										}
 									}
@@ -863,11 +1046,6 @@
 									}
 									&[name="shippingAddress.custom_attributes.direccion_comprobante_picker"]{
 										order: 4;
-										label{
-											&:after{
-												content: none;
-											}
-										}
 									}
 									&[name="shippingAddress.city"]{
 										order: 2;
@@ -1074,7 +1252,7 @@
 									span{
 										&:after{
 											content: '*';
-											color: @color-black;
+											color: @red;
 											padding-left: 3px;
 										}
 									}
@@ -1375,14 +1553,14 @@
 										height: 48px;
 										border: 1px solid @lines-input;
 									}
-                                    &[name="customCheckoutForm.ruc"]{
+                                    &[name="customCheckoutForm.razon_social"]{
                                         order: 1;
-                                        width: 50%;
+                                        width: 45%;
                                         padding-left: 25px;
                                     }
-                                    &[name="customCheckoutForm.razon_social"]{
+                                    &[name="customCheckoutForm.ruc"]{
                                         order: 2;
-                                        width: 45%;
+                                        width: 50%;
                                         padding-left: 25px;
                                     }
 									&[name="customCheckoutForm.direccion_fiscal"]{
@@ -1541,9 +1719,57 @@
 												}
 											}
 										}
-										.checkout-agreements-block{
+										.checkout-agreements-block {
 											margin-top: 25px;
 											text-align: center;
+                                            .checkout-agreements {
+                                                order: 6;
+                                                margin: 10px 0;
+                                                [type='checkbox']{
+                                                    position: absolute;
+                                                    opacity: 0;
+                                                    visibility: hidden;
+                                                    z-index: -10;
+                                                    ~ label{
+                                                        position: relative;
+                                                        float: left;
+                                                        padding-left: 27px;
+                                                        &:after{
+                                                            content: "";
+                                                            position: absolute;
+                                                            top: 0;
+                                                            left: 0;
+                                                            width: 16px;
+                                                            height: 16px;
+                                                            border: 1px solid @lines-input;
+                                                            border-radius: 2px;
+                                                            cursor: pointer;
+                                                        }
+                                                        a{
+                                                            font-weight: bold;
+                                                            color: @color-black;
+															cursor: pointer;
+                                                        }
+                                                    }
+                                                    &:checked ~ label {
+                                                        .lib-icon-font(
+                                                            @_icon-font-content: @icon-checkmark,
+                                                            @_icon-font-color: @black,
+                                                            @_icon-font-size: 1.2rem,
+                                                            @_icon-font-position: before,
+                                                            @_icon-font-margin: 0
+                                                        );
+                                                        &:before{
+                                                            position: absolute;
+                                                            top: 1px;
+                                                            left: 8px;
+                                                        }
+                                                        &:after{
+                                                            border: 1px solid @black;
+                                                        }
+                                                    }
+                                                }
+                                            }
 										}
 									}
 									&:nth-child(3){
@@ -2567,6 +2793,80 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
 	.checkout-index-index{
+		&._has-modal{
+			.modals-wrapper{
+				.modal-popup.regular-additional-info-modal,
+				.modal-popup.fast-additional-info-modal{
+					left: 0;
+					.modal-inner-wrap{
+						position: absolute;
+						transform: translate(-50%, -50%);
+						top: 50%;
+						right: 50%;
+						left: 50%;
+						width: calc(~"100% - 30px");
+						height: auto;
+						min-height: 90vh;
+						border-radius: 12px;
+						padding: 0;
+						.modal-header{
+							.action-close{
+								width: 24px;
+								height: 24px;
+								top: 8px;
+								&:before{
+									.lib-font-size(14);
+									line-height: 1.6;
+								}
+							}
+						}
+						.modal-content{
+							padding: 15px;
+							.custom-popup-content{
+								&_info{
+									.icon-regular,
+									.icon-fast{
+										&:before{
+											.lib-font-size(30);
+										}
+									}
+									p{
+										.lib-font-size(14);
+									}
+								}
+								&_delivery{
+									.lib-css(flex-direction,column,1);
+									.section{
+										width: 100%;
+										margin-bottom: 10px;
+										p{
+											.lib-font-size(12);
+										}
+										&_provinces,
+										&_hour{
+											padding-bottom: 15px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				.modal-popup.fast-additional-info-modal._show{
+					.modal-content{
+						.custom-popup-content{
+							&_info{
+								.icon-fast{
+									&:before{
+										.lib-font-size(25);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		.checkoutWrap {
 			.pagebuilder-column-group {
 				.pagebuilder-column {
@@ -2897,14 +3197,16 @@
 								}
 							}
 						}
-						#stepFormCheck{
-							.field{
-								label{
-									display: block;
-									margin-bottom: 8px;
-								}
-								&[name="customerData.identificacion"]{
-									align-self: end;
+						#customer_data_edit{
+							#stepFormCheck{
+								.field{
+									label{
+										display: block;
+										margin-bottom: 8px;
+									}
+									&[name="customerData.identificacion"]{
+										align-self: end;
+									}
 								}
 							}
 						}
@@ -2973,6 +3275,35 @@
 		}
 	}
 }
+
+@media screen and (min-width:770px) and (max-width:1274px){
+	.checkout-index-index{
+		#checkoutSteps{
+			#customer_step{
+			   #stepFormCheck{
+					.field{
+						&[name="customerData.identificacion"]{
+							.lib-css(display,flex,1);
+							.lib-css(flex-direction,column,1);
+							.lib-css(justify-content,end,1);
+							height: 90px;
+						}
+					}
+			    } 
+		    } 
+			.checkout-shipping-address.step-two{
+				.container.steps {
+					#store-pickup {
+						.step-content{
+							gap: 1px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 //
 //  Mobile 640 - 768
 //  _____________________________________________

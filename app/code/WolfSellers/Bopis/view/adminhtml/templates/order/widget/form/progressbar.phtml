@@ -7,6 +7,8 @@ $_progressBar = $block->getData('viewModel');
 
 $states = $_progressBar->getRealBopisStates();
 $stateComplete = true;
+
+$isEnvioRapido = ($_order->getShippingMethod() == "envio_rapido_envio_rapido");
 ?>
 <div class="sales_order_progress_bar">
     <ul class="states-list">
@@ -35,6 +37,7 @@ $stateComplete = true;
 
                         <input name="order_id" type="hidden" value="<?= $_order->getEntityId() ?>"/>
 
+                        <?php if(!($isEnvioRapido && $state == 'shipping')): ?>
                         <button type="submit" class="<?= ($stateComplete) ? 'confirmed-button' : 'unconfirmed-button' ?>"
                             <?= ($stateComplete || !$nextStepAvailable) ? 'disabled' : '' ?>
                             >
@@ -42,6 +45,7 @@ $stateComplete = true;
                                 <?= ($stateComplete) ? 'CONFIRMADO' : 'CONFIRMAR' ?>
                             </span>
                         </button>
+                        <?php endif; ?>
                     </form>
                 <?php endif; ?>
             </li>

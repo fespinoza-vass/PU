@@ -249,6 +249,11 @@ h1{
                     padding: 10px;
                 }
             }
+            .qr-code{
+                img{
+                    width: 220px;
+                }
+            }
             &--img{
                 border-top-left-radius: 12px;
                 border-bottom-left-radius: 12px;
@@ -264,7 +269,7 @@ h1{
                 span{
                     color: @black;
                     font-weight: bold;
-                    padding-left: 0;
+                    padding-left: 25px;
                     font-size: 14px;
                     white-space: nowrap;
                 }
@@ -311,6 +316,12 @@ h1{
                 }
                 span{
                     color: @color-black;
+                }
+                p{
+                    color: @color-black-transaccional !important; // style added by mailer
+                    a{
+                        color: @color-black-transaccional !important; // style added by mailer
+                    }
                 }
             }
         }

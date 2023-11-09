@@ -63,7 +63,9 @@ define([
                 fecha:fechaEntrega,
                 horario: horarioEntrega
             });
-            this.scheduleDates("<p>Tu pedido llegará " + diaEntrega + " <span> "+ fechaEntrega + " </span> en un rango de " + horarioEntrega + "</p>");
+            this.scheduleDates(
+                "<span class=\"step-content_fast-icon\"></span>" +
+                "<p><p>Tu pedido llegará " + diaEntrega + " <span> "+ fechaEntrega + " </span> en un rango de " + horarioEntrega + "</p></p>");
         }
     });
 })

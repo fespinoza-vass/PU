@@ -98,14 +98,6 @@ define([
                 } else {
                     $( ".actions-toolbar").find("#createCount").attr("disabled", "disabled");
                 }
-            } else {
-                if (jQuery( ".actions-toolbar").find("#stepFormCheck")){
-                    if(jQuery('#agreement__' + agreementId).is(":checked")){
-                        $( ".actions-toolbar").find("#stepFormContinue").removeAttr("disabled");
-                    } else {
-                        $( ".actions-toolbar").find("#stepFormContinue").attr("disabled", "disabled");
-                    }
-                }
             }
         }
     });

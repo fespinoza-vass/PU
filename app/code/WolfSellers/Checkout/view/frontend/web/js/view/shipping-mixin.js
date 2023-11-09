@@ -11,6 +11,7 @@ define([
     'WolfSellers_Checkout/js/model/customer',
     'Magento_Catalog/js/price-utils',
     'Magento_Checkout/js/checkout-data',
+    'WolfSellers_Checkout/js/view/shipping-additional-info-modal',
     'domReady!'
 ],function (
     $,
@@ -24,7 +25,8 @@ define([
     shippingPayment,
     customer,
     priceUtils,
-    checkoutData
+    checkoutData,
+    additionalInfoModal
 ) {
     'use strict';
     var shippingAddressPath = "checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.";
@@ -87,8 +89,10 @@ define([
                 if(value.includes('_complete')){
                     this.validateRates();
                     this.isContinueBtnDisabled(false);
+                    shippingPayment.isStepTwoFinished('_active');
                 }
             },this);
+            this.createInformationModals();
             return this;
         },
         /**
@@ -503,7 +507,31 @@ define([
             if(carrierWithErrorMessage){
                 this.isShippingMethodAvailable(carrierWithErrorMessage.carrier_code);
             }
-        }
+        },
+        /**
+         * Create Modals
+         */
+        createInformationModals: function () {
+            if (additionalInfoModal.modalContentForRegularDelivery == null) {
+                additionalInfoModal.createModalRS('#regularshipping-additional-info-modal');
+            }
+            if (additionalInfoModal.modalContentForFastDelivery == null) {
+                additionalInfoModal.createModalFS('#fastshipping-additional-info-modal');
+            }
+            return true;
+        },
+        /**
+         * Show Additional Modal Information for Regular Shipping
+         */
+        showRSInformation: function () {
+            additionalInfoModal.showModalRSInformation();
+        },
+        /**
+         * Show Additional Modal Information for Fast Shipping
+         */
+        showFSInformation: function () {
+            additionalInfoModal.showModalFSInformation();
+        },
     }
 
     return function(shippingTarget){

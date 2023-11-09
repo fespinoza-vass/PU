@@ -4,9 +4,9 @@
 
 <?php if($block->getIsPickup()): ?>
     <div class="qrWrap">
-        <div class="qrOrderNumber">Order No: <a href="<?= $block->getViewOrderUrl() ?>"><?= $block->getOrderId() ?></a></div>
+        <div class="qrOrderNumber">Orden No: <a href="<?= $block->getViewOrderUrl() ?>"><?= $block->getOrderId() ?></a></div>
         <p class="qrOrderInformation">
-            <?= sprintf(__("Se enviará un mensaje con <b>toda la información de tu pedido</b> por correo electrónico y podrás recogerlo a partir del día <b>%s</b> en un rango de 8am a 10pm"),$block->getDeliveryDate())?>
+            <?= sprintf(__("Se enviará un mensaje con <b>toda la información de tu pedido</b> por correo electrónico y podrás recogerlo a partir del día <b>%s</b> en un rango de 8am a 9:30pm"),$block->getDeliveryDate())?>
         </p>
         <div class="qr-container">
             <div class="qr-code"><img src="<?= $block->getQrImage() ?>" alt="qr-code"></div>
