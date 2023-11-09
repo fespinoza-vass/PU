@@ -45,9 +45,7 @@ $currencyDesc=$block->getCurrencyCode();
                     <td width="80" align="center">
                         Producto
                     </td>
-                    <td width="250">
-                        Item
-                    </td>
+                    <td width="250"></td>
                     <td width="100" align="center">
                         Cantidad
                     </td>
@@ -118,7 +116,7 @@ $currencyDesc=$block->getCurrencyCode();
 
                 <tr class="pedido_header sub_total">
                     <td colspan="2"></td>
-                    <td align="right"> Sub Total: </td>
+                    <td align="right"> SubTotal: </td>
                     <td align="center"><?PHP echo $currencyCode.number_format($quote->getSubtotal(),2);  ?></td>
                 </tr>
 
@@ -229,7 +227,7 @@ $currencyDesc=$block->getCurrencyCode();
 
         </div>
 
-        <div class="">
+        <div class="btn-print">
                 <input class="btn btn-default" type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
 
         </div>
