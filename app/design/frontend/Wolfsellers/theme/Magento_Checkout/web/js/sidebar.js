@@ -380,6 +380,7 @@ define([
              * @param {jQuery.Event} event
              */
             events['click ' + this.options.buttons.qty_order_menos] = function (event) {
+                if (self._isDoubleClicked($(event.currentTarget))) return;
                 self._updateItemQtyLessMixin($(event.currentTarget));
             }
 
@@ -387,6 +388,7 @@ define([
              * @param {jQuery.Event} event
              */
             events['click ' + this.options.buttons.qty_order_mas] = function (event) {
+                if (self._isDoubleClicked($(event.currentTarget))) return;
                 self._updateItemQtyMoreMixin($(event.currentTarget));
             }
 
@@ -497,6 +499,19 @@ define([
             }).always(function() {
                 $('[data-block="minicart"]').trigger('contentUpdated');
             });
+        },
+
+        _isDoubleClicked: function (elem) {
+            if (elem.data("isclicked")) return true;
+
+            //mark as clicked for few seconds
+            elem.data("isclicked", true);
+            setTimeout(function () {
+                elem.removeData("isclicked");
+            }, 3000);
+
+            //return false to indicate this click was allowed
+            return false;
         }
     });
 
