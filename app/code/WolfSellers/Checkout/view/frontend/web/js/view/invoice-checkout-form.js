@@ -95,12 +95,7 @@ define([
                 if(quote.billingAddress().extensionAttributes !== undefined && quote.billingAddress().extensionAttributes.pickup_location_code !== undefined){
                     quote.billingAddress().extensionAttributes.pickup_location_code = pickup_location_code;
                 }
-
-
-
-                //quote.billingAddress().customAttributes = customAtributes;
-                console.log(quote.shippingAddress());
-                messageList.addSuccessMessage({ message: $.mage.__('Información de facturación gurdada') });
+                messageList.addSuccessMessage({ message: $.mage.__('Información de facturación guardada') });
 
             }
         }
