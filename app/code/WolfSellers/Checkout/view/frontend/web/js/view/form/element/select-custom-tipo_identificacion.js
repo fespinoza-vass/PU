@@ -24,9 +24,9 @@ define([
                 placeholder: "Selecciona Tipo Identificación",
                 validations: {'required-entry':true,'min_text_length' :'8','max_text_length':'8'},
                 inputType: "text"
-            },
-
+            }
         }
+    var componentName = "checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion";
     return Select.extend({
         /**
          * Initialize component identificacion
@@ -34,26 +34,30 @@ define([
          * */
         initialize: function () {
             this._super();
-            var componentName = "checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion";
-            this.caption("Selecciona una opción");
             this.value.subscribe(function (value) {
-                var componentName = "checkout.steps.customer-data-step.customer-fieldsets.customer-data-numero_de_identificacion";
                 var cedulaComponent = registry.get(componentName);
                 var inputConfiguration = this.getInputConfigurationsById(value);
                 if (!_.isUndefined(cedulaComponent)){
                     cedulaComponent.placeholder(inputConfiguration.placeholder);
                     cedulaComponent.dataType(inputConfiguration.inputType);
                     cedulaComponent.validation = inputConfiguration.validations;
-                    cedulaComponent.value("");
+                    if(_.isEmpty(cedulaComponent.value())){
+                        cedulaComponent.value("");
+                    }
                 }
             },this);
             var cedulaComponent = registry.get(componentName);
-            var inputConfiguration = this.getInputConfigurationsById(this.value());
+            var inputConfiguration = this.getInputConfigurationsById('868');
             if (!_.isUndefined(cedulaComponent)){
                 cedulaComponent.placeholder(inputConfiguration.placeholder);
                 cedulaComponent.dataType(inputConfiguration.inputType);
                 cedulaComponent.validation = inputConfiguration.validations;
-                cedulaComponent.value("");
+                if(_.isEmpty(cedulaComponent.value())){
+                    cedulaComponent.value("");
+                }
+            }
+            if(_.isEmpty(this.value())){
+                this.value("868");
             }
             return this;
         },

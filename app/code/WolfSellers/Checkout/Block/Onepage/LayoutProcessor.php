@@ -372,10 +372,14 @@ class LayoutProcessor implements LayoutProcessorInterface
         $pickerArea['another-picker'] = $pickerUiComponent;
         $pickerArea['another-picker']['children']['identificacion_picker'] =
             $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.identificacion_picker');
+        $pickerArea['another-picker']['children']['identificacion_picker']['component'] = "WolfSellers_Checkout/js/view/form/element/select-identificacion-anotherpicker";
+        $pickerArea['another-picker']['children']['identificacion_picker']['label'] = "Tipo de documento";
         $pickerArea['another-picker']['children']['identificacion_picker']['config']['customScope'] = "anotherPicker.identificacion_picker";
         $pickerArea['another-picker']['children']['identificacion_picker']['dataScope'] = "anotherPicker.identificacion_picker";
         $pickerArea['another-picker']['children']['numero_identificacion_picker'] =
             $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.numero_identificacion_picker');
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['component'] = "WolfSellers_Checkout/js/view/form/element/input-numero_identificacion";
+        $pickerArea['another-picker']['children']['numero_identificacion_picker']['label'] = "Número de documento";
         $pickerArea['another-picker']['children']['numero_identificacion_picker']['config']['customScope'] = "anotherPicker.numero_identificacion_picker";
         $pickerArea['another-picker']['children']['numero_identificacion_picker']['dataScope'] = "anotherPicker.numero_identificacion_picker";
         $pickerArea['another-picker']['children']['nombre_completo_picker'] =

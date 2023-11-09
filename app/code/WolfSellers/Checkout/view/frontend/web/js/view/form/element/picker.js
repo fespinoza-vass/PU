@@ -17,6 +17,7 @@ define([
         value: ko.observable(),
         initialize: function () {
             this._super();
+            this.validation = {"required-entry": true};
             this.value.subscribe(function (value) {
                 if (value === "other"){
                     this.setInputValidation(true);
@@ -31,10 +32,8 @@ define([
          */
         setInputValidation: function (value) {
             var identificacion_picker = registry.get("checkout.steps.store-pickup.store-selector.another-picker.identificacion_picker");
-            var numero_identificacion_picker = registry.get("checkout.steps.store-pickup.store-selector.another-picker.numero_identificacion_picker");
             var nombre_completo_picker = registry.get("checkout.steps.store-pickup.store-selector.another-picker.nombre_completo_picker");
-            identificacion_picker.validation = {"required-entry":value}
-            numero_identificacion_picker.validation = {"required-entry":value}
+            identificacion_picker.value.notifySubscribers('11174');
             nombre_completo_picker.validation = {"required-entry":value}
         }
     });
