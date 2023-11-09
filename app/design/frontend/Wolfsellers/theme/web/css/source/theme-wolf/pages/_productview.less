@@ -434,6 +434,30 @@
 					}
 					.product-social-links{
 						margin: 0;
+						.split.button.wishlist{
+							position: absolute;
+						    top: 20px;
+						    right: 20px;
+						    z-index: 10;
+						    margin: 0;
+							button{
+								span{
+									display: none;
+								}
+								&.toggle{
+									display: none;
+								}
+								&:before{
+									.lib-font-size(22);
+									color: @color-black;
+									transform-origin: center;
+    								overflow: visible;
+								}
+								&:hover{
+									.lib-pulseefx();
+								}
+							}
+						}
 						a.action.towishlist{
 							position: absolute;
 							top: 20px;

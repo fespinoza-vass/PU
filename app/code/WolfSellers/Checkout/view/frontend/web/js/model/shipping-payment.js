@@ -97,10 +97,15 @@ define([
         setPickupModelData: function (selectedLocation, quote) {
             this.tiendaSeleccionada(selectedLocation.name);
             this.direccionTienda(selectedLocation.street[0]);
-            this.picker(this.getCustomAttributeByAttributeCode(quote,"picker"));
+            var picker = registry.get("checkout.steps.store-pickup.store-selector.picker.pickerOption");
+            this.picker(picker.value());
             var identificacion = registry.get("checkout.steps.store-pickup.store-selector.another-picker.identificacion_picker");
             this.identificacionPicker(identificacion.value());
-            this.numero_identificacion(this.getCustomAttributeByAttributeCode(quote,"numero_identificacion_picker"));
+            if (!identificacion.value()){
+                this.identificacionPicker('');
+            }
+            var num_identificacion = registry.get("checkout.steps.store-pickup.store-selector.another-picker.numero_identificacion_picker");
+            this.numero_identificacion(num_identificacion.value());
             var nombre_completo_picker = registry.get("checkout.steps.store-pickup.store-selector.another-picker.nombre_completo_picker");
             this.nombreApellido(nombre_completo_picker.value());
             var emailPicker = registry.get("checkout.steps.store-pickup.store-selector.another-picker.email_picker");
