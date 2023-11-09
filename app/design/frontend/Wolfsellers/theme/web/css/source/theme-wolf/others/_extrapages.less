@@ -277,6 +277,101 @@
             display: none;
         }
     }
+    .visanet-onepage-error{
+		.page-title-wrapper{
+			max-width: 900px;
+			.lib-css(display,flex,1);
+			.lib-css(align-items,center,1);
+			.lib-css(justify-content,space-between,1);
+			margin: 20px auto 0 auto;
+			h1,a.action{
+				margin-top: 0;
+			}
+			a{
+				.lib-font-size(18);
+				background: @color-black;
+				color: @color-white;
+				padding: 10px;
+				border-radius: 12px;
+			}
+		}
+		#maincontent{
+			.orden_success_page{
+				margin: 20px auto;
+				background: initial;
+				.content{
+					.btn_regresar_a_comprar{
+						background: @color-black;
+						border-radius: 12px;
+						font-weight: normal;
+						padding: 10px;
+						.lib-icon-font(
+							@_icon-font-content: @icon-arrow-right-thin,
+							@_icon-font-color: @black,
+							@_icon-font-size: 1.8rem,
+							@_icon-font-position: before,
+							@_icon-font-margin: 0
+						);
+					}
+					.pedido-numero{
+						margin-bottom: 15px;
+						a{
+							display: block;
+							color: @color-black;
+							pointer-events: none;
+						}
+					}
+					.pedido-items{
+						background: @color-white;
+						.pedido_header{
+							background-color: @color-white;
+							td{
+								&:nth-child(2){
+									font-weight: bold;
+								}
+							}
+							&.header_titles{
+								td{
+									font-weight: bold;
+									border-bottom: 1px solid @lines-input;
+								}
+							}
+							&.sub_total{
+								border-top: 20px solid @mainbackground;
+							}
+						}
+                        .pedido_registro{
+                            .name_product{
+                                font-weight: bold;
+                            }
+                        }
+					}
+					.direcciones{
+						background: @color-white;
+						border-top: 20px solid @mainbackground;
+						padding: 20px 35px;
+						.envio,
+						.facturacion{
+							.subtitle{
+								.lib-font-size(16);
+								font-weight: bold;
+							}
+						}
+					}
+					.btn-default{
+						font-family: @font-family-name__base;
+						.lib-font-size(16);
+						width: 100px;
+						padding: 10px;
+						background: @color-black;
+						color: @color-white;
+						border: 0px;
+						border-radius: 12px;
+					}
+				}
+			}
+		}
+	}
 }
 
 
