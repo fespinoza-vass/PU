@@ -26,6 +26,7 @@ class SaveAfterObserver implements ObserverInterface
 
         $source->setData("is_fastshipping_active", $integration['extension_attributes']['is_fastshipping_active']);
         $source->setData("range_radius", $integration['extension_attributes']['range_radius']);
+        $source->setData("conductor", $integration['extension_attributes']['conductor']);
 
 
         if (!empty($general["district"])) {

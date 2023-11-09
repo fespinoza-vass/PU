@@ -51,7 +51,7 @@ abstract class AbstractBopisCollection extends Collection
     const FAST_SHIPPING_METHOD = 'envio_rapido_envio_rapido';
 
     /** @var string  */
-    const REGULAR_SHIPPING_METHOD = 'urbano';
+    const REGULAR_SHIPPING_METHOD = 'flatrate';
 
     /** @var string  */
     const PICKUP_SHIPPING_METHOD = 'instore_pickup';
