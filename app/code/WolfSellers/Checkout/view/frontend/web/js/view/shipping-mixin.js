@@ -12,6 +12,7 @@ define([
     'Magento_Catalog/js/price-utils',
     'Magento_Checkout/js/checkout-data',
     'WolfSellers_Checkout/js/view/shipping-additional-info-modal',
+    'WolfSellers_Checkout/js/model/step-summary',
     'domReady!'
 ],function (
     $,
@@ -26,7 +27,8 @@ define([
     customer,
     priceUtils,
     checkoutData,
-    additionalInfoModal
+    additionalInfoModal,
+    stepSummary
 ) {
     'use strict';
     var shippingAddressPath = "checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.";
@@ -75,12 +77,19 @@ define([
                 if (!value){
                     shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isShippingStepFinished('_complete');
+                    if(shippingPayment.isPaymentStepFinished() === '_complete'){
+                        stepSummary.isStepTreeFinished('_active');
+                    } else {
+                        stepSummary.isStepTreeFinished('');
+                    }
                     this.isShippingStepFinished('_complete');
                     this.setIsDisabledShippingStep();
                 }else{
                     shippingPayment.isShippingStepFinished('_active');
                     this.isShippingStepFinished('_active');
                     shippingPayment.isStepTwoFinished('_active');
+                    stepSummary.isStepTreeFinished('');
+
                     this.setIsDisabledShippingStep();
                 }
             },this);
