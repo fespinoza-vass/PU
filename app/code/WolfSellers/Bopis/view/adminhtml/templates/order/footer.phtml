@@ -38,7 +38,7 @@ $comments = $block->isCompleteComments();
 </section>
 
 <?php if($isComplete): ?>
-    <form action="<?= $block->escapeUrl($block->getUrl("bopis/complete/save"))?>" method="post"
+    <!--<form action="<?= $block->escapeUrl($block->getUrl("bopis/complete/save"))?>" method="post"
           id="form-comlete-comments">
         <input name="form_key" type="hidden"  value="<?= $block->getFormKey() ?>" />
         <h2>Añadir comentarios de la orden:</h2>
@@ -50,20 +50,20 @@ $comments = $block->isCompleteComments();
             <textarea name="complete_comments" id="complete_comments" placeholder="Observaciones" class="required required-entry"></textarea>
         </div>
         <input type="submit" value="Confirmar" class="btn" />
-    </form>
+    </form>-->
     <section class="admin__page-section bopis-footer">
         <div class="admin__page-section-content">
             <table>
                 <thead>
                 <tr>
-                    <th>Comentarios de la entrega realizada</th>
+                    <th>Comentarios de la entrega realizada:</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php if($comments):?>
                     <?php foreach($comments as $comment):?>
                         <tr>
-                            <td><?php echo $comment;?></td>
+                            <td><i><?= $comment;?></i></td>
                         </tr>
                     <?php endforeach;?>
                 <?php else: ?>

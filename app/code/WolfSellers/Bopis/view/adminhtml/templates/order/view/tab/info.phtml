@@ -22,20 +22,24 @@ $btnAvailable = $block->isBtnMetodoPagoAvailable();
 <section class="admin__page-section bopis-data card-payment">
     <div class="admin__page-section-content">
         <div class="admin__page-section-item bopis-payment-method">
-            <?php /* Payment Method */ ?>
+            <?php /* Payment Method */ $payment = $_order->getPayment();?>
             <div class="admin__page-section-item-title icon-tarjeta">
                 <span class="title"><?= $block->escapeHtml(__('Método de pago')) ?></span>
             </div>
             <div class="admin__page-section-item-content">
                 <b>Método de pago</b>
                 <span class="color-orange"><?= $_order->getPayment()->getMethodInstance()->getTitle(); ?></span><br />
-                <?= $block->getPaymentHtml() ?>
-                <?php if($_order->getPayment()->getMethod() == 'tilopay_fac'):?>
-                    <?= $block->getTiloData(); ?>
-                <?php endif;?>
                 <br>
-                <span>No de tarjeta: <?=$_order->getPayment()->getCcLast4() ? '****' . $_order->getPayment()->getCcLast4() : '' ?></span> <br>
-                <span>Nombre: <?=$_order->getBillingAddress()->getFirstname() . $_order->getBillingAddress()->getLastname()?></span>
+                <?php if (isset($payment['additional_information']['PAN'])): ?>
+                    <span>No de tarjeta: <?=substr($payment['additional_information']['PAN'], -8); ?></span> <br>
+                <?php endif; ?>
+
+                <?php if($_order->getShippingMethod() ==
+                    \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::PICKUP_SHIPPING_METHOD): ?>
+                    <span>Nombre: <?=$_order->getCustomerName()?></span>
+                <?php else: ?>
+                    <span>Nombre: <?=$_order->getBillingAddress()->getFirstname() . $_order->getBillingAddress()->getLastname()?></span>
+                <?php endif; ?>
             </div>
             <?php if ($block->getAdminUserType() == 1):?>
             <button name="btn-confirmacion-cliente-metodo-pago"
