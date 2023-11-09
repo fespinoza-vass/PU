@@ -131,22 +131,13 @@ class SavarHelper extends AbstractHelper
      */
     public function sendOrderToSavar(OrderInterface $order)
     {
-        $distrito = $order->getShippingAddress()->getDistritoEnvioRapido();
-
-        $sources = $this->_districtGeoname->getNearestWarehouses($order);
-
-        if(empty($sources)){
-            $this->_savarLogger->error("No fue posible encontrar Sources que puedan surtir el pedido.");
-            throw new \Exception('No fue posible encontrar Sources que puedan surtir el pedido. ');
-        }
-
-        $sourceCode = $sources[0]['source_code'];
+        $sourceCode = $order->getData('source_code');
 
         $source = $this->_sourceRepository->get($sourceCode);
 
         $requestPayload = [
             "CodPaquete" => $order->getIncrementId(),
-            "NomRemitente" => "Perfumerias Unidas",
+            "NomRemitente" => $source->getName(),
             "DireccionRemitente" => $source->getStreet(),
             "DistritoRemitente" => strtoupper($source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict()),
             "TelefonoRemitente" => $source->getPhone(),
@@ -180,7 +171,8 @@ class SavarHelper extends AbstractHelper
             "Comentario" => "",
             "Comentario2" => "",
             "Latitud" => "",
-            "Longitud" => ""
+            "Longitud" => "",
+            "conductor" => $source->getConductor()
         ];
 
         if ($order->getShippingAddress()->getHorariosDisponibles()) {

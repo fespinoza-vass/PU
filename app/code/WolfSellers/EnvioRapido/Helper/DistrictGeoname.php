@@ -14,8 +14,7 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\InventoryDistanceBasedSourceSelection\Model\DistanceProvider\Offline\GetDistance;
 use Magento\InventoryDistanceBasedSourceSelectionApi\Api\Data\LatLngInterfaceFactory;
 use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
-
-
+use Magento\Sales\Api\OrderRepositoryInterface;
 
 
 /**
@@ -24,6 +23,8 @@ use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 class DistrictGeoname extends AbstractHelper
 {
 
+    /** @var OrderRepositoryInterface */
+    protected $_orderRepository;
 
     /** @var SavarLogger */
     protected $_savarLogger;
@@ -53,6 +54,7 @@ class DistrictGeoname extends AbstractHelper
      * @param Context $context
      */
     public function __construct(
+        OrderRepositoryInterface $orderRepository,
         SavarLogger $savarLogger,
         GetSourceItemsBySkuInterface $sourceItemsBySku,
         GetDistance $getDistance,
@@ -61,6 +63,7 @@ class DistrictGeoname extends AbstractHelper
         ResourceConnection $resourceConnection,
         Context $context
     ){
+        $this->_orderRepository = $orderRepository;
         $this->_savarLogger = $savarLogger;
         $this->_getDistance = $getDistance;
         $this->_latLngInterfaceFactory = $latLngInterfaceFactory;
@@ -214,8 +217,16 @@ class DistrictGeoname extends AbstractHelper
                         }
                     }
                 }
+
+                $sourceResult[] = array_merge(
+                    $source->getData(),
+                    array(
+                        'has_stock' => $stockAvailable,
+                        'distance_to_district' => $distance
+                    )
+                );
+
                 if($stockAvailable){
-                    $sourceResult[] = $source;
                     $this->_savarLogger->info("Distrito: ".$order->getShippingAddress()->getData('colony'). ", ".
                         $source->getName() . "stock disponible: SI"
                     );
@@ -226,7 +237,57 @@ class DistrictGeoname extends AbstractHelper
                 }
             }
         }
+
+        usort($sourceResult, function ($a, $b) {
+            return $a['distance_to_district'] <=> $b['distance_to_district'];
+        });
+
         return $sourceResult;
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @return void
+     */
+    public function assignSourceToOrder(OrderInterface $order){
+        try {
+            $souceAssigned = null;
+            $sources = $this->getNearestWarehouses($order);
+
+            if(count($sources) > 0){
+                foreach($sources as $source){
+                    if($source['has_stock']){ //si alguna sucursal tiene stock suficiente se le asigna a la orden
+                        $souceAssigned = $source['source_code'];
+                        $this->_savarLogger->info("METHOD assignSourceToOrder, order:  ".
+                            $order->getIncrementId(). " se le asigno la source " . $source['source_code']
+                        );
+                        break;
+                    }
+                }
+
+                if(!$souceAssigned){ // si no fue posible asignar alguna source con stock, se asigna a la primera mas cercana
+                    $this->_savarLogger->info("METHOD assignSourceToOrder, order:  ".
+                        $order->getIncrementId(). " NO fue posible asignar una sucursal con stock " . $sources[0]['source_code'] .
+                        " se le asigno a la sucursal " . $sources[0]['source_code'] .
+                        " activando la bandera needs_supply_instore"
+                    );
+
+                    $souceAssigned = $sources[0]['source_code'];
+                    $order->setData('needs_supply_instore', true);
+                }
+            }else{
+                $this->_savarLogger->info("METHOD assignSourceToOrder, order:  ".
+                    $order->getIncrementId(). " NO fue posible asignar una sucursal con stock " . $sources[0]['source_code'] .
+                    " se le asigno a la sucursal " . $sources[0]['source_code'] .
+                    " activando la bandera needs_supply_instore"
+                );
+            }
+
+            $order->setData('source_code', $souceAssigned);
+            $this->_orderRepository->save($order);
+        } catch (\Throwable $error) {
+            $this->_savarLogger->error("ERROR AL ASIGNAR UNA SOURCE UNA ORDEN: ". $error->getMessage());
+        }
     }
 
 }

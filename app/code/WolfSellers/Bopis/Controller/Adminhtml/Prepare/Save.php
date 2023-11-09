@@ -205,7 +205,7 @@ class Save extends Order
 
                 $this->logger->critical("La orden está preparada para ser enviada");
                 $this->messageManager->addSuccessMessage(__('La orden está preparada para ser enviada.'));
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage(__('No se pudo preparar la orden.'));
                 $this->logger->critical($e->getMessage());
             }

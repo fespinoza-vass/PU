@@ -63,10 +63,18 @@
                 <dataType>text</dataType>
                 <dataScope>extension_attributes.range_radius</dataScope>
                 <label translate="true">Rango de Alcance</label>
-                <notice>Rango de alcance en la que la sucursal puede realizar envios rapidos</notice>
+                <notice>Rango de alcance en la que la sucursal puede realizar envios rapidos(kilometros)</notice>
                 <validation>
                     <rule name="validate-number" xsi:type="boolean">true</rule>
                 </validation>
+            </settings>
+        </field>
+        <field name="conductor" formElement="input" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>extension_attributes.conductor</dataScope>
+                <label translate="true">Numero del Conductor</label>
+                <notice>Contiene el numero de documento del conductor</notice>
             </settings>
         </field>
     </fieldset>
