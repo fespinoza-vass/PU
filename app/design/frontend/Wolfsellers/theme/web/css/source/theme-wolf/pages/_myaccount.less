@@ -983,6 +983,33 @@
                     margin: 0 0 8px;
                     display: block;
                 }
+                &-name-firstname,
+                &-name-lastname{
+                    label{
+                        span{
+                            &:after{
+                                content: '*';
+                                color: @red;
+                                margin-left: 3px;
+                            }
+                        }
+                    }
+                    .mage-error{
+                        &:before{
+                            content: "!";
+                            width: 15px;
+                            height: 15px;
+                            background: @red;
+                            border-radius: 50%;
+                            display: inline-block;
+                            color: @white;
+                            text-align: center;
+                            font-weight: bold;
+                            margin-right: 5px;
+                            line-height: 1.3;
+                        }
+                    }
+                }
             }
         }
     }
