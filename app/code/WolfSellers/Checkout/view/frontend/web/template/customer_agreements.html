@@ -18,7 +18,9 @@
                                     },
                                    click: $parent.click($parentContext, agreementId)">
             <label class="label" data-bind="attr: {'for': $parent.getCheckboxId($parentContext, agreementId)}">
-                <span data-bind="html: checkboxText, click: function(data, event) { return $parent.showContent(data, event) }"></span>
+                <span data-bind="html: checkboxText, click: function(data, event) { return $parent.showContentAgreement(data, event) }"
+                      data-trigger="agreements">
+                </span>
             </label>
         </div>
         <!-- /ko -->
@@ -27,15 +29,26 @@
         <!-- ko if: (agreementId == 2)-->
         <div class="checkout-agreement">
             <button type="button" class="action action-show"
-                    data-bind="click: function(data, event) { return $parent.showContent(data, event) }">
+                    data-bind="click: function(data, event) { return $parent.showContentAgreement(data, event) }" data-trigger="agreements">
                 <span data-bind="html: checkboxText"></span>
             </button>
         </div>
         <!-- /ko -->
         <!-- /ko -->
         <!-- /ko -->
-        <div id="checkout-agreements-modal" data-bind="afterRender: initModal" style="display: none">
-            <div class="checkout-agreements-item-content" data-bind="html: modalContent, style: {height: contentHeight, overflow:'auto' }"></div>
-        </div>
+    </div>
+</div>
+<div data-bind="mageInit: {
+        'Magento_Ui/js/modal/modal':{
+            'type': 'popup',
+            'trigger': '[data-trigger=agreements]',
+            'responsive': true,
+            'buttons': [{
+                text: jQuery.mage.__('close'),
+                class: 'action'
+            }]
+        }}">
+    <div class="content">
+        <div class="checkout-agreements-item-content" data-bind="html: modalContent, style: {height: contentHeight, overflow:'auto' }"></div>
     </div>
 </div>

@@ -42,11 +42,10 @@ define([
          *
          * @param {Object} element
          */
-        showContent: function (element) {
+        showContentAgreement: function (element) {
             this.modalTitle(element.checkboxText);
             this.modalContent(element.content);
             this.contentHeight(element.contentHeight ? element.contentHeight : 'auto');
-            agreementsModal.showModal();
         },
 
         /**
@@ -67,15 +66,6 @@ define([
             }
 
             return 'agreement_' + paymentMethodName + '_' + agreementId;
-        },
-
-        /**
-         * Init modal window for rendered element
-         *
-         * @param {Object} element
-         */
-        initModal: function (element) {
-            agreementsModal.createModal(element);
         },
 
         click: function (context, agreementId) {
