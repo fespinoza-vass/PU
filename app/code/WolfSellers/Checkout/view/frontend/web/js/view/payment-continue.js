@@ -28,6 +28,7 @@ define([
     return Component.extend({
         defaults: {
             template: 'WolfSellers_Checkout/payment-continue',
+            namePrefixPayment: 'checkout.steps.billing-step.payment.payments-list.before-place-order.payments-continue',
         },
         isVisible: ko.observable(true),
         isPaymentStepFinished : ko.observable(false),
@@ -44,9 +45,11 @@ define([
                 if (!value){
                     shippingPayment.isStepTwoFinished('_complete');
                     shippingPayment.isPaymentStepFinished('_complete');
+                    stepSummary.isStepTreeFinished('_active');
                 }else{
                     shippingPayment.isStepTwoFinished('_active');
                     shippingPayment.isPaymentStepFinished('_active');
+                    stepSummary.isStepTreeFinished('');
                 }
                 this.isPaymentFinished(value);
             }, this);
@@ -67,11 +70,15 @@ define([
          */
         setPaymentInformationCustomer: function () {
             this.switchText(!this.switchText());
+            var changeText = registry.get(this.namePrefixPayment);
             if (checkoutData.getSelectedPaymentMethod() == null) {
                 messageList.addErrorMessage({message: 'No se seleccionó ningún método de pago.'});
                 this.isPaymentFinished(true);
             } else {
-                if (customer.isCustomerStepFinished() === '_complete' && shippingPayment.isShippingStepFinished() === '_complete') {
+                if (customer.isCustomerStepFinished() === '_complete' &&
+                    shippingPayment.isShippingStepFinished() === '_complete' &&
+                    changeText.switchText() == false
+                   ) {
                     this.isPaymentFinished(false);
                     this.isPaymentFinished.notifySubscribers(false);
                 } else {
