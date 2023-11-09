@@ -3,3 +3,7 @@ View,Ver
 records found,registros encontrados
 Export,Exportar
 Filters,Filtros
+Preparing,Preparación
+Active filters\:,Filtros activo:
+Clear all,Limpiar
+Something went wrong with processing current view and filters have reset to its original state. Please edit filters then click apply.,Algo salió mal al procesar la vista actual y los filtros se restablecieron a su estado original. Edite los filtros y luego haga clic en Aplicar.
