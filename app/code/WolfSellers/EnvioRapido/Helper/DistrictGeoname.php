@@ -209,11 +209,13 @@ class DistrictGeoname extends AbstractHelper
                     /** @var SourceItemInterface $sourceSku */
                     foreach ($inventory as $sourceSku) {
                         if($sourceSku->getSourceCode() == $source->getSourceCode()){
-                            if (!$sourceSku->getStatus()) continue;
-
-                            if ($sourceSku->getQuantity() <= $item->getQtyOrdered()) {
+                            if (!$sourceSku->getStatus()){
                                 $stockAvailable = false;
                             }
+                            if ($sourceSku->getQuantity() < $item->getQtyOrdered()) {
+                                $stockAvailable = false;
+                            }
+                            break;
                         }
                     }
                 }
