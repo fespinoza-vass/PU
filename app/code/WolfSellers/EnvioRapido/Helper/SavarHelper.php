@@ -9,6 +9,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Store\Model\ScopeInterface;
 use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
 use WolfSellers\EnvioRapido\Model\NotifyToSavarCreateOrder;
 use WolfSellers\EnvioRapido\Model\GetSavarOrder;
@@ -32,6 +33,8 @@ class SavarHelper extends AbstractHelper
     CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
     CONST SAVAR_STATUS_RECOGIDO = 5;
     CONST SAVAR_STATUS_ENTREGADO = 9;
+
+    CONST XML_PATH_IS_ACTIVE_SAVAR_CRON = "bopis/savar/is_active";
 
 
     /**
@@ -236,13 +239,15 @@ class SavarHelper extends AbstractHelper
 
         $order = $this->_orderFactory->create()->loadByIncrementId($orderIncremental);
 
-        $response = $this->json->serialize($result['response']);
         if($result['state_code'] != 200){
             $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']. " ". $response));
             return false;
         }
 
-        if(in_array(intval($result['response']['vcodestado']),array(5,6,7,8))){
+        if(
+            isset($result['response']['vfechanotificacion']) &&
+            $result['response']['vfechanotificacion'] != "0001-01-01T00:00:00"
+        ){
             if($order->getStatus() == 'prepared_order'){
                 $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
                 $this->emailHelper->sendShipOrderEmail($to, $this->emailHelper->getOrderModel($order));
@@ -342,6 +347,13 @@ class SavarHelper extends AbstractHelper
      * @return void
      */
     public function updateSavarOrders(){
+
+       $isSavarCronActive = $this->scopeConfig->getValue(self::XML_PATH_IS_ACTIVE_SAVAR_CRON,ScopeInterface::SCOPE_STORE);
+
+       if(!$isSavarCronActive){
+           return;
+       }
+
         $this->_savarLogger->error("consulta de ordenes savar");
         $searchCriteria = $this->_searchCriteriaBuilder
             ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
