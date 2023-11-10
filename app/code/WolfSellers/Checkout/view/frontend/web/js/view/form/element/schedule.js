@@ -1,10 +1,12 @@
 define([
     'ko',
+    'WolfSellers_Checkout/js/model/customer',
     'Magento_Ui/js/form/element/select',
     'WolfSellers_Checkout/js/model/shipping-payment',
     'WolfSellers_Checkout/js/utils-wolf-uicomponents'
 ], function (
     ko,
+    customerModel,
     Select,
     shippingPayment,
     wolfUtils
@@ -39,6 +41,9 @@ define([
          * @returns {*|string}
          */
         setValueFromTimer: function (radioOption, data) {
+            if(customerModel.isCustomerStepFinished() === "_active"){
+                radioOption = 0;
+            }
             var ahora = new Date();
             var timeSensitive = wolfUtils.getAvailableDates(ahora);
             if(data.includes('lab')){
