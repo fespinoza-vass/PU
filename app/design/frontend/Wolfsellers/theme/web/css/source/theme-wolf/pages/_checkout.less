@@ -700,6 +700,25 @@
 							width: ~"calc(100% - 25px)";
 						}
 					}
+					&._error{
+						@media @mdmax{
+							.control{
+								position: relative;
+								input{
+									position: initial;
+								}
+								.field-error{
+									position: absolute;
+									margin-top: 0px;
+								    position: absolute;
+								    left: 0;
+								    line-height: 1;
+								    .lib-font-size(10);
+								    bottom: -11px;
+								}
+							}
+						}
+					}
 				}
 				.field-tooltip{
 					.field-tooltip-action{

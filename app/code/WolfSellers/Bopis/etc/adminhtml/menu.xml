@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="WolfSellers_Bopis::principal"
-             title="Historial de ordenes"
+             title="Historial de órdenes"
              module="WolfSellers_Bopis"
              sortOrder="200"
              action="bopis/listorders"
@@ -17,7 +17,7 @@
         />
 
         <add 	id="WolfSellers_Bopis::listprocessingorders"
-                title="Órdenes En Preparacion"
+                title="Órdenes En Preparación"
                 module="WolfSellers_Bopis"
                 sortOrder="220"
                 action="bopis/listprocessingorders/index"
