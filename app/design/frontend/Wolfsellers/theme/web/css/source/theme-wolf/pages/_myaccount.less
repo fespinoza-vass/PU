@@ -703,6 +703,49 @@
             }
         }
     }
+    .review-customer-view{
+        .customer-review{
+            .product-image-container{
+                // IMPORTANTS para modificar estilos de AMASTY
+                position: relative !important;
+                .product-image-wrapper{
+                    .product-image-photo{
+                        width: 100% !important;
+                    }
+                }
+                .amlabel-position-wrapper{
+                    margin: 10px;
+                    width: auto !important;
+                    &[class*="amlabel-position-top-center"]{
+                        left: auto !important; //add style for module amasty
+                        right: 75px !important; //add style for module amasty
+                        .amlabel-text{
+                            display: none !important; //add style for module amasty 
+                        }
+                    }
+                    &[class*="amlabel-position-top-right"]{
+                        .amlabel-text{
+                            display: none !important; //add style for module amasty 
+                        }
+                    }
+                    .amasty-label-container:not(.-preview){
+                        height: 24px !important;
+                        line-height: 24px !important;
+                        width: auto !important;
+                        text-align: center;
+                        .amlabel-text{
+                            position: static !important;
+                            padding: 0 10px !important;
+                        }
+                        .amasty-label-image{
+                            width: 56px !important; //add style for amasty
+                            height: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /////////INFO DE CUENTA/////////////
     .customer-account-edit{
@@ -1755,6 +1798,29 @@
             }
         }
     }
+    .review-customer-view{
+        .customer-review{
+            .product-media{
+                .product-image-container{
+                    .amlabel-position-wrapper{
+                        z-index: 1;
+                        &[class*="amlabel-position-top-center"]{
+                            left: auto !important; //add style for module amasty
+                            right: 10px !important; //add style for module amasty
+                            top: 25px !important; //add style for module amasty
+                        }
+                        .amasty-label-container:not(.-preview){
+                            .amasty-label-image{
+                                width: 34px !important; //style addd for amasty
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
 
     /////////INFO DE CUENTA/////////////
     .customer-account-edit{
