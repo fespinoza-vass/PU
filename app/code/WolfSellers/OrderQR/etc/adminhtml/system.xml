@@ -17,6 +17,14 @@
                     <frontend_class>validate-number</frontend_class>
                 </field>
             </group>
+            <group id="savar" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Savar Configuration</label>
+                <field id="is_active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Savar Cron Active </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This configuration enables or disable Savar Cron for Update Order Status</comment>
+                </field>
+            </group>
         </section>
     </system>
 </config>
