@@ -240,7 +240,7 @@ class SavarHelper extends AbstractHelper
         $order = $this->_orderFactory->create()->loadByIncrementId($orderIncremental);
 
         if($result['state_code'] != 200){
-            $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']. " ". $response));
+            $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']));
             return false;
         }
 
