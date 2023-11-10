@@ -6,6 +6,9 @@
                 <is_active>0</is_active>
                 <qr_size>400</qr_size>
             </qrcode_configuration>
+            <savar_cron_active>
+                <is_active>0</is_active>
+            </savar_cron_active>
         </bopis>
     </default>
 </config>
