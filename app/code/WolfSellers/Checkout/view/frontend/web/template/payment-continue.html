@@ -4,8 +4,7 @@
                 id="continuePayment" type="submit"
                 data-bind="click:setPaymentInformationCustomer"
                 class="button action continue primary" disabled="disabled">
-            <span data-bind="text: $data.switchText() ? 'Siguiente' : 'Regresar'"></span>
+            <span data-bind="i18n: $data.switchText() ? 'Next' : 'Next'" ></span>
         </button>
     </div>
 </div>
-
