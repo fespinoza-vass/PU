@@ -77,7 +77,7 @@ class UserFieldSource
                     'id' => 'user_type',
                     'title' => __('user_type_title'),
                     'required' => false,
-                    'value' => $data['user_type'],
+                    'value' => $data['user_type'] ?? '',
                     'options' => [
                         '0' => 'Usuario Administrador',
                         '1' => 'Usuario Sucursal (Gestor Bopis)'
@@ -101,7 +101,7 @@ class UserFieldSource
                     'id' => 'source_code',
                     'title' => __('source_code_title'),
                     'required' => false,
-                    'value' => $data['source_code'],
+                    'value' => $data['source_code'] ?? '',
                     'options' => $options
                 ]
             );
@@ -121,7 +121,7 @@ class UserFieldSource
                     'id' => 'website_id',
                     'title' => __('website'),
                     'required' => false,
-                    'value' => $data['website_id'],
+                    'value' => $data['website_id'] ?? '',
                     'options' => $websites
                 ]
             );
