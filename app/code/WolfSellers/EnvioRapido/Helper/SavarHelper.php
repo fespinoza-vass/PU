@@ -290,7 +290,7 @@ class SavarHelper extends AbstractHelper
 
         $shipment->register();
         $shipment->getOrder()->setIsInProcess(true);
-        $shipment->getExtensionAttributes()->setSourceCode("1");
+        $shipment->getExtensionAttributes()->setSourceCode($order->getData('source_code'));
 
         try {
 
