@@ -1,5 +1,8 @@
 & when (@media-common = true) {
 	.checkout-index-index{
+		.loading-mask{
+			z-index: -1 !important;// inline style loading mask
+		}
 		h4{
 			.lib-font-size(16);
 			font-weight: 600;
@@ -722,6 +725,15 @@
 							&:after {
 								content: none;
 							}
+							span{
+								line-height: 1.2;
+								a{
+									font-weight: bold;
+									&:hover{
+										color: @black;
+									}
+								}
+							}
 						}
 						button {
 							span {
@@ -965,6 +977,9 @@
 										}
 										.admin__field{
 											.lib-radio();
+										}
+										.field-error{
+											padding: 0;
 										}
 									}
 								}
