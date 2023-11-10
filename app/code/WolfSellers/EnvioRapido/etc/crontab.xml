@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-    <group id="wolfsellers_savar">
+    <group id="default">
         <job name="savar_orders_update" instance="WolfSellers\EnvioRapido\Cron\SavarUpdateStatus" method="execute">
-            <schedule>*/10 * * * *</schedule>
+            <schedule>* * * * *</schedule>
         </job>
     </group>
 </config>
