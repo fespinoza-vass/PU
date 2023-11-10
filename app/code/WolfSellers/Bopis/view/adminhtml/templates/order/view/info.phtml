@@ -46,6 +46,7 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
     'horarios_disponibles',
     $shippingAddress->getHorariosDisponibles()
 );
+$customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformation($order->getId());
 ?>
 
 <!-- 01 CARD: CLIENTE QUE FACTURA -->
@@ -69,11 +70,12 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
                     T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
                 <?php else: ?>
                     <span class="color-orange">
-                        <?= $billingAddress->getFirstname() . " " . $billingAddress->getLastname(); ?>
+                        <?= $customerOrderBillingInformation['name'] ?>
                     </span><br>
-                    Número de documento: <?= $billingAddress->getVatId(); ?><br />
-                    <?= $billingAddress->getEmail(); ?><br />
-                    T. <?= $billingAddress->getTelephone(); ?><br />
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
+                    <?= $customerOrderBillingInformation['email'] ?><br />
+                    T. <?= $customerOrderBillingInformation['tel'] ?><br />
                 <?php endif; ?>
                 <br>
                 Comprobante:
