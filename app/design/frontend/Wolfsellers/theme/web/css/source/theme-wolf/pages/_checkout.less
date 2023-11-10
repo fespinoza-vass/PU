@@ -1,5 +1,8 @@
 & when (@media-common = true) {
 	.checkout-index-index{
+		.loading-mask{
+			z-index: -1 !important;// inline style loading mask
+		}
 		h4{
 			.lib-font-size(16);
 			font-weight: 600;
@@ -286,18 +289,7 @@
 					font-weight: 700;
 				}
 			}
-			&:nth-child(3) {
-				&._active {
-					> span:after{
-						border-color: @gray8;
-						color: @gray8;
-					}
-					> span{
-						color: @gray8;
-						font-weight: 600;
-					}
-				}
-			}
+			
 			&:before {
 				height: 0;
 
