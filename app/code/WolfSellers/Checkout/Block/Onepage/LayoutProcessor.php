@@ -308,7 +308,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
         $shippingFastArea['fast']['children']['distrito']['config']['options'] = $this->_districtGeoname->getDistrictActiveList();
 
-        $shippingFastArea['fast']['children']['distrito']['config']['caption'] = "Selecciona tu distrito de retiro...";
+        $shippingFastArea['fast']['children']['distrito']['config']['caption'] = "Selecciona un distrito...";
         $shippingFastArea['fast']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
         $shippingFastArea['fast']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
         $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingFastArea);
