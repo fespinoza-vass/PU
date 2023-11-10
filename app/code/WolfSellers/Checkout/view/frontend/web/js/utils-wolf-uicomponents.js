@@ -47,13 +47,11 @@ define([
                 .value();
         },
         /**
-         * Get available Dates with the actual date
-         * Taste this function setting the var ahora like:
-         *      ahora = new Date('2023-10-18T14:00:00');
+         *
          * @param ahora
          * @returns {[{label: string, value: string, dia: string}]|[{label: string, value: string, dia: string},{label: string, value: string, dia: string}]}
          */
-        getAvailableDates: function (ahora) {
+        getAvailableDatesWithRange: function (ahora) {
             var hora = ahora.getHours();
             var finRango1 = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 16, 0);
             var minutosRestantesRango1 = Math.ceil((finRango1 - ahora) / (1000 * 60));
@@ -92,6 +90,47 @@ define([
                     { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
                     { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
                 ];
+            }else {
+                return [
+                    {value: 'noSet',"label": "no disponible", "dia": "no disponible"}
+                ]
+            }
+        },
+        /**
+         * Get available Dates with the actual date
+         * Taste this function setting the var ahora like:
+         *      ahora = new Date('2023-10-18T14:00:00');
+         * @param ahora
+         * @returns {[{label: string, value: string, dia: string}]|[{label: string, value: string, dia: string},{label: string, value: string, dia: string}]}
+         */
+        getAvailableDates: function (ahora) {
+            var hora = ahora.getHours();
+            var finRango1 = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 16, 0);
+            var minutosRestantesRango1 = Math.ceil((finRango1 - ahora) / (1000 * 60));
+            var finRango2 = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), 20, 0);
+            var minutosRestantesRango2 = Math.ceil((finRango2 - ahora) / (1000 * 60));
+            var manana = "mañana";
+            var hoy = "hoy";
+            if (hora >= 11 && hora <= 15) {
+
+                return [
+                    { value: '4_8_hoy',"label": "4 a 8pm", "dia": hoy }
+                ];
+
+            }else if (hora >= 0 && hora < 11) {
+
+                return [
+                    { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
+                    { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
+                ];
+
+            }else if (hora >= 16 && hora <= 24 ){
+
+                return [
+                    { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
+                    { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
+                ];
+
             }else {
                 return [
                     {value: 'noSet',"label": "no disponible", "dia": "no disponible"}
