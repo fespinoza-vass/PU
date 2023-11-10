@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote">
+        <column xsi:type="text" name="savar_status" nullable="true"/>
+        <column xsi:type="varchar" name="savar_horario" nullable="true"/>
+    </table>
+    <table name="sales_order">
+        <column xsi:type="text" name="savar_status" nullable="true"/>
+        <column xsi:type="varchar" name="savar_horario" nullable="true"/>
+    </table>
+
+    <table name="inventory_geoname" resource="default" engine="innodb">
+        <column xsi:type="tinyint" name="district_active" default="0" unsigned="true" nullable="true"/>
+        <column xsi:type="varchar" name="nombre_completo" nullable="true"/>
+    </table>
+</schema>

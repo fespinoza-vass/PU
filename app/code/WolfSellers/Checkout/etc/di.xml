@@ -1,7 +1,69 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Checkout\Block\Checkout\DirectoryDataProcessor">
-        <plugin name="WolfSellers_Checkout_DirectoryDataProcessor" type="WolfSellers\Checkout\Plugin\Block\Checkout\DirectoryDataProcessorPlugin" sortOrder="10" disabled="false"/>
+        <plugin name="WolfSellers_Checkout_DirectoryDataProcessor"
+                type="WolfSellers\Checkout\Plugin\Block\Checkout\DirectoryDataProcessorPlugin"
+                sortOrder="10"
+                disabled="false"
+        />
     </type>
+    <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="WolfSellers_Checkout_Plugin_DefaultConfigProviderPlugin"
+                type="WolfSellers\Checkout\Plugin\Model\DefaultConfigProvider"
+                sortOrder="10"
+                disabled="false"
+        />
+    </type>
+    <preference for="WolfSellers\Checkout\Api\GiftMessageInformationManagementInterface"
+                type="WolfSellers\Checkout\Model\GiftMessageInformationManagement" />
+    <preference for="WolfSellers\Checkout\Api\GuestGiftMessageInformationManagementInterface"
+                type="WolfSellers\Checkout\Model\GuestGiftMessageInformationManagement" />
+
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="save_custom_field_to_quote_table"
+                type="WolfSellers\Checkout\Plugin\Model\ShippingInformationManagement"
+                sortOrder="30" />
+    </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order" type="WolfSellers\Checkout\Plugin\Order\OrderManagement"/>
+    </type>
+    <type name="Magento\Customer\Model\Address\CustomerAddressDataFormatter">
+        <plugin name="WolfSellers_Checkout_Plugin_CustomerAddressDataFormatter"
+                type="WolfSellers\Checkout\Plugin\Customer\Address\CustomerAddressDataFormatterPlugin"
+                disabled="false"/>
+    </type>
+    <type name="Magento\InventoryApi\Api\Data\SourceInterface">
+        <plugin name="district_extension_atttribute" type="WolfSellers\Checkout\Plugin\SourceInterfaceExtension" />
+    </type>
+
+    <type name="Magento\Checkout\Api\PaymentInformationManagementInterface">
+        <plugin name="disable-place-order" type="Magento\CheckoutStaging\Plugin\PaymentInformationManagementPlugin" disabled="true"/>
+        <plugin name="wolf-disable-place-order" type="WolfSellers\Checkout\Plugin\PaymentInformationManagementPlugin" disabled="false"/>
+    </type>
+    <type name="Magento\Checkout\Api\GuestPaymentInformationManagementInterface">
+        <plugin name="disable-guest-place-order" type="Magento\CheckoutStaging\Plugin\GuestPaymentInformationManagementPlugin" disabled="true"/>
+        <plugin name="wolf-disable-guest-place-order" type="WolfSellers\Checkout\Plugin\GuestPaymentInformationManagementPlugin" disabled="false"/>
+    </type>
+
+    <type name="Magento\Checkout\Api\PaymentInformationManagementInterface">
+        <plugin name="WolfSellers_Checkout_Plugin_Magento_Quote_Model_BillingAddressManagement_logged_user" sortOrder="10" type="WolfSellers\Checkout\Plugin\Quote\Model\BillingAddressManagement"/>
+    </type>
+    <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="WolfSellers_Checkout_Plugin_Magento_Quote_Model_BillingAddressManagement_guest_user" sortOrder="10" type="WolfSellers\Checkout\Plugin\Quote\Model\BillingAddressManagementGuest"/>
+    </type>
+
+
+    <type name="Magento\InventoryInStorePickupApi\Model\Mapper">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="extension_attributes.district" xsi:type="string">extension_attributes.district</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="WolfSellers\Checkout\Api\Data\EnvioRegularInterface" type="WolfSellers\Checkout\Model\EnvioRegular"/>
+    <preference for="WolfSellers\Checkout\Api\Data\EnvioRapidoInterface" type="WolfSellers\Checkout\Model\EnvioRapido"/>
+    <preference for="WolfSellers\Checkout\Api\Data\RetiroTiendaInterface" type="WolfSellers\Checkout\Model\RetiroTienda"/>
+
+    <preference for="\Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule" type="WolfSellers\Checkout\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule"/>
 </config>

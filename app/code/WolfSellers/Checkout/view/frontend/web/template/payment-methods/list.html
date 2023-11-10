@@ -1,0 +1,18 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<div if="isPaymentMethodsAvailable()"
+     class="items payment-methods">
+    <div repeat="foreach: paymentGroupsList, item: '$group'"
+         class="payment-group">
+        <h4 data-bind="i18n: getGroupTitle($group)"></h4>
+        <each args="data: getRegion($group().displayArea), as: 'method'" render=""></each>
+    </div>
+</div>
+<div ifnot="isPaymentMethodsAvailable()"
+     class="no-payments-block"
+     translate="'No Payment Methods'">
+</div>

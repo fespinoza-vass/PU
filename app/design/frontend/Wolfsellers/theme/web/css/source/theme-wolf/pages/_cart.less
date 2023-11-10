@@ -97,6 +97,34 @@
                                                             text-transform: uppercase;
                                                         }
                                                     }
+                                                    .product-item-photo{
+                                                        .amlabel-position-wrapper{
+                                                            &[class*="amlabel-position-top-center"]{
+                                                                display: none !important; //add style for module amasty;
+                                                                left: auto !important; //add style for module amasty
+                                                                right: 40px !important; //add style for module amasty
+                                                                .amasty-label-container{
+                                                                    .amlabel-text{
+                                                                        display: none; //add style for module amasty
+                                                                    }
+                                                                }    
+                                                            }
+                                                            &[class*="amlabel-position-top-right"]{
+                                                                display: none !important; //add style for module amasty; 
+                                                                .amasty-label-container{
+                                                                    .amlabel-text{
+                                                                        display: none; //add style for module amasty
+                                                                    }
+                                                                }
+                                                            }
+                                                            .amasty-label-container{
+                                                                .amasty-label-image{
+                                                                    width: 36px !important; //add style for amasty
+                                                                    height: auto;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                     .product-item-name{
                                                         a{
                                                             font-weight: 600;
@@ -142,15 +170,44 @@
                                                         min-height: 0;
                                                         padding: 0;
 
-                                                        .action-towishlist,
-                                                        .action-edit,
-                                                        .wishlist {
+                                                        .action-towishlist{
                                                             display: none;
                                                         }
 
                                                         .action-delete {
                                                             &::before {
                                                                 color: @gray-4C;
+                                                            }
+                                                        }
+
+                                                        .button.wishlist{
+                                                            position: absolute;
+                                                            bottom: 20px;
+                                                            right: 145px;
+                                                            top: auto;
+                                                            font-weight: 600;
+                                                            text-decoration: underline;
+                                                            margin-right: 0;
+                                                            .action.split{
+                                                                .lib-font-size(16);
+                                                                font-weight: 600;
+                                                                color: @black;
+                                                                &:hover{
+                                                                    color: @color-black;
+                                                                }
+                                                            }
+                                                            span{
+                                                               .lib-icon-font(
+                                                                   @_icon-font-content: @icon-save-later,
+                                                                   @_icon-font-color: @color-black,
+                                                                   @_icon-font-size: 1.8rem,
+                                                                   @_icon-font-position: before,
+                                                                   @_icon-font-margin: 0 5px 0 0,
+                                                                   );
+                                                                text-decoration: underline;
+                                                            }
+                                                            .toggle.change{
+                                                                display: none;
                                                             }
                                                         }
                                                     }
@@ -622,6 +679,37 @@
                                     margin-bottom: -15px;
                                 }
                             }
+                            #form-validate{
+                                .table-wrapper{
+                                    .items{
+                                        tbody{
+                                            .item-info{
+                                                .col{
+                                                    .product-item-photo{
+                                                        .amlabel-position-wrapper{
+                                                            &[class*="amlabel-position-top-center"]{
+                                                                display: none !important; //add style for module amasty;
+                                                                top: 20px !important; //add style for module amasty
+                                                                left: 58px !important; //add style for module amasty
+                                                            }
+                                                            &[class*="amlabel-position-top-right"]{
+                                                                display: none !important; //add style for module amasty;
+                                                                top: 0px !important; //add style for module amasty
+                                                                left: 53px !important; //add style for module amasty
+                                                            }
+                                                            .amasty-label-container{
+                                                                .amasty-label-image{
+                                                                    width: 30px !important; //important add for style amasty
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             .form-cart {
                                 order: 3;
 
@@ -702,7 +790,7 @@
                                                 }
 
                                                 .item {
-                                                    padding: 25px 15px 10px 90px;
+                                                    padding: 25px 15px 10px 110px;
                                                     &.message.notice{
                                                         padding: 5px 0 10px 10px;
                                                         width: 95%;
@@ -742,7 +830,7 @@
                                                         padding: 0;
 
                                                         .action-delete {
-                                                            bottom: 86px;
+                                                            bottom: 130px;
                                                             right: 16px;
                                                             top: auto;
 
@@ -750,6 +838,27 @@
                                                                 .lib-font-size(24);
                                                                 overflow: visible;
                                                             }
+                                                        }
+                                                        .split.button.wishlist{
+                                                            position: relative;
+                                                            right: 0;
+                                                            &:before{
+                                                                content: none;
+                                                            }
+                                                            .action.split{
+                                                            }
+                                                            span{
+                                                                position: relative;
+                                                                overflow: visible;
+                                                                .lib-font-size(14);
+                                                                width: auto;
+                                                                height: auto;
+                                                                margin: 0;
+                                                                padding: 15px 0 0 90px;
+                                                            }
+                                                        }
+                                                        .action-edit{
+                                                            display: none;
                                                         }
                                                     }
                                                 }

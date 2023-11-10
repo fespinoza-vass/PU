@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="carriers" sortOrder="1000" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+			<group id="envio_rapido" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<label>Envio Rapido</label>
+				<field id="active" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+
+                <field id="sandbox_mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Sandbox Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+				<field id="name" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Method Name</label>
+				</field>
+				<field id="price" type="text" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Price</label>
+					<validate>validate-number validate-zero-or-greater</validate>
+				</field>
+				<field id="sort_order" type="text" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Sort Order</label>
+				</field>
+				<field id="title" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Title</label>
+				</field>
+				<field id="sallowspecific" type="select" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Ship to Applicable Countries</label>
+					<frontend_class>shipping-applicable-country</frontend_class>
+					<source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" type="multiselect" sortOrder="70" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Ship to Specific Countries</label>
+					<can_be_empty>1</can_be_empty>
+					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+				</field>
+				<field id="specificerrmsg" type="textarea" sortOrder="80" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Displayed Error Message</label>
+				</field>
+
+                <field id="production_order_endpoint" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Create Order Endpoint (Production)</label>
+                    <depends>
+                        <field id="sandbox_mode">0</field>
+                    </depends>
+                </field>
+                <field id="sandbox_order_endpoint" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Create Order Endpoint (Sandbox)</label>
+                    <depends>
+                        <field id="sandbox_mode">1</field>
+                    </depends>
+                </field>
+
+                <field id="production_status_endpoint" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Shipment Status Endpoint (Production)</label>
+                    <depends>
+                        <field id="sandbox_mode">0</field>
+                    </depends>
+                </field>
+                <field id="sandbox_status_endpoint" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Shipment Status Endpoint (Sandbox)</label>
+                    <depends>
+                        <field id="sandbox_mode">1</field>
+                    </depends>
+                </field>
+
+                <field id="production_token" translate="label" type="obscure" sortOrder="90" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
+                    <label>Production Token</label>
+                    <depends>
+                        <field id="sandbox_mode">0</field>
+                    </depends>
+                </field>
+                <field id="sandbox_token" translate="label" type="obscure" sortOrder="91" showInStore="1" showInWebsite="1" showInDefault="1" canRestore="1">
+                    <label>Sandbox Token</label>
+                    <depends>
+                        <field id="sandbox_mode">1</field>
+                    </depends>
+                </field>
+
+                <field id="max_package_weight" type="label" sortOrder="100">
+                    <label>MAx Package Weight</label>
+                </field>
+            </group>
+		</section>
+	</system>
+</config>

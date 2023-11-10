@@ -145,6 +145,18 @@
                                     .amlabel-position-wrapper{
                                         margin: 10px;
                                         width: auto !important;
+                                        &[class*="amlabel-position-top-center"]{
+                                            left: auto !important; //add style for module amasty
+                                            right: 75px !important; //add style for module amasty
+                                            .amlabel-text{
+                                                display: none !important; //add style for module amasty 
+                                            }
+                                        }
+                                        &[class*="amlabel-position-top-right"]{
+                                            .amlabel-text{
+                                                display: none !important; //add style for module amasty 
+                                            }
+                                        }
                                         .amasty-label-container:not(.-preview){
                                             height: 24px !important;
                                             line-height: 24px !important;
@@ -153,6 +165,10 @@
                                             .amlabel-text{
                                                 position: static !important;
                                                 padding: 0 10px !important;
+                                            }
+                                            .amasty-label-image{
+                                                width: 56px !important; //add style for amasty
+                                                height: auto;
                                             }
                                         }
                                     }
@@ -334,12 +350,39 @@
         }
     }
 }
-
 //
 //  Mobile
 //  ---------------------------------------------
 .media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
     body{
+        .page-wrapper{
+            main[class*="page-main"]{
+                .columns{
+                    div.products-grid{
+                        .product-item{
+                            .product-item-info{
+                                .product-item-photo{
+                                    .product-image-container{
+                                        .amlabel-position-wrapper{
+                                            &[class*="amlabel-position-top-center"]{
+                                                left: auto !important; //add style for module amasty
+                                                right: 10px !important; //add style for module amasty
+                                                top: 25px !important; //add style for module amasty
+                                            }
+                                            .amasty-label-container:not(.-preview){
+                                                .amasty-label-image{
+                                                    width: 34px !important; //style addd for amasty
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         &:not(.cms-home){
             .page-wrapper{
                 main.page-main{

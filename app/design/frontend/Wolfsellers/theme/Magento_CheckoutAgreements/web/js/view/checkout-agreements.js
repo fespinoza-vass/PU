@@ -26,6 +26,13 @@ define([
         contentHeight: ko.observable(null),
         modalWindow: null,
 
+        initialize: function () {
+            this._super();
+            if(this.name.includes('customer-fieldsets')){
+                this.isVisible = true;
+            }
+        },
+
         /**
          * Checks if agreement required
          *
@@ -88,14 +95,10 @@ define([
             if (jQuery( ".actions-toolbar").find("#createCount").length){
                 if (jQuery('#agreement_' + paymentMethodName + '_' + agreementId).is(":checked")) {
                     $( ".actions-toolbar").find("#createCount").removeAttr("disabled");
-                    //jQuery("#createCount").removeAttr("disabled");
                 } else {
                     $( ".actions-toolbar").find("#createCount").attr("disabled", "disabled");
-                    //jQuery("#createCount").attr("disabled", "disabled");
                 }
             }
         }
-
-
     });
 });

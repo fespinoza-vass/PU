@@ -24,7 +24,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\Session\Proxy;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\CatalogRule\Api\CatalogRuleRepositoryInterface;
-use Magento\Catalog\Model\ProductFactory;
+
 class ListJson extends \Magento\GoogleTagManager\Block\ListJson
 {
 
@@ -57,11 +57,6 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
      * @var CatalogRuleRepositoryInterface
      */
     private CatalogRuleRepositoryInterface $catalogRuleRepository;
-
-    /**
-     * @var ProductFactory
-     */
-    protected $_productloader;
 
     /**
      * @param CategoryRepositoryInterface $categoryRepository
@@ -105,7 +100,6 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         TimezoneInterface $date,
         CatalogRuleRepositoryInterface $catalogRuleRepository,
         Image $imageHelper,
-        ProductFactory $_productloader,
         array $data = []
     )
     {
@@ -116,7 +110,6 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         $this->sessionProxy= $sessionProxy;
         $this->_date =  $date;
         $this->catalogRuleRepository = $catalogRuleRepository;
-        $this->_productloader = $_productloader;
         parent::__construct(
             $context,
             $helper,
@@ -162,23 +155,16 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $attributes = $item2->getAttributes();
             $category = null;
             $subcategory = null;
-
             $brand = null;
             $gender = null;
             $size = null;
-
             foreach($attributes as $attribute){
-                if($attribute->getName() === 'categoria') {
+                /*if($attribute->getName() === 'categoria') {
                     $category = $attribute->getFrontend()->getValue($item->getProduct());
                 }
                 if($attribute->getName() === 'sub_categoria') {
                     $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
-                }
-
-                if($attribute->getName() === 'familia') {
-                    $family = $attribute->getFrontend()->getValue($item->getProduct());
-                }
-
+                }*/
                 if($attribute->getName() === 'manufacturer') {
                     $brand = $attribute->getFrontend()->getValue($item->getProduct());
                 }
@@ -190,12 +176,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                     if( !$size ) $size = null;
                 }
             }
-
-            if($family == null){
-                $product = $this->getLoadProduct($item->getProductId());
-                $family = !empty($product->getFamilia()) ? $product->getFamilia() : null;
-            }
-
+            
             /** Get Rules of product */
             $rules = $this->getRules($item2->getId());
             $dataRule = [];
@@ -205,17 +186,17 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
                 }
             }
             $dataRule = implode( ', ', $dataRule);
-
+            
             /** Get Name Categories of product */
-            /*$categories = [];
+            $categories = [];
             foreach($item2->getCategoryIds() as $categoryId){
                 array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
             }
-
+            
             $category = isset($categories[0]) ? $categories[0] : '';
             $subcategory = isset($categories[1]) ? $categories[1] : '';
-            $family = isset($categories[2]) ? $categories[2] : '';*/
-
+            $family = isset($categories[2]) ? $categories[2] : '';
+            
             $cartItem = [
                 'id' => $item2->getId(),
                 'name' => $item2->getName(),
@@ -299,7 +280,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
 
     /**
      * Function to obtain product promotion
-     *
+     * 
      * @param $productId
      * @return array
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -317,16 +298,5 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         }
 
         return $promos;
-    }
-
-    /**
-     * Load data product by Id
-     *
-     * @param $id
-     * @return \Magento\Catalog\Model\Product
-     */
-    public function getLoadProduct($id)
-    {
-        return $this->_productloader->create()->load($id);
     }
 }

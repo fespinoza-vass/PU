@@ -73,6 +73,13 @@
                                                                         <item name="componentDisabled" xsi:type="boolean">true</item>
                                                                     </item>
                                                                 </item>
+                                                                <item name="payment-benefits-modal" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/payment/benefits</item>
+                                                                    <item name="displayArea" xsi:type="string">afterMethods</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">Magento_Checkout/payment/benefits</item>
+                                                                    </item>
+                                                                </item>
                                                             </item>
                                                         </item>
                                                     </item>
@@ -103,8 +110,6 @@
                                                         <item name="sortOrder" xsi:type="string">10</item>
                                                     </item>
                                                 </item>
-
-
                                                 <item name="discount" xsi:type="array">
                                                     <item name="sortOrder" xsi:type="string">100</item>
                                                     <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount</item>
@@ -122,7 +127,6 @@
                                                         </item>
                                                     </item>
                                                 </item>
-
                                                 <item name="agreements" xsi:type="array">
                                                     <item name="component" xsi:type="string">Magento_CheckoutAgreements/js/view/checkout-agreements</item>
                                                     <item name="sortOrder" xsi:type="string">200</item>
@@ -132,8 +136,6 @@
                                                             xsi:type="string">WolfSellers_Checkout/js/view/form/element/recibir-promocion</item>
                                                     <item name="sortOrder" xsi:type="string">300</item>
                                                 </item>
-
-
                                             </item>
                                         </item>
                                     </item>

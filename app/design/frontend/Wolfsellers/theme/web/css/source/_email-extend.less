@@ -42,6 +42,354 @@ h1{
         }
     }
 }
+.main-content{
+    padding: 0;
+}
+.cmp-content-general-milla{
+    p,h1,h3{
+        font-family: 'Open Sans', sans-serif;;
+        font-size: 14px;
+        color: @color-black-transaccional;
+    }
+    h1{
+        font-weight: bold;
+        font-size: 15px; 
+    }
+    h3{
+        font-weight: bold;
+        text-align: start;
+    }
+    .cmp-content-info-customer{
+        margin: 0 auto;
+        margin-bottom: 10px;
+        tr{
+          td{
+            padding: 25px 80px 0 80px;
+            text-align: center;
+                .cmp-content-info-span{
+                   font-weight: bold;
+                }
+            }
+            .name-encuesta{
+                margin-bottom: 0;
+                font-weight: bold;
+            }
+        }
+        &__name,
+        &__delivered{
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+    }
+    .cmp-content-info-customer__name{
+        &.path{
+            padding: 25px 65px 0 65px;
+        }
+        &.store{
+            padding: 25px 90px 0 90px;
+        }
+    }
+    .cmp-content-button,
+    .cmp-info-contact{
+        text-align: center;
+
+        a{
+            display: block;
+            width: 168px;
+            background: @black;
+            padding: 10px;
+            border-radius: 12px;
+            color: @white !important; // style added by mailer
+            margin: 0 auto;
+            text-decoration: none;
+            &:hover{
+                color: @white !important; // style added by mailer
+                text-decoration: none !important; //style added by mailer
+            }
+            span{
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+    }
+    .cmp-info-encuesta{
+        tr{
+            td{
+                text-align: center;
+                padding: 15px 40px;
+                strong{
+                    display: block;
+                    padding-bottom: 15px;
+                    color: @black;
+                }
+            }
+        }
+    }
+    .cmp-content-button{
+        border-bottom: 20px solid @mainbackground;
+        td{
+            padding: 0 35px;
+            a{
+                margin: 20px auto;
+            }
+        }
+        &.path{
+            tr{
+                td{
+                    padding: 0 110px;
+                }
+            }
+        }
+    }
+    .cmp-content-progress{
+        margin: 0 auto;
+        text-align: center;
+        .progress-status{
+            td{
+                padding: 0;
+            }
+        }
+    }
+    .cmp-form-encuesta{
+        margin: 0 auto;
+        border-bottom: 20px solid @mainbackground;
+        &__title{
+            display: block;
+            font-weight: bold;
+            padding:  0 110px;
+            text-align: center;
+        }
+        .cmp-form-encuesta__form{
+            margin: 0 auto;
+            text-align: center;
+            a{
+                width: 220px;
+                color: @black;
+                padding: 15px 20px;
+                border-radius: 12px;
+                margin-top: 10px;
+                border: 1px solid @color-black;
+                background: @white;
+                cursor: pointer !important; //style added by mailer
+                span{
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                &:hover{
+                    color: @black !important; //style added by mailer
+                    text-decoration: none !important; //style added by mailer
+                }
+            }
+        }
+        .cmp-form-encuentas__form--img{
+            margin: 0 auto;
+        }
+        &__recommendation{
+            height: 35px;
+            &--no,
+            &--yes{
+                width: 120px;
+                p{
+                    font-size: 12px;
+                    font-weight: bold;
+                    margin-bottom: 0;
+                }
+            }
+            &--no{
+                float: left;
+                padding-left: 35px !important; // style added by mailer
+            }
+            &--yes{
+                float: right;
+                padding-right: 40px !important; // style added by mailer
+            }
+        }
+        &__button{
+            margin: 0 auto;
+        }
+    }
+    .cmp-content-info-qr{
+        text-align: center;
+        td{
+            padding: 20px 30px;
+            p{
+                display: inline;
+                margin-bottom: 0;
+            }
+        }
+        &.store{
+            text-align: start;
+            h4{
+                text-align: center;
+            }
+            p{
+                display: block;
+            }
+            .remember{
+                margin-top: 10px;
+            }
+        }
+    }
+    .cmp-content-code-qr{
+        border-bottom: 20px solid @mainbackground;
+        .qr-container,
+        .remember{
+            margin:10px 20px;
+            td{
+                padding-bottom: 0;
+                background: @gray-EE;
+            }
+        }
+        .qr-container{
+            .qr-code,
+            .qr-description{
+                display: inline;
+                img{
+                    float: left;
+                    padding: 10px;
+                }
+            }
+            .qr-code{
+                img{
+                    width: 220px;
+                }
+            }
+            &--img{
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            &--info{
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+                p{
+                    font-size: 16px;
+                    padding: 70px 25px 20px 25px;
+                    margin-bottom: 0;
+                }
+                span{
+                    color: @black;
+                    font-weight: bold;
+                    padding-left: 25px;
+                    font-size: 14px;
+                    white-space: nowrap;
+                }
+                img{
+                    vertical-align: middle;
+                }
+            }
+        }
+        .remember{
+            img{
+                float: left;
+                padding: 0 5px;
+            }
+            p{
+                font-size: 12px;
+                margin-bottom: 0px;
+            }
+            &--icon{
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+            &--description{
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
+                p{
+                    padding: 5px 15px 5px 5px;
+                }
+            }
+        }
+    }
+    .email-summary{
+       display: none;
+    }
+    .email-information{
+        .order-details{
+            border-bottom: 20px solid @mainbackground;
+            margin-bottom: 20px;
+            .address-details{
+                padding: 0 25px 10px 25px;
+                h3{
+                    font-size: 15px;
+                    color: @color-black-transaccional;
+                    font-weight: bold;
+                }
+                span{
+                    color: @color-black;
+                }
+                p{
+                    color: @color-black-transaccional !important; // style added by mailer
+                    a{
+                        color: @color-black-transaccional !important; // style added by mailer
+                    }
+                }
+            }
+        }
+    }
+    .email-items{
+        th{
+            font-weight: normal;
+            font-size: 16px;
+            padding-left: 0;
+            &.item-subtotal{
+                padding-right: 25px;
+            }
+        } 
+        td{
+            &.product-name,
+            &.item-qty,
+            &.item-price,
+            &.item-subtotal{
+                font-size: 12px;
+                font-weight: bold;
+            }
+            &.item-subtotal{
+                padding-right: 25px;
+            }
+        }
+        .item-info{
+            padding-left: 25px;
+        }
+        .order-totals{
+            border-top: 20px solid @mainbackground;
+            border-bottom: 20px solid @mainbackground;
+            td{
+                background: @white;
+                padding-right: 25px;
+                padding-left: 0;
+                span{
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+            }
+            th{
+                background: @white;
+                font-size: 12px;
+                strong{
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+    .cmp-info-contact{
+        text-align: start;
+        td{
+            padding: 0 25px;
+            a{
+                width: 290px;
+                text-align: center;
+                margin: 0 auto;
+            }
+            p{
+                margin-bottom: 0;
+            }
+            &.button-info-contact{
+                padding: 15px 0 35px 0;
+            }
+        }
+    }
+}
+
 .footer{
     table{
         width: 90%;
@@ -75,6 +423,87 @@ h1{
         }
         p{
             color: @white;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    table.cmp-content-info-customer{
+        tr{
+            td{
+                padding: 25px 25px 0 25px !important; // style added by mailer
+                h1{
+                    font-size: 12px;
+                }
+                p{
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+    .cmp-content-progress{
+        .progress-status{
+            img{
+                width: 250px;
+            }
+        }
+    }
+    .email-information{
+        .order-details{
+            .address-details{
+                display: table-cell !important; //by added by mailer
+                h3,p{
+                    font-size: 10px !important; //by added by mailer
+                }
+            }
+        }
+    }
+    .cmp-content-info-qr{
+        td{
+            padding: 20px 15px !important; // style added by mailer
+        }
+    }
+    .cmp-content-general-milla{
+        .cmp-content-button{
+            tr{
+                td.info{
+                    padding: 15px 0 !important; // style added by mailer;
+                }
+            }
+        }
+    }
+    table.cmp-content-code-qr{
+        tr{
+            .qr-container{
+                td{
+                    display: block;
+                }
+                &--img{
+                    img{
+                        float: initial !important; // style added by mailer
+                        margin: 0 auto;
+                        width: 200px;
+                        display: block;
+                    }
+                }
+                &--info{
+                    padding-bottom: 20px !important; // style added by mailer
+                    p{
+                        font-size: 14px !important; // style added by mailer
+                        padding:15px 45px 20px 40px !important; // style added by mailer
+                    }
+                    span{
+                        font-size: 14px !important;  // style added by mailer
+                    }
+                }
+            }
+        }
+        .remember{
+            &--description{
+                p{
+                    font-size: 10px;
+                }
+            }
         }
     }
 }

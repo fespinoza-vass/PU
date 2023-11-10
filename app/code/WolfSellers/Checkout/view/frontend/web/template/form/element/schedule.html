@@ -1,0 +1,33 @@
+<fieldset>
+    <div class="admin__field admin__field-option"
+         id="uno"
+         data-role="option"
+         role="option"
+         aria-hidden="false">
+        <input type="radio"
+               name="schedule"
+               id="inputUno"
+               data-bind="
+                    checked: value,
+                    value: '0'">
+        <label for="inputUno" data-bind="
+                    text: setValueFromTimer(0,'label')" ></label>
+    </div>
+    <div class="admin__field admin__field-option"
+         id="dos"
+         data-role="option"
+         role="option"
+         aria-hidden="false">
+        <input type="radio"
+               id="inputDos"
+               name="schedule"
+               data-bind="
+                    checked: value,
+                    value: '1'">
+        <label for="inputDos" data-bind="
+                    text: setValueFromTimer(1,'label')" ></label>
+    </div>
+</fieldset>
+<div class="step-content_fast" data-bind="html: scheduleDates">
+
+</div>
