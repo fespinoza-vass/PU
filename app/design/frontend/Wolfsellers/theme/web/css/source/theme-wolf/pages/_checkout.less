@@ -722,6 +722,15 @@
 							&:after {
 								content: none;
 							}
+							span{
+								line-height: 1.2;
+								a{
+									font-weight: bold;
+									&:hover{
+										color: @black;
+									}
+								}
+							}
 						}
 						button {
 							span {
@@ -965,6 +974,9 @@
 										}
 										.admin__field{
 											.lib-radio();
+										}
+										.field-error{
+											padding: 0;
 										}
 									}
 								}
