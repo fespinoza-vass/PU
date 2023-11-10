@@ -471,7 +471,7 @@ define([
             {
                 return false;
             }
-
+            $('body').trigger('processStart');
             $('[data-block="minicart"]').trigger('contentLoading');
             var formData = {
                 itemId: caja.attr("data-cart-item"),
@@ -498,6 +498,10 @@ define([
                 /* do nothing */
             }).always(function() {
                 $('[data-block="minicart"]').trigger('contentUpdated');
+
+                setTimeout(function () {
+                    $('body').trigger('processStop');
+                }, 2000);
             });
         },
 
