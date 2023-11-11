@@ -119,7 +119,7 @@ define([
                 );
                 return false;
             }
-            if (customer.isCustomerStepFinished() === '_complete') {
+            if (customer.isCustomerStepFinished() === '_complete' || true) {
                 this.source.set('params.invalid', false);
                 this.triggerShippingDataValidateEvent();
                 this.validateShippingInformation();
