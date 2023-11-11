@@ -269,12 +269,27 @@
 			position: relative;
 			text-align: center;
 			vertical-align: top;
-			&:nth-child(1),
-			&:nth-child(2),
+
+			&:nth-child(1){
+				span{
+					&:after{
+						content: '1';
+						font-family: inherit;
+					}
+				}
+			}
+			&:nth-child(2){
+				span{
+					&:after{
+						content: '2';
+						font-family: inherit;
+					}
+				}
+			}
 			&:nth-child(3){
 				span{
 					&:after{
-						content: counter(i);
+						content: '3';
 						font-family: inherit;
 					}
 				}
