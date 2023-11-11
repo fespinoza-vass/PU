@@ -16,6 +16,7 @@ use Magento\Shipping\Model\Rate\ResultFactory;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterface;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 
 /**
@@ -109,6 +110,8 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
                 $inventory = $this->_sourceItemsBySku->execute($item->getSku());
                 /** @var SourceItemInterface $source */
                 foreach ($inventory as $source) {
+                    if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) continue;
+
                     if (!$source->getStatus()) continue;
 
                     if ($source->getQuantity() < 2) {
