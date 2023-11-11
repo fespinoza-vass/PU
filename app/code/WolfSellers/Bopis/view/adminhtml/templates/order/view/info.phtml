@@ -79,7 +79,8 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                 <?php endif; ?>
                 <br>
                 Comprobante:
-                <?php if ( $billingAddress->getDataByKey('invoice_required') == '0'):?>
+                <?php if ( is_null($billingAddress->getDataByKey('invoice_required')) ||
+                    $billingAddress->getDataByKey('invoice_required') == '0' ):?>
                     Boleta
                 <?php else: ?>
                     Factura <br>
