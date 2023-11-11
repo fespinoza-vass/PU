@@ -38,7 +38,7 @@ define([
          */
         getShippingMethod:function () {
             if (this.isReadyToShowSummary()){
-                if (shippingPayment.shippingMethod().includes("flat")){
+                if (shippingPayment.shippingMethod().includes("urban")){
                     return "Envió regular a domicilio";
                 }
                 if (shippingPayment.shippingMethod().includes("rapido")){
@@ -93,7 +93,7 @@ define([
             if (shippingPayment.shippingMethod().includes("rapido")){
                 distrito = shippingPayment.distritoEnvioRapido();
             }
-            if (shippingPayment.shippingMethod().includes("flat")){
+            if (shippingPayment.shippingMethod().includes("urban")){
                 if(distrito.length >= 3){
                     distrito = distrito.charAt(0).toUpperCase() + distrito.slice(1).toLowerCase();
                 }
@@ -147,7 +147,7 @@ define([
          */
         getShippingTime:function () {
             var horario = "";
-            if (shippingPayment.shippingMethod().includes("flat")){
+            if (shippingPayment.shippingMethod().includes("urban")){
                 horario = "en un rango de 8 am a 7 pm";
             }
             if (shippingPayment.shippingMethod().includes("rapido")){
