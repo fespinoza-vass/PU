@@ -51,7 +51,7 @@ define([
             if(_.isNull(quote.shippingMethod()) || _.isUndefined(quote.shippingMethod())){
                 return false;
             }
-            if (quote.shippingMethod().carrier_code.includes("flat")){
+            if (quote.shippingMethod().carrier_code.includes("urban")){
                 this.shippingMethod("flat");
             }
             if (quote.shippingMethod().carrier_code.includes("rapido")){
