@@ -498,10 +498,8 @@ define([
                 /* do nothing */
             }).always(function() {
                 $('[data-block="minicart"]').trigger('contentUpdated');
-
-                setTimeout(function () {
-                    $('body').trigger('processStop');
-                }, 2000);
+            }).complete(function () {
+                $('body').trigger('processStop');
             });
         },
 
