@@ -21,6 +21,8 @@ use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\Email\Helper\EmailHelper;
 use WolfSellers\Bopis\Helper\Config as BopisConfig;
+use Magento\Store\Model\App\Emulation as Emulation;
+use Magento\Framework\App\Area;
 
 /**
  *
@@ -36,6 +38,9 @@ class SavarHelper extends AbstractHelper
 
     CONST XML_PATH_IS_ACTIVE_SAVAR_CRON = "bopis/savar/is_active";
 
+
+    /** @var Emulation */
+    protected $_emulation;
 
     /**
      * @var BopisConfig
@@ -89,6 +94,7 @@ class SavarHelper extends AbstractHelper
      * @param NotifyToSavarCreateOrder $notifyToSavar
      */
     public function __construct(
+        Emulation                             $emulation,
         DistrictGeoname                       $districtGeoname,
         Context                               $context,
         NotifyToSavarCreateOrder              $notifyToSavar,
@@ -107,6 +113,7 @@ class SavarHelper extends AbstractHelper
         BopisConfig $config
     )
     {
+        $this->_emulation = $emulation;
         $this->config = $config;
         $this->emailHelper = $emailHelper;
         $this->_districtGeoname = $districtGeoname;
@@ -239,6 +246,8 @@ class SavarHelper extends AbstractHelper
 
         $order = $this->_orderFactory->create()->loadByIncrementId($orderIncremental);
 
+        $this->_emulation->startEnvironmentEmulation($order->getStoreId(),Area::AREA_FRONTEND,true);
+
         if($result['state_code'] != 200){
             $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']));
             return false;
@@ -273,6 +282,8 @@ class SavarHelper extends AbstractHelper
                 }
             }
         }
+
+        $this->_emulation->stopEnvironmentEmulation();
 
     }
 
