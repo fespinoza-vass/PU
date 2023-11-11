@@ -21,6 +21,10 @@ use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\Email\Helper\EmailHelper;
 use WolfSellers\Bopis\Helper\Config as BopisConfig;
+use Magento\Store\Model\App\Emulation as Emulation;
+use Magento\Framework\App\Area;
+use Magento\Framework\App\State;
+use Magento\Framework\App\AreaList;
 
 /**
  *
@@ -36,6 +40,15 @@ class SavarHelper extends AbstractHelper
 
     CONST XML_PATH_IS_ACTIVE_SAVAR_CRON = "bopis/savar/is_active";
 
+
+    /** @var AreaList */
+    protected $_areaList;
+
+    /** @var State */
+    protected $_state;
+
+    /** @var Emulation */
+    protected $_emulation;
 
     /**
      * @var BopisConfig
@@ -89,6 +102,9 @@ class SavarHelper extends AbstractHelper
      * @param NotifyToSavarCreateOrder $notifyToSavar
      */
     public function __construct(
+        AreaList                              $areaList,
+        State                                 $state,
+        Emulation                             $emulation,
         DistrictGeoname                       $districtGeoname,
         Context                               $context,
         NotifyToSavarCreateOrder              $notifyToSavar,
@@ -107,6 +123,9 @@ class SavarHelper extends AbstractHelper
         BopisConfig $config
     )
     {
+        $this->_areaList = $areaList;
+        $this->_state = $state;
+        $this->_emulation = $emulation;
         $this->config = $config;
         $this->emailHelper = $emailHelper;
         $this->_districtGeoname = $districtGeoname;
@@ -239,6 +258,8 @@ class SavarHelper extends AbstractHelper
 
         $order = $this->_orderFactory->create()->loadByIncrementId($orderIncremental);
 
+        $this->_emulation->startEnvironmentEmulation($order->getStoreId(),Area::AREA_FRONTEND,true);
+
         if($result['state_code'] != 200){
             $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']));
             return false;
@@ -273,6 +294,8 @@ class SavarHelper extends AbstractHelper
                 }
             }
         }
+
+        $this->_emulation->stopEnvironmentEmulation();
 
     }
 
@@ -353,6 +376,12 @@ class SavarHelper extends AbstractHelper
        if(!$isSavarCronActive){
            return;
        }
+
+        $this->_state->setAreaCode("frontend");
+
+        $this->_areaList->getArea(Area::AREA_FRONTEND)
+            ->load(\Magento\Framework\App\Area::PART_TRANSLATE);
+
 
         $this->_savarLogger->error("consulta de ordenes savar");
         $searchCriteria = $this->_searchCriteriaBuilder
