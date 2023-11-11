@@ -19,9 +19,9 @@
                  role="tabpanel"
                  aria-hidden="false"
                  data-bind="
-                    css: isFastShipping() ? 'selected': '',
+                    css: isUrbanoShipping() ? 'selected': '',
                     css: isShippingMethodAvailable('urbano_terrestre') ? 'disabled' : '',
-                    click: setFastShipping">
+                    click: setUrbanoShipping">
                 <label class="step-content_icon" for="urbano_terrestre">Envío Regular:</label>
                 <span class="step-content_price" data-bind="text: getPriceLabel('urbano_terrestre')"></span>
                 <input type="radio" id="urbano_terrestre" name="opciones" value="fast" attr="{checked: isUrbanoShipping, disabled:isUrbanoShippingDisabled}">
