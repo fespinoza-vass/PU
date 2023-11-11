@@ -20,7 +20,6 @@
 @import "theme-wolf/base/_colors";
 
 a{
-  color: @red;
     &:active{
         color: @lines !important;
     }
@@ -93,23 +92,34 @@ h1{
     .cmp-info-contact{
         text-align: center;
 
-        a{
-            display: block;
-            width: 168px;
-            background: @black;
-            padding: 10px;
-            border-radius: 12px;
-            color: @white !important; // style added by mailer
-            margin: 0 auto;
-            text-decoration: none;
-            &:hover{
-                color: @white !important; // style added by mailer
-                text-decoration: none !important; //style added by mailer
-            }
-            span{
-                font-size: 18px;
-                font-weight: bold;
-            }
+        // a{
+        //     display: block;
+        //     width: 168px;
+        //     background: @black;
+        //     padding: 10px;
+        //     border-radius: 12px;
+        //     color: @white !important; // style added by mailer
+        //     margin: 0 auto;
+        //     text-decoration: none;
+        //     &:hover{
+        //         color: @white !important; // style added by mailer
+        //         text-decoration: none !important; //style added by mailer
+        //     }
+        //     span{
+        //         font-size: 18px;
+        //         font-weight: bold;
+        //     }
+        // }
+        a.btn-rastreo,
+        span.btn-rastreo{
+            height: 24px !important; 
+            border-radius: 10px 10px 10px 10px !important; 
+            background-color: #000000 !important;  
+            display: inline-block !important;
+            padding-top: 10px !important; 
+            padding-right: 10px !important; 
+            padding-bottom: 10px !important; 
+            padding-left: 10px !important;
         }
     }
     .cmp-info-encuesta{
