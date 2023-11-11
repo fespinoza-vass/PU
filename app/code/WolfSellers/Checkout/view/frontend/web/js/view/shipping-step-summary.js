@@ -118,7 +118,7 @@ define([
          */
         getShippingDate: function () {
             var date = "";
-            if (shippingPayment.shippingMethod().includes("flat")){
+            if (shippingPayment.shippingMethod().includes("urban")){
                 date = "2 días naturales";
             }
             if (shippingPayment.shippingMethod().includes("rapido")){
