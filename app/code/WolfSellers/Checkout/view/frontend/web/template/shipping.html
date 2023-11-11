@@ -12,6 +12,26 @@
          data-role="content">
         <div class="step-title" translate="'2. Forma de entrega'" data-role="title"></div>
 
+        <div class="content-method_urbano">
+            <div id="checkout-step-shipping_method-urbano"
+                 class="step-content"
+                 data-role="content"
+                 role="tabpanel"
+                 aria-hidden="false"
+                 data-bind="
+                    css: isFastShipping() ? 'selected': '',
+                    css: isShippingMethodAvailable('urbano_terrestre') ? 'disabled' : '',
+                    click: setFastShipping">
+                <label class="step-content_icon" for="urbano_terrestre">Envío Regular:</label>
+                <span class="step-content_price" data-bind="text: getPriceLabel('urbano_terrestre')"></span>
+                <input type="radio" id="urbano_terrestre" name="opciones" value="fast" attr="{checked: isUrbanoShipping, disabled:isUrbanoShippingDisabled}">
+                <label class="step-content_input-fast" for="urbano_terrestre"></label>
+                <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
+                    <a href="#" data-bind="click: showRSInformation">Cónoce más aquí</a>
+                </span>
+            </div>
+        </div>
+        <!--
         <div class="content-method_regular">
             <div id="checkout-step-shipping_method-regular"
                  class="step-content"
@@ -50,10 +70,11 @@
                 </span>
             </div>
         </div>
+        -->
         <div class="shipping-method-error"
              data-bind="fadeVisible: isShippingMethodError()"
         >
-            <p>Tu pedido no puede ser procesado por Envío rápido.</p>
+            <p>Hubo un error.</p>
         </div>
 
     </div>

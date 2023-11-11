@@ -52,8 +52,10 @@ define([
         isDisabledShippingStep: ko.observable(true),
         isRegularShipping: ko.observable(false),
         isFastShipping: ko.observable(false),
+        isUrbanoShipping: ko.observable(false),
         isFastShippingDisabled: ko.observable(false),
         isRegularShippingDisabled: ko.observable(false),
+        isUrbanoShippingDisabled: ko.observable(false),
         shippingMethod: ko.observable(),
         goToResume: ko.observable(),
         isShippingMethodError: ko.observable(),
@@ -108,7 +110,7 @@ define([
          * Overwrite set shipping information action
          */
         setShippingInformation: function () {
-            if (!this.isFastShipping() && !this.isRegularShipping()){
+            if (!this.isFastShipping() && !this.isRegularShipping() && !this.isUrbanoShipping()){
                 if(!customer.isCustomerLoggedIn){
                     quote.shippingMethod(null);
                 }
@@ -162,7 +164,27 @@ define([
                 departamentoRegular.reset();
                 this.isRegularShipping(true);
                 this.isFastShipping(false);
+                this.isUrbanoShipping(false);
                 var rate = this.findRateByCarrierCode('flatrate');
+                this.showShippingMethodError(rate);
+                this.selectShippingMethod(rate);
+                this.updateShippingValidations();
+                this.isShippingMethodError(false);
+                return true;
+            }
+            return false;
+        },
+        /**
+         * Set shipping method flatRate for regular shipping
+         */
+        setUrbanoShipping: function () {
+            if(!this.isUrbanoShippingDisabled()){
+                var departamentoRegular = registry.get("checkout.steps.shipping-step.shippingAddress.regular.departamento");
+                departamentoRegular.reset();
+                this.isRegularShipping(false);
+                this.isUrbanoShipping(true);
+                this.isFastShipping(false);
+                var rate = this.findRateByCarrierCode('urbano');
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
@@ -185,6 +207,7 @@ define([
                 street.reset();
                 this.isRegularShipping(false);
                 this.isFastShipping(true);
+                this.isUrbanoShipping(false);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
                 return true;
@@ -301,7 +324,7 @@ define([
             /**
              * Envio Regular
              */
-            if(this.isRegularShipping()){
+            if(this.isRegularShipping() || this.isUrbanoShipping()){
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
                 wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
@@ -429,7 +452,7 @@ define([
             wolfUtils.setUiComponentsArrayValidation(voucherPath, pickerVoucherPath, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(pickerPath, pickerPickerPath, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(anotherPicker, pickerAnotherPicker, newValidationConfig);
-            if(this.isRegularShipping()){
+            if(this.isRegularShipping() || this.isUrbanoShipping()){
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
                 wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
@@ -491,6 +514,11 @@ define([
                     this.isRegularShippingDisabled(true);
                 }else{
                     this.isRegularShippingDisabled(false);
+                }
+                if(!!carrier.error_message && carrier.carrier_code.includes('urbano')){
+                    this.isUrbanoShippingDisabled(false);
+                }else{
+                    this.isUrbanoShippingDisabled(true);
                 }
                 if (!!carrier.error_message && carrier.carrier_code.includes('rapid')){
                     this.isFastShippingDisabled(true);
