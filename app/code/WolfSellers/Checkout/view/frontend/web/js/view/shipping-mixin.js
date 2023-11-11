@@ -185,8 +185,10 @@ define([
                 this.isUrbanoShipping(true);
                 this.isFastShipping(false);
                 var rate = this.findRateByCarrierCode('urbano');
-                this.showShippingMethodError(rate);
-                this.selectShippingMethod(rate);
+                if(rate !== undefined) {
+                    this.showShippingMethodError(rate);
+                    this.selectShippingMethod(rate);
+                }
                 this.updateShippingValidations();
                 this.isShippingMethodError(false);
                 return true;
