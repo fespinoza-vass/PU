@@ -36,7 +36,7 @@ define([
             direccion_comprobante:""
         };
         if(!_.isUndefined(shippingPayment.shippingMethod())){
-            if (shippingPayment.shippingMethod() === 'flat'){
+            if (shippingPayment.shippingMethod() === 'urban'){
                 payloadEnvioRegular.metodo_envio = shippingPayment.shippingMethod();
                 payloadEnvioRegular.departamento = shippingPayment.departamento();
                 payloadEnvioRegular.provincia = shippingPayment.provincia();
