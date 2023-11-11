@@ -52,7 +52,7 @@ define([
                 return false;
             }
             if (quote.shippingMethod().carrier_code.includes("urban")){
-                this.shippingMethod("flat");
+                this.shippingMethod("urban");
             }
             if (quote.shippingMethod().carrier_code.includes("rapido")){
                 this.shippingMethod("rapido");
@@ -75,7 +75,7 @@ define([
             this.empresa(this.getCustomAttributeByAttributeCode(quote,"company"));
             this.ruc(this.getCustomAttributeByAttributeCode(quote,"dni"));
 
-            if(this.shippingMethod().includes("flat")){
+            if(this.shippingMethod().includes("urban")){
                 this.referencia(this.getCustomAttributeByAttributeCode(quote,"referencia_envio"));
                 this.direccion(quote.shippingAddress().street[0]);
                 this.departamento(quote.shippingAddress().region);
