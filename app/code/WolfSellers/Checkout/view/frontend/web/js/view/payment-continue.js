@@ -85,6 +85,9 @@ define([
                     this.isPaymentFinished(true);
                 }
             }
+            document.querySelector('.opc-progress-bar').scrollIntoView({
+                behavior: 'smooth'
+            });
         },
     });
 });
