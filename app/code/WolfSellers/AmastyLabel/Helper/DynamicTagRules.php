@@ -58,6 +58,7 @@ class DynamicTagRules extends AbstractHelper
      * @param $sku
      * @return bool
      * @throws NoSuchEntityException
+     * @todo Set the configuration to get the FAST_METHOD_MIN_STOCK value from the administrator.
      */
     public function fastShippingLabel($qty, $sku): bool
     {
@@ -81,6 +82,7 @@ class DynamicTagRules extends AbstractHelper
      * @param $sku
      * @return bool
      * @throws NoSuchEntityException
+     * @todo Set the configuration to get the INSTORE_MIN_STOCK value from the administrator.
      */
     public function InStoreLabel($qty, $sku): bool
     {
@@ -105,6 +107,7 @@ class DynamicTagRules extends AbstractHelper
      * @param $qty
      * @return bool
      * @throws NoSuchEntityException
+     * @todo Set the configuration to get the GENERAL_MIN_STOCK value from the administrator.
      */
     public function generalRules($sku, $qty): bool
     {
