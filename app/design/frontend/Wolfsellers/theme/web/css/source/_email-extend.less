@@ -106,6 +106,9 @@ h1{
                 color: @white !important; // style added by mailer
                 text-decoration: none !important; //style added by mailer
             }
+            &:visited{
+                color: @white !important;
+            }
             span{
                 font-size: 18px;
                 font-weight: bold;
@@ -129,9 +132,6 @@ h1{
         border-bottom: 20px solid @mainbackground;
         td{
             padding: 0 35px;
-            a{
-                margin: 20px auto;
-            }
         }
         &.path{
             tr{
@@ -379,6 +379,24 @@ h1{
             }
             &.button-info-contact{
                 padding: 15px 0 35px 0;
+            }
+        }
+        .btn-rastreo{
+            td{
+                a{
+                    font-size: 18px !important;
+                    font-weight: bold !important;
+                    display: inline-block;
+                    &:hover{
+                        color: @white !important;
+                    }
+                    &:visited{
+                        color: @white !important;
+                    }
+                    span{
+                        padding: 20px;
+                    }
+                }
             }
         }
     }
