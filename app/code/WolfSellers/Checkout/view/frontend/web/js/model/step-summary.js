@@ -8,7 +8,7 @@ define([
     'use strict';
 
     return {
-        isStepTreeFinished: ko.observable("_active"),
+        isStepTreeFinished: ko.observable(""),
         isPlaceOrderFinished: ko.observable(""),
         isStepPlaceOrder : ko.observable("")
     }

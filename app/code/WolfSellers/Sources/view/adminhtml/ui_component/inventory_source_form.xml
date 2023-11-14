@@ -22,6 +22,62 @@
             </formElements>
         </field>
     </fieldset>
+    <fieldset name="fastshipping" sortOrder="300">
+        <settings>
+            <label translate="true">Envio Rapido</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <dataScope>bopis</dataScope>
+        </settings>
+        <field name="is_fastshipping_active" formElement="checkbox" sortOrder="1">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>extension_attributes.is_fastshipping_active</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Activo</label>
+                <notice>Si esta activa se considera la source para envio rapido</notice>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="range_radius" formElement="input" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>extension_attributes.range_radius</dataScope>
+                <label translate="true">Rango de Alcance</label>
+                <notice>Rango de alcance en la que la sucursal puede realizar envios rapidos(kilometros)</notice>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="conductor" formElement="input" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>extension_attributes.conductor</dataScope>
+                <label translate="true">Numero del Conductor</label>
+                <notice>Contiene el numero de documento del conductor</notice>
+            </settings>
+        </field>
+    </fieldset>
     <fieldset name="address">
         <field name="district" formElement="input" sortOrder="35">
             <settings>

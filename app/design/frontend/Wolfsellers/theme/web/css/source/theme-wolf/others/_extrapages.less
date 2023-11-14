@@ -277,6 +277,119 @@
             display: none;
         }
     }
+    .visanet-onepage-error{
+        #maincontent{
+            .page-title-wrapper{
+                max-width: 900px;
+                .lib-css(display,flex,1);
+                .lib-css(align-items,center,1);
+                .lib-css(justify-content,space-between,1);
+                margin: 40px auto 0 auto;
+                h1,a.action{
+                    margin-top: 0;
+                }
+                .page-title{
+                    margin-bottom: 0;
+                }
+                a{
+                    .lib-font-size(18);
+                    background: @color-black;
+                    color: @color-white;
+                    padding: 10px;
+                    border-radius: 12px;
+                }
+            }
+			.orden_success_page{
+				margin: 20px auto;
+				background: initial;
+				.content{
+                    background: @color-white;
+                    .title{
+                        padding-left: 35px;
+                    }
+                    p{
+                        padding-left: 35px;
+                    }
+					.btn_regresar_a_comprar{
+						background: @color-black;
+						border-radius: 12px;
+						font-weight: normal;
+						padding: 10px;
+                        margin-left: 35px;
+						.lib-icon-font(
+							@_icon-font-content: @icon-arrow-right-thin,
+							@_icon-font-color: @black,
+							@_icon-font-size: 1.8rem,
+							@_icon-font-position: before,
+							@_icon-font-margin: 0
+						);
+					}
+					.pedido-numero{
+                        border-bottom: 20px solid @mainbackground;
+						margin-bottom: 15px;
+                        padding: 0 0 15px 35px;
+						a{
+							display: block;
+							color: @color-black;
+							pointer-events: none;
+                            span{
+                                font-weight: bold;
+                            }
+                        }
+					}
+					.pedido-items{
+						background: @color-white;
+						.pedido_header{
+							background-color: @color-white;
+							td{
+								&:nth-child(2){
+									font-weight: bold;
+								}
+							}
+							&.header_titles{
+								td{
+									font-weight: bold;
+									border-bottom: 1px solid @lines-input;
+								}
+							}
+							&.sub_total{
+								border-top: 20px solid @mainbackground;
+							}
+						}
+                        .name_product{
+                            font-weight: bold;
+                        }
+					}
+					.direcciones{
+						background: @color-white;
+						border-top: 20px solid @mainbackground;
+						padding: 20px 35px;
+						.envio,
+						.facturacion{
+							.subtitle{
+								.lib-font-size(16);
+								font-weight: bold;
+							}
+						}
+					}
+                    .btn-print{
+                        border-top: 20px solid @mainbackground;
+                        background: @mainbackground;
+                        .btn-default{
+                            font-family: @font-family-name__base;
+                            .lib-font-size(16);
+                            width: 100px;
+                            padding: 10px;
+                            background: @color-black;
+                            color: @color-white;
+                            border: 0px;
+                            border-radius: 12px;
+                        }
+                    }
+				}
+			}
+		}
+	}
 }
 
 
@@ -508,6 +621,46 @@
                     a {
                         .lib-font-size(16);
                         display: block;
+                    }
+                }
+            }
+        }
+    }
+    .visanet-onepage-error{
+        #maincontent{
+            .column.main{
+                .orden_success_page{
+                    .content{
+                        .title{
+                            .lib-font-size(18);
+                            padding-left: 10px;
+                        }
+                        p{
+                            padding-left: 10px;
+                        }
+                        .btn_regresar_a_comprar{
+                            margin-left: 10px;
+                        }
+                        .pedido-numero{
+                            padding-left: 10px;
+                        }
+                        .pedido_header{
+                            td{
+                                white-space: nowrap;
+                            }
+                        }
+                        .direcciones{
+                            padding: 20px 15px;
+                            .subtitle{
+                                .lib-font-size(14);
+                            }
+                        }
+                        .btn-print{
+                            text-align: center;
+                            .btn-default{
+                                width: 80%;
+                            }
+                        }
                     }
                 }
             }

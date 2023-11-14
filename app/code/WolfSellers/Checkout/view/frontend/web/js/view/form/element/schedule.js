@@ -1,10 +1,12 @@
 define([
     'ko',
+    'WolfSellers_Checkout/js/model/customer',
     'Magento_Ui/js/form/element/select',
     'WolfSellers_Checkout/js/model/shipping-payment',
     'WolfSellers_Checkout/js/utils-wolf-uicomponents'
 ], function (
     ko,
+    customerModel,
     Select,
     shippingPayment,
     wolfUtils
@@ -16,16 +18,25 @@ define([
         scheduleDates: ko.observable(""),
         updateOptions: ko.observable(),
         optionSelected: ko.observable(),
+        onlyOneRadio: ko.observable(false),
 
         initialize: function () {
             this._super();
             var ahora = new Date();
             this.options = wolfUtils.getAvailableDates(ahora);
+
+            if (this.options.length === 1){
+                this.onlyOneRadio(true);
+            }else{
+                this.onlyOneRadio(false);
+            }
+
             this.updateOptions.subscribe(function (value) {
                 for (let i = 0; i < this.options.length; i++) {
                     this.options[i].value = value[i].option_value;
                 }
             },this);
+
             this.value.subscribe(function (value) {
                 if(value){
                     this.optionSelected(this.setValueFromTimer(value, 'value'));
@@ -39,6 +50,9 @@ define([
          * @returns {*|string}
          */
         setValueFromTimer: function (radioOption, data) {
+            if(customerModel.isCustomerStepFinished() === "_active"){
+                radioOption = 0;
+            }
             var ahora = new Date();
             var timeSensitive = wolfUtils.getAvailableDates(ahora);
             if(data.includes('lab')){

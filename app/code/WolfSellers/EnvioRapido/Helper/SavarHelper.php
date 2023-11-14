@@ -9,6 +9,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Store\Model\ScopeInterface;
 use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
 use WolfSellers\EnvioRapido\Model\NotifyToSavarCreateOrder;
 use WolfSellers\EnvioRapido\Model\GetSavarOrder;
@@ -17,9 +18,13 @@ use Magento\Sales\Model\Convert\Order as OrderConverter;
 use Magento\Shipping\Model\ShipmentNotifier as OrderShipmentNotifier;
 use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
-
-
-
+use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
+use WolfSellers\Email\Helper\EmailHelper;
+use WolfSellers\Bopis\Helper\Config as BopisConfig;
+use Magento\Store\Model\App\Emulation as Emulation;
+use Magento\Framework\App\Area;
+use Magento\Framework\App\State;
+use Magento\Framework\App\AreaList;
 
 /**
  *
@@ -30,7 +35,33 @@ class SavarHelper extends AbstractHelper
      *
      */
     CONST SHIPPING_METHOD_ENVIO_RAPIDO = "envio_rapido_envio_rapido";
+    CONST SAVAR_STATUS_RECOGIDO = 5;
+    CONST SAVAR_STATUS_ENTREGADO = 9;
 
+    CONST XML_PATH_IS_ACTIVE_SAVAR_CRON = "bopis/savar/is_active";
+
+
+    /** @var AreaList */
+    protected $_areaList;
+
+    /** @var State */
+    protected $_state;
+
+    /** @var Emulation */
+    protected $_emulation;
+
+    /**
+     * @var BopisConfig
+     */
+    protected $config;
+
+    /**
+     * @var EmailHelper
+     */
+    protected $emailHelper;
+
+    /** @var DistrictGeoname */
+    protected $_districtGeoname;
 
     /** @var SavarLogger */
     protected $_savarLogger;
@@ -71,6 +102,10 @@ class SavarHelper extends AbstractHelper
      * @param NotifyToSavarCreateOrder $notifyToSavar
      */
     public function __construct(
+        AreaList                              $areaList,
+        State                                 $state,
+        Emulation                             $emulation,
+        DistrictGeoname                       $districtGeoname,
         Context                               $context,
         NotifyToSavarCreateOrder              $notifyToSavar,
         OrderRepositoryInterface              $orderRepository,
@@ -83,10 +118,17 @@ class SavarHelper extends AbstractHelper
         OrderConverter                        $orderConverter,
         OrderShipmentNotifier                 $orderShipmentNotifier,
         SearchCriteriaBuilder                 $searchCriteriaBuilder,
-        SavarLogger                           $savarLogger
-
+        SavarLogger                           $savarLogger,
+        EmailHelper                           $emailHelper,
+        BopisConfig $config
     )
     {
+        $this->_areaList = $areaList;
+        $this->_state = $state;
+        $this->_emulation = $emulation;
+        $this->config = $config;
+        $this->emailHelper = $emailHelper;
+        $this->_districtGeoname = $districtGeoname;
         $this->_savarLogger = $savarLogger;
         $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->_orderShipmentNotifier = $orderShipmentNotifier;
@@ -111,18 +153,15 @@ class SavarHelper extends AbstractHelper
      */
     public function sendOrderToSavar(OrderInterface $order)
     {
-        $distrito = $order->getShippingAddress()->getDistritoEnvioRapido();
-
-        $distritoTienda = $this->_direccionesTiendasRepository->get($distrito);
-        $sourceCode = $distritoTienda->getTienda();
+        $sourceCode = $order->getData('source_code');
 
         $source = $this->_sourceRepository->get($sourceCode);
 
         $requestPayload = [
             "CodPaquete" => $order->getIncrementId(),
-            "NomRemitente" => "Perfumerias Unidas",
+            "NomRemitente" => $source->getName(),
             "DireccionRemitente" => $source->getStreet(),
-            "DistritoRemitente" => $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict(),
+            "DistritoRemitente" => strtoupper($source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict()),
             "TelefonoRemitente" => $source->getPhone(),
             "CodigoProducto" => $this->getSkuList($order),
             "MarcaProducto" => "",
@@ -134,7 +173,7 @@ class SavarHelper extends AbstractHelper
             "NomConsignado" => $order->getCustomerFirstname() . " " . $order->getCustomerLastname(),
             "NumDocConsignado" => $order->getShippingAddress()->getVatId(),
             "DireccionConsignado" => implode(",",$order->getShippingAddress()->getStreet()),
-            "DistritoConsignado" => $source->getRegion() . "|" . $source->getCity() . "|" . $source->getDistrict(),
+            "DistritoConsignado" => strtoupper("Lima" . "|" . $order->getShippingAddress()->getCity() . "|" . $order->getShippingAddress()->getData('colony')),
             "Referencia" => $order->getShippingAddress()->getReferenciaEnvio(),
             "TelefonoConsignado" => $order->getShippingAddress()->getTelephone(),
             "CorreoConsignado" => $order->getCustomerEmail(),
@@ -154,7 +193,8 @@ class SavarHelper extends AbstractHelper
             "Comentario" => "",
             "Comentario2" => "",
             "Latitud" => "",
-            "Longitud" => ""
+            "Longitud" => "",
+            "conductor" => $source->getConductor()
         ];
 
         if ($order->getShippingAddress()->getHorariosDisponibles()) {
@@ -218,17 +258,45 @@ class SavarHelper extends AbstractHelper
 
         $order = $this->_orderFactory->create()->loadByIncrementId($orderIncremental);
 
-        $response = $this->json->serialize($result['response']);
+        $this->_emulation->startEnvironmentEmulation($order->getStoreId(),Area::AREA_FRONTEND,true);
+
         if($result['state_code'] != 200){
-            $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']. " ". $response));
+            $this->_savarLogger->error( __("No fue posible consultar la orden $orderIncremental: ".$result['state_code']));
             return false;
         }
 
-        if(intval($result['response']['vcodestado']) == 9){
-            if (!$order->canShip() || !$order->hasShipments()) {
-                $this->_savarLogger->error( __('You can\'t create an shipment.'));
+        if(
+            isset($result['response']['vfechanotificacion']) &&
+            $result['response']['vfechanotificacion'] != "0001-01-01T00:00:00"
+        ){
+            if($order->getStatus() == 'prepared_order'){
+                $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
+                $this->emailHelper->sendShipOrderEmail($to, $this->emailHelper->getOrderModel($order));
+
+                $nextStatus = $this->config->getConfig('bopis/status/shipping');
+                $order->setStatus($nextStatus)
+                    ->addStatusToHistory($order->getStatus())
+                    ->addCommentToStatusHistory('Orden Lista para ser entregada');
+                $this->_orderRepository->save($order);
+
+                $this->_savarLogger->error( __('Se actualizo estatus de orden: '. $order->getIncrementId(). " status: ". $order->getStatus()));
             }
         }
+
+        if(intval($result['response']['vcodestado']) == self::SAVAR_STATUS_ENTREGADO){
+            if($order->getStatus() == 'order_on_the_way'){
+                if ($order->canShip() && !$order->hasShipments()) {
+                    $this->generateShipment($order);
+                    $order->setStatus('complete');
+                    $this->_orderRepository->save($order);
+                }else{
+                    $this->_savarLogger->error( __('You can\'t create an shipment.'));
+                }
+            }
+        }
+
+        $this->_emulation->stopEnvironmentEmulation();
+
     }
 
     /**
@@ -236,7 +304,7 @@ class SavarHelper extends AbstractHelper
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function generateShipment($order){
+    public function generateShipment($order,$sourceCode=null){
         $shipment = $this->_orderConverter->toShipment($order);
 
         foreach ($order->getAllItems() AS $orderItem) {
@@ -250,7 +318,7 @@ class SavarHelper extends AbstractHelper
 
         $shipment->register();
         $shipment->getOrder()->setIsInProcess(true);
-        $shipment->getExtensionAttributes()->setSourceCode('1');
+        $shipment->getExtensionAttributes()->setSourceCode($order->getData('source_code'));
 
         try {
 
@@ -261,10 +329,8 @@ class SavarHelper extends AbstractHelper
                 ->notify($shipment);
 
             $shipment->save();
-        } catch (\Exception $e) {
-            throw new \Magento\Framework\Exception\LocalizedException(
-                __($e->getMessage())
-            );
+        } catch (\Throwable $error) {
+            $this->_savarLogger->error($error->getMessage());
         }
     }
 
@@ -304,10 +370,24 @@ class SavarHelper extends AbstractHelper
      * @return void
      */
     public function updateSavarOrders(){
+
+       $isSavarCronActive = $this->scopeConfig->getValue(self::XML_PATH_IS_ACTIVE_SAVAR_CRON,ScopeInterface::SCOPE_STORE);
+
+       if(!$isSavarCronActive){
+           return;
+       }
+
+        $this->_state->setAreaCode("frontend");
+
+        $this->_areaList->getArea(Area::AREA_FRONTEND)
+            ->load(\Magento\Framework\App\Area::PART_TRANSLATE);
+
+
         $this->_savarLogger->error("consulta de ordenes savar");
         $searchCriteria = $this->_searchCriteriaBuilder
             ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
-            ->addFilter('status',"order_on_the_way","eq")
+            ->addFilter('status',["prepared_order",'order_on_the_way'],"in")
+            ->addFilter('state',"processing","eq")
             ->create();
 
         $orders = $this->_orderRepository->getList($searchCriteria);
@@ -318,7 +398,9 @@ class SavarHelper extends AbstractHelper
                 try {
                     $this->getSavarOrder($order->getIncrementId());
                 }catch (\Throwable $error){
-                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId());
+                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId().
+                        $error->getMessage()
+                    );
                     continue;
                 }
             }

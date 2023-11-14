@@ -12,6 +12,7 @@ use Magento\Framework\Phrase;
 use Magento\Rule\Model\Condition\AbstractCondition;
 use Magento\Rule\Model\Condition\Context;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class QtyPerSource extends AbstractCondition
 {
@@ -77,6 +78,8 @@ class QtyPerSource extends AbstractCondition
         $inventory = $this->sourceItemsBySku->execute($product->getSku());
 
         foreach ($inventory as $source) {
+            if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) continue;
+
             if (!$source->getStatus()) continue;
 
             if ($source->getQuantity() > $max) {

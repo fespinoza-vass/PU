@@ -90,8 +90,12 @@ define([
             if (jQuery( ".actions-toolbar-continue").find("#continuePayment")){
                 if (jQuery('#agreement_' + paymentMethodName + '_' + agreementId).is(":checked")) {
                     $( ".actions-toolbar-continue").find("#continuePayment").removeAttr("disabled");
+                    if(jQuery('#receive-promotion').is(":checked")){
+                        $( "#placeOrder").removeAttr("disabled");
+                    }
                 } else {
                     $( ".actions-toolbar-continue").find("#continuePayment").attr("disabled", "disabled");
+                    $( "#placeOrder").attr("disabled", "disabled");
                 }
             }
         }

@@ -46,7 +46,10 @@
     </type>
 
     <type name="Magento\Checkout\Api\PaymentInformationManagementInterface">
-        <plugin name="WolfSellers_Checkout_Plugin_Magento_Quote_Model_BillingAddressManagement" sortOrder="10" type="WolfSellers\Checkout\Plugin\Quote\Model\BillingAddressManagement"/>
+        <plugin name="WolfSellers_Checkout_Plugin_Magento_Quote_Model_BillingAddressManagement_logged_user" sortOrder="10" type="WolfSellers\Checkout\Plugin\Quote\Model\BillingAddressManagement"/>
+    </type>
+    <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="WolfSellers_Checkout_Plugin_Magento_Quote_Model_BillingAddressManagement_guest_user" sortOrder="10" type="WolfSellers\Checkout\Plugin\Quote\Model\BillingAddressManagementGuest"/>
     </type>
 
 

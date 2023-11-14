@@ -12,12 +12,16 @@ define([
         initialize: function () {
             this._super();
             this.value.subscribe(function (value) {
-                if(value.length > 18){
-                    this.value(value.substring(0,18));
+                if(value.length > 8){
+                    this.value(value.substring(0,8));
                 }
             },this);
             return this;
         },
+        /**
+         * Init observable
+         * @returns {*}
+         */
         initObservable: function(){
             this._super();
             this.observe('placeholder');
