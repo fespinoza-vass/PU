@@ -78,13 +78,15 @@ define([
                 if (customer.isCustomerStepFinished() === '_complete' &&
                     shippingPayment.isShippingStepFinished() === '_complete' &&
                     changeText.switchText() == false
-                   ) {
+                ) {
                     this.isPaymentFinished(false);
                     this.isPaymentFinished.notifySubscribers(false);
                 } else {
                     this.isPaymentFinished(true);
                 }
             }
+
+            document.getElementById('opc-sidebar').scrollIntoView({ behavior: 'smooth' });
         },
     });
 });

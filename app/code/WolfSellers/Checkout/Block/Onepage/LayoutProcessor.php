@@ -146,7 +146,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/select',
                 'tooltip' => [
-                    "description" => 'Selecciona tipo de identificacion.'
+                    "description" => 'Selecciona tipo de identificación.'
                 ],
 
             ],
@@ -199,7 +199,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
                 'tooltip' => [
-                    "description" => 'Ingresa Número de Telefono.'
+                    "description" => 'Ingresa Número de Teléfono.'
                 ],
             ],
             'dataScope' => 'customerData.telefono',
