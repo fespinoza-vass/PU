@@ -13,9 +13,6 @@ $viewModel = $block->getData('viewModel');
  * @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Info $block
  */
 $order = $block->getOrder();
-$tipo_cedula_order = !empty($order->getData('tipo_cedula_order')) ? "Tipo de Cedula: ".$order->getData('tipo_cedula_order')." <br/>" : "";
-$no_cedula = !empty($order->getData('no_cedula')) ? "No. de Cédula: ".$order->getData('no_cedula')." <br/>" : "";
-$nombre_o_empresa = !empty($order->getData('nombre_o_empresa')) ? "Nombre o Empresa : ".$order->getData('nombre_o_empresa')." <br/>" : "";
 $baseCurrencyCode = (string)$order->getBaseCurrencyCode();
 $globalCurrencyCode = (string)$order->getGlobalCurrencyCode();
 $orderCurrencyCode = (string)$order->getOrderCurrencyCode();
@@ -49,6 +46,7 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
     'horarios_disponibles',
     $shippingAddress->getHorariosDisponibles()
 );
+$customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformation($order->getId());
 ?>
 
 <!-- 01 CARD: CLIENTE QUE FACTURA -->
@@ -60,17 +58,29 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
             </div>
 
             <address class="admin__page-section-item-content">
-                <span class="color-orange"><?= $billingAddress->getFirstname() . " " . $billingAddress->getLastname(); ?></span><br />
-                <?= $tipo_cedula_order ?>
-                <?= $no_cedula ?>
-                <?= $nombre_o_empresa ?>
-                Número de documento: <?= $billingAddress->getVatId(); ?><br />
-                <?= $billingAddress->getEmail(); ?><br />
-                T. <?= $billingAddress->getTelephone(); ?><br />
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                    <?php $customer = $viewModel->getCustomerData($order->getCustomerId())?>
 
+                    <span class="color-orange">
+                        <b><?= $customer->getFirstname()?> <?=$customer->getLastname()?></b>
+                    </span><br>
+                    Número de documento:
+                    <?=$viewModel->getCustomerIdentificacion($customer->getId())?><br>
+                    <?=$customer->getEmail()?> <br>
+                    T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                <?php else: ?>
+                    <span class="color-orange">
+                        <?= $customerOrderBillingInformation['name'] ?>
+                    </span><br>
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
+                    <?= $customerOrderBillingInformation['email'] ?><br />
+                    T. <?= $customerOrderBillingInformation['tel'] ?><br />
+                <?php endif; ?>
                 <br>
                 Comprobante:
-                <?php if ( $billingAddress->getDataByKey('invoice_required') == '0'):?>
+                <?php if ( is_null($billingAddress->getDataByKey('invoice_required')) ||
+                    $billingAddress->getDataByKey('invoice_required') == '0' ):?>
                     Boleta
                 <?php else: ?>
                     Factura <br>
@@ -111,7 +121,7 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
 
 
             <address class="admin__page-section-item-content">
-                <b><span class="color-orange">ID de Orden: <?= $order->getIncrementId(); ?></span></b><br />
+                <b><span class="color-orange">Número de Pedido: <?= $order->getIncrementId(); ?></span></b><br />
                 <!--ID SBX: <?= $order->getId(); ?><br />-->
                 Creado: <?= $orderStoreDate; ?><br />
                 Entrega: <?=$viewModel->getShippingMethodTitle($order->getShippingMethod())?><br />
@@ -141,13 +151,29 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
                 <span class="title"><?= $block->escapeHtml(__('Cliente que recibe')) ?></span>
             </div>
             <address class="admin__page-section-item-content">
-                <span class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></span><br />
-                Número de documento: <?=$viewModel->getCustomerIdentificacion($order->getCustomerId())?><br />
-                <?= $shippingAddress->getEmail(); ?><br />
-                T. <?= $shippingAddress->getTelephone(); ?>
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                    <?php $picker = $viewModel->getRealAddrOptionValue('picker', $shippingAddress->getPicker()); ?>
+                    <?php if ($picker == 'other'): ?>
+                        <b class="color-orange" title="pick <?=$picker?>"><?= $shippingAddress->getNombreCompletoPicker() ?></b><br />
+                        Número de documento: <?=$viewModel->getRealAddrOptionValue('identificacion_picker', $shippingAddress->getIdentificacionPicker())?>
+                            - <?=$shippingAddress->getNumeroIdentificacionPicker()?><br />
+                        <?= $shippingAddress->getEmailPicker() ?? $customer->getEmail(); ?><br />
+                        T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                    <?php else: ?>
+                        <b class="color-orange" title="<?=$picker?>"><?= $customer->getFirstname()?> <?=$customer->getLastname()?></b><br />
+                        Número de documento: <?=$viewModel->getCustomerIdentificacion($customer->getId())?><br>
+                        <?=$customer->getEmail()?> <br>
+                        T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <b class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></b><br />
+                    Número de documento: <?=$viewModel->getCustomerIdentificacion($order->getCustomerId())?><br />
+                    <?= $shippingAddress->getEmail(); ?><br />
+                    T. <?= $shippingAddress->getTelephone(); ?>
+                <?php endif; ?>
             </address>
             <?php if ($block->getAdminUserType() == 1):?>
-            <button name="btn-confirmacion-cliente-retira"
+            <!--<button name="btn-confirmacion-cliente-retira"
                     value="Confirmar"
                     class="btn-confirmacion-cliente btn-confirmacion-cliente-retira
                         <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"":"confirmado" ?>
@@ -157,7 +183,7 @@ $horarioDeEntrega = $viewModel->getRealAddrOptionValue(
                     data-type="1"
             >
                 <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
-            </button>
+            </button>-->
             <?php endif;?>
         </div>
     </div>

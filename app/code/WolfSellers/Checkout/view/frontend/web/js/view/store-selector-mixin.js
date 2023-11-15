@@ -102,6 +102,13 @@ define([
          * @returns {boolean}
          */
         validatePickupInformation: function () {
+            var picker = registry.get("checkout.steps.store-pickup.store-selector.picker.pickerOption");
+            if(_.isUndefined(picker.value())){
+                picker.error('Este es un campo obligatorio.');
+                return false;
+            }else{
+                picker.error('');
+            }
             if(this.isAnotherPickerAreaVisible()){
                 var anotherPickerForm = registry.get("checkout.steps.store-pickup.store-selector.another-picker");
                 if(!anotherPickerForm.validateAnotherPickerForm()){

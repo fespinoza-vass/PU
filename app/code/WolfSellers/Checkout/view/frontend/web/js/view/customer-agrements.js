@@ -1,8 +1,3 @@
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
 define([
     'ko',
     'jquery',
@@ -17,7 +12,7 @@ define([
 
     return Component.extend({
         defaults: {
-            template: 'Magento_CheckoutAgreements/checkout/checkout-agreements'
+            template: 'WolfSellers_Checkout/customer_agreements'
         },
         isVisible: agreementsConfig.isEnabled,
         agreements: agreementsConfig.agreements,
@@ -47,11 +42,10 @@ define([
          *
          * @param {Object} element
          */
-        showContent: function (element) {
+        showContentAgreement: function (element) {
             this.modalTitle(element.checkboxText);
             this.modalContent(element.content);
             this.contentHeight(element.contentHeight ? element.contentHeight : 'auto');
-            agreementsModal.showModal();
         },
 
         /**
@@ -68,19 +62,10 @@ define([
             if (paymentMethodRenderer) {
                 // item looks like this: {title: "Check / Money order", method: "checkmo"}
                 paymentMethodName = paymentMethodRenderer.item ?
-                  paymentMethodRenderer.item.method : '';
+                    paymentMethodRenderer.item.method : '';
             }
 
             return 'agreement_' + paymentMethodName + '_' + agreementId;
-        },
-
-        /**
-         * Init modal window for rendered element
-         *
-         * @param {Object} element
-         */
-        initModal: function (element) {
-            agreementsModal.createModal(element);
         },
 
         click: function (context, agreementId) {
@@ -92,11 +77,11 @@ define([
                 paymentMethodName = paymentMethodRenderer.item ?
                     paymentMethodRenderer.item.method : '';
             }
-            if (jQuery( ".actions-toolbar").find("#createCount").length){
-                if (jQuery('#agreement_' + paymentMethodName + '_' + agreementId).is(":checked")) {
-                    $( ".actions-toolbar").find("#createCount").removeAttr("disabled");
+            if (jQuery( ".actions-toolbar").find("#stepFormCheck")){
+                if(jQuery('#agreement__' + agreementId).is(":checked")){
+                    $( ".actions-toolbar").find("#stepFormContinue").removeAttr("disabled");
                 } else {
-                    $( ".actions-toolbar").find("#createCount").attr("disabled", "disabled");
+                    $( ".actions-toolbar").find("#stepFormContinue").attr("disabled", "disabled");
                 }
             }
         }

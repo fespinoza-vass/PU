@@ -703,6 +703,49 @@
             }
         }
     }
+    .review-customer-view{
+        .customer-review{
+            .product-image-container{
+                // IMPORTANTS para modificar estilos de AMASTY
+                position: relative !important;
+                .product-image-wrapper{
+                    .product-image-photo{
+                        width: 100% !important;
+                    }
+                }
+                .amlabel-position-wrapper{
+                    margin: 10px;
+                    width: auto !important;
+                    &[class*="amlabel-position-top-center"]{
+                        left: auto !important; //add style for module amasty
+                        right: 75px !important; //add style for module amasty
+                        .amlabel-text{
+                            display: none !important; //add style for module amasty 
+                        }
+                    }
+                    &[class*="amlabel-position-top-right"]{
+                        .amlabel-text{
+                            display: none !important; //add style for module amasty 
+                        }
+                    }
+                    .amasty-label-container:not(.-preview){
+                        height: 24px !important;
+                        line-height: 24px !important;
+                        width: auto !important;
+                        text-align: center;
+                        .amlabel-text{
+                            position: static !important;
+                            padding: 0 10px !important;
+                        }
+                        .amasty-label-image{
+                            width: 56px !important; //add style for amasty
+                            height: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /////////INFO DE CUENTA/////////////
     .customer-account-edit{
@@ -734,6 +777,17 @@
                                         display: none;
                                     }
                                 }
+                                
+                                @media @xxsmax{
+                                    .control{
+                                        .password-strength-meter{
+                                            .lib-font-size(11);
+                                        }
+                                    }
+                                }
+                            }
+                            &.additional_info{
+                                display: none;
                             }
                         }
                     }
@@ -774,7 +828,7 @@
                                     box-shadow: none;
                                     border: none;
                                     height: 32px;
-                                    width: 55px;
+                                    width: 65px;
                                 }
                             }
                         }
@@ -982,6 +1036,33 @@
                 .label{
                     margin: 0 0 8px;
                     display: block;
+                }
+                &-name-firstname,
+                &-name-lastname{
+                    label{
+                        span{
+                            &:after{
+                                content: '*';
+                                color: @red;
+                                margin-left: 3px;
+                            }
+                        }
+                    }
+                    .mage-error{
+                        &:before{
+                            content: "!";
+                            width: 15px;
+                            height: 15px;
+                            background: @red;
+                            border-radius: 50%;
+                            display: inline-block;
+                            color: @white;
+                            text-align: center;
+                            font-weight: bold;
+                            margin-right: 5px;
+                            line-height: 1.3;
+                        }
+                    }
                 }
             }
         }
@@ -1728,6 +1809,29 @@
             }
         }
     }
+    .review-customer-view{
+        .customer-review{
+            .product-media{
+                .product-image-container{
+                    .amlabel-position-wrapper{
+                        z-index: 1;
+                        &[class*="amlabel-position-top-center"]{
+                            left: auto !important; //add style for module amasty
+                            right: 10px !important; //add style for module amasty
+                            top: 25px !important; //add style for module amasty
+                        }
+                        .amasty-label-container:not(.-preview){
+                            .amasty-label-image{
+                                width: 34px !important; //style addd for amasty
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
 
     /////////INFO DE CUENTA/////////////
     .customer-account-edit{

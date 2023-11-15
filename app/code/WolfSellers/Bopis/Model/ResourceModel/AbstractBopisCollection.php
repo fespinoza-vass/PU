@@ -51,7 +51,7 @@ abstract class AbstractBopisCollection extends Collection
     const FAST_SHIPPING_METHOD = 'envio_rapido_envio_rapido';
 
     /** @var string  */
-    const REGULAR_SHIPPING_METHOD = 'urbano';
+    const REGULAR_SHIPPING_METHOD = 'flatrate';
 
     /** @var string  */
     const PICKUP_SHIPPING_METHOD = 'instore_pickup';
@@ -150,6 +150,17 @@ abstract class AbstractBopisCollection extends Collection
             "soaShipping.parent_id = main_table.entity_id AND soaShipping.address_type = 'shipping'",
             ['telephone', 'city', 'postcode', 'street', 'region',
                 'customer_address_id'
+            ]
+        );
+
+        $this->getSelect()->joinLeft(
+            ['customer' => $this->getTable('customer_entity')],
+            "customer.entity_id = main_table.customer_id",
+            [
+                'firstname',
+                'lastname',
+                "IF (so.shipping_method = '" . self::PICKUP_SHIPPING_METHOD . "' ,
+                    CONCAT(customer.firstname, ' ', customer.lastname) ,main_table.shipping_name) AS entregar_a"
             ]
         );
 

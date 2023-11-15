@@ -1,5 +1,8 @@
 & when (@media-common = true) {
 	.checkout-index-index{
+		.loading-mask{
+			z-index: -1 !important;// inline style loading mask
+		}
 		h4{
 			.lib-font-size(16);
 			font-weight: 600;
@@ -286,18 +289,7 @@
 					font-weight: 700;
 				}
 			}
-			&:nth-child(3) {
-				&._active {
-					> span:after{
-						border-color: @gray8;
-						color: @gray8;
-					}
-					> span{
-						color: @gray8;
-						font-weight: 600;
-					}
-				}
-			}
+			
 			&:before {
 				height: 0;
 
@@ -697,7 +689,7 @@
 						span {
 							&:after {
 								content: '*';
-								color: @color-black;
+								color: @red;
 								font-size: 1.2rem;
 								margin: 0 0 0 5px;
 							}
@@ -706,6 +698,25 @@
 					.control._with-tooltip {
 						select {
 							width: ~"calc(100% - 25px)";
+						}
+					}
+					&._error{
+						@media @mdmax{
+							.control{
+								position: relative;
+								input{
+									position: initial;
+								}
+								.field-error{
+									position: absolute;
+									margin-top: 0px;
+								    position: absolute;
+								    left: 0;
+								    line-height: 1;
+								    .lib-font-size(10);
+								    bottom: -11px;
+								}
+							}
 						}
 					}
 				}
@@ -732,6 +743,15 @@
 						label {
 							&:after {
 								content: none;
+							}
+							span{
+								line-height: 1.2;
+								a{
+									font-weight: bold;
+									&:hover{
+										color: @black;
+									}
+								}
 							}
 						}
 						button {
@@ -976,6 +996,9 @@
 										}
 										.admin__field{
 											.lib-radio();
+										}
+										.field-error{
+											padding: 0;
 										}
 									}
 								}
@@ -2936,6 +2959,39 @@
 						input{
 							width: 100%;
 						}
+						.control{
+							#customer-email{
+								width: 90%;
+								margin-right: 0;
+							}
+							.field-tooltip{
+								.field-tooltip-action{
+									&:before{
+										line-height: 1.8;
+									}
+								}
+								.field-tooltip-content{
+									.lib-font-size(12);
+								}
+							}
+						}
+					}
+				}
+			}
+			#stepFormCheck{
+				.field{
+					.field-tooltip{
+						.field-tooltip-content{
+							width: 210px;
+							.lib-font-size(12);
+							right: -85px;
+							&:before{
+								right: 85px;
+							}
+							&:after{
+								right: 85px;
+							}
+						}
 					}
 				}
 			}
@@ -3333,6 +3389,17 @@
 //Mobile 375px
 @media @xssmax{
 	.checkout-index-index{
+		#customer_step{
+			#stepFormCheck{
+				.field{
+					&[name="customerData.telefono"]{
+						input{
+							padding-right:0;
+						}
+					}
+				}
+			}
+		}
 		.checkout-shipping-address.step-two{
 			.container.steps{
 				#shipping{

@@ -13,14 +13,8 @@ define([
                 type: 'popup',
                 responsive: true,
                 innerScroll: true,
-                // title: 'Example Modal',
-                buttons: [{
-                    text: $.mage.__('Cancel'),
-                    class: 'payment-benefits-modal',
-                    click: function () {
-                        this.closeModal();
-                    }
-                }]
+                modalClass: 'container-payment-benefits-modal',
+                buttons: []
             },
             /**
              * Function to open modal.

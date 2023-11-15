@@ -26062,3 +26062,7 @@ Your receipt address will be the registered delivery address,Tu dirección del c
 "Remember that you have up to 7 days after your purchase to collect your products, otherwise your purchase will be canceled and the money will be refunded.","Recuerda que tienes hasta 7 días posteriores a tu compra para recoger tus productos, de lo contrario tu compra será anulada y se procederá a la devolución del dinero."
 "Cost of shipping","Costo de envío"
 "You will be able to pick up your order within 24 to 48 hours.", "Podras recoger tu pedido en un lapso de 24 a 48 horas"
+"Copyright © 2023 United Perfumerias Peru. All rights reserved","Copyright © 2023 Perfumerias Unidas Peru. Todos los derechos reservados"
+Grand Total,Total,module,Magento_Sales,
+Shipping & Handling,Envío,module,Magento_Sales,
+Summary,Resumen,module,Magento_Checkout,

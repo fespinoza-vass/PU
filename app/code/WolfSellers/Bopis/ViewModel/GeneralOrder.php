@@ -10,6 +10,7 @@ use Magento\Framework\App\Response\RedirectInterface;
 use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Sales\Api\OrderRepositoryInterface;
 
 class GeneralOrder implements ArgumentInterface
 {
@@ -19,13 +20,15 @@ class GeneralOrder implements ArgumentInterface
      * @param SourceRepositoryInterface $_sourceRepository
      * @param SearchCriteriaBuilder $_searchCriteriaBuilder
      * @param CustomerRepositoryInterface $customerRepository
+     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         protected RealStates                  $_realStates,
         protected RedirectInterface           $redirect,
         protected SourceRepositoryInterface   $_sourceRepository,
         protected SearchCriteriaBuilder       $_searchCriteriaBuilder,
-        protected CustomerRepositoryInterface $customerRepository
+        protected CustomerRepositoryInterface $customerRepository,
+        protected OrderRepositoryInterface    $orderRepository
     )
     {
     }
@@ -102,17 +105,23 @@ class GeneralOrder implements ArgumentInterface
 
     /**
      * @param $customerId
+     * @param bool $whitType
      * @return string
      * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
-    public function getCustomerIdentificacion($customerId)
+    public function getCustomerIdentificacion($customerId, bool $whitType = true): string
     {
         $identification_type = $this->getCustomerAttributeValue($customerId, 'identificacion');
         $identification_number = $this->getCustomerAttributeValue($customerId, 'numero_de_identificacion');
 
-        $type = $this->_realStates->getRealAddrOptionValue('customer', 'identificacion', $identification_type);
+        if ($whitType) {
+            $type = $this->_realStates->getRealAddrOptionValue('customer', 'identificacion', $identification_type);
+            return ($type ? $type . ' - ' : '') . $identification_number;
+        }
 
-        return ($type ? $type . ' - ' : '') . $identification_number;
+
+        return $identification_number;
     }
 
     /**
@@ -130,5 +139,48 @@ class GeneralOrder implements ArgumentInterface
         if (!$attribute) return '';
 
         return $attribute->getValue();
+    }
+
+    /**
+     * @param $customerId
+     * @return \Magento\Customer\Api\Data\CustomerInterface
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function getCustomerData($customerId)
+    {
+        return $this->customerRepository->getById($customerId);
+    }
+
+    /**
+     * @return string
+     */
+    public function getInStoreCode(): string
+    {
+        return \WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection::PICKUP_SHIPPING_METHOD;
+    }
+
+    /**
+     * @param $orderId
+     * @return array
+     * @throws LocalizedException
+     */
+    public function getCustomerOrderBillingInformation($orderId)
+    {
+        $order = $this->orderRepository->get($orderId);
+
+        $typeId = $this->_realStates->getRealAddrOptionValue(
+            'customer',
+            'identificacion',
+            $order->getCustomerIdentificacion()
+        );
+
+        return [
+            'name' => $order->getCustomerFirstname() . ' ' . $order->getCustomerLastname(),
+            'email' => $order->getCustomerEmail(),
+            'tel' => $order->getCustomerTelefono(),
+            'type_id' => $typeId,
+            'id_number' => $order->getCustomerNumeroDeIdentificacion()
+        ];
     }
 }

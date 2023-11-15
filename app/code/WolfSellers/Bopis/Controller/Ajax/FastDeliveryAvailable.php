@@ -6,6 +6,7 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\Checkout\Model\Session;
+use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 
 class FastDeliveryAvailable implements HttpGetActionInterface
 {
@@ -53,7 +54,12 @@ class FastDeliveryAvailable implements HttpGetActionInterface
         return $result;
     }
 
-
+    /**
+     * Get the maximum amount of stock
+     *
+     * @param $sku
+     * @return int
+     */
     private function getMaxQtyPerSource($sku): int
     {
         $max = 0;
@@ -61,6 +67,9 @@ class FastDeliveryAvailable implements HttpGetActionInterface
         $inventory = $this->sourceItemsBySku->execute($sku);
 
         foreach ($inventory as $source) {
+            // Exclude Default Source Lurin.
+            if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) continue;
+
             if (!$source->getStatus()) continue;
 
             if ($source->getQuantity() > $max) {
