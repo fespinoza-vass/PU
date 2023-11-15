@@ -1,0 +1,54 @@
+<?php
+    /** @var $block \WolfSellers\Bopis\Block\Order\Email\Addresses */
+
+    /** @var  $viewModel \WolfSellers\Bopis\ViewModel\GeneralOrder */
+    $viewModel = $block->getData('viewModel');
+
+    /** @var $order \Magento\Sales\Api\Data\OrderInterface */
+    $order = $this->getOrder();
+
+    $billingInformation = $viewModel->getCustomerOrderBillingInformation($block->getOrderId());
+    $shippingAddress = $order->getShippingAddress();
+
+    $horarioDeEntrega = $viewModel->getRealAddrOptionValue('horarios_disponibles',
+        $shippingAddress->getHorariosDisponibles());
+
+    $horarioTxt = $viewModel->getAllSchedule($horarioDeEntrega, $order->getCreatedAt());
+?>
+<table class="order-details">
+    <tbody>
+        <tr>
+            <td class="address-details">
+                <h3>Información de contacto</h3>
+                <p>
+                    <?=$order->getCustomerFirstname()?> <br>
+                    <?=$order->getCustomerLastname()?> <br>
+                    <?=$billingInformation['type_id']?> : <?=$billingInformation['id_number']?><br>
+                    <?=$billingInformation['email']?> <br>
+                    <?=$billingInformation['tel']?> <br>
+                </p>
+            </td>
+
+            <td class="address-details">
+                <h3>Información de entrega</h3>
+                <p>
+                    <?php if ($block->getIsPickup()): ?>
+                        <?= $shippingAddress->getName() ?> <br>
+                        <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?> <br>
+                        <?= $horarioTxt['fecha'] ?? "" ?> <br>
+                        <?= $horarioTxt['horario'] ?? "" ?>
+                    <?php else: ?>
+                        <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?>
+                        <?= $shippingAddress->getPostcode() ?>,
+                        <?= $shippingAddress->getData('colony') ?> -
+                        <?= $shippingAddress->getCity() ?> -
+                        <?= $shippingAddress->getRegion() ?> <br>
+                        <?= $shippingAddress->getData('referencia_envio') ?> <br>
+                        <?= $horarioTxt['fecha'] ?? "" ?> <br>
+                        <?= $horarioTxt['horario'] ?? "" ?>
+                    <?php endif; ?>
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>

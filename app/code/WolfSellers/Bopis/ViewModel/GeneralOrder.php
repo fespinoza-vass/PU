@@ -104,6 +104,31 @@ class GeneralOrder implements ArgumentInterface
     }
 
     /**
+     * @param $horarioDeEntrega
+     * @param $createdAt
+     * @return array|string
+     */
+    public function getAllSchedule($horarioDeEntrega, $createdAt)
+    {
+        $txt = $this->_realStates->getSchedule($horarioDeEntrega);
+
+        if ($txt == "") return $txt;
+
+        $data = explode("de", $txt);
+
+        if (trim($data[0]) == 'Hoy'){
+            $date = date('d/m/Y', strtotime($createdAt));
+        }else{
+            $date = date('d/m/Y', strtotime('+ 24 hours', strtotime($createdAt)) );;
+        }
+
+        return [
+            'fecha' => $data[0] . ' ' . $date,
+            'horario' => $data[1]
+        ];
+    }
+
+    /**
      * @param $customerId
      * @param bool $whitType
      * @return string
