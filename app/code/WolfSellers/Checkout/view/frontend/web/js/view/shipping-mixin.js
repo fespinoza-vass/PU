@@ -121,6 +121,11 @@ define([
                 return false;
             }
              */
+            var rate = this.findRateByCarrierCode('urbano');
+            if(rate !== undefined) {
+                this.showShippingMethodError(rate);
+                this.selectShippingMethod(rate);
+            }
             this.source.set('params.invalid', false);
             this.triggerShippingDataValidateEvent();
             this.validateShippingInformation();
