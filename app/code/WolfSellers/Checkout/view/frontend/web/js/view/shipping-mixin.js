@@ -157,6 +157,10 @@ define([
                             this.isShippingStepFinished.notifySubscribers("_complete");
                         }
                         this.goToResume(false);
+                        var visanet = registry.get("checkout.steps.billing-step.payment.payments-list.visanet_pay");
+                        if(!_.isUndefined(visanet)){
+                            visanet.selectPaymentMethod();
+                        }
                     } else {
                         this.isShippingStepFinished("_active");
                         this.goToResume(true);
@@ -260,7 +264,6 @@ define([
          * @returns {*}
          */
         showShippingMethodError: function (rate) {
-            console.log(rate);
             if(_.isUndefined(rate.error_message)){
                 return false;
             }

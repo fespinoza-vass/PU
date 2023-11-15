@@ -26,7 +26,7 @@ define([
                 if (!value){
                     shippingPayment.isShippingStepFinished('_complete');
                     var visanet = registry.get("checkout.steps.billing-step.payment.payments-list.visanet_pay");
-                    if(_.isUndefined(visanet)){
+                    if(!_.isUndefined(visanet)){
                         visanet.selectPaymentMethod();
                     }
                 }else{
