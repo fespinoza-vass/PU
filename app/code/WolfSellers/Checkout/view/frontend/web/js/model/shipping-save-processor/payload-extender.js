@@ -12,6 +12,14 @@ define([
     'use strict';
 
     return function (payload) {
+        var payloadEnvioUrbano = {
+            metodo_envio:"",
+            departamento:"",
+            provincia:"",
+            distrito:"",
+            direccion:"",
+            referencia:""
+        };
         var payloadEnvioRegular = {
             metodo_envio:"",
             departamento:"",
@@ -36,6 +44,14 @@ define([
             direccion_comprobante:""
         };
         if(!_.isUndefined(shippingPayment.shippingMethod())){
+            if (shippingPayment.shippingMethod() === 'urbano'){
+                payloadEnvioUrbano.metodo_envio = shippingPayment.shippingMethod();
+                payloadEnvioUrbano.departamento = shippingPayment.departamento();
+                payloadEnvioUrbano.provincia = shippingPayment.provincia();
+                payloadEnvioUrbano.distrito = shippingPayment.distrito();
+                payloadEnvioUrbano.direccion = shippingPayment.direccion();
+                payloadEnvioUrbano.referencia = shippingPayment.referencia();
+            }
             if (shippingPayment.shippingMethod() === 'flat'){
                 payloadEnvioRegular.metodo_envio = shippingPayment.shippingMethod();
                 payloadEnvioRegular.departamento = shippingPayment.departamento();
@@ -77,6 +93,7 @@ define([
             customer_identificacion :customer.customerTypeIdentification(),
             customer_numero_de_identificacion: customer.customerNumberIdentification(),
             customer_password : customer.passwordRegister(),
+            envio_urbano: payloadEnvioUrbano,
             envio_regular: payloadEnvioRegular,
             envio_rapido: payloadEnvioRapido,
             retiro_tienda: payloadRetiroEnTienda
