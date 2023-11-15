@@ -138,7 +138,6 @@
 
     <form id="co-shipping-method-form"
           class="form methods-shipping"
-          if="rates().length"
           submit="setShippingInformation"
           novalidate="novalidate">
 
@@ -149,7 +148,9 @@
         </div>
         <div class="actions-toolbar" id="shipping-method-buttons-container">
             <div class="primary">
-                <button data-role="opc-continue" type="submit" class="button action continue primary" data-bind="attr:{disabled:isContinueBtnDisabled}">
+                <button data-role="opc-continue" type="submit"
+
+                        class="button action continue primary" data-bind="attr:{disabled:isContinueBtnDisabled}">
                     <span translate="'Next'"></span>
                 </button>
             </div>
