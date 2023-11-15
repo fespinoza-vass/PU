@@ -110,6 +110,7 @@ define([
          * Overwrite set shipping information action
          */
         setShippingInformation: function () {
+            /*
             if (!this.isFastShipping() && !this.isRegularShipping() && !this.isUrbanoShipping()){
                 if(!customer.isCustomerLoggedIn){
                     quote.shippingMethod(null);
@@ -119,27 +120,26 @@ define([
                 );
                 return false;
             }
-            if (customer.isCustomerStepFinished() === '_complete' || true) {
-                this.source.set('params.invalid', false);
-                this.triggerShippingDataValidateEvent();
-                this.validateShippingInformation();
-                if (!this.source.get('params.invalid')) {
-                    if (!this.setDataToShippingForm()){
-                        return false;
-                    }
-                    if (this.validateShippingInformation()) {
-                        this.isShippingStepFinished("_complete");
-                        if (shippingPayment.shippingMethod() === 'instore') {
-                            this.isShippingStepFinished.notifySubscribers("_complete");
-                        }
-                        this.goToResume(false);
-                    } else {
-                        this.isShippingStepFinished("_active");
-                        this.goToResume(true);
-                    }
-                }else{
+             */
+            this.source.set('params.invalid', false);
+            this.triggerShippingDataValidateEvent();
+            this.validateShippingInformation();
+            if (!this.source.get('params.invalid')) {
+                if (!this.setDataToShippingForm()){
                     return false;
                 }
+                if (this.validateShippingInformation()) {
+                    this.isShippingStepFinished("_complete");
+                    if (shippingPayment.shippingMethod() === 'instore') {
+                        this.isShippingStepFinished.notifySubscribers("_complete");
+                    }
+                    this.goToResume(false);
+                } else {
+                    this.isShippingStepFinished("_active");
+                    this.goToResume(true);
+                }
+            }else{
+                return false;
             }
             this._super();
         },
