@@ -79,7 +79,7 @@ class ShippingInformationManagement
         }
 
         // atributos de envio rapido
-        if($extensionAttributes->getEnvioRapido()->getDistrito()){
+        if($extensionAttributes->getEnvioRapido()->getDistrito() || $extensionAttributes->getEnvioUrbano()->getDistrito()){
 
             $extension = $this->_addressExtensionFactory->create();
 
