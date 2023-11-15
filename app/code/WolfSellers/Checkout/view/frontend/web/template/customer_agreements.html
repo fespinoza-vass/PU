@@ -14,7 +14,8 @@
                    data-bind="attr: {
                                     'id': $parent.getCheckboxId($parentContext, agreementId),
                                     'name': 'agreement[' + agreementId + ']',
-                                    'value': agreementId
+                                    'value': agreementId,
+                                    'checked':true
                                     },
                                    click: $parent.click($parentContext, agreementId)">
             <label class="label" data-bind="attr: {'for': $parent.getCheckboxId($parentContext, agreementId)}">

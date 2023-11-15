@@ -32,18 +32,24 @@ define([
 ) {
     'use strict';
     var shippingAddressPath = "checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.";
+    var urbanoAddressPath = "checkout.steps.shipping-step.shippingAddress.urbano.";
     var regularAddressPath = "checkout.steps.shipping-step.shippingAddress.regular.";
     var fastAddressPath = "checkout.steps.shipping-step.shippingAddress.fast.";
     var voucherPath = 'checkout.steps.store-pickup.store-selector.picker-voucher.';
     var pickerPath = "checkout.steps.store-pickup.store-selector.picker.";
     var anotherPicker = "checkout.steps.store-pickup.store-selector.another-picker.";
+    var checkoutConfig = window.checkoutConfig;
 
     var shippingMixin = {
         defaults:{
             template: 'WolfSellers_Checkout/shipping',
+            shippingMethods: "WolfSellers_Checkout/shippingMethod",
             links: {
                 "goToResume":'checkout:isVisibleShipping',
-                "updateOptions":"checkout.steps.shipping-step.shippingAddress.schedule.schedule:updateOptions"
+                "updateOptions":"checkout.steps.shipping-step.shippingAddress.schedule.schedule:updateOptions",
+            },
+            imports: {
+                "ubigeo":"checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.postcode:value"
             }
         },
         isFormInline: true,
@@ -51,7 +57,9 @@ define([
         isShippingStepFinished: ko.observable(false),
         isDisabledShippingStep: ko.observable(true),
         isRegularShipping: ko.observable(false),
+        isUrbanoShipping: ko.observable(false),
         isFastShipping: ko.observable(false),
+        isUrbanoShippingDisabled: ko.observable(false),
         isFastShippingDisabled: ko.observable(false),
         isRegularShippingDisabled: ko.observable(false),
         shippingMethod: ko.observable(),
@@ -59,6 +67,11 @@ define([
         isShippingMethodError: ko.observable(),
         updateOptions: ko.observable(),
         isContinueBtnDisabled: ko.observable(true),
+        ubigeo: ko.observable(''),
+        errorMessage: ko.observable(''),
+        isUrbanoMethodConfigured: ko.observable(true),
+        isRegularMethodConfigured: ko.observable(true),
+        isFastMethodConfigured: ko.observable(true),
 
         initialize: function () {
             this._super();
@@ -66,6 +79,11 @@ define([
                 title : $t('Entrega y Pago')
             }
             stepNavigator.modifyStep("shipping", modifyData);
+            var activeCarriers = checkoutConfig.activeCarriers;
+            this.isUrbanoMethodConfigured(_.includes(activeCarriers, 'urbano'));
+            this.isRegularMethodConfigured(_.includes(activeCarriers, 'flatrate'));
+            this.isFastMethodConfigured(_.includes(activeCarriers, 'envio_rapido'));
+
             this.setIsDisabledShippingStep();
             this.isShippingStepFinished.subscribe(function (value) {
                 shippingPayment.isShippingStepFinished(value);
@@ -101,6 +119,14 @@ define([
                     shippingPayment.isStepTwoFinished('_active');
                 }
             },this);
+            //Set this when 'til estimate shipping rates gets urbano
+            this.ubigeo.subscribe(function (value) {
+                if (!_.isUndefined(value) && this.isUrbanoShipping()){
+                    var rate = this.findRateByCarrierCode('urbano');
+                    this.showShippingMethodError(rate);
+                    this.selectShippingMethod(rate);
+                }
+            },this);
             this.createInformationModals();
             return this;
         },
@@ -108,7 +134,7 @@ define([
          * Overwrite set shipping information action
          */
         setShippingInformation: function () {
-            if (!this.isFastShipping() && !this.isRegularShipping()){
+            if (!this.isFastShipping() && !this.isRegularShipping() && !this.isUrbanoShipping()){
                 if(!customer.isCustomerLoggedIn){
                     quote.shippingMethod(null);
                 }
@@ -154,6 +180,29 @@ define([
             }
         },
         /**
+         * Set shipping method urbano for regular shipping
+         * @returns {boolean}
+         */
+        setUrbanoShipping: function () {
+            if(!this.isUrbanoShippingDisabled()){
+                var departamentoRegular = registry.get("checkout.steps.shipping-step.shippingAddress.regular.departamento");
+                departamentoRegular.reset();
+                this.isRegularShipping(false);
+                this.isFastShipping(false);
+                this.isUrbanoShipping(true);
+                this.updateShippingValidations();
+                this.isShippingMethodError(false);
+                return true;
+            }
+            this.isShippingMethodError(true);
+            this.errorMessage('');
+            this.errorMessage('Tu pedido no puede ser procesado por Envío Regular.');
+            setTimeout(function () {
+                shippingMixin.isShippingMethodError(false);
+            }, 4000);
+            return false
+        },
+        /**
          * Set shipping method flatRate for regular shipping
          */
         setRegularShipping: function () {
@@ -162,6 +211,7 @@ define([
                 departamentoRegular.reset();
                 this.isRegularShipping(true);
                 this.isFastShipping(false);
+                this.isUrbanoShipping(false);
                 var rate = this.findRateByCarrierCode('flatrate');
                 this.showShippingMethodError(rate);
                 this.selectShippingMethod(rate);
@@ -169,7 +219,13 @@ define([
                 this.isShippingMethodError(false);
                 return true;
             }
-            return false;
+            this.isShippingMethodError(true);
+            this.errorMessage('');
+            this.errorMessage('Tu pedido no puede ser procesado por Envío Regular.');
+            setTimeout(function () {
+                shippingMixin.isShippingMethodError(false);
+            }, 4000);
+            return false
         },
         /**
          * Set shipping method for fast shipping
@@ -184,12 +240,15 @@ define([
                 var street = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
                 street.reset();
                 this.isRegularShipping(false);
+                this.isUrbanoShipping(false);
                 this.isFastShipping(true);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
                 return true;
             }
             this.isShippingMethodError(true);
+            this.errorMessage('');
+            this.errorMessage('Tu pedido no puede ser procesado por Envío rápido.');
             setTimeout(function () {
                 shippingMixin.isShippingMethodError(false);
             }, 4000);
@@ -201,6 +260,10 @@ define([
          * @returns {*}
          */
         showShippingMethodError: function (rate) {
+            console.log(rate);
+            if(_.isUndefined(rate.error_message)){
+                return false;
+            }
             return this.isShippingMethodError(!!rate.error_message);
         },
         /**
@@ -210,6 +273,114 @@ define([
          */
         findRateByCarrierCode:function (carrierCode) {
             return _.find(this.rates(), { 'carrier_code': carrierCode });
+        },
+        /**
+         * get text value of carrier amount by method type
+         * @param methodType
+         * @returns {*}
+         */
+        getPriceLabel: function (methodType){
+            var carrier;
+            var selectedShippingRate = checkoutData.getSelectedShippingRate();
+            if (methodType === "selected") {
+                if (!_.isUndefined(selectedShippingRate) &&
+                    !_.isNull(selectedShippingRate) ) {
+                    methodType = selectedShippingRate;
+                } else {
+                    return "No ha seleccionado un precio aun.";
+                }
+            }
+            carrier = this.getCarrierCodeByCarrier(methodType);
+            if(methodType === 'urbano' && carrier.amount === 0){
+                return 'Sin Calcular';
+            }
+            return priceUtils.formatPrice(carrier.amount);
+        },
+        /**
+         * Get carrier by string that contains carrierCode
+         * @param carrierCode
+         * @returns {*|boolean}
+         */
+        getCarrierCodeByCarrier: function (carrierCode) {
+            if (_.isEmpty(this.rates())){
+                return false;
+            }
+            var carrier = _.find(this.rates(),function(rate) {
+                return carrierCode.includes(rate.carrier_code);
+            });
+            if (carrier){
+                return carrier;
+            }
+            return false;
+        },
+        /**
+         * validate if shippingMethod is Available
+         * @param methodType
+         * @returns {boolean}
+         */
+        isShippingMethodAvailable: function (methodType) {
+            var carrier = this.getCarrierCodeByCarrier(methodType);
+            if (carrier){
+                if(!_.isObject(carrier)){
+                    return false;
+                }
+                if(!!carrier.error_message && carrier.carrier_code.includes('urbano')){
+                    this.isUrbanoShippingDisabled(true);
+                    return true;
+                }
+                if(!!carrier.error_message && carrier.carrier_code.includes('flat')){
+                    this.isRegularShippingDisabled(true);
+                }else{
+                    this.isRegularShippingDisabled(false);
+                }
+                if (!!carrier.error_message && carrier.carrier_code.includes('rapid')){
+                    this.isFastShippingDisabled(true);
+                }else{
+                    if (carrier.carrier_code.includes('rapid')){
+                        this.updateOptions(carrier.extension_attributes.delivery_time);
+                    }
+                    this.isFastShippingDisabled(false);
+                }
+                return !!carrier.error_message;
+            }
+            return false;
+        },
+        /**
+         * validates if some rates have error to disabled
+         */
+        validateRates: function () {
+            var carrierWithErrorMessage = _.find(this.rates(), function(rate) {
+                if(!!rate.error_message){
+                    return rate;
+                }
+            });
+            if(carrierWithErrorMessage){
+                this.isShippingMethodAvailable(carrierWithErrorMessage.carrier_code);
+            }
+        },
+        /**
+         * Create Modals
+         */
+        createInformationModals: function () {
+            if (additionalInfoModal.modalContentForRegularDelivery == null) {
+                additionalInfoModal.createModalRS('#regularshipping-additional-info-modal');
+            }
+            if (additionalInfoModal.modalContentForFastDelivery == null) {
+                additionalInfoModal.createModalFS('#fastshipping-additional-info-modal');
+            }
+            return true;
+        },
+        /**
+         * Show Additional Modal Information for Regular Shipping
+         */
+        showRSInformation: function () {
+            additionalInfoModal.showModalRSInformation();
+        },
+        /**
+         * Show Additional Modal Information for Fast Shipping
+         */
+        showFSInformation: function () {
+            additionalInfoModal.showModalFSInformation();
         },
         /**
          * Set data for shipping inputs by array uiComponents
@@ -246,6 +417,13 @@ define([
                 "telephone",
                 "vat_id"
             ];
+            var urbano = [
+                "region_id",
+                "city",
+                "colony",
+                "street.0",
+                "referencia_envio"
+            ];
             var regular = [
                 "region_id",
                 "city",
@@ -253,6 +431,12 @@ define([
                 "street.0",
                 "referencia_envio"
             ];
+            var urbanoComponentsArea = [
+                "provincia",
+                "departamento",
+                "distrito",
+                "referencia"
+            ]
             var regularComponentsArea = [
                 "provincia",
                 "departamento",
@@ -283,6 +467,7 @@ define([
                 "nombre_completo_picker",
                 "email_picker"
             ];
+            var referenciaRegular = {};
             /**
              * Customer Data
              */
@@ -293,28 +478,41 @@ define([
             uiComponent.telephone.value(customer.customerTelephone());
             uiComponent.vat_id.value(customer.customerNumberIdentification());
             wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, allShippingPickupComponents, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(urbanoAddressPath, urbanoComponentsArea, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(voucherPath, pickerVoucherPath, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(pickerPath, pickerPickerPath, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(anotherPicker, pickerAnotherPicker, newValidationConfig);
             /**
-             * Envio Regular
+             * Envio Urbano
              */
-            if(this.isRegularShipping()){
+            if(this.isRegularShipping() || this.isUrbanoShipping()){
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
-                wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
-                uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, regular);
-                var referenciaRegular = registry.get("checkout.steps.shipping-step.shippingAddress.regular.referencia")
+                wolfUtils.setUiComponentsArrayValidation(urbanoAddressPath, urbanoComponentsArea, newValidationConfig);
+                uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, urbano);
+                referenciaRegular = registry.get("checkout.steps.shipping-step.shippingAddress.urbano.referencia");
                 uiComponent.region_id.value();
                 uiComponent.city.value();
                 uiComponent.colony.value();
                 uiComponent['street.0'].value();
                 uiComponent.referencia_envio.value(referenciaRegular.value());
-                if(referenciaRegular.value()){
-
-                }
+            }
+            /**
+             * Envio Regular
+             */
+            if(this.isRegularShipping() || this.isUrbanoShipping()){
+                newValidationConfig['required-entry'] = true;
+                wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
+                wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
+                uiComponent = wolfUtils.getUiComponentsArray(shippingAddressPath, regular);
+                referenciaRegular = registry.get("checkout.steps.shipping-step.shippingAddress.regular.referencia")
+                uiComponent.region_id.value();
+                uiComponent.city.value();
+                uiComponent.colony.value();
+                uiComponent['street.0'].value();
+                uiComponent.referencia_envio.value(referenciaRegular.value());
             }
             /**
              * Envio Rápido
@@ -378,6 +576,13 @@ define([
                 "postcode",
                 "country_id"
             ];
+            var urbano = [
+                "region_id",
+                "city",
+                "colony",
+                "street.0",
+                "referencia_envio"
+            ];
             var regular = [
                 "region_id",
                 "city",
@@ -385,6 +590,12 @@ define([
                 "street.0",
                 "referencia_envio"
             ];
+            var urbanoComponentsArea = [
+                "provincia",
+                "departamento",
+                "distrito",
+                "referencia"
+            ]
             var regularComponentsArea = [
                 "provincia",
                 "departamento",
@@ -424,11 +635,18 @@ define([
             uiComponent.telephone.value(customer.customerTelephone());
             uiComponent.vat_id.value(customer.customerNumberIdentification());
             wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, allShippingPickupComponents, newValidationConfig);
+            wolfUtils.setUiComponentsArrayValidation(urbanoAddressPath, urbanoComponentsArea, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(voucherPath, pickerVoucherPath, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(pickerPath, pickerPickerPath, newValidationConfig);
             wolfUtils.setUiComponentsArrayValidation(anotherPicker, pickerAnotherPicker, newValidationConfig);
+
+            if(this.isUrbanoShipping()){
+                newValidationConfig['required-entry'] = true;
+                wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, urbano, newValidationConfig);
+                wolfUtils.setUiComponentsArrayValidation(urbanoAddressPath, urbanoComponentsArea, newValidationConfig);
+            }
             if(this.isRegularShipping()){
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
@@ -439,108 +657,7 @@ define([
                 wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
             }
 
-        },
-        /**
-         * get text value of carrier amount by method type
-         * @param methodType
-         * @returns {*}
-         */
-        getPriceLabel: function (methodType){
-            var carrier;
-            var selectedShippingRate = checkoutData.getSelectedShippingRate();
-            if (methodType === "selected") {
-                if (!_.isUndefined(selectedShippingRate) &&
-                    !_.isNull(selectedShippingRate) ) {
-                    methodType = selectedShippingRate;
-                } else {
-                    return "No ha seleccionado un precio aun.";
-                }
-            }
-            carrier = this.getCarrierCodeByCarrier(methodType);
-            return priceUtils.formatPrice(carrier.amount);
-        },
-        /**
-         * Get carrier by string that contains carrierCode
-         * @param carrierCode
-         * @returns {*|boolean}
-         */
-        getCarrierCodeByCarrier: function (carrierCode) {
-            if (_.isEmpty(this.rates())){
-                return false;
-            }
-            var carrier = _.find(this.rates(),function(rate) {
-                return carrierCode.includes(rate.carrier_code);
-            });
-            if (carrier){
-                return carrier;
-            }
-            return false;
-        },
-        /**
-         * validate if shippingMethod is Available
-         * @param methodType
-         * @returns {boolean}
-         */
-        isShippingMethodAvailable: function (methodType) {
-            var carrier = this.getCarrierCodeByCarrier(methodType);
-            if (carrier){
-                if(!_.isObject(carrier)){
-                    return false;
-                }
-                if(!!carrier.error_message && carrier.carrier_code.includes('flat')){
-                    this.isRegularShippingDisabled(true);
-                }else{
-                    this.isRegularShippingDisabled(false);
-                }
-                if (!!carrier.error_message && carrier.carrier_code.includes('rapid')){
-                    this.isFastShippingDisabled(true);
-                }else{
-                    if (carrier.carrier_code.includes('rapid')){
-                        this.updateOptions(carrier.extension_attributes.delivery_time);
-                    }
-                    this.isFastShippingDisabled(false);
-                }
-                return !!carrier.error_message;
-            }
-            return false;
-        },
-        /**
-         * validates if some rates have error to disabled
-         */
-        validateRates: function () {
-            var carrierWithErrorMessage = _.find(this.rates(), function(rate) {
-                if(!!rate.error_message){
-                    return rate;
-                }
-            });
-            if(carrierWithErrorMessage){
-                this.isShippingMethodAvailable(carrierWithErrorMessage.carrier_code);
-            }
-        },
-        /**
-         * Create Modals
-         */
-        createInformationModals: function () {
-            if (additionalInfoModal.modalContentForRegularDelivery == null) {
-                additionalInfoModal.createModalRS('#regularshipping-additional-info-modal');
-            }
-            if (additionalInfoModal.modalContentForFastDelivery == null) {
-                additionalInfoModal.createModalFS('#fastshipping-additional-info-modal');
-            }
-            return true;
-        },
-        /**
-         * Show Additional Modal Information for Regular Shipping
-         */
-        showRSInformation: function () {
-            additionalInfoModal.showModalRSInformation();
-        },
-        /**
-         * Show Additional Modal Information for Fast Shipping
-         */
-        showFSInformation: function () {
-            additionalInfoModal.showModalFSInformation();
-        },
+        }
     }
 
     return function(shippingTarget){
