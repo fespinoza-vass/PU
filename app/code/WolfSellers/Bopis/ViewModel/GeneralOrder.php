@@ -11,6 +11,7 @@ use Magento\InventoryApi\Api\SourceRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use WolfSellers\Bopis\Logger\Logger;
 
 class GeneralOrder implements ArgumentInterface
 {
@@ -21,6 +22,7 @@ class GeneralOrder implements ArgumentInterface
      * @param SearchCriteriaBuilder $_searchCriteriaBuilder
      * @param CustomerRepositoryInterface $customerRepository
      * @param OrderRepositoryInterface $orderRepository
+     * @param Logger $logger
      */
     public function __construct(
         protected RealStates                  $_realStates,
@@ -28,7 +30,8 @@ class GeneralOrder implements ArgumentInterface
         protected SourceRepositoryInterface   $_sourceRepository,
         protected SearchCriteriaBuilder       $_searchCriteriaBuilder,
         protected CustomerRepositoryInterface $customerRepository,
-        protected OrderRepositoryInterface    $orderRepository
+        protected OrderRepositoryInterface    $orderRepository,
+        protected Logger                      $logger
     )
     {
     }
@@ -116,10 +119,10 @@ class GeneralOrder implements ArgumentInterface
 
         $data = explode("de", $txt);
 
-        if (trim($data[0]) == 'Hoy'){
+        if (trim($data[0]) == 'Hoy') {
             $date = date('d/m/Y', strtotime($createdAt));
-        }else{
-            $date = date('d/m/Y', strtotime('+ 24 hours', strtotime($createdAt)) );;
+        } else {
+            $date = date('d/m/Y', strtotime('+ 24 hours', strtotime($createdAt)));;
         }
 
         return [
@@ -153,12 +156,16 @@ class GeneralOrder implements ArgumentInterface
      * @param $customerId
      * @param $attr
      * @return mixed|string
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
      */
-    public function getCustomerAttributeValue($customerId, $attr)
+    public function getCustomerAttributeValue($customerId, $attr): mixed
     {
-        $customer = $this->customerRepository->getById($customerId);
+        try {
+            $customer = $this->customerRepository->getById($customerId);
+        } catch (\Throwable $error) {
+            $this->logger->error($error->getMessage(), ["you are querying information about a deleted customer", $customerId]);
+            return '';
+        }
+
         $attribute = $customer->getCustomAttribute($attr);
 
         if (!$attribute) return '';
@@ -169,12 +176,16 @@ class GeneralOrder implements ArgumentInterface
     /**
      * @param $customerId
      * @return \Magento\Customer\Api\Data\CustomerInterface
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
      */
-    public function getCustomerData($customerId)
+    public function getCustomerData($customerId): bool|\Magento\Customer\Api\Data\CustomerInterface
     {
-        return $this->customerRepository->getById($customerId);
+        try {
+            return $this->customerRepository->getById($customerId);
+        } catch (\Throwable $error) {
+            $this->logger->error($error->getMessage(), ["You are trying to query a deleted client.", $customerId]);
+            return false;
+        }
+
     }
 
     /**
