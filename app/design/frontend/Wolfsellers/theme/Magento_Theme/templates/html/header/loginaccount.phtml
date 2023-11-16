@@ -8,7 +8,9 @@
         <div class="loginbtns">
             <div>
                 <span><?= $block->escapeHtml(__('Welcome')) ?>, </span>
-                <?php echo $block->getFullname(); ?>
+                <span data-bind="scope: 'customer'">
+                    <span data-bind="text: customer().fullname"></span>
+                </span>
             </div>
             <a data-mage-init='{"dropdown":{}}' data-toggle="dropdown" class="ddaccount action" data-action="customer-menu-toggle">
                 <span><?= $block->escapeHtml(__('My Account')) ?></span>
@@ -29,6 +31,19 @@
                 </li>
             </ul>
         </div>
+        <script type="text/x-magento-init">
+            {
+              "*": {
+                  "Magento_Ui/js/core/app": {
+                      "components": {
+                          "customer": {
+                              "component": "Magento_Customer/js/view/customer"
+                          }
+                      }
+                  }
+              }
+            }
+        </script>
     <?php } else { ?>
         <div class="loginbtns logout">
             <a href="<?php echo $block->getUrl('customer/account/login') ?>" class="efirst"><span><?= $block->escapeHtml(__('Login')) ?></span></a>
@@ -49,3 +64,5 @@
     <?php } ?>
     <span class="icon-uniE627"></span>
 </div>
+
+

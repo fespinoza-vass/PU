@@ -1,11 +1,13 @@
 define([
     'ko',
+    'underscore',
     'uiComponent',
     'WolfSellers_Checkout/js/model/shipping-payment',
     'WolfSellers_Checkout/js/model/customer',
     'uiRegistry'
 ],function (
     ko,
+    _,
     Component,
     shippingPayment,
     customer,
@@ -24,7 +26,9 @@ define([
                 if (!value){
                     shippingPayment.isShippingStepFinished('_complete');
                     var visanet = registry.get("checkout.steps.billing-step.payment.payments-list.visanet_pay");
-                    visanet.selectPaymentMethod();
+                    if(!_.isUndefined(visanet)){
+                        visanet.selectPaymentMethod();
+                    }
                 }else{
                     shippingPayment.isShippingStepFinished('_active');
                 }

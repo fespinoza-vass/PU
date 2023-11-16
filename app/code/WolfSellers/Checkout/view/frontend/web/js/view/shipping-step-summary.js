@@ -17,16 +17,35 @@ define([
         defaults:{
             template:'WolfSellers_Checkout/shipping-step-summary'
         },
-        isShipping: ko.observable(true),
+        isUrbano: ko.observable(true),
+        isShipping: ko.observable(false),
         isStorePickUp: ko.observable(false),
+        isFastShipping: ko.observable(false),
         initialize:function () {
             this._super();
             shippingPayment.shippingMethod.subscribe(function (value) {
-                if (value.includes('instore')){
+                if(value.includes('rapido')){
+                    this.isUrbano(false);
                     this.isShipping(false);
+                    this.isFastShipping(true);
+                    this.isStorePickUp(false);
+                }
+                if (value.includes('urbano')){
+                    this.isUrbano(true);
+                    this.isShipping(false);
+                    this.isFastShipping(false);
+                    this.isStorePickUp(false);
+                }
+                if (value.includes('instore')){
+                    this.isUrbano(false);
+                    this.isShipping(false);
+                    this.isFastShipping(false);
                     this.isStorePickUp(true);
-                }else{
+                }
+                if(value.includes('flat')){
+                    this.isUrbano(false);
                     this.isShipping(true);
+                    this.isFastShipping(false);
                     this.isStorePickUp(false);
                 }
             },this);
@@ -38,7 +57,7 @@ define([
          */
         getShippingMethod:function () {
             if (this.isReadyToShowSummary()){
-                if (shippingPayment.shippingMethod().includes("flat")){
+                if (shippingPayment.shippingMethod().includes("flat") || shippingPayment.shippingMethod().includes("urban")){
                     return "Envió regular a domicilio";
                 }
                 if (shippingPayment.shippingMethod().includes("rapido")){

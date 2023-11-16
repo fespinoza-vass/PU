@@ -510,7 +510,7 @@ define([
             elem.data("isclicked", true);
             setTimeout(function () {
                 elem.removeData("isclicked");
-            }, 3000);
+            }, 2500);
 
             //return false to indicate this click was allowed
             return false;

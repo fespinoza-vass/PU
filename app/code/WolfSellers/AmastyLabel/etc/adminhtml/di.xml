@@ -7,6 +7,8 @@
             <argument name="data" xsi:type="array">
                 <item name="amlabel_custom_condition" xsi:type="array">
                     <item name="qty_per_source" xsi:type="object">WolfSellers\AmastyLabel\Model\Rule\Condition\QtyPerSource</item>
+                    <item name="fast_shipping_label" xsi:type="object">WolfSellers\AmastyLabel\Model\Rule\Condition\FastShippingLabel</item>
+                    <item name="instore_shipping_label" xsi:type="object">WolfSellers\AmastyLabel\Model\Rule\Condition\InStoreShippingLabel</item>
                 </item>
             </argument>
         </arguments>
