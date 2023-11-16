@@ -140,7 +140,8 @@ abstract class AbstractBopisCollection extends Collection
                 "IF(so.created_at >= (now() - interval 1 DAY) AND so.status = 'processing',1,0) as is_new",
                 'so.source_code',
                 'so.shipping_method',
-                'so.savar_horario'
+                'so.savar_horario',
+                'so.needs_supply_instore'
             ]
         );
         $orderAddressTable = $this->getTable('sales_order_address');
