@@ -20,20 +20,9 @@ use WolfSellers\OrderQR\Logger\Logger;
  */
 class AssingSource
 {
-
-    /**
-     *
-     */
+    CONST URBANO_SHIPPING_METHOD_CODE = "urbano";
     CONST FAST_SHIPPING_METHOD_CODE = "envio_rapido_envio_rapido";
-
-    /**
-     *
-     */
     CONST REGULAR_SHIPPING_METHOD_CODE = "flatrate_flatrate";
-
-    /**
-     *
-     */
     CONST DEFAULT_LURIN_SOURCE = "1";
 
     /** @var DistrictGeoname */
@@ -79,7 +68,9 @@ class AssingSource
             if($order->getShippingMethod() == self::FAST_SHIPPING_METHOD_CODE){
                 $this->_districtGeoname->assignSourceToOrder($order);
             }
-            if($order->getShippingMethod() == self::REGULAR_SHIPPING_METHOD_CODE){
+            if($order->getShippingMethod() == self::REGULAR_SHIPPING_METHOD_CODE ||
+                str_contains($order->getShippingMethod(),self::URBANO_SHIPPING_METHOD_CODE)
+            ){
                 $order->setData('source_code',AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE); // almacen lurin
             }
             if($order->getShippingMethod() == AbstractBopisCollection::PICKUP_SHIPPING_METHOD){
