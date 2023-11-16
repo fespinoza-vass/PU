@@ -146,6 +146,9 @@ define([
             }else{
                 return false;
             }
+            setTimeout( function () {
+                $('html, body').animate({scrollTop: ($("#payment").offset().top - 50)}, 1000);
+            }, 500);
             this._super();
         },
         /**
@@ -475,19 +478,8 @@ define([
          * @param methodType
          * @returns {*}
          */
-        getPriceLabel: function (methodType){
-            var carrier;
-            var selectedShippingRate = checkoutData.getSelectedShippingRate();
-            if (methodType === "selected") {
-                if (!_.isUndefined(selectedShippingRate) &&
-                    !_.isNull(selectedShippingRate) ) {
-                    methodType = selectedShippingRate;
-                } else {
-                    return "No ha seleccionado un precio aun.";
-                }
-            }
-            carrier = this.getCarrierCodeByCarrier(methodType);
-            return priceUtils.formatPrice(carrier.amount);
+        getPriceLabel: function (){
+            return priceUtils.formatPrice(quote.totals()["shipping_amount"]);
         },
         /**
          * Get carrier by string that contains carrierCode
