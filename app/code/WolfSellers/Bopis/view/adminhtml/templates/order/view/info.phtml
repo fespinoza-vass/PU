@@ -58,7 +58,7 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
             </div>
 
             <address class="admin__page-section-item-content">
-                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode() && $order->getCustomerId()): ?>
                     <?php $customer = $viewModel->getCustomerData($order->getCustomerId())?>
 
                     <span class="color-orange">
@@ -151,7 +151,7 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                 <span class="title"><?= $block->escapeHtml(__('Cliente que recibe')) ?></span>
             </div>
             <address class="admin__page-section-item-content">
-                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode() && $order->getCustomerId()): ?>
                     <?php $picker = $viewModel->getRealAddrOptionValue('picker', $shippingAddress->getPicker()); ?>
                     <?php if ($picker == 'other'): ?>
                         <b class="color-orange" title="pick <?=$picker?>"><?= $shippingAddress->getNombreCompletoPicker() ?></b><br />
@@ -167,7 +167,8 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                     <?php endif; ?>
                 <?php else: ?>
                     <b class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></b><br />
-                    Número de documento: <?=$viewModel->getCustomerIdentificacion($order->getCustomerId())?><br />
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
                     <?= $shippingAddress->getEmail(); ?><br />
                     T. <?= $shippingAddress->getTelephone(); ?>
                 <?php endif; ?>
