@@ -99,6 +99,11 @@ define([
                 }
                 this.isVisibleEdit(false);
                 stepNavigator.next();
+                setTimeout( function () {
+                    $('html, body').animate({
+                        scrollTop: ($(".checkout-shipping-address.step-two").offset().top - 50)
+                    }, 1000);
+                }, 500);
             }
         },
 
