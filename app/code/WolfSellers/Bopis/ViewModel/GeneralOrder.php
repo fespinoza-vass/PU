@@ -113,9 +113,14 @@ class GeneralOrder implements ArgumentInterface
      */
     public function getAllSchedule($horarioDeEntrega, $createdAt)
     {
+        $return = [
+            'default-msj' => 'Tu pedido llegará en un lapso de 24 a 48 horas.',
+            'default-instore' => 'Podrás recoger tu pedido en un lapso de 24 a 48 horas.'
+        ];
+
         $txt = $this->_realStates->getSchedule($horarioDeEntrega);
 
-        if ($txt == "") return $txt;
+        if ($txt == "") return $return;
 
         $data = explode("de", $txt);
 
@@ -125,10 +130,10 @@ class GeneralOrder implements ArgumentInterface
             $date = date('d/m/Y', strtotime('+ 24 hours', strtotime($createdAt)));;
         }
 
-        return [
-            'fecha' => $data[0] . ' ' . $date,
-            'horario' => $data[1]
-        ];
+        $return['fecha'] = $data[0] . ' ' . $date;
+        $return['horario'] = $data[1];
+
+        return $return;
     }
 
     /**
