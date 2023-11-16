@@ -38,9 +38,6 @@ class SavarHelper extends AbstractHelper
     CONST SAVAR_STATUS_RECOGIDO = 5;
     CONST SAVAR_STATUS_ENTREGADO = 9;
 
-    CONST XML_PATH_IS_ACTIVE_SAVAR_CRON = "bopis/savar/is_active";
-
-
     /** @var AreaList */
     protected $_areaList;
 
@@ -265,6 +262,10 @@ class SavarHelper extends AbstractHelper
             return false;
         }
 
+        if(is_array($result['response'])){
+            $result['response'] = current($result['response']);
+        }
+
         if(
             isset($result['response']['vfechanotificacion']) &&
             $result['response']['vfechanotificacion'] != "0001-01-01T00:00:00"
@@ -289,6 +290,9 @@ class SavarHelper extends AbstractHelper
                     $this->generateShipment($order);
                     $order->setStatus('complete');
                     $this->_orderRepository->save($order);
+
+                    $to = ['email' => $order->getCustomerEmail(), 'name' => $order->getCustomerName()];
+                    $this->emailHelper->sendSatisfactionSurveyEmail($to, $this->emailHelper->getOrderModel($order));
                 }else{
                     $this->_savarLogger->error( __('You can\'t create an shipment.'));
                 }
@@ -304,7 +308,7 @@ class SavarHelper extends AbstractHelper
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function generateShipment($order,$sourceCode=null){
+    public function generateShipment($order){
         $shipment = $this->_orderConverter->toShipment($order);
 
         foreach ($order->getAllItems() AS $orderItem) {
@@ -371,12 +375,6 @@ class SavarHelper extends AbstractHelper
      */
     public function updateSavarOrders(){
 
-       $isSavarCronActive = $this->scopeConfig->getValue(self::XML_PATH_IS_ACTIVE_SAVAR_CRON,ScopeInterface::SCOPE_STORE);
-
-       if(!$isSavarCronActive){
-           return;
-       }
-
         $this->_state->setAreaCode("frontend");
 
         $this->_areaList->getArea(Area::AREA_FRONTEND)
@@ -393,6 +391,9 @@ class SavarHelper extends AbstractHelper
         $orders = $this->_orderRepository->getList($searchCriteria);
 
         if($orders->getTotalCount() > 0){
+            $this->_savarLogger->info(
+                "numero de ordenes pendientes para actualizacion de estatus: ".$orders->getTotalCount()
+            );
             /** @var OrderInterface $order */
             foreach($orders as $order){
                 try {
