@@ -35,7 +35,7 @@
                     <?php if ($block->getIsPickup()): ?>
                         <?= $shippingAddress->getName() ?> <br>
                         <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?> <br>
-                        <?= $horarioTxt['fecha'] ?? "" ?> <br>
+                        <?= $horarioTxt['fecha'] ?? $horarioTxt['default-instore'] ?> <br>
                         <?= $horarioTxt['horario'] ?? "" ?>
                     <?php else: ?>
                         <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?>
@@ -44,7 +44,7 @@
                         <?= $shippingAddress->getCity() ?> -
                         <?= $shippingAddress->getRegion() ?> <br>
                         <?= $shippingAddress->getData('referencia_envio') ?> <br>
-                        <?= $horarioTxt['fecha'] ?? "" ?> <br>
+                        <?= $horarioTxt['fecha'] ?? $horarioTxt['default-msj'] ?> <br>
                         <?= $horarioTxt['horario'] ?? "" ?>
                     <?php endif; ?>
                 </p>
