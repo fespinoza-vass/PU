@@ -8,7 +8,7 @@
         <div class="loginbtns">
             <div>
                 <span><?= $block->escapeHtml(__('Welcome')) ?>, </span>
-                <?php echo $block->getFullname(); ?>
+                <span class="name-header"><?= $block->getFullname(); ?></span>
             </div>
             <a data-mage-init='{"dropdown":{}}' data-toggle="dropdown" class="ddaccount action" data-action="customer-menu-toggle">
                 <span><?= $block->escapeHtml(__('My Account')) ?></span>

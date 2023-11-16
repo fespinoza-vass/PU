@@ -62,6 +62,7 @@
     </type>
 
     <preference for="WolfSellers\Checkout\Api\Data\EnvioRegularInterface" type="WolfSellers\Checkout\Model\EnvioRegular"/>
+    <preference for="WolfSellers\Checkout\Api\Data\EnvioUrbanoInterface" type="WolfSellers\Checkout\Model\EnvioUrbano"/>
     <preference for="WolfSellers\Checkout\Api\Data\EnvioRapidoInterface" type="WolfSellers\Checkout\Model\EnvioRapido"/>
     <preference for="WolfSellers\Checkout\Api\Data\RetiroTiendaInterface" type="WolfSellers\Checkout\Model\RetiroTienda"/>
 
