@@ -15,6 +15,9 @@ class ShippingMethod extends Column
     /** @var string  */
     const SHIPPING_INFORMATION = 'shipping_information';
 
+    /** @var string  */
+    const NEEDS_SUPPLY = 'needs_supply_instore';
+
     /**
      * @param RealStates $realStates
      * @param ContextInterface $context
@@ -46,6 +49,12 @@ class ShippingMethod extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 $shipping = $item[$this->getData('name')];
                 $shippingTitle = $this->realStates->getShippingMethodTitle($shipping);
+
+                $needsSupply = boolval($item[self::NEEDS_SUPPLY]);
+                if ($needsSupply){
+                    $shippingTitle = $shippingTitle . ' - desde almacen';
+                }
+
                 $item[$this->getData('name')] = $shippingTitle;
             }
         }

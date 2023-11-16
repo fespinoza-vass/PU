@@ -17,6 +17,7 @@ use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 use WolfSellers\Flow\Helper\Cart as HelperCart;
+use Magento\Framework\Controller\Result\JsonFactory;
 
 class Updateitem implements HttpPostActionInterface
 {
@@ -52,6 +53,11 @@ class Updateitem implements HttpPostActionInterface
     protected ManagerInterface $messageManager;
 
     /**
+     * @var JsonFactory
+     */
+    protected JsonFactory $jsonResultFactory;
+
+    /**
      * UpdateItemQty constructor
      *
      * @param FormKeyValidator $formKeyValidator
@@ -60,6 +66,7 @@ class Updateitem implements HttpPostActionInterface
      * @param RequestInterface $request
      * @param ResponseInterface $response
      * @param ManagerInterface $messageManager
+     * @param JsonFactory $jsonResultFactory
      */
     public function __construct(
         FormKeyValidator $formKeyValidator,
@@ -67,7 +74,8 @@ class Updateitem implements HttpPostActionInterface
         HelperCart $helperCart,
         RequestInterface $request,
         ResponseInterface $response,
-        ManagerInterface $messageManager
+        ManagerInterface $messageManager,
+        JsonFactory $jsonResultFactory
     ) {
         $this->formKeyValidator = $formKeyValidator;
         $this->json = $json;
@@ -75,15 +83,18 @@ class Updateitem implements HttpPostActionInterface
         $this->request = $request;
         $this->response = $response;
         $this->messageManager = $messageManager;
+        $this->jsonResultFactory = $jsonResultFactory;
     }
 
     /**
      * Controller execute method
      *
-     * @return void
+     * @return ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
      */
-    public function execute(): void
+    public function execute()
     {
+        $result = $this->jsonResultFactory->create();
+
         try {
             $this->validateRequest();
             $this->validateFormKey();
@@ -117,13 +128,19 @@ class Updateitem implements HttpPostActionInterface
                 $this->helperCart->getMessageInformation($product, $item, $qty)
             );
 
-            $this->jsonResponse();
+            $result->setData($this->getResponseData(''));
+            return $result;
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
-
-            $this->jsonResponse($e->getMessage());
+            $result->setData($this->getResponseData($e->getMessage()));
+            return $result;
         } catch (\Exception $e) {
-            $this->jsonResponse('Something went wrong while saving the page. Please refresh the page and try again.');
+            $result->setData(
+                $this->getResponseData(
+                    'Something went wrong while saving the page. Please refresh the page and try again.'
+                )
+            );
+            return $result;
         }
     }
 
