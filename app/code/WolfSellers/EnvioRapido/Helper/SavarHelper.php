@@ -262,10 +262,6 @@ class SavarHelper extends AbstractHelper
             return false;
         }
 
-        if(is_array($result['response'])){
-            $result['response'] = current($result['response']);
-        }
-
         if(
             isset($result['response']['vfechanotificacion']) &&
             $result['response']['vfechanotificacion'] != "0001-01-01T00:00:00"
