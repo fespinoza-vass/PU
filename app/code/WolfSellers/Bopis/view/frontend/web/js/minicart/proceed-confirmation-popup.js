@@ -56,9 +56,10 @@ define([
          * @param route
          */
         validations: function (route) {
+            $('body').trigger('processStart');
             $.ajax({
                 context: this,
-                url: BASE_URL + '/bopis/ajax/fastdeliveryavailable', // La URL de tu controlador
+                url: BASE_URL + '/bopis/ajax/fastdeliveryavailable',
                 type: 'get',
                 dataType: 'json',
                 success: function (response) {
@@ -77,6 +78,8 @@ define([
                 }
             }).done(function (response) {
                 console.log('respuesta:' + response.available);
+            }).always(function () {
+                $('body').trigger('processStop');
             });
         },
 
