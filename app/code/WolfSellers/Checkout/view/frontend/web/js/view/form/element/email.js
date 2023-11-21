@@ -13,8 +13,8 @@ define([
     'Magento_Checkout/js/model/quote',
     'Magento_Checkout/js/checkout-data',
     'Magento_Checkout/js/model/full-screen-loader',
-    'mage/validation',
-    'WolfSellers_Checkout/js/model/customer'
+    'WolfSellers_Checkout/js/model/customer',
+    'mage/validation'
 ], function ($, Component, ko, customer, checkEmailAvailability, loginAction, quote, checkoutData, fullScreenLoader,customer_data) {
     'use strict';
 
