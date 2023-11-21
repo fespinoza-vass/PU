@@ -280,7 +280,9 @@ class SavarHelper extends AbstractHelper
             }
         }
 
-        if(intval($result['response']['vcodestado']) == self::SAVAR_STATUS_ENTREGADO){
+        if( isset($result['response']['vcodestado']) &&
+            intval($result['response']['vcodestado']) == self::SAVAR_STATUS_ENTREGADO
+        ){
             if($order->getStatus() == 'order_on_the_way'){
                 if ($order->canShip() && !$order->hasShipments()) {
                     $this->generateShipment($order);
@@ -294,9 +296,7 @@ class SavarHelper extends AbstractHelper
                 }
             }
         }
-
         $this->_emulation->stopEnvironmentEmulation();
-
     }
 
     /**
@@ -368,39 +368,42 @@ class SavarHelper extends AbstractHelper
 
     /**
      * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function updateSavarOrders(){
 
-        $this->_state->setAreaCode("frontend");
+        $this->_state->emulateAreaCode('frontend', function () {
 
         $this->_areaList->getArea(Area::AREA_FRONTEND)
             ->load(\Magento\Framework\App\Area::PART_TRANSLATE);
 
+            $this->_savarLogger->error("consulta de ordenes savar");
+            $searchCriteria = $this->_searchCriteriaBuilder
+                ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
+                ->addFilter('status',["prepared_order",'order_on_the_way'],"in")
+                ->addFilter('state',"processing","eq")
+                ->create();
 
-        $this->_savarLogger->error("consulta de ordenes savar");
-        $searchCriteria = $this->_searchCriteriaBuilder
-            ->addFilter('shipping_method',self::SHIPPING_METHOD_ENVIO_RAPIDO,"eq")
-            ->addFilter('status',["prepared_order",'order_on_the_way'],"in")
-            ->addFilter('state',"processing","eq")
-            ->create();
+            $orders = $this->_orderRepository->getList($searchCriteria);
 
-        $orders = $this->_orderRepository->getList($searchCriteria);
-
-        if($orders->getTotalCount() > 0){
-            $this->_savarLogger->info(
-                "numero de ordenes pendientes para actualizacion de estatus: ".$orders->getTotalCount()
-            );
-            /** @var OrderInterface $order */
-            foreach($orders as $order){
-                try {
-                    $this->getSavarOrder($order->getIncrementId());
-                }catch (\Throwable $error){
-                    $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId().
-                        $error->getMessage()
-                    );
-                    continue;
+            if($orders->getTotalCount() > 0){
+                $this->_savarLogger->info(
+                    "numero de ordenes pendientes para actualizacion de estatus: ".$orders->getTotalCount()
+                );
+                /** @var OrderInterface $order */
+                foreach($orders as $order){
+                    try {
+                        $this->getSavarOrder($order->getIncrementId());
+                    }catch (\Throwable $error){
+                        $this->_savarLogger->error("error al actualizar estatus de orden savar: ".$order->getIncrementId().
+                            $error->getMessage()
+                        );
+                        continue;
+                    }
                 }
             }
-        }
+
+        });
+
     }
 }
