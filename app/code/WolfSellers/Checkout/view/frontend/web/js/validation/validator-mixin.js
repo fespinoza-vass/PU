@@ -8,7 +8,7 @@ define(['mage/translate'], function($t) {
          */
         rules['validate-alphanum-with-spaces'] = {
             handler: function (v) {
-                return /^[a-zA-Z0-9áéíóúüñ\s]+$/.test(v);
+                return /^[a-zA-Z0-9áéíóúüñ\s./-]+$/.test(v);
             },
             message: $t('Solo se permiten letras, números y espacios.')
         };
