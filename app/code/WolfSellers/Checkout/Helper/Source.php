@@ -5,12 +5,18 @@ namespace WolfSellers\Checkout\Helper;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Inventory\Model\ResourceModel\Source\CollectionFactory as SourceCollectionFactory;
+use Magento\Framework\App\ResourceConnection;
 
 /**
  *
  */
 class Source extends AbstractHelper
 {
+
+    /**
+     * @var ResourceConnection
+     */
+    private $resourceConnection;
 
     /**
      * @var SourceCollectionFactory
@@ -23,8 +29,10 @@ class Source extends AbstractHelper
      */
     public function __construct(
         Context $context,
-        SourceCollectionFactory $sourceCollectionFactory
+        SourceCollectionFactory $sourceCollectionFactory,
+        ResourceConnection $resourceConnection
     ) {
+        $this->resourceConnection = $resourceConnection;
         $this->_sourceCollectionFactorty = $sourceCollectionFactory;
         parent::__construct($context);
     }
@@ -33,32 +41,26 @@ class Source extends AbstractHelper
      * @return array
      */
     public function getDistrictSource(){
-        $district = array();
+        $district = [];
+        $connection = $this->resourceConnection->getConnection();
+        $tableName = $this->resourceConnection->getTableName('inventory_geoname');
 
-        /** @var \Magento\Inventory\Model\ResourceModel\Source\Collection $collection */
-        $collection = $this->_sourceCollectionFactorty->create()
-            ->addFieldToSelect(['district'])
-            ->addFieldToFilter('enabled', true)
-            ->addFieldToFilter('is_pickup_location_active', true);
-        $collection->getSelect()->group('district');
+        $qry = $connection->select()->from($tableName)
+            ->where('is_district_lima = ?', 1)
+            ->order("city ASC");
 
-        if(count($collection->getItems())<=0){
+        $rows = $connection->fetchAssoc($qry);
+
+        if(count($rows)<=0){
             return $district;
         }
 
-        foreach($collection->getItems() as $item){
-
-            if(empty($item['district'])){
-                continue;
-            }
-
+        foreach($rows as $row){
             $district[] = [
-                'label' => $item['district'],
-                'value' => $item['district']
+                'label' => $row['city'],
+                'value' => $row['city']
             ];
         }
         return $district;
     }
-
-
 }
