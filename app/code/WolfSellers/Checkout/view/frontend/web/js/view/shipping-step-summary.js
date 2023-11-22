@@ -39,10 +39,13 @@ define([
         getShippingMethod:function () {
             if (this.isReadyToShowSummary()){
                 if (shippingPayment.shippingMethod().includes("urban")){
-                    return "Envió regular a domicilio";
+                    return "Envío regular a domicilio";
+                }
+                if (shippingPayment.shippingMethod().includes("free")){
+                    return "Envío regular a domicilio";
                 }
                 if (shippingPayment.shippingMethod().includes("rapido")){
-                    return "Envió rápido a domicilio";
+                    return "Envío rápido a domicilio";
                 }
                 if (shippingPayment.shippingMethod().includes("instore")){
                     return "Retiro en Tienda";
@@ -93,7 +96,7 @@ define([
             if (shippingPayment.shippingMethod().includes("rapido")){
                 distrito = shippingPayment.distritoEnvioRapido();
             }
-            if (shippingPayment.shippingMethod().includes("urban")){
+            if (shippingPayment.shippingMethod().includes("urban") || shippingPayment.shippingMethod().includes("free")){
                 if(distrito.length >= 3){
                     distrito = distrito.charAt(0).toUpperCase() + distrito.slice(1).toLowerCase();
                 }
@@ -118,7 +121,7 @@ define([
          */
         getShippingDate: function () {
             var date = "";
-            if (shippingPayment.shippingMethod().includes("urban")){
+            if (shippingPayment.shippingMethod().includes("urban") || shippingPayment.shippingMethod().includes("free")){
                 date = "2 días naturales";
             }
             if (shippingPayment.shippingMethod().includes("rapido")){
@@ -147,7 +150,7 @@ define([
          */
         getShippingTime:function () {
             var horario = "";
-            if (shippingPayment.shippingMethod().includes("urban")){
+            if (shippingPayment.shippingMethod().includes("urban") || shippingPayment.shippingMethod().includes("free")){
                 horario = "en un rango de 8 am a 7 pm";
             }
             if (shippingPayment.shippingMethod().includes("rapido")){

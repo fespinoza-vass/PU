@@ -132,29 +132,31 @@ define([
                     this.selectShippingMethod(rate);
                 }
             }
-            this.source.set('params.invalid', false);
-            this.triggerShippingDataValidateEvent();
-            this.validateShippingInformation();
-            if (!this.source.get('params.invalid')) {
-                if (!this.setDataToShippingForm()){
+            if (customer.isCustomerStepFinished() === '_complete') {
+                this.source.set('params.invalid', false);
+                this.triggerShippingDataValidateEvent();
+                this.validateShippingInformation();
+                if (!this.source.get('params.invalid')) {
+                    if (!this.setDataToShippingForm()) {
+                        return false;
+                    }
+                    if (this.validateShippingInformation()) {
+                        this.isShippingStepFinished("_complete");
+                        if (shippingPayment.shippingMethod() === 'instore') {
+                            this.isShippingStepFinished.notifySubscribers("_complete");
+                        }
+                        this.goToResume(false);
+                    } else {
+                        this.isShippingStepFinished("_active");
+                        this.goToResume(true);
+                    }
+                } else {
                     return false;
                 }
-                if (this.validateShippingInformation()) {
-                    this.isShippingStepFinished("_complete");
-                    if (shippingPayment.shippingMethod() === 'instore') {
-                        this.isShippingStepFinished.notifySubscribers("_complete");
-                    }
-                    this.goToResume(false);
-                } else {
-                    this.isShippingStepFinished("_active");
-                    this.goToResume(true);
-                }
-            }else{
-                return false;
+                setTimeout(function () {
+                    $('html, body').animate({scrollTop: ($("#payment").offset().top - 50)}, 1000);
+                }, 500);
             }
-            setTimeout( function () {
-                $('html, body').animate({scrollTop: ($("#payment").offset().top - 50)}, 1000);
-            }, 500);
             this._super();
         },
         /**
@@ -521,6 +523,11 @@ define([
                     this.isRegularShippingDisabled(false);
                 }
                 if(!!carrier.error_message && carrier.carrier_code.includes('urbano')){
+                    this.isUrbanoShippingDisabled(false);
+                }else{
+                    this.isUrbanoShippingDisabled(true);
+                }
+                if(!!carrier.error_message && carrier.carrier_code.includes('free')){
                     this.isUrbanoShippingDisabled(false);
                 }else{
                     this.isUrbanoShippingDisabled(true);

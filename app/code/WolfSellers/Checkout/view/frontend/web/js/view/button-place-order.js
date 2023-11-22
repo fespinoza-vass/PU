@@ -58,8 +58,7 @@ define([
                 this.isPlaceOrderDisabled = ko.computed(function () {
                     return !(customer.isCustomerStepFinished() === '_complete' &&
                         shippingPayment.isShippingStepFinished() === '_complete' &&
-                        shippingPayment.isPaymentStepFinished() === '_complete' &&
-                        this.isSubscribed() === true);
+                        shippingPayment.isPaymentStepFinished() === '_complete');
                 }, this);
                 return this;
             },
@@ -71,14 +70,9 @@ define([
              * @return {boolean}
              */
             placeOrder: function (data, event) {
-                if (!this.isSubscribed()){
-                    messageList.addErrorMessage({message: 'Es necesario Acepte la Política de Envío de Comunicaciones de Publicidad y Promociones'});
-                    return false;
-                }
                 if (customer.isCustomerStepFinished() === '_complete' &&
                         shippingPayment.isShippingStepFinished() === '_complete' &&
-                            shippingPayment.isPaymentStepFinished() === '_complete' &&
-                                this.isSubscribed() === true) {
+                            shippingPayment.isPaymentStepFinished() === '_complete') {
 
                     var shippingComponent = registry.get(this.shippingFormPrefix);
                     var paymentMethod = quote.paymentMethod();
