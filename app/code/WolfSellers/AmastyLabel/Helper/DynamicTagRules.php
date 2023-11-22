@@ -21,6 +21,9 @@ class DynamicTagRules extends AbstractHelper
     /** @var int */
     const GENERAL_MIN_STOCK = 2;
 
+    /** @var string  */
+    const SOURCE_CODE_JOCKEY = '104';
+
     /**
      * @param Context $context
      * @param GetSourceItemsBySkuInterface $sourceItemsBySku
@@ -87,10 +90,18 @@ class DynamicTagRules extends AbstractHelper
     public function InStoreLabel($qty, $sku): bool
     {
         $labelAvailable = false;
+        $ignoreMainRule = false;
 
-        // Label available if at least one source and lurin has stock.
-        if ($qty['sources'] < self::INSTORE_MIN_STOCK || $qty['lurin'] < self::INSTORE_MIN_STOCK) {
-            return false;
+        // Rule Exception for InStore.
+        if ($this->isOnlyStockInJockey($qty)) {
+            $ignoreMainRule = true;
+        }
+
+        if (!$ignoreMainRule) {
+            // Label available if at least one source and lurin has stock.
+            if ($qty['sources'] < self::INSTORE_MIN_STOCK || $qty['lurin'] < self::INSTORE_MIN_STOCK) {
+                return false;
+            }
         }
 
         // GENERAL RULES FOR LURIN
@@ -170,8 +181,45 @@ class DynamicTagRules extends AbstractHelper
                 $max = $source->getQuantity();
                 $qty['sources'] = $max;
             }
+
+            $qty['per_source'][$source->getSourceCode()] = $source->getQuantity();
         }
 
         return $qty;
+    }
+
+    /**
+     * Rule Exception for InStore.
+     * Returns true if Jockey is the only source with stock.
+     *
+     * @param $qty
+     * @return bool
+     */
+    public function isOnlyStockInJockey($qty): bool
+    {
+        if ($qty['lurin'] > 0) return false;
+
+        if ($qty['sources'] > $qty['per_source'][self::SOURCE_CODE_JOCKEY]) return false;
+
+        $max = 0;
+        $jockey = 0;
+        foreach ($qty['per_source'] as $source_code => $stock){
+            if ($source_code == self::SOURCE_CODE_JOCKEY){
+                // If jockey_stock = 0, It can't be the only one with stock.
+                if ($stock <= 0) return false;
+                $jockey = $stock;
+                continue;
+            }
+
+            if ($stock > $max){
+                $max = $stock;
+            }
+        }
+
+        // If stock_jockey is more than the GENERAL_MIN_STOCK
+        // AND the stock of others sources is 0.
+        if ($jockey >= self::GENERAL_MIN_STOCK && $max <= 0) return true;
+
+        return false;
     }
 }
