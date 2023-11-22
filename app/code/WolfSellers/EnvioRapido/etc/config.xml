@@ -17,6 +17,7 @@
                 <sandbox_order_endpoint>https://test.savarexpress.com.pe/govari/api/ServicioDelivery</sandbox_order_endpoint>
                 <production_status_endpoint>https://app.savarexpress.com.pe/govari/api/servicio/#</production_status_endpoint>
                 <sandbox_status_endpoint>https://test.savarexpress.com.pe/govari/api/servicio/#</sandbox_status_endpoint>
+                <logs_active>1</logs_active>
                 <max_package_weight>75</max_package_weight>
                 <production_token></production_token>
                 <sandbox_token></sandbox_token>

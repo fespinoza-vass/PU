@@ -12,6 +12,7 @@
     <table name="inventory_geoname" resource="default" engine="innodb">
         <column xsi:type="tinyint" name="district_active" default="0" unsigned="true" nullable="true"/>
         <column xsi:type="varchar" name="nombre_completo" nullable="true"/>
+        <column xsi:type="tinyint" name="is_district_lima" nullable="true" default="0"/>
     </table>
 
     <table name="inventory_reservation" resource="default" engine="innodb">
