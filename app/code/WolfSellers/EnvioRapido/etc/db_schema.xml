@@ -13,4 +13,8 @@
         <column xsi:type="tinyint" name="district_active" default="0" unsigned="true" nullable="true"/>
         <column xsi:type="varchar" name="nombre_completo" nullable="true"/>
     </table>
+
+    <table name="inventory_reservation" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="source_code" nullable="false"/>
+    </table>
 </schema>
