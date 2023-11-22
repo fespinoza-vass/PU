@@ -78,6 +78,7 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                     T. <?= $customerOrderBillingInformation['tel'] ?><br />
                 <?php endif; ?>
                 <br>
+                <br>
                 Comprobante:
                 <?php if ( is_null($billingAddress->getDataByKey('invoice_required')) ||
                     $billingAddress->getDataByKey('invoice_required') == '0' ):?>
@@ -86,6 +87,7 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                     Factura <br>
                     <?=$billingAddress->getDataByKey('ruc')?> <br>
                     <?=$billingAddress->getDataByKey('razon_social')?> <br>
+                    Dirección Fiscal: <?=$billingAddress->getDataByKey('direccion_fiscal')?> <br>
                 <?php endif; ?>
                 <br />
 
