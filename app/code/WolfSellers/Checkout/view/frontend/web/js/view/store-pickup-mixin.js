@@ -28,7 +28,11 @@ define([
        selectShippingMethod: function (shippingMethod) {
            if(!shippingMethod.carrier_code.includes('instore')){
                var shipping = registry.get("checkout.steps.shipping-step.shippingAddress");
-               shipping.setRegularShipping();
+               if(shipping.isUrbanoMethodConfigured() && !shipping.isRegularMethodConfigured()){
+                   shipping.setUrbanoShipping();
+               }else{
+                   shipping.setRegularShipping();
+               }
            }
            this._super(shippingMethod);
        }
