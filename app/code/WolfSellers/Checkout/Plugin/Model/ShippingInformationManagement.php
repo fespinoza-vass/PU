@@ -134,20 +134,22 @@ class ShippingInformationManagement
             $quote->getShippingAddress()->setCustomAttribute('email_picker',
                 $extensionAttributes->getRetiroTienda()->getCorreoOpcional()
             );
-
+            /********* Currently this information is not used ***********
+             ************************************************************
             $quote->getShippingAddress()->setData('distrito_pickup',
                 $extensionAttributes->getRetiroTienda()->getDistritoComprobante()
             );
             $quote->getShippingAddress()->setCustomAttribute('distrito_pickup',
                 $extensionAttributes->getRetiroTienda()->getDistritoComprobante()
             );
-
             $quote->getShippingAddress()->setData('direccion_comprobante_picker',
                 $extensionAttributes->getRetiroTienda()->getDireccionComprobante()
             );
             $quote->getShippingAddress()->setCustomAttribute('direccion_comprobante_picker',
                 $extensionAttributes->getRetiroTienda()->getDireccionComprobante()
             );
+            **************************************************************
+            **/
 
             $quote->save();
         }
