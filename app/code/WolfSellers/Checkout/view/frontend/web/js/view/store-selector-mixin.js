@@ -117,15 +117,17 @@ define([
             }
             var voucher = registry.get("checkout.steps.store-pickup.store-selector.picker-voucher.voucher");
             if(_.isUndefined(voucher.value())){
-                voucher.error('Este es un campo obligatorio.');
-                return false;
+                /********* Currently this information is not used ***********/
+                //voucher.error('Este es un campo obligatorio.');
+                //return true;
             }else{
                 voucher.error('');
             }
             var direccion_picker_voucher = registry.get("checkout.steps.store-pickup.store-selector.picker-voucher.direccion_comprobante_picker");
             if(!direccion_picker_voucher.value()){
-                direccion_picker_voucher.error('Este es un campo obligatorio.');
-                return false;
+                /********* Currently this information is not used ***********/
+                //direccion_picker_voucher.error('Este es un campo obligatorio.');
+                //return true;
             }else{
                 direccion_picker_voucher.error('');
             }
