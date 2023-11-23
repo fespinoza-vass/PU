@@ -14,6 +14,7 @@ use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
 use WolfSellers\DireccionesTiendas\Api\Data\DireccionesTiendasInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\OrderQR\Logger\Logger;
+use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
 
 /**
  *
@@ -35,6 +36,9 @@ class AssingSource
     /** @var GetSourceItemsBySkuInterface */
     protected $_sourceItemsBySku;
 
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
+
 
     /**
      * @param GetPickupLocationCodeByOrderId $_getPickupLocationCodeByOrderId
@@ -50,8 +54,10 @@ class AssingSource
         protected DireccionesTiendasRepositoryInterface $direccionesTiendasRepository,
         protected Logger                                $_logger,
         DistrictGeoname                                 $districtGeoname,
-        GetSourceItemsBySkuInterface                    $sourceItemsBySku
+        GetSourceItemsBySkuInterface                    $sourceItemsBySku,
+        InventoryBySourceHelper                         $inventoryBySourceHelper
     ) {
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_districtGeoname = $districtGeoname;
         $this->_sourceItemsBySku = $sourceItemsBySku;
     }
@@ -100,10 +106,12 @@ class AssingSource
             /** @var SourceItemInterface $sourceSku */
             foreach ($inventory as $sourceSku) {
                 if($sourceSku->getSourceCode() == $sourceCode){
+                    $sourceQuantity = $this->_inventoryBySource->getSalableQtyBySource($item->getSku(),$sourceCode);
+
                     if (!$sourceSku->getStatus()){
                         $stockAvailable = false;
                     }
-                    if ($sourceSku->getQuantity() < $item->getQtyOrdered()) {
+                    if ($sourceQuantity < $item->getQtyOrdered()) {
                         $stockAvailable = false;
                     }
                     break;

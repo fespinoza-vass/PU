@@ -14,6 +14,7 @@ use Magento\InventoryApi\Api\SourceItemRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
 
 
 
@@ -22,6 +23,9 @@ use Magento\Sales\Api\OrderRepositoryInterface;
  */
 class SourceQuantityHelper extends AbstractHelper
 {
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
 
     /** @var OrderRepositoryInterface */
     protected $_orderRepository;
@@ -44,17 +48,8 @@ class SourceQuantityHelper extends AbstractHelper
     /** @var GetSalableQuantityDataBySku */
     protected $_getSalableQuantity;
 
-
-    /**
-     * @param TimezoneInterface $timezone
-     * @param CartRepositoryInterface $cartRepository
-     * @param GetSalableQuantityDataBySku $getSalableQuantity
-     * @param SourceItemRepositoryInterface $sourceItems
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param OrderRepositoryInterface $orderRepository
-     * @param Context $context
-     */
     public function __construct(
+        InventoryBySourceHelper $inventoryBySourceHelper,
         TimezoneInterface $timezone,
         CartRepositoryInterface $cartRepository,
         GetSalableQuantityDataBySku $getSalableQuantity,
@@ -63,6 +58,7 @@ class SourceQuantityHelper extends AbstractHelper
         OrderRepositoryInterface $orderRepository,
         Context $context
     ) {
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_orderRepository = $orderRepository;
         $this->_timezone = $timezone;
         $this->sourceItems = $sourceItems;
@@ -126,19 +122,7 @@ class SourceQuantityHelper extends AbstractHelper
      * @return int
      */
     public function getStockBySource($sku, $sourceCode){
-        $searchCriteria = $this->searchCriteriaBuilder
-            ->addFilter('sku', $sku)
-            ->create();
-        $sourceItemData = $this->sourceItems->getList($searchCriteria);
-        foreach ($sourceItemData->getItems() as $sourceItem){
-            if($sourceItem->getSourceCode() == $sourceCode){
-                if(!$sourceItem->getStatus() || $sourceItem->getQuantity() <= 0) {
-                    return 0;
-                }
-                return intval($sourceItem->getQuantity());
-            }
-        }
-        return 0;
+        return $this->_inventoryBySource->getSalableQtyBySource($sku,$sourceCode);
     }
 
     /**

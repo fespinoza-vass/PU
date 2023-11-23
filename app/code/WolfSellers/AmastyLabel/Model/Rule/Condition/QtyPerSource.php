@@ -13,9 +13,13 @@ use Magento\Rule\Model\Condition\AbstractCondition;
 use Magento\Rule\Model\Condition\Context;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
+use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
 
 class QtyPerSource extends AbstractCondition
 {
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
     /**
      * @var QtyOptionSource
      */
@@ -33,12 +37,14 @@ class QtyPerSource extends AbstractCondition
      * @param array $data
      */
     public function __construct(
+        InventoryBySourceHelper      $inventoryBySourceHelper,
         Context                      $context,
         QtyOptionSource              $qtyOptionSource,
         GetSourceItemsBySkuInterface $sourceItemsBySku,
         array                        $data = []
     )
     {
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->qtyOptionSource = $qtyOptionSource;
         $this->sourceItemsBySku = $sourceItemsBySku;
         parent::__construct(
@@ -82,8 +88,10 @@ class QtyPerSource extends AbstractCondition
 
             if (!$source->getStatus()) continue;
 
-            if ($source->getQuantity() > $max) {
-                $max = $source->getQuantity();
+            $sourceQuantity = $this->_inventoryBySource->getSalableQtyBySource($product->getSku(), $source->getSourceCode());
+
+            if ($sourceQuantity > $max) {
+                $max = $sourceQuantity;
             }
         }
 

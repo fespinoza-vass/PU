@@ -15,6 +15,7 @@ use Magento\InventoryDistanceBasedSourceSelection\Model\DistanceProvider\Offline
 use Magento\InventoryDistanceBasedSourceSelectionApi\Api\Data\LatLngInterfaceFactory;
 use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
 
 
 /**
@@ -22,6 +23,9 @@ use Magento\Sales\Api\OrderRepositoryInterface;
  */
 class DistrictGeoname extends AbstractHelper
 {
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
 
     /** @var OrderRepositoryInterface */
     protected $_orderRepository;
@@ -54,6 +58,7 @@ class DistrictGeoname extends AbstractHelper
      * @param Context $context
      */
     public function __construct(
+        InventoryBySourceHelper $inventoryBySourceHelper,
         OrderRepositoryInterface $orderRepository,
         SavarLogger $savarLogger,
         GetSourceItemsBySkuInterface $sourceItemsBySku,
@@ -63,6 +68,7 @@ class DistrictGeoname extends AbstractHelper
         ResourceConnection $resourceConnection,
         Context $context
     ){
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_orderRepository = $orderRepository;
         $this->_savarLogger = $savarLogger;
         $this->_getDistance = $getDistance;
@@ -209,10 +215,14 @@ class DistrictGeoname extends AbstractHelper
                     /** @var SourceItemInterface $sourceSku */
                     foreach ($inventory as $sourceSku) {
                         if($sourceSku->getSourceCode() == $source->getSourceCode()){
+                            $sourceQuantity = $this->_inventoryBySource->getSalableQtyBySource(
+                                $item->getSku(),
+                                $source->getSourceCode()
+                            );
                             if (!$sourceSku->getStatus()){
                                 $stockAvailable = false;
                             }
-                            if ($sourceSku->getQuantity() < $item->getQtyOrdered()) {
+                            if ($sourceQuantity < $item->getQtyOrdered()) {
                                 $stockAvailable = false;
                             }
                             break;

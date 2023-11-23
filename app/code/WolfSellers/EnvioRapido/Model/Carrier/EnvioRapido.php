@@ -17,6 +17,7 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
+use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
 
 
 /**
@@ -25,6 +26,9 @@ use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
     \Magento\Shipping\Model\Carrier\CarrierInterface
 {
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
     /**
      * @var string
      */
@@ -70,6 +74,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      * @param array $data
      */
     public function __construct(
+        InventoryBySourceHelper $inventoryBySourceHelper,
         ScopeConfigInterface $scopeConfig,
         ErrorFactory         $rateErrorFactory,
         LoggerInterface      $logger,
@@ -82,6 +87,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
         array                $data = []
     )
     {
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_sourceItemsBySku = $sourceItemsBySku;
         $this->_rateResultFactory = $rateResultFactory;
         $this->_rateMethodFactory = $rateMethodFactory;
@@ -114,7 +120,12 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
                     if (!$source->getStatus()) continue;
 
-                    if ($source->getQuantity() < 2) {
+                    $sourceQuantity = $this->_inventoryBySource->getSalableQtyBySource(
+                        $item->getSku(),
+                        $source->getSourceCode()
+                    );
+
+                    if ($sourceQuantity < 2 || $sourceQuantity < $item->getQty()) {
                         $cumpleReglasEnvioRapido = false;
                     }
                 }

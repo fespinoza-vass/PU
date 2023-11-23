@@ -9,6 +9,7 @@ use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\Product;
+use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
 
 class DynamicTagRules extends AbstractHelper
 {
@@ -24,6 +25,9 @@ class DynamicTagRules extends AbstractHelper
     /** @var string  */
     const SOURCE_CODE_JOCKEY = '104';
 
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySourceHelper;
+
     /**
      * @param Context $context
      * @param GetSourceItemsBySkuInterface $sourceItemsBySku
@@ -32,9 +36,11 @@ class DynamicTagRules extends AbstractHelper
     public function __construct(
         Context                                $context,
         protected GetSourceItemsBySkuInterface $sourceItemsBySku,
-        protected ProductRepository            $productRepository
+        protected ProductRepository            $productRepository,
+        InventoryBySourceHelper                $inventoryBySourceHelper
     )
     {
+        $this->_inventoryBySourceHelper = $inventoryBySourceHelper;
         parent::__construct($context);
     }
 
@@ -170,19 +176,21 @@ class DynamicTagRules extends AbstractHelper
         $inventory = $this->sourceItemsBySku->execute($sku);
 
         foreach ($inventory as $source) {
+            $sourceQuantity = $this->_inventoryBySourceHelper->getSalableQtyBySource($sku,$source->getSourceCode());
+
             if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) {
-                $qty['lurin'] = ($source->getStatus()) ? $source->getQuantity() : 0;
+                $qty['lurin'] = ($source->getStatus()) ? $sourceQuantity : 0;
                 continue;
             }
 
             if (!$source->getStatus()) continue;
 
-            if ($source->getQuantity() > $max) {
-                $max = $source->getQuantity();
+            if ($sourceQuantity > $max) {
+                $max = $sourceQuantity;
                 $qty['sources'] = $max;
             }
 
-            $qty['per_source'][$source->getSourceCode()] = $source->getQuantity();
+            $qty['per_source'][$source->getSourceCode()] = $sourceQuantity;
         }
 
         return $qty;
@@ -222,4 +230,5 @@ class DynamicTagRules extends AbstractHelper
 
         return false;
     }
+
 }

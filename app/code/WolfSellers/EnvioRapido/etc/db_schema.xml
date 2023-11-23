@@ -14,8 +14,4 @@
         <column xsi:type="varchar" name="nombre_completo" nullable="true"/>
         <column xsi:type="tinyint" name="is_district_lima" nullable="true" default="0"/>
     </table>
-
-    <table name="inventory_reservation" resource="default" engine="innodb">
-        <column xsi:type="varchar" name="source_code" nullable="false"/>
-    </table>
 </schema>

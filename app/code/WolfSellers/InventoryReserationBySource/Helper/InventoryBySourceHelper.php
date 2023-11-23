@@ -1,16 +1,25 @@
 <?php
 
-namespace WolfSellers\EnvioRapido\Helper;
+namespace WolfSellers\InventoryReserationBySource\Helper;
 
+use Elasticsearch\Endpoints\Get;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\OrderFactory;
+use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
+use Magento\InventoryApi\Api\Data\SourceItemInterface;
 
 
-class InventoryHelper extends AbstractHelper
+/**
+ *
+ */
+class InventoryBySourceHelper extends AbstractHelper
 {
+
+    /** @var GetSourceItemsBySkuInterface */
+    protected $_sourceItemsBySku;
 
     /** @var OrderFactory */
     protected $orderFactory;
@@ -24,18 +33,30 @@ class InventoryHelper extends AbstractHelper
     private $resourceConnection;
 
 
+    /**
+     * @param Context $context
+     * @param ResourceConnection $resourceConnection
+     * @param OrderRepositoryInterface $orderRepository
+     * @param OrderFactory $orderFactory
+     * @param GetSourceItemsBySkuInterface $sourceItemsBySku
+     */
     public function __construct(
         Context $context,
         ResourceConnection $resourceConnection,
         OrderRepositoryInterface $orderRepository,
-        OrderFactory $orderFactory
+        OrderFactory $orderFactory,
+        GetSourceItemsBySkuInterface $sourceItemsBySku
     ){
+        $this->_sourceItemsBySku = $sourceItemsBySku;
         $this->orderFactory = $orderFactory;
         $this->_orderRepository = $orderRepository;
         $this->resourceConnection = $resourceConnection;
         parent::__construct($context);
     }
 
+    /**
+     * @return void
+     */
     public function setSourceCodeInReservation()
     {
         $connect = $this->resourceConnection->getConnection();
@@ -57,10 +78,10 @@ class InventoryHelper extends AbstractHelper
 
     /**
      * @param string $sku
-     * @param int $stockId
-     * @return null|float
+     * @param int $sourceCode
+     * @return float|null
      */
-    public function getQtyBySource(string $sku, int $sourceCode): ?float
+    public function getSalableQtyBySource(string $sku, string $sourceCode): ?float
     {
         $connection = $this->resourceConnection->getConnection();
         $select = $connection->select()
@@ -71,7 +92,17 @@ class InventoryHelper extends AbstractHelper
 
         $reservationQty = $connection->fetchOne($select);
 
-        return $reservationQty ? (float) $reservationQty : 0;
-    }
+        $reservationQty = $reservationQty ? (float) $reservationQty : 0;
 
+        $inventory = $this->_sourceItemsBySku->execute($sku);
+
+        /** @var SourceItemInterface $source */
+        foreach($inventory as $source){
+            if($source->getSourceCode() == $sourceCode){
+                return (float) $source->getQuantity() + $reservationQty;
+            }
+        }
+
+        return 0;
+    }
 }
