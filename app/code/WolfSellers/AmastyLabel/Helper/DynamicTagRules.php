@@ -208,7 +208,9 @@ class DynamicTagRules extends AbstractHelper
 
         $max = 0;
         $jockey = 0;
-        foreach ($qty['per_source'] as $source_code => $stock){
+        $qtyPerSource = $qty['per_source'] ?? [];
+
+        foreach ($qtyPerSource as $source_code => $stock){
             if ($source_code == self::SOURCE_CODE_JOCKEY){
                 // If jockey_stock = 0, It can't be the only one with stock.
                 if ($stock <= 0) return false;
