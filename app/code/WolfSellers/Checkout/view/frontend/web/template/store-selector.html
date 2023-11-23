@@ -50,12 +50,13 @@
         </div>
     </div>
     <div class="store-pickup-receipt-address">
-        <div class="step-title" translate="'2.2. Ingresa una dirección para tu comprobante'" data-role="title" visible="selectedLocation()"></div>
-        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="!selectedLocation()"></div>
+        <div class="step-title" translate="'2.2. Ingresa una dirección para tu comprobante'" data-role="title" visible="false"></div>
+        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="false"></div>
         <form id="form_another_vaoucher"
               class="form-picker-voucher"
               novalidate="novalidate"
-              data-form-part="pickerVoucher">
+              data-form-part="pickerVoucher"
+              visible="false">
             <each args="getRegion('picker-voucher')" render="" ></each>
         </form>
         <div class="store-pickup-receipt-address_time">

@@ -123,8 +123,10 @@ define([
             this.ubigeo.subscribe(function (value) {
                 if (!_.isUndefined(value) && this.isUrbanoShipping()){
                     var rate = this.findRateByCarrierCode('urbano');
-                    this.showShippingMethodError(rate);
-                    this.selectShippingMethod(rate);
+                    if (!_.isUndefined(rate)){
+                        this.showShippingMethodError(rate);
+                        this.selectShippingMethod(rate);
+                    }
                 }
             },this);
             this.createInformationModals();
@@ -264,7 +266,7 @@ define([
          * @returns {*}
          */
         showShippingMethodError: function (rate) {
-            if(_.isUndefined(rate.error_message)){
+            if(_.isUndefined(rate)){
                 return false;
             }
             return this.isShippingMethodError(!!rate.error_message);

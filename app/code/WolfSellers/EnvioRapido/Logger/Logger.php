@@ -2,7 +2,7 @@
 namespace WolfSellers\EnvioRapido\Logger;
 use DateTimeZone;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface as StoreScopeConfigInterface;
 
 /**
  *
@@ -11,18 +11,18 @@ class Logger extends \Monolog\Logger
 {
     CONST XML_SAVAR_GENERATE_LOGS = "carriers/envio_rapido/logs_active";
 
-    /** @var ScopeConfigInterface */
+    /** @var StoreScopeConfigInterface */
     protected $_scopeConfig;
 
     /**
-     * @param ScopeConfigInterface $scopeConfig
+     * @param StoreScopeConfigInterface $scopeConfig
      * @param string $name
      * @param array $handlers
      * @param array $processors
      * @param DateTimeZone|null $timezone
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
+        StoreScopeConfigInterface $scopeConfig,
         string $name,
         array $handlers = [],
         array $processors = [],
