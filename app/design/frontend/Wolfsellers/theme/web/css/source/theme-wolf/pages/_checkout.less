@@ -130,7 +130,8 @@
 						}
 					}
 				}
-				.fast-additional-info-modal{
+				.fast-additional-info-modal,
+				.regular-additional-info-modal{
 					.modal-inner-wrap{
 						.modal-content{
 							.custom-popup-content{
@@ -2881,6 +2882,19 @@
 								.icon-fast{
 									&:before{
 										.lib-font-size(25);
+									}
+								}
+							}
+						}
+					}
+				}
+				.modal-popup.regular-additional-info-modal._show{
+					.modal-inner-wrap{
+						.modal-content{
+							.custom-popup-content{
+								&_delivery{
+									.section{
+										padding: 10px;
 									}
 								}
 							}
