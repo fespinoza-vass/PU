@@ -39,7 +39,7 @@
 						left: 50%;
 						right: 50%;
 						border-radius: 20px;
-						max-width: 1000px;
+						max-width: 1060px;
 						width: 100%;
 						max-height: 100%;
 						overflow-y: auto;
@@ -118,7 +118,8 @@
 											font-weight: bold;
 										}
 										&_provinces,
-										&_hour{
+										&_hour,
+										&_coverage{
 											padding-bottom: 25px;
 										}
 									}
@@ -130,8 +131,7 @@
 						}
 					}
 				}
-				.fast-additional-info-modal,
-				.regular-additional-info-modal{
+				.fast-additional-info-modal{
 					.modal-inner-wrap{
 						.modal-content{
 							.custom-popup-content{
@@ -166,6 +166,19 @@
 										&_provinces{
 											padding-top: 30px;
 										}
+									}
+								}
+							}
+						}
+					}
+				}
+				.regular-additional-info-modal{
+					.modal-inner-wrap{
+						.modal-content{
+							.custom-popup-content{
+								&_delivery{
+									.section{
+										padding: 25px 10px 10px 10px;
 									}
 								}
 							}
@@ -2866,8 +2879,11 @@
 											.lib-font-size(12);
 										}
 										&_provinces,
-										&_hour{
+										&_hour,
+										&_coverage,
+										&_time{
 											padding-bottom: 15px;
+											.lib-font-size(12);
 										}
 									}
 								}
