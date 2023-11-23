@@ -202,7 +202,7 @@ class DynamicTagRules extends AbstractHelper
      */
     public function isOnlyStockInJockey($qty): bool
     {
-        if (!isset($qty['per_source'])) return false;
+        if (!isset($qty['per_source']) || !isset($qty['per_source'][self::SOURCE_CODE_JOCKEY])) return false;
 
         if ($qty['lurin'] > 0) return false;
 
