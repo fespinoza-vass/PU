@@ -67,6 +67,11 @@ class DynamicTagRules extends AbstractHelper
     {
         $labelAvailable = false;
 
+        // Rule Exception for Shipping Label.
+        if ($this->isOnlyStockInJockey($qty)) {
+            return false;
+        }
+
         // Label available if at least one source has stock.
         if ($qty['sources'] < self::FAST_METHOD_MIN_STOCK) return false;
 
