@@ -202,15 +202,15 @@ class DynamicTagRules extends AbstractHelper
      */
     public function isOnlyStockInJockey($qty): bool
     {
+        if (!isset($qty['per_source'])) return false;
+
         if ($qty['lurin'] > 0) return false;
 
         if ($qty['sources'] > $qty['per_source'][self::SOURCE_CODE_JOCKEY]) return false;
 
         $max = 0;
         $jockey = 0;
-        $qtyPerSource = $qty['per_source'] ?? [];
-
-        foreach ($qtyPerSource as $source_code => $stock){
+        foreach ($qty['per_source'] as $source_code => $stock){
             if ($source_code == self::SOURCE_CODE_JOCKEY){
                 // If jockey_stock = 0, It can't be the only one with stock.
                 if ($stock <= 0) return false;
