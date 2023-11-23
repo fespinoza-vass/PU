@@ -110,6 +110,7 @@
 											padding-bottom: 10px;
 										}
 										p{
+											display: inline;
 											b{
 												display: initial;
 											}
@@ -179,6 +180,9 @@
 								&_delivery{
 									.section{
 										padding: 25px 10px 10px 10px;
+										&_title{
+											text-transform: uppercase;
+										}
 									}
 								}
 							}
@@ -2882,8 +2886,14 @@
 										&_hour,
 										&_coverage,
 										&_time{
-											padding-bottom: 15px;
+											padding-bottom: 10px;
 											.lib-font-size(12);
+										}
+										&_info{
+											&-schedule,
+											&-time{
+												.lib-font-size(12);
+											}
 										}
 									}
 								}
