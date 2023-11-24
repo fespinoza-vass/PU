@@ -43,9 +43,9 @@
                 <block class="Magento\Sales\Block\Adminhtml\Order\View\Items" name="order_items" template="WolfSellers_Bopis::order/view/items.phtml">
                     <arguments>
                         <argument name="columns" xsi:type="array">
-                            <item name="product" xsi:type="string" translate="true">Product</item>
-                            <item name="estatus" xsi:type="string" translate="true">Status</item>
-                            <item name="ordered-qty" xsi:type="string" translate="true">Qty</item>
+                            <item name="product" xsi:type="string" translate="true">Producto</item>
+                            <item name="ordered-qty" xsi:type="string" translate="true">Cantidad</item>
+                            <item name="pdiscont" xsi:type="string" translate="true">% Descuento</item>
                             <item name="totals" xsi:type="string" translate="true">Total</item>
                         </argument>
                     </arguments>
@@ -54,13 +54,14 @@
                         <arguments>
                             <argument name="columns" xsi:type="array">
                                 <item name="product" xsi:type="string" translate="false">col-product</item>
-                                <item name="estatus" xsi:type="string" translate="false">col-estatus</item>
                                 <item name="qty" xsi:type="string" translate="false">col-ordered-qty</item>
+                                <item name="pdiscont" xsi:type="string" translate="false">col-pdiscont</item>
                                 <item name="totals" xsi:type="string" translate="false">col-totals</item>
                             </argument>
                         </arguments>
                     </block>
                     <block class="Magento\Sales\Block\Adminhtml\Items\Column\Qty" name="column_qty" template="WolfSellers_Bopis::order/items/column/qty.phtml" group="column"/>
+                    <block class="WolfSellers\Bopis\Block\Adminhtml\Items\Column\Discont" name="column_pdiscont" template="WolfSellers_Bopis::order/items/column/discont.phtml" group="column"/>
                     <block class="Magento\Sales\Block\Adminhtml\Items\Column\Name" name="column_name" template="WolfSellers_Bopis::order/items/column/name.phtml" group="column"/>
                     <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Items\Totals" name="column_totals" template="WolfSellers_Bopis::order/items/column/totals.phtml" group="column"/>
                     <block class="WolfSellers\Bopis\Block\Adminhtml\Order\View\Items\Totals" name="column_estatus" template="WolfSellers_Bopis::order/items/column/status.phtml" group="column"/>
