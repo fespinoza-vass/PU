@@ -21,8 +21,13 @@
             <td class="address-details">
                 <h3>Información de contacto</h3>
                 <p>
-                    <?=$order->getCustomerFirstname()?> <br>
-                    <?=$order->getCustomerLastname()?> <br>
+                    <?php if($order->getCustomerIsGuest()): ?>
+                        <?=ucfirst($order->getCustomerNombre())?> <br>
+                        <?=ucfirst($order->getCustomerApellido())?> <br>
+                    <?php else: ?>
+                        <?=$order->getCustomerFirstname()?> <br>
+                        <?=$order->getCustomerLastname()?> <br>
+                    <?php endif; ?>
                     <?=$billingInformation['type_id']?> : <?=$billingInformation['id_number']?><br>
                     <?=$billingInformation['email']?> <br>
                     <?=$billingInformation['tel']?> <br>
