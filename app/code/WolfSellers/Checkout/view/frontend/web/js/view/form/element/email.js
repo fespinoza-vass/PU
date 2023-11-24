@@ -62,11 +62,11 @@ define([
             this._super();
 
             this.passwordRegister.subscribe(function(value) {
-                customer_data.passwordRegister = value;
+                customer_data.passwordRegister(value);
             }, this);
 
             this.passwordConfirm.subscribe(function(value) {
-                customer_data.passwordConfirm = value;
+                customer_data.passwordConfirm(value);
             }, this);
 
             return this;
