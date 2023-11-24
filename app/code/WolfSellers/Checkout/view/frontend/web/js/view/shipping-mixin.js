@@ -311,11 +311,11 @@ define([
                 return 'Sin Calcular';
             }
             if (!carrier && methodType === "urbano" && this.isUrbanoShipping()){
-                return "Calculando";
+                return "Calculando...";
             }
             if (!carrier && methodType === "urbano" &&
                     !this.isUrbanoShipping() && !this.isFastShipping() && !this.isRegularShipping()){
-                return "Calculando";
+                return "Calculando...";
             }
             return priceUtils.formatPrice(carrier.amount);
         },
