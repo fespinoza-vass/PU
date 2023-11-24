@@ -17,7 +17,7 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
-
+use WolfSellers\AmastyLabel\Helper\DynamicTagRules;
 
 /**
  *
@@ -58,6 +58,9 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
     /** @var GetSourceItemsBySkuInterface */
     protected $_sourceItemsBySku;
 
+    /** @var DynamicTagRules */
+    protected DynamicTagRules $dynamicTagRules;
+
     /**
      * @param ScopeConfigInterface $scopeConfig
      * @param ErrorFactory $rateErrorFactory
@@ -67,19 +70,22 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      * @param ProductRepository $productRepository
      * @param SalableQtyBySku $salableQuantityDataBySku
      * @param TimezoneInterface $timezone
+     * @param GetSourceItemsBySkuInterface $sourceItemsBySku
+     * @param DynamicTagRules $dynamicTagRules
      * @param array $data
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        ErrorFactory         $rateErrorFactory,
-        LoggerInterface      $logger,
-        ResultFactory        $rateResultFactory,
-        MethodFactory        $rateMethodFactory,
-        ProductRepository    $productRepository,
-        SalableQtyBySku      $salableQuantityDataBySku,
-        TimezoneInterface    $timezone,
+        ScopeConfigInterface         $scopeConfig,
+        ErrorFactory                 $rateErrorFactory,
+        LoggerInterface              $logger,
+        ResultFactory                $rateResultFactory,
+        MethodFactory                $rateMethodFactory,
+        ProductRepository            $productRepository,
+        SalableQtyBySku              $salableQuantityDataBySku,
+        TimezoneInterface            $timezone,
         GetSourceItemsBySkuInterface $sourceItemsBySku,
-        array                $data = []
+        DynamicTagRules              $dynamicTagRules,
+        array                        $data = []
     )
     {
         $this->_sourceItemsBySku = $sourceItemsBySku;
@@ -88,6 +94,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
         $this->productRepository = $productRepository;
         $this->salableQuantityDataBySku = $salableQuantityDataBySku;
         $this->_timezone = $timezone;
+        $this->dynamicTagRules = $dynamicTagRules;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
@@ -107,16 +114,15 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
             /** @var \Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
-                $inventory = $this->_sourceItemsBySku->execute($item->getSku());
-                /** @var SourceItemInterface $source */
-                foreach ($inventory as $source) {
-                    if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) continue;
+                // Get the amasty_labels that apply per sku
+                $labels = $this->dynamicTagRules->shippingLabelsByProductSku($item->getSku());
+                // If the label does not exist, we continue with the next product.
+                if (!isset($labels['fast'])) continue;
 
-                    if (!$source->getStatus()) continue;
+                $fastLabel = boolval($labels['fast']);
 
-                    if ($source->getQuantity() < 2) {
-                        $cumpleReglasEnvioRapido = false;
-                    }
+                if (!$fastLabel){
+                    $cumpleReglasEnvioRapido = false;
                 }
             }
 
@@ -133,7 +139,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
                     $method->setMethod($this->_code);
                     $method->setMethodTitle($this->getConfigData('name'));
-                    $method->setData('delivery_time',$this->getDeliveryTime());
+                    $method->setData('delivery_time', $this->getDeliveryTime());
 
                     $method->setPrice($shippingPrice);
                     $method->setCost($shippingPrice);
