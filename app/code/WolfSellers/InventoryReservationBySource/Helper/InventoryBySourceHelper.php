@@ -1,6 +1,6 @@
 <?php
 
-namespace WolfSellers\InventoryReserationBySource\Helper;
+namespace WolfSellers\InventoryReservationBySource\Helper;
 
 use Elasticsearch\Endpoints\Get;
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -99,10 +99,13 @@ class InventoryBySourceHelper extends AbstractHelper
         /** @var SourceItemInterface $source */
         foreach($inventory as $source){
             if($source->getSourceCode() == $sourceCode){
-                return (float) $source->getQuantity() + $reservationQty;
+                if($reservationQty != 0){
+                    return (float) $source->getQuantity() + $reservationQty;
+                }else{
+                    return $source->getQuantity();
+                }
             }
         }
-
         return 0;
     }
 }

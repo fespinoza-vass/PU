@@ -15,7 +15,7 @@ use Magento\InventoryDistanceBasedSourceSelection\Model\DistanceProvider\Offline
 use Magento\InventoryDistanceBasedSourceSelectionApi\Api\Data\LatLngInterfaceFactory;
 use WolfSellers\EnvioRapido\Logger\Logger as SavarLogger;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 
 /**

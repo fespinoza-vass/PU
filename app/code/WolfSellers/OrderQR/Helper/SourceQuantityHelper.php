@@ -14,7 +14,7 @@ use Magento\InventoryApi\Api\SourceItemRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 
 

@@ -9,7 +9,7 @@ use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\Product;
-use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 class DynamicTagRules extends AbstractHelper
 {

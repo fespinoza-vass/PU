@@ -17,7 +17,8 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
-use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\AmastyLabel\Helper\DynamicTagRules;
 
 
 /**
@@ -26,6 +27,9 @@ use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
 class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
     \Magento\Shipping\Model\Carrier\CarrierInterface
 {
+
+    /** @var DynamicTagRules */
+    protected $_dynamicTagsRules;
 
     /** @var InventoryBySourceHelper */
     protected $_inventoryBySource;
@@ -74,6 +78,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      * @param array $data
      */
     public function __construct(
+        DynamicTagRules $dynamicTagsRules,
         InventoryBySourceHelper $inventoryBySourceHelper,
         ScopeConfigInterface $scopeConfig,
         ErrorFactory         $rateErrorFactory,
@@ -87,6 +92,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
         array                $data = []
     )
     {
+        $this->_dynamicTagsRules = $dynamicTagsRules;
         $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_sourceItemsBySku = $sourceItemsBySku;
         $this->_rateResultFactory = $rateResultFactory;
@@ -113,21 +119,9 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
             /** @var \Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
-                $inventory = $this->_sourceItemsBySku->execute($item->getSku());
-                /** @var SourceItemInterface $source */
-                foreach ($inventory as $source) {
-                    if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) continue;
-
-                    if (!$source->getStatus()) continue;
-
-                    $sourceQuantity = $this->_inventoryBySource->getSalableQtyBySource(
-                        $item->getSku(),
-                        $source->getSourceCode()
-                    );
-
-                    if ($sourceQuantity < 2 || $sourceQuantity < $item->getQty()) {
-                        $cumpleReglasEnvioRapido = false;
-                    }
+                $labels = $this->_dynamicTagsRules->shippingLabelsByProductSku($item->getSku());
+                if(!$labels['fast']){
+                    $cumpleReglasEnvioRapido = false;
                 }
             }
 

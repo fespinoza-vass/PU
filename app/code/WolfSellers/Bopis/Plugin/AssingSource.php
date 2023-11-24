@@ -14,7 +14,7 @@ use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
 use WolfSellers\DireccionesTiendas\Api\Data\DireccionesTiendasInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\OrderQR\Logger\Logger;
-use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 /**
  *

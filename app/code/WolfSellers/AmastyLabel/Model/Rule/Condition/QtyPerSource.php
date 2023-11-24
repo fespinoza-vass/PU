@@ -13,7 +13,7 @@ use Magento\Rule\Model\Condition\AbstractCondition;
 use Magento\Rule\Model\Condition\Context;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
-use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 class QtyPerSource extends AbstractCondition
 {

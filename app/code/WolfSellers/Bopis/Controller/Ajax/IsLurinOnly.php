@@ -13,7 +13,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\Checkout\Model\Session;
 use Magento\InventoryConfigurationApi\Exception\SkuIsNotAssignedToStockException;
-use WolfSellers\InventoryReserationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 /**
  * Class IsLurinOnly
