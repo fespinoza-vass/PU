@@ -1236,6 +1236,7 @@
 							padding: 7px 5px 10px 10px;
 							.step-content{
 								&_icon{
+									width: auto;
 									.lib-icon-font(
 										@_icon-font-content: @icon-regular-shipping,
 										@_icon-font-color: @black,
@@ -2903,8 +2904,10 @@
 											.lib-font-size(12);
 										}
 										&_provinces,
-										&_hour{
+										&_hour,
+										&_time{
 											padding-bottom: 15px;
+											.lib-font-size(12);
 										}
 									}
 								}
@@ -3219,6 +3222,7 @@
 										}
 										span{
 											display: inline;
+											.lib-font-size(12);
 											a{
 												display: inline;
 											}
@@ -3391,7 +3395,7 @@
 						#checkout-step-shipping_method-fast{
 							.step-content_icon{
 								.lib-font-size(12);
-								width: 75%
+								width: 60%
 							}
 							span.step-content_info{
 								.lib-font-size(10);
