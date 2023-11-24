@@ -3,6 +3,13 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="sales_order">
         <column name="ubigeo_estimated_delivery" nullable="true" xsi:type="text" comment="Estimacioon de Entrega URBANO"/>
+
+        <column name="customer_nombre" nullable="true" xsi:type="varchar" comment="customer name guest" length="200"/>
+        <column name="customer_telefono" nullable="true" xsi:type="varchar" comment="customer telefono guest" length="200"/>
+        <column name="customer_identificacion" nullable="true" xsi:type="int" comment="customer identificacion guest"  unsigned="true"/>
+        <column name="customer_numero_de_identificacion" nullable="true" xsi:type="varchar" comment="customer numero_de_identificacion guest" length="200"/>
+        <column name="customer_apellido" nullable="true" xsi:type="varchar" comment="customer lastname guest" length="200"/>
+
     </table>
     <table name="quote">
         <column name="customer_name" nullable="true" xsi:type="varchar" comment="customer name guest" length="200"/>

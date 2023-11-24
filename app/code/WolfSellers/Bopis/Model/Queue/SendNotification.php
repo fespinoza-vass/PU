@@ -218,6 +218,7 @@ class SendNotification
                 'frontend_status_label' => $order->getFrontendStatusLabel()
             ]
         ];
+
         $transportObject = new DataObject($transport);
         $this->templateContainer->setTemplateVars($transportObject->getData());
         $this->templateContainer->setTemplateOptions($this->getTemplateOptions($order));
