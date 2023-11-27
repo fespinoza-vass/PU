@@ -20,7 +20,6 @@ use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 use WolfSellers\AmastyLabel\Helper\DynamicTagRules;
 
-
 /**
  *
  */
@@ -66,6 +65,9 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
     /** @var GetSourceItemsBySkuInterface */
     protected $_sourceItemsBySku;
 
+    /** @var DynamicTagRules */
+    protected DynamicTagRules $dynamicTagRules;
+
     /**
      * @param ScopeConfigInterface $scopeConfig
      * @param ErrorFactory $rateErrorFactory
@@ -75,6 +77,8 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      * @param ProductRepository $productRepository
      * @param SalableQtyBySku $salableQuantityDataBySku
      * @param TimezoneInterface $timezone
+     * @param GetSourceItemsBySkuInterface $sourceItemsBySku
+     * @param DynamicTagRules $dynamicTagRules
      * @param array $data
      */
     public function __construct(
@@ -89,7 +93,8 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
         SalableQtyBySku      $salableQuantityDataBySku,
         TimezoneInterface    $timezone,
         GetSourceItemsBySkuInterface $sourceItemsBySku,
-        array                $data = []
+        DynamicTagRules              $dynamicTagRules,
+        array                        $data = []
     )
     {
         $this->_dynamicTagsRules = $dynamicTagsRules;
@@ -100,6 +105,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
         $this->productRepository = $productRepository;
         $this->salableQuantityDataBySku = $salableQuantityDataBySku;
         $this->_timezone = $timezone;
+        $this->dynamicTagRules = $dynamicTagRules;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
@@ -138,7 +144,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
                     $method->setMethod($this->_code);
                     $method->setMethodTitle($this->getConfigData('name'));
-                    $method->setData('delivery_time',$this->getDeliveryTime());
+                    $method->setData('delivery_time', $this->getDeliveryTime());
 
                     $method->setPrice($shippingPrice);
                     $method->setCost($shippingPrice);

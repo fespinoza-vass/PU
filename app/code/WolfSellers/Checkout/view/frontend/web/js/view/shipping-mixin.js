@@ -129,6 +129,17 @@ define([
                     }
                 }
             },this);
+
+            this.rates.subscribe(function (value) {
+                if (!_.isUndefined(value) && this.isUrbanoShipping()){
+                    var rate = this.findRateByCarrierCode('urbano');
+                    if (!_.isUndefined(rate)){
+                        this.showShippingMethodError(rate);
+                        this.selectShippingMethod(rate);
+                    }
+                }
+                console.log(value);
+            },this);
             this.createInformationModals();
             return this;
         },
@@ -298,6 +309,13 @@ define([
             carrier = this.getCarrierCodeByCarrier(methodType);
             if(methodType === 'urbano' && carrier.amount === 0){
                 return 'Sin Calcular';
+            }
+            if (!carrier && methodType === "urbano" && this.isUrbanoShipping()){
+                return "Calculando...";
+            }
+            if (!carrier && methodType === "urbano" &&
+                    !this.isUrbanoShipping() && !this.isFastShipping() && !this.isRegularShipping()){
+                return "Calculando...";
             }
             return priceUtils.formatPrice(carrier.amount);
         },
