@@ -14,16 +14,13 @@ use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 class DynamicTagRules extends AbstractHelper
 {
     /** @var int */
-    const FAST_METHOD_MIN_STOCK = 1;
-
-    /** @var int */
-    const INSTORE_MIN_STOCK = 1;
-
-    /** @var int */
     const GENERAL_MIN_STOCK = 2;
 
-    /** @var string  */
+    /** @var string */
     const SOURCE_CODE_JOCKEY = '104';
+
+    /** @var string */
+    const SOURCE_CODE_CARACOL = '102';
 
     /** @var InventoryBySourceHelper */
     protected $_inventoryBySourceHelper;
@@ -32,6 +29,7 @@ class DynamicTagRules extends AbstractHelper
      * @param Context $context
      * @param GetSourceItemsBySkuInterface $sourceItemsBySku
      * @param ProductRepository $productRepository
+     * @param InventoryBySourceHelper $inventoryBySourceHelper
      */
     public function __construct(
         Context                                $context,
@@ -66,25 +64,37 @@ class DynamicTagRules extends AbstractHelper
      * @param $qty
      * @param $sku
      * @return bool
-     * @throws NoSuchEntityException
-     * @todo Set the configuration to get the FAST_METHOD_MIN_STOCK value from the administrator.
+     * @todo Set the configuration to get the GENERAL_MIN_STOCK value from the administrator.
      */
     public function fastShippingLabel($qty, $sku): bool
     {
         $labelAvailable = false;
 
-        // Rule Exception for Shipping Label.
+        // Rule 1: If there is stock only in Lurín, the label will not be available.
+        if ($qty['sources'] <= 0) {
+            return false;
+        }
+
+        // EXCEPTIONS TO FAST SHIPPING LABEL RULES.
+        //  If there is stock only in JockeyPlaza, only the InStore label is shown
         if ($this->isOnlyStockInJockey($qty)) {
             return false;
         }
 
-        // Label available if at least one source has stock.
-        if ($qty['sources'] < self::FAST_METHOD_MIN_STOCK) return false;
+        //  If there is stock only in Caracol, only the fast label is shown
+        if ($this->isOnlyStockInCaracol($qty)) {
+            return true;
+        }
 
-        // GENERAL RULES FOR LURIN
-        if ($this->generalRules($sku, $qty)) {
+        // Label available if at least one source has stock.
+        if ($qty['sources'] >= self::GENERAL_MIN_STOCK) {
             $labelAvailable = true;
         }
+
+        // GENERAL RULES FOR LURIN
+        /*if ($this->generalRules($sku, $qty)) {
+            $labelAvailable = true;
+        }*/
 
         return $labelAvailable;
     }
@@ -95,30 +105,37 @@ class DynamicTagRules extends AbstractHelper
      * @param $qty
      * @param $sku
      * @return bool
-     * @throws NoSuchEntityException
-     * @todo Set the configuration to get the INSTORE_MIN_STOCK value from the administrator.
+     * @todo Set the configuration to get the GENERAL_MIN_STOCK value from the administrator.
      */
     public function InStoreLabel($qty, $sku): bool
     {
         $labelAvailable = false;
-        $ignoreMainRule = false;
 
-        // Rule Exception for InStore.
-        if ($this->isOnlyStockInJockey($qty)) {
-            $ignoreMainRule = true;
+        // Rule 1: If there is stock only in Lurín, the label will not be available.
+        if ($qty['sources'] <= 0) {
+            return false;
         }
 
-        if (!$ignoreMainRule) {
-            // Label available if at least one source and lurin has stock.
-            if ($qty['sources'] < self::INSTORE_MIN_STOCK || $qty['lurin'] < self::INSTORE_MIN_STOCK) {
-                return false;
-            }
+        // EXCEPTIONS TO FAST SHIPPING LABEL RULES.
+        //  If there is stock only in JockeyPlaza, only the InStore label is shown
+        if ($this->isOnlyStockInJockey($qty)) {
+            return true;
+        }
+
+        //  If there is stock only in Caracol, only the fast label is shown
+        if ($this->isOnlyStockInCaracol($qty)) {
+            return false;
+        }
+
+        // Label available if at least one source has stock.
+        if ($qty['sources'] >= self::GENERAL_MIN_STOCK) {
+            $labelAvailable = true;
         }
 
         // GENERAL RULES FOR LURIN
-        if ($this->generalRules($sku, $qty)) {
+        /*if ($this->generalRules($sku, $qty)) {
             $labelAvailable = true;
-        }
+        }*/
 
         return $labelAvailable;
     }
@@ -181,7 +198,7 @@ class DynamicTagRules extends AbstractHelper
         $inventory = $this->sourceItemsBySku->execute($sku);
 
         foreach ($inventory as $source) {
-            $sourceQuantity = $this->_inventoryBySourceHelper->getSalableQtyBySource($sku,$source->getSourceCode());
+            $sourceQuantity = $this->_inventoryBySourceHelper->getSalableQtyBySource($sku, $source->getSourceCode());
 
             if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) {
                 $qty['lurin'] = ($source->getStatus()) ? $sourceQuantity : 0;
@@ -202,7 +219,7 @@ class DynamicTagRules extends AbstractHelper
     }
 
     /**
-     * Rule Exception for InStore.
+     * Rule Exception.
      * Returns true if Jockey is the only source with stock.
      *
      * @param $qty
@@ -210,30 +227,54 @@ class DynamicTagRules extends AbstractHelper
      */
     public function isOnlyStockInJockey($qty): bool
     {
-        if (!isset($qty['per_source']) || !isset($qty['per_source'][self::SOURCE_CODE_JOCKEY])) return false;
+        return $this->thereIsOnlyStockIn(self::SOURCE_CODE_JOCKEY, $qty);
+    }
+
+    /**
+     * Rule Exception.
+     * Returns true if caracol is the only source with stock.
+     *
+     * @param $qty
+     * @return bool
+     */
+    public function isOnlyStockInCaracol($qty): bool
+    {
+        return $this->thereIsOnlyStockIn(self::SOURCE_CODE_CARACOL, $qty);
+    }
+
+    /**
+     * Returns true if the selected source is the only source with stock.
+     *
+     * @param $sourceCode
+     * @param $qty
+     * @return bool
+     */
+    public function thereIsOnlyStockIn($sourceCode, $qty): bool
+    {
+        if (!isset($qty['per_source']) || !isset($qty['per_source'][$sourceCode])) return false;
 
         if ($qty['lurin'] > 0) return false;
 
-        if ($qty['sources'] > $qty['per_source'][self::SOURCE_CODE_JOCKEY]) return false;
+        if ($qty['sources'] > $qty['per_source'][$sourceCode]) return false;
 
         $max = 0;
-        $jockey = 0;
-        foreach ($qty['per_source'] as $source_code => $stock){
-            if ($source_code == self::SOURCE_CODE_JOCKEY){
-                // If jockey_stock = 0, It can't be the only one with stock.
+        $currentSourceStock = 0;
+        foreach ($qty['per_source'] as $source_code => $stock) {
+            if ($source_code == $sourceCode) {
+                // If source_stock = 0, It can't be the only one with stock.
                 if ($stock <= 0) return false;
-                $jockey = $stock;
+                $currentSourceStock = $stock;
                 continue;
             }
 
-            if ($stock > $max){
+            if ($stock > $max) {
                 $max = $stock;
             }
         }
 
-        // If stock_jockey is more than the GENERAL_MIN_STOCK
+        // If source_stock is more than the GENERAL_MIN_STOCK
         // AND the stock of others sources is 0.
-        if ($jockey >= self::GENERAL_MIN_STOCK && $max <= 0) return true;
+        if ($currentSourceStock >= self::GENERAL_MIN_STOCK && $max <= 0) return true;
 
         return false;
     }
