@@ -21,7 +21,7 @@ class BillingAddressManagementGuest
         $this->addressRepository = $addressRepository;
     }
 
-    public function beforeSavePaymentInformationAndPlaceOrder(
+    public function beforeSavePaymentInformation(
         \Magento\Checkout\Model\GuestPaymentInformationManagement $subject,
                                                                     $cartId,
                                                                     $email,
