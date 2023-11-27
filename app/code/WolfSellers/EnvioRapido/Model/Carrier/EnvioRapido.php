@@ -202,35 +202,35 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
         if(strtotime($horaActual) >= strtotime("0:00:00") && strtotime($horaActual) < strtotime("14:00:00")) {
             //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00
-            $textToShowInFront_Option1 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 12 a 4pm";
+            $textToShowInFront_Option1 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 12 a 4 pm";
             // La opcion que se deberá elegir en el Address Attribute es today__1200_1600
             $horarios_disponibles_Option1 = "today__1200_1600";
 
             //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00
-            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8pm";
+            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8 pm";
             // La opcion que se deberá elegir en el Address Attribute es today__1600_2000
             $horarios_disponibles_Option2 = "today__1600_2000";
         }
         elseif(strtotime($horaActual) >= strtotime("14:00:00") && strtotime($horaActual) < strtotime("18:00:00")){
             //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00
-            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4pm";
+            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4 pm";
             // La opcion que se deberá elegir en el Address Attribute es tomorrow__1200_1600
             $horarios_disponibles_Option1 = "tomorrow__1200_1600";
 
             //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00
-            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8pm";
+            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8 pm";
             // La opcion que se deberá elegir en el Address Attribute es today__1600_2000
             $horarios_disponibles_Option2 = "today__1600_2000";
 
         }
         else{
             //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00
-            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4pm";
+            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4 pm";
             // La opcion que se deberá elegir en el Address Attribute es tomorrow__1200_1600
             $horarios_disponibles_Option1 = "tomorrow__1200_1600";
 
             //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00
-            $textToShowInFront_Option2 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 4 a 8pm";
+            $textToShowInFront_Option2 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 4 a 8 pm";
             // La opcion que se deberá elegir en el Address Attribute es tomorrow__1600_2000
             $horarios_disponibles_Option2 = "tomorrow__1600_2000";
         }
