@@ -60,7 +60,11 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
             <address class="admin__page-section-item-content">
                 <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
                     <span class="color-orange">
-                        <b><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b>
+                        <?php if ($order->getCustomerIsGuest()): ?>
+                            <b><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b>
+                        <?php else: ?>
+                            <?= $customerOrderBillingInformation['name'] ?>
+                        <?php endif; ?>
                     </span><br>
                     Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
                     <?=$customerOrderBillingInformation['id_number'] ?><br />
@@ -158,7 +162,13 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                         Número de documento: <?=$viewModel->getRealAddrOptionValue('identificacion_picker', $shippingAddress->getIdentificacionPicker())?>
                             - <?=$shippingAddress->getNumeroIdentificacionPicker()?><br />
                     <?php else: ?>
-                        <b class="color-orange" title="<?=$picker?>"><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b><br />
+                        <b class="color-orange" title="<?=$picker?>">
+                        <?php if ($order->getCustomerIsGuest()): ?>
+                            <b><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b>
+                        <?php else: ?>
+                            <?= $customerOrderBillingInformation['name'] ?>
+                        <?php endif; ?>
+                        </b><br />
                         Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
                         <?=$customerOrderBillingInformation['id_number'] ?><br />
                         <?= $customerOrderBillingInformation['email'] ?><br />
