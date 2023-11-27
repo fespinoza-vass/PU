@@ -192,8 +192,10 @@ define([
         getId: function (data) {
             var nombre = data.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             var region = data.region.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            var code = data.pickup_location_code;
             var nombreUltimos = nombre.slice(-4);
-            var resultado = nombreUltimos + "_" + region;
+            var resultado = nombreUltimos + "_" + region + "_" + code;
+
             return resultado;
         },
         /**
