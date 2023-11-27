@@ -28,7 +28,13 @@
                         <?=$order->getCustomerFirstname()?> <br>
                         <?=$order->getCustomerLastname()?> <br>
                     <?php endif; ?>
-                    <?=$billingInformation['type_id']?> : <?=$billingInformation['id_number']?><br>
+
+                    <?php if($billingInformation['type_id'] == 'DNI'):?>
+                        <?=$billingInformation['type_id']?> : <?=$billingInformation['id_number']?><br>
+                    <?php else: ?>
+                        <?= __("Tipo de documento")?>: <?=$billingInformation['type_id']?><br>
+                        <?= __("Número de documento")?> : <?=$billingInformation['id_number']?><br>
+                    <?php endif; ?>
                     <?=$billingInformation['email']?> <br>
                     <?=$billingInformation['tel']?> <br>
                 </p>
@@ -42,6 +48,10 @@
                         <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?> <br>
                         <?= $horarioTxt['fecha'] ?? $horarioTxt['default-instore'] ?> <br>
                         <?= $horarioTxt['horario'] ?? "" ?>
+                        <?php if($shippingAddress->getNumeroIdentificacionPicker()): ?>
+                            <?= __("Número de documento")?>: <?= $shippingAddress->getNumeroIdentificacionPicker() ?><br>
+                            <?= __("Nombre y Apellido")?> : <?= $shippingAddress->getNombreCompletoPicker() ?><br>
+                        <?php endif; ?>
                     <?php else: ?>
                         <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?>
                         <?= $shippingAddress->getPostcode() ?>,
