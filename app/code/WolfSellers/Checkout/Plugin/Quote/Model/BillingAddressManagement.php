@@ -21,7 +21,7 @@ class BillingAddressManagement
         $this->addressRepository = $addressRepository;
     }
 
-    public function beforeSavePaymentInformationAndPlaceOrder(
+    public function beforeSavePaymentInformation(
         \Magento\Checkout\Api\PaymentInformationManagementInterface $subject,
                                                                     $cartId,
         \Magento\Quote\Api\Data\PaymentInterface $paymentMethod,
