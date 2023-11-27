@@ -9,7 +9,9 @@
             </td>
             <td class="qr-container--info">
                 <p><?= __("You must show this voucher or QR and along with your identity document to be able to pick up your order."); ?></p>
-                <span><?=__("Share by Whatsapp") ?><img style="width: 33px; height: 33px; margin-left: 5px;" src="<?= $block->getViewFileUrl('images/icon-whatsapp_dm.png'); ?>" /></span> 
+                <a href="https://api.whatsapp.com/send?text=<?= $block->getQrImage() ?>" data-action="share/whatsapp/share" target="_blank">
+                    <span><?=__("Share by Whatsapp") ?><img style="width: 33px; height: 33px; margin-left: 5px;" src="<?= $block->getViewFileUrl('images/icon-whatsapp_dm.png'); ?>" /></span>
+                </a>
             </td>
         </tr>
     </table>
