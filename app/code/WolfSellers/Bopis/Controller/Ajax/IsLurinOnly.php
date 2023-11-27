@@ -13,6 +13,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\Checkout\Model\Session;
 use Magento\InventoryConfigurationApi\Exception\SkuIsNotAssignedToStockException;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 /**
  * Class IsLurinOnly
@@ -22,6 +23,9 @@ use Magento\InventoryConfigurationApi\Exception\SkuIsNotAssignedToStockException
  */
 class IsLurinOnly implements HttpGetActionInterface
 {
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
     /**
      * @var JsonFactory
      */
@@ -47,8 +51,10 @@ class IsLurinOnly implements HttpGetActionInterface
     public function __construct(
         JsonFactory $jsonResultFactory,
         Session $checkoutSession,
-        GetSourceItemsBySkuInterface $sourceItemsBySku
+        GetSourceItemsBySkuInterface $sourceItemsBySku,
+        InventoryBySourceHelper $inventoryBySourceHelper
     ) {
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->jsonResultFactory = $jsonResultFactory;
         $this->checkoutSession = $checkoutSession;
         $this->sourceItemsBySku = $sourceItemsBySku;
@@ -103,15 +109,17 @@ class IsLurinOnly implements HttpGetActionInterface
                 continue;
             }
 
+            $sourceQuantity = $this->_inventoryBySource->getSalableQtyBySource($sku,$sourceItem->getSourceCode());
+
             if ($sourceItem->getSourceCode() != 1) {
                 // Found stock in another source, not Lurin.
-                if ($sourceItem->getQuantity() > 0) {
+                if ($sourceQuantity > 0) {
                     $isOnlyInLurin = false;
                     break;
                 }
-            } elseif ($sourceItem->getQuantity() > $maxQuantity) {
+            } elseif ($sourceQuantity > $maxQuantity) {
                 // Update max if this is the Lurin source and has more quantity.
-                $maxQuantity = $sourceItem->getQuantity();
+                $maxQuantity = $sourceQuantity;
             }
         }
 

@@ -17,6 +17,7 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 use WolfSellers\AmastyLabel\Helper\DynamicTagRules;
 
 /**
@@ -25,6 +26,12 @@ use WolfSellers\AmastyLabel\Helper\DynamicTagRules;
 class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
     \Magento\Shipping\Model\Carrier\CarrierInterface
 {
+
+    /** @var DynamicTagRules */
+    protected $_dynamicTagsRules;
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
     /**
      * @var string
      */
@@ -75,19 +82,23 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      * @param array $data
      */
     public function __construct(
-        ScopeConfigInterface         $scopeConfig,
-        ErrorFactory                 $rateErrorFactory,
-        LoggerInterface              $logger,
-        ResultFactory                $rateResultFactory,
-        MethodFactory                $rateMethodFactory,
-        ProductRepository            $productRepository,
-        SalableQtyBySku              $salableQuantityDataBySku,
-        TimezoneInterface            $timezone,
+        DynamicTagRules $dynamicTagsRules,
+        InventoryBySourceHelper $inventoryBySourceHelper,
+        ScopeConfigInterface $scopeConfig,
+        ErrorFactory         $rateErrorFactory,
+        LoggerInterface      $logger,
+        ResultFactory        $rateResultFactory,
+        MethodFactory        $rateMethodFactory,
+        ProductRepository    $productRepository,
+        SalableQtyBySku      $salableQuantityDataBySku,
+        TimezoneInterface    $timezone,
         GetSourceItemsBySkuInterface $sourceItemsBySku,
         DynamicTagRules              $dynamicTagRules,
         array                        $data = []
     )
     {
+        $this->_dynamicTagsRules = $dynamicTagsRules;
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_sourceItemsBySku = $sourceItemsBySku;
         $this->_rateResultFactory = $rateResultFactory;
         $this->_rateMethodFactory = $rateMethodFactory;
@@ -114,14 +125,8 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
             /** @var \Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
-                // Get the amasty_labels that apply per sku
-                $labels = $this->dynamicTagRules->shippingLabelsByProductSku($item->getSku());
-                // If the label does not exist, we continue with the next product.
-                if (!isset($labels['fast'])) continue;
-
-                $fastLabel = boolval($labels['fast']);
-
-                if (!$fastLabel){
+                $labels = $this->_dynamicTagsRules->shippingLabelsByProductSku($item->getSku());
+                if(!$labels['fast']){
                     $cumpleReglasEnvioRapido = false;
                 }
             }
