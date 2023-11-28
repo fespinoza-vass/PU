@@ -42,9 +42,6 @@ var config = {
             "Magento_Tax/js/view/checkout/summary/shipping": {
                 "WolfSellers_Checkout/js/view/checkout/summary/shipping-mixin" : true
             },
-            'Magento_Checkout/js/view/billing-address': {
-                'WolfSellers_Checkout/js/view/billing-address-mixin': true
-            },
             'Magento_Ui/js/lib/validation/rules': {
                 'WolfSellers_Checkout/js/validation/validator-mixin': true
             }

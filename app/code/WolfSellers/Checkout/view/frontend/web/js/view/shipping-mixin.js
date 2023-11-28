@@ -72,6 +72,7 @@ define([
         isUrbanoMethodConfigured: ko.observable(true),
         isRegularMethodConfigured: ko.observable(true),
         isFastMethodConfigured: ko.observable(true),
+        isDebuggEnable: ko.observable(false),
 
         initialize: function () {
             this._super();
@@ -138,7 +139,7 @@ define([
                         this.selectShippingMethod(rate);
                     }
                 }
-                console.log(value);
+                if(this.isDebuggEnable())console.log(value);
             },this);
             this.createInformationModals();
             return this;
