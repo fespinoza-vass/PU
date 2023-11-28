@@ -120,8 +120,8 @@ define([
             }else if (hora >= 0 && hora < 11) {
 
                 return [
-                    { value: '12_4_manana',"label": "12 a 4 pm", "dia": manana },
-                    { value: '4_8_manana',"label": "4 a 8 pm", "dia": manana }
+                    { value: '12_4_hoy',"label": "12 a 4 pm", "dia": hoy },
+                    { value: '4_8_hoy',"label": "4 a 8 pm", "dia": hoy }
                 ];
 
             }else if (hora >= 16 && hora <= 24 ){
