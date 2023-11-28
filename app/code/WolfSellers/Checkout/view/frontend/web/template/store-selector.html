@@ -61,8 +61,11 @@
         </form>
         <div class="store-pickup-receipt-address_time">
             <span class="store-pickup-receipt-address_time-icon"></span>
-            <p>
+            <p visible="isLabelsMatch()">
                 Podrás recoger tu pedido a partir del día <span data-bind="text: getPickupDateFormat()"></span> en un rango de 8am a 9:30 pm
+            </p>
+            <p visible="!isLabelsMatch()">
+                Podras recoger tu pedido en un lapso de 24 a 48 horas
             </p>
         </div>
 

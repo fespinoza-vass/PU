@@ -26068,3 +26068,21 @@ Shipping & Handling,Envío,module,Magento_Sales,
 Summary,Resumen,module,Magento_Checkout,
 "You must be at least 18 years old","Debes tener al menos 18 años"
 "2. Select your district","2. Selecciona tu distrito"
+REGULAR SHIPPING TO HOME,ENVÍO REGULAR A DOMICILIO,
+METROPOLITAN LIMA AND CALLAO,LIMA METROPOLITANA Y CALLAO:,Magento_Checkout
+Coverage Districts,Distritos de Cobertura:
+Shipping times,Horarios de envío:
+Delivery time,Tiempo de entrega:
+"Monday to Friday, from 8 am to 7 pm and Saturdays from 8 am to 2 pm.","De lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am hasta las 2 pm."
+"Up to 3 business days according to the selected district.","Hasta 3 días hábiles de acuerdo al distrito seleccionado."
+Coverage Districts,Distritos de Cobertura:
+Provinces,Provincias:
+"Monday, Wednesday and Friday, from 8 am to 7 pm.","Lunes, Miércoles y Viernes, desde las 8 am hasta las 7 pm."
+Up to 3 business days according to the selected district.,Hasta 3 días hábiles de acuerdo al distrito seleccionado.
+We reach all the provinces of Peru.,Llegamos a todas las provincias de Perú.
+"Monday to Friday, from 8 am to 7 pm and Saturdays from 8 am to 2 pm.","De Lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am hasta las 2 pm."
+5 to 15 business days according to the province and district of delivery.,5 a 15 días hábiles de acuerdo a la provincia y distrito de la entrega.
+LIMA PERIPHERY,PERIFERIA DE LIMA:
+"Lima, Ate, Barranco, Breña, Carabayllo, Chorrillos, Comas, El Augustine, Independence, Jesus Maria, The Molina, La Victoria, Lince, Los Olivos, Magdalena del Mar, Pueblo Libre, Miraflores, Rimac, San Borja, San Isidro, SJL, SUM, San Luis, SMP, San Miguel, Santa Anita, Santiago from Surco, Surquillo, VES, VMT, Callao.","Lima, Ate, Barranco, Breña, Carabayllo, Chorrillos, Comas, El Augustino, Independencia, Jesus María, La Molina, La Victoria, Lince, Los Olivos, Magdalena del Mar, Pueblo Libre, Miraflores, Rimac, San Borja, San Isidro, SJL, SUM, San Luis, SMP, San Miguel, Santa Anita, Santiago de Surco, Surquillo, VES, VMT, Callao.",
+"Ancón, Chaclacayo, Cieneguilla, Lurigancho, Lurín, Pachacamac, Pucusana, Puente Piedra, Punta Hermosa, Punta Negra, San Bartolo, Santa María del Mar, Santa Rosa.","Ancón, Chaclacayo, Cieneguilla, Lurigancho, Lurín, Pachacamac, Pucusana, Puente Piedra, Punta Hermosa, Punta Negra, San Bartolo, Santa María del Mar, Santa Rosa."
+"Monday to Friday, from 8 am to 7 pm and Saturdays from 8 am to 2 pm.","De lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am hasta las 2 pm."

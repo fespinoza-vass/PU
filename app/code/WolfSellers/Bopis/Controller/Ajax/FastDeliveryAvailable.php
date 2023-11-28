@@ -54,17 +54,37 @@ class FastDeliveryAvailable implements HttpGetActionInterface
                 return $result;
             }
 
+            $fastlabelAvailable = true;
+            $splitOrder = false;
+            $lastValue = null;
+
             // The items are reviewed validating the available labels.
             foreach ($items as $item) {
                 $labels = $this->dynamicTagRules->shippingLabelsByProductSku($item->getSku());
-                $fastlabelAvailable = boolval($labels['fast']);
+                $currentfastlabelAvailable = boolval($labels['fast']);
 
-                // If any item does not have the "fast label", then the available $fastlabelAvailable is 0
-                if (!$fastlabelAvailable) {
-                    $data = ['available' => "0"];
-                    $result->setData($data);
-                    return $result;
+                if (is_null($lastValue)) {
+                    $lastValue = $currentfastlabelAvailable;
                 }
+
+                if (!is_null($lastValue) && $lastValue != $currentfastlabelAvailable) {
+                    $splitOrder = true;
+                }
+
+                if (!$currentfastlabelAvailable) {
+                    $fastlabelAvailable = false;
+                }
+
+            }
+
+            if (!$splitOrder) {
+                return $result;
+            }
+
+            // If any item does not have the "fast label", then the available $fastlabelAvailable is 0
+            if (!$fastlabelAvailable) {
+                $data = ['available' => "0"];
+                $result->setData($data);
             }
 
             return $result;
