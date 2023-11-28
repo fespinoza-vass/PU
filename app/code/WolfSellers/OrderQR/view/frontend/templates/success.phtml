@@ -1,13 +1,26 @@
 <?php
     /** @var $block \WolfSellers\OrderQR\Block\Onepage\Success */
+
+    if($block->getDeliveryDate()){
+        $today = date('d');
+        $day = explode(" ", $block->getDeliveryDate())[1];
+    }
 ?>
 
 <?php if($block->getIsPickup()): ?>
     <div class="qrWrap">
         <div class="qrOrderNumber">Orden No: <a href="<?= $block->getViewOrderUrl() ?>"><?= $block->getOrderId() ?></a></div>
-        <p class="qrOrderInformation">
-            <?= sprintf(__("Se enviará un mensaje con <b>toda la información de tu pedido</b> por correo electrónico y podrás recogerlo a partir del día <b>%s</b> en un rango de 8am a 9:30pm"),$block->getDeliveryDate())?>
-        </p>
+        <?php if($block->getDeliveryDate()): ?>
+            <?php if($day == $today): ?>
+                <p class="qrOrderInformation">
+                    <?= sprintf(__("Se enviará un mensaje con <b>toda la información de tu pedido</b> por correo electrónico y podrás recogerlo a partir de hoy <b>%s</b> en un rango de 8am a 9:30pm"),$block->getDeliveryDate())?>
+                </p>
+            <?php else: ?>
+                <p class="qrOrderInformation">
+                    <?= sprintf(__("Se enviará un mensaje con <b>toda la información de tu pedido</b> por correo electrónico y podrás recogerlo a partir del día <b>%s</b> en un rango de 8am a 9:30pm"),$block->getDeliveryDate())?>
+                </p>
+            <?php endif; ?>
+        <?php endif; ?>
         <div class="qr-container">
             <div class="qr-code"><img src="<?= $block->getQrImage() ?>" alt="qr-code"></div>
             <div class="qr-description">
