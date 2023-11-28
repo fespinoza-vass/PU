@@ -49,7 +49,8 @@ define([
                 "updateOptions":"checkout.steps.shipping-step.shippingAddress.schedule.schedule:updateOptions",
             },
             imports: {
-                "ubigeo":"checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.postcode:value"
+                "ubigeo":"checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.postcode:value",
+                "isStorePickUpSelected": "checkout.steps.store-pickup:isStorePickupSelected"
             }
         },
         isFormInline: true,
@@ -72,6 +73,7 @@ define([
         isUrbanoMethodConfigured: ko.observable(true),
         isRegularMethodConfigured: ko.observable(true),
         isFastMethodConfigured: ko.observable(true),
+        isStorePickUpSelected: ko.observable(false),
         isDebuggEnable: ko.observable(false),
 
         initialize: function () {
@@ -132,11 +134,27 @@ define([
             },this);
 
             this.rates.subscribe(function (value) {
-                if (!_.isUndefined(value) && this.isUrbanoShipping()){
-                    var rate = this.findRateByCarrierCode('urbano');
-                    if (!_.isUndefined(rate)){
-                        this.showShippingMethodError(rate);
-                        this.selectShippingMethod(rate);
+                if(!_.isUndefined(value) && !this.isStorePickUpSelected()){
+                    if (!_.isUndefined(value) && this.isUrbanoShipping()){
+                        var rate = this.findRateByCarrierCode('urbano');
+                        if (!_.isUndefined(rate)){
+                            this.showShippingMethodError(rate);
+                            this.selectShippingMethod(rate);
+                        }
+                    }
+                    if (!_.isUndefined(value) && this.isRegularShipping()){
+                        var rate = this.findRateByCarrierCode('flatrate');
+                        if (!_.isUndefined(rate)){
+                            this.showShippingMethodError(rate);
+                            this.selectShippingMethod(rate);
+                        }
+                    }
+                    if (!_.isUndefined(value) && this.isFastShipping()){
+                        var rate = this.findRateByCarrierCode('envio_rapido');
+                        if (!_.isUndefined(rate)){
+                            this.showShippingMethodError(rate);
+                            this.selectShippingMethod(rate);
+                        }
                     }
                 }
                 if(this.isDebuggEnable())console.log(value);
