@@ -254,9 +254,20 @@ define([
             var formattedDate = wolfUtils.formatDate(now);
 
             return formattedDate;
+        },
+
+        /**
+         * Validate products labels match
+         * @returns {boolean}
+         */
+        isLabelsMatch: function (){
+            var rules = window.checkoutConfig.ruleslabelsApplied;
+
+            if(rules.fastShipping == true && rules.inStorePickup == true && rules.noRules == true){
+                return false;
+            }
+            return true;
         }
-
-
     };
 
     return function (storeSelectorTarget) {
