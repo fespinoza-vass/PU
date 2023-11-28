@@ -7,7 +7,11 @@
 /**
  * @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Items $block
  */
-$_order = $block->getOrder() ?>
+$_order = $block->getOrder();
+
+/** @var  $viewModel \WolfSellers\Bopis\ViewModel\GeneralOrder */
+$viewModel = $block->getData('viewModel');
+?>
 <div class="admin__table-wrapper">
     <table class="data-table admin__table-primary edit-order-table">
         <thead>
@@ -34,5 +38,30 @@ $_order = $block->getOrder() ?>
             <?= $block->getItemHtml($_item) ?>
             </tbody>
         <?php endforeach; ?>
+        <tfoot>
+            <tr>
+                <td colspan="<?=$lastItemNumber-2?>"></td>
+                <td colspan="2">
+                    <table width="100%">
+                        <tr>
+                            <td>Subtotal</td>
+                            <td><?=$_order->formatPrice($_order->getSubtotal())?></td>
+                        </tr>
+                        <tr>
+                            <td>Descuento:</td>
+                            <td><?=$_order->formatPrice($_order->getDiscountAmount())?></td>
+                        </tr>
+                        <tr>
+                            <td>Costo de envío</td>
+                            <td><?=$_order->formatPrice($_order->getShippingAmount())?></td>
+                        </tr>
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td><?=$_order->formatPrice($_order->getGrandTotal())?></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 </div>
