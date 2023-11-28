@@ -17,4 +17,8 @@
         <plugin sortOrder="1" name="wolfSellersInStorePickupDistanceBased"
                 type="WolfSellers\InStorePickup\Plugin\Model\SearchResult\Strategy\DistanceBasedPlugin"/>
     </type>
+
+    <type name="Magento\InventoryInStorePickupShippingApi\Model\Carrier\InStorePickup">
+        <plugin name="wolfsellers_in_store_label_activation" type="WolfSellers\InStorePickup\Plugin\CollectRatesPlugin" sortOrder="10" disabled="false"/>
+    </type>
 </config>
