@@ -263,9 +263,12 @@ define([
         isLabelsMatch: function (){
             var rules = window.checkoutConfig.ruleslabelsApplied;
 
-            if(rules.fastShipping == true && rules.inStorePickup == true && rules.noRules == true){
-                return false;
+            if(!_.isUndefined(rules)){
+                if(rules.fastShipping == true && rules.inStorePickup == true && rules.noRules == true){
+                    return false;
+                }
             }
+
             return true;
         }
     };
