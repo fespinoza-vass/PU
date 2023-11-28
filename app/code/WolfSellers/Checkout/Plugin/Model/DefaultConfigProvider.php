@@ -29,6 +29,8 @@ class DefaultConfigProvider
     /**
      * @param ScopeConfigInterface $scopeConfig
      * @param StoreManagerInterface $storeManager
+     * @param CheckoutSesion $checkoutSession
+     * @param DynamicTagRules $dynamicTagRules
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
