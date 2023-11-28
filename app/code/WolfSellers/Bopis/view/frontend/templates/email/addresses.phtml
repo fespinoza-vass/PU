@@ -22,8 +22,8 @@
                 <h3>Información de contacto</h3>
                 <p>
                     <?php if($order->getCustomerIsGuest()): ?>
-                        <?=ucfirst($order->getCustomerNombre())?> <br>
-                        <?=ucfirst($order->getCustomerApellido())?> <br>
+                        <?=ucfirst((string) $order->getCustomerNombre())?> <br>
+                        <?=ucfirst((string) $order->getCustomerApellido())?> <br>
                     <?php else: ?>
                         <?=$order->getCustomerFirstname()?> <br>
                         <?=$order->getCustomerLastname()?> <br>

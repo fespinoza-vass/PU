@@ -42,29 +42,39 @@ class OrderManagement
      * @param OrderInterface $result
      * @return OrderInterface
      */
-    public function afterPlace(
+    public function beforePlace(
         OrderManagementInterface $subject,
-        OrderInterface $result
+        OrderInterface $order
     ) {
-        $orderId = $result->getIncrementId();
+        $orderId = $order->getIncrementId();
         if ($orderId) {
             try {
-                $billingAddress =$result->getBillingAddress();
-                $address = $result->getAddresses();
+                $billingAddress =$order->getBillingAddress();
+                $address = $order->getAddresses();
 
-                $quote = $this->quoteRepository->get($result->getQuoteId());
+                $quote = $this->quoteRepository->get($order->getQuoteId());
 
-                if($quote->getCustomerName()){
-                    $result->setCustomerNombre($quote->getCustomerName());
-                    $result->setCustomerApellido($quote->getCustomerApellido());
-                    $result->setCustomerTelefono($quote->getCustomerTelefono());
-                    $result->setCustomerIdentificacion($quote->getCustomerIdentificacion());
-                    $result->setCustomerNumeroDeIdentificacion($quote->getCustomerNumeroDeIdentificacion());
+                if($order->getShippingMethod() == "instore_pickup"){
+                    if($order->getCustomerIsGuest()){
+                        $order->setCustomerNombre($quote->getCustomerName());
+                        $order->setCustomerApellido($quote->getCustomerApellido());
+                        $order->setCustomerTelefono($quote->getCustomerTelefono());
+                        $order->setCustomerIdentificacion($quote->getCustomerIdentificacion());
+                        $order->setCustomerNumeroDeIdentificacion($quote->getCustomerNumeroDeIdentificacion());
 
-                    $result->getBillingAddress()->setFirstname($quote->getCustomerName());
-                    $result->getBillingAddress()->setLastname($quote->getCustomerApellido());
+                        $order->getBillingAddress()->setFirstname($quote->getCustomerName());
+                        $order->getBillingAddress()->setLastname($quote->getCustomerApellido());
 
-                    $this->_orderRepositoryInterface->save($result);
+                        $order->setCustomerFirstname($quote->getCustomerName()." ".$quote->getCustomerApellido());
+                        $order->setCustomerLastname('');
+                        $this->_orderRepositoryInterface->save($order);
+                    }else{
+
+                        $order->getBillingAddress()->setFirstname($order->getCustomerFirstname());
+                        $order->getBillingAddress()->setLastname($order->getCustomerLastname());
+
+                        $this->_orderRepositoryInterface->save($order);
+                    }
                 }
 
                 foreach ($address as $item){
@@ -80,6 +90,6 @@ class OrderManagement
             } catch (\Exception $exception) {
             }
         }
-        return $result;
+        return [$order];
     }
 }

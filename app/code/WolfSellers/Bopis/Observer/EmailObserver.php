@@ -51,13 +51,7 @@ class EmailObserver implements ObserverInterface
         $transport = $observer->getEvent()->getTransport();
         $order = $transport->getOrder();
 
-
-
         try {
-            $orderData = $transport->getData('order_data');
-            $orderData['customer_name']  = ucfirst(($order->getCustomerNombre() ?? $order->getCustomerName()));
-            $transport->setData('order_data',$orderData);
-
             $transport['shipping_method_name'] = $this->realStates->getShippingMethodTitle($order->getShippingMethod());
             $transport['delivery'] = $this->emailHelper->getDeliveryType($order);
 

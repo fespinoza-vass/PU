@@ -114,8 +114,8 @@ class GeneralOrder implements ArgumentInterface
     public function getAllSchedule($horarioDeEntrega, $createdAt)
     {
         $return = [
-            'default-msj' => 'Tu pedido llegará en un lapso de 24 a 48 horas.',
-            'default-instore' => 'Podrás recoger tu pedido en un lapso de 24 a 48 horas.'
+            'default-msj' => 'Tu pedido llegará en un lapso de 48 horas.',
+            'default-instore' => 'Podrás recoger tu pedido en un lapso de 48 horas.'
         ];
 
         $txt = $this->_realStates->getSchedule($horarioDeEntrega);
