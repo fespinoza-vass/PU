@@ -20,7 +20,6 @@ define([
          */
         rules['validate-number'] = {
             handler: function (v) {
-                console.log("hola");
                 return utils.isEmptyNoTrim(v) ||
                     !isNaN(utils.parseNumber(v)) &&
                     /^\d{8,12}$/.test(v);
