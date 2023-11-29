@@ -275,6 +275,8 @@ define([
                 }
                 var street = registry.get("checkout.steps.shipping-step.shippingAddress.fast.direccion.0");
                 street.reset();
+                var schedule = registry.get('checkout.steps.shipping-step.shippingAddress.schedule.schedule');
+                schedule.reset();
                 this.isRegularShipping(false);
                 this.isUrbanoShipping(false);
                 this.isFastShipping(true);
