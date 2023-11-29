@@ -12,7 +12,8 @@ class Strategy implements OptionSourceInterface
     {
         return [
             ['value' => 'distance_based', 'label' => __('Distance Based')],
-            ['value' => 'stock_distance_based', 'label' => __('Stock Distance Based')]
+            ['value' => 'stock_distance_based', 'label' => __('Stock Distance Based')],
+            ['value' => 'custom_rules', 'label' => __('Custom Based')]
         ];
     }
 }

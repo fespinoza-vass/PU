@@ -5,17 +5,30 @@ declare(strict_types=1);
 namespace WolfSellers\InStorePickup\Plugin;
 use WolfSellers\AmastyLabel\Helper\DynamicTagRules;
 
+/**
+ *
+ */
 class CollectRatesPlugin
 {
     /** @var DynamicTagRules */
     protected $_dynamicTagRules;
 
+    /**
+     * @param DynamicTagRules $dynamicTagRules
+     */
     public function __construct(
         DynamicTagRules $dynamicTagRules
     ){
         $this->_dynamicTagRules = $dynamicTagRules;
     }
 
+    /**
+     * @param \Magento\InventoryInStorePickupShippingApi\Model\Carrier\InStorePickup $subject
+     * @param $result
+     * @param $request
+     * @return mixed|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function afterCollectRates(
         \Magento\InventoryInStorePickupShippingApi\Model\Carrier\InStorePickup $subject,
                                          $result,

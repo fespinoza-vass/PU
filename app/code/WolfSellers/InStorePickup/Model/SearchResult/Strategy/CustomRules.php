@@ -16,15 +16,17 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\InventoryApi\Api\SourceItemRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use WolfSellers\InStorePickup\Helper\SplitCart;
+
 
 /**
  * @class StockDistanceBased
  */
-class StockDistanceBased implements StrategyInterface
+class CustomRules implements StrategyInterface
 {
     const XML_PATH_STRATEGY_SELECTION = 'instore_pickup/strategy/selection';
 
-    const STRATEGY_TYPE = 'stock_distance_based';
+    const STRATEGY_TYPE = 'custom_rules';
 
     /**
      * @var GetDistanceToSources
@@ -62,6 +64,7 @@ class StockDistanceBased implements StrategyInterface
      * @var SearchCriteriaBuilder
      */
     private $searchCriteriaBuilder;
+    private SplitCart $splitCartHelper;
 
     /**
      * @param GetDistanceToSources $getDistanceToSources
@@ -71,6 +74,7 @@ class StockDistanceBased implements StrategyInterface
      * @param CheckoutSession $checkoutSession
      * @param SourceItemRepositoryInterface $sourceItemRepository
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param SplitCart $splitCartHelper
      */
     public function __construct(
         GetDistanceToSources $getDistanceToSources,
@@ -79,7 +83,8 @@ class StockDistanceBased implements StrategyInterface
         ScopeConfigInterface $scopeConfig,
         CheckoutSession $checkoutSession,
         SourceItemRepositoryInterface $sourceItemRepository,
-        SearchCriteriaBuilder $searchCriteriaBuilder
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        SplitCart $splitCartHelper
     ) {
         $this->getDistanceToSources = $getDistanceToSources;
         $this->getProductSalableQty = $getProductSalableQty;
@@ -88,6 +93,7 @@ class StockDistanceBased implements StrategyInterface
         $this->checkoutSession = $checkoutSession;
         $this->sourceItemRepository = $sourceItemRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->splitCartHelper = $splitCartHelper;
     }
 
     /**
@@ -205,7 +211,8 @@ class StockDistanceBased implements StrategyInterface
         }
 
         $selectedStrategy = $this->scopeConfig->getValue(self::XML_PATH_STRATEGY_SELECTION);
+        $isSplitCart = $this->splitCartHelper->isSplitCart();
 
-        return $selectedStrategy === self::STRATEGY_TYPE;
+        return $selectedStrategy === self::STRATEGY_TYPE && !$isSplitCart;
     }
 }

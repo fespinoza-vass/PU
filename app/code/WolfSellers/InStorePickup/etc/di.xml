@@ -10,12 +10,15 @@
         <arguments>
             <argument name="strategies" xsi:type="array">
                 <item name="stock-distance-based" xsi:type="object">WolfSellers\InStorePickup\Model\SearchResult\Strategy\StockDistanceBased</item>
+                <item name="custom-rules" xsi:type="object">WolfSellers\InStorePickup\Model\SearchResult\Strategy\CustomRules</item>
             </argument>
         </arguments>
     </type>
     <type name="Magento\InventoryInStorePickup\Model\SearchResult\Strategy\DistanceBased">
         <plugin sortOrder="1" name="wolfSellersInStorePickupDistanceBased"
-                type="WolfSellers\InStorePickup\Plugin\Model\SearchResult\Strategy\DistanceBasedPlugin"/>
+                type="WolfSellers\InStorePickup\Plugin\Model\SearchResult\Strategy\DistanceBasedPlugin"
+                disabled="false"
+        />
     </type>
 
     <type name="Magento\InventoryInStorePickupShippingApi\Model\Carrier\InStorePickup">
