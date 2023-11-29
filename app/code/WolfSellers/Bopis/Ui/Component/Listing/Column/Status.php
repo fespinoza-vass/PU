@@ -39,6 +39,11 @@ class Status extends Column
      */
     public function toSpanish($status): string
     {
+
+        if ($status === null || !is_string($status)) {
+            return '';
+        }
+
         return match ($status) {
             'received' => 'Recibido',
             'confirmed_order' => 'Pedido confirmado',
