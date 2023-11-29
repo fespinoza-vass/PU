@@ -10,6 +10,7 @@
         <arguments>
             <argument name="strategies" xsi:type="array">
                 <item name="stock-distance-based" xsi:type="object">WolfSellers\InStorePickup\Model\SearchResult\Strategy\StockDistanceBased</item>
+                <item name="custom-rules" xsi:type="object">WolfSellers\InStorePickup\Model\SearchResult\Strategy\CustomRules</item>
             </argument>
         </arguments>
     </type>
