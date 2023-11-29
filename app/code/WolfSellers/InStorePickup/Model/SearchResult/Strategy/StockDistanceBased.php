@@ -200,9 +200,12 @@ class StockDistanceBased implements StrategyInterface
         SearchRequestInterface $searchRequest,
         SourceSearchResultsInterface $sourcesSearchResult
     ): bool {
-        $isAreaAvailable = (bool)$searchRequest->getArea();
+        if (!$searchRequest->getArea()) {
+            return false;
+        }
+
         $selectedStrategy = $this->scopeConfig->getValue(self::XML_PATH_STRATEGY_SELECTION);
 
-        return $isAreaAvailable && $selectedStrategy === self::STRATEGY_TYPE;
+        return $selectedStrategy === self::STRATEGY_TYPE;
     }
 }

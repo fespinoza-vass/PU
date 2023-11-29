@@ -6,8 +6,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\InventoryInStorePickupApi\Api\Data\SearchRequestInterface;
 use Magento\InventoryApi\Api\Data\SourceSearchResultsInterface;
 use WolfSellers\InStorePickup\Helper\SplitCart;
-use Magento\InventoryInStorePickupApi\Api\Data\SearchRequest\AreaInterface;
-use Magento\InventoryInStorePickupApi\Api\Data\SearchRequest\AreaInterfaceFactory;
 
 /**
  * @class DistanceBasedPlugin
@@ -22,22 +20,22 @@ class DistanceBasedPlugin
      * @var ScopeConfigInterface
      */
     private $scopeConfig;
-    private SplitCart $splitCartHelper;
-    private AreaInterfaceFactory $areaFactory;
+
+    /**
+     * @var SplitCart
+     */
+    private $splitCartHelper;
 
     /**
      * @param ScopeConfigInterface $scopeConfig
      * @param SplitCart $splitCartHelper
-     * @param AreaInterfaceFactory $areaFactory
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        SplitCart $splitCartHelper,
-        AreaInterfaceFactory $areaFactory
+        SplitCart $splitCartHelper
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->splitCartHelper = $splitCartHelper;
-        $this->areaFactory = $areaFactory;
     }
 
 
@@ -56,6 +54,10 @@ class DistanceBasedPlugin
         SearchRequestInterface $searchRequest,
         SourceSearchResultsInterface $sourcesSearchResult
     ): bool {
+        if (!$searchRequest->getArea()) {
+            return false;
+        }
+
         $selectedStrategy = $this->scopeConfig->getValue(self::XML_PATH_STRATEGY_SELECTION);
         $isSplitCart = $this->splitCartHelper->isSplitCart();
 

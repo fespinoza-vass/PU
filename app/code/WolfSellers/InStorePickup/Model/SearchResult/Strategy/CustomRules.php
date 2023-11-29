@@ -206,10 +206,13 @@ class CustomRules implements StrategyInterface
         SearchRequestInterface $searchRequest,
         SourceSearchResultsInterface $sourcesSearchResult
     ): bool {
-        $isAreaAvailable = (bool)$searchRequest->getArea();
+        if (!$searchRequest->getArea()) {
+            return false;
+        }
+
         $selectedStrategy = $this->scopeConfig->getValue(self::XML_PATH_STRATEGY_SELECTION);
         $isSplitCart = $this->splitCartHelper->isSplitCart();
 
-        return $isAreaAvailable && $selectedStrategy === self::STRATEGY_TYPE && !$isSplitCart;
+        return $selectedStrategy === self::STRATEGY_TYPE && !$isSplitCart;
     }
 }

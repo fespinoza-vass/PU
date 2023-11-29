@@ -16,7 +16,9 @@
     </type>
     <type name="Magento\InventoryInStorePickup\Model\SearchResult\Strategy\DistanceBased">
         <plugin sortOrder="1" name="wolfSellersInStorePickupDistanceBased"
-                type="WolfSellers\InStorePickup\Plugin\Model\SearchResult\Strategy\DistanceBasedPlugin"/>
+                type="WolfSellers\InStorePickup\Plugin\Model\SearchResult\Strategy\DistanceBasedPlugin"
+                disabled="false"
+        />
     </type>
 
     <type name="Magento\InventoryInStorePickupShippingApi\Model\Carrier\InStorePickup">
