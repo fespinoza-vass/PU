@@ -325,8 +325,7 @@ class SavarHelper extends AbstractHelper
             $shipment->save();
             $shipment->getOrder()->save();
 
-            $this->_orderShipmentNotifier
-                ->notify($shipment);
+            //$this->_orderShipmentNotifier->notify($shipment);
 
             $shipment->save();
         } catch (\Throwable $error) {
