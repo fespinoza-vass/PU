@@ -84,6 +84,9 @@ define([
                 } else {
                     this.isPaymentFinished(true);
                 }
+                $('html, body').animate({
+                    scrollTop: ($("#opc-sidebar").offset().top - 50)
+                }, 1000);
             }
 
             document.getElementById('opc-sidebar').scrollIntoView({ behavior: 'smooth' });

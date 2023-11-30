@@ -42,7 +42,7 @@
                     css: isShippingMethodAvailable('flatrate_flatrate') ? 'disabled' : '',
                     click: setRegularShipping">
                 <label class="step-content_icon" for="envio_regular">Envío Regular:</label>
-                <span class="step-content_price" data-bind="text: getPriceLabel('flatrate_flatrate')"></span>
+                <span class="step-content_price" data-bind="text: getPriceLabel()"></span>
                 <input type="radio" id="envio_regular" name="opciones" value="regular" attr="{checked: isRegularShipping}">
                 <label class="step-content_input-regular" for="envio_regular"></label>
                 <span class="step-content_info">Tu pedido llega entre 24 y 48 horas luego a tu compra*
@@ -61,7 +61,7 @@
                     css: isShippingMethodAvailable('envio_rapido_envio_rapido') ? 'disabled' : '',
                     click: setFastShipping">
                 <label class="step-content_icon" for="envio_rapido">Envío Rápido:</label>
-                <span class="step-content_price" data-bind="text: getPriceLabel('envio_rapido_envio_rapido')"></span>
+                <span class="step-content_price" data-bind="text: getPriceLabel()"></span>
                 <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping, disabled:isFastShippingDisabled}">
                 <label class="step-content_input-fast" for="envio_rapido"></label>
                 <span class="step-content_info">Tu pedido llega el mismo día de tu compra*
@@ -133,12 +133,11 @@
          class="step-content"
          data-role="content">
         <div class="step-sub-title" translate="'Costo de envío'" data-role="subtitle"></div>
-        <span class="subtotal" data-bind="text:getPriceLabel('selected')"></span>
+        <span class="subtotal" data-bind="text:getPriceLabel()"></span>
     </div>
 
     <form id="co-shipping-method-form"
           class="form methods-shipping"
-          if="rates().length"
           submit="setShippingInformation"
           novalidate="novalidate">
 
@@ -149,7 +148,9 @@
         </div>
         <div class="actions-toolbar" id="shipping-method-buttons-container">
             <div class="primary">
-                <button data-role="opc-continue" type="submit" class="button action continue primary" data-bind="attr:{disabled:isContinueBtnDisabled}">
+                <button data-role="opc-continue" type="submit"
+
+                        class="button action continue primary" data-bind="attr:{disabled:isContinueBtnDisabled}">
                     <span translate="'Next'"></span>
                 </button>
             </div>

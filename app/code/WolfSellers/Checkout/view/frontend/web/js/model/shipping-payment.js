@@ -51,10 +51,13 @@ define([
             if(_.isNull(quote.shippingMethod()) || _.isUndefined(quote.shippingMethod())){
                 return false;
             }
-            if (quote.shippingMethod().carrier_code.includes("urbano")){
-                this.shippingMethod("urbano");
+            if (quote.shippingMethod().carrier_code.includes("urban")){
+                this.shippingMethod("urban");
             }
-            if (quote.shippingMethod().carrier_code.includes("flat")){
+            if (quote.shippingMethod().carrier_code.includes("free")) {
+                this.shippingMethod("free");
+            }
+            if (quote.shippingMethod().carrier_code.includes("flat")) {
                 this.shippingMethod("flat");
             }
             if (quote.shippingMethod().carrier_code.includes("rapido")){
@@ -78,7 +81,7 @@ define([
             this.empresa(this.getCustomAttributeByAttributeCode(quote,"company"));
             this.ruc(this.getCustomAttributeByAttributeCode(quote,"dni"));
 
-            if(this.shippingMethod().includes("flat") || this.shippingMethod().includes("urbano")){
+            if(this.shippingMethod().includes("flat") || this.shippingMethod().includes("urbano") || this.shippingMethod().includes("free")){
                 this.referencia(this.getCustomAttributeByAttributeCode(quote,"referencia_envio"));
                 this.direccion(quote.shippingAddress().street[0]);
                 this.departamento(quote.shippingAddress().region);

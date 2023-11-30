@@ -15,8 +15,22 @@ define([
     var mixin = {
         customTitle: ko.observable(''),
         initialize : function () {
-          var self = this;
-          this._super();
+            var self = this;
+            this._super();
+            quote.shippingMethod.subscribe(function (value) {
+                if(!_.isUndefined(value) && !_.isNull(value) && !value.carrier_code.includes('instore')){
+                    if (value && value.method_title) {
+                        self.customTitle(value['method_title']);
+                    }
+                }
+            });
+            quote.shippingAddress.subscribe(function (value) {
+                var _shippingMethod = quote.shippingMethod();
+
+                if (_shippingMethod && _shippingMethod.method_title) {
+                    self.customTitle(_shippingMethod['method_title']);
+                }
+            });
         },
         /**
          * disable title that was 15 in the title

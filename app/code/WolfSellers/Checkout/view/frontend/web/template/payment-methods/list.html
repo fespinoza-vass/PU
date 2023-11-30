@@ -8,7 +8,7 @@
      class="items payment-methods">
     <div repeat="foreach: paymentGroupsList, item: '$group'"
          class="payment-group">
-        <h4 data-bind="i18n: getGroupTitle($group)"></h4>
+        <h4 class="group-title-h4" data-bind="i18n: getGroupTitle($group)" style="display:none;"></h4>
         <each args="data: getRegion($group().displayArea), as: 'method'" render=""></each>
     </div>
 </div>
