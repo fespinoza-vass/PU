@@ -57,7 +57,9 @@ define([
             if (quote.shippingMethod().carrier_code.includes("free")) {
                 this.shippingMethod("free");
             }
-
+            if (quote.shippingMethod().carrier_code.includes("flat")) {
+                this.shippingMethod("flat");
+            }
             if (quote.shippingMethod().carrier_code.includes("rapido")){
                 this.shippingMethod("rapido");
             }
