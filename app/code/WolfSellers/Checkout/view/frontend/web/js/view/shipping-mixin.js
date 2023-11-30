@@ -214,26 +214,6 @@ define([
                     return false;
                 }
             }
-            /*if (!this.isFastShipping() && !this.isRegularShipping() && !this.isUrbanoShipping()){
-                if(!customer.isCustomerLoggedIn){
-                    quote.shippingMethod(null);
-                }
-                this.errorValidationMessage(
-                    $t('The shipping method is missing. Select the shipping method and try again.')
-                );
-                return false;
-            }
-            var rate = this.findRateByCarrierCode('freeshipping');
-            if(rate !== undefined) {
-                this.showShippingMethodError(rate);
-                this.selectShippingMethod(rate);
-            } else {
-                var rate = this.findRateByCarrierCode('urbano');
-                if (rate !== undefined) {
-                    this.showShippingMethodError(rate);
-                    this.selectShippingMethod(rate);
-                }
-            }*/
             if (customer.isCustomerStepFinished() === '_complete') {
                 this.source.set('params.invalid', false);
                 this.triggerShippingDataValidateEvent();
