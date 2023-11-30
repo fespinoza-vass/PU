@@ -149,8 +149,9 @@ class SourceQuantityHelper extends AbstractHelper
      * @param $source
      * @return string
      */
-    public function getEstimatedDeliveryDateByOrderId($orderId, $source=null){
-        $currentDate = $this->_timezone->date()->format('Y-m-d');;
+    public function getEstimatedDeliveryDateByOrderId($orderId, $source = null)
+    {
+        $currentDate = $this->_timezone->date()->format('Y-m-d');
         $sourceHasStock = $this->hasStockInSourceByOrder($orderId,$source);
 
         if($sourceHasStock){
@@ -158,7 +159,7 @@ class SourceQuantityHelper extends AbstractHelper
             return $currentDate;
         } else {
             // no hay stock en sucursal
-            return date('Y-m-d',strtotime($currentDate. " +24 hour"));
+            return date('Y-m-d',strtotime($currentDate. " +48 hour"));
         }
     }
 
