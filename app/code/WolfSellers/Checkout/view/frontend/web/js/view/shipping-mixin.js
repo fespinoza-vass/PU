@@ -397,7 +397,7 @@ define([
                 return "Calculando...";
             }
             if (!carrier && methodType === "urbano" &&
-                    !this.isUrbanoShipping() && !this.isFastShipping() && !this.isRegularShipping()){
+                !this.isUrbanoShipping() && !this.isFastShipping() && !this.isRegularShipping()){
                 return "Calculando...";
             }
             return priceUtils.formatPrice(carrier.amount);
