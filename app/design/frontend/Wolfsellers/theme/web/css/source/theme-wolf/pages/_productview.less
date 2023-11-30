@@ -31,7 +31,7 @@
 							font-weight: 600; 
 							background: @color-label-fast; 
 							border-radius: 12px;
-							padding: 12px !important;  //add style for module amasty
+							padding: 10px 10px !important; //add style for module amasty
 							.lib-icon-font(
 								@_icon-font-content: @icon-fast-shipping,
 								@_icon-font-color: @black,
@@ -50,7 +50,32 @@
 							display: none !important; //add style for module amasty;
 						}
 					}
-					
+					&[class*="amlabel-position-top-right"]{
+						left: auto !important; //add style for module amasty
+						right: 155px !important; //add style for module amasty
+						top: 40px !important; //add style for module amasty
+						.amlabel-text{
+							width: auto !important; //add style for module amasty
+							.lib-font-size(10) !important; //add style for module amasty
+							font-weight: 600;
+							background: @color-label-store;
+							border-radius: 12px;
+							padding: 10px 10px !important; //add style for module amasty
+							.lib-icon-font(
+								@_icon-font-content: @icon-store-checkout,
+								@_icon-font-color: @black,
+								@_icon-font-size: 1.4rem,
+								@_icon-font-position: before,
+								@_icon-font-margin: 0
+							);
+							&:before{
+								vertical-align: bottom;
+							}
+							&.-am-centered{
+								transform: initial;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -488,6 +513,34 @@
 								}
 								.amasty-label-image{
 									display: none !important; //add style for module amasty
+								}
+							}
+						}
+						&[class*="amlabel-position-top-right"]{
+							background: @color-label-store; //add style for module amasty
+							border-radius: 12px;
+							.amasty-label-container{
+								.amlabel-text{
+									.lib-font-size(10); //add style for module amasty
+									font-weight: 600; //add style for module amasty
+									padding: 10px !important; //add style for module amasty
+									line-height: initial;
+									.lib-icon-font(
+										@_icon-font-content: @icon-store-checkout,
+										@_icon-font-color: @black,
+										@_icon-font-size: 1.4rem,
+										@_icon-font-position: before,
+										@_icon-font-margin: 0
+									);
+									&:before{
+										vertical-align: bottom;
+									}
+									&.-am-centered{
+										transform: initial;
+									}
+								}
+								.amasty-label-image{
+									display: none;
 								}
 							}
 						}
@@ -966,8 +1019,12 @@
 							right: 95px !important; //add style for module amasty
 							top: 100px !important; //add style for module amasty
 							.amlabel-text{
-								width: 132px !important; //add style for module amasty
+								width: 128px !important; //add style for module amasty
 							}
+						}
+						&[class*="amlabel-position-top-right"]{
+							right: 95px !important;
+							top: 70px !important;
 						}
 					}
 				}
@@ -1093,7 +1150,8 @@
 				.product.media{
 					.gallery-placeholder{
 						.amlabel-position-wrapper{
-							&[class*="amlabel-position-top-center"]{
+							&[class*="amlabel-position-top-center"],
+							&[class*="amlabel-position-top-right"]{
 								width: 95px !important; //add style for module amasty
 								height: 30px !important; //add style for module amasty
 								.amasty-label-container{
