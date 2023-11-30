@@ -175,17 +175,6 @@ define([
                 );
                 return false;
             }
-            var rate = this.findRateByCarrierCode('freeshipping');
-            if(rate !== undefined) {
-                this.showShippingMethodError(rate);
-                this.selectShippingMethod(rate);
-            } else {
-                var rate = this.findRateByCarrierCode('urbano');
-                if (rate !== undefined) {
-                    this.showShippingMethodError(rate);
-                    this.selectShippingMethod(rate);
-                }
-            }
             if (customer.isCustomerStepFinished() === '_complete') {
                 this.source.set('params.invalid', false);
                 this.triggerShippingDataValidateEvent();
