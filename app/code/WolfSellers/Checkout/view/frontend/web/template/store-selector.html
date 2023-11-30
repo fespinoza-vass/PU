@@ -9,7 +9,7 @@
     <div class="store-pickup-method">
         <div class="content-when-not-selected" data-bind="fadeVisible:!selectedLocation()">
             <div class="distrito-uicomponent">
-                <div class="step-title" translate="'2. Selecciona tú distrito de retiro'" data-role="title"></div>
+                <div class="step-title" translate="'2. Select your district'" data-role="title"></div>
 
                 <each args="getRegion('distrito-pickup')" render="" ></each>
 
@@ -50,18 +50,22 @@
         </div>
     </div>
     <div class="store-pickup-receipt-address">
-        <div class="step-title" translate="'2.2. Ingresa una dirección para tu comprobante'" data-role="title" visible="selectedLocation()"></div>
-        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="!selectedLocation()"></div>
+        <div class="step-title" translate="'2.2. Ingresa una dirección para tu comprobante'" data-role="title" visible="false"></div>
+        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="false"></div>
         <form id="form_another_vaoucher"
               class="form-picker-voucher"
               novalidate="novalidate"
-              data-form-part="pickerVoucher">
+              data-form-part="pickerVoucher"
+              visible="false">
             <each args="getRegion('picker-voucher')" render="" ></each>
         </form>
         <div class="store-pickup-receipt-address_time">
             <span class="store-pickup-receipt-address_time-icon"></span>
-            <p>
+            <p visible="isLabelsMatch()">
                 Podrás recoger tu pedido a partir del día <span data-bind="text: getPickupDateFormat()"></span> en un rango de 8am a 9:30 pm
+            </p>
+            <p visible="!isLabelsMatch()">
+                Podrás recoger tu pedido en 48 Hrs
             </p>
         </div>
 

@@ -146,7 +146,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/select',
                 'tooltip' => [
-                    "description" => 'Selecciona tipo de identificacion.'
+                    "description" => 'Selecciona tipo de identificación.'
                 ],
 
             ],
@@ -199,7 +199,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'template' => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input',
                 'tooltip' => [
-                    "description" => 'Ingresa Número de Telefono.'
+                    "description" => 'Ingresa Número de Teléfono.'
                 ],
             ],
             'dataScope' => 'customerData.telefono',
@@ -284,6 +284,11 @@ class LayoutProcessor implements LayoutProcessorInterface
         ];
         $walker->setValue('{SHIPPING_ADDRESS_FIELDSET}.>>.fecha_de_nacimiento', $fechaNacimiento);
         //Step Two configuration
+        $shippingUrbano = [
+            'component' => 'uiComponent',
+            'displayArea' => 'urbano',
+            'provider' => 'checkoutProvider'
+        ];
         $shippingRegular = [
             'component' => 'uiComponent',
             'displayArea' => 'regular',
@@ -294,6 +299,17 @@ class LayoutProcessor implements LayoutProcessorInterface
             'displayArea' => 'fast',
             'provider' => 'checkoutProvider'
         ];
+        //Urbano
+        $shippingUrbanoArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
+        $shippingUrbanoArea['urbano'] = $shippingUrbano;
+        $shippingUrbanoArea['urbano']['children']['departamento'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
+        $shippingUrbanoArea['urbano']['children']['hidden-region'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region');
+        $shippingUrbanoArea['urbano']['children']['provincia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.city');
+        $shippingUrbanoArea['urbano']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.colony');
+        $shippingUrbanoArea['urbano']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
+        $shippingUrbanoArea['urbano']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
+        $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingUrbanoArea);
+        //Regular
         $shippingRegularArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
         $shippingRegularArea['regular'] = $shippingRegular;
         $shippingRegularArea['regular']['children']['departamento'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.region_id');
@@ -303,6 +319,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $shippingRegularArea['regular']['children']['direccion'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.street');
         $shippingRegularArea['regular']['children']['referencia'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.referencia_envio');
         $walker->setValue('{SHIPPING_ADDRESS}.>>', $shippingRegularArea);
+        //Envio Rapido
         $shippingFastArea = $walker->getValue('{SHIPPING_ADDRESS}.>>');
         $shippingFastArea['fast'] = $shippingFast;
         $shippingFastArea['fast']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_envio_rapido');
@@ -346,7 +363,7 @@ class LayoutProcessor implements LayoutProcessorInterface
         $distritoPickupArea['distrito-pickup']['children']['distrito'] = $walker->getValue('{SHIPPING_ADDRESS_FIELDSET}.>>.distrito_pickup');
         $distritoPickupArea['distrito-pickup']['children']['distrito']['component'] = "WolfSellers_Checkout/js/view/form/element/distrito_pickup";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['label'] = "Distrito";
-        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['caption'] = "Selecciona tú distrito de retiro";
+        $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['caption'] = "Selecciona tu distrito";
         $distritoPickupArea['distrito-pickup']['children']['distrito']['config']['options'] = $this->_sourceHelper->getDistrictSource();
         $walker->setValue('{STORE-PICKUP}.>>',$distritoPickupArea);
 

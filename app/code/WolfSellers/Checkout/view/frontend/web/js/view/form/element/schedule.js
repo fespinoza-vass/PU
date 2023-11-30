@@ -69,8 +69,15 @@ define([
         getHorarioDisponibles: function (radioOptionSelected) {
             var ahora = new Date();
             var timeSensitive = wolfUtils.getAvailableDates(ahora);
-            var fechaEntrega = wolfUtils.formatDate(ahora);
             var diaEntrega = timeSensitive[radioOptionSelected].dia;
+            var fechaEntrega = "";
+            if (diaEntrega === "mañana"){
+                var tomorrow = new Date(ahora);
+                tomorrow.setDate(ahora.getDate() + 1);
+                fechaEntrega = wolfUtils.formatDate(tomorrow);
+            }else{
+                fechaEntrega = wolfUtils.formatDate(ahora);
+            }
             var horarioEntrega = timeSensitive[radioOptionSelected].label;
             shippingPayment.fechaEnvioRapido({
                 dia: diaEntrega,

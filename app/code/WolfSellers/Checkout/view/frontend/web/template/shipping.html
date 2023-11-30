@@ -12,25 +12,26 @@
          data-role="content">
         <div class="step-title" translate="'2. Forma de entrega'" data-role="title"></div>
 
-        <div class="content-method_urbano">
+        <div class="content-method_urbano" if="isUrbanoMethodConfigured">
             <div id="checkout-step-shipping_method-urbano"
                  class="step-content"
                  data-role="content"
                  role="tabpanel"
                  aria-hidden="false"
                  data-bind="
+                    css: isurbanoShipping() ? 'selected' : '',
+                    css: isShippingMethodAvailable('urbano') ? 'disabled' : '',
                     click: setUrbanoShipping">
-                <label class="step-content_icon" for="urbano_terrestre">Envío Regular:</label>
-                <span class="step-content_price" data-bind="text: getPriceLabel()"></span>
-                <input type="radio" id="urbano_terrestre" name="opciones" value="fast" attr="{checked: isUrbanoShipping}">
-                <label class="step-content_input-fast" for="urbano_terrestre"></label>
-                <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
-                    <a href="#" data-bind="click: showRSInformation">Cónoce más aquí</a>
-                </span>
+                    <label class="step-content_icon" for="envio_urbano">Envío Regular:</label>
+                    <span class="step-content_price" data-bind="text: getPriceLabel('urbano')"></span>
+                    <input type="radio" id="envio_urbano" name="opciones" value="regular" attr="{checked: isUrbanoShipping}">
+                    <label class="step-content_input-urbano" for="envio_urbano"></label>
+                    <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
+                        <a href="#" data-bind="click: showRSInformation, clickBubble: false">Cónoce más aquí</a>
+                    </span>
             </div>
         </div>
-        <!--
-        <div class="content-method_regular">
+        <div class="content-method_regular" if="isRegularMethodConfigured">
             <div id="checkout-step-shipping_method-regular"
                  class="step-content"
                  data-role="content"
@@ -44,12 +45,12 @@
                 <span class="step-content_price" data-bind="text: getPriceLabel()"></span>
                 <input type="radio" id="envio_regular" name="opciones" value="regular" attr="{checked: isRegularShipping}">
                 <label class="step-content_input-regular" for="envio_regular"></label>
-                <span class="step-content_info">Tú pedido llega entre 24 y 48 horas luego a tu compra*
-                    <a href="#" data-bind="click: showRSInformation">Cónoce más aquí</a>
+                <span class="step-content_info">Tu pedido llega entre 24 y 48 horas luego a tu compra*
+                    <a href="#" data-bind="click: showRSInformation, clickBubble: false">Cónoce más aquí</a>
                 </span>
             </div>
         </div>
-        <div class="content-method_fast">
+        <div class="content-method_fast" if="isFastMethodConfigured">
             <div id="checkout-step-shipping_method-fast"
                  class="step-content"
                  data-role="content"
@@ -64,18 +65,34 @@
                 <input type="radio" id="envio_rapido" name="opciones" value="fast" attr="{checked: isFastShipping, disabled:isFastShippingDisabled}">
                 <label class="step-content_input-fast" for="envio_rapido"></label>
                 <span class="step-content_info">Tu pedido llega el mismo día de tu compra*
-                    <a href="#" data-bind="click: showFSInformation">Cónoce más aquí</a>
+                    <a href="#" data-bind="click: showFSInformation, clickBubble: false">Cónoce más aquí</a>
                 </span>
             </div>
         </div>
-        -->
+
         <div class="shipping-method-error"
-             data-bind="fadeVisible: isShippingMethodError()"
-        >
-            <p>Hubo un error.</p>
+             data-bind="fadeVisible: isShippingMethodError()">
+            <p data-bind="text: errorMessage()"></p>
         </div>
 
     </div>
+    <!-- ko if: (isUrbanoShipping) -->
+    <div id="checkout-step-shipping-urbano"
+         class="step-content"
+         data-role="content">
+        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
+        <fieldset>
+            <each args="getRegion('urbano')" render="" ></each>
+        </fieldset>
+        <div class="step-content_regular">
+            <span class="step-content_regular-icon"></span>
+            <p class="shipping-time-label-uno">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2 pm</span></p>
+            <p class="shipping-time-label-dos" style="display: none;"><span>Lunes, Miércoles y Viernes</span>, desde las<span>8 am hasta las 7 pm</span></p>
+            <p class="shipping-time-label-tres" style="display: none;">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2 pm</span>.
+                Con un tiempo de entrega de <span>5 a 15 días</span> de acuerdo a la <span>provincia y distrito</span> de la entrega.</p>
+        </div>
+    </div>
+    <!-- /ko -->
     <!-- ko if: (isRegularShipping) -->
     <div id="checkout-step-shipping-regular"
          class="step-content"
@@ -86,26 +103,9 @@
         </fieldset>
         <div class="step-content_regular">
             <span class="step-content_regular-icon"></span>
-            <p class="shipping-time-label-uno">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2pm</span></p>
+            <p class="shipping-time-label-uno">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2 pm</span></p>
             <p class="shipping-time-label-dos" style="display: none;"><span>Lunes, Miércoles y Viernes</span>, desde las<span>8 am hasta las 7 pm</span></p>
-            <p class="shipping-time-label-tres" style="display: none;">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2pm</span>.
-                Con un tiempo de entrega de <span>5 a 15 días</span> de acuerdo a la <span>provincia y distrito</span> de la entrega.</p>
-        </div>
-    </div>
-    <!-- /ko -->
-    <!-- ko if: (isUrbanoShipping) -->
-    <div id="checkout-step-shipping-regular"
-         class="step-content"
-         data-role="content">
-        <div class="step-title" translate="'2.1 Selecciona tu lugar de entrega'" data-role="title"></div>
-        <fieldset>
-            <each args="getRegion('regular')" render="" ></each>
-        </fieldset>
-        <div class="step-content_regular">
-            <span class="step-content_regular-icon"></span>
-            <p class="shipping-time-label-uno">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2pm</span></p>
-            <p class="shipping-time-label-dos" style="display: none;"><span>Lunes, Miércoles y Viernes</span>, desde las<span>8 am hasta las 7 pm</span></p>
-            <p class="shipping-time-label-tres" style="display: none;">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2pm</span>.
+            <p class="shipping-time-label-tres" style="display: none;">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2 pm</span>.
                 Con un tiempo de entrega de <span>5 a 15 días</span> de acuerdo a la <span>provincia y distrito</span> de la entrega.</p>
         </div>
     </div>

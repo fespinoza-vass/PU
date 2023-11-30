@@ -13,8 +13,8 @@ define([
     'Magento_Checkout/js/model/quote',
     'Magento_Checkout/js/checkout-data',
     'Magento_Checkout/js/model/full-screen-loader',
-    'mage/validation',
-    'WolfSellers_Checkout/js/model/customer'
+    'WolfSellers_Checkout/js/model/customer',
+    'mage/validation'
 ], function ($, Component, ko, customer, checkEmailAvailability, loginAction, quote, checkoutData, fullScreenLoader,customer_data) {
     'use strict';
 
@@ -62,11 +62,11 @@ define([
             this._super();
 
             this.passwordRegister.subscribe(function(value) {
-                customer_data.passwordRegister = value;
+                customer_data.passwordRegister(value);
             }, this);
 
             this.passwordConfirm.subscribe(function(value) {
-                customer_data.passwordConfirm = value;
+                customer_data.passwordConfirm(value);
             }, this);
 
             return this;

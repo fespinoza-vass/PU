@@ -6,7 +6,7 @@ define([
     'Magento_Checkout/js/model/step-navigator',
     'Magento_Checkout/js/model/quote',
     'uiRegistry',
-    'WolfSellers_Checkout/js/model/customer',
+    'WolfSellers_Checkout/js/model/customer'
 ], function (
     $,
     ko,
@@ -15,8 +15,7 @@ define([
     stepNavigator,
     quote,
     registry,
-    customer,
-    shippingPayment
+    customer
 ) {
     'use strict';
 

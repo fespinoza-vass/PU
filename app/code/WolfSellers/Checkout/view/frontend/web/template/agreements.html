@@ -8,13 +8,14 @@
     <div class="checkout-agreements fieldset">
         <!-- ko foreach: agreements -->
         <!-- ko if: ($parent.isAgreementRequired($data)) -->
-        <!-- ko if: (agreementId == 6)-->
+        <!-- ko if: (agreementId == 5)-->
         <div class="checkout-agreement field choice required">
             <input type="checkbox" class="required-entry"
                    data-bind="attr: {
                                     'id': $parent.getCheckboxId($parentContext, agreementId),
                                     'name': 'agreement[' + agreementId + ']',
-                                    'value': agreementId
+                                    'value': agreementId,
+                                    'checked':true
                                     },
                                    click: $parent.click($parentContext, agreementId)"/>
             <label class="label" data-bind="attr: {'for': $parent.getCheckboxId($parentContext, agreementId)}">
@@ -24,7 +25,7 @@
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko ifnot: ($parent.isAgreementRequired($data)) -->
-        <!-- ko if: (agreementId == 6)-->
+        <!-- ko if: (agreementId == 5)-->
         <div class="checkout-agreement">
             <button type="button" class="action action-show"
                     data-bind="click: function(data, event) { return $parent.showContent(data, event) }">

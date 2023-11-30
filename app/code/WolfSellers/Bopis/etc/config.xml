@@ -88,6 +88,10 @@
                 <enabled>1</enabled>
                 <roles></roles>
             </remember_me>
+            <live_Box>
+                <enabled>1</enabled>
+                <min_items>2</min_items>
+            </live_Box>
         </bopis>
     </default>
 </config>

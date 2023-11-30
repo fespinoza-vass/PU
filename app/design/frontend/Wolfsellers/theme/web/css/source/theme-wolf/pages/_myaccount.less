@@ -386,6 +386,19 @@
                             .field.field-name-lastname.required{
                                 float: right;
                             }
+                            .field.field-name-firstname.required,
+                            .field.field-name-lastname.required{
+                                .mage-error{
+                                    .lib-icon-font(
+                                        @_icon-font-content: @icon-info-checkout,
+                                        @_icon-font-color: @red,
+                                        @_icon-font-size: 1.5rem,
+                                        @_icon-font-position: before,
+                                        @_icon-font-margin: 0 5px 0 0,
+                                    );
+                                    display: block;
+                                }
+                            }
                         }
                         .field.gender.required,
                         .field.field-identificacion.required{
@@ -399,13 +412,19 @@
                                 }
                             }
                         }
+                        .field.field-numero_de_identificacion{
+                            .control{
+                                input.valid{
+                                    border: 1px solid @red;
+                                }
+                            }
+                        }
                         .field.date.field-dob.required{
                             .control.customer-dob{
                                 height: 48px;
                                 border-radius: 12px;
                                 background: @white;
                                 background-clip: padding-box;
-                                border: 1px solid @lines-input;
                                 font-size: 1.4rem;
                                 line-height: 1.428571429;
                                 vertical-align: baseline;
@@ -414,13 +433,23 @@
                                 display: inline-flex;
                                 position: relative;
                                 input{
-                                    border: none;
+                                    border: 1px solid @lines-input;
                                     background: none;
                                     margin: unset;
+                                    width: 100%;
+                                    &.mage-error{
+                                        width: 100%;
+                                        border: 1px solid @red;
+                                    }
                                 }
                                 div.mage-error{
                                     position: absolute;
                                     top: 45px;
+                                }
+                                .ui-datepicker-trigger{
+                                    position: absolute;
+                                    top: 15px;
+                                    right: 10px;
                                 }
                             }
                         }

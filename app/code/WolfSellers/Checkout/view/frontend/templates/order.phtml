@@ -19,3 +19,14 @@ $viewModel = $block->getData('viewModel');
         <a class="order-back-to-store" href="<?=$block->getBaseUrl()?>"><?= __("Regresar a la tienda"); ?></a>
     </div>
 <?php endif; ?>
+
+<script type="text/javascript">
+    require([
+        'Magento_Customer/js/customer-data',
+        'domReady!'
+    ], function (customerData) {
+        var sections = ['cart'];
+        customerData.invalidate(sections);
+        customerData.reload(sections, true);
+    });
+</script>

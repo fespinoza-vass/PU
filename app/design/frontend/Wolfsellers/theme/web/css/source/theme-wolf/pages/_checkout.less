@@ -132,7 +132,8 @@
 						}
 					}
 				}
-				.fast-additional-info-modal{
+				.fast-additional-info-modal,
+				.regular-additional-info-modal{
 					.modal-inner-wrap{
 						.modal-content{
 							.custom-popup-content{
@@ -147,6 +148,9 @@
 								&_delivery{
 									.section{
 										padding: 25px 10px 10px 10px;
+										&_title{
+											text-transform: uppercase;
+										}
 										ul{
 											li{
 												list-style: disc;
@@ -180,8 +184,11 @@
 								&_delivery{
 									.section{
 										padding: 25px 10px 10px 10px;
-										&_title{
-											text-transform: uppercase;
+										&_title {
+                                            text-transform: uppercase;
+                                        }
+										&_provinces{
+											padding-top: 0px;
 										}
 									}
 								}
@@ -287,7 +294,6 @@
 			position: relative;
 			text-align: center;
 			vertical-align: top;
-
 			&:nth-child(1){
 				span{
 					&:after{
@@ -394,6 +400,11 @@
 			.block.items-in-cart {
 				order: 2;
 				margin-bottom: 10px;
+				&.active{
+					.minicart-items{
+						display: none !important; // style added by style with js
+					}
+				}
 				.title{
 					border-bottom: 1px solid @gray-E9;
 					&:after{
@@ -405,6 +416,7 @@
 					}
 				}
 				.minicart-items{
+					display: block !important; // style added by style with js
 					border-bottom: 1px solid @gray-E9;
 					.product{
 						.product-item-inner{
@@ -1140,7 +1152,7 @@
 							}
 							&_info{
 								.lib-css(display,flex,@_prefix:1);
-								.lib-css(display,flex-direction,@_prefix:1);
+								.lib-css(align-items,center,@_prefix:1);
 								background: @gray-EE;
 								border: 1px solid @lines-input;
 								border-radius: 12px;
@@ -1217,8 +1229,10 @@
 							border-radius: 12px;
 							padding: 10px;
 							margin: 0 0 0 40px;
+							cursor: pointer;
 							> label{
-								width: 70%;
+								width: 85%;
+								cursor: pointer;
 							}
 							.step-content{
 								&_price{
@@ -1239,7 +1253,8 @@
 									}
 								}
 								&_input-fast,
-								&_input-regular{
+								&_input-regular,
+								&_input-urbano{
 									position: absolute;
 									top: 25px;
 									left: 0;
@@ -1252,6 +1267,7 @@
 							padding: 7px 7px 10px 10px;
 							.step-content{
 								&_icon{
+									width: auto;
 									.lib-icon-font(
 										@_icon-font-content: @icon-regular-shipping,
 										@_icon-font-color: @black,
@@ -1301,7 +1317,8 @@
 					}
 					#checkout-step-shipping-regular,
 					#checkout-step-shipping-rapido,
-					#checkout-step-shipping-time{
+					#checkout-step-shipping-time,
+					#checkout-step-shipping-urbano{
 						margin-bottom: 10px;
 						fieldset{
 							.lib-css(display,flex,@_prefix:1);
@@ -1333,7 +1350,8 @@
 							}
 						}
 					}
-					#checkout-step-shipping-regular{
+					#checkout-step-shipping-regular,
+					#checkout-step-shipping-urbano{
 						fieldset{
 							.field{
 								margin-bottom: 10px;
@@ -1429,7 +1447,7 @@
 								margin-bottom: 17px;
 							}
 							#uno{
-								padding-right: 10px;
+								padding-right: 15px;
 							}
 						}
 						.step-content_fast{
@@ -1771,7 +1789,8 @@
                                                     ~ label{
                                                         position: relative;
                                                         float: left;
-                                                        padding-left: 27px;
+														text-align: start;
+                                                        padding-left: 35px;
                                                         &:after{
                                                             content: "";
                                                             position: absolute;
@@ -1807,6 +1826,14 @@
                                                         }
                                                     }
                                                 }
+												span{
+													&:after{
+														content: '*';
+														.lib-font-size(12);
+														color: @red;
+														padding-left: 3px;
+													}
+												}
                                             }
 										}
 									}
@@ -2072,7 +2099,7 @@
 				height: 65px;
 				background: @primary;
 				top: 0;
-				z-index: 10;
+				z-index: 100;
 				.header.content{
 					padding: 13px 15px;
 					justify-content: center;
@@ -2914,17 +2941,28 @@
 						}
 					}
 				}
-				.modal-popup.regular-additional-info-modal._show{
+				.modal-popup.container-payment-benefits-modal._show{
+					left: 0;
 					.modal-inner-wrap{
-						.modal-content{
-							.custom-popup-content{
-								&_delivery{
-									.section{
-										padding: 10px;
-									}
-								}
-							}
-						}
+						position: absolute;
+						transform: translate(-50%, -50%);
+						top: 50%;
+						right: 50%;
+						left: 50%;
+						width: calc(~"100% - 30px");
+						height: auto;
+						min-height: auto;
+						border-radius: 12px;
+						padding: 0;
+                        .modal-content{
+                            .custom-popup-content{
+                                &_delivery{
+                                    .section{
+                                        padding: 10px;
+                                    }
+                                }
+                            }
+                        }
 					}
 				}
 			}
@@ -3198,8 +3236,23 @@
 									}
 								}
 								#shipping{
+									#checkout-step-shipping_method-urbano,
+									#checkout-step-shipping_method-regular,
+									#checkout-step-shipping_method-fast{
+										label{
+											width: 75%;
+										}
+										span{
+											display: inline;
+											.lib-font-size(12);
+											a{
+												display: inline;
+											}
+										}
+									}
 									#checkout-step-shipping-rapido,
-									#checkout-step-shipping-regular{
+									#checkout-step-shipping-regular,
+									#checkout-step-shipping-urbano{
 										fieldset{
 											padding-left: 40px;
 											.street{
@@ -3288,6 +3341,12 @@
 															padding: 25px 0 0 0;
 														}
 													}
+													.checkout-agreements-block{
+														label{
+															text-align: start;
+															padding-left: 32px;
+														}
+													}
 												}
 											}
 										}
@@ -3303,7 +3362,19 @@
 										margin-bottom: 8px;
 									}
 									&[name="customerData.identificacion"]{
-										align-self: end;
+										label{
+											width: 75%;
+										}
+									}
+									&[name="customerData.numero_de_identificacion"]{
+										label{
+											width: 75%;
+										}
+										.control{
+											.field-error{
+												bottom: -22px;
+											}
+										}
 									}
 								}
 							}
@@ -3343,6 +3414,22 @@
 		.checkout-shipping-address.step-two{
 			.container.steps{
 				#shipping{
+					#checkout-step-shipping{
+						#checkout-step-shipping_method-urbano,
+						#checkout-step-shipping_method-regular,
+						#checkout-step-shipping_method-fast{
+							.step-content_icon{
+								.lib-font-size(12);
+								width: 60%
+							}
+							span.step-content_info{
+								.lib-font-size(10);
+								a{
+									.lib-font-size(10);
+								}
+							}
+						}
+					}
 					.shipping-method-error{
 						.lib-font-size(10);
 						&:after{
@@ -3486,6 +3573,27 @@
 					}
 				}
 				#shipping{
+					.step-title{
+						.lib-font-size(14);
+					}
+					#checkout-step-shipping{
+						#checkout-step-shipping_method-urbano,
+						#checkout-step-shipping_method-regular,
+						#checkout-step-shipping_method-fast{
+							.step-content_icon{
+								.lib-font-size(12);
+							}
+							.step-content_price{
+								.lib-font-size(12);
+							}
+							span.step-content_info{
+								.lib-font-size(10);
+								a{
+									.lib-font-size(10);
+								}
+							}
+						}
+					}
 					#checkout-step-shipping-time{
 						fieldset{
 							#uno,
@@ -3504,6 +3612,13 @@
 									font-size: 1.4rem;
 								}
 							}
+						}
+					}
+				}
+				#store-pickup{
+					#store-selector{
+						.step-title{
+							.lib-font-size(14);
 						}
 					}
 				}

@@ -30,15 +30,11 @@ define([
             defaults: {
                 template: 'WolfSellers_Checkout/button-place-order',
                 paymentsNamePrefix: 'checkout.steps.billing-step.payment.payments-list.',
-                links: {
-                    'isSubscribed' : 'checkout.sidebar.summary.checkout-che-promo:isSubscribed'
-                }
             },
             isStepTreeFinished: ko.observable(""),
             isPlaceOrderFinished: ko.observable(""),
             isStepPlaceOrder : ko.observable(false),
             isPlaceOrderDisabled: ko.observable(),
-            isSubscribed: ko.observable(),
 
             /**
              * change status progress bar

@@ -3,8 +3,8 @@ var config = {
       '*':{
           'Magento_Checkout/js/model/step-navigator':'WolfSellers_Checkout/js/model/step-navigator',
           'Magento_Checkout/js/view/form/element/email':'WolfSellers_Checkout/js/view/form/element/email',
-          'Magento_Checkout/js/model/shipping-save-processor/default': 'WolfSellers_Checkout/js/model/shipping-save-processor/default',
-          'Magento_Checkout/js/model/shipping-save-processor/payload-extender': 'WolfSellers_Checkout/js/model/shipping-save-processor/payload-extender'
+          'Magento_Checkout/js/model/shipping-save-processor/default':'WolfSellers_Checkout/js/model/shipping-save-processor/default',
+          'Magento_Checkout/js/model/shipping-save-processor/payload-extender':'WolfSellers_Checkout/js/model/shipping-save-processor/payload-extender'
         }
     },
     config: {
@@ -41,6 +41,9 @@ var config = {
             },
             "Magento_Tax/js/view/checkout/summary/shipping": {
                 "WolfSellers_Checkout/js/view/checkout/summary/shipping-mixin" : true
+            },
+            'Magento_Ui/js/lib/validation/rules': {
+                'WolfSellers_Checkout/js/validation/validator-mixin': true
             }
         }
     }

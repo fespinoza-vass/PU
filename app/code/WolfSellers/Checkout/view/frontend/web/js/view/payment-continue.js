@@ -78,7 +78,7 @@ define([
                 if (customer.isCustomerStepFinished() === '_complete' &&
                     shippingPayment.isShippingStepFinished() === '_complete' &&
                     changeText.switchText() == false
-                   ) {
+                ) {
                     this.isPaymentFinished(false);
                     this.isPaymentFinished.notifySubscribers(false);
                 } else {
@@ -88,6 +88,8 @@ define([
                     scrollTop: ($("#opc-sidebar").offset().top - 50)
                 }, 1000);
             }
+
+            document.getElementById('opc-sidebar').scrollIntoView({ behavior: 'smooth' });
         },
     });
 });

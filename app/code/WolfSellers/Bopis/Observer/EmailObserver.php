@@ -50,6 +50,7 @@ class EmailObserver implements ObserverInterface
         /** @var \Magento\Sales\Model\Order $order */
         $transport = $observer->getEvent()->getTransport();
         $order = $transport->getOrder();
+
         try {
             $transport['shipping_method_name'] = $this->realStates->getShippingMethodTitle($order->getShippingMethod());
             $transport['delivery'] = $this->emailHelper->getDeliveryType($order);

@@ -14,26 +14,16 @@ use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
 use WolfSellers\DireccionesTiendas\Api\Data\DireccionesTiendasInterface;
 use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
 use WolfSellers\OrderQR\Logger\Logger;
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 /**
  *
  */
 class AssingSource
 {
-
-    /**
-     *
-     */
+    CONST URBANO_SHIPPING_METHOD_CODE = "urbano";
     CONST FAST_SHIPPING_METHOD_CODE = "envio_rapido_envio_rapido";
-
-    /**
-     *
-     */
     CONST REGULAR_SHIPPING_METHOD_CODE = "flatrate_flatrate";
-
-    /**
-     *
-     */
     CONST DEFAULT_LURIN_SOURCE = "1";
 
     /** @var DistrictGeoname */
@@ -45,6 +35,9 @@ class AssingSource
 
     /** @var GetSourceItemsBySkuInterface */
     protected $_sourceItemsBySku;
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
 
 
     /**
@@ -61,8 +54,10 @@ class AssingSource
         protected DireccionesTiendasRepositoryInterface $direccionesTiendasRepository,
         protected Logger                                $_logger,
         DistrictGeoname                                 $districtGeoname,
-        GetSourceItemsBySkuInterface                    $sourceItemsBySku
+        GetSourceItemsBySkuInterface                    $sourceItemsBySku,
+        InventoryBySourceHelper                         $inventoryBySourceHelper
     ) {
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_districtGeoname = $districtGeoname;
         $this->_sourceItemsBySku = $sourceItemsBySku;
     }
@@ -79,7 +74,9 @@ class AssingSource
             if($order->getShippingMethod() == self::FAST_SHIPPING_METHOD_CODE){
                 $this->_districtGeoname->assignSourceToOrder($order);
             }
-            if($order->getShippingMethod() == self::REGULAR_SHIPPING_METHOD_CODE){
+            if($order->getShippingMethod() == self::REGULAR_SHIPPING_METHOD_CODE ||
+                str_contains($order->getShippingMethod(),self::URBANO_SHIPPING_METHOD_CODE)
+            ){
                 $order->setData('source_code',AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE); // almacen lurin
             }
             if($order->getShippingMethod() == AbstractBopisCollection::PICKUP_SHIPPING_METHOD){
@@ -109,10 +106,12 @@ class AssingSource
             /** @var SourceItemInterface $sourceSku */
             foreach ($inventory as $sourceSku) {
                 if($sourceSku->getSourceCode() == $sourceCode){
+                    $sourceQuantity = $this->_inventoryBySource->getSalableQtyBySource($item->getSku(),$sourceCode);
+
                     if (!$sourceSku->getStatus()){
                         $stockAvailable = false;
                     }
-                    if ($sourceSku->getQuantity() < $item->getQtyOrdered()) {
+                    if ($sourceQuantity < $item->getQtyOrdered()) {
                         $stockAvailable = false;
                     }
                     break;

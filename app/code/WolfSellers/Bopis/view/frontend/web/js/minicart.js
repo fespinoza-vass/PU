@@ -20,6 +20,22 @@ define([
              * @override
              */
             getCartParam: function (name) {
+                if (name === 'possible_onepage_checkout') {
+                    $(document).on('click', '.checkout.minicart-submit,.action.viewcart', function (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        var route = 0;
+                        if ($(this).hasClass('viewcart')) {
+                            $('[data-block="minicart"]').find('[data-role="dropdownDialog"]').dropdownDialog('close');
+                            $('body').removeClass('cart-open');
+                            route = 1;
+                        }
+
+                        proceedPopup.validations(route);
+                    });
+
+                }
                 return this._super(name);
             },
 

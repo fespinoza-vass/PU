@@ -3,11 +3,11 @@
         <b>Forma de entrega:</b>
         <p data-bind="text: getShippingMethod()"></p>
     </div>
-    <div data-bind="visible: isShipping">
+    <div ifnot="isStorePickUp">
         <b>Dirección de entrega:</b>
         <p data-bind="text: getShippingAddress()"></p>
     </div>
-    <div data-bind="visible: isShipping">
+    <div ifnot="isStorePickUp">
         <b>Referencia:</b>
         <p data-bind="text: getReferencia()"></p>
     </div>
@@ -20,6 +20,22 @@
             <b>Dirección de entrega:</b>
             <p data-bind="text: getPickupAddress()"></p>
         </div>
+    </div>
+    <div if="isShipping">
+        <b>Fecha:</b>
+        <p data-bind="text: getShippingDate()"></p>
+    </div>
+    <div if="isShipping">
+        <b>Horario:</b>
+        <p data-bind="text: getShippingTime()"></p>
+    </div>
+    <div if="isFastShipping">
+        <b>Fecha:</b>
+        <p data-bind="text: getShippingDate()"></p>
+    </div>
+    <div if="isFastShipping">
+        <b>Horario:</b>
+        <p data-bind="text: getShippingTime()"></p>
     </div>
 </div>
 

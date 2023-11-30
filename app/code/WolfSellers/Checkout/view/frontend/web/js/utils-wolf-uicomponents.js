@@ -62,33 +62,33 @@ define([
             if (hora >= 0 && hora < 16) {
                 if(minutosRestantesRango1 > 60){
                     return [
-                        { value: '12_4_hoy',"label": "12 a 4pm", "dia": hoy },
-                        { value: '4_8_hoy',"label": "4 a 8pm", "dia": hoy }
+                        { value: '12_4_hoy',"label": "12 a 4 pm", "dia": hoy },
+                        { value: '4_8_hoy',"label": "4 a 8 pm", "dia": hoy }
                     ];
                 }
                 if (minutosRestantesRango1 <= 60) {
                     return [
-                        { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                        { value: '4_8_hoy',"label": "4 a 8pm", "dia": hoy }
+                        { value: '12_4_manana',"label": "12 a 4 pm", "dia": manana },
+                        { value: '4_8_hoy',"label": "4 a 8 pm", "dia": hoy }
                     ];
                 }
             }else if (hora >= 16 && hora < 20) {
                 if(minutosRestantesRango2 > 60){
                     return [
-                        { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                        { value: '4_8_hoy',"label": "4 a 8pm", "dia": hoy }
+                        { value: '12_4_manana',"label": "12 a 4 pm", "dia": manana },
+                        { value: '4_8_hoy',"label": "4 a 8 pm", "dia": hoy }
                     ];
                 }
                 if (minutosRestantesRango2 <= 60) {
                     return [
-                        { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                        { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
+                        { value: '12_4_manana',"label": "12 a 4 pm", "dia": manana },
+                        { value: '4_8_manana',"label": "4 a 8 pm", "dia": manana }
                     ];
                 }
             }else if (hora >= 20 && hora <=23 ){
                 return [
-                    { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                    { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
+                    { value: '12_4_manana',"label": "12 a 4 pm", "dia": manana },
+                    { value: '4_8_manana',"label": "4 a 8 pm", "dia": manana }
                 ];
             }else {
                 return [
@@ -120,15 +120,15 @@ define([
             }else if (hora >= 0 && hora < 11) {
 
                 return [
-                    { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                    { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
+                    { value: '12_4_hoy',"label": "12 a 4 pm", "dia": hoy },
+                    { value: '4_8_hoy',"label": "4 a 8 pm", "dia": hoy }
                 ];
 
             }else if (hora >= 16 && hora <= 24 ){
 
                 return [
-                    { value: '12_4_manana',"label": "12 a 4pm", "dia": manana },
-                    { value: '4_8_manana',"label": "4 a 8pm", "dia": manana }
+                    { value: '12_4_manana',"label": "12 a 4 pm", "dia": manana },
+                    { value: '4_8_manana',"label": "4 a 8 pm", "dia": manana }
                 ];
 
             }else {

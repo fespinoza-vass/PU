@@ -59,15 +59,17 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
 
             <address class="admin__page-section-item-content">
                 <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
-                    <?php $customer = $viewModel->getCustomerData($order->getCustomerId())?>
-
                     <span class="color-orange">
-                        <b><?= $customer->getFirstname()?> <?=$customer->getLastname()?></b>
+                        <?php if ($order->getCustomerIsGuest()): ?>
+                            <b><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b>
+                        <?php else: ?>
+                            <?= $customerOrderBillingInformation['name'] ?>
+                        <?php endif; ?>
                     </span><br>
-                    Número de documento:
-                    <?=$viewModel->getCustomerIdentificacion($customer->getId())?><br>
-                    <?=$customer->getEmail()?> <br>
-                    T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
+                    <?= $customerOrderBillingInformation['email'] ?><br />
+                    T. <?= $customerOrderBillingInformation['tel'] ?><br />
                 <?php else: ?>
                     <span class="color-orange">
                         <?= $customerOrderBillingInformation['name'] ?>
@@ -78,6 +80,7 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                     T. <?= $customerOrderBillingInformation['tel'] ?><br />
                 <?php endif; ?>
                 <br>
+                <br>
                 Comprobante:
                 <?php if ( is_null($billingAddress->getDataByKey('invoice_required')) ||
                     $billingAddress->getDataByKey('invoice_required') == '0' ):?>
@@ -86,6 +89,7 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                     Factura <br>
                     <?=$billingAddress->getDataByKey('ruc')?> <br>
                     <?=$billingAddress->getDataByKey('razon_social')?> <br>
+                    Dirección Fiscal: <?=$billingAddress->getDataByKey('direccion_fiscal')?> <br>
                 <?php endif; ?>
                 <br />
 
@@ -157,17 +161,23 @@ $customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformatio
                         <b class="color-orange" title="pick <?=$picker?>"><?= $shippingAddress->getNombreCompletoPicker() ?></b><br />
                         Número de documento: <?=$viewModel->getRealAddrOptionValue('identificacion_picker', $shippingAddress->getIdentificacionPicker())?>
                             - <?=$shippingAddress->getNumeroIdentificacionPicker()?><br />
-                        <?= $shippingAddress->getEmailPicker() ?? $customer->getEmail(); ?><br />
-                        T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
                     <?php else: ?>
-                        <b class="color-orange" title="<?=$picker?>"><?= $customer->getFirstname()?> <?=$customer->getLastname()?></b><br />
-                        Número de documento: <?=$viewModel->getCustomerIdentificacion($customer->getId())?><br>
-                        <?=$customer->getEmail()?> <br>
-                        T. <?=$viewModel->getCustomerAttributeValue($customer->getId(), 'telefono')?>
+                        <b class="color-orange" title="<?=$picker?>">
+                        <?php if ($order->getCustomerIsGuest()): ?>
+                            <b><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b>
+                        <?php else: ?>
+                            <?= $customerOrderBillingInformation['name'] ?>
+                        <?php endif; ?>
+                        </b><br />
+                        Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                        <?=$customerOrderBillingInformation['id_number'] ?><br />
+                        <?= $customerOrderBillingInformation['email'] ?><br />
+                        T. <?= $customerOrderBillingInformation['tel'] ?><br
                     <?php endif; ?>
                 <?php else: ?>
                     <b class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></b><br />
-                    Número de documento: <?=$viewModel->getCustomerIdentificacion($order->getCustomerId())?><br />
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
                     <?= $shippingAddress->getEmail(); ?><br />
                     T. <?= $shippingAddress->getTelephone(); ?>
                 <?php endif; ?>

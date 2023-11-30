@@ -17,7 +17,8 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\InventoryApi\Api\GetSourceItemsBySkuInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
-
+use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
+use WolfSellers\AmastyLabel\Helper\DynamicTagRules;
 
 /**
  *
@@ -25,6 +26,12 @@ use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
 class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
     \Magento\Shipping\Model\Carrier\CarrierInterface
 {
+
+    /** @var DynamicTagRules */
+    protected $_dynamicTagsRules;
+
+    /** @var InventoryBySourceHelper */
+    protected $_inventoryBySource;
     /**
      * @var string
      */
@@ -58,6 +65,9 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
     /** @var GetSourceItemsBySkuInterface */
     protected $_sourceItemsBySku;
 
+    /** @var DynamicTagRules */
+    protected DynamicTagRules $dynamicTagRules;
+
     /**
      * @param ScopeConfigInterface $scopeConfig
      * @param ErrorFactory $rateErrorFactory
@@ -67,9 +77,13 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
      * @param ProductRepository $productRepository
      * @param SalableQtyBySku $salableQuantityDataBySku
      * @param TimezoneInterface $timezone
+     * @param GetSourceItemsBySkuInterface $sourceItemsBySku
+     * @param DynamicTagRules $dynamicTagRules
      * @param array $data
      */
     public function __construct(
+        DynamicTagRules $dynamicTagsRules,
+        InventoryBySourceHelper $inventoryBySourceHelper,
         ScopeConfigInterface $scopeConfig,
         ErrorFactory         $rateErrorFactory,
         LoggerInterface      $logger,
@@ -79,15 +93,19 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
         SalableQtyBySku      $salableQuantityDataBySku,
         TimezoneInterface    $timezone,
         GetSourceItemsBySkuInterface $sourceItemsBySku,
-        array                $data = []
+        DynamicTagRules              $dynamicTagRules,
+        array                        $data = []
     )
     {
+        $this->_dynamicTagsRules = $dynamicTagsRules;
+        $this->_inventoryBySource = $inventoryBySourceHelper;
         $this->_sourceItemsBySku = $sourceItemsBySku;
         $this->_rateResultFactory = $rateResultFactory;
         $this->_rateMethodFactory = $rateMethodFactory;
         $this->productRepository = $productRepository;
         $this->salableQuantityDataBySku = $salableQuantityDataBySku;
         $this->_timezone = $timezone;
+        $this->dynamicTagRules = $dynamicTagRules;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
@@ -107,16 +125,9 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
             /** @var \Magento\Quote\Model\Quote\Item $item */
             foreach ($request->getAllItems() as $item) {
-                $inventory = $this->_sourceItemsBySku->execute($item->getSku());
-                /** @var SourceItemInterface $source */
-                foreach ($inventory as $source) {
-                    if ($source->getSourceCode() == AbstractBopisCollection::DEFAULT_BOPIS_SOURCE_CODE) continue;
-
-                    if (!$source->getStatus()) continue;
-
-                    if ($source->getQuantity() < 2) {
-                        $cumpleReglasEnvioRapido = false;
-                    }
+                $labels = $this->_dynamicTagsRules->shippingLabelsByProductSku($item->getSku());
+                if(!$labels['fast']){
+                    $cumpleReglasEnvioRapido = false;
                 }
             }
 
@@ -133,7 +144,7 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
                     $method->setMethod($this->_code);
                     $method->setMethodTitle($this->getConfigData('name'));
-                    $method->setData('delivery_time',$this->getDeliveryTime());
+                    $method->setData('delivery_time', $this->getDeliveryTime());
 
                     $method->setPrice($shippingPrice);
                     $method->setCost($shippingPrice);
@@ -191,35 +202,35 @@ class EnvioRapido extends \Magento\Shipping\Model\Carrier\AbstractCarrier implem
 
         if(strtotime($horaActual) >= strtotime("0:00:00") && strtotime($horaActual) < strtotime("14:00:00")) {
             //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00
-            $textToShowInFront_Option1 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 12 a 4pm";
+            $textToShowInFront_Option1 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 12 a 4 pm";
             // La opcion que se deberá elegir en el Address Attribute es today__1200_1600
             $horarios_disponibles_Option1 = "today__1200_1600";
 
             //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00
-            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8pm";
+            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8 pm";
             // La opcion que se deberá elegir en el Address Attribute es today__1600_2000
             $horarios_disponibles_Option2 = "today__1600_2000";
         }
         elseif(strtotime($horaActual) >= strtotime("14:00:00") && strtotime($horaActual) < strtotime("18:00:00")){
             //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00
-            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4pm";
+            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4 pm";
             // La opcion que se deberá elegir en el Address Attribute es tomorrow__1200_1600
             $horarios_disponibles_Option1 = "tomorrow__1200_1600";
 
             //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00
-            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8pm";
+            $textToShowInFront_Option2 = "Tu pedido llegará HOY $todayNameDay $todayDay de $todayMonth en un rango de 4 a 8 pm";
             // La opcion que se deberá elegir en el Address Attribute es today__1600_2000
             $horarios_disponibles_Option2 = "today__1600_2000";
 
         }
         else{
             //OPCIÓN 1: Usuario selecciona de 12:00 a 16:00
-            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4pm";
+            $textToShowInFront_Option1 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 12 a 4 pm";
             // La opcion que se deberá elegir en el Address Attribute es tomorrow__1200_1600
             $horarios_disponibles_Option1 = "tomorrow__1200_1600";
 
             //OPCIÓN 2: Usuario selecciona de 16:00 a 20:00
-            $textToShowInFront_Option2 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 4 a 8pm";
+            $textToShowInFront_Option2 = "Tu pedido llegará MAÑANA $tomorrowNameDay $tomorrowDay de $tomorrowMonth en un rango de 4 a 8 pm";
             // La opcion que se deberá elegir en el Address Attribute es tomorrow__1600_2000
             $horarios_disponibles_Option2 = "tomorrow__1600_2000";
         }
