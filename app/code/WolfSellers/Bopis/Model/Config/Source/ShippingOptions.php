@@ -52,6 +52,11 @@ class ShippingOptions implements ArrayInterface
         return $result;
     }
 
+    /**
+     * Get Shipping Methods options
+     * @return array
+     * @todo Make disabling fast shipping in bopis configurable
+     */
     public function getOptions(): array
     {
         $options = [];
@@ -62,6 +67,8 @@ class ShippingOptions implements ArrayInterface
                 ? self::SUFFIX
                 : $deliveryCode] = $this->getAlias($deliveryCode);
         }
+
+        unset($options[AbstractBopisCollection::REGULAR_SHIPPING_METHOD]);
 
         return $options;
     }
