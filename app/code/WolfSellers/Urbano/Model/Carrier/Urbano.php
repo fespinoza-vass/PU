@@ -277,6 +277,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
     {
         $quoteService = [];
         $insurance = [];
+        $this->_logger->error("Urbano quotes to parse:\n" . print_r($quotes, true) . "\n");
         foreach ($quotes as $quote) {
             if (!isset($quote['id_servicio'])) {
                 continue;
@@ -292,6 +293,8 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
                 $insurance = $quote;
             }
         }
+        $this->_logger->error("Urbano \$quoteService:\n" . print_r($quoteService, true) . "\n");
+        $this->_logger->error("Urbano \$insurance:\n" . print_r($insurance, true) . "\n");
 
         if (!$quoteService) {
             return [];
