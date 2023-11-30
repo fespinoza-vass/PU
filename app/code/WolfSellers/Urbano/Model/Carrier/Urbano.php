@@ -56,6 +56,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
         $this->setRawRequest($request);
         $quotes = $this->getQuotes();
 
+        $this->_logger->error("Urbano quotes:\n" . print_r($quotes) . "\n");
         if (!$quotes) {
             $this->_logger->error('Urbano: Not quotes available');
 
