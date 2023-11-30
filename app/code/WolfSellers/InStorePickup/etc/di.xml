@@ -22,6 +22,6 @@
     </type>
 
     <type name="Magento\InventoryInStorePickupShippingApi\Model\Carrier\InStorePickup">
-        <plugin name="wolfsellers_in_store_label_activation" type="WolfSellers\InStorePickup\Plugin\CollectRatesPlugin" sortOrder="10" disabled="true"/>
+        <plugin name="wolfsellers_in_store_label_activation" type="WolfSellers\InStorePickup\Plugin\CollectRatesPlugin" sortOrder="10" disabled="false"/>
     </type>
 </config>

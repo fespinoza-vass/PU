@@ -34,20 +34,28 @@ class CollectRatesPlugin
                                          $result,
                                          $request
     ) {
-        $inStore = true;
         $items = $request->getAllItems();
+
+        $inStore = $this->hasOnlyFastItems($items);
+
+        return $inStore;
+    }
+
+
+    public function hasOnlyFastItems($items){
+        $inStore = false;
+
         foreach($items as $item){
             $labels = $this->_dynamicTagRules->shippingLabelsByProductSku($item->getSku());
-
-            if(!$labels['instore']){
-                $inStore = false;
+            if($labels['fast'] && $labels['instore']){
+                $inStore =  true;
+            }elseif(!$labels['fast'] && !$labels['instore']){
+                $inStore =  true;
+            }elseif(!$labels['fast'] && $labels['instore']){
+                $inStore =  true;
             }
         }
 
-        if(!$inStore){
-            return null;
-        }
-
-        return $result;
+        return $inStore;
     }
 }
