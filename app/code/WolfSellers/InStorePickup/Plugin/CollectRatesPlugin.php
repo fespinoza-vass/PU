@@ -38,7 +38,11 @@ class CollectRatesPlugin
 
         $inStore = $this->hasOnlyFastItems($items);
 
-        return $inStore;
+        if(!$inStore){
+            return null;
+        }
+
+        return $result;
     }
 
 
