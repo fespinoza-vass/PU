@@ -166,24 +166,52 @@ define([
          * Overwrite set shipping information action
          */
         setShippingInformation: function () {
-            if (!this.isFastShipping() && !this.isRegularShipping() && !this.isUrbanoShipping()){
-                if(!customer.isCustomerLoggedIn){
-                    quote.shippingMethod(null);
+            if (this.isUrbanoMethodConfigured() && this.isUrbanoShipping()){
+                if (!quote.shippingMethod().carrier_code.includes('urbano')){
+                    var rate = this.findRateByCarrierCode('urbano');
+                    if(rate !== undefined) {
+                        this.showShippingMethodError(rate);
+                        this.selectShippingMethod(rate);
+                    }
+                    if(!customer.isCustomerLoggedIn){
+                        quote.shippingMethod(null);
+                    }
+                    this.errorValidationMessage(
+                        $t('The shipping method is missing. Select the shipping method and try again.')
+                    );
+                    return false;
                 }
-                this.errorValidationMessage(
-                    $t('The shipping method is missing. Select the shipping method and try again.')
-                );
-                return false;
             }
-            var rate = this.findRateByCarrierCode('freeshipping');
-            if(rate !== undefined) {
-                this.showShippingMethodError(rate);
-                this.selectShippingMethod(rate);
-            } else {
-                var rate = this.findRateByCarrierCode('urbano');
-                if (rate !== undefined) {
-                    this.showShippingMethodError(rate);
-                    this.selectShippingMethod(rate);
+            if(this.isRegularMethodConfigured() && this.isRegularShipping()){
+                if (!quote.shippingMethod().carrier_code.includes('flatrate')){
+                    var rate = this.findRateByCarrierCode('flatrate');
+                    if(rate !== undefined) {
+                        this.showShippingMethodError(rate);
+                        this.selectShippingMethod(rate);
+                    }
+                    if(!customer.isCustomerLoggedIn){
+                        quote.shippingMethod(null);
+                    }
+                    this.errorValidationMessage(
+                        $t('The shipping method is missing. Select the shipping method and try again.')
+                    );
+                    return false;
+                }
+            }
+            if (this.isFastMethodConfigured() && this.isFastShipping()){
+                if (!quote.shippingMethod().carrier_code.includes('envio_rapido')){
+                    var rate = this.findRateByCarrierCode('envio_rapido');
+                    if(rate !== undefined) {
+                        this.showShippingMethodError(rate);
+                        this.selectShippingMethod(rate);
+                    }
+                    if(!customer.isCustomerLoggedIn){
+                        quote.shippingMethod(null);
+                    }
+                    this.errorValidationMessage(
+                        $t('The shipping method is missing. Select the shipping method and try again.')
+                    );
+                    return false;
                 }
             }
             if (customer.isCustomerStepFinished() === '_complete') {
@@ -256,25 +284,26 @@ define([
             return false
         },
         /**
-         * Set shipping method flatRate for regular shipping
+         * Set shipping method urbano for regular shipping
          */
         setUrbanoShipping: function () {
             if(!this.isUrbanoShippingDisabled()){
                 var departamentoRegular = registry.get("checkout.steps.shipping-step.shippingAddress.regular.departamento");
                 departamentoRegular.reset();
                 this.isRegularShipping(false);
-                this.isUrbanoShipping(true);
                 this.isFastShipping(false);
-                var rate = this.findRateByCarrierCode('urbano');
-                if(rate !== undefined) {
-                    this.showShippingMethodError(rate);
-                    this.selectShippingMethod(rate);
-                }
+                this.isUrbanoShipping(true);
                 this.updateShippingValidations();
                 this.isShippingMethodError(false);
                 return true;
             }
-            return false;
+            this.isShippingMethodError(true);
+            this.errorMessage('');
+            this.errorMessage('Tu pedido no puede ser procesado por Envío Regular.');
+            setTimeout(function () {
+                shippingMixin.isShippingMethodError(false);
+            }, 4000);
+            return false
         },
         /**
          * Set shipping method for fast shipping
@@ -293,7 +322,6 @@ define([
                 this.isRegularShipping(false);
                 this.isUrbanoShipping(false);
                 this.isFastShipping(true);
-                this.isUrbanoShipping(false);
                 this.selectShippingMethod(rate);
                 this.updateShippingValidations();
                 return true;
@@ -349,7 +377,7 @@ define([
                 return "Calculando...";
             }
             if (!carrier && methodType === "urbano" &&
-                    !this.isUrbanoShipping() && !this.isFastShipping() && !this.isRegularShipping()){
+                !this.isUrbanoShipping() && !this.isFastShipping() && !this.isRegularShipping()){
                 return "Calculando...";
             }
             return priceUtils.formatPrice(carrier.amount);
@@ -545,7 +573,7 @@ define([
             /**
              * Envio Urbano
              */
-            if(this.isRegularShipping() || this.isUrbanoShipping()){
+            if(this.isUrbanoShipping()){
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
                 wolfUtils.setUiComponentsArrayValidation(urbanoAddressPath, urbanoComponentsArea, newValidationConfig);
@@ -560,7 +588,7 @@ define([
             /**
              * Envio Regular
              */
-            if(this.isRegularShipping() || this.isUrbanoShipping()){
+            if(this.isRegularShipping()){
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(shippingAddressPath, regular, newValidationConfig);
                 wolfUtils.setUiComponentsArrayValidation(regularAddressPath, regularComponentsArea, newValidationConfig);

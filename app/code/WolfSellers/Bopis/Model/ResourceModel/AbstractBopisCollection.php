@@ -51,7 +51,7 @@ abstract class AbstractBopisCollection extends Collection
     const FAST_SHIPPING_METHOD = 'envio_rapido_envio_rapido';
 
     /** @var string  */
-    const REGULAR_SHIPPING_METHOD = 'flatrate';
+    const REGULAR_SHIPPING_METHOD = 'urbano';
 
     /** @var string  */
     const PICKUP_SHIPPING_METHOD = 'instore_pickup';
@@ -220,6 +220,10 @@ abstract class AbstractBopisCollection extends Collection
                 if ($sql) $this->getSelect()->where($sql);
             }
         }
+
+        // General Conditions
+        $this->getSelect()->where("(so.shipping_method NOT LIKE '%" . self::REGULAR_SHIPPING_METHOD . "%')");
+
 
         /*if ($userType == 2 && is_numeric($websiteId) && $websiteId > 0) {
 

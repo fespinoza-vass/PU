@@ -126,11 +126,14 @@ define([
                 if(provincia.length >= 3){
                     provincia = provincia.charAt(0).toUpperCase() + provincia.slice(1).toLowerCase();
                 }
+                return shippingPayment.direccion() +split+ distrito +split+
+                    departamento +split+ provincia;
             }
             if (shippingPayment.shippingMethod().includes("rapido")){
                 if(distrito.length >= 3){
                     distrito = distrito.charAt(0).toUpperCase() + distrito.slice(1).toLowerCase();
                 }
+                return shippingPayment.direccion() +split+ distrito;
             }
             return shippingPayment.direccion() +split+ distrito +split+
                 departamento +split+ provincia;
