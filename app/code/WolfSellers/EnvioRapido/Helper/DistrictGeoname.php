@@ -289,9 +289,7 @@ class DistrictGeoname extends AbstractHelper
                 }
             }else{
                 $this->_savarLogger->info("METHOD assignSourceToOrder, order:  ".
-                    $order->getIncrementId(). " NO fue posible asignar una sucursal con stock " . $sources[0]['source_code'] .
-                    " se le asigno a la sucursal " . $sources[0]['source_code'] .
-                    " activando la bandera needs_supply_instore"
+                    $order->getIncrementId(). " NO fue posible asignar una sucursal" . " NO HAY SOURCES QUE CUMPLAN LOS RANGOS DE DISTRANCIA"
                 );
             }
 
