@@ -360,7 +360,7 @@ define([
          * @returns {*|boolean}
          */
         getCarrierCodeByCarrier: function (carrierCode) {
-            if (_.isEmpty(this.rates())){
+            if (_.isEmpty(this.rates()) || carrierCode === undefined){
                 return false;
             }
             var carrier = _.find(this.rates(),function(rate) {
