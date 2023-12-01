@@ -714,7 +714,28 @@ define([
                 newValidationConfig['required-entry'] = true;
                 wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
             }
-        }
+        },
+
+        /**
+         *
+         */
+        updateShippingTimeMessage: function () {
+            var shippingSettings = window.checkoutConfig.shippingSettings || {};
+            var selectedDistrict = shippingPayment.distrito();
+
+            var openingConfig;
+
+            if (shippingSettings.openings_1 && shippingSettings.openings_1.configuredLocations.toUpperCase().split(',').includes(selectedDistrict.toUpperCase())) {
+                openingConfig = shippingSettings.openings_1;
+            } else if (shippingSettings.openings_2 && shippingSettings.openings_2.configuredLocations.toUpperCase().split(',').includes(selectedDistrict.toUpperCase())) {
+                openingConfig = shippingSettings.openings_2;
+            } else {
+                openingConfig = shippingSettings.openings_1 || {};
+            }
+
+            this.shippingTimeMessage(openingConfig.deliveryTimeMessage || $t('Información de entrega no disponible'));
+        },
+
     }
 
     return function(shippingTarget){

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/config.xsd">
+    <default>
+        <regular_shipping>
+            <openings_1>
+                <location><![CDATA[ANCÓN,CHACLACAYO,CIENEGUILLA,LURIGANCHO,LURÍN,PACHACAMAC,PUCUSANA,PUENTE PIEDRA,PUNTA HERMOSA,PUNTA NEGRA,SAN BARTOLO,SANTA MARÍA DEL MAR,SANTA ROSA]]></location>
+                <sending_hours><![CDATA[Lunes, Miércoles y Viernes, desde las 8 am hasta las 7 pm]]></sending_hours>
+                <delivery_time_message><![CDATA[Hasta 3 días hábiles de acuerdo al distrito seleccionado]]></delivery_time_message>
+                <rest_sending_hours><![CDATA[De lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am hasta las 2 pm.]]></rest_sending_hours>
+                <rest_delivery_time_message><![CDATA[5 a 15 días hábiles de acuerdo a la provincia y distrito de la entrega]]></rest_delivery_time_message>
+            </openings_1>
+
+            <openings_2>
+                <location><![CDATA[LIMA, ATE, BARRANCO, BREÑA, CARABAYLLO, CHORRILLOS, COMAS, EL AGUSTINO, INDEPENDENCIA, JESUS MARÍA, LA MOLINA, LA VICTORIA, LINCE, LOS OLIVOS, MAGDALENA DEL MAR, PUEBLO LIBRE, MIRAFLORES, RIMAC, SAN BORJA, SAN ISIDRO, SJL, SUM, SAN LUIS, SMP, SAN MIGUEL, SANTA ANITA, SANTIAGO DE SURCO, SURQUILLO, VES, VMT, CALLAO]]></location>
+                <sending_hours><![CDATA[De lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am hasta las 2 pm]]></sending_hours>
+                <delivery_time_message><![CDATA[Hasta 3 días hábiles de acuerdo al distrito seleccionado.]]></delivery_time_message>
+                <rest_sending_hours><![CDATA[De lunes a viernes, desde las 8 am hasta las 7 pm y sábados desde las 8 am hasta las 2 pm.]]></rest_sending_hours>
+                <rest_delivery_time_message><![CDATA[5 a 15 días hábiles de acuerdo a la provincia y distrito de la entrega]]></rest_delivery_time_message>
+            </openings_2>
+        </regular_shipping>
+    </default>
+</config>
