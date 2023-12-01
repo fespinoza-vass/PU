@@ -2,13 +2,11 @@ define([
     'jquery',
     'underscore',
     'WolfSellers_Checkout/js/model/customer',
-    'Magento_Checkout/js/model/quote',
     'WolfSellers_Checkout/js/model/shipping-payment'
 ], function (
     $,
     _,
     customer,
-    quote,
     shippingPayment
 ) {
     'use strict';
@@ -53,15 +51,6 @@ define([
                 payloadEnvioUrbano.distrito = shippingPayment.distrito();
                 payloadEnvioUrbano.direccion = shippingPayment.direccion();
                 payloadEnvioUrbano.referencia = shippingPayment.referencia();
-
-                if (quote.getTotals()().grand_total >= 299) {
-                    payload.shipping_method_code =  "freeshipping";
-                    payload.shipping_carrier_code =  "freeshipping";
-                }else{
-                    payload.shipping_method_code =  "urbano";
-                    payload.shipping_carrier_code =  "terrestre";
-                }
-
             }
             if (shippingPayment.shippingMethod() === 'flat'){
                 payloadEnvioRegular.metodo_envio = shippingPayment.shippingMethod();
