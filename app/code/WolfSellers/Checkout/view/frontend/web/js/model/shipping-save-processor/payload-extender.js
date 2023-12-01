@@ -54,9 +54,14 @@ define([
                 payloadEnvioUrbano.direccion = shippingPayment.direccion();
                 payloadEnvioUrbano.referencia = shippingPayment.referencia();
 
-                if (quote.getTotals()().grand_total >= 299) {
-                    payload.shipping_method_code =  "freeshipping";
-                    payload.shipping_carrier_code =  "freeshipping";
+                if(payloadEnvioUrbano.provincia  === "CALLAO" || payloadEnvioUrbano.provincia ===  "LIMA"){
+                    if (quote.getTotals()().grand_total >= 299) {
+                        payload.shipping_method_code =  "freeshipping";
+                        payload.shipping_carrier_code =  "freeshipping";
+                    }else{
+                        payload.shipping_method_code =  "urbano";
+                        payload.shipping_carrier_code =  "terrestre";
+                    }
                 }else{
                     payload.shipping_method_code =  "urbano";
                     payload.shipping_carrier_code =  "terrestre";
