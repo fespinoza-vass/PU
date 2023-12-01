@@ -166,52 +166,24 @@ define([
          * Overwrite set shipping information action
          */
         setShippingInformation: function () {
-            if (this.isUrbanoMethodConfigured() && this.isUrbanoShipping()){
-                if (!quote.shippingMethod().carrier_code.includes('urbano')){
-                    var rate = this.findRateByCarrierCode('urbano');
-                    if(rate !== undefined) {
-                        this.showShippingMethodError(rate);
-                        this.selectShippingMethod(rate);
-                    }
-                    if(!customer.isCustomerLoggedIn){
-                        quote.shippingMethod(null);
-                    }
-                    this.errorValidationMessage(
-                        $t('The shipping method is missing. Select the shipping method and try again.')
-                    );
-                    return false;
+            if (!this.isFastShipping() && !this.isRegularShipping() && !this.isUrbanoShipping()){
+                if(!customer.isCustomerLoggedIn){
+                    quote.shippingMethod(null);
                 }
+                this.errorValidationMessage(
+                    $t('The shipping method is missing. Select the shipping method and try again.')
+                );
+                return false;
             }
-            if(this.isRegularMethodConfigured() && this.isRegularShipping()){
-                if (!quote.shippingMethod().carrier_code.includes('flatrate')){
-                    var rate = this.findRateByCarrierCode('flatrate');
-                    if(rate !== undefined) {
-                        this.showShippingMethodError(rate);
-                        this.selectShippingMethod(rate);
-                    }
-                    if(!customer.isCustomerLoggedIn){
-                        quote.shippingMethod(null);
-                    }
-                    this.errorValidationMessage(
-                        $t('The shipping method is missing. Select the shipping method and try again.')
-                    );
-                    return false;
-                }
-            }
-            if (this.isFastMethodConfigured() && this.isFastShipping()){
-                if (!quote.shippingMethod().carrier_code.includes('envio_rapido')){
-                    var rate = this.findRateByCarrierCode('envio_rapido');
-                    if(rate !== undefined) {
-                        this.showShippingMethodError(rate);
-                        this.selectShippingMethod(rate);
-                    }
-                    if(!customer.isCustomerLoggedIn){
-                        quote.shippingMethod(null);
-                    }
-                    this.errorValidationMessage(
-                        $t('The shipping method is missing. Select the shipping method and try again.')
-                    );
-                    return false;
+            var rate = this.findRateByCarrierCode('freeshipping');
+            if(rate !== undefined) {
+                this.showShippingMethodError(rate);
+                this.selectShippingMethod(rate);
+            } else {
+                var rate = this.findRateByCarrierCode('urbano');
+                if (rate !== undefined) {
+                    this.showShippingMethodError(rate);
+                    this.selectShippingMethod(rate);
                 }
             }
             if (customer.isCustomerStepFinished() === '_complete') {
