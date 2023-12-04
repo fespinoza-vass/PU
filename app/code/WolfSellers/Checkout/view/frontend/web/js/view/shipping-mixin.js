@@ -50,7 +50,8 @@ define([
             },
             imports: {
                 "ubigeo":"checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.postcode:value",
-                "isStorePickUpSelected": "checkout.steps.store-pickup:isStorePickupSelected"
+                "isStorePickUpSelected": "checkout.steps.store-pickup:isStorePickupSelected",
+                "currentDistrito": "checkout.steps.shipping-step.shippingAddress.urbano.distrito:value"
             }
         },
         isFormInline: true,
@@ -75,7 +76,8 @@ define([
         isFastMethodConfigured: ko.observable(true),
         isStorePickUpSelected: ko.observable(false),
         isDebuggEnable: ko.observable(false),
-
+        currentDistrito: ko.observable(false),
+        shippingTimeMessage: ko.observable(false),
         initialize: function () {
             this._super();
             var modifyData= {
@@ -158,6 +160,11 @@ define([
                     }
                 }
                 if(this.isDebuggEnable())console.log(value);
+            },this);
+            this.currentDistrito.subscribe(function (value) {
+                if (!_.isUndefined(value)){
+                    this.updateShippingTimeMessage(value);
+                }
             },this);
             this.createInformationModals();
             return this;
@@ -715,13 +722,12 @@ define([
                 wolfUtils.setUiComponentsArrayValidation(fastAddressPath, fastComponentsArea, newValidationConfig);
             }
         },
-
         /**
          *
          */
-        updateShippingTimeMessage: function () {
+        updateShippingTimeMessage: function (currentDistrict) {
             var shippingSettings = window.checkoutConfig.shippingSettings || {};
-            var selectedDistrict = shippingPayment.distrito();
+            var selectedDistrict = currentDistrict;
 
             var openingConfig;
 
