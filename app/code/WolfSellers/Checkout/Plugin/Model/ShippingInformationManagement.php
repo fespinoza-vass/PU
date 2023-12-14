@@ -79,7 +79,7 @@ class ShippingInformationManagement
         }
 
         // atributos de envio rapido
-        if($extensionAttributes->getEnvioRapido()->getDistrito() || $extensionAttributes->getEnvioUrbano()->getDistrito()){
+        if($extensionAttributes->getEnvioRapido()->getDistrito()){
 
             $extension = $this->_addressExtensionFactory->create();
 
@@ -101,6 +101,36 @@ class ShippingInformationManagement
             $quote->getShippingAddress()->setData('colony',$extensionAttributes->getEnvioRapido()->getDistrito());
             $quote->getShippingAddress()->setCustomAttribute('colony',$extensionAttributes->getEnvioRapido()->getDistrito());
 
+
+            $quote->save();
+        }
+
+        if($extensionAttributes->getEnvioUrbano()->getDistrito()){
+
+            $extension = $this->_addressExtensionFactory->create();
+
+            $extension->setData('referencia_envio',$extensionAttributes->getEnvioUrbano()->getReferencia());
+
+            $quote->getBillingAddress()->setExtensionAttributes($extension);
+            $quote->getShippingAddress()->setExtensionAttributes($extension);
+
+            $quote->getShippingAddress()->setData('colony',$extensionAttributes->getEnvioUrbano()->getDistrito());
+            $quote->getShippingAddress()->setCustomAttribute('colony',$extensionAttributes->getEnvioUrbano()->getDistrito());
+
+            $quote->save();
+        }
+
+        if($extensionAttributes->getEnvioRegular()->getDistrito()){
+
+            $extension = $this->_addressExtensionFactory->create();
+
+            $extension->setData('referencia_envio',$extensionAttributes->getEnvioRegular()->getReferencia());
+
+            $quote->getBillingAddress()->setExtensionAttributes($extension);
+            $quote->getShippingAddress()->setExtensionAttributes($extension);
+
+            $quote->getShippingAddress()->setData('colony',$extensionAttributes->getEnvioRegular()->getDistrito());
+            $quote->getShippingAddress()->setCustomAttribute('colony',$extensionAttributes->getEnvioRegular()->getDistrito());
 
             $quote->save();
         }
