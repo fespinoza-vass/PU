@@ -26,7 +26,7 @@
                     <span class="step-content_price" data-bind="text: getPriceLabel('urbano')"></span>
                     <input type="radio" id="envio_urbano" name="opciones" value="regular" attr="{checked: isUrbanoShipping}">
                     <label class="step-content_input-urbano" for="envio_urbano"></label>
-                <span class="step-content_info" data-bind="text: shippingTimeMessage"></span>
+                <span class="step-content_info" data-bind="html: shippingTimeMessage"></span>
                 <a href="#" data-bind="click: showRSInformation, clickBubble: false">Conoce más aquí</a>
             </div>
         </div>
@@ -87,8 +87,7 @@
             <span class="step-content_regular-icon"></span>
             <p class="shipping-time-label-uno">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2 pm</span></p>
             <p class="shipping-time-label-dos" style="display: none;"><span>Lunes, Miércoles y Viernes</span>, desde las<span>8 am hasta las 7 pm</span></p>
-            <p class="shipping-time-label-tres" style="display: none;">De <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2 pm</span>.
-                Con un tiempo de entrega de <span>5 a 15 días</span> de acuerdo a la <span>provincia y distrito</span> de la entrega.</p>
+            <p class="shipping-time-label-tres" style="display: none;">Horario de entrega de <span>lunes a viernes</span> desde las <span>8 am hasta las 7 pm</span> y <span>sábados</span> desde las <span>8 am hasta las 2 pm</span>.</p>
         </div>
     </div>
     <!-- /ko -->

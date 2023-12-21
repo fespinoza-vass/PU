@@ -77,7 +77,7 @@ define([
         isStorePickUpSelected: ko.observable(false),
         isDebuggEnable: ko.observable(false),
         currentDistrito: ko.observable(false),
-        shippingTimeMessage: ko.observable(false),
+        shippingTimeMessage: ko.observable("<br>"),
         initialize: function () {
             this._super();
             var modifyData= {
