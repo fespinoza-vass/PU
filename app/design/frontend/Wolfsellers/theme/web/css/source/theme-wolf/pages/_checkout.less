@@ -1243,7 +1243,7 @@
 									font-weight: 600;
 								}
 								&_info{
-									width: 100%;
+									width: 100% !important; //style added by inline style
 									display: block;
 									width: auto;
 									.lib-font-size(12);
@@ -1262,7 +1262,14 @@
 									top: 25px;
 									left: 0;
 								}
-
+							}
+							a{
+								display: inherit;
+								.lib-font-size(12);
+								color: @color-black;
+								text-decoration: underline;
+								font-weight: 600;
+								padding-left: 30px;
 							}
 						}
 						#checkout-step-shipping_method-regular,
@@ -1294,6 +1301,11 @@
 										@_icon-font-position: before,
 										@_icon-font-margin: 0 5px 0 0
 									);
+								}
+								&_info{
+									a{
+										padding-left: 0;
+									}
 								}
 							}
 						}
@@ -3429,6 +3441,9 @@
 								a{
 									.lib-font-size(10);
 								}
+							}
+							a{
+								.lib-font-size(10);
 							}
 						}
 					}
