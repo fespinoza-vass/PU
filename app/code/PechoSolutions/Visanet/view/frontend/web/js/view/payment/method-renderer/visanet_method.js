@@ -124,7 +124,7 @@ define(
                                merchantlogo : window.checkoutConfig.payment.visanet_pay.upload_image,
                                merchantname : '',
                                formbuttoncolor : window.checkoutConfig.payment.visanet_pay.vex_formbuttoncolor,
-                               hidexbutton:"true",
+                               hidexbutton:'true',
                                showamount : vex_show,
                                cardholdername : '',
                                cardholderlastname : '',
