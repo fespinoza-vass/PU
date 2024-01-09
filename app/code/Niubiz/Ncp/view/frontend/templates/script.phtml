@@ -1,0 +1,11 @@
+<?php
+$helperConfig = $this->helper('Niubiz\Ncp\Helper\Data');
+$debug = $helperConfig->getConfig('payment/Ncp_pay/NcpConfiguracion/debug');
+
+if ($debug==1){
+$ambiente = 'dev';
+echo "<script src=\"https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true\"></script>";
+}else{
+$ambiente = 'prd';
+    echo "<script src=\"https://static-content.vnforapps.com/v2/js/checkout.js\"></script>";
+}
