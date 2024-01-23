@@ -36,8 +36,12 @@ class OrderRepositoryPlugin
         try{
             $billingAddress = $order->getBillingAddress();
             $billingAddressExtensionAttributes = $billingAddress->getExtensionAttributes();
-            $billingAddressExtensionAttributes->setColony($billingAddress->getColony());
-            $billingAddressExtensionAttributes->setReferenciaEnvio($billingAddress->getReferenciaEnvio());
+            $billingAddressExtensionAttributes->setColony($billingAddress->getColony()??"");
+            $billingAddressExtensionAttributes->setReferenciaEnvio($billingAddress->getReferenciaEnvio()??"");
+            $billingAddressExtensionAttributes->setRuc($billingAddress->getRuc()??"");
+            $billingAddressExtensionAttributes->setRazonSocial($billingAddress->getRazonSocial()??"");
+            $billingAddressExtensionAttributes->setIdentificacion($order->getCustomerIdenficacion()=="868" ? "DNI" : "Pasaporte");
+
 
             $shippingAddress = $order->getShippingAddress();
 
