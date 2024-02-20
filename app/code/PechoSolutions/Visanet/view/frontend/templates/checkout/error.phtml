@@ -33,7 +33,7 @@ $currencyDesc=$block->getCurrencyCode();
 
     <?php } ?>
         <div style="padding: 20px 0;">
-            <a href="<?PHP echo $block->getBaseUrl().'checkout/#payment' ?>" class="btn_regresar_a_comprar"> Volver a intentar </a>
+            <a href="<?PHP echo $block->getBaseUrl().'checkout/#payment' ?>" class="btn_regresar_a_comprar"> <- Volver a intentar </a>
         </div>
         <div class="pedido-numero">
             <a href=""> Número de pedido: <span style="margin-left: 5px;"> #<?PHP echo $block->escapeHtml($block->getQuoteId()); ?> </span> </a>
@@ -41,11 +41,13 @@ $currencyDesc=$block->getCurrencyCode();
 
         <div class="pedido-items">
             <table>
-                <tr class="pedido_header header_titles">
+                <tr class="pedido_header">
                     <td width="80" align="center">
-                        Producto
+                        #
                     </td>
-                    <td width="250"></td>
+                    <td width="250">
+                        Item
+                    </td>
                     <td width="100" align="center">
                         Cantidad
                     </td>
@@ -92,7 +94,7 @@ $currencyDesc=$block->getCurrencyCode();
                             <img src="<?=$image_url?>" width="75" height="75" alt="">
                         </td>
                         <td width="250">
-                            <div class="name_product">
+                            <div>
                                 <?php echo $item->getName(); ?>
                             </div>
                             <div>
@@ -114,9 +116,9 @@ $currencyDesc=$block->getCurrencyCode();
 
                 ?>
 
-                <tr class="pedido_header sub_total">
+                <tr class="pedido_header">
                     <td colspan="2"></td>
-                    <td align="right"> SubTotal: </td>
+                    <td align="right"> Sub Total: </td>
                     <td align="center"><?PHP echo $currencyCode.number_format($quote->getSubtotal(),2);  ?></td>
                 </tr>
 
@@ -227,7 +229,7 @@ $currencyDesc=$block->getCurrencyCode();
 
         </div>
 
-        <div class="btn-print">
+        <div class="">
                 <input class="btn btn-default" type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
 
         </div>

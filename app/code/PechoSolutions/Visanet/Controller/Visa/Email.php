@@ -14,7 +14,7 @@ use PechoSolutions\Visanet\Model\Library\Visanet;
 
 class Email extends \Magento\Framework\App\Action\Action {
 
-    protected $config;
+    protected $scopeConfig;
     private $encryptor;
     protected $checkoutSession;
     protected $resultJsonFactory;
@@ -38,6 +38,12 @@ class Email extends \Magento\Framework\App\Action\Action {
 
 
     public function execute() {
+
+	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend_Log();
+        $logger->addWriter($writer);
+        $logger->info("Email Controller");
+
         $response = new \Magento\Framework\DataObject();
         if (isset($_POST['email'])){
             $this->checkoutSession->setGuestEmail($_POST['email']);
