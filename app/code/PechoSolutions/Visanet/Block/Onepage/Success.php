@@ -110,8 +110,8 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getCurrencyCode()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        $logger = new \Zend\Log\Logger();
+	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend_Log();
         $logger->addWriter($writer);
         $logger->info("Currency Code");
         $logger->info($this->_storeManagerInterface->getStore()->getBaseCurrencyCode());
@@ -126,8 +126,8 @@ class Success extends \Magento\Framework\View\Element\Template
      */
     public function getCurrency()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        $logger = new \Zend\Log\Logger();
+	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend_Log();
         $logger->addWriter($writer);
         $logger->info("Currency jp");
         $logger->info($this->currency->getCurrencySymbol());

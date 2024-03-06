@@ -1,6 +1,5 @@
 <?php
 
-
 namespace PechoSolutions\Visanet\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
@@ -60,10 +59,9 @@ class AdditionalConfigProvider implements ConfigProviderInterface
      */
     public function getConfig()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        $logger = new \Zend\Log\Logger();
+	    $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
+        $logger = new \Zend_Log();
         $logger->addWriter($writer);
-
 
         $media_dir = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
         $grandTotal = $this->cart->getQuote()->getGrandTotal();
