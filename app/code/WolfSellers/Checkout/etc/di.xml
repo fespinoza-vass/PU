@@ -81,4 +81,9 @@
             </argument>
         </arguments>
     </type>
+    <type name="PechoSolutions\Visanet\Controller\Visa\Web">
+        <plugin name="pechosolutions_visanet_web_tracking"
+                type="WolfSellers\Checkout\Payment\Plugin\VisanetWebTracking"
+                sortOrder="20"/>
+    </type>
 </config>
