@@ -67,4 +67,18 @@
     <preference for="WolfSellers\Checkout\Api\Data\RetiroTiendaInterface" type="WolfSellers\Checkout\Model\RetiroTienda"/>
 
     <preference for="\Magento\InventoryInStorePickupQuote\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule" type="WolfSellers\Checkout\Model\Quote\ValidationRule\InStorePickupQuoteValidationRule"/>
+
+    <type name="WolfSellers\Checkout\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\Checkout\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">WOLF-CHECKOUT</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">WolfSellers\Checkout\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
