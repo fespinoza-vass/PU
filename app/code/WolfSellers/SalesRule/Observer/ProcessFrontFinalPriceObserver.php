@@ -24,6 +24,8 @@ use Magento\SalesRule\Model\RuleFactory as SalesRuleFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory as RulesCollectionFactory;
 use Magento\Catalog\Model\Product;
+use Magento\Quote\Api\CartRepositoryInterface;
+use WolfSellers\Checkout\Logger\Logger;
 
 
 /**
@@ -67,6 +69,15 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
     /** @var ResourceSalesRuleFactory */
     private ResourceSalesRuleFactory $resourceSalesRuleFactory;
 
+    /** @var CartRepositoryInterface */
+    protected CartRepositoryInterface $quoteRepository;
+
+    /** @var bool */
+    protected bool $hasOriginalPriceEnabled;
+
+    /** @var Logger */
+    private Logger $logger;
+
     /**
      * @param RulePricesStorage $rulePricesStorage
      * @param ResourceRuleFactory $resourceRuleFactory
@@ -79,6 +90,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
      * @param RulesCollectionFactory $salesRuleCollectionFactory
      * @param Product $itemProduct
      * @param ResourceSalesRuleFactory $resourceSalesRuleFactory
+     * @param CartRepositoryInterface $quoteRepository
+     * @param Logger $logger
      */
     public function __construct(
         RulePricesStorage $rulePricesStorage,
@@ -91,7 +104,9 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         SalesRuleFactory $salesRuleFactory,
         RulesCollectionFactory $salesRuleCollectionFactory,
         Product $itemProduct,
-        ResourceSalesRuleFactory $resourceSalesRuleFactory
+        ResourceSalesRuleFactory $resourceSalesRuleFactory,
+        CartRepositoryInterface $quoteRepository,
+        Logger $logger
     ) {
         $this->rulePricesStorage = $rulePricesStorage;
         $this->resourceRuleFactory = $resourceRuleFactory;
@@ -104,6 +119,9 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         $this->_salesRuleCollectionFactory = $salesRuleCollectionFactory;
         $this->_itemProduct = $itemProduct;
         $this->resourceSalesRuleFactory = $resourceSalesRuleFactory;
+        $this->logger = $logger;
+        $this->quoteRepository = $quoteRepository;
+        $this->hasOriginalPriceEnabled = $this->hasCouponOriginalPrice();
     }
 
     /**
@@ -146,10 +164,11 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         }
 
         if (false !== $this->rulePricesStorage->getRulePrice($key)) {
-            $finalPrice = min($product->getData('final_price'), $this->rulePricesStorage->getRulePrice($key));
 
-            if ($this->hasCouponOriginalPrice()) {
+            if ($this->hasOriginalPriceEnabled) {
                 $finalPrice = max($product->getData('final_price'), $this->rulePricesStorage->getRulePrice($key));
+            }else{
+                $finalPrice = min($product->getData('final_price'), $this->rulePricesStorage->getRulePrice($key));
             }
 
             if ($this->hasRuleFromProduct($pId)) {
@@ -170,7 +189,12 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
     private function hasCouponOriginalPrice(): bool
     {
         try {
-            $couponCode = $this->checkoutSession->getQuote()->getCouponCode();
+            //Using the GetQuote function of checkoutSession calls the function $quote->collectTotals()
+            // which creates an infinite loop for this observer.
+            //Change checkoutSession->getQuote() to get quote data from quoteRepository
+
+            //$couponCode = $this->checkoutSession->getQuote()->getCouponCode();
+            $couponCode = $this->getCurrentCouponCode();
 
             if (empty($couponCode)) {
                 return false;
@@ -181,7 +205,8 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
             $this->resourceSalesRuleFactory->create()->load($salesRule, $ruleId);
 
             return (bool) $salesRule->getData('apply_original_price');
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            $this->logger->error($e->getMessage());
             return false;
         }
     }
@@ -263,5 +288,19 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         }
 
         return (bool) $validate;
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    private function getCurrentCouponCode(): mixed
+    {
+        $quoteId = $this->checkoutSession->getQuoteId();
+
+        /** @var Magento\Quote\Api\Data\CartInterface $quote */
+        $quote = $this->quoteRepository->get($quoteId);
+
+        return $quote->getCouponCode() ?? "";
     }
 }
