@@ -1,0 +1,26 @@
+<!--
+    Amasty MegaMenu item icon template
+
+    @param {Object} item
+    @param {String} additionalClasses
+    @param {Boolean} toggle - is toggle icon
+    @param {String} color
+    @param {Object} event
+    @param {String} icon_template
+-->
+
+<!-- ko scope: 'index = ammenu_wrapper' -->
+    <figure if="$parent.item && $parent.item.icon"
+            data-bind="
+                attr: {
+                    class: 'ammenu-icon-block ' + ($parent.additionalClasses ? $parent.additionalClasses : '-icon')
+                },
+                style: {
+                    '-webkit-mask-image': 'url(' + $parent.item.icon + ')',
+                    'maskImage': 'url(' + $parent.item.icon + ')',
+                    'background-color': $parent.color ? $parent.color : $parent.item.color,
+                    'background-image': $parent.item.icon_extension !== 'png' ? 'url(' + $parent.item.icon + ')' : false
+                },
+                event: $parent.event">
+    </figure>
+<!-- /ko -->

@@ -1,0 +1,16 @@
+<!-- ko scope: 'index = ammenu_hamburger_toggle' -->
+    <button class="ammenu-button -icon -close"
+            type="button"
+            aria-controls="ammenu-sidebar"
+            data-bind="
+                style: {
+                    color: color_settings.toggle_icon_color
+                },
+                event: {
+                    click: toggling
+                },
+                attr: {
+                    title: $t('Close menu')
+                }">
+    </button>
+<!-- /ko -->

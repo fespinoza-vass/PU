@@ -1,0 +1,523 @@
+& when (@media-common = true) {
+	.cms-perfect-inc .page-wrapper{
+		.breadcrumbs{
+			display: none;
+		}
+		.slider-perfect	{
+			position: relative;
+			.slick-slide{
+				position: relative;
+				.pagebuilder-slide-wrapper{
+					@media @mdmin{
+						padding-bottom: 38.1%;
+					}
+					@media @mdmax{
+						background-size: 100% !important;
+						padding-bottom: 122%;
+					}
+					.pagebuilder-overlay{
+						.pagebuilder-poster-content{
+							position: absolute;
+							float: left;
+							width: 100%;
+							max-width: 460px;
+							z-index: 10;
+							@media @mdmin{
+								right: 6%;
+								top: 10%;
+							}
+							@media @mdmax{
+								left: 0;
+								bottom: 60px;
+								padding: 0 20px;
+								> div[data-element="content"]{
+									a{
+										padding: 10px;
+										font-size: 2.2rem;
+										span,
+										strong{
+											float: left;
+											width: 100%;
+											text-align: center;
+										}
+									}
+								}
+							}
+							> div{
+								overflow: initial;
+								@media @mdmax{
+									strong{
+										float: left;
+										padding: 0 30px;
+										span{
+											font-size: 2.2rem !important;
+										}
+									}
+								}
+								a{
+									padding: 20px;
+									border-radius: @radiusitems;
+									background: @black;
+									color: @white;
+									font-size: 1.8rem;
+									font-weight: bold;
+									float: left;
+									width: 100%;
+									max-width: 342px;
+									text-align: center;
+									margin-top: 20px;
+									@media @mdmin{
+										&:hover{
+											background: @a-hovers;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			.slick-dots{
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				bottom: 10px;
+			}
+		}
+	}
+
+	.cms-simulador{
+		.slick-track, .slick-track {
+			min-width: 100%;
+		}
+		.field{
+			&.fb-text{
+				&.form-group{
+					&.field-textinput-formid,&.field-textinput-skinhealth{
+						&.amform-layout-one {
+							display: none !important;
+						}
+					}
+				}
+			}
+		}
+		.pagebuilder-column-group{
+			background: @white;
+			.pagebuilder-column{
+				h2{
+					font-weight: bold;
+				}
+				[data-content-type="html"]{
+					padding: 0px 0px 10px;
+
+					button{
+						.lib-font-size(14);
+						background: @black;
+						font-weight: bold;
+						padding: 10px;
+						color: @white;
+						width: 100%;
+					}
+				}
+				div{
+					p{
+						align-items: center;
+						display: flex;
+
+						img{
+							margin: 0 30px 0 0;
+							width: 50px;
+						}
+					}
+				}
+			}	
+		}
+
+		.perfect-inc{
+			 .pagebuilder-column-group{
+				border-radius: @radiusitems;
+				.pagebuilder-column{	
+					align-items: center;
+				    justify-content: center !important; //PageBuilder importants
+				    float: left;
+				    h2{
+				    	margin: 0 0 30px 0;
+				    }
+				    > [data-content-type="html"]{
+				    	padding: 50px 10px 10px;
+				    	text-align: center;
+				    	.skin-care-content{
+				    		button{
+				    			max-width: 200px;
+				    			&.analysis-updated{
+				    				margin-top: 15px;	
+				    			}
+				    		}
+				    	}		
+				    }
+				    &.skin-care-recomendations{
+						display: flex;
+				    	align-items: start;
+						padding: 20px;
+						.pagebuilder-column{
+							align-items: start;
+						}
+				    	> div{
+				    		float: left;
+				    		width: 100%;
+				    		.skin-care-results{
+				    			.pagebuilder-column-group{
+				    				justify-content: space-between;
+									.pagebuilder-column{
+										justify-content: normal !important; //PageBuilder Importants
+									}
+				    				.result-item{
+				    					width: 50% !important; //PageBuilder importants
+				    					&:not(:last-child){
+				    						margin-right: 15px;
+				    					}
+				    					[data-content-type="text"]{
+				    						@media @mdmax{
+				    							margin-bottom: 20px;
+				    						}
+				    						p{
+				    							margin-top: 20px;
+				    							font-size: 1.4rem;	
+				    							font-weight: normal;
+				    							&:not(:last-child){
+				    								display: none;
+				    							}
+				    						}
+				    						.skin-care-bar{
+				    							padding: 20px 10px 15px 10px;
+				    							border-radius: @radiusitems;
+				    							border: 1px solid @black;
+				    							position: relative;
+				    							white-space: nowrap;
+				    							font-size: 1.6rem;	
+				    							font-weight: normal;
+				    							.cont-percentage{
+				    								position: absolute;
+			    								    left: -10px;
+			    								    top: -11px;
+			    								    background: @white;
+			    								    padding: 0 10px;
+				    							}
+				    							.bar{
+				    								background: @lines-input;
+				    								.bar-percentage{
+				    									background: @primary;
+				    									height: 15px;
+				    									position: relative;
+				    									width: 0%;
+				    								}
+				    							}
+				    						}
+				    					}
+				    				}
+				    			}
+				    		}
+				    	}
+				    }		
+				}
+			}
+		}
+
+		.result-slider{
+			&.slider-skinAge{
+				&.formulario{
+					padding: 20px;
+					.pagebuilder-column-group{
+						background: transparent;
+
+						.pagebuilder-column{
+							&:first-child{
+								background: rgba(255, 255, 255, .70);
+								border-radius: 8px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+//
+// Desktop
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+	.cms-simulador{
+		.page-wrapper{
+			.page-main-full-width{
+				.column{
+					.pagebuilder-column{
+						.rendered-form{
+							.amform-form-fieldset{
+								.amcform-multi-page{
+									.amcform-page-wrap{
+										padding: 0 20px;
+										.fb-h3{
+											margin: 25px 0 15px;
+										}
+										.fb-undefined {
+											.control {
+
+												textarea {
+													border-radius: 12px;
+												}
+											}
+										}
+										.amcform-toolbar{
+											.amcform-submit{
+												background: @black;
+												width: 100%;
+											}
+										}
+										.field{
+											&.fb-checkbox {
+												margin-top: 20px;
+                                                .lib-css(display, flex) !important; 
+                                                position: relative ;
+												.lib-checkboxs;
+												label {
+													margin-right: 10px;
+												}
+												.mage-error{
+                                                    position: absolute;
+                                                    left: 0;
+                                                    min-width: 220px;
+                                                    bottom: -40px;
+                                                }
+											}
+											&.fb-wysiwyg{
+                                                @media @mdmax{
+                                                    max-width: 670px;
+                                                }
+                                                p{
+                                                    display: inline;
+                                                    //letter-spacing: -1px;
+                                                    strong{
+                                                        padding-left: 145px;
+                                                        font-weight: normal;
+                                                    }
+                                                }
+                                                .control {
+                                                    > div{
+                                                        margin-top: -66px;
+                                                        margin-bottom: 0px;
+                                                        margin-left: 16px;
+                                                        &.popro{
+                                                            margin-top: -58px;
+                                                        }
+                                                        margin-top: -66px;
+                                                        &.popro{
+                                                            margin-top: -58px;
+															margin-left: 6px;
+                                                            p{
+                                                                margin: 0 0 0 140px !important;
+                                                                font-size: 14px;
+                                                            }
+                                                        }
+                                                        &.amform-wysiwyg p{
+                                                            margin: 0 0 0 140px;
+                                                            .lib-font-size(14);
+															position: relative;
+                                                        }
+                                                    }
+                                                }
+                                            }
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+///MOBILE
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+	.cms-simulador{
+		.result-slider{
+			&.slider-skinAge{
+				&.formulario {
+					background-size: cover !important;
+					background-position: 85% !important;
+					background-repeat: no-repeat !important;
+					background-origin: content-box;
+				}
+			}
+		}
+		.result-slider{
+			&.slider-skinAge{
+				&.formulario{
+					.pagebuilder-column-group{
+						padding: 20% 0 20px;
+					}
+				}
+			}
+		}
+		.page-wrapper{
+			.page-main-full-width{
+				.column{
+					.pagebuilder-column{
+						.rendered-form{
+							.amform-form-fieldset{
+								.amcform-multi-page{
+									.amcform-page-wrap{
+										position: relative;
+										padding: 0 20px;
+										.fb-h3{
+											margin: 25px 0 15px;
+										}
+										.fb-undefined {
+											.control {
+
+												textarea {
+													border-radius: 12px;
+												}
+											}
+										}
+										.amcform-toolbar{
+											.amcform-submit{
+												background: @black;
+												width: 100%;
+											}
+										}
+										.field{
+											&.fb-checkbox {
+												margin-top: 20px;
+                                                .lib-css(display, flex) !important; 
+                                                position: relative ;
+												.lib-checkboxs;
+												label {
+													margin-right: 10px;
+												}
+												.mage-error{
+                                                    position: absolute;
+                                                    left: 0;
+                                                    min-width: 220px;
+                                                    bottom: -40px;
+                                                }
+											}
+											&.fb-wysiwyg{
+                                                @media @mdmax{
+                                                    max-width: 670px;
+                                                }
+                                                p{
+                                                    display: inline;
+                                                    //letter-spacing: -1px;
+                                                    strong{
+                                                        padding-left: 145px;
+                                                        font-weight: normal;
+                                                    }
+                                                }
+                                                .control {
+                                                    > div{
+                                                        margin-top: -66px;
+                                                        margin-bottom: 0px;
+                                                        margin-left: 16px;
+                                                        &.popro{
+                                                            margin-top: -58px;
+                                                        }
+                                                        margin-top: -66px;
+                                                        &.popro{
+                                                            margin-top: -58px;
+                                                            p{
+                                                                margin: 0 0 0 130px !important;
+                                                                font-size: 14px;
+                                                            }
+                                                        }
+                                                        &.amform-wysiwyg p{
+                                                            margin: 0 0 0 140px;
+                                                            .lib-font-size(14);
+															position: relative;
+															span{
+																&:first-child{
+																	padding-left: 6px;
+																}
+															}
+                                                        }
+                                                    }
+                                                }
+                                            }
+										}
+                                            .fb-text {
+                                                display: inline-block;
+                                                width: 51%;
+                                            }
+
+                                            .fb-undefined {
+                                                position: absolute;
+                                                height: 100%;
+                                                max-height: 270px;
+                                                width: 46%;
+                                                top: 35px;
+                                                right: 0;
+
+                                                .control {
+                                                    height: 90%;
+                                                    textarea {
+                                                        height: 100%;
+                                                    }
+                                                }
+                                            }
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.page.messages{
+			margin: 0;
+		}
+
+		.pagebuilder-column-group{
+
+			.pagebuilder-column{
+				h2{
+					margin: 0 0 0px 0;
+					width: 100%;
+    				font-size: 2.1rem;
+				}
+
+				[data-content-type="html"]{
+					padding: 15px 3px 0;
+
+					button{
+						.lib-font-size(14);
+						background: @black;
+						font-weight: bold;
+						padding: 10px;
+						color: @white;
+						width: 100%;
+					}
+				}
+
+				div{
+					p{
+						text-align: left !important;
+						margin: 0 0px 25px;
+						font-size: 2.0rem;
+						img{
+							margin: 0 30px 0 0;
+							width: 50px;
+						}
+						span{
+							&#js_skin_health_percentage {
+								font-size: 20px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

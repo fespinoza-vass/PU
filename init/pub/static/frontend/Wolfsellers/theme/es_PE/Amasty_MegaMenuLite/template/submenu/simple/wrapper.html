@@ -1,0 +1,9 @@
+<div data-bind="
+            attr: {
+                class: 'ammenu-submenu-block -root -simple'
+            },
+            html: elem.content,
+            afterRender: function (element, context) {
+                $parent.init(element, context);
+            }">
+</div>

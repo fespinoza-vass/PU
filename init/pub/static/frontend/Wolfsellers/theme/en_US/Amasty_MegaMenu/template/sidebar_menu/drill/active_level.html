@@ -1,0 +1,43 @@
+<!--
+    Amasty ammenu_drill_wrapper UiComponent
+-->
+
+<section data-bind="
+             attr: {
+                class: 'ammenu-active-level'
+             },
+             visible: $data.activeElem()">
+    <!-- ko template: { name: $data.templates.navigation } --><!-- /ko -->
+
+    <!-- ko template: { name: $data.templates.current_title } --><!-- /ko -->
+
+    <!-- ko scope: 'index = ammenu_submenu_mobile' -->
+        <!-- ko template: { name: getTemplate(), data: $parent.activeElem() } --><!-- /ko -->
+    <!-- /ko -->
+
+    <ul data-bind="
+            attr: {
+                class: 'ammenu-items -drill ' + actionAnimation()
+            },
+            foreach: $data.activeElem().elems">
+        <li data-bind="attr: {
+                class: 'ammenu-item'
+            }">
+            <!-- ko template: {
+                name: $parent.root_templates.item,
+                data: {
+                    item: $data,
+                    toggle: $data.isSubmenuVisible(),
+                    link: $data.isViewAll || !$data.isSubmenuVisible() || $parent.source.hide_view_all_link,
+                    additionalClasses: '-mobile',
+                    border: true,
+                    event: $data.isSubmenuVisible() ? {
+                        click: $parent.toggleItem.bind($parent, $data),
+                        keypress: $parent.toggleItem.bind($parent, $data)
+                    } : false
+                }
+            } -->
+            <!-- /ko -->
+        </li>
+    </ul>
+</section>

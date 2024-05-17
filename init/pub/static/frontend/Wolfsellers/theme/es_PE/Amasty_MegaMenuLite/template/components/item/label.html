@@ -1,0 +1,15 @@
+<!--
+    Amasty MegaMenu item label template
+
+    $data { item: current_item }
+-->
+
+<span class="ammenu-label"
+      if="item.label"
+      data-bind="
+          style: {
+              background: item.label.label_background_color || '',
+              color: item.label.label_text_color || ''
+          },
+          i18n: item.label.label">
+</span>

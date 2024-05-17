@@ -1,0 +1,15 @@
+<!-- ko scope: 'customer' -->
+    <p data-bind="
+            attr: {
+                class: 'ammenu-menu-greetings' + (customer().fullname ? ' -logged' : '')
+            }">
+        <!-- ko if: customer().fullname -->
+            <span class="ammenu-message -welcome" data-bind="i18n: 'Welcome'"></span>
+            <span class="ammenu-name" data-bind="text: customer().fullname"></span>
+        <!-- /ko -->
+
+        <!-- ko ifnot: customer().fullname -->
+            <span class="ammenu-message" data-bind="i18n: $parent.welcome_message().message"></span>
+        <!-- /ko -->
+    </p>
+<!-- /ko -->

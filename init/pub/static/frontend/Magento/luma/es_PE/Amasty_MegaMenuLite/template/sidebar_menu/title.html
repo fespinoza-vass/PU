@@ -1,0 +1,11 @@
+<section class="ammenu-menu-title" data-bind="scope: 'index = ammenu_wrapper'">
+    <h5 class="ammenu-title"
+        if="mobile_menu_title"
+        data-bind="
+            style: {
+                color: color_settings.main_menu_text
+            },
+            i18n: mobile_menu_title">
+    </h5>
+    <!-- ko template: { name: templates.close_button } --><!-- /ko -->
+</section>

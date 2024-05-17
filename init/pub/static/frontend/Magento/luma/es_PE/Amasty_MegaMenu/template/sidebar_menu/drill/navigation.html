@@ -1,0 +1,63 @@
+<!--
+    Amasty ammenu_drill_wrapper UiComponent
+-->
+
+<section class="ammenu-drill-navigation"
+         tabindex="0"
+         data-bind="style: { 'border-bottom-color': color_settings.border, color: color_settings.main_menu_text }">
+    <button class="ammenu-button -go-main"
+            if="$data.activeElem()"
+            tabindex="0"
+            role="button"
+            data-bind="
+                event: {
+                    click: function () {
+                        $data.setRootLevel();
+                    },
+                    keypress: function () {
+                        $data.setRootLevel();
+                    }
+                },
+                attr: {
+                    'aria-label': $t('Go back to all categories'),
+                    title: $t('Go back to all categories')
+                }">
+
+        <!-- ko if: $data.activeElem().level && $data.activeElem().level() < 1 -->
+            <!-- ko template: {
+                name: root_templates.icon,
+                data: { icon_template: icons.chevron, color: color_settings.toggle_icon_color, toggle: true, additionalClasses: '-toggle' }
+            } -->
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: $data.activeElem().level && $data.activeElem().level() -->
+            <!-- ko template: {
+                name: root_templates.icon,
+                data: { icon_template: icons.double_chevron, color: color_settings.toggle_icon_color, toggle: true, additionalClasses: '-toggle' }
+        } --><!-- /ko -->
+        <!-- /ko -->
+
+        <span data-bind="i18n: 'All Сategory'"></span>
+    </button>
+    <button class="ammenu-button -prev"
+            if="$data.activeElem().level"
+            role="button"
+            tabindex="0"
+            data-bind="
+                attr: {
+                    'aria-label': $t('Go Back to ' ) + $data.activeElem().parent.name,
+                    title: $t('Go Back to ' ) + $data.activeElem().parent.name,
+                },
+                event: {
+                    click: setPrevLevel,
+                    keypress: setPrevLevel
+                }">
+        <!-- ko template: {
+            name: root_templates.icon,
+            data: { icon_template: icons.chevron, color: color_settings.toggle_icon_color, toggle: true, additionalClasses: '-toggle' }
+        } -->
+        <!-- /ko -->
+        <span data-bind="i18n: $data.activeElem().parent.name"></span>
+    </button>
+</section>

@@ -1,0 +1,22 @@
+<!--
+    Amasty MegaMenu item template
+
+    Universal description template for all types of menu
+
+    @param {Object} item
+    @param {Boolean} toggle - show or hide toggle icon
+    @param {String} additionalClasses
+    @param {String | null} font_weight
+    @param {Object} event - event listeners
+-->
+
+<!-- ko if: item.isVisible -->
+    <!-- ko scope: 'index = ammenu_wrapper' -->
+        <!-- ko if: !$parent.link && $parent.toggle || !$parent.item.url.length -->
+            <!-- ko template: { name: templates.item_button } --><!-- /ko-->
+        <!-- /ko -->
+        <!-- ko if: $parent.link && $parent.item.url.length -->
+            <!-- ko template: { name: templates.item_link } --><!-- /ko-->
+        <!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->

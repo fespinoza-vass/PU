@@ -1,0 +1,24 @@
+<!--
+    Amasty ammenu_submenu_builder content_block uiComponent
+
+    @param {Object} elem
+-->
+
+<!-- ko scope: 'index = ammenu_submenu_builder' -->
+    <section class="ammenu-content-block"
+         data-bind="
+            attr: {
+                'aria-expanded': $parent.elem.isContentActive().toString()
+            },
+            event: {
+                mouseenter: clearHoverTimeout
+            },
+            visible: $parent.elem.isContentActive,
+            afterRender: function(node) {
+                initContent(node, $parent);
+            },
+            css: { '-active': $parent.elem.isActive },
+            html: $parent.elem.content">
+    </section>
+<!-- /ko -->
+

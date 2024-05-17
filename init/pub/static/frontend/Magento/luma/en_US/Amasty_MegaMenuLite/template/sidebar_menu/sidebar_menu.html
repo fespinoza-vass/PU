@@ -1,0 +1,44 @@
+<!--
+    Amasty ammenu_sidebar_menu_wrapper UiComponent
+-->
+
+<nav data-action="navigation"
+     role="navigation"
+     id="ammenu-sidebar"
+     data-bind="
+         attr: {
+            'aria-labelledby': $t('Main Menu'),
+            'aria-expanded': isOpen().toString(),
+            'tabindex': isOpen() ? '0' : '-1',
+            class: 'ammenu-nav-sections -sidebar' + ($data.source.isMobile() ? ' -mobile -' + mobile_class : '') + (is_hamburger && !$data.source.isMobile() ? ' -left-menu' : '') + ' -animation-' + $data.hamburger_animation
+        },
+        css: {
+            '-opened': isOpen
+        },
+        visible: isOpen,
+        hasFocus: isOpen(),
+        style: {
+            background: color_settings.main_menu_background,
+            animationDuration: ($data.hamburger_animation !== 'none' ? $data.animation_time + 's' : '')
+        }">
+
+    <!-- ko template: { name: root_templates.menu_title } --><!-- /ko -->
+
+    <!-- ko scope: 'index = ammenu_tabs_wrapper' -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko scope: 'index = ammenu_account_wrapper' -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: !$data.source.isMobile() -->
+        <!-- ko scope: 'index = ammenu_hamburger_wrapper' -->
+            <!-- ko template: { name: root_templates.sidebar_type_switcher, data: { elems: elems, tab_index: 0 } } --><!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- ko if: $data.source.isMobile() -->
+        <!-- ko template: { name: root_templates.sidebar_type_switcher, data: { elems: $data.source.data.elems, tab_index: 0 } } --><!-- /ko -->
+    <!-- /ko -->
+</nav>
