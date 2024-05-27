@@ -1,0 +1,14 @@
+<!--
+    Amasty ammenu_account_wrapper uiComponent
+-->
+
+<!-- ko if: rendered -->
+    <section class="ammenu-account-section"
+             data-bind="visible: matchTab()">
+        <!-- ko template: { name: root_templates.greetings } --><!-- /ko -->
+
+        <!-- ko if: elems().length -->
+            <!-- ko template: { name: root_templates.sidebar_type_switcher, data: { elems: elems(), tab_index: tab_index } } --><!-- /ko -->
+        <!-- /ko -->
+    </section>
+<!-- /ko -->

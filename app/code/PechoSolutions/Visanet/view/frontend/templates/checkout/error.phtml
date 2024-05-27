@@ -1,0 +1,313 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+/** @var \PechoSolutions\Visanet\Block\Onepage\Success $block */
+$items = $block->getQuoteItems();
+$quoteData = $block->getQuoteData();
+$quote = $block->getQuote();
+
+$shippingData = $block->getQuoteShippingAddress();
+$billing =$block->getQuoteBillingAddress();
+$currencyCode=$block->getCurrency();
+$currencyDesc=$block->getCurrencyCode();
+?>
+
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+
+<div class="orden_success_page">
+
+    <div class="content" id="areaImprimir">
+        <div class="title">
+            Algo no salio bien con su pedido
+        </div>
+
+    <?php  if (!empty($_SESSION['autorizado'])){   ?>
+
+        <p><strong>Desgraciadamente tu pedido no puede procesarse el banco/comercio ha rechazado tu transación. Por favor intenta realizar la compra de nuevo</strong></p> <br>
+        <p><span><strong>Motivo:</strong></span> (<?=$_SESSION['CODACCION']?>) <?=$_SESSION['DSC_COD_ACCION']?></p>
+        <p><span><strong>Moneda:</strong></span> Sol peruano</p>
+
+    <?php } ?>
+        <div style="padding: 20px 0;">
+            <a href="<?PHP echo $block->getBaseUrl().'checkout/#payment' ?>" class="btn_regresar_a_comprar"> <- Volver a intentar </a>
+        </div>
+        <div class="pedido-numero">
+            <a href=""> Número de pedido: <span style="margin-left: 5px;"> #<?PHP echo $block->escapeHtml($block->getQuoteId()); ?> </span> </a>
+        </div>
+
+        <div class="pedido-items">
+            <table>
+                <tr class="pedido_header">
+                    <td width="80" align="center">
+                        #
+                    </td>
+                    <td width="250">
+                        Item
+                    </td>
+                    <td width="100" align="center">
+                        Cantidad
+                    </td>
+                    <td width="100" align="center">
+                        SubTotal
+                    </td>
+                </tr>
+
+                <?php
+
+                $n = 1;
+                $total = 0;
+
+                foreach ($items as $item) {
+
+                    $_product = $block->getProduct($item->getProductId());
+                    $imageHelper  = $this->helper(\Magento\Catalog\Helper\Image::class);
+
+                    if($item->getProduct()->getTypeId() == 'configurable'){
+                        $realProductChild = $block->getRealProduct($item->getSku());
+                        $image_url = $imageHelper->init($realProductChild, 'product_page_image_small')->setImageFile($_product->getFile())->resize(100, 100)->getUrl();
+
+                        if (empty($image_url)){
+                            $image_url = $imageHelper->getDefaultPlaceholderUrl('image');
+                        }
+                    }
+                    else{
+                        $image_url = $imageHelper->init($_product, 'product_page_image_small')->setImageFile($_product->getFile())->resize(100, 100)->getUrl();
+
+                        if (empty($image_url)){
+                            $image_url = $imageHelper->getDefaultPlaceholderUrl('image');
+                        }
+                    }
+
+
+
+                    $itemData = $item->getData();
+                    $total+=$itemData['row_total'];
+                    // print_r($item->getData());
+                    ?>
+
+                    <tr clas="pedido_registro">
+                        <td width="80" align="center">
+                            <img src="<?=$image_url?>" width="75" height="75" alt="">
+                        </td>
+                        <td width="250">
+                            <div>
+                                <?php echo $item->getName(); ?>
+                            </div>
+                            <div>
+                                SKU: <?php echo $item->getSKU(); ?>
+                            </div>
+                        </td>
+                        <td width="100" align="center">
+                            <?PHP echo (int)$item->getQty(); ?>
+                        </td>
+                        <td width="100" align="center">
+                            <?PHP  echo number_format($itemData['row_total'],2); ?>
+                        </td>
+                    </tr>
+
+                    <?PHP
+
+                    $n++;
+                }
+
+                ?>
+
+                <tr class="pedido_header">
+                    <td colspan="2"></td>
+                    <td align="right"> Sub Total: </td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($quote->getSubtotal(),2);  ?></td>
+                </tr>
+
+                <tr class="pedido_header">
+                    <td colspan="2"></td>
+                    <td align="right"> Costo de envío: </td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($shippingData['shipping_amount'],2);  ?></td>
+                </tr>
+
+                <?PHP
+
+                    if( ($shippingData['discount_amount']*1) > 0){
+
+                ?>
+
+                <tr class="pedido_header">
+                    <td colspan="2"></td>
+                    <td align="right"> - Total descuentos: </td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($shippingData['discount_amount'],2);  ?></td>
+                </tr>
+
+                <?PHP
+                    }
+                ?>
+
+
+                <tr class="pedido_header">
+                    <td colspan="2"></td>
+                    <td align="right"> Total: </td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($quote->getGrandTotal(),2);  ?></td>
+                </tr>
+
+
+            </table>
+
+        </div>
+
+        <div class="direcciones">
+
+            <div class="envio">
+                <div class="subtitle">
+                    Dirección de envío
+                </div>
+
+                <div class="direccion_content">
+                    <div>
+                        <?PHP
+                        echo $shippingData['firstname'].' '.$shippingData['lastname'];
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+
+                        if(is_array($shippingData['street'])) {
+                            echo implode(",", $shippingData['street']);
+                        } else {
+                            echo $shippingData['street'];
+                        }
+
+                        //echo implode(',', $shipping['street']);
+
+                        ?>
+                    </div>
+                    <div>
+                        <?PHP
+                        echo $shippingData['city'];
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="facturacion">
+
+                <div class="subtitle">
+                    Dirección de facturación
+                </div>
+
+                <div class="direccion_content">
+                    <div>
+                        <?PHP
+                        echo $billing['firstname'].' '.$billing['lastname'];
+                        ?>
+                    </div>
+                    <div>
+                        <?PHP
+                        if(is_array($billing['street'])) {
+                            echo implode(",", $billing['street']);
+                        } else {
+                            echo $billing['street'];
+                        }
+                        //echo implode(',', $billing['street']);
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        if(is_array($billing['city'])) {
+                            echo implode(",", $billing['city']);
+                        } else {
+                            echo $billing['city'];
+                        }
+                        //echo $billing['city'];
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="">
+                <input class="btn btn-default" type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
+
+        </div>
+    </div>
+
+</div>
+<style>
+    /* Success page */
+
+    .orden_success_page{
+        max-width: 900px;
+        background-color: #FFF;
+        margin-top: 30px;
+    }
+
+    .orden_success_page .title{
+        color:#000;
+        font-size: 24px;
+        font-weight: bold;
+        padding:15px 0px;
+    }
+
+    .orden_success_page .subtitle{
+        margin-top: 10px;
+    }
+
+    .orden_success_page .content .pedido-numero{
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    .orden_success_page .pedido_header{
+        background-color: #F2F2F2;
+        margin-top:15px;
+    }
+
+    .orden_success_page .pedido-items{
+        color:#333;
+    }
+
+    .orden_success_page .direcciones{
+        display: table;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .orden_success_page .direcciones .subtitle{
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 20px;
+        color:#333;
+
+    }
+
+    .orden_success_page .direcciones .envio{
+        width: 50%;
+        float: left;
+    }
+
+    .orden_success_page .direcciones .facturacion{
+        width: 50%;
+        float: left;
+    }
+
+    .btn_regresar_a_comprar{
+
+       background-color: #333;
+       border-color: #333;
+       color:#FFFFFF!important;
+       padding:10px 20px;
+    }
+</style>
+<script>
+    function printDiv(nombreDiv) {
+        var contenido= document.getElementById(nombreDiv).innerHTML;
+        var contenidoOriginal= document.body.innerHTML;
+        document.body.innerHTML = contenido;
+        window.print();
+        document.body.innerHTML = contenidoOriginal;
+    }
+</script>

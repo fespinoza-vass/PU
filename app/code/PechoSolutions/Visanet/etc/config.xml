@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <visanet_pay>
+                <active>0</active>
+                <model>PechoSolutions\Visanet\Model\Payment</model>
+                <payment_action>authorize_capture</payment_action>
+                <title>Visa</title>
+                <store_title>Mi Tiendita</store_title>
+                <store_desc>Por compras en MiTiendita.com</store_desc>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <cctypes>VI,MC,AE,DI</cctypes>
+                <allowspecific>0</allowspecific>
+                <min_order_total>0.50</min_order_total>
+            </visanet_pay>
+        </payment>
+    </default>
+</config>

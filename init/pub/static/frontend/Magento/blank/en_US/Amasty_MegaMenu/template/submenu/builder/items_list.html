@@ -1,0 +1,36 @@
+<!--
+    Amasty ammenu_submenu_builder items_list uiComponent
+
+    @param {Object} elem
+-->
+
+<ul class="ammenu-items-list"
+    if="elem.elems && elem.type && elem.type.value">
+    <!-- ko fastForEach: { data: elem.elems, as: 'elem' } -->
+        <li data-bind="
+               attr: {
+                    class: 'ammenu-item category-item'
+               },
+               css: {
+                    '-current': elem.current,
+                    '-active': elem.isActive,
+                    '-label': elem.label
+               }">
+            <!-- ko scope: 'index = ammenu_submenu_builder' -->
+                <!-- ko template: {
+                    name: root_templates.item,
+                    data: {
+                        link: true,
+                        item: elem,
+                        event: elem.isLinkInteractive ? {
+                            mouseenter: onMouseenter.bind($data, elem),
+                            mouseleave: onMouseleave.bind($data, elem),
+                            keypress: onMouseenter.bind($data, elem)
+                        } : false,
+                        additionalClasses: '-simple'
+                    }
+                } --><!-- /ko-->
+            <!-- /ko-->
+        </li>
+    <!--/ko-->
+</ul>

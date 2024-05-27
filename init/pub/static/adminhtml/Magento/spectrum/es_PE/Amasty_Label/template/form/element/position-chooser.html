@@ -1,0 +1,19 @@
+<!-- ko if: (visible) -->
+<table data-bind="css: element.additionalClasses">
+    <tbody>
+    <!-- ko foreach: {data: cellsMap, as: 'item'} -->
+    <tr>
+        <!-- ko foreach: {data: item, as: 'cell'} -->
+        <td data-bind="attr: {
+        'data-amlabel-position-enabled': cell.enabled,
+        'data-amlabel-position-selected': element.isCellEnabled(cell)},
+        click: function(data) {element.selectPositionProcess(data)},
+        clickBubble: false,
+        text: cell.label"
+        ></td>
+        <!-- /ko -->
+    </tr>
+    <!-- /ko -->
+    </tbody>
+</table>
+<!-- /ko -->

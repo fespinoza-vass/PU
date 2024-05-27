@@ -1,0 +1,23 @@
+<!-- ko if: activeElem() -->
+    <a class="ammenu-current-title"
+       data-bind="
+            style: {
+                color: color_settings.main_menu_text
+            },
+            css: {
+                '-clickable': hide_view_all_link && activeElem().url.length
+            },
+            attr: {
+                href: activeElem().url,
+                tabindex: hide_view_all_link ? '0' : '-1'
+            }
+       ">
+        <!-- ko if: activeElem().icon -->
+            <!-- ko template: { name: root_templates.item_icon, data: { item: activeElem(), color: 'currentColor' } } --><!-- /ko -->
+        <!-- /ko -->
+
+        <strong class="ammenu-text" data-bind="i18n: activeElem().name"></strong>
+
+        <!-- ko template: { name: root_templates.label, data: { item: activeElem() } } --><!-- /ko-->
+    </a>
+<!-- /ko -->

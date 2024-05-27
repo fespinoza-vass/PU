@@ -1,0 +1,357 @@
+[2024-04-22T17:16:20.713362+00:00] INFO: Starting scenario(s): scenario/build/generate.xml (magento/ece-tools version: 2002.1.14, magento/magento2-base version: 2.4.5-p3)
+[2024-04-22T17:16:20.916054+00:00] DEBUG: Running step: pre-build
+[2024-04-22T17:16:20.925853+00:00] INFO: Verbosity level is -vvv
+[2024-04-22T17:16:20.926047+00:00] DEBUG: Flag .static_content_deploy has already been deleted.
+[2024-04-22T17:16:20.926094+00:00] DEBUG: Step "pre-build" finished
+[2024-04-22T17:16:20.926121+00:00] DEBUG: Running step: apply-patches
+[2024-04-22T17:16:20.926166+00:00] NOTICE: Applying patches
+[2024-04-22T17:16:20.926517+00:00] DEBUG: php ./vendor/bin/ece-patches apply --no-interaction
+[2024-04-22T17:16:21.557909+00:00] DEBUG: Patch MCLOUD-10032 has been applied
+Title: Auto increment number jumping up for catalog_product_entity_* tables
+File: MCLOUD-10032__Increment_number_for_catalog_product_entity_tables__2.4.3-p1.patch
+Affected components: magento/module-catalog
+
+Patch MCLOUD-10279 has been applied
+Title: Fixes the error 'The file can't be deleted. Warning!unlink: No such file or directory' when flushing JS/CSS cache from the Admin
+File: MCLOUD-10279__errors_when_flushing_js_css_cache_from_admin__2.4.4.patch
+Affected components: magento/framework
+
+Applying hot-fixes
+Patch ../m2-hotfixes/AddFilterMaCollection.patch has been applied
+Patch ../m2-hotfixes/ShippingAddressMatchesWithBillingAddress.patch has been applied
+Patch ../m2-hotfixes/agreements-config-provider.patch has been applied
+Patch ../m2-hotfixes/billingAddress.patch has been applied
+Patch ../m2-hotfixes/country_filer.patch has been applied
+Patch ../m2-hotfixes/custom-attributes.patch has been applied
+Patch ../m2-hotfixes/recaptcha-error.patch was already applied
+[2024-04-22T17:16:21.558034+00:00] NOTICE: End of applying patches
+[2024-04-22T17:16:21.558121+00:00] DEBUG: Step "apply-patches" finished
+[2024-04-22T17:16:21.558157+00:00] DEBUG: Running step: set-production-mode
+[2024-04-22T17:16:21.558185+00:00] INFO: Set Magento application mode to 'production'
+[2024-04-22T17:16:21.558969+00:00] DEBUG: Step "set-production-mode" finished
+[2024-04-22T17:16:21.559026+00:00] DEBUG: Running step: validate-configuration
+[2024-04-22T17:16:21.559066+00:00] NOTICE: Validating configuration
+[2024-04-22T17:16:21.685777+00:00] NOTICE: Fix configuration with given suggestions:
+[2024-04-22T17:16:21.685902+00:00] WARNING: [1008] File op-exclude.txt does not contain required paths to exclude for OPCache
+Check if your op-exclude.txt contains the next paths:
+/app/*/app/etc/env.php
+/app/app/etc/config.php
+/app/app/etc/env.php
+[2024-04-22T17:16:21.695095+00:00] WARNING: [1006] The configured state is not ideal
+Your application does not have the "post_deploy" hook enabled.
+  In order to minimize downtime, add the following to ".magento.app.yaml":
+  hooks:
+      post_deploy: |
+          php ./vendor/bin/ece-tools run scenario/post-deploy.xml
+[2024-04-22T17:16:21.695268+00:00] NOTICE: End of validation
+[2024-04-22T17:16:21.695321+00:00] DEBUG: Step "validate-configuration" finished
+[2024-04-22T17:16:21.695347+00:00] DEBUG: Running step: refresh-modules
+[2024-04-22T17:16:21.695372+00:00] NOTICE: Reconciling installed modules with shared config.
+[2024-04-22T17:16:21.697476+00:00] DEBUG: php ./bin/magento module:enable --all --ansi --no-interaction '-vvv'
+[2024-04-22T17:16:37.211003+00:00] DEBUG: [32mThe following modules have been enabled:[39m
+[32m- Magento_AdminAnalytics
+- WolfSellers_AmastyLabel
+- WolfSellers_BackendBopis
+- WolfSellers_DireccionesTiendas
+- WolfSellers_Email
+- WolfSellers_EnvioRapido
+- WolfSellers_InStorePickup
+- WolfSellers_InventoryReservationBySource
+- WolfSellers_OrderManagement
+- WolfSellers_OrderQR
+- WolfSellers_ShippingStepMessages
+- WolfSellers_Sources
+- WolfSellers_Wishlist[39m
+
+[32mCache cleared successfully.[39m
+[32mGenerated classes cleared successfully. Please run the 'setup:di:compile' command to generate classes.[39m
+[32mInfo: Some modules might require static view files to be cleared. To do this, run 'module:enable' with the --clear-static-content option to clear them.[39m
+[2024-04-22T17:16:37.213028+00:00] INFO: The following modules have been enabled:
+WolfSellers_AmastyLabel
+WolfSellers_DireccionesTiendas
+WolfSellers_Email
+WolfSellers_EnvioRapido
+WolfSellers_InStorePickup
+WolfSellers_InventoryReservationBySource
+WolfSellers_OrderManagement
+WolfSellers_OrderQR
+WolfSellers_ShippingStepMessages
+WolfSellers_Sources
+WolfSellers_Wishlist
+[2024-04-22T17:16:37.213125+00:00] NOTICE: End of reconciling modules.
+[2024-04-22T17:16:37.213183+00:00] DEBUG: Step "refresh-modules" finished
+[2024-04-22T17:16:37.213218+00:00] DEBUG: Running step: copy-pub-static
+[2024-04-22T17:16:37.219162+00:00] INFO: File "front-static.php" was copied
+[2024-04-22T17:16:37.219245+00:00] DEBUG: Step "copy-pub-static" finished
+[2024-04-22T17:16:37.219272+00:00] DEBUG: Running step: set-report-dir-nesting-level
+[2024-04-22T17:16:37.219298+00:00] INFO: Configuring directory nesting level for saving error reports
+[2024-04-22T17:16:37.219494+00:00] NOTICE: The file /app/pub/errors/local.xml with the `config.report.dir_nesting_level` property: `1` was created.
+[2024-04-22T17:16:37.219575+00:00] DEBUG: Step "set-report-dir-nesting-level" finished
+[2024-04-22T17:16:37.219601+00:00] DEBUG: Running step: marshall-files
+[2024-04-22T17:16:37.220848+00:00] DEBUG: Step "marshall-files" finished
+[2024-04-22T17:16:37.220894+00:00] DEBUG: Running step: copy-sample-data
+[2024-04-22T17:16:37.220936+00:00] INFO: Sample data media was not found. Skipping.
+[2024-04-22T17:16:37.220982+00:00] DEBUG: Step "copy-sample-data" finished
+[2024-04-22T17:16:37.221002+00:00] DEBUG: Running step: enable-eventing
+[2024-04-22T17:16:37.221029+00:00] DEBUG: Step "enable-eventing" finished
+[2024-04-22T17:16:37.221050+00:00] DEBUG: Running step: compile-di
+[2024-04-22T17:16:37.221071+00:00] NOTICE: Running DI compilation
+[2024-04-22T17:16:37.221751+00:00] DEBUG: php ./bin/magento setup:di:compile --ansi --no-interaction '-vvv'
+[2024-04-22T17:18:14.122608+00:00] DEBUG: [32mCompilation was started.[39m
+
+[32mGenerated code and dependency injection configuration successfully.[39m
+[2024-04-22T17:18:14.122742+00:00] NOTICE: End of running DI compilation
+[2024-04-22T17:18:14.122829+00:00] DEBUG: Step "compile-di" finished
+[2024-04-22T17:18:14.122863+00:00] DEBUG: Running step: dump-autoload
+[2024-04-22T17:18:14.123429+00:00] DEBUG: composer dump-autoload -o --ansi --no-interaction
+[2024-04-22T17:18:28.518214+00:00] DEBUG: [32mGenerating optimized autoload files[39m
+[32mGenerated optimized autoload files containing 36950 classes[39m
+[2024-04-22T17:18:28.518349+00:00] DEBUG: Step "dump-autoload" finished
+[2024-04-22T17:18:28.518395+00:00] DEBUG: Running step: deploy-static-content
+[2024-04-22T17:18:28.518452+00:00] DEBUG: Flag .static_content_deploy has already been deleted.
+[2024-04-22T17:18:28.519439+00:00] NOTICE: Generating fresh static content
+[2024-04-22T17:18:28.520174+00:00] INFO: Generating static content for locales: en_US es_PE
+Using 16 Threads
+[2024-04-22T17:18:28.520392+00:00] DEBUG: Finding available themes.
+[2024-04-22T17:18:28.520447+00:00] DEBUG: End of finding available themes.
+[2024-04-22T17:18:28.520477+00:00] DEBUG: Finding available themes.
+[2024-04-22T17:18:28.520499+00:00] DEBUG: End of finding available themes.
+[2024-04-22T17:18:28.520519+00:00] DEBUG: Finding available themes.
+[2024-04-22T17:18:28.520537+00:00] DEBUG: End of finding available themes.
+[2024-04-22T17:18:28.520555+00:00] DEBUG: Finding available themes.
+[2024-04-22T17:18:28.520596+00:00] DEBUG: End of finding available themes.
+[2024-04-22T17:18:28.521181+00:00] DEBUG: Finding available themes.
+[2024-04-22T17:18:28.521219+00:00] DEBUG: End of finding available themes.
+[2024-04-22T17:18:28.521318+00:00] DEBUG: Finding available themes.
+[2024-04-22T17:18:28.521349+00:00] DEBUG: End of finding available themes.
+[2024-04-22T17:18:28.521985+00:00] DEBUG: php ./bin/magento setup:static-content:deploy --ansi --no-interaction -f -s quick -vvv --jobs 16 --no-html-minify --exclude-theme Magento/blank --exclude-theme Magento/luma --exclude-theme Magento/backend --exclude-theme Wolfsellers/theme en_US es_PE
+[2024-04-22T17:18:57.433488+00:00] DEBUG: [32m
+Deploy using quick strategy[39m
+[32mExecute: adminhtml/Magento/backend/en_US[39m
+[32mExecute: adminhtml/Magento/backend/es_PE[39m
+[32mExecute: adminhtml/Magento/spectrum/en_US[39m
+[32mExecute: adminhtml/Magento/spectrum/es_PE[39m
+adminhtml/Magento/backend/en_US         1/3451              >--------------------------- 0%     < 1 sec             
+adminhtml/Magento/backend/es_PE         1/3451              >--------------------------- 0%     < 1 sec             
+adminhtml/Magento/spectrum/en_US        1/3451              >--------------------------- 0%     < 1 sec             
+adminhtml/Magento/spectrum/es_PE        0/3451              >--------------------------- 0%     < 1 sec
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         1461/3451           ===========>---------------- 42%    6 secs              
+adminhtml/Magento/backend/es_PE         1397/3451           ===========>---------------- 40%    6 secs              
+adminhtml/Magento/spectrum/en_US        1395/3451           ===========>---------------- 40%    6 secs              
+adminhtml/Magento/spectrum/es_PE        1433/3451           ===========>---------------- 41%    6 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         3238/3451           ==========================>- 93%    11 secs             
+adminhtml/Magento/backend/es_PE         3238/3451           ==========================>- 93%    11 secs             
+adminhtml/Magento/spectrum/en_US        3238/3451           ==========================>- 93%    11 secs             
+adminhtml/Magento/spectrum/es_PE        3238/3451           ==========================>- 93%    11 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         3239/3451           ==========================>- 93%    17 secs             
+adminhtml/Magento/backend/es_PE         3239/3451           ==========================>- 93%    17 secs             
+adminhtml/Magento/spectrum/en_US        3239/3451           ==========================>- 93%    17 secs             
+adminhtml/Magento/spectrum/es_PE        3239/3451           ==========================>- 93%    17 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         3239/3451           ==========================>- 93%    22 secs             
+adminhtml/Magento/backend/es_PE         3239/3451           ==========================>- 93%    22 secs             
+adminhtml/Magento/spectrum/en_US        3239/3451           ==========================>- 93%    22 secs             
+adminhtml/Magento/spectrum/es_PE        3239/3451           ==========================>- 93%    22 secs
+[32m.[39m
+[32mExited: adminhtml/Magento/backend/en_US(status: 0)[39m
+[32mExited: adminhtml/Magento/backend/es_PE(status: 0)[39m
+[32mExited: adminhtml/Magento/spectrum/en_US(status: 0)[39m
+[32mExited: adminhtml/Magento/spectrum/es_PE(status: 0)[39m
+[1A[2K[1A[2K[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   22 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   22 secs             
+adminhtml/Magento/spectrum/en_US        3451/3451           ============================ 100%   22 secs             
+adminhtml/Magento/spectrum/es_PE        3451/3451           ============================ 100%   22 secs
+[32m
+Execution time: 28.250873088837[39m
+[2024-04-22T17:18:57.434282+00:00] DEBUG: php ./bin/magento setup:static-content:deploy --ansi --no-interaction -f -s quick -vvv --jobs 16 --no-html-minify --theme Magento/backend en_US es_PE
+[2024-04-22T17:19:02.409740+00:00] DEBUG: [32m
+Deploy using quick strategy[39m
+[32mExecute: adminhtml/Magento/backend/en_US[39m
+[32mExecute: adminhtml/Magento/backend/es_PE[39m
+adminhtml/Magento/backend/en_US         1/3451              >--------------------------- 0%     < 1 sec             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   0
+[32m.[39m
+[32mExited: adminhtml/Magento/backend/en_US(status: 0)[39m
+[32mExited: adminhtml/Magento/backend/es_PE(status: 0)[39m
+[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   < 1 sec             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   0
+[32m
+Execution time: 4.4356920719147[39m
+[2024-04-22T17:19:02.410464+00:00] DEBUG: php ./bin/magento setup:static-content:deploy --ansi --no-interaction -f -s quick -vvv --jobs 16 --no-html-minify --theme Wolfsellers/theme en_US es_PE
+[2024-04-22T17:20:06.178542+00:00] DEBUG: [32m
+Deploy using quick strategy[39m
+[32mExecute: frontend/Magento/blank/en_US[39m
+[32mExecute: adminhtml/Magento/backend/en_US[39m
+[32mExecute: frontend/Magento/blank/es_PE[39m
+[32mExecute: adminhtml/Magento/backend/es_PE[39m
+[32mExecute: frontend/Magento/luma/en_US[39m
+[32mExecute: adminhtml/Wolfsellers/theme/en_US[39m
+[32mExecute: frontend/Magento/luma/es_PE[39m
+[32mExecute: adminhtml/Wolfsellers/theme/es_PE[39m
+[32mExecute: frontend/Wolfsellers/theme/en_US[39m
+[32mExecute: frontend/Wolfsellers/theme/es_PE[39m
+frontend/Magento/blank/en_US            76/2817             >--------------------------- 2%     1 sec               
+adminhtml/Magento/backend/en_US         0/3451              >--------------------------- 0%     1 sec               
+frontend/Magento/blank/es_PE            1/2817              >--------------------------- 0%     1 sec               
+adminhtml/Magento/backend/es_PE         1/3451              >--------------------------- 0%     1 sec               
+frontend/Magento/luma/en_US             1/2834              >--------------------------- 0%     1 sec               
+adminhtml/Wolfsellers/theme/en_US       1/3462              >--------------------------- 0%     1 sec               
+frontend/Magento/luma/es_PE             1/2834              >--------------------------- 0%     1 sec               
+adminhtml/Wolfsellers/theme/es_PE       1/3462              >--------------------------- 0%     1 sec               
+frontend/Wolfsellers/theme/en_US        1/2927              >--------------------------- 0%     < 1 sec             
+frontend/Wolfsellers/theme/es_PE        1/2927              >--------------------------- 0%     < 1 sec
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            721/2817            =======>-------------------- 25%    6 secs              
+adminhtml/Magento/backend/en_US         1623/3451           =============>-------------- 47%    6 secs              
+frontend/Magento/blank/es_PE            704/2817            ======>--------------------- 24%    6 secs              
+adminhtml/Magento/backend/es_PE         1460/3451           ===========>---------------- 42%    6 secs              
+frontend/Magento/luma/en_US             625/2834            ======>--------------------- 22%    6 secs              
+adminhtml/Wolfsellers/theme/en_US       647/3462            =====>---------------------- 18%    6 secs              
+frontend/Magento/luma/es_PE             586/2834            =====>---------------------- 20%    6 secs              
+adminhtml/Wolfsellers/theme/es_PE       591/3462            ====>----------------------- 17%    6 secs              
+frontend/Wolfsellers/theme/en_US        519/2927            ====>----------------------- 17%    5 secs              
+frontend/Wolfsellers/theme/es_PE        0/2927              >--------------------------- 0%     5 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            1146/2817           ===========>---------------- 40%    12 secs             
+adminhtml/Magento/backend/en_US         3239/3451           ==========================>- 93%    12 secs             
+frontend/Magento/blank/es_PE            1156/2817           ===========>---------------- 41%    12 secs             
+adminhtml/Magento/backend/es_PE         2984/3451           ========================>--- 86%    12 secs             
+frontend/Magento/luma/en_US             1042/2834           ==========>----------------- 36%    12 secs             
+adminhtml/Wolfsellers/theme/en_US       1054/3462           ========>------------------- 30%    12 secs             
+frontend/Magento/luma/es_PE             960/2834            =========>------------------ 33%    12 secs             
+adminhtml/Wolfsellers/theme/es_PE       1057/3462           ========>------------------- 30%    12 secs             
+frontend/Wolfsellers/theme/en_US        949/2927            =========>------------------ 32%    11 secs             
+frontend/Wolfsellers/theme/es_PE        946/2927            =========>------------------ 32%    11 secs
+[32m.[39m
+[32mExited: adminhtml/Magento/backend/en_US(status: 0)[39m
+[32mExited: adminhtml/Magento/backend/es_PE(status: 0)[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            1978/2817           ===================>-------- 70%    17 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            1972/2817           ===================>-------- 70%    17 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             1783/2834           =================>---------- 62%    17 secs             
+adminhtml/Wolfsellers/theme/en_US       1943/3462           ===============>------------ 56%    17 secs             
+frontend/Magento/luma/es_PE             1761/2834           =================>---------- 62%    17 secs             
+adminhtml/Wolfsellers/theme/es_PE       1882/3462           ===============>------------ 54%    17 secs             
+frontend/Wolfsellers/theme/en_US        1755/2927           ================>----------- 59%    16 secs             
+frontend/Wolfsellers/theme/es_PE        1720/2927           ================>----------- 58%    16 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            2716/2817           ==========================>- 96%    23 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            2715/2817           ==========================>- 96%    23 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             2687/2834           ==========================>- 94%    23 secs             
+adminhtml/Wolfsellers/theme/en_US       2857/3462           =======================>---- 82%    23 secs             
+frontend/Magento/luma/es_PE             2681/2834           ==========================>- 94%    23 secs             
+adminhtml/Wolfsellers/theme/es_PE       2763/3462           ======================>----- 79%    23 secs             
+frontend/Wolfsellers/theme/en_US        0/2927              >--------------------------- 0%     22 secs             
+frontend/Wolfsellers/theme/es_PE        2535/2927           ========================>--- 86%    22 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            2719/2817           ===========================> 96%    28 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            2719/2817           ===========================> 96%    28 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             2719/2834           ==========================>- 95%    28 secs             
+adminhtml/Wolfsellers/theme/en_US       3238/3462           ==========================>- 93%    28 secs             
+frontend/Magento/luma/es_PE             2719/2834           ==========================>- 95%    28 secs             
+adminhtml/Wolfsellers/theme/es_PE       3238/3462           ==========================>- 93%    28 secs             
+frontend/Wolfsellers/theme/en_US        2719/2927           ==========================>- 92%    27 secs             
+frontend/Wolfsellers/theme/es_PE        2719/2927           ==========================>- 92%    27 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            2720/2817           ===========================> 96%    34 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            2720/2817           ===========================> 96%    34 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             2720/2834           ==========================>- 95%    34 secs             
+adminhtml/Wolfsellers/theme/en_US       3239/3462           ==========================>- 93%    34 secs             
+frontend/Magento/luma/es_PE             2720/2834           ==========================>- 95%    34 secs             
+adminhtml/Wolfsellers/theme/es_PE       3239/3462           ==========================>- 93%    34 secs             
+frontend/Wolfsellers/theme/en_US        2719/2927           ==========================>- 92%    33 secs             
+frontend/Wolfsellers/theme/es_PE        2719/2927           ==========================>- 92%    33 secs
+[32m.[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            2720/2817           ===========================> 96%    40 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            2720/2817           ===========================> 96%    40 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             2720/2834           ==========================>- 95%    40 secs             
+adminhtml/Wolfsellers/theme/en_US       3239/3462           ==========================>- 93%    40 secs             
+frontend/Magento/luma/es_PE             2720/2834           ==========================>- 95%    40 secs             
+adminhtml/Wolfsellers/theme/es_PE       3239/3462           ==========================>- 93%    40 secs             
+frontend/Wolfsellers/theme/en_US        2720/2927           ==========================>- 92%    39 secs             
+frontend/Wolfsellers/theme/es_PE        2720/2927           ==========================>- 92%    39 secs
+[32m.[39m
+[32mExited: frontend/Magento/blank/en_US(status: 0)[39m
+[32mExited: frontend/Magento/blank/es_PE(status: 0)[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            2817/2817           ============================ 100%   40 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            2817/2817           ============================ 100%   40 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             2720/2834           ==========================>- 95%    45 secs             
+adminhtml/Wolfsellers/theme/en_US       3239/3462           ==========================>- 93%    45 secs             
+frontend/Magento/luma/es_PE             2720/2834           ==========================>- 95%    45 secs             
+adminhtml/Wolfsellers/theme/es_PE       3239/3462           ==========================>- 93%    45 secs             
+frontend/Wolfsellers/theme/en_US        2720/2927           ==========================>- 92%    44 secs             
+frontend/Wolfsellers/theme/es_PE        2720/2927           ==========================>- 92%    44 secs
+[32m.[39m
+[32mExited: frontend/Magento/luma/en_US(status: 0)[39m
+[32mExited: frontend/Magento/luma/es_PE(status: 0)[39m
+[32mExited: adminhtml/Wolfsellers/theme/en_US(status: 0)[39m
+[32mExited: adminhtml/Wolfsellers/theme/es_PE(status: 0)[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            2817/2817           ============================ 100%   40 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            2817/2817           ============================ 100%   40 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             2834/2834           ============================ 100%   45 secs             
+adminhtml/Wolfsellers/theme/en_US       3462/3462           ============================ 100%   45 secs             
+frontend/Magento/luma/es_PE             2834/2834           ============================ 100%   45 secs             
+adminhtml/Wolfsellers/theme/es_PE       3462/3462           ============================ 100%   45 secs             
+frontend/Wolfsellers/theme/en_US        2720/2927           ==========================>- 92%    50 secs             
+frontend/Wolfsellers/theme/es_PE        2720/2927           ==========================>- 92%    50 secs
+[32m.[39m
+[32mExited: frontend/Wolfsellers/theme/en_US(status: 0)[39m
+[32mExited: frontend/Wolfsellers/theme/es_PE(status: 0)[39m
+[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2Kfrontend/Magento/blank/en_US            2817/2817           ============================ 100%   40 secs             
+adminhtml/Magento/backend/en_US         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/blank/es_PE            2817/2817           ============================ 100%   40 secs             
+adminhtml/Magento/backend/es_PE         3451/3451           ============================ 100%   12 secs             
+frontend/Magento/luma/en_US             2834/2834           ============================ 100%   45 secs             
+adminhtml/Wolfsellers/theme/en_US       3462/3462           ============================ 100%   45 secs             
+frontend/Magento/luma/es_PE             2834/2834           ============================ 100%   45 secs             
+adminhtml/Wolfsellers/theme/es_PE       3462/3462           ============================ 100%   45 secs             
+frontend/Wolfsellers/theme/en_US        2927/2927           ============================ 100%   50 secs             
+frontend/Wolfsellers/theme/es_PE        2927/2927           ============================ 100%   50 secs
+[32m
+Execution time: 63.196723937988[39m
+[2024-04-22T17:20:06.178914+00:00] INFO: Set flag: .static_content_deploy
+[2024-04-22T17:20:06.178996+00:00] NOTICE: End of generating fresh static content
+[2024-04-22T17:20:06.179053+00:00] DEBUG: Step "deploy-static-content" finished
+[2024-04-22T17:20:06.179107+00:00] DEBUG: Running step: run-baler
+[2024-04-22T17:20:06.179144+00:00] DEBUG: Baler JS bundling is disabled.
+[2024-04-22T17:20:06.179167+00:00] DEBUG: Step "run-baler" finished
+[2024-04-22T17:20:06.179191+00:00] INFO: Scenario(s) finished
+[2024-04-22T17:20:07.159956+00:00] INFO: Starting scenario(s): scenario/build/transfer.xml (magento/ece-tools version: 2002.1.14, magento/magento2-base version: 2.4.5-p3)
+[2024-04-22T17:20:07.160825+00:00] DEBUG: Running step: compress-static-content
+[2024-04-22T17:20:07.170478+00:00] DEBUG: which timeout
+[2024-04-22T17:20:07.180060+00:00] DEBUG: /usr/bin/timeout
+[2024-04-22T17:20:07.180646+00:00] DEBUG: which bash
+[2024-04-22T17:20:07.187882+00:00] DEBUG: /bin/bash
+[2024-04-22T17:20:07.188456+00:00] DEBUG: /usr/bin/timeout -k 30 600 /bin/bash -c 'find '\''/app/pub/static'\'' -type d -name '\''DELETING_*'\'' -prune -o -type f -size +300c '\''('\'' -name '\''*.js'\'' -or -name '\''*.css'\'' -or -name '\''*.svg'\'' -or -name '\''*.html'\'' -or -name '\''*.htm'\'' '\'')'\'' -print0 | xargs -0 -n100 -P16 gzip -q --keep -6'
+[2024-04-22T17:20:16.786550+00:00] INFO: Static content compression took 9.5985069274902 seconds.
+[2024-04-22T17:20:16.786774+00:00] DEBUG: Step "compress-static-content" finished
+[2024-04-22T17:20:16.786831+00:00] DEBUG: Running step: clear-init-directory
+[2024-04-22T17:20:16.786879+00:00] INFO: Clearing temporary directory.
+[2024-04-22T17:20:16.787685+00:00] DEBUG: Step "clear-init-directory" finished
+[2024-04-22T17:20:16.787731+00:00] DEBUG: Running step: backup-data
+[2024-04-22T17:20:16.787762+00:00] NOTICE: Copying data to the ./init directory
+[2024-04-22T17:20:16.787823+00:00] DEBUG: Flag var/.regenerate has already been deleted.
+[2024-04-22T17:20:16.798070+00:00] INFO: Create ./init/pub/static
+[2024-04-22T17:20:16.798334+00:00] INFO: Moving static content to init directory
+[2024-04-22T17:20:16.798467+00:00] INFO: Recreating pub/static directory
+[2024-04-22T17:20:16.798867+00:00] INFO: Copying writable directories to /app/init/ directory.
+[2024-04-22T17:20:16.798962+00:00] DEBUG: Copying /app/app/etc->/app/init/app/etc
+[2024-04-22T17:20:16.816046+00:00] DEBUG: Copying /app/pub/media->/app/init/pub/media
+[2024-04-22T17:20:16.830343+00:00] NOTICE: Skip copying /app/var/view_preprocessed->/app/init/var/view_preprocessed
+[2024-04-22T17:20:16.830510+00:00] DEBUG: Copying /app/var/log->/app/init/var/log

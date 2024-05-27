@@ -1,0 +1,38 @@
+<!--
+    Amasty ammenu_submenu_builder uiComponent
+
+    @parent ammenu_submenu_builder
+    @param {Object} elem
+-->
+
+<section data-bind="
+            attr: {
+                class: 'ammenu-submenu-block -root -builder' + (elem.type ? ' -' + elem.type.label : '')
+            },
+            afterRender: function() {
+                $parent.initRoot(elem);
+            },
+            event: {
+                mouseleave: function() {
+                    $parent.reset(elem);
+                }
+            }">
+
+    <!-- ko template: { name: $parent.templates.itemsList } --><!-- /ko-->
+
+    <div class="ammenu-submenu-sidebar">
+        <!-- ko if: elem.elems.length && elem.type && elem.type.value -->
+            <!-- ko scope: 'index = ammenu_submenu_builder' -->
+                <!-- ko fastForEach: $parent.elem.elems -->
+                    <!-- ko template: {
+                        name: $parent.templates.itemWrapper,
+                        data: { elem: $data }
+                    } -->
+                    <!-- /ko-->
+                <!-- /ko-->
+            <!-- /ko-->
+        <!-- /ko-->
+
+        <!-- ko template: { name: $parent.templates.contentBlock } --><!-- /ko-->
+    </div>
+</section>

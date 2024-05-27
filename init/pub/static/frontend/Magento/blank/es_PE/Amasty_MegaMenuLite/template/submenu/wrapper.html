@@ -1,0 +1,48 @@
+<!--
+    Amasty MegaMenu ammenu_submenu_wrapper template
+
+    $parent ammenu_submenu_wrapper
+    @param {Object} item
+    @param {Object} event - event listeners
+-->
+
+<!-- ko if: item.rendered -->
+    <div if="item.isSubmenuVisible"
+             data-bind="
+                attr: {
+                    class: 'ammenu-submenu-wrapper' + (item.additionalClasses.length ? ' ' + item.additionalClasses.join(' ') : ''),
+                    id: item.id
+                },
+                css: {
+                    '-auto': item.width === 1,
+                    '-full': item.width === 0
+                },
+                style: {
+                    animationDuration: ($parent.animation_time + 's'|| ''),
+                    width: item.width_value ? item.width_value() : '',
+                    color: $parent.color_settings.submenu_text,
+                    backgroundColor: $parent.color_settings.submenu_background_color,
+                    backgroundImage: $parent.color_settings.submenu_background_image ? 'url(' + $parent.color_settings.submenu_background_image + ')' : '',
+                    top: item.submenu_position && item.submenu_position.top && item.submenu_position.top() ? item.submenu_position.top() + 'px': false,
+                    right: item.submenu_position && item.submenu_position.right && item.submenu_position.right() ? item.submenu_position.right() + 'px' : false,
+                    bottom: item.submenu_position && item.submenu_position.bottom && item.submenu_position.bottom() ? item.submenu_position.bottom() + 'px' : false,
+                    left: item.submenu_position && item.submenu_position.left && item.submenu_position.left() ? item.submenu_position.left() + 'px' : false
+                },
+                afterRender: function (node) {
+                    item.nodes.submenu = node;
+                },
+                visible: item.isActive,
+                event: event">
+
+        <!-- ko if: item.submenu_type && item.type.value -->
+            <!-- ko scope: 'index = ammenu_submenu_builder' -->
+                <!-- ko template: { name: getTemplate(), data: { elem: $parent.item } } --><!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: !item.submenu_type -->
+            <!-- ko scope: 'index = ammenu_submenu_simple' -->
+                <!-- ko template: { name: getTemplate(), data: { elem: $parent.item } } --><!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+<!-- /ko -->

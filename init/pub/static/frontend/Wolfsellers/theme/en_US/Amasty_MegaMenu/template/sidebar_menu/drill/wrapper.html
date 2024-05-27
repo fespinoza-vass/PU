@@ -1,0 +1,40 @@
+<!--
+    Amasty ammenu_drill_wrapper UiComponent
+
+    @param {Array} elems
+    @param {Number} tab_index
+-->
+
+<!-- ko scope: 'index = ammenu_drill_wrapper' -->
+<section class="ammenu-drill-section"
+         data-bind="visible: activeTab() === $parent.tab_index">
+
+    <!-- ko template: { name: templates.activeLevel } --><!-- /ko -->
+
+    <ul class="ammenu-items -root -drill"
+        data-bind="
+            visible: !$data.activeElem(),
+            attr: {
+                class: 'ammenu-items -root -drill ' + actionAnimation()
+            },
+            fastForEach: $parent.elems">
+        <li class="ammenu-item category-item" if="$data.isVisible">
+            <!-- ko template: {
+                name: $parent.root_templates.item,
+                data: {
+                    item: $data,
+                    link: $data.isViewAll || !$data.isSubmenuVisible() || $parent.source.hide_view_all_link,
+                    toggle: $data.isSubmenuVisible(),
+                    font_weight: $data.mobile_font,
+                    additionalClasses: '-mobile',
+                    border: true,
+                    event: $data.isSubmenuVisible() ? {
+                        click: $parent.toggleItem.bind($parent, $data)
+                    } : false
+                }
+            } -->
+            <!-- /ko -->
+        </li>
+    </ul>
+</section>
+<!-- /ko -->

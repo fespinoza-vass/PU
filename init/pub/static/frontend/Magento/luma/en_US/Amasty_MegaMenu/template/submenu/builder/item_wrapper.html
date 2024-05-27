@@ -1,0 +1,33 @@
+<!--
+    Amasty ammenu_submenu_builder item_wrapper uiComponent
+
+    @param {Object} elem
+-->
+
+<!-- ko scope: 'index = ammenu_submenu_builder' -->
+<div if="$parent.elem && !$parent.elem.hide_content && ($parent.elem.isLinkInteractive || $parent.elem.isContentInteractive)"
+     data-bind="
+        attr: {
+            'class': 'ammenu-submenu-block -' + ($parent.elem.type ? $parent.elem.type.label : '') + (!$parent.elem.elems ? ' -last' : '')
+                    + (!$parent.elem.elems.length && !$parent.elem.content.length ? ' -empty' : '')
+        },
+        style: {
+            color: color_settings.border
+        },
+        visible: $parent.elem.isActive">
+
+    <!-- ko template: { name: templates.itemsList, data: $parent } --><!-- /ko-->
+
+    <div class="ammenu-submenu-sidebar" data-bind="style: { color: color_settings.submenu_text }">
+        <!-- ko if: $parent.elem.type && $parent.elem.type.value -->
+            <!-- ko fastForEach: $parent.elem.elems -->
+                <!-- ko template: { name: $parent.templates.itemWrapper, data: { elem: $data } } --><!-- /ko-->
+            <!-- /ko-->
+        <!-- /ko-->
+
+        <!-- ko if: $parent.elem.isContentInteractive -->
+            <!-- ko template: { name: templates.contentBlock, data: $parent } --><!-- /ko-->
+        <!-- /ko-->
+    </div>
+</div>
+<!-- /ko-->

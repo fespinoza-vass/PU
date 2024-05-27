@@ -1,0 +1,21 @@
+<!--
+    Amasty ammenu_sidebar_menu sidebar switcher template
+    Switching items list via current menu type {hamburger, accordion, drill}
+
+    @param {Array} elems
+    @param {Number} tab_index
+-->
+
+<!-- ko scope: 'index = ammenu_sidebar_menu_wrapper' -->
+    <!-- ko if: !$data.source.isMobile() -->
+        <!-- ko template: { name: root_templates.hamburger_items, data: $parent } --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: $data.source.isMobile() && $data.mobile_class === 'drill' -->
+        <!-- ko template: { name: root_templates.drill_wrapper, data: $parent } --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: $data.source.isMobile() && $data.mobile_class === 'accordion' -->
+        <!-- ko template: { name: root_templates.accordion, data: $parent } --><!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->
+
+

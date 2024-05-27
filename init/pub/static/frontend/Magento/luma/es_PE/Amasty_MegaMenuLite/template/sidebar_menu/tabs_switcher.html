@@ -1,0 +1,35 @@
+<!--
+    Amasty ammenu_tabs UiComponent
+-->
+
+<ul class="ammenu-tabs-list"
+    role="tablist"
+    data-bind="
+        style: {
+            background: $parent.color_settings.submenu_background_color
+        },
+        foreach: $data.tabsList">
+    <li class="ammenu-item">
+        <button class="ammenu-button"
+                role="tab"
+                data-bind="
+                    attr: {
+                        'aria-selected': ($parent.activeTab() === $index()).toString(),
+                        'title': $t($index() === 0 ? 'Switch to category menu tab' : 'Switch to account menu tab')
+                    },
+                    style: {
+                        background: $parent.activeTab() === $index() ? $parent.color_settings.main_menu_background : $parent.color_settings.submenu_background_color,
+                        color: $parent.activeTab() === $index() ? $parent.color_settings.main_menu_text : $parent.color_settings.submenu_text
+                    },
+                    event: {
+                        click: function() {
+                            $parent.activeTab($index())
+                        }
+                    },
+                    css: {
+                       '-active': $parent.activeTab() === $index()
+                    },
+                    text: title">
+        </button>
+    </li>
+</ul>

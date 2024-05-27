@@ -1,0 +1,65 @@
+<?php
+/** @var $block \WolfSellers\Bopis\Block\Adminhtml\Order\View */
+$_order = $block->getOrder();
+
+/** @var $_progressBar \WolfSellers\Bopis\ViewModel\ProgressBar */
+$_progressBar = $block->getData('viewModel');
+
+$states = $_progressBar->getRealBopisStates();
+$stateComplete = true;
+
+$isEnvioRapido = ($_order->getShippingMethod() == "envio_rapido_envio_rapido");
+?>
+<div class="sales_order_progress_bar">
+    <ul class="states-list">
+
+        <?php foreach ($states as $state => $data): ?>
+
+            <?php if ($_order->getShippingMethod() != $_progressBar->getPickupShippingMethodKey()
+                && $state == 'readyforpickup'): ?>
+                <?php continue; ?>
+            <?php endif; ?>
+
+            <?php if ($_order->getShippingMethod() == $_progressBar->getPickupShippingMethodKey()
+                && $state == 'shipping'): ?>
+                <?php continue; ?>
+            <?php endif; ?>
+
+            <li class="state-<?= $state ?> <?= ($stateComplete) ? 'step-complete' : '' ?>">
+                <span class="icon-check"></span>
+
+                <span> <?= $data['label'] ?> </span>
+
+                <?php if ($data['action']): ?>
+                    <form action="<?= $block->escapeUrl($block->getUrl($data['action'])) ?>" method="post"
+                          id="form-state--<?= $state ?>">
+                        <?= $block->getBlockHtml('formkey') ?>
+
+                        <input name="order_id" type="hidden" value="<?= $_order->getEntityId() ?>"/>
+
+                        <?php if(!($isEnvioRapido && $state == 'shipping')): ?>
+                        <button type="submit" class="<?= ($stateComplete) ? 'confirmed-button' : 'unconfirmed-button' ?>"
+                            <?= ($stateComplete || !$nextStepAvailable) ? 'disabled' : '' ?>
+                            >
+                            <span>
+                                <?= ($stateComplete) ? 'CONFIRMADO' : 'CONFIRMAR' ?>
+                            </span>
+                        </button>
+                        <?php endif; ?>
+                    </form>
+                <?php endif; ?>
+            </li>
+
+            <?php $nextStepAvailable = false; ?>
+
+            <?php if ($_order->getStatus() == $data['state']): ?>
+                <?php
+                $stateComplete = false;
+                $nextStepAvailable = true;
+                ?>
+            <?php endif ?>
+
+        <?php endforeach; ?>
+
+    </ul>
+</div>
