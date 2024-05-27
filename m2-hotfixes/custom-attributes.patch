@@ -1,0 +1,16 @@
+diff --git a/vendor/magento/module-customer/Model/Address/AbstractAddress.php b/vendor/magento/module-customer/Model/Address/AbstractAddress.php
+index 8421fc9..4854553 100755
+--- a/vendor/magento/module-customer/Model/Address/AbstractAddress.php
++++ b/vendor/magento/module-customer/Model/Address/AbstractAddress.php
+@@ -281,11 +281,6 @@ class AbstractAddress extends AbstractExtensibleModel implements AddressModelInt
+             $key = $this->_implodeArrayField($key);
+         } elseif (is_array($value) && $this->isAddressMultilineAttribute($key)) {
+             $value = $this->_implodeArrayValues($value);
+-        } elseif (self::CUSTOM_ATTRIBUTES === $key && is_array($value)) {
+-            foreach ($value as &$attribute) {
+-                $attribute = is_array($attribute) ? $attribute : $attribute->__toArray();
+-                $attribute = $this->processCustomAttribute($attribute);
+-            }
+         }
+ 
+         return parent::setData($key, $value);

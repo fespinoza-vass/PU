@@ -1,0 +1,13 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Items\Totals $block */
+
+?>
+<?php if ($item = $block->getItem()) :
+    $orderStatus = $item->getOrder()->getStatus();
+?>
+    <span class="grid-status <?= $orderStatus ?>"><?= ucfirst($orderStatus) ?></span>
+<?php endif; ?>

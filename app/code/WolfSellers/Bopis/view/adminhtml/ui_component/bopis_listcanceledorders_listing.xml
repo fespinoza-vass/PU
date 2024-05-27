@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">bopis_listcanceledorders_listing.bopis_listcanceledorders_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>bopis_listorders_columns</spinner>
+        <deps>
+            <dep>bopis_listcanceledorders_listing.bopis_listcanceledorders_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="bopis_listcanceledorders_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>WolfSellers_Bopis::listnewsorders</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="bopis_listcanceledorders_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>main_table.entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters" template="WolfSellers_Bopis/grid/filters/filters">
+            <settings>
+                <childDefaults>
+                    <param name="imports" xsi:type="array">
+                        <item name="visible" xsi:type="string">bopis_listcanceledorders_listing.bopis_listcanceledorders_listing.bopis_listorders_columns:${ $.index }.visible</item>
+                    </param>
+                    <param name="provider" xsi:type="string">bopis_listcanceledorders_listing.bopis_listcanceledorders_listing.listing_top.listing_filters</param>
+                </childDefaults>
+                <statefull>
+                    <property name="applied" xsi:type="boolean">false</property>
+                </statefull>
+
+            </settings>
+            <filterSelect name="source_code" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
+                <settings>
+                    <options class="WolfSellers\Bopis\Model\Config\Source\SourceOptions"/>
+                    <caption translate="true">--Todo--</caption>
+                    <label translate="true">Tienda</label>
+                    <dataScope>source_code</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+            <filterSelect
+                name="shipping_method"
+                provider="${ $.parentName }"
+                class="\WolfSellers\Bopis\Ui\Component\Listing\Filter\ShippingMethod">
+                <settings>
+                    <options class="WolfSellers\Bopis\Model\Config\Source\ShippingOptions"/>
+                    <caption translate="true">--Todo--</caption>
+                    <label translate="true">Método de entrega</label>
+                    <dataScope>shipping_method</dataScope>
+                </settings>
+            </filterSelect>
+            <filterSelect
+                name="savar_horario"
+                provider="${ $.parentName }"
+                class="\WolfSellers\Bopis\Ui\Component\Listing\Filter\SavarHorario" sortOrder="45">
+                <settings>
+                    <options class="WolfSellers\Bopis\Model\Config\Source\HorariosOptions"/>
+                    <caption translate="true">--Todo--</caption>
+                    <label translate="true">Horario</label>
+                    <dataScope>savar_horario</dataScope>
+                </settings>
+            </filterSelect>
+        </filters>
+    </listingToolbar>
+    <columns name="bopis_listorders_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">bopis_listcanceledorders_listing.bopis_listcanceledorders_listing.bopis_listorders_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">view</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+                <sorting>desc</sorting>
+            </settings>
+        </selectionsColumn>
+
+        <column name="increment_id" sortOrder="10">
+            <settings>
+                <draggable>false</draggable>
+                <filter>text</filter>
+                <label translate="true">Número de Pedido</label>
+                <sorting>desc</sorting>
+                <sortable>true</sortable>
+            </settings>
+        </column>
+        <column name="shipping_name" sortOrder="20">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>false</sortable>
+                <filter>text</filter>
+                <label translate="true">Entregar a</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="customer_email" sortOrder="30">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <filter>false</filter>
+                <label translate="true">Email</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="source_code" class="WolfSellers\Bopis\Ui\Component\Listing\Column\PickupLocationCode" sortOrder="20">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <filter>multiselect</filter>
+                <label translate="true">Tienda</label>
+                <dataType>select</dataType>
+            </settings>
+        </column>
+        <column name="entregar_a" sortOrder="25">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <filter>text</filter>
+                <label translate="true">Entregar a</label>
+            </settings>
+        </column>
+        <column name="shipping_method" class="WolfSellers\Bopis\Ui\Component\Listing\Column\ShippingMethod" sortOrder="40">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <label translate="true">Método de entrega</label>
+            </settings>
+        </column>
+        <column name="savar_horario" class="WolfSellers\Bopis\Ui\Component\Listing\Column\HorariosSavar" sortOrder="45">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <label translate="true">Horario</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date" sortOrder="50">
+            <settings>
+                <filter>dateRange</filter>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <dataType>date</dataType>
+                <label translate="true">Fecha de Compra</label>
+                <!--dateFormat>dd/MM/YYYY</dateFormat-->
+            </settings>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date" sortOrder="50">
+            <settings>
+                <filter>dateRange</filter>
+                <draggable>false</draggable>
+                <sortable>false</sortable>
+                <dataType>date</dataType>
+                <label translate="true">Fecha de Entrega</label>
+                <!--dateFormat>dd/MM/YYYY</dateFormat-->
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/cells/sanitizedHtml"
+                class="WolfSellers\Bopis\Ui\Component\Listing\Column\Status" sortOrder="60">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <options class="Magento\Sales\Ui\Component\Listing\Column\Status\Options"/>
+                <dataType>select</dataType>
+                <label translate="true">Estatus</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+        <column name="grand_total" class="Magento\Sales\Ui\Component\Listing\Column\PurchasedPrice" sortOrder="70">
+            <settings>
+                <draggable>false</draggable>
+                <sortable>true</sortable>
+                <label translate="true">TOTAL</label>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" class="Magento\Sales\Ui\Component\Listing\Column\ViewAction" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="viewUrlPath" xsi:type="string">bopis/order/view</item> <!-- TODO: Cambiar por el editor de ordenes de este módulo-->
+                    <item name="urlEntityParamName" xsi:type="string">order_id</item>
+                </item>
+            </argument>
+            <settings>
+                <sortable>false</sortable>
+                <draggable>false</draggable>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+    <listingToolbar name="listing_bottom">
+        <paging name="listing_paging"/>
+    </listingToolbar>
+</listing>

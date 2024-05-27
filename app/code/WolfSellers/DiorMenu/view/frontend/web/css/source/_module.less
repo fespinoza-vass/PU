@@ -1,0 +1,47 @@
+/*Media Query*/
+@xsmall:~"all and (max-width:360px)";
+@small:~"all and (max-width:500px)";
+@medium:~"all and (max-width:800px)";
+@large:~"all and (max-width:1024px)";
+
+.w-desktop{
+    display: block;
+    @media @medium {
+        display: none;
+    }
+}
+
+.w-mobil{
+    display: none;
+    @media @medium {
+        display: block;
+    }
+}
+
+.menu-dior.w-mobil {
+    height: 45px;
+    overflow: hidden;
+    transition: all .2s linear;
+}
+
+.open-nav{
+    height: 100% !important;
+}
+.presentation{
+    text-align: center;
+}
+span.toggle-menu-custom{
+    color: #ffff;
+    font-size: 2em;
+    padding: 10px;
+}
+ul#nav-list {
+    margin-top: 15px;
+}
+
+.custom-menu {
+    display: none !important;
+    &.se-ve {
+        display: block !important;
+    }
+}

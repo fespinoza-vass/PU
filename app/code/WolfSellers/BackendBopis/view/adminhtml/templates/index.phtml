@@ -1,0 +1,12 @@
+<?php
+/**@var  $block \WolfSellers\BackendBopis\Block\Adminhtml\Index */
+
+?>
+<div class="ordes">
+    <div class="newOrders"><div><?= $block->getNewOrders() ?></div><div>Pedidos confirmados</div></div>
+    <div class="processingOrders"><?= $block->getProcessingOrders() ?></div><div>Pedidos preparados</div></div>
+    <div class="processingOrders"><?= $block->getShippingOrders() ?></div><div> Pedidos en camino</div></div>
+    <div class="holdedOrders"><?= $block->getHoldedOrders() ?></div><div>Pedidos detenidos</div></div>
+    <div class="completeOrders"><?= $block->getCompleteOrders() ?></div><div>Predidos entregados</div></div>
+    <div class="cancelOrders"><?= $block->getCancelOrders() ?></div><div>Pedidods cancelados</div></div>
+</div>

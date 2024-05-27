@@ -1,0 +1,187 @@
+& when (@media-common =true) {
+    .cms-rastreo-y-seguimiento {
+        .page-wrapper {
+            .page-main-full-width {
+                .column {
+                    .row-page-content {
+                        .order-tracking-container {
+                            background: @gray-F7;
+                            border-radius: 12px;
+
+                            form {
+                                background: @gray-F7;
+                                border-radius: 12px;
+
+                                .required {
+                                    .label {
+                                        display: block;
+                                    }
+                                }
+                            }
+
+                            .tracking-result {
+                                .tracking-status {
+                                    font-weight: bold;
+                                    .lib-font-size(0);
+                                    color: @gray-7C;
+
+                                    .item-status {
+                                        &.active {
+                                            .active {
+                                                display: block;
+                                            }
+
+                                            img {
+                                                display: none;
+                                            }
+                                        }
+
+                                        .active {
+                                            display: none;
+                                        }
+
+                                        img {
+                                            width: 90%;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+// Desktop
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+    .cms-rastreo-y-seguimiento {
+        .page-wrapper {
+            .page-main-full-width {
+                .column {
+                    .row-page-content {
+
+
+                        .order-tracking-container {
+                            form {
+                                justify-content: start;
+                                margin: auto auto 30px;
+                                align-items: center;
+                                padding: 24px 32px;
+                                display: flex;
+                                width: 70%;
+
+                                .required {
+                                    margin: 0 16px 0 0;
+                                    width: 70%;
+
+                                    &::after {
+                                        content: "Máximo 9 digitos";
+                                        .lib-font-size(12);
+                                        margin: 15px 0 0;
+                                        color: @gray-7C;
+                                    }
+
+                                    .label {
+                                        margin: 0 0 7px;
+                                    }
+                                }
+
+                                .actions-toolbar {
+                                    .primary {
+                                        .action {
+                                            padding: 16px 50px;
+                                            margin: 0;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .tracking-result {
+                                padding: 20px;
+
+                                .tracking-status {
+                                    justify-content: space-between;
+                                    display: flex;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//
+//  Mobile
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .cms-rastreo-y-seguimiento {
+        .page-wrapper {
+            .page-main-full-width {
+                .column {
+                    .row-page-content {
+                        h2 {
+                            margin: 12px 0 24px;
+                        }
+
+                        .order-tracking-container {
+                            form {
+                                padding: 24px 16px;
+                                margin: 0 0 20px;
+
+                                &::after {
+                                    content: "Máximo 9 digitos";
+                                    .lib-font-size(12);
+                                    margin: 24px 0 0;
+                                    color: @gray-7C;
+                                    display: block;
+                                }
+
+                                .required {
+                                    margin: 0 0 12px;
+
+                                    .label {
+                                        margin: 0 0 7px;
+                                    }
+                                }
+
+                                .actions-toolbar {
+                                    .primary {
+                                        .action {
+                                            .lib-font-size(16);
+                                            padding: 9px 0;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .tracking-result {
+                                .tracking-status {
+                                    text-align: center;
+
+                                    div {
+                                        margin: 0 0 20px;
+                                    }
+
+                                    .item-status {
+                                        &.active {
+                                            .active {
+                                                margin: auto;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

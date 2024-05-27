@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="inventory_reservation_by_source_cron" instance="WolfSellers\InventoryReservationBySource\Cron\SetSourceInventoryReservationCron" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>
+

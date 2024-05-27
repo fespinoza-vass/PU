@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+    <topic name="bopis.order.notifications" is_synchronous="false" request="WolfSellers\Bopis\Model\Queue\NotificationData">
+        <handler name="bopis.order.notifications.handler" type="WolfSellers\Bopis\Model\Queue\SendNotification" method="execute" />
+    </topic>
+</config>

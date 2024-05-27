@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table comment="wolfsellers_consecutive_consecutive Table" engine="innodb" name="wolfsellers_consecutive_consecutive" resource="default">
+		<column comment="Entity Id" identity="true" name="consecutive_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="consecutive_id"/>
+		</constraint>
+		<column length="255" name="consecutive_number" nullable="true" xsi:type="varchar"/>
+		<column name="website_id" nullable="true" xsi:type="smallint"/>
+		<constraint xsi:type="unique" referenceId="WOLFSELLERS_CONSECUTIVE">
+			<column name="consecutive_number"/>
+		</constraint>
+	</table>
+	<table comment="wolfsellers_consecutive_sequential Table" engine="innodb" name="wolfsellers_consecutive_sequential" resource="default">
+		<column comment="Entity Id" identity="true" name="sequential_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="sequential_id"/>
+		</constraint>
+		<column length="255" name="name" nullable="true" xsi:type="varchar"/>
+		<column length="255" name="start_number" nullable="true" xsi:type="varchar"/>
+		<column length="255" name="format" nullable="true" xsi:type="varchar"/>
+		<column length="255" name="website_id" nullable="true" xsi:type="varchar"/>
+		<column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+		<column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+		<constraint xsi:type="unique" referenceId="WOLFSELLERS_CONSECUTIVE_SEQUENTIAL">
+			<column name="website_id"/>
+		</constraint>
+	</table>
+	<table name="amasty_customform_answer" resource="default" engine="innodb" comment="amasty_customform_answer">
+		<column xsi:type="varchar" length="255" name="correlative_number" nullable="true" comment="correlative_consecutive_number"/>
+	</table>
+</schema>

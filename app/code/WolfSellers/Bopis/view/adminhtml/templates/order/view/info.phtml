@@ -1,0 +1,232 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \WolfSellers\Bopis\Block\Adminhtml\Order\View\Info */
+
+/** @var $viewModel \WolfSellers\Bopis\ViewModel\GeneralOrder */
+$viewModel = $block->getData('viewModel');
+
+/**
+ * @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Info $block
+ */
+$order = $block->getOrder();
+$baseCurrencyCode = (string)$order->getBaseCurrencyCode();
+$globalCurrencyCode = (string)$order->getGlobalCurrencyCode();
+$orderCurrencyCode = (string)$order->getOrderCurrencyCode();
+
+$orderAdminDate = $block->formatDate(
+    $block->getOrderAdminDate($order->getCreatedAt()),
+    \IntlDateFormatter::MEDIUM,
+    true
+);
+
+$orderStoreDate = $block->formatDate(
+    $order->getCreatedAt(),
+    \IntlDateFormatter::SHORT,
+    true,
+    $block->getTimezoneForStore($order->getStore())
+);
+
+$customerUrl = $block->getCustomerViewUrl();
+
+$allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub', 'sup', 'ul'];
+
+$btnClienteRetira = $block->isBtnClienteRetiraAvailable();
+$btnClienteFactura = $block->isBtnClienteFacturaAvailable();
+$btnOrden = $block->isBtnOrdenAvailable();
+
+/** @var  $billingAddress */
+$billingAddress = $order->getBillingAddress();
+/** @var  $shippingAddress */
+$shippingAddress = $order->getShippingAddress();
+$horarioDeEntrega = $viewModel->getRealAddrOptionValue(
+    'horarios_disponibles',
+    $shippingAddress->getHorariosDisponibles()
+);
+$customerOrderBillingInformation = $viewModel->getCustomerOrderBillingInformation($order->getId());
+?>
+
+<!-- 01 CARD: CLIENTE QUE FACTURA -->
+<section class="admin__page-section bopis-data card-bill">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-billing-address">
+            <div class="admin__page-section-item-title icon-retira">
+                <span class="title"><?= $block->escapeHtml(__('Cliente que compra')) ?></span>
+            </div>
+
+            <address class="admin__page-section-item-content">
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                    <span class="color-orange">
+                        <?php if ($order->getCustomerIsGuest()): ?>
+                            <b><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b>
+                        <?php else: ?>
+                            <?= $customerOrderBillingInformation['name'] ?>
+                        <?php endif; ?>
+                    </span><br>
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
+                    <?= $customerOrderBillingInformation['email'] ?><br />
+                    T. <?= $customerOrderBillingInformation['tel'] ?><br />
+                <?php else: ?>
+                    <span class="color-orange">
+                        <?= $customerOrderBillingInformation['name'] ?>
+                    </span><br>
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
+                    <?= $customerOrderBillingInformation['email'] ?><br />
+                    T. <?= $customerOrderBillingInformation['tel'] ?><br />
+                <?php endif; ?>
+                <br>
+                <br>
+                Comprobante:
+                <?php if ( is_null($billingAddress->getDataByKey('invoice_required')) ||
+                    $billingAddress->getDataByKey('invoice_required') == '0' ):?>
+                    Boleta
+                <?php else: ?>
+                    Factura <br>
+                    RUC: <?=$billingAddress->getDataByKey('ruc')?> <br>
+                    Razón Social: <?=$billingAddress->getDataByKey('razon_social')?> <br>
+                    Dirección Fiscal: <?=$billingAddress->getDataByKey('direccion_fiscal')?> <br>
+                <?php endif; ?>
+                <br />
+
+                <?php if ($block->isLegalPerson()):?>
+                    Razón Social : <?= $order->getData('razon_social'); ?><br />
+                    Ruc : <?= $order->getData('ruc'); ?><br />
+                    dv : <?= $order->getData('dv'); ?><br />
+                    Regimen : <?= $order->getData('regimen'); ?><br />
+                <?php endif;?>
+            </address>
+            <?php if ($block->getAdminUserType() == 1):?>
+                <button name="btn-confirmacion-cliente-factura"
+                        value="Confirmar"
+                        class="btn-confirmacion-cliente btn-confirmacion-cliente-factura <?= $this->getOrder()->getData("verificacion_bopis_cliente_factura") > 0 ?"":"confirmado" ?>"
+                    <?= $btnClienteFactura ? "":'disabled="disabled"' ?>
+                        data-order-id="<?= $order->getEntityId() ?>"
+                        data-type="2"
+                >
+                    <?= $this->getOrder()->getData("verificacion_bopis_cliente_factura") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
+                </button>
+            <?php endif;?>
+        </div>
+    </div>
+</section>
+
+<!-- 03 CARD: ORDEN -->
+<section class="admin__page-section bopis-data">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-orden">
+            <div class="admin__page-section-item-title icon-orden">
+                <span class="title"><?= $block->escapeHtml(__('Orden')) ?></span>
+            </div>
+
+
+            <address class="admin__page-section-item-content">
+                <b><span class="color-orange">Número de Pedido: <?= $order->getIncrementId(); ?></span></b><br />
+                <!--ID SBX: <?= $order->getId(); ?><br />-->
+                Creado: <?= $orderStoreDate; ?><br />
+                Entrega: <?=$viewModel->getShippingMethodTitle($order->getShippingMethod())?><br />
+                Tienda: <?=$viewModel->getOrderSourceName($order->getData('source_code'))?> <br>
+                <?=$order->getGiftMessageId() ? '<b class="gift">Esta orden es un regalo</b>' : ''?>
+            </address>
+            <?php if ($block->getAdminUserType() == 1):?>
+                <button name="btn-confirmacion-orden"
+                        value="Confirmar"
+                        class="btn-confirmacion-cliente btn-confirmacion-orden <?= $this->getOrder()->getData("verificacion_bopis_orden") > 0 ?"":"confirmado" ?>"
+                    <?= $btnOrden ? "":'disabled="disabled"' ?>
+                        data-order-id="<?= $order->getEntityId() ?>"
+                        data-type="3"
+                >
+                    <?= $this->getOrder()->getData("verificacion_bopis_orden") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
+                </button>
+            <?php endif;?>
+        </div>
+    </div>
+</section>
+
+<!-- 04 CARD: CLIENTE QUE RECIBE -->
+<section class="admin__page-section bopis-data">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-shipping-address ">
+            <div class="admin__page-section-item-title icon-retira">
+                <span class="title"><?= $block->escapeHtml(__('Cliente que recibe')) ?></span>
+            </div>
+            <address class="admin__page-section-item-content">
+                <?php if($order->getShippingMethod() == $viewModel->getInStoreCode()): ?>
+                    <?php $picker = $viewModel->getRealAddrOptionValue('picker', $shippingAddress->getPicker()); ?>
+                    <?php if ($picker == 'other'): ?>
+                        <b class="color-orange" title="pick <?=$picker?>"><?= $shippingAddress->getNombreCompletoPicker() ?></b><br />
+                        Número de documento: <?=$viewModel->getRealAddrOptionValue('identificacion_picker', $shippingAddress->getIdentificacionPicker())?>
+                            - <?=$shippingAddress->getNumeroIdentificacionPicker()?><br />
+                    <?php else: ?>
+                        <b class="color-orange" title="<?=$picker?>">
+                        <?php if ($order->getCustomerIsGuest()): ?>
+                            <b><?= $order->getCustomerNombre()?> <?=$order->getCustomerApellido()?></b>
+                        <?php else: ?>
+                            <?= $customerOrderBillingInformation['name'] ?>
+                        <?php endif; ?>
+                        </b><br />
+                        Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                        <?=$customerOrderBillingInformation['id_number'] ?><br />
+                        <?= $customerOrderBillingInformation['email'] ?><br />
+                        T. <?= $customerOrderBillingInformation['tel'] ?><br
+                    <?php endif; ?>
+                <?php else: ?>
+                    <b class="color-orange"><?= $shippingAddress->getFirstname() . " " . $shippingAddress->getLastname(); ?></b><br />
+                    Número de documento: <?= $customerOrderBillingInformation['type_id']?> -
+                    <?=$customerOrderBillingInformation['id_number'] ?><br />
+                    <?= $shippingAddress->getEmail(); ?><br />
+                    T. <?= $shippingAddress->getTelephone(); ?>
+                <?php endif; ?>
+            </address>
+            <?php if ($block->getAdminUserType() == 1):?>
+            <!--<button name="btn-confirmacion-cliente-retira"
+                    value="Confirmar"
+                    class="btn-confirmacion-cliente btn-confirmacion-cliente-retira
+                        <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"":"confirmado" ?>
+                        is-button-visible"
+                <?= $btnClienteRetira ? "":'disabled="disabled"' ?>
+                    data-order-id="<?= $order->getEntityId() ?>"
+                    data-type="1"
+            >
+                <?= $this->getOrder()->getData("verificacion_bopis_cliente_retira") > 0 ?"CONFIRMADO":"CONFIRMAR" ?>
+            </button>-->
+            <?php endif;?>
+        </div>
+    </div>
+</section>
+
+<?php if(!$block->IsPickup()):?>
+<!-- 05 CARD: DIRECCIÓN DE ENTREGA -->
+<section class="admin__page-section bopis-data bopis-data-entrega">
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item bopis-shipping-address ">
+            <div class="admin__page-section-item-title icon-direccion">
+                <span class="title"><?= $block->escapeHtml(__('Dirección de entrega')) ?></span>
+            </div>
+
+            <address class="admin__page-section-item-content">
+                <span class="calle">
+                    <b>
+                        <?= implode(" ", ($shippingAddress->getStreet() ?? [])) ?>,
+                        <?= $shippingAddress->getData('colony') ?>
+                    </b>
+                </span> <br>
+                <span class="departamento"> <?= $shippingAddress->getRegion() ?></span> <br>
+                <span class="cp"> CP. <?= $shippingAddress->getPostcode() ?> </span> <br>
+                <span class="teléfono">T. <?= $shippingAddress->getTelephone() ?></span> <br>
+                <span class="referencia"> Referencia: <?= $shippingAddress->getData('referencia_envio') ?></span> <br>
+                <span class="provincia"><?= $shippingAddress->getCity() ?></span> <br>
+                <?php if ($horarioDeEntrega): ?>
+                    <span class="horario" title="<?=$horarioDeEntrega?>">Horario de entrega:
+                        <?= $viewModel->getSchedule($horarioDeEntrega)?>
+                    </span>
+                <?php endif; ?>
+            </address>
+        </div>
+    </div>
+</section>
+<?php endif;?>

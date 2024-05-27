@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Shipping\Model\Shipping">
+        <plugin name="WolfSellers_FreeShipping_Plugin_Shipping" type="WolfSellers\FreeShipping\Plugin\ShippingPlugin" sortOrder="10" disabled="false"/>
+    </type>
+</config>

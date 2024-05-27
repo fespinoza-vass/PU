@@ -1,0 +1,138 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div id="store-selector"class="step-content" data-bind="blockLoader: $parent.isLoading" css="'store-selected': $parent.selectedLocation">
+
+    <div class="store-pickup-method">
+        <div class="content-when-not-selected" data-bind="fadeVisible:!selectedLocation()">
+            <div class="distrito-uicomponent">
+                <div class="step-title" translate="'2. Select your district'" data-role="title"></div>
+
+                <each args="getRegion('distrito-pickup')" render="" ></each>
+
+            </div>
+            <div class="pickup-store-list">
+                <div class="step-title" translate="'2.1 Selecciona tu tienda de retiro'" data-role="title"></div>
+                <span class="pickup-store-list_empty" data-bind="visible:isActiveFade()"></span>
+                <div id="opc-store-selector-popup-noModal" data-bind="visible:activeOptions()" render="storeSelectorPopupTemplate" ></div>
+            </div>
+        </div>
+        <div class="content-when-selected" data-bind="fadeVisible:selectedLocation()">
+            <div class="step-title" translate="'2. Selecciona tu tienda de retiro'" data-role="title"></div>
+            <render args="selectedLocationTemplate"></render>
+            <div class="options">
+                <a href="#" data-bind="click: unSelectLocation()" translate="'Elegir otro lugar de retiro'" ></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="store-pickup-picker">
+        <div class="step-title" translate="'2.1. Selecciona quien recogerá el pedido'" data-role="title" visible="selectedLocation()"></div>
+        <div class="step-title" translate="'2.2. Selecciona quien recogerá el pedido'" data-role="title" visible="!selectedLocation()"></div>
+        <div class="content-picker">
+            <each args="getRegion('picker')" render="" ></each>
+            <div class="content-for-other-picker" data-bind="visible: isAnotherPickerAreaVisible()">
+                <form
+                    id="form_another_picker"
+                    class="form-another-picker"
+                    novalidate="novalidate"
+                    data-form-part="anotherPicker">
+                    <each args="getRegion('another-picker')" render="" ></each>
+                </form>
+                <div class="content-for-other-picker_info">
+                    <span class="content-for-other-picker_info-icon"></span>
+                    <p translate="'A QR code will be sent to this email to expedite the store pickup of your order'"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="store-pickup-receipt-address">
+        <div class="step-title" translate="'2.2. Ingresa una dirección para tu comprobante'" data-role="title" visible="false"></div>
+        <div class="step-title" translate="'2.3. Ingresa una dirección para tu comprobante'" data-role="title" visible="false"></div>
+        <form id="form_another_vaoucher"
+              class="form-picker-voucher"
+              novalidate="novalidate"
+              data-form-part="pickerVoucher"
+              visible="false">
+            <each args="getRegion('picker-voucher')" render="" ></each>
+        </form>
+        <div class="store-pickup-receipt-address_time">
+            <span class="store-pickup-receipt-address_time-icon"></span>
+            <div visible="!isNotLabels()">
+                <p visible="isLabelInstore()">
+                    <!--Etiqueta Tienda -->
+                    <span data-bind="text: getHorarioTienda()"></span>
+                </p>
+                <p visible="isNotLabelMoreInstore()">
+                    <!--Sin Etiqueta  + Etiqueta Tienda -->
+                    <span data-bind="text: rulesIntoreHours()"></span>
+                </p>
+                <p visible="isLabelsMatch()">
+                    <!--Dos Etiquetas  +  Sin Etiqueta -->
+                    <span data-bind="text: rulesIntoreHours()"></span>
+                </p>
+                <p visible="isLabelInstoreFast()">
+                    <!--Etiqueta instore +  Etiqueta fast-->
+                    <span data-bind="text: getHorarioTienda()"></span>
+                </p>
+            </div>
+            <div visible="isNotLabels()">
+                <p>
+                    Podrás recoger tu pedido en 48 Hrs
+                </p>
+            </div>
+        </div>
+
+        <div class="store-pickup-receipt-address_info">
+            <span></span>
+            <p data-bind="text: messageBasedOnAvailability"></p>
+        </div>
+
+        <div class="store-pickup-receipt-address_price">
+            <p translate="'Cost of shipping'"></p>
+            <span>S/0.00</span>
+    </div>
+</div>
+
+
+<div id="store-selector-original">
+    <div id="checkout-step-store-selector" class="step-content" data-role="content">
+
+        <each args="getRegion('after-selected-location')" render=""></each>
+        <form
+            class="form-continue"
+            submit="setPickupInformation"
+            novalidate="novalidate"
+            >
+            <div class="actions-toolbar">
+                <div class="secondary">
+                    <button type="button" class="button action" click="openPopup">
+                        <span if="selectedLocation">
+                            <translate args="'Select Other'"></translate>
+                        </span>
+                        <span ifnot="selectedLocation">
+                            <translate args="'Select Store'"></translate>
+                        </span>
+                    </button>
+                </div>
+                <div class="primary">
+                    <button data-role="opc-continue"
+                            type="submit"
+                            class="button action continue primary"
+                            css="disabled: !selectedLocation"
+                            enable="selectedLocation"
+                            disabled
+                    >
+                        <span>
+                            <translate args="'Next'"></translate>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,8 @@
+{
+    "inventory_source": {
+        "column": {
+            "store_code": true,
+            "opening_hours": true
+        }
+    }
+}

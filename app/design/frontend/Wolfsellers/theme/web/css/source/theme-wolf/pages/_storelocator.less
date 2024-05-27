@@ -1,0 +1,92 @@
+//
+// Common
+//  ---------------------------------------------
+& when (@media-common = true) {
+    .amlocator-index-index{
+        .container-header-page{
+            position: relative;
+            margin-bottom: 50px;
+            .page-image-wrapper{
+                .pages-image{
+                    &:after{
+                        background: url("../images/perfumerias-store-locator-1.png") no-repeat;
+                        background-position-x: center;
+                        background-size: cover;
+                        display: block;
+                        height: 325px;
+                        content: ' ';
+                        opacity: 0.8;
+                        width: 100vw;
+                        margin-left: ~"calc(50% - 50vw)";
+                    }
+                }
+            }
+            .page-title-wrapper{
+                position: absolute;
+                bottom: 40%;
+                left: 50%;
+                width: 100%;
+                max-width: @layout__max-width;
+                text-align: right;
+                transform: translateX(-50%);
+                padding:0 20px;
+                box-sizing:border-box;
+                .page-title {
+                    font-size: 42px;
+                    margin: 0 !important;
+                    span {
+                        font-weight: bold;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+        .amlocator-main-container{
+            background: @white;
+            padding: 24px;
+            border-radius: 12px;
+            .amlocator-map-container{
+                .amlocator-search-container{
+                    display: none;
+                }
+                .amlocator-block.-storelist.amlocator-store-list{
+                    flex: unset;
+                    .amlocator-wrapper{
+                        .amlocator-store-desc{
+                            background-color: @white;
+                            &.-active{
+                                background-color: @primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+.media-width(@extremum, @break) when (@extremum ='max') and (@break =@screen__m) {
+    .amlocator-index-index {
+        .container-header-page {
+            .page-image-wrapper {
+                .pages-image {
+                    &:after {
+                        height: 140px !important;
+                        background: url("../images/perfumerias-locator-mobile.png") no-repeat !important;
+                    }
+                }
+            }
+            .page-title-wrapper{
+                .page-title {
+                    font-size: 20px !important;
+                }
+            }
+        }
+        .amlocator-main-container{
+            padding: 16px;
+        }
+    }
+}

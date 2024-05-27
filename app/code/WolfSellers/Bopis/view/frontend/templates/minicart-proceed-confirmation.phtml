@@ -1,0 +1,29 @@
+<div id="minicart-proceed-confirmation-popup-content" style="display: none;">
+    <div class="custom-popup-content">
+        <div class="custom-popup-content_info">
+            <div class="custom-popup-content_info-img">
+                <img data-bind="attr: { src: require.toUrl('')+'images/compra-popup-minicart.svg' }">
+            </div>
+            <p>
+                Actualmente tienes uno o más productos en tu carrito que no cuenta con el método de entrega "<b>Envío
+                    rápido </b>", edita tu carrito y guarda para después tus productos o realiza tu pedido completo con
+                "<b>Envío Regular o Retiro en tienda</b>"
+            </p>
+        </div>
+        <div class="custom-popup-content_delivery">
+            <div class="custom-popup-content_delivery_regular">
+                <span class="custom-popup-content_delivery_regular-tag"> <span class="icon-method-regular"></span> <?= __('ENVÍO REGULAR') ?> </span>
+                <span class="custom-popup-content_delivery_regular-available"> <span class="icon-check"></span> Disponible</span>
+                <span class="custom-popup-content_delivery_regular-wait-time"><?= __('Llega de 2 a 3 días.') ?></span>
+            </div>
+            <div class="custom-popup-content_delivery_instore">
+                <span class="custom-popup-content_delivery_instore-tag"> <span class="icon-method-instore"></span> <?= __('RETIRO EN TIENDA') ?> </span>
+                <span class="custom-popup-content_delivery_instore-available"> <span class="icon-check"></span> Disponible</span>
+                <span class="custom-popup-content_delivery_instore-wait-time"><?= __('Puedes recogerlo después de 1 o 2 días.') ?></span>
+            </div>
+        </div>
+        <p class="custom-popup-content_footer">
+            Si requiere su entrega con "<b>Envío rápido</b>" le sugerimos realizar su compra en dos pedidos.
+        </p>
+    </div>
+</div>

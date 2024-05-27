@@ -1,0 +1,22 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="admin" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="30">
+            <tab>advanced</tab>
+            <label>Admin</label>
+            <resource>Magento_Config::config_admin</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="show_image" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Image</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label comment" type="image" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Store Image</label>
+                    <backend_model>WolfSellers\Backend\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">magepow/backendimage</base_url>
+                    <comment><![CDATA[Allowed file types: jpg, jpeg, png]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

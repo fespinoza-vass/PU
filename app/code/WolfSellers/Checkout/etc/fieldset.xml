@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote_address">
+
+            <field name="direccion_fiscal">
+                <aspect name="to_order_address" targetField="direccion_fiscal"/>
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="invoice_required">
+                <aspect name="to_order_address" targetField="direccion_fiscal"/>
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="razon_social">
+                <aspect name="to_order_address" targetField="direccion_fiscal"/>
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="ruc">
+                <aspect name="to_order_address" targetField="direccion_fiscal"/>
+                <aspect name="to_customer_address" />
+            </field>
+
+        </fieldset>
+
+    </scope>
+</config>

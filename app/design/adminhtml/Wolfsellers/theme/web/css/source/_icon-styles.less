@@ -1,0 +1,94 @@
+body{
+	form{
+		input[type="text"],
+		input[type="password"],
+		input[type="url"],
+		input[type="tel"],
+		input[type="search"],
+		input[type="number"],
+		input[type="datetime"],
+		input[type="email"]{
+			    border-color: @gray-A;
+			    height: 35px;
+			    border-radius: @radiusitems;
+		}
+	}
+	&.page-layout-admin-login{
+		background-color: @primary;
+		.page-wrapper{
+			border-radius: @radiusitems;
+			.login-header{
+				text-align: center;
+			}
+			legend.admin__legend{
+				color: @secondary;
+				font-size: 1.4rem;
+				text-align: center;
+			}
+		}
+	}
+	.menu-wrapper{
+		.logo{
+			background-color: @white;
+			display: flex;
+			align-items: center;
+			img.logo-img{
+				width: 75%;
+				height: auto;
+				margin: auto;
+			}
+		}
+	}
+	.admin__menu [data-ui-id="menu-wolfsellers-top-level"] > a::before{
+		content: '';
+		background: url('../images/icon-wolf.png');
+		height: 40px;
+		width: 100%;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	li{
+		&#menu-wolfsellers-menu-wolfsellersmenu{
+			display: none;
+		}
+	}
+	.page-footer{
+		background-color: @background-table;
+		padding: 0 0 3rem 0;
+		p{
+			&.copyright{
+				&.col-m-6{
+					display: block !important;
+					color: transparent;
+					float: left;
+					width: 100%;
+					text-align: center;
+					margin-bottom: 20px;
+					&:after{
+						transition: color 0.1s linear;
+						color: @primary;
+						position: relative;
+						content: '';
+						background: url(../images/iconn_logo.png);
+						display: block;
+						width: 100%;
+						height: 70px;
+						background-position: center;
+						background-repeat: no-repeat;
+					}
+				}
+				.link-copyright{
+					display: none;
+				}
+			}
+		}
+		.footer-legal-system{
+			&.col-m-6 {
+				float: left;
+				width: 100%;
+				text-align: center;
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+    "name": "wolfsellers/module-rule",
+    "description": "ocultar valores en opciones de select y agregar alert en campo vacío en la creación de reglas",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "RafaelTorresCovarrubias",
+            "email": "rafaeltorres@wolfsellers.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "WolfSellers\\Rule\\": ""
+        }
+    }
+}

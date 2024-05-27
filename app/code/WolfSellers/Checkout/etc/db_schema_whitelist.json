@@ -1,0 +1,7 @@
+{
+  "sales_order": {
+    "column": {
+      "ubigeo_estimated_delivery": true
+    }
+  }
+}

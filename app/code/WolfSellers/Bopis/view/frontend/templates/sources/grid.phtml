@@ -1,0 +1,53 @@
+<?php
+/** @var $block \WolfSellers\Bopis\Block\Sources\Grid */
+?>
+<?php $states = $this->getStates(); ?>
+<div class="modal-sources-grid">
+    <span class="info-title">Tiendas iShop:</span>
+    <?php if (count($states) <= 0): ?>
+        <span class="info-title"><?=__('Disponible sólo para Entrega a Domicilio.')?></span>
+    <?php endif;?>
+    <?php if (count($states) > 0): ?>
+        <table>
+            <?php foreach ($states as $state => $sources): ?>
+                <thead>
+                <tr>
+                    <td class="title"><?= __($state); ?></td>
+                    <td class="title"><?= __('Monday to Friday'); ?></td>
+                    <td class="title"><?= __('Saturday & Sunday'); ?></td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($sources as $source): ?>
+                    <tr class="source-item">
+                        <td class="content">
+                            <input type="radio" id="source-<?= $source['source_code']; ?>" name="source_code" value="<?= $source['source_code']; ?>" />
+                            <label for="source-<?= $source['source_code']; ?>"><?= $source['name']; ?></label>
+                            <span><?= __('Customer Service'); ?></span>
+                            <span><?= __('Technical Service'); ?></span>
+                        </td>
+                        <td class="content">
+                            10 am - 8 pm<br>
+                            10 am - 7 pm
+                        </td>
+                        <td class="content">
+                            Sab. 10 am - 8 pm, Dom. 11 am - 7 pm<br>
+                            Sab. 10 am - 7 pm, Dom. N/Disponible
+                        </td>
+                    </tr>
+                <? endforeach; ?>
+                </tbody>
+            <?php endforeach; ?>
+            <tfoot>
+            <tr class="actions-toolbar">
+                <td class="primary">
+                    <button type="button" class="action submit primary select-source"
+                            title="<?= /* @escapeNotVerified */ __('Select') ?>">
+                        <span class="select-source"><?= /* @escapeNotVerified */ __('Select') ?></span>
+                    </button>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    <?php endif; ?>
+</div>

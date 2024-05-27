@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <settings>
+        <buttons>
+            <button name="go_to_archive" class="WolfSellers\BackendBopis\Block\Adminhtml\Sales\Gotoarchive"/>
+            <button name="NewsOrdersButton" class="WolfSellers\BackendBopis\Block\Adminhtml\Sales\NewsOrdersButton"/>
+            <button name="ProcessingOrdersButton" class="WolfSellers\BackendBopis\Block\Adminhtml\Sales\ProcessingOrdersButton"/>
+            <button name="ShippingOrdersButton" class="WolfSellers\BackendBopis\Block\Adminhtml\Sales\ShippingOrdersButton"/>
+            <button name="CompleteOrdersButton" class="WolfSellers\BackendBopis\Block\Adminhtml\Sales\CompleteOrdersButton"/>
+            <button name="CanceledOrdersButton" class="WolfSellers\BackendBopis\Block\Adminhtml\Sales\CanceledOrdersButton"/>
+            <button name="HoldedOrdersButton" class="WolfSellers\BackendBopis\Block\Adminhtml\Sales\CanceledOrdersButton"/>
+        </buttons>
+    </settings>
+</listing>

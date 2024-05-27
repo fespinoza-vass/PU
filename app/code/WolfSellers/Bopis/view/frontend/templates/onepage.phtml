@@ -1,0 +1,10 @@
+<?php
+$bopisHelper = $this->helper(\WolfSellers\Bopis\Helper\Bopis::class);
+if($bopisHelper->isBopis()):
+?>
+<script>
+    document.body.classList.add("is-bopis");
+</script>
+<?php
+endif;
+?>

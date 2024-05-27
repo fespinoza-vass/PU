@@ -1,0 +1,22 @@
+& when (@media-common = true) {
+	.modals-wrapper{
+		.modal-popup{
+			&.confirm{
+				.modal-inner-wrap{
+					padding: 10px 10px 20px;
+				}
+				.modal-footer{
+					button.action-accept{
+						background: @black;
+						border-radius: @radiusitems;
+						color: @white;
+						text-transform: uppercase;
+						font-weight: 600;
+						margin-left: 20px;
+						.lib-hovers;
+					}
+				}
+			}
+		}
+	}
+}

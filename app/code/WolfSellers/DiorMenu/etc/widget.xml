@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="wolfsellers_dior_menu" class="WolfSellers\DiorMenu\Block\Widget\Menu">
+        <label>Wolf Sellers Custom Menu</label>
+        <description>Dior Menu Widget</description>
+        <parameters>
+            <parameter name="id_path" xsi:type="block" visible="true" required="true" sort_order="10">
+                <label translate="true">Category</label>
+                <block class="Magento\Catalog\Block\Adminhtml\Category\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Category...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="manufacturer" xsi:type="select" required="true" visible="true" sort_order="20" source_model="WolfSellers\DiorMenu\Model\Source\Manufacturer">
+                <label>Manufacturer</label>
+            </parameter>
+            <parameter name="gender" xsi:type="select" visible="true" sort_order="30" source_model="WolfSellers\DiorMenu\Model\Source\Gender">
+                <label>Gender</label>
+            </parameter>
+            <parameter name="attr" xsi:type="select" required="true" visible="true" sort_order="40" source_model="WolfSellers\DiorMenu\Model\Source\AttributeLabel">
+                <label>Attribute label</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

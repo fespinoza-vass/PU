@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="WolfSellers_Reports::sales" title="Reporte Ventas PU" module="WolfSellers_Reports" sortOrder="10" action="wolf_sellers/report/sales" resource="Magento_Reports::report" parent="Magento_Reports::report_salesroot"/>
+    </menu>
+</config>

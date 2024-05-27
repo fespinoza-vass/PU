@@ -1,0 +1,22 @@
+{
+    "name": "wolfsellers/module-email",
+    "description": "WolfSellers Emails",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Cesar Rojas",
+            "email": "cesarrojas@wolfsellers.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "WolfSellers\\Email\\": ""
+        }
+    }
+}
