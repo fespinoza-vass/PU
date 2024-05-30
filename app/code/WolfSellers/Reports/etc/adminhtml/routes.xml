@@ -1,7 +1,0 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
-    <router id="admin">
-        <route id="wolf_sellers" frontName="wolf_sellers">
-            <module name="WolfSellers_Reports" after="Magento_Reports"/>
-        </route>
-    </router>
-</config>
