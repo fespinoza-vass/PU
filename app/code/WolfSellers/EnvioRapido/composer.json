@@ -1,0 +1,22 @@
+{
+    "name": "WolfSellers/module-enviorapido",
+    "description": "Shipping Method Module",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Brandon Juarez",
+            "email": "brjupo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "WolfSellers\\EnvioRapido\\": ""
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var \WolfSellers\FreeGiftBanner\Block\Product\Banner $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<?php if ($block->hasFreeGift()) { ?>
+    <div class="free-gift-mailt">
+        <div>
+            <span class="icon-gift"></span>
+            <span><?php echo $escaper->escapeHtml(__('Get a gift when you buy this product.')); ?></span>
+        </div>
+    </div>
+<?php } ?>
