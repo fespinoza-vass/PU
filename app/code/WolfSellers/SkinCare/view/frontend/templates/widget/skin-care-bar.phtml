@@ -1,0 +1,16 @@
+<?php
+/**
+ * @var \WolfSellers\SkinCare\Block\Widget\SkinCareBar $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<div class="skin-care-bar" data-type="<?php echo $block->getType(); ?>">
+   <span class="cont-percentage">
+   <?php echo $escaper->escapeHtml($block->getTitle()); ?>
+    <span class="percentage">0</span>%
+   </span>
+    <div class="bar">
+        <div class="bar-percentage"></div>
+    </div>
+</div>

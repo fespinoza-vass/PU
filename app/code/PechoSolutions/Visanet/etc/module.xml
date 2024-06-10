@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="PechoSolutions_Visanet" setup_version="1.0.0">
+        <sequence>
+        <!-- Sequencia de los modulos que deben estar cargados antes de que nuesto modulo cargue -->
+            <module name="Magento_Sales" />
+            <module name="Magento_Payment" />
+            <module name="Magento_Directory" />
+            <module name="Magento_Config" />
+        </sequence>
+    </module>
+</config>

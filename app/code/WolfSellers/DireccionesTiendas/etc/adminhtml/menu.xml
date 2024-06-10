@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+<!--		<add id="WolfSellers::top_level" title="WolfSellers" module="WolfSellers_DireccionesTiendas" sortOrder="9999" resource="Magento_Backend::content"/>-->
+		<add id="WolfSellers_DireccionesTiendas::wolfsellers_direccionestiendas_direccionestiendas" title="DireccionesTiendas" module="WolfSellers_DireccionesTiendas" sortOrder="9999" resource="Magento_Backend::content" parent="WolfSellers::top_level" action="wolfsellers_direccionestiendas/direccionestiendas/index"/>
+	</menu>
+</config>
