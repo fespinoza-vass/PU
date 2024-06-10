@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="inventory_source">
-        <column xsi:type="text" name="store_code" nullable="true" comment="Main Store ID"/>
-        <column xsi:type="text" name="opening_hours" nullable="true" comment="Opening hours"/>
-    </table>
-</schema>
