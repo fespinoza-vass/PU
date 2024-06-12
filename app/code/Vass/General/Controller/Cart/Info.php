@@ -1,5 +1,5 @@
 <?php
-namespace Vass\Test\Controller\Cart;
+namespace Vass\General\Controller\Cart;
 
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\App\Action\Context;
@@ -51,7 +51,7 @@ class Info extends \Magento\Framework\App\Action\Action
                 $rates = $address->collectShippingRates();
                 echo "Monto Despacho: ".$rates->getData("shipping_amount")."<br>";           
                 //$rates->setData("shipping_amount",0);
-                $rates->delete();
+                //$rates->delete();
             }
 
             /*$data = [];
