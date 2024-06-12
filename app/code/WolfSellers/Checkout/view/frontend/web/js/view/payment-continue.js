@@ -69,6 +69,55 @@ define([
          * function get checked payment and change status
          */
         setPaymentInformationCustomer: function () {
+            const paymentType = document.querySelector('.payment-type');
+
+            function getSelectedPaymentType() {
+                const selectedOption = paymentType.querySelector('input[name="payment_type"]:checked');
+                return selectedOption ? selectedOption.value : null;
+            }
+        
+            function updateReceipt() {
+                const selectedPaymentType = getSelectedPaymentType();
+        
+                var selectReceipt = `
+                    <p><span class="list-billing">Comprobante:</span> ${selectedPaymentType}</p>
+                `;
+                document.getElementById('selectReceipt').innerHTML = selectReceipt;
+        
+                var inputs = document.querySelectorAll('.input-text');
+                var valores = {};
+                inputs.forEach(function(input) {
+                    var nombre = input.getAttribute('name');
+                    var valor = input.value;
+                    valores[nombre] = valor;
+                });
+        
+                var detailReceipt = `
+                    <p><span class="list-billing">Razón Social:</span> ${valores['razon_social']}</p>
+                    <p><span class="list-billing">RUC:</span> ${valores['ruc']}</p>
+                    <p><span class="list-billing">Dirección Fiscal:</span> ${valores['direccion_fiscal']}</p>
+                `;
+        
+                if (selectedPaymentType && selectedPaymentType.toLowerCase() === "factura") {
+                    document.getElementById('detailReceipt').innerHTML = detailReceipt;
+                } else {
+                    document.getElementById('detailReceipt').innerHTML = '';
+                }
+            }
+        
+            paymentType.addEventListener('change', updateReceipt);
+            updateReceipt();
+            
+            const editBilling = document.getElementById('editBilling');
+            const selectBilling = document.getElementById('checkout-payment-method-load');
+            const customCheckoutForm = document.getElementById('custom-checkout-form');
+            const resumeBilling = document.getElementById('resume-billing');
+
+            editBilling.style.display = 'flex';
+            selectBilling.style.display = 'none';
+            customCheckoutForm.style.display = 'none';
+            resumeBilling.style.display = 'flex';
+
             this.switchText(!this.switchText());
             var changeText = registry.get(this.namePrefixPayment);
             if (checkoutData.getSelectedPaymentMethod() == null) {
@@ -93,3 +142,4 @@ define([
         },
     });
 });
+
