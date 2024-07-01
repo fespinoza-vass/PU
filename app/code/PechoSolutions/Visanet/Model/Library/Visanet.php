@@ -9,7 +9,7 @@ class Visanet
         if (function_exists('com_create_guid')){
             return com_create_guid();
         }else{
-           // mt_srand((double)microtime()*10000); optional for php 4.2.0 and up.
+            //mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
             $charid = strtoupper(md5(uniqid(rand(), true)));
             $hyphen = chr(45);// "-"
             $uuid = chr(123)// "{"
@@ -117,10 +117,10 @@ class Visanet
         curl_setopt($ch, CURLOPT_POSTFIELDS, $request_body);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $response = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);        
         $json = json_decode($response, TRUE);
-        $json["statusCode"]=$status;
-        $json = json_encode($json, JSON_PRETTY_PRINT);
+        $json["statusCode"]=$status;    
+        $json = json_encode($json, JSON_PRETTY_PRINT);        
         return $json;
     }
 
@@ -175,11 +175,11 @@ class Visanet
                 break;
             case 'dev':
                 //$merchantId = merchantidtest;
-                $url = "https://apitestenv.vnforapps.com/api.security/v1/security";
+                $url = "https://apisandbox.vnforappstest.com/api.security/v1/security";
                 $accessKey=$user;
                 $secretKey=$password;
                 break;
-        }
+        } 
         $header = array("Content-Type: application/json");
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -193,6 +193,9 @@ class Visanet
         #curl_setopt($ch, CURLOPT_POSTFIELDS, $request_body);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $key = curl_exec($ch);
+        var_dump($accessKey);
+        var_dump($secretKey);
+        var_dump($key);
         return $key;
     }
 
@@ -239,13 +242,10 @@ class Visanet
         $response = curl_exec($ch);
         #var_dump($response);
         $json = json_decode($response);
-
-        try {
-            if (property_exists($json, "sessionKey")){
-                return $json->sessionKey;
-            }
-        } catch (\Exception $e) {
-        }
+        var_dump($request_body);
+        var_dump($json);
+        $dato = $json->sessionKey;
+        return $dato;
     }
-
+    
 }
