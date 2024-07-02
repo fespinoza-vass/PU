@@ -30,7 +30,6 @@ define(
 
         function getRootUrl() {
 
-            return 'https://perfumerias.test/';
             return window.checkout.baseUrl;
         
         }
@@ -87,9 +86,8 @@ this._super();
                                    context: this,  
                                    
                                    success : function(response){
-                                    console.log('success visanet');
-                                    console.log(response);
-                                    let totals = quote.getTotals()(); 
+                                       console.log(response);
+                                       let totals = quote.getTotals()(); 
                                        let grandTotal = 0;
                
                                        console.log('TOTALS: ', totals);
@@ -186,7 +184,6 @@ this._super();
             },
 
             loadCheckoutJS: function(){
-                alert('hola');
 		window.VisanetCheckout.open();
             },
 

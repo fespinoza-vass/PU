@@ -4,22 +4,22 @@ namespace PechoSolutions\Visanet\Model\Library;
 
 class Visanet
 {
-
     public function getGUID(){
         if (function_exists('com_create_guid')){
             return com_create_guid();
-        }else{
-            //mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
-            $charid = strtoupper(md5(uniqid(rand(), true)));
-            $hyphen = chr(45);// "-"
-            $uuid = chr(123)// "{"
-                .substr($charid, 0, 8).$hyphen
-                .substr($charid, 8, 4).$hyphen
-                .substr($charid,12, 4).$hyphen
-                .substr($charid,16, 4).$hyphen
-                .substr($charid,20,12).$hyphen
-                .chr(125);// "}"
-            $uuid = substr($uuid, 1, 36);
+        } else {
+            // No es necesario llamar a mt_srand en versiones modernas de PHP
+            // Ya que rand() y mt_rand() usan un generador de números aleatorios mejorado
+            $charid = strtoupper(md5(uniqid(random_int(PHP_INT_MIN, PHP_INT_MAX), true)));
+            $hyphen = chr(45); // "-"
+            $uuid = chr(123) // "{"
+                . substr($charid, 0, 8) . $hyphen
+                . substr($charid, 8, 4) . $hyphen
+                . substr($charid, 12, 4) . $hyphen
+                . substr($charid, 16, 4) . $hyphen
+                . substr($charid, 20, 12)
+                . chr(125); // "}"
+            $uuid = substr($uuid, 1, -1); // Eliminar el primer y último carácter para que no incluya las llaves
             return $uuid;
         }
     }
@@ -175,7 +175,7 @@ class Visanet
                 break;
             case 'dev':
                 //$merchantId = merchantidtest;
-                $url = "https://apisandbox.vnforappstest.com/api.security/v1/security";
+                $url = "https://apitestenv.vnforapps.com/api.security/v1/security";
                 $accessKey=$user;
                 $secretKey=$password;
                 break;
@@ -193,9 +193,6 @@ class Visanet
         #curl_setopt($ch, CURLOPT_POSTFIELDS, $request_body);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $key = curl_exec($ch);
-        var_dump($accessKey);
-        var_dump($secretKey);
-        var_dump($key);
         return $key;
     }
 
@@ -242,8 +239,6 @@ class Visanet
         $response = curl_exec($ch);
         #var_dump($response);
         $json = json_decode($response);
-        var_dump($request_body);
-        var_dump($json);
         $dato = $json->sessionKey;
         return $dato;
     }

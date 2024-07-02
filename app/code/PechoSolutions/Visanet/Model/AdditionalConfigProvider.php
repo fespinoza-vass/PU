@@ -88,7 +88,7 @@ class AdditionalConfigProvider implements ConfigProviderInterface
             $merchant_id=$this->config->getValue('visanetConfiguracion/merchant_id');
         }
         $logger->info("Merchant Id jp2");
-        //$logger->info($merchant_id);
+        $logger->info($merchant_id);
         /**
          *  'merchantId' => $this->config->getValue('visanetConfiguracion/merchant_id'),**/
 
