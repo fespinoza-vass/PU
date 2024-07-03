@@ -13,7 +13,7 @@ define([
         '11177': {
             placeholder: 'No. Pasaporte',
             validations: {"validate-identificacion-pasaporte":true,'required-entry':true,'min_text_length':'6','max_text_length':'12',"validate-alphanum": true},
-            inputType: "number"
+            inputType: "text"
         },
         '11174': {
             placeholder: 'DNI',
