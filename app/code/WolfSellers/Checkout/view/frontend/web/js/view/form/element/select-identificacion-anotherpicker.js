@@ -12,7 +12,7 @@ define([
     var inputConfiguration = {
         '11177': {
             placeholder: 'No. Pasaporte',
-            validations: {"validate-identificacion-pasaporte":true,'required-entry':true,'min_text_length':'12','max_text_length':'12',"validate-alphanum": true},
+            validations: {"validate-identificacion-pasaporte":true,'required-entry':true,'min_text_length':'6','max_text_length':'12',"validate-alphanum": true},
             inputType: "text"
         },
         '11174': {
