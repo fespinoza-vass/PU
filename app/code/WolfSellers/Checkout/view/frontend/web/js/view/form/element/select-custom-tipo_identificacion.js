@@ -12,7 +12,7 @@ define([
         var inputConfiguration = {
             '865': {
                 placeholder: 'No. Pasaporte',
-                validations: {"validate-identificacion-pasaporte":true,'required-entry':true,'min_text_length':'12','max_text_length':'12',"validate-alphanum": true},
+                validations: {"validate-identificacion-pasaporte":true,'required-entry':true,'min_text_length':'6','max_text_length':'12',"validate-alphanum": true},
                 inputType: "text"
             },
             '868': {
@@ -22,7 +22,7 @@ define([
             },
             'default': {
                 placeholder: "Selecciona Tipo Identificación",
-                validations: {'required-entry':true,'min_text_length' :'1','max_text_length':'1'},
+                validations: {'required-entry':true,'min_text_length' :'8','max_text_length':'8'},
                 inputType: "text"
             }
         }
