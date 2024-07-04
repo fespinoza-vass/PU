@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
+        <attribute code="colony" type="string" />
+        <attribute code="company" type="string" />
+        <attribute code="ruc" type="string" />
+        <attribute code="referencia_envio" type="string" />
+        <attribute code="razon_social" type="string" />
+        <attribute code="identificacion" type="string" />
+    </extension_attributes>
+</config>

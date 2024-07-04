@@ -1,0 +1,23 @@
+{
+    "quote_bopis": {
+        "column": {
+            "entity_id": true,
+            "quote_id": true,
+            "type": true,
+            "address_formatted": true,
+            "address_object": true,
+            "store": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "BOPIS_QUOTE_QUOTE_ID_QUOTE_ENTITY_ID": true,
+            "BOPIS_QUOTE_QUOTE_ID": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "source_code": true,
+            "needs_supply_instore": true
+        }
+    }
+}

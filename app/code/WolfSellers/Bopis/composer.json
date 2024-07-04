@@ -1,0 +1,22 @@
+{
+    "name": "wolfsellers/module-bopis",
+    "description": "",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "David Jimenez Chirinos",
+            "email": "davidjimenez@wolfsellers.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WolfSellers\\Bopis\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
