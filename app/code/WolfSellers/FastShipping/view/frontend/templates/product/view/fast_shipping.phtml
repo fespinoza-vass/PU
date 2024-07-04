@@ -1,0 +1,82 @@
+<?php
+/**
+ * @var \WolfSellers\FastShipping\Block\Product\FastShippingView $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$lastEstimation = $block->getLastEstimation();
+?>
+
+<div class="block fast-shipping">
+    <div class="block-actions" id="estimate-actions" <?php if ($lastEstimation) { ?>style="display: none"<?php } ?>>
+        <button class="action primary calculate-button" type="button" value="<?php echo $escaper->escapeHtmlAttr(__('Calculate')); ?>">
+            <span><?php echo $escaper->escapeHtml(__('Calculate')); ?></span>
+        </button>
+    </div>
+
+    <div id="estimate-result" <?php if (!$lastEstimation) { ?> style="display: none"<?php } ?>>
+        <p>
+            <?php echo $escaper->escapeHtml(__('Faster delivery:')); ?>
+            <span class="estimate-date"><?php echo $lastEstimation; ?></span>
+        </p>
+
+        <button class="action primary recalculate-button" type="button" value="<?php echo $escaper->escapeHtmlAttr(__('Recalculate')); ?>">
+            <span><?php echo $escaper->escapeHtml(__('Recalculate')); ?></span>
+        </button>
+    </div>
+</div>
+
+<div id="modal-estimate-shipping" style="display: none">
+    <div class="modal-estimate-shipping-content">
+        <form action="<?php echo $escaper->escapeUrl($block->getUrl('fast-shipping/estimate')) ?>" class="form" method="post" id="fast-shipping-form" autocomplete="off">
+            <input type="hidden" name="product_id" value="<?php echo $block->getProduct()->getId(); ?>">
+
+            <div class="fieldset">
+                <div class="field region required">
+                    <label class="label" for="region">
+                        <span><?php echo $escaper->escapeHtml(__('Region')); ?></span>
+                    </label>
+                    <div class="control">
+                        <select name="region" id="region" data-validate="{required: true}">
+                            <?php foreach ($block->getRegionOptions() as $regionOption) { ?>
+                                <option value="<?php echo $regionOption['value']; ?>"><?php echo $regionOption['label']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field city required">
+                    <label for="city" class="label">
+                        <span><?php echo $escaper->escapeHtml(__('City')); ?></span>
+                    </label>
+                    <div class="control">
+                        <select name="city" id="city" data-validate="{required: true}">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field town required">
+                    <label for="town" class="label">
+                        <span><?php echo $escaper->escapeHtml(__('Town')); ?></span>
+                    </label>
+                    <div class="control">
+                        <select name="town" id="town" data-validate="{required: true}">
+                            <option value=""><?php echo $escaper->escapeHtml(__('Select Town')); ?></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+{
+    ".fast-shipping": {
+        "WolfSellers_FastShipping/js/fast_shipping": {
+            "ubigeo": "<?php echo $block->getCurrentUbigeo(); ?>"
+        }
+    }
+}
+</script>

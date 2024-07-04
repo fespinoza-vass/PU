@@ -1,0 +1,85 @@
+#Transaction_History{
+	h4{
+		margin-bottom: 10px;
+		color: @primary;
+	}
+	table{
+		&.form-list{
+			width: 100%;
+			margin-bottom: 20px;
+			background: @background-table;
+			tr{
+				td{
+					border:solid 1px @border-table;
+					padding:10px;
+					&:first-child{
+						width: 180px;
+					}
+					&.table{
+						padding:0;
+						border:none;
+						table{
+							margin-bottom: 0;
+							
+							tr{
+								&:first-child{
+									td{
+										border-top:0;
+									}
+								}
+								td{
+									strong{
+										padding:0;
+										border:none;
+									}
+								}
+							}
+						}
+						strong{
+							padding:10px;
+							border:solid 1px @border-table;
+							display: block;
+							border-top-size:0;
+						}
+					}
+				}
+			}
+		}
+		
+	}
+}
+
+.autodesk-contract-view{
+	h4{
+		margin-bottom: 10px;
+		color:@primary;
+	}
+	table{
+		&.form-list{
+			margin-bottom: 40px;
+			tr{
+				td{
+					border:solid 1px @border-table;
+					padding:10px;
+					&:first-child{
+						width: 180px;
+					}
+				}
+			}
+		}
+		&.order-tables{
+			thead{
+				text-align: left;
+				th{
+					padding:10px 5px;
+				}
+			}
+			tr{
+				border-bottom:solid 1px @border-table;
+				td{
+					padding:10px 5px;
+				}
+			}
+		}
+	}
+}

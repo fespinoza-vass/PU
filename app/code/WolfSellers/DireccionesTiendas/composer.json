@@ -1,0 +1,22 @@
+{
+    "name": "wolfsellers/module-direccionestiendas",
+    "description": "DireccionesTiendas",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "brjupo",
+            "email": "brjupo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "WolfSellers\\DireccionesTiendas\\": ""
+        }
+    }
+}
