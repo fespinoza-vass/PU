@@ -73,6 +73,8 @@ define([
                 ).hide();
                 $('#editInvoice').hide();
                 $('#submitInvoice').hide();
+                $('.continuePaymentPu').prop('disabled',false);
+
             } else if (value === 'factura') {
                 customAtributes.forEach( function(value, index, array) {
                     if (value['attribute_code'] === 'invoice_required') {
@@ -92,6 +94,8 @@ define([
                 }else{
                     $('#submitInvoice').show();
                 }
+
+                $('.continuePaymentPu').prop('disabled',true);
             }
         }
     });

@@ -51,6 +51,9 @@ class BillingAddressManagement
                     $billingAddress->setCustomAttribute('invoice_required',$extensionAttributes->getInvoiceRequired());
                     $billingAddress->setInvoiceRequired($extensionAttributes->getInvoiceRequired());
 
+                    $billingAddress->setCustomAttribute('dni',$extensionAttributes->getRuc());
+                    $billingAddress->setDni($extensionAttributes->getRuc());
+
                 }
             }
         }catch (\Exception $exception){
