@@ -9,6 +9,8 @@ define([
             placeholder: ''
         },
         dataType: ko.observable("text"),
+        maxLength: ko.observable(12), // Inicializa maxLength en 12 para 'text'
+        
         initialize: function () {
             this._super();
             this.dataType.subscribe(function (newValue) {
@@ -19,8 +21,8 @@ define([
                 }
             },this);
             this.value.subscribe(function (value) {
-                if(value.length > 8){
-                    this.value(value.substring(0,8));
+                if (value.length > this.maxLength()) {
+                    this.value(value.substring(0, this.maxLength()));
                 }
             },this);
             return this;
@@ -29,7 +31,7 @@ define([
          * Init observable
          * @returns {*}
          */
-        initObservable: function(){
+        initObservable: function() {
             this._super();
             this.observe('placeholder');
             return this;
