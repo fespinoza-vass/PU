@@ -1,9 +1,0 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
-    <acl>
-        <resources>
-            <resource id="Magento_Backend::admin">
-                <resource id="WolfSellers_BackendBopis::dashboard" title="Dashboard Bopis" sortOrder="0" />
-            </resource>
-        </resources>
-    </acl>
-</config>
