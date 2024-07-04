@@ -10,7 +10,7 @@
         <attribute code="ruc" type="string" />
         <attribute code="razon_social" type="string" />
         <attribute code="direccion_fiscal" type="string" />
-
+        <attribute code="dni" type="string" />
         <attribute code="envio_regular" type="WolfSellers\Checkout\Api\Data\EnvioRegularInterface" />
         <attribute code="envio_urbano" type="WolfSellers\Checkout\Api\Data\EnvioUrbanoInterface" />
         <attribute code="envio_rapido" type="WolfSellers\Checkout\Api\Data\EnvioRapidoInterface" />
@@ -22,6 +22,7 @@
         <attribute code="razon_social" type="string" />
         <attribute code="direccion_fiscal" type="string" />
         <attribute code="invoice_required" type="string" />
+        <attribute code="dni" type="string" />
     </extension_attributes>
 
     <extension_attributes for="Magento\InventoryApi\Api\Data\SourceInterface">

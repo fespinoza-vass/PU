@@ -82,6 +82,8 @@ define([
                     }
                     if(value['attribute_code'] === 'ruc'){
                         quote.billingAddress().extensionAttributes.ruc = formData.ruc;
+                        quote.billingAddress().extensionAttributes.dni = formData.ruc;
+
                         value['value'] = formData.ruc;
                     }
                 });
@@ -92,11 +94,13 @@ define([
                 $('#submitInvoice').hide();
                 $('#editInvoice').show();
 
+
                 if(quote.billingAddress().extensionAttributes !== undefined && quote.billingAddress().extensionAttributes.pickup_location_code !== undefined){
                     quote.billingAddress().extensionAttributes.pickup_location_code = pickup_location_code;
                 }
                 messageList.addSuccessMessage({ message: $.mage.__('Información de facturación guardada') });
 
+                $('.continuePaymentPu').prop('disabled',false);
             }
         }
     });

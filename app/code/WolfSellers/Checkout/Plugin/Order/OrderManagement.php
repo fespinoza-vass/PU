@@ -84,6 +84,7 @@ class OrderManagement
                     $address->setCustomAttribute('ruc',$billingAddress->getRuc());
                     $address->setCustomAttribute('razon_social',$billingAddress->getRazonSocial());
                     $address->setCustomAttribute('direccion_fiscal',$billingAddress->getDireccionFiscal());
+                    $address->setCustomAttribute('dni',$billingAddress->getRuc());
 
                     $this->addressRepository->save($address);
                 }
