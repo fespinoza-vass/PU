@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <tab>wolfsellers</tab>
+            <label>Bopis</label>
+            <resource>WolfSellers_Bopis::config</resource>
+            <group id="qrcode_configuration" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>QR Code Configuration</label>
+                <field id="is_active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Generate Order QR code </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This configuration generates a QR code for each order and it can be used in Admin Gestor</comment>
+                </field>
+                <field id="qr_size" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>QR Image Size</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+            </group>
+            <group id="savar" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Savar Configuration</label>
+                <field id="is_active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Savar Cron Active </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This configuration enables or disable Savar Cron for Update Order Status</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

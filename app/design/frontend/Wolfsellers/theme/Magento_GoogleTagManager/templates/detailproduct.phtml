@@ -1,0 +1,77 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\GoogleTagManager\Block\Ga;
+?>
+<?php
+/** @var \WolfSellers\GoogleTagManager\Block\ListJson $block */
+$product = $block->getCurrentProduct();
+
+$categories = $block->getCategoryName();
+
+$category = isset($categories[0]) ? $categories[0] : '';
+$subcategory = isset($categories[1]) ? $categories[1] : '';
+$family = isset($categories[2]) ? $categories[2] : '';
+
+
+$gender = '';
+$size = '';
+
+$attr = $product->getResource()->getAttribute('tamano');
+if ($attr->usesSource()) {
+    $size = $attr->getSource()->getOptionText($product->getTamano());
+}
+
+$attr = $product->getResource()->getAttribute('genero');
+if ($attr->usesSource()) {
+    $gender = $attr->getSource()->getOptionText($product->getGenero());
+}
+
+$attributes = $product->getAttributes();
+$brand = '';
+
+foreach($attributes as $attribute){
+    if($attribute->getName() === 'manufacturer') {
+        $brand = $attribute->getFrontend()->getValue($product);
+    }
+}
+$imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($product, 'product_base_image')->getUrl();
+
+$rules = $block->getRules($product->getId());
+
+$data = [];
+if($rules){
+    foreach ($rules as $rule){
+        $data[] = $rule;
+    }
+}
+$data = implode( ', ', $data);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_GoogleTagManager/js/actions/product-detail": {
+                "product":{
+                    "id": "<?=$block->escapeJs($product->getId());?>",
+                    "totalValue": "<?=$block->escapeJs($product->getFinalPrice());?>",
+                    "name": "<?=$block->escapeJs($product->getName());?>",
+                    "sku": "<?=$block->escapeJs($product->getSku());?>",
+                    "category": "<?=$block->escapeJs($category);?>",
+                    "sub_categoria": "<?=$block->escapeJs($subcategory);?>",
+                    "familia": "<?=$block->escapeJs($family);?>",
+                    "brand": "<?=$block->escapeJs($brand);?>",
+                    "productURL": "<?=$block->escapeJs($product->getProductUrl());?>",
+                    "imageURL": "<?=$block->escapeJs($imageUrl);?>",
+                    "genero": "<?=$block->escapeJs($gender);?>",
+                    "tamano": "<?=$block->escapeJs($size);?>",
+                    "promotion": "<?=$block->escapeJs($data);?>"
+                },
+                "currencyCode": "<?=$block->getCurrencyCode();?>"
+            }
+        }
+    }
+</script>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="delivery_time_shipping_method_converter_plugin" type="WolfSellers\EnvioRapido\Plugin\ShippingMethodConverterPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="delivery_time_address_rate_plugin" type="WolfSellers\EnvioRapido\Plugin\QuoteAddressRatePlugin" />
+    </type>
+
+    <type name="WolfSellers\EnvioRapido\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="WolfSellers\EnvioRapido\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">SavarLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">WolfSellers\EnvioRapido\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="savarUpdateOrders" xsi:type="object">WolfSellers\EnvioRapido\Console\SavarUpdateOrderCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order_envio_rapido" type="WolfSellers\EnvioRapido\Plugin\PlaceOrderPlugin"/>
+    </type>
+</config>
