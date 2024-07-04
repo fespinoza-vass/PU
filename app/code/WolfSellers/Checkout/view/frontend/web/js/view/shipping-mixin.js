@@ -350,7 +350,7 @@ define([
             }
             carrier = this.getCarrierCodeByCarrier(methodType);
             if(methodType === 'urbano' && carrier.amount === 0){
-                return 'Sin Calcular';
+                return 'S/0.00';
             }
             if (!carrier && methodType === "urbano" && this.isUrbanoShipping()){
                 return "Calculando...";
