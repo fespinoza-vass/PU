@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email SkinCare Diagnóstico" design_abstraction="custom">
-    <body>
-        <block class="WolfSellers\SkinCare\Block\Email\Diagnostico" name="skin_care_diagnostico" template="email/diagnostico.phtml" cacheable="false"/>
-    </body>
-</page>

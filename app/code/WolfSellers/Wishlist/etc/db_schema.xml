@@ -1,8 +1,0 @@
-<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-
-    <table name="wishlist" resource="default" engine="innodb" comment="Wishlist main Table">
-        <column xsi:type="int" name="save_for_later" unsigned="true" nullable="false" identity="false" default="0" comment="guardar para más tarde"/>
-    </table>
-
-</schema>
