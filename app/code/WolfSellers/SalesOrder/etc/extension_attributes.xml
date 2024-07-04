@@ -8,5 +8,6 @@
         <attribute code="referencia_envio" type="string" />
         <attribute code="razon_social" type="string" />
         <attribute code="identificacion" type="string" />
+        <attribute code="dni" type="string" />
     </extension_attributes>
 </config>
