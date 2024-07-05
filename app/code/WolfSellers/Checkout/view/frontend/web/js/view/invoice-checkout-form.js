@@ -1,4 +1,3 @@
-/*global define*/
 define([
     'jquery',
     'ko',
@@ -27,6 +26,17 @@ define([
             $('input[name="direccion_fiscal"]').removeAttr('disabled');
             $('#editInvoice').hide();
             $('#submitInvoice').show();
+        },
+        editBilling: function() {
+            const editBilling = document.getElementById('editBilling');
+            const selectBilling = document.getElementById('checkout-payment-method-load');
+            const customCheckoutForm = document.getElementById('custom-checkout-form');
+            const resumeBilling = document.getElementById('resume-billing');
+
+            editBilling.style.display = 'none';
+            selectBilling.style.display = 'block';
+            customCheckoutForm.style.display = 'block';
+            resumeBilling.style.display = 'none';
         },
         /**
          * Form submit handler
@@ -82,6 +92,8 @@ define([
                     }
                     if(value['attribute_code'] === 'ruc'){
                         quote.billingAddress().extensionAttributes.ruc = formData.ruc;
+                        quote.billingAddress().extensionAttributes.dni = formData.ruc;
+
                         value['value'] = formData.ruc;
                     }
                 });
@@ -92,11 +104,13 @@ define([
                 $('#submitInvoice').hide();
                 $('#editInvoice').show();
 
+
                 if(quote.billingAddress().extensionAttributes !== undefined && quote.billingAddress().extensionAttributes.pickup_location_code !== undefined){
                     quote.billingAddress().extensionAttributes.pickup_location_code = pickup_location_code;
                 }
                 messageList.addSuccessMessage({ message: $.mage.__('Información de facturación guardada') });
 
+                $('.continuePaymentPu').prop('disabled',false);
             }
         }
     });
