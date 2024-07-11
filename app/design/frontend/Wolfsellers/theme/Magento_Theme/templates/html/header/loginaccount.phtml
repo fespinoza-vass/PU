@@ -1,0 +1,68 @@
+<?php
+/**
+* @var \WolfSellers\Customer\Block\LoginAccount $block
+*/
+?>
+<div class="cont-loginaccount">
+    <?php if ($block->customerLoggedIn()) { ?>
+        <div class="loginbtns">
+            <div>
+                <span><?= $block->escapeHtml(__('Welcome')) ?>, </span>
+                <span data-bind="scope: 'customer'">
+                    <span data-bind="text: customer().fullname"></span>
+                </span>
+            </div>
+            <a data-mage-init='{"dropdown":{}}' data-toggle="dropdown" class="ddaccount action" data-action="customer-menu-toggle">
+                <span><?= $block->escapeHtml(__('My Account')) ?></span>
+                <span class="icon-uniE622"></span>
+            </a>
+            <ul data-target="dropdown" class="dropdown-options">
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/index') ?>';"><span><?= $block->escapeHtml(__('My profile')) ?></span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('sales/order/history') ?>';"><span><?= $block->escapeHtml(__('My orders')) ?></span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('wishlist') ?>';"><span>Wishlist</span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/logout') ?>';"><span><?= $block->escapeHtml(__('Logout')) ?></span></a>
+                </li>
+            </ul>
+        </div>
+        <script type="text/x-magento-init">
+            {
+              "*": {
+                  "Magento_Ui/js/core/app": {
+                      "components": {
+                          "customer": {
+                              "component": "Magento_Customer/js/view/customer"
+                          }
+                      }
+                  }
+              }
+            }
+        </script>
+    <?php } else { ?>
+        <div class="loginbtns logout">
+            <a href="<?php echo $block->getUrl('customer/account/login') ?>" class="efirst"><span><?= $block->escapeHtml(__('Login')) ?></span></a>
+            <a href="<?php echo $block->getUrl('customer/account/create') ?>"><span><?= $block->escapeHtml(__('Create Account')) ?></span></a>
+            <a href="#" data-mage-init='{"dropdown":{}}' data-toggle="dropdown" class="ddaccount mobile action" data-action="customer-menu-toggle" style="display: none;">
+                <span>Open menu</span>
+                <span class="icon-uniE622"></span>
+            </a>
+            <ul data-target="dropdown" class="dropdown-options mobile">
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/login') ?>';" class="efirst"><span><?= $block->escapeHtml(__('Login')) ?></span></a>
+                </li>
+                <li>
+                    <a onclick="location.href = '<?php echo $block->getUrl('customer/account/create') ?>';"><span><?= $block->escapeHtml(__('Create Account')) ?></span></a>
+                </li>
+            </ul>
+        </div>
+    <?php } ?>
+    <span class="icon-uniE627"></span>
+</div>
+
+
