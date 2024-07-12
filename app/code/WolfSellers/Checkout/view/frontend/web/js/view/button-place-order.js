@@ -89,6 +89,7 @@ define([
 
                 if (!_.isUndefined(paymentComponent)) {
                     if (paymentMethod.method === 'visanet_pay') {
+                        //$("#element").loader("show");
                         document.getElementById('placeOrder').disabled = true;
                         paymentComponent.loadCheckoutJS();
                     } else {
