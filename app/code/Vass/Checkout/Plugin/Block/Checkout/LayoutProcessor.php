@@ -33,7 +33,7 @@ class LayoutProcessor
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['dni']['visible']=false;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['visible']=false;
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['visible']=true;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['nombre_completo_picker']['visible']=false;
