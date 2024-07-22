@@ -3,10 +3,10 @@
 	<default>
 		<payment>
 			<vassvisanet>
-				<active>0</active>
+				<active>1</active>
 				<model>Vass\NiubizVisanet\Model\Payment\VassVisanet</model>
 				<title>VassVisanet</title>
-				<allowspecific>0</allowspecific>
+              	<cctypes>AE,VI,MC,DI</cctypes>
 			</vassvisanet>
 		</payment>
 	</default>

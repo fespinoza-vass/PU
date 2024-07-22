@@ -14,6 +14,8 @@ define(
                 component: 'Vass_NiubizVisanet/js/view/payment/method-renderer/vassvisanet-method'
             }
         );
+
+        /** Add view logic here if needed */
         return Component.extend({});
     }
 );
