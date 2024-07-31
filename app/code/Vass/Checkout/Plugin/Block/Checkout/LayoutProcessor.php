@@ -24,9 +24,6 @@ class LayoutProcessor
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['company']['visible']=false;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['colony']['visible']=false;
-
-        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio']['visible']=false;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -49,7 +46,7 @@ class LayoutProcessor
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['distrito_envio_rapido']['visible']=false;
-        
+
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['horarios_disponibles']['visible']=false;
 
@@ -60,25 +57,23 @@ class LayoutProcessor
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['distrito_pickup']['visible']=false;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['visible']=false; 
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['vat_id']['visible']=false;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['picker']['visible']=false;
-        
-        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['visible']=false; 
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['city']['visible']=false; 
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['visible']=false;
+
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['region_id']['visible']=false; 
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['region_id']['visible']=false;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['country_id']['visible']=false; 
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['country_id']['visible']=false;
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['postcode']['visible']=false; 
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['postcode']['visible']=false;
 
         return $jsLayout;
     }
