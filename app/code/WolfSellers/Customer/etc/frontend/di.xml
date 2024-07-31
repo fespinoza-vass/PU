@@ -1,0 +1,12 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Block\Widget\Dob">
+        <plugin name="add_require_dob" type="WolfSellers\Customer\Plugin\Dob" sortOrder="10" disabled="false"  />
+    </type>
+    <type name="Magento\Customer\Block\Widget\Gender">
+        <plugin name="add_require_gender" type="WolfSellers\Customer\Plugin\Gender" sortOrder="10" disabled="false"  />
+    </type>
+    <type name="Magento\CustomAttributeManagement\Block\Form">
+        <plugin name="add_require_attr" type="WolfSellers\Customer\Plugin\Form" sortOrder="10" disabled="false"  />
+    </type>
+    
+</config>

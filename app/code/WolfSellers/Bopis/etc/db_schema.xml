@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+
+    <table name="quote_bopis" resource="default" engine="innodb" comment="">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="quote_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Quote ID"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Shipping Type"/>
+        <column xsi:type="text" name="address_formatted" nullable="false" comment="Address Formatted"/>
+        <column xsi:type="text" name="address_object" nullable="false" comment="Address Object"/>
+        <column xsi:type="varchar" name="store" nullable="false" length="255" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="BOPIS_QUOTE_QUOTE_ID_QUOTE_ENTITY_ID" table="quote_bopis" column="quote_id" referenceTable="quote" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="BOPIS_QUOTE_QUOTE_ID">
+            <column name="quote_id"/>
+        </constraint>
+    </table>
+
+
+    <table name="admin_user">
+        <column xsi:type="int" name="user_type" nullable="false" comment="user_type" default="0"/>
+        <column xsi:type="text" name="source_code" nullable="false" comment="source_code"/>
+        <column xsi:type="int" name="website_id" nullable="false" comment="source_code" default="0"/>
+    </table>
+    <!--
+    <table name="inventory_source">
+        <column xsi:type="varchar" name="co_tipo_direccion" nullable="true" default="" />
+        <column xsi:type="varchar" name="co_street2" nullable="true" default="" />
+        <column xsi:type="varchar" name="co_street3" nullable="true" default="" />
+        <column xsi:type="varchar" name="co_additional_info" nullable="true" default="" />
+        <column xsi:type="varchar" name="co_ciudad" nullable="true" default="" />
+        <column xsi:type="varchar" name="pe_distrito" nullable="true" default="" />
+        <column xsi:type="varchar" name="pe_ciudad" nullable="true" default="" />
+        <column xsi:type="varchar" name="cr_canton" nullable="true" default="" />
+        <column xsi:type="varchar" name="cr_distrito" nullable="true" default="" />
+    </table>
+    -->
+
+    <table name="sales_order">
+        <column xsi:type="text" name="source_code" nullable="true" comment="Source Codes"/>
+        <column xsi:type="boolean" name="needs_supply_instore" nullable="false" comment="Needs supply from default source"/>
+        <!--
+        <column xsi:type="int" name="verificacion_bopis_cliente_retira" padding="5" default="0" />
+        <column xsi:type="int" name="verificacion_bopis_cliente_factura" padding="5" default="0" />
+        <column xsi:type="int" name="verificacion_bopis_orden" padding="5" default="0" />
+        <column xsi:type="int" name="verificacion_bopis_metodo_pago" padding="5" default="0" />
+        <column xsi:type="int" name="bopis_delivered" padding="5" default="0" />
+        <column xsi:type="text" name="bopis_deliver_comments" nullable="true" />
+        <column xsi:type="varchar" name="bopis_hold_reason" nullable="true" default="" />
+        <column xsi:type="text" name="bopis_hold_comments" nullable="true" />
+        <column xsi:type="varchar" name="bopis_store" nullable="false" length="255" comment="Bopis Store ID"/>
+        <column xsi:type="varchar" name="bopis_type" nullable="false" length="255" comment="Bopis Shipping Type"/>
+        -->
+    </table>
+
+    <table name="wolfsellers_bopis_notification" resource="default" engine="innodb" comment="wolfsellers_bopis_notification Table">
+        <column xsi:type="int" name="notification_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="notification_id"/>
+        </constraint>
+        <column name="type" nullable="true" xsi:type="text" comment="type"/>
+        <column name="order_id" nullable="true" xsi:type="text" comment="order_id"/>
+        <column name="source" nullable="true" xsi:type="text" comment="source"/>
+        <column name="user_id" nullable="true" xsi:type="int" comment="user_id" identity="false"/>
+        <column xsi:type="timestamp" default="CURRENT_TIMESTAMP" name="created_at" nullable="false" comment="Creation date"/>
+        <column name="read" nullable="true" xsi:type="int" default="0" comment="user_id" identity="false"/>
+    </table>
+</schema>

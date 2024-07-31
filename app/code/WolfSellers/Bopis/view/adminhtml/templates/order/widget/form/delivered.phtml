@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \WolfSellers\Bopis\Block\Adminhtml\Order\View\Footer $block */
+$isDelivered = $block->isDelivered();
+$isHolded = $block->isHolded();
+$order = $block->getOrder();
+$entregar = $block->isEntregarAvailable();
+?>
+<?php if($isDelivered && !$isHolded && $block->getAdminUserType() == 1): ?>
+    <section class="admin__page-section bopis-footer">
+        <div class="admin__page-section-content">
+            <button name="btn-entregado"
+                    value="Entregar"
+                    class="btn-entregado orden-entregada"
+                    disabled="disabled"
+            >
+                Orden Entregada
+            </button>
+        </div>
+    </section>
+<?php endif; ?>
+
+
+<?php if($isHolded && $block->getAdminUserType() == 1): ?>
+    <section class="admin__page-section bopis-footer">
+        <div class="admin__page-section-content">
+            <button name="btn-cancelar"
+                    value="Detener"
+                    class="btn-cancelar "
+                    data-order-id="<?= $order->getEntityId() ?>"
+            >
+                Cancelar Orden
+            </button>
+        </div>
+    </section>
+    <div id="form-cancelar" style="display: none">
+
+        <form action="<?= $block->escapeUrl($block->getUrl("bopis/cancel/save"))?>" method="post"
+              id="bopis-cancelar-verification">
+            <input name="order_id" type="hidden" value="<?= $order->getEntityId() ?>" />
+            <input name="form_key" type="hidden"  value="<?= $block->getFormKey() ?>" />
+        </form>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Payment\Block\Info $block
+ * @see \Magento\Payment\Block\Info
+ */
+$specificInfo = $block->getSpecificInformation();
+$paymentTitle = $block->getMethod()->getConfigData('title', $block->getInfo()->getOrder()->getStoreId());
+?>
+<?php if ($specificInfo) : ?>
+    <?php
+    $count = 0;
+    foreach ($specificInfo as $label => $value) : ?>
+        <span class="payment-header-bopis"><?= $block->escapeHtml($label) ?>:</span>
+        <span>
+            <?= /* @noEscape */ nl2br($block->escapeHtml(implode("\n", $block->getValueAsArray($value, true)))) ?>
+        </span>
+        <br />
+    <?php
+    $count++;
+    if($count == 5) {
+        break;
+    }
+    endforeach; ?>
+<?php endif;?>
