@@ -1,16 +1,22 @@
 var config = {
     map: {
         '*': {
-            'vass-validation': 'Vass_Checkout/js/vass-validation'
+            'general-validation': 'Vass_Checkout/js/general-validation',
+            'validation-documento': 'Vass_Checkout/js/validation-documento',
         }
     },
     paths: {
-        'vass-validation': 'Vass_Checkout/js/vass-validation'
+        'general-validation': 'Vass_Checkout/js/general-validation',
+        'validation-documento': 'Vass_Checkout/js/validation-documento'
     },
     shim: {
-        'vass-validation': {
+        'general-validation': {
             deps: ['jquery'],
-            exports: 'vass-validation'
-        }
+            exports: 'general-validation'
+        },
+        'validation-documento': {
+            deps: ['jquery'],
+            exports: 'validation-documento'
+        },
     }
 };

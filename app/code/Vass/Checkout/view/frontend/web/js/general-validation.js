@@ -1,6 +1,6 @@
 require([
     'jquery',
-    'uiComponent'
+    'uiComponent',
 ], function($, Component) {
     'use strict';
 
@@ -67,73 +67,6 @@ require([
                 subtree: true
             });
         }, 500); // Retraso de 500ms para permitir la carga de componentes dinámicos
-
-        // Función para validar el número de documento
-        function validarNumeroDocumento(tipo, numero) {
-            if (tipo === 'DNI') {
-                return /^\d{8}$/.test(numero); // 8 números
-            } else if (tipo === 'Pasaporte') {
-                return /^[a-zA-Z0-9]{6,12}$/.test(numero); // 6-12 caracteres alfanuméricos
-            }
-            return false;
-        }
-
-        // Aplicar la lógica de validación al campo de número de documento
-        setTimeout(function() {
-            var $selectTipoDocumento = $('[name="custom_attributes[identificacion_picker]"]');
-            var $inputNumeroDocumento = $('[name="custom_attributes[numero_identificacion_picker]"]');
-
-            // Cambiar el placeholder y la validación según el tipo de documento
-            $selectTipoDocumento.on('change', function() {
-                var tipoDocumento = $(this).val();
-                
-                if (tipoDocumento === 'DNI') {
-                    $inputNumeroDocumento.attr('placeholder', 'Ingrese su DNI');
-                    $inputNumeroDocumento.attr('maxlength', '8');
-                } else if (tipoDocumento === 'Pasaporte') {
-                    $inputNumeroDocumento.attr('placeholder', 'Ingrese su Pasaporte');
-                    $inputNumeroDocumento.attr('maxlength', '12');
-                } else {
-                    $inputNumeroDocumento.attr('placeholder', 'Ingrese su número de documento');
-                    $inputNumeroDocumento.removeAttr('maxlength');
-                }
-
-                // Limpiar el valor del input
-                $inputNumeroDocumento.val('');
-            });
-
-            // Validar el número de documento al salir del campo
-            $inputNumeroDocumento.on('blur', function() {
-                var tipoDocumento = $selectTipoDocumento.val();
-                var numeroDocumento = $(this).val();
-
-                if (!validarNumeroDocumento(tipoDocumento, numeroDocumento)) {
-                    alert('El número de documento ingresado no es válido.');
-                    $(this).val('');
-                }
-            });
-
-            // Configurar un observador para asegurar que los campos se cargan dinámicamente
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    mutation.addedNodes.forEach(function(node) {
-                        if (node.nodeType === 1) { // Es un nodo de elemento
-                            if ($(node).find('[name="custom_attributes[identificacion_picker]"]').length ||
-                                $(node).is('[name="custom_attributes[identificacion_picker]"]')) {
-                                $selectTipoDocumento = $('[name="custom_attributes[identificacion_picker]"]');
-                                $inputNumeroDocumento = $('[name="custom_attributes[numero_identificacion_picker]"]');
-                            }
-                        }
-                    });
-                });
-            });
-
-            // Observar el body para cambios
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-        }, 500); // Retraso para esperar a que se carguen los componentes
 
         $('input[name="country_id"]').closest('.field').hide();
     });
