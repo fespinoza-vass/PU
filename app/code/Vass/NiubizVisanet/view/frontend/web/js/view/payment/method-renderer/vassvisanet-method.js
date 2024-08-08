@@ -6,9 +6,10 @@ define([
     'Magento_Vault/js/view/payment/vault-enabler',
     'Magento_Checkout/js/model/full-screen-loader',
     'Magento_Customer/js/customer-data',
-    'payform'
+    'payform',
+    'ko'
 ],
-function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,paylib
+function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,paylib,ko
     ) {
     'use strict';
 
@@ -35,20 +36,13 @@ function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,p
         getData: function () {
 
             var data = {
-
                 'method': this.getCode(),
-
                 'additional_data': {
-
                     'payment_token': this.paymenToken
-
                 }
-
             };
 
-
             return data;
-
         },
 
         /**
@@ -78,42 +72,173 @@ function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,p
             }
         },
 
-        sendPaymentVal: function(sessionToken,merchantId,totals) {
+        createCard: async function(){
+            try {
+                const response = await payform.createElement(
+                  'card-number', {
+                    style: this.elementStyles,
+                    placeholder: 'Nro Tarjeta'
+                  }, 'txtNumeroTarjeta'
+                );
+                console.log('Resultado Nro Tarjeta:', response);
+              } catch (error) {
+                console.error('Error al crear el elemento:', error);
+              }
+        },
+        createExpiry: async function(){
+            try {
+                const response = await payform.createElement(
+                  'card-expiry', {
+                    style: this.elementStyles,
+                    placeholder: 'Expiry'
+                  }, 'txtFechaVencimiento'
+                );
+                console.log('Resultado Expiry:', response);
+              } catch (error) {
+                console.error('Error al crear el elemento:', error);
+              }
+        },
+        createCvv: async function(){
+            try {
+                const response = await payform.createElement(
+                  'card-cvc', {
+                    style: this.elementStyles,
+                    placeholder: 'CVV'
+                  }, 'txtCvv'
+                );
+                console.log('Resultado Cvv:', response);
+              } catch (error) {
+                console.error('Error al crear el elemento:', error);
+              }
+        },
 
+        sendPaymentVal: async  function(sessionToken, merchantId, totals) {
             var data = {
-                name: this.getCustomerDetails().firstName,
-                lastName: this.getCustomerDetails().lastname,
+                name: 'nombre',
+                lastName: 'nombre',
                 email: this.getCustomerDetails().email
-                };
+            };
 
-            var configuration = {
+            window.configuration = {
                 sessionkey: sessionToken,
                 channel: 'web',
+                callbackurl : '',
                 merchantid: merchantId,
-                purchasenumber: quote.getQuoteId(),
-                amount: totals,
+                purchasenumber: '3543535',
+                amount: String(totals),
                 language: 'es',
                 font: 'https://fonts.googleapis.com/css?family=Montserrat:400&display=swap',
-                };
-                window.payform.setConfiguration(configuration);
-                var cardNumber = this.getSelector('cc_number');
-                var cardExpiry = this.getSelector('expirationDate');
-                var cardCvc = this.getSelector('cc_cid');
+            };
 
-                console.log(data);
-                console.log(configuration);
+            window.payform.purchase = '3543535';
+            window.payform.dcc = false;
+            window.payform.setConfiguration(window.configuration);
 
-                return cardNumber+cardExpiry+cardCvc;
-                /* Caso de uso: Controles independientes */
-                // window.payform.createToken([cardNumber,cardExpiry,cardCvc], data).then(function(response){
-                // return response;
-                //     }).catch(function(error){
-                //         fullScreenLoader.stopLoader();
-                //         globalMessageList.addErrorMessage({
-                //             message: error.message
-                //         });
-                // })
+            var elementStyles= {
+                base: {
+                    color: 'black',
+                    margin: '0',
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSmoothing: 'antialiased',
+                    placeholder: {
+                    color: '#999999'
+                    },
+                    autofill: {
+                    color: '#e39f48',
+                    }
+                },
+                invalid: {
+                    color: '#E25950',
+                    '::placeholder': {
+                    color: '#FFCCA5',
+                    }
+                }
+            };
+
+            try {
+                // Esperar a que los elementos de tarjeta se creen
+                const [cardNumber, cardExpiry, cardCvv] = await Promise.all([
+                    payform.createElement('card-number', {
+                        style: elementStyles,
+                        placeholder: 'Número de Tarjeta'
+                    }, 'txtNumeroTarjeta'),
+                    payform.createElement('card-expiry', {
+                        style: elementStyles,
+                        placeholder: 'mmaa'
+                    }, 'txtFechaVencimiento'),
+                    payform.createElement('card-cvc', {
+                        style: elementStyles,
+                        placeholder: 'cvc'
+                    }, 'txtCvv')
+                ]);
+        
+                // Asignar los eventos de cambio
+                cardNumber.on('change', function(data) {
+                    console.log('cardNumber: ', data);
+                });
+                cardExpiry.on('change', function(data) {
+                    console.log('Expiry: ', data);
+                });
+                cardCvv.on('change', function(data) {
+                    console.log('CHANGE CVV2: ', data);
+                });
+        
+                // Crear el token con los elementos de tarjeta
+                const response = await payform.createToken([cardNumber, cardExpiry, cardCvv], data);
+                return response;
+            } catch (error) {
+                console.error('Error al crear el token:', error);
+            }
         },
+
+        // sendPaymentVal: function(sessionToken,merchantId,totals) {
+
+        //     var data = {
+        //         // name: this.getCustomerDetails().firstName,
+        //         // lastName: this.getCustomerDetails().lastname,
+        //         name    :'nombre',
+        //         lastName:'nombre',
+        //         email: this.getCustomerDetails().email
+        //         };
+
+        //     var configuration = {
+        //         sessionkey: sessionToken,
+        //         channel: 'web',
+        //         merchantid: merchantId,
+        //         purchasenumber: 3543535,
+        //         amount: totals,
+        //         language: 'es',
+        //         font: 'https://fonts.googleapis.com/css?family=Montserrat:400&display=swap',
+        //         };
+
+        //         window.payform.purchase = 3543535;
+        //         window.payform.dcc = false;
+        //         window.payform.setConfiguration(configuration);
+
+
+        //         window.cardNumber = this.createCard();
+        //         window.cardExpiry = this.createExpiry();
+        //         window.cardCvv = this.createCvv();
+
+
+
+        //         var cardNumber = this.getSelector('cc_number');
+        //         var cardExpiry = this.getSelector('expirationDate');
+        //         var cardCvc = this.getSelector('cc_cid');
+
+        //         console.log(data);
+        //         console.log(configuration);
+
+        //         // return cardNumber+cardExpiry+cardCvc;
+        //         /* Caso de uso: Controles independientes */
+        //         window.payform.createToken([window.cardNumber,window.cardExpiry,window.cardCvc], data).then(function(response){
+        //         return response;
+        //             }).catch(function(error){
+        //                 globalMessageList.addErrorMessage({
+        //                     message: error.message
+        //                 });
+        //         })
+        // },
 
         /**
          * Send request to get payment method nonce
@@ -127,10 +252,9 @@ function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,p
                 data: JSON.stringify({})
             })
                 .done(function (response) {
-                    fullScreenLoader.stopLoader();
                     let total = quote.getCalculatedTotal();
 
-                    var payment = self.sendPaymentVal(response.token, response.merchant, total);
+                    const payment = self.sendPaymentVal(response.token, response.merchant, total);
                     console.log(payment);
 
                     fullScreenLoader.stopLoader();
@@ -146,6 +270,8 @@ function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,p
                     }
                 })
                 .fail(function (response) {
+                    fullScreenLoader.stopLoader();
+
                     var error = JSON.parse(response.responseText);
 
                     fullScreenLoader.stopLoader();

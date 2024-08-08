@@ -86,7 +86,7 @@ class Config
     public function securitykey($environment,$merchantId,$user,$password){
         $url = match ($environment) {
             'prd'            => "https://apiprod.vnforapps.com/api.security/v1/security ",
-            'dev'            => "https://apisandbox.vnforappstest.com/api.security/v1/security",
+            'dev'            => "https://apitestenv.vnforapps.com/api.security/v1/security",
             default => throw new \InvalidArgumentException("Ambiente desconocido: $environment"),
         };
         $accessKey = $user;

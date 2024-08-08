@@ -8,8 +8,10 @@
     <policies>
         <policy id="script-src">
             <values>
-                <value id="niubiz_prod" type="host">https://static-content.vnforapps.com/</value>
-                <value id="niubiz_dev" type="host">https://pocpaymentserve.s3.amazonaws.com/</value>
+                <value id="niubiz_prod" type="host">*.vnforapps.com</value>
+                <value id="niubiz_lib" type="host">*.s3.amazonaws.com</value>
+                <value id="niubiz_dev" type="host">*.vnforappstest.com</value>
+                <value id="niubiz_cardinal" type="host">*.cardinalcommerce.com</value>
             </values>
         </policy>
     </policies>
