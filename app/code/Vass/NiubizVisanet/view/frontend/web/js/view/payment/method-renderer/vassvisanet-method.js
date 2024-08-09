@@ -112,7 +112,7 @@ function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,p
               }
         },
 
-        sendPaymentVal: async  function(sessionToken, merchantId, totals) {
+        sendPaymentVal:  function(sessionToken, merchantId, totals) {
             var data = {
                 name: 'nombre',
                 lastName: 'nombre',
@@ -134,60 +134,86 @@ function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,p
             window.payform.dcc = false;
             window.payform.setConfiguration(window.configuration);
 
-            var elementStyles= {
-                base: {
-                    color: 'black',
-                    margin: '0',
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontSmoothing: 'antialiased',
-                    placeholder: {
-                    color: '#999999'
-                    },
-                    autofill: {
-                    color: '#e39f48',
-                    }
-                },
-                invalid: {
-                    color: '#E25950',
-                    '::placeholder': {
-                    color: '#FFCCA5',
-                    }
-                }
-            };
-
             try {
                 // Esperar a que los elementos de tarjeta se creen
-                const [cardNumber, cardExpiry, cardCvv] = await Promise.all([
-                    payform.createElement('card-number', {
+                // window.cardNumber = await this.createCard();
+                // window.cardExpiry = await this.createExpiry();
+                // window.cardCvv = await this.createCvv();
+
+                var elementStyles= {
+                    base: {
+                        color: 'black',
+                        margin: '0',
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontSmoothing: 'antialiased',
+                        placeholder: {
+                        color: '#999999'
+                        },
+                        autofill: {
+                        color: '#e39f48',
+                        }
+                    },
+                    invalid: {
+                        color: '#E25950',
+                        '::placeholder': {
+                        color: '#FFCCA5',
+                        }
+                    }
+                    };
+
+                window.cardNumber =  window.payform.createElement(
+                    'card-number', {
                         style: elementStyles,
                         placeholder: 'Número de Tarjeta'
-                    }, 'txtNumeroTarjeta'),
-                    payform.createElement('card-expiry', {
+                    },
+                    'txtNumeroTarjeta'
+                    ).then(element => {
+                        element.on('change', function(data) {
+                            console.log('cardNumber: ', data);
+                        })
+                    });
+                
+                console.log('cardNumber', window.cardNumber);
+              
+                
+                window.cardExpiry =  window.payform.createElement(
+                    'card-expiry', {
                         style: elementStyles,
                         placeholder: 'mmaa'
-                    }, 'txtFechaVencimiento'),
-                    payform.createElement('card-cvc', {
+                    },
+                    'txtFechaVencimiento'
+                    ).then(element => {
+                        element.on('change', function(data) {
+                            console.log('Expiry: ', data);
+                        })
+                        });
+                
+
+                window.cardCvv =  window.payform.createElement(
+                    'card-cvc', {
                         style: elementStyles,
                         placeholder: 'cvc'
-                    }, 'txtCvv')
-                ]);
-        
-                // Asignar los eventos de cambio
-                cardNumber.on('change', function(data) {
-                    console.log('cardNumber: ', data);
-                });
-                cardExpiry.on('change', function(data) {
-                    console.log('Expiry: ', data);
-                });
-                cardCvv.on('change', function(data) {
-                    console.log('CHANGE CVV2: ', data);
-                });
-        
+                    },
+                    'txtCvv'
+                    ).then(element => {
+                        element.on('change', function(data) {
+                            console.log('CHANGE CVV2: ', data);
+                        })
+                    });
+                      
+          
+
+                var cardNumber = this.getSelector('cc_number');
+                var cardExpiry = this.getSelector('expirationDate');
+                var cardCvc = this.getSelector('cc_cid');
+
+                console.log('hola');
+                
                 // Crear el token con los elementos de tarjeta
-                const response = await payform.createToken([cardNumber, cardExpiry, cardCvv], data);
-                return response;
+                const response = window.payform.createToken([window.cardNumber, window.cardExpiry, window.cardCvv], data);
+                 return response;
             } catch (error) {
-                console.error('Error al crear el token:', error);
+                console.log('Error:');
             }
         },
 
@@ -283,5 +309,4 @@ function ($, Component, url, quote, VaultEnabler,fullScreenLoader,customerData,p
     });
 }
 );
-
 
