@@ -8,17 +8,24 @@ declare(strict_types=1);
 namespace Vass\NiubizVisanet\Model;
 
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+
 
 class Config
 {
-    private function getValueConfig($field, $storeId = null)
+    public function __construct(
+        ScopeConfigInterface $scopeConfig,
+    ) {
+        $this->scopeConfig = $scopeConfig;
+    }
+
+    public function getValueConfig($field, $storeId = null)
     {
       
-        $pathPattern = 'payment/%s/vassvisanet/%s';
-        $methodCode = 'vassvisanet';
+        $pathPattern = 'payment/vassvisanet/%s';
 
         return $this->scopeConfig->getValue(
-            sprintf($pathPattern, $methodCode, $field),
+            sprintf($pathPattern, $field),
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
@@ -26,19 +33,20 @@ class Config
 
     public function configurationNiubiz()
     {
-        return $this->getValueConfig('merchant_id')
-        && $this->getValueConfig('public_key')
-        && $this->getValueConfig('private_key')
-        && $this->getValueConfig('debug')
-        && $this->getValueConfig('ip_client');
+        return 
+        ['merchant' => $this->getValueConfig('merchant_id'),
+        'public'    => $this->getValueConfig('public_key'),
+        'private'   => $this->getValueConfig('private_key'),
+        'debug'     => $this->getValueConfig('debug'),
+        'ip'        => $this->getValueConfig('ip_client')];
     }
 
     
     public function authorization($environment,$key,$amount,$transactionToken,$purchaseNumber,$merchantId,$currencyCode){
         
         $url = match ($environment) {
-            'prd' => "https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/".$merchantId,
-            'dev' => "https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/".$merchantId,
+            'prd'            => "https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/".$merchantId,
+            'dev'            => "https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/".$merchantId,
             default => throw new \InvalidArgumentException("Ambiente desconocido: $environment"),
         };
 
@@ -77,11 +85,10 @@ class Config
 
     public function securitykey($environment,$merchantId,$user,$password){
         $url = match ($environment) {
-            'prd' => "https://apiprod.vnforapps.com/api.security/v1/security",
-            'dev' => "https://apitestenv.vnforapps.com/api.security/v1/security",
+            'prd'            => "https://apiprod.vnforapps.com/api.security/v1/security ",
+            'dev'            => "https://apitestenv.vnforapps.com/api.security/v1/security",
             default => throw new \InvalidArgumentException("Ambiente desconocido: $environment"),
         };
-        
         $accessKey = $user;
         $secretKey = $password;
         $header = array("Content-Type: application/json");
@@ -102,8 +109,8 @@ class Config
 
     public function create_token($environment,$amount,$key,$merchantId,$user,$password,$ipClient){
         $url = match ($environment) {
-            'prd' => "https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId,
-            'dev' => "https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId,
+            'prd'            => "https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId,
+            'dev'            => "https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/".$merchantId,
             default => throw new \InvalidArgumentException("Ambiente desconocido: $environment"),
         };
         
