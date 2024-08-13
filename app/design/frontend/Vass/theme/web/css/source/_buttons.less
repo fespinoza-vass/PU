@@ -3,4 +3,18 @@ a.action.primary,
 a.action.secondary,
 a.action.tertiary{
     background-color: @primary-00;
+    padding: 15px 51px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    &:hover {
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+    &:active {
+        background-color: @primary-01;
+    }
+    &:disabled {
+        background-color: @secondary-black-02;
+        color: @secondary-black-01
+    }
 }
