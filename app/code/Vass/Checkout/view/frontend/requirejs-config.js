@@ -3,6 +3,7 @@ var config = {
         '*': {
             'general-validation': 'Vass_Checkout/js/general-validation',
             'validation-documento': 'Vass_Checkout/js/validation-documento',
+            'Magento_SalesRule/template/payment/discount.html': 'Vass_Checkout/template/payment/discount.html'
         }
     },
     paths: {

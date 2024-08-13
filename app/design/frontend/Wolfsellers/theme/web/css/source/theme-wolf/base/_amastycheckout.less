@@ -581,8 +581,194 @@
         border: 0.8px solid #979797;
         background: #FFF;
     }
-      
+
+    .totals{
+        .mark{
+           background: #FFF !important;
+           .value{
+            display: none !important;
+           }
+        }
+      .amount{
+        background: #fff !important;
+      }
+    }
+
+     #discount-code{
+        display: flex;
+        width: 308px;
+        padding: 11px;
+        align-items: center;
+        gap: 10px;
+        flex: 1 0 0;
+        border-radius: 10px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+        margin-left: -25px;
+
+    }
+
+    .actions-toolbar {
+        .primary .action {
+            border-radius: 0px 10px 10px 0px;
+            background: var(--Texto, #000);
+            width: 121px;
+            height: 41px;
     
+            span {
+                color: #FFF;
+                text-align: center;
+                font-family: "Open Sans";
+                font-size: 19px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+        }
+    
+        #block-discount-heading span {
+            color: #3E3E3E;
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+
+    /* Contenedor del checkbox */
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field {
+            display: flex;
+            align-items: center; /* Alinea verticalmente el checkbox con el texto */
+
+        }
+
+        /* Checkbox */
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .checkbox {
+            border-radius: 2px !important;
+            border: 0.5px solid var(--Texto, #000) !important;
+            background: #FFF !important;
+            width: 16px !important;
+            height: 16px !important;
+            padding: 2px !important;
+            margin-right: 10px; /* Espacio entre el checkbox y el texto */
+            flex-shrink: 0; /* Evita que el checkbox se reduzca */
+        }
+
+        /* Texto del label */
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.2; /* Ajusta la altura de línea */
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .label::before {
+            content: "Acepto Política de Envío de";
+        }
+        
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .label::after {
+            content: "Comunicaciones de Publicidad y Promociones.";
+            font-weight: bold; /* Aplica negrita */
+        }
+
+         /* Contenedor del checkbox */
+         div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field {
+            display: flex;
+            align-items: center; 
+            margin-bottom: 16px;
+        }
+
+        /* Checkbox */
+        div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .checkbox {
+            border-radius: 2px !important;
+            border: 0.5px solid var(--Texto, #000) !important;
+            background: #FFF !important;
+            width: 16px !important;
+            height: 16px !important;
+            padding: 2px !important;
+            margin-right: 10px; /* Espacio entre el checkbox y el texto */
+            flex-shrink: 0; /* Evita que el checkbox se reduzca */
+        }
+
+        /* Texto del label */
+        div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.2; /* Ajusta la altura de línea */
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .label::before {
+            content: "He leído y acepto los ";
+        }
+        
+        div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .label::after {
+            content: "Términos y Condiciones.";
+            font-weight: bold; /* Aplica negrita */
+        }
+
+        /* Contenedor del checkbox */
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        /* Checkbox */
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .checkbox {
+            border-radius: 2px !important;
+            border: 0.5px solid var(--Texto, #000) !important;
+            background: #FFF !important;
+            width: 16px !important;
+            height: 16px !important;
+            padding: 2px !important;
+            margin-right: 10px; /* Espacio entre el checkbox y el texto */
+            flex-shrink: 0; /* Evita que el checkbox se reduzca */
+        }
+
+        /* Texto del label */
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.2; /* Ajusta la altura de línea */
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .label::before {
+            content: "He leído y acepto la ";
+        }
+        
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .label::after {
+            content: "Política de Protección de Datos Personales.";
+            font-weight: bold; /* Aplica negrita */
+        }
+
+        .amcheckout-checkboxes {
+            display: none !important;
+        }
+
+         
+
+   
+
+    
+
 }
 
 

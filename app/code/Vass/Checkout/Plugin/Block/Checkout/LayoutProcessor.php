@@ -9,7 +9,9 @@ class LayoutProcessor
     public function afterProcess(
         \Magento\Checkout\Block\Checkout\LayoutProcessor $subject,
         array $jsLayout
+        
     ) {
+        
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['ruc']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -99,8 +101,91 @@ class LayoutProcessor
            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
                ['shippingAddress']['children']['shipping-address-fieldset']['children']['telephone']['config']['errorMessage'] = __('El número de DNI debe tener 10 dígitos.');
        }
+
+       $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['comment']['visible']= false;
+       if (isset($jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['checkboxes']['children']['subscribe'])) {
+        // Oculta el checkbox 'subscribe'
+        $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['checkboxes']['children']['subscribe']['displayArea'] = 'hidden';
+    }
+
+      
+
+       $check_terminos = [
+        'component' => 'Magento_Ui/js/form/element/abstract',
+        'config' => [
+            'customScope' => 'checkout.sidebar.additional.custom_attributes',
+            'template' => 'ui/form/field',
+            'elementTmpl' => 'ui/form/element/checkbox',
+            'id' => 'checkbox_terminos',
+        ],
+        'dataScope' => 'checkout.sidebar.additional.checkbox_terminos',
+        'description' => '', // Cambia esto a la etiqueta deseada
+        'provider' => 'checkoutProvider',
+        'visible' => true,
+        'validation' => [
+            'required-entry' => false, // Cambia a true si deseas que sea obligatorio
+        ],
+        'sortOrder' => 100, // Cambia según donde quieras que aparezca
+        'id' => 'custom-checkbox-terminos',
         
+    ];
+
+    $checkbox_privacidad = [
+        'component' => 'Magento_Ui/js/form/element/abstract',
+        'config' => [
+            'customScope' => 'checkout.sidebar.additional.custom_attributes',
+            'template' => 'ui/form/field',
+            'elementTmpl' => 'ui/form/element/checkbox',
+            'id' => 'checkbox_privacidad',
+        ],
+        'dataScope' => 'checkout.sidebar.additional.checkbox_privacidad',
+        'description' => '', // Cambia esto a la etiqueta deseada
+        'provider' => 'checkoutProvider',
+        'visible' => true,
+        'validation' => [
+            'required-entry' => false, // Cambia a true si deseas que sea obligatorio
+        ],
+        'sortOrder' => 200, // Cambia según donde quieras que aparezca
+        'id' => 'custom-checkbox-privacidad',
         
+    ];
+
+    $checkbox_newsletter = [
+        'component' => 'Magento_Ui/js/form/element/abstract',
+        'config' => [
+            'customScope' => 'checkout.sidebar.additional.custom_attributes',
+            'template' => 'ui/form/field',
+            'elementTmpl' => 'ui/form/element/checkbox',
+            'id' => 'checkbox_newsletter',
+        ],
+        'dataScope' => 'checkout.sidebar.additional.checkbox_newsletter',
+        'description' => '', // Cambia esto a la etiqueta deseada
+        'provider' => 'checkoutProvider',
+        'visible' => true,
+        'validation' => [
+            'required-entry' => false, // Cambia a true si deseas que sea obligatorio
+        ],
+        'sortOrder' => 300, // Cambia según donde quieras que aparezca
+        'id' => 'custom-checkbox-newsletter',
+        
+    ];
+
+
+    
+
+    // Añadiendo el checkbox a la ruta especificada
+    $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox'] = $check_terminos;
+    $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox2'] = $checkbox_privacidad;
+    $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox3'] = $checkbox_newsletter;
+
+
+
+
+
+
+
         return $jsLayout;
+
+        
     }
 }
