@@ -1,20 +1,53 @@
-button,
-a.action.primary,
-a.action.secondary,
-a.action.tertiary{
-    background-color: @primary-00;
-    padding: 15px 51px;
+.button-base() {
+    padding: 16px 51px;
     border-radius: 2px;
     text-transform: uppercase;
+}
+
+.button-primary() {
+    background-color: @primary-00;
     &:hover {
-        background-color: #fff;
         border: 1px solid #000;
+        background-color: @secondary-white-00;
     }
     &:active {
         background-color: @primary-01;
     }
     &:disabled {
         background-color: @secondary-black-02;
-        color: @secondary-black-01
+        color: @secondary-black-01;
     }
+}
+
+.button-secondary() {
+    background-color: @secondary-beige-00;
+    &:hover {
+        border: 1px solid @primary-00;
+        color: @primary-00;
+    }
+    &:active {
+        border: 1px solid @secondary-black-02;
+        color: @secondary-black-02;
+    }
+    &:disabled {
+        border: 1px solid @secondary-black-03;
+        color: @secondary-black-03;
+    }
+}
+
+button,
+.action.primary,
+.action.secondary,
+.action.tertiary {
+    .button-base();
+}
+
+.action.primary,
+.action.tertiary {
+    .button-primary();
+}
+
+button,
+.action.secondary {
+    .button-secondary();
 }
