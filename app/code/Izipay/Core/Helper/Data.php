@@ -76,10 +76,12 @@ class Data extends AbstractHelper
 	const CONFIG_IZIPAY_CANCELED_STATUS = 'payment/izipay/canceled_izipay';
 
 	// URLs para generación de token
-	const URL_TOKEN_DEV = 'https://testapi-pw.izipay.pe/security/v1/Token/Generate';
+	//const URL_TOKEN_DEV = 'https://testapi-pw.izipay.pe/security/v1/Token/Generate';
+	const URL_TOKEN_DEV = 'https://sandbox-api-pw.izipay.pe/security/v1/Token/Generate';
 	const URL_TOKEN_PROD = 'https://api-pw.izipay.pe/security/v1/Token/Generate';
 
-	const URL_SDK_DEV = 'https://testcheckout.izipay.pe/payments/v1/js/index.js';
+	//const URL_SDK_DEV = 'https://testcheckout.izipay.pe/payments/v1/js/index.js';
+	const URL_SDK_DEV = 'https://sandbox-checkout.izipay.pe/payments/v1/js/index.js';
 	const URL_SDK_PROD = 'https://checkout.izipay.pe/payments/v1/js/index.js';
 
 	const PRODUCTION_ENVIRONMENT = 'production';

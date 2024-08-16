@@ -228,7 +228,7 @@ define(
                             postal_code = "00051";
                         }*/
                         var postal_code = "00051";
-
+                        var dateTimeIzi = Math.floor(Date.now()) * 1000;
                         const iziConfig = {
                             publicKey: izipay_public_key,
                             config: {
@@ -242,7 +242,7 @@ define(
                                     processType: izipay_type_access,
                                     payMethod : alternative_payment_method_selected,
                                     merchantBuyerId: merchantBuyerId,
-                                    dateTimeTransaction: Math.floor(Date.now()).toString(), //currentTimeUnix
+                                    dateTimeTransaction: dateTimeIzi.toString(), //currentTimeUnix
                                 },
                                 card: {
                                     brand: '',
