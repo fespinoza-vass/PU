@@ -36,6 +36,56 @@
     }
 }
 
+.slick-dots{
+    li button{
+        border-radius: 100%;
+        background-color: @secondary-black-02;
+        width: 4px;
+        height: 4px;
+        border: none;
+    }
+    li.slick-active button{
+        border-radius: 100%;
+        background-color: @secondary-black-00;
+        width: 6px;
+        height: 6px;
+    }
+}
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 0.5px solid @secondary-black-00;
+    border-radius: 100%;
+    position: relative;
+    cursor: pointer;
+
+
+    &:checked::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background-color: @secondary-black-00;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &:disabled {
+        border-color: @secondary-black-03;
+        cursor: not-allowed;
+        &::before {
+            background-color: @secondary-black-03;
+        }
+    }
+}
+
+
 button,
 .action.primary,
 .action.secondary,
