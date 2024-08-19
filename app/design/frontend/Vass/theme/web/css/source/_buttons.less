@@ -10,6 +10,7 @@
     &:hover {
         border: 1px solid #000;
         background-color: @secondary-white-00;
+        color: @secondary-black-00;
     }
     &:active {
         background-color: @primary-01;
@@ -85,23 +86,25 @@ input[type="radio"] {
     }
 }
 
+& when (@media-common = true){
+    button,
+    .action.primary,
+    .action.secondary,
+    .action.tertiary {
+        .button-base();
+    }
 
-button,
-.action.primary,
-.action.secondary,
-.action.tertiary {
-    .button-base();
+    .action.primary,
+    .action.tertiary {
+        .button-primary();
+    }
+
+    button,
+    .action.secondary {
+        .button-secondary();
+    }
 }
 
-.action.primary,
-.action.tertiary {
-    .button-primary();
-}
-
-button,
-.action.secondary {
-    .button-secondary();
-}
 
 //
 //  Mobile
