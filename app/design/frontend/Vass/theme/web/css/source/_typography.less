@@ -1,0 +1,58 @@
+@font-family__base: 'Aboreto';
+@font-family__secondary: 'Gantari';
+
+& when (@media-common= true){
+    @font-face{
+        font-family: @font-family__base;
+        src: url('@{baseDir}fonts/Aboreto/Aboreto-Regular.ttf');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face{
+        font-family: @font-family__secondary;
+        src: url('@{baseDir}fonts/Gantari/Gantari-Regular.ttf');
+        font-weight: 300;
+        font-style: normal;
+    }
+
+    @font-face{
+        font-family: @font-family__secondary;
+        src: url('@{baseDir}fonts/Gantari/Gantari-Regular.ttf');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face{
+        font-family: @font-family__secondary;
+        src: url('@{baseDir}fonts/Gantari/Gantari-Regular.ttf');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    @font-face{
+        font-family: @font-family__secondary;
+        src: url('@{baseDir}fonts/Gantari/Gantari-Medium.ttf');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    @font-face{
+        font-family: @font-family__secondary;
+        src: url('@{baseDir}fonts/Gantari/Gantari-Bold.ttf');
+        font-weight: 700;
+        font-style: normal;
+    }
+
+
+    @font-face{
+        font-family: @font-family__secondary;
+        src: url('@{baseDir}fonts/Gantari/Gantari-Light.ttf');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .items{
+        .lib-list-reset-styles();
+    }
+}
