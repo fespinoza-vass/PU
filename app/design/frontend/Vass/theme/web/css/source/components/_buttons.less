@@ -1,0 +1,32 @@
+.lib-button-primary(){
+    &:disabled{
+        background: @button-primary__disabled__background;
+        border: @button-primary__disabled__border;
+        color: @button-primary__disabled__color;
+    }
+}
+
+.lib-button(){
+    &:disabled{
+        background: @button__disabled__background;
+        border: @button__disabled__border;
+        color: @button__disabled__color;
+    }
+}
+
+.lib-button(){
+    .lib-css(text-transform, @button__text-transform);
+}
+
+//
+// Mobile
+// -------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .action.primary{
+        .lib-button-primary(@_button-padding: 8px 16px);
+    }
+    .action.secondary{
+        .lib-button(@_button-padding: 8px 16px);
+    }
+}
