@@ -3,5 +3,7 @@
     <head>
         <script src="Vass_Checkout::js/general-validation.js"/>
         <script src="Vass_Checkout::js/validation-documento.js"/>
+        <script src="Vass_Checkout::js/popups.js"/>
+         <script src="Vass_Checkout::js/texto-checkbox.js"/>
     </head>
 </page>

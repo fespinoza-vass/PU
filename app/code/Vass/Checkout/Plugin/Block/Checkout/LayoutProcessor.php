@@ -119,14 +119,13 @@ class LayoutProcessor
             'id' => 'checkbox_terminos',
         ],
         'dataScope' => 'checkout.sidebar.additional.checkbox_terminos',
-        'description' => '', // Cambia esto a la etiqueta deseada
+        'description' => 'He leído y acepto los',
         'provider' => 'checkoutProvider',
         'visible' => true,
         'validation' => [
-            'required-entry' => false, // Cambia a true si deseas que sea obligatorio
+            'required-entry' => false,
         ],
-        'sortOrder' => 100, // Cambia según donde quieras que aparezca
-        'id' => 'custom-checkbox-terminos',
+        'sortOrder' => 100,
         
     ];
 
@@ -139,14 +138,12 @@ class LayoutProcessor
             'id' => 'checkbox_privacidad',
         ],
         'dataScope' => 'checkout.sidebar.additional.checkbox_privacidad',
-        'description' => '', // Cambia esto a la etiqueta deseada
+        'description' => 'He leído y acepto la', // Cambia esto a la etiqueta deseada
         'provider' => 'checkoutProvider',
         'visible' => true,
-        'validation' => [
-            'required-entry' => false, // Cambia a true si deseas que sea obligatorio
-        ],
+        'required-entry' => true, // Cambia a true si deseas que sea obligatorio
         'sortOrder' => 200, // Cambia según donde quieras que aparezca
-        'id' => 'custom-checkbox-privacidad',
+        'id' => 'custom-checkbox-privacidad', 
         
     ];
 
@@ -159,7 +156,7 @@ class LayoutProcessor
             'id' => 'checkbox_newsletter',
         ],
         'dataScope' => 'checkout.sidebar.additional.checkbox_newsletter',
-        'description' => '', // Cambia esto a la etiqueta deseada
+        'description' => 'Acepto Política de Envío de', // Cambia esto a la etiqueta deseada
         'provider' => 'checkoutProvider',
         'visible' => true,
         'validation' => [
@@ -168,24 +165,17 @@ class LayoutProcessor
         'sortOrder' => 300, // Cambia según donde quieras que aparezca
         'id' => 'custom-checkbox-newsletter',
         
+        
     ];
-
-
-    
-
     // Añadiendo el checkbox a la ruta especificada
     $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox'] = $check_terminos;
     $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox2'] = $checkbox_privacidad;
     $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox3'] = $checkbox_newsletter;
-
-
-
-
-
-
-
-        return $jsLayout;
+    
+    return $jsLayout;
 
         
     }
+   
+    
 }
