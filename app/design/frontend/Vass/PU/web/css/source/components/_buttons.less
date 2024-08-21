@@ -26,16 +26,16 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .action.primary{
         .lib-button-primary(
-            @_button-padding: 8px 16px
+            @_button-padding: @button__mobile__padding
         );
 
-        .lib-css(height, 40px);
+        .lib-css(height, @button__mobile__height);
     }
     .action.secondary{
         .lib-button(
-            @_button-padding: 8px 16px
+            @_button-padding: @button__mobile__padding
         );
 
-        .lib-css(height, 40px);
+        .lib-css(height, @button__mobile__height);
     }
 }
