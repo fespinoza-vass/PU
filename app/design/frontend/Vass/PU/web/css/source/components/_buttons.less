@@ -15,6 +15,7 @@
 }
 
 .lib-button(){
+    .lib-css(height, @button__height);
     .lib-css(text-transform, @button__text-transform);
 }
 
@@ -24,9 +25,17 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .action.primary{
-        .lib-button-primary(@_button-padding: 8px 16px);
+        .lib-button-primary(
+            @_button-padding: 8px 16px
+        );
+
+        .lib-css(height, 40px);
     }
     .action.secondary{
-        .lib-button(@_button-padding: 8px 16px);
+        .lib-button(
+            @_button-padding: 8px 16px
+        );
+
+        .lib-css(height, 40px);
     }
 }
