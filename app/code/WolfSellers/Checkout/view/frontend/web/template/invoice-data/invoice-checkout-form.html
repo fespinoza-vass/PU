@@ -2,6 +2,9 @@
     <!-- ko foreach: getRegion('messages') -->
     <!-- ko template: getTemplate() --><!-- /ko -->
     <!--/ko-->
+    <button id="editBilling" type="button" class="pormientras" data-bind="click:editBilling" style="display: none;">
+        <span>Editar</span>
+    </button>
     <form id="custom-checkout-form" class="form" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
         <fieldset class="fieldset">
             <h4 data-bind="i18n: '1. Tipo de comprobante'"></h4>

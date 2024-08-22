@@ -28,6 +28,17 @@ define([
             $('#editInvoice').hide();
             $('#submitInvoice').show();
         },
+        editBilling: function() {
+            const editBilling = document.getElementById('editBilling');
+            const selectBilling = document.getElementById('checkout-payment-method-load');
+            const customCheckoutForm = document.getElementById('custom-checkout-form');
+            const resumeBilling = document.getElementById('resume-billing');
+
+            editBilling.style.display = 'none';
+            selectBilling.style.display = 'block';
+            customCheckoutForm.style.display = 'block';
+            resumeBilling.style.display = 'none';
+        },
         /**
          * Form submit handler
          * If invoice require, change billing address data

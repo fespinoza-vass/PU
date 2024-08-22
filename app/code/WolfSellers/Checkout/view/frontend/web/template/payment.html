@@ -17,7 +17,11 @@
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->
         <!--/ko-->
-        <form id="co-payment-form" class="form payments" novalidate="novalidate">
+        <form id="co-payment-form" class="form payments" novalidate="novalidate" style="display: flex;">
+            <div id="resume-billing" class="resume-billing" style="display: none;"> 
+                <div id="selectReceipt"></div>
+                <div id="detailReceipt"></div>
+            </div>
             <input data-bind='attr: {value: getFormKey()}' type="hidden" name="form_key"/>
             <fieldset class="fieldset">
                 <legend class="legend">
@@ -41,7 +45,7 @@
                 </div>
                 <!-- ko foreach: getRegion('afterMethods') -->
                 <!-- ko template: getTemplate() --><!-- /ko -->
-                <!-- /ko -->
+                <!-- /ko -->                
             </fieldset>
         </form>
     </div>
