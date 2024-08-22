@@ -18,14 +18,14 @@
 @icons__font-name: 'icons-blank-theme'; // ToDo UI: we need to rename (it shouldn't use blank theme name) or move icon fonts to blank theme
 
 //  Font families
+@font-family-name__base: Aboreto;
 @font-family__sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 @font-family__serif: Georgia, 'Times New Roman', Times, serif;
 @font-family__monospace: Menlo, Monaco, Consolas, 'Courier New', monospace;
-@font-family__aboreto: Aboreto;
 @font-family__gantari: Gantari;
 
-@font-family__base: @font-family__aboreto;
-@font-family__secondary: @font-family__gantari;
+@font-family__base: @font-family-name__base, @font-family__sans-serif;
+@font-family__secondary: @font-family__gantari, @font-family__sans-serif;
 
 //  Sizes
 @root__font-size: 62.5%; // Defines ratio between root font size and base font size, 1rem = 10px
