@@ -141,7 +141,9 @@ class LayoutProcessor
         'description' => 'He leído y acepto la', // Cambia esto a la etiqueta deseada
         'provider' => 'checkoutProvider',
         'visible' => true,
-        'required-entry' => true, // Cambia a true si deseas que sea obligatorio
+        'validation' => [
+            'required-entry' => true, // Cambia a true si deseas que sea obligatorio
+        ],
         'sortOrder' => 200, // Cambia según donde quieras que aparezca
         'id' => 'custom-checkbox-privacidad', 
         

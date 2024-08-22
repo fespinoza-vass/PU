@@ -56,5 +56,37 @@ require(['jquery'], function($) {
 
         // Llamar a la función para buscar los <span> y modificar su contenido
         addStrongToSpans();
+
+        function modifyClasses() {
+            var $targetDiv = $('div[name="checkout.sidebar.additional.checkbox_privacidad"]');
+
+            if ($targetDiv.length) {
+                // Elimina las clases 'field' y '_required' del div objetivo
+                $targetDiv.removeClass('field _required');
+
+                // Selecciona el div con la clase 'control' dentro del div objetivo
+                var $controlDiv = $targetDiv.find('.control');
+
+                if ($controlDiv.length) {
+                    // Agrega las clases 'field' y '_required' al div con la clase 'control'
+                    $controlDiv.addClass('field _required');
+                }
+            }
+        }
+
+        // Intenta ejecutar la función varias veces hasta que el div esté disponible
+        var attempts = 0;
+        var maxAttempts = 10; // Número máximo de intentos
+        var interval = setInterval(function() {
+            attempts++;
+            modifyClasses();
+
+            // Si después de intentos la clase no se ha eliminado, se detiene
+            if (attempts >= maxAttempts && 
+                !$('div[name="checkout.sidebar.additional.checkbox_privacidad"]').hasClass('field') &&
+                !$('div[name="checkout.sidebar.additional.checkbox_privacidad"]').hasClass('_required')) {
+                clearInterval(interval); // Detiene los intentos después del máximo
+            }
+        }, 500); 
     });
 });
