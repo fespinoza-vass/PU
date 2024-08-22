@@ -1,7 +1,14 @@
-@font-family__base: 'Aboreto';
-@font-family__secondary: 'Gantari';
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
 
 & when (@media-common= true){
+
+    //
+    // Aboreto
+    // ------------------
+
     @font-face{
         font-family: @font-family__base;
         src: url('@{baseDir}fonts/Aboreto/Aboreto-Regular.ttf');
@@ -9,12 +16,19 @@
         font-style: normal;
     }
 
+    //
+    // Gantari
+    // ------------------
+
+    // Light
+
     @font-face{
         font-family: @font-family__secondary;
-        src: url('@{baseDir}fonts/Gantari/Gantari-Regular.ttf');
+        src: url('@{baseDir}fonts/Gantari/Gantari-Light.ttf');
         font-weight: 300;
         font-style: normal;
     }
+    // Regular
 
     @font-face{
         font-family: @font-family__secondary;
@@ -23,12 +37,7 @@
         font-style: normal;
     }
 
-    @font-face{
-        font-family: @font-family__secondary;
-        src: url('@{baseDir}fonts/Gantari/Gantari-Regular.ttf');
-        font-weight: 500;
-        font-style: normal;
-    }
+    // Medium
 
     @font-face{
         font-family: @font-family__secondary;
@@ -37,21 +46,26 @@
         font-style: normal;
     }
 
+    // Bold
+
     @font-face{
         font-family: @font-family__secondary;
         src: url('@{baseDir}fonts/Gantari/Gantari-Bold.ttf');
-        font-weight: 700;
+        font-weight: 600;
         font-style: normal;
     }
 
+    //
+    // Link Button
+    // ------------------
 
-    @font-face{
-        font-family: @font-family__secondary;
-        src: url('@{baseDir}fonts/Gantari/Gantari-Light.ttf');
-        font-weight: 400;
-        font-style: normal;
+    .lib-link()
+    {
+        &:disabled{
+            .lib-css(color, @link__disabled__color);
+            .lib-css(text-decoration, @link__disabled__text-decoration);
+        }
     }
-
     .items{
         .lib-list-reset-styles();
     }
