@@ -3,7 +3,7 @@
  * @author VASS Team
  */
 
-@font-family__secondary: 'Aboreto';
+@font-family-name__secondary: 'Aboreto';
 
 & when (@media-common= true) {
 
@@ -48,17 +48,6 @@
         src: url('@{baseDir}fonts/Gantari/Gantari-Bold.ttf');
         font-weight: 600;
         font-style: normal;
-    }
-
-    //
-    //  Link Button
-    //  _____________________________________________
-
-    .lib-link() {
-        &:disabled {
-            .lib-css(color, @link__disabled__color);
-            .lib-css(text-decoration, @link__disabled__text-decoration);
-        }
     }
 
     .items {
