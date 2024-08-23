@@ -3,7 +3,7 @@
  * @author VASS Team
  */
 
- & when (@media-common = true) {
+& when (@media-common = true) {
     input[type="radio"] {
         .lib-css(appearance, none);
         width: 20px;
@@ -13,7 +13,6 @@
         border-radius: 100%;
         position: relative;
         cursor: pointer;
-
 
         &:checked::before {
             content: '';
@@ -30,6 +29,7 @@
         &:disabled {
             border-color: @color-gray-light1;
             cursor: not-allowed;
+
             &::before {
                 background-color: @color-gray-light1;
             }
