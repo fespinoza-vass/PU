@@ -2,13 +2,13 @@
  * @copyright Copyright (c) 2024 VASS
  * @author VASS Team
  */
- 
- //
- // Primary Button
- // -------------------------
 
-.lib-button-primary(){
-    &:disabled{
+//
+// Primary Button
+// -------------------------
+
+.lib-button-primary() {
+    &:disabled {
         background: @button-primary__disabled__background;
         border: @button-primary__disabled__border;
         color: @button-primary__disabled__color;
@@ -19,15 +19,15 @@
 // Secondary Button
 // -------------------------
 
-.lib-button(){
-    &:disabled{
+.lib-button() {
+    &:disabled {
         background: @button__disabled__background;
         border: @button__disabled__border;
         color: @button__disabled__color;
     }
 }
 
-.lib-button(){
+.lib-button() {
     .lib-css(height, @button__height);
     .lib-css(text-transform, @button__text-transform);
 }
@@ -37,14 +37,14 @@
 // -------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .action.primary{
+    .action.primary {
         .lib-button-primary(
             @_button-padding: @button__mobile__padding
         );
 
         .lib-css(height, @button__mobile__height);
     }
-    .action.secondary{
+    .action.secondary {
         .lib-button(
             @_button-padding: @button__mobile__padding
         );
