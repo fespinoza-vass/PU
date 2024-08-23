@@ -1,0 +1,61 @@
+<?php 
+	$order = $this->getOrder();
+	$response_izipay = $this->getIzipayResponse();
+
+	$date_r = substr($response_izipay["dateTransaction"],6,2)."/".substr($response_izipay["dateTransaction"],4,2)."/".substr($response_izipay["dateTransaction"],0,4);
+	$time_r = substr($response_izipay["timeTransaction"],0,2).":".substr($response_izipay["timeTransaction"],2,2).":".substr($response_izipay["timeTransaction"],4,2);
+
+?>
+<style>
+	table.data-izipay-response-success {
+		padding:3px;
+		width: 500px;
+	}
+	table.data-izipay-response-success td{
+		padding:3px;
+	}
+</style>
+
+<div class="checkout-success-wrapper">
+	<div class="checkout-success">
+		<div class="izipay-payment">
+			<?php if($order && $order->getIncrementId()):?>
+			    <h4>Transacción con IZIPAY:</h4>
+			    <table class="data-izipay-response-success">
+					<tr>
+						<td>Código de Respuesta:</td>
+						<td><?php echo $response_izipay["code"] ?></td>
+					</tr>
+					<tr>
+						<td>Mensaje Izipay:</td>
+						<td><?php echo $response_izipay["messageUser"] ?></td>
+					</tr>
+					<tr>
+						<td>Moneda:</td>
+						<td><?php echo $response_izipay["currency"] ?></td>
+					</tr>
+					<tr>
+						<td>Monto:</td>
+						<td><?php echo $response_izipay["amount"] ?></td>
+					</tr>
+					<tr>
+						<td>Order Number:</td>
+						<td><?php echo $response_izipay["orderNumber"] ?></td>
+					</tr>
+					<tr>
+						<td>Código Autorización:</td>
+						<td><?php echo $response_izipay["codeAuth"] ?></td>
+					</tr>
+					<tr>
+						<td>Fecha y Hora de Transacción:</td>
+						<td><?php echo $date_r." ".$time_r; ?></td>
+					</tr>
+					<tr>
+						<td>Método de pago:</td>
+						<td><?php echo $response_izipay["payMethod"] ?></td>
+					</tr>
+				</table>
+			<?php endif;?>
+		</div>
+	</div>
+</div>
