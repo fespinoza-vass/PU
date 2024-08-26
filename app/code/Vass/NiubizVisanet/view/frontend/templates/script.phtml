@@ -1,0 +1,24 @@
+<?php 
+$env = $block->getEnv();
+$mode = ($env == '0') ? 'production' : '';
+if ($mode == "production") {
+    $url = "https://static-content.vnforapps.com/elements/v1/payform.min.js";
+  
+} else {
+    $url = "https://pocpaymentserve.s3.amazonaws.com/payform.min.js";
+} ?>
+<script>
+   require.config({
+       map: {
+           '*': {
+               'payform':  '<?= $url ?>'
+           }
+       },
+        shim: {
+            'payform': {
+                deps: ['jquery'], 
+                exports: 'payform'
+            }
+        }
+   });
+</script>
