@@ -1,0 +1,100 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .message.info {
+        .lib-message(info);
+        .lib-css(padding, @message__padding-mobile);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size-mobile;
+        );
+    }
+
+    .message.error {
+        .lib-message(error);
+        .lib-css(padding, @message__padding-mobile);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size-mobile;
+        );
+    }
+
+    .message.warning {
+        .lib-message(warning);
+        .lib-css(padding, @message__padding-mobile);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size-mobile;
+        );
+    }
+
+    .message.notice {
+        .lib-message(notice);
+        .lib-css(padding, @message__padding-mobile);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size-mobile;
+        );
+    }
+
+    .message.success {
+        .lib-message(success);
+        .lib-css(padding, @message__padding-mobile);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size-mobile;
+        );
+    }
+    
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xs) {
+    .message.info {
+        .lib-css(padding, @message__padding);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size;
+        );
+    }
+
+    .message.error {
+        .lib-css(padding, @message__padding);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size;
+        );
+    }
+
+    .message.warning {
+        .lib-css(padding, @message__padding);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size;
+        );
+    }
+
+    .message.notice {
+        .lib-css(padding, @message__padding);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size;
+        );
+    }
+
+    .message.success {
+        .lib-css(padding, @message__padding);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size;
+        );
+    }
+}
+
