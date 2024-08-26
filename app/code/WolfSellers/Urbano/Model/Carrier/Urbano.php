@@ -247,7 +247,6 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
     {
         /** @var RateRequest $request */
         $request = $this->_rawRequest;
-
         $data = [
             'linea' => $this->getConfigData('line'),
             'id_orden' => $this->getConfigData('contract'),

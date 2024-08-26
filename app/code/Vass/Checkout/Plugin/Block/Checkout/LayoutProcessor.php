@@ -21,10 +21,6 @@ class LayoutProcessor
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['company']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['city']['visible']=true; 
-        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['colony']['visible']=true;
-        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio']['visible']= true;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['dni']['visible']=false;
@@ -53,7 +49,7 @@ class LayoutProcessor
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['visible']=false; 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['region_id']['visible']=false; 
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['region_id']['observable']=false; 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['country_id']['visible'] =false; 
 
@@ -174,7 +170,76 @@ class LayoutProcessor
     $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox2'] = $checkbox_privacidad;
     $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox3'] = $checkbox_newsletter;
     
-    return $jsLayout;
+
+     // Campo City
+     $cityField = [
+        'component' => 'Vass_Checkout/js/form/element/custom-select-address-city',
+        'config' => [
+            'customScope' => 'shippingAddress.custom_attributes',
+            'template' => 'ui/form/field',
+            'elementTmpl' => 'ui/form/element/select',
+            'id' => 'city',
+        ],
+        'dataScope' => 'shippingAddress.custom_attributes.city',
+        'label' => 'Provincia',
+        'provider' => 'checkoutProvider',
+        'sortOrder' => 210,
+        'validation' => [
+            'required-entry' => true
+        ],
+        'options' => [[
+            'label' => '',
+            'value' => '',
+        ]], 
+        'filterBy' => [
+            'target' => 'shippingAddress.region_id',
+            'field' => 'region_id',
+        ],
+        'visible' => true,
+        'imports' => [
+            'initialOptions' => 'index = checkoutProvider:dictionaries.city',
+            'setOptions' => 'index = checkoutProvider:dictionaries.city',
+        ],
+        'observable' => true
+    ];
+
+    // Campo Colony
+    $colonyField = [
+        'component' => 'Vass_Checkout/js/form/element/custom-select-address-colony',
+        'config' => [
+            'customScope' => 'shippingAddress.custom_attributes',
+            'template' => 'ui/form/field',
+            'elementTmpl' => 'ui/form/element/select',
+            'id' => 'colony',
+        ],
+        'dataScope' => 'shippingAddress.custom_attributes.colony',
+        'label' => 'Distrito',
+        'provider' => 'checkoutProvider',
+        'sortOrder' => 220,
+        'validation' => [
+            'required-entry' => true
+        ],
+        'options' =>[[
+            'label' => '',
+            'value' => '',
+        ]],
+        'filterBy' => [
+            'target' => 'shippingAddress.custom_attributes.city',
+            'field' => 'city',
+        ],
+        'visible' => true,
+        'imports' => [
+            'initialOptions' => 'index = checkoutProvider:dictionaries.colony',
+            'setOptions' => 'index = checkoutProvider:dictionaries.colony',
+        ],
+        'observable' => true
+    ];
+
+    // Añadir los campos al layout
+    $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['city'] = $cityField;
+    $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['colony'] = $colonyField;
+
+        return $jsLayout;
 
         
     }

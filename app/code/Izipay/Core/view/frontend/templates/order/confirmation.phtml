@@ -1,0 +1,90 @@
+<?php
+	$izipayObject = $this->getData('izipay');
+	$izipay = json_decode($izipayObject->getPaymentDetail());
+	$order = $this->getOrder($izipayObject->getIncrementId());
+?>
+
+<div class="checkout-success-wrapper">
+	<div class="checkout-success">
+	    <!--<div class="izipay__checkout--imagen">
+	        <img src="<?= $this->getViewFileUrl('images/Gracias.png') ?>" alt="Gracias">
+	    </div>-->
+	    <div class="izipay__checkout--descripcion">
+	        <div class="izipay__checkout--descripcion-titulo">
+				<h3 class="text-center"><?= $izipayObject->getPaymentStatus() == 'approved' ? '¡Felicidades '.$order->getCustomerFirstname().'!': 'La Transacción no fue realizada'   ?></h3>
+	        </div>
+	        <div class="izipay__checkout--descripcion-info">
+	            Hemos recibido la confirmación del pago, muy pronto recibiras tu producto a la dirección indicada.
+	        </div>
+	    </div>
+
+	    <div class="container-success">
+			<h4 class="text-center">Resumen:</h4>
+
+			<table>
+				<?php if($izipayObject->getPaymentStatus() !== 'approved'): ?>
+					<tr>
+						<td><strong>Número de Pedido:</strong></td>
+						<td class="text-right"><?= $order->getIncrementId() ?></td>
+					</tr>
+					<tr>
+						<td><strong>Fecha y Hora del pedido:</strong></td>
+						<td class="text-right"><?= $izipay->date_created ?></td>
+					</tr>
+				<?php endif; ?>
+				<tr>
+					<td><strong>Monto:</strong></td>
+					<td class="text-right"><?= $this->formatPaymentAmount($izipay->transaction_details->total_paid_amount) ?></td>
+				</tr>
+				<tr>
+					<td><strong>Tarjeta:</strong></td>
+					<td class="text-right"><?= $izipay->card->first_six_digits.'******'.$izipay->card->last_four_digits ?></td>
+				</tr>
+				<tr>
+					<td><strong>Mensaje:</strong></td>
+					<td class="text-right"><?= $this->getPaymentStatuses($izipay->status_detail) ?></td>
+				</tr>
+				<tr>
+					<td><strong>Método:</strong></td>
+					<td class="text-right"><?= $izipay->payment_method_id ?></td>
+				</tr>
+				<tr>
+					<td><strong>Estado:</strong></td>
+					<td class="text-right"><?= $izipay->status ?></td>
+				</tr>
+			</table>
+
+			<?php if($izipayObject->getPaymentStatus() == 'approved'): ?>
+				<?php if ($order->getEntityId()):?>
+			        <?php if ($this->getCanViewOrder($order)) :?>
+			            <p class="your-order-is"><?= $this->escapeHtml(__('Your order is # %1', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $this->escapeUrl($this->getViewOrderUrl($order)), $order->getIncrementId())), ['a', 'strong']) ?></p>
+			        <?php else :?>
+			            <p class="your-order-is"><?= $this->escapeHtml(__('Your order is # %1', sprintf('<span class="order-number">%s</span>', $order->getIncrementId())), ['span']) ?></p>
+			        <?php endif;?>
+			    <?php endif;?>
+			<?php endif; ?>
+		</div>
+
+		<!--<div class="izipay__checkout--comparte">
+		    <div class="izipay__checkout--comparte-titulo">
+		        COMPARTE EN NUESTRAS REDES SOCIALES
+		    </div>
+		    <div class="izipay__checkout--iconos"> 
+		        <a target="_blank" class="iconos" href="https://www.facebook.com/sharer/sharer.php?<?= http_build_query( array( 'u' => 'izipay' ) ) ?>"><i class="athlete2-icon-facebook"></i>
+		        </a>
+		        <a target="_blank" class="iconos" href="https://twitter.com/intent/tweet?<?=
+		        http_build_query( array( // WPCS: xss ok.
+		            'text'	 => 'izipay',
+		            'url'	 => 'izipay',
+		        ) ) ?>">
+		        </a>        
+		    </div>
+		</div>-->
+
+	    <div class="actions-toolbar">
+	        <div class="primary text-center">
+	            <a class="action primary continue" href="<?= $this->escapeUrl($this->getBaseUrl()) ?>"><span><?= $this->escapeHtml(__('IR AL HOME')) ?></span></a>
+	        </div>
+	    </div>
+	</div>
+</div>
