@@ -17,7 +17,7 @@ require(['jquery', 'domReady!'], function($) {
             $input.siblings('.field-error').remove(); 
             $input.css('border-color', ''); // Elimina el color de borde
 
-            if (selectedValue === '12552') { // DNI
+            if (selectedValue === 868) { // DNI
                 console.log('Configurando validación para DNI');
                 $input.attr('data-validate', JSON.stringify({
                     'required-entry': true,
@@ -44,7 +44,7 @@ require(['jquery', 'domReady!'], function($) {
                         $input.siblings('.field-error').filter('.field-required').remove();
                     }
                 });
-            } else if (selectedValue === '12555') { // Pasaporte
+            } else if (selectedValue === 865) { // Pasaporte
                 console.log('Configurando validación para Pasaporte');
                 $input.attr('data-validate', JSON.stringify({
                     'required-entry': true,
