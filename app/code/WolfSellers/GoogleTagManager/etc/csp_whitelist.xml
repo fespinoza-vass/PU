@@ -63,7 +63,7 @@
                 <value id="ccdc02-includestest-script" type="host">includestest.ccdc02.com</value>
                 <value id="unpkg-script" type="host">unpkg.com</value>
                 <value id="adobedtm-commerce-script" type="host">commerce.adobedtm.com</value>
-                <value id="makeupar-plugins-media-script" type="host">plugins-media.makeupar.com</value>                
+                <value id="makeupar-plugins-media-script" type="host">plugins-media.makeupar.com</value>
             </values>
         </policy>
         <policy id="frame-src">
