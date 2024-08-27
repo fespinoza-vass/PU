@@ -35,4 +35,48 @@
             }
         }
     }
+
+    // Input Text
+
+    .mage-error {
+        .lib-css(padding, @form-validation-note__padding);
+    }
+
+    .input-text.mage-error{
+        &:focus {
+            .lib-css(color, @secondary-black);
+            .lib-css(border, @form-element-validation__focus__border);
+        }
+        &:active {
+            .lib-css(color, @secondary-black);
+        }
+    }
+    .note {
+        .lib-css(padding, @form-validation-note__padding);
+    }
+
+    input,
+    select,
+    textarea {
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    // Select
+    select {
+        &:active {
+            .lib-css(color, @secondary-black);
+        }
+    }
 }
+
+// Mobile
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .input-text {
+        .lib-css(height, @form-element-input__height__mobile) !important;
+    }
+}
+
