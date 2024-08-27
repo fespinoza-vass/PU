@@ -18,9 +18,8 @@
 @button__line-height: @font-size__base + 2;
 @button__text-transform: uppercase;
 @button__margin: 0;
-@button__padding: 16px 51px; // is set up to false when buttons don't depend on side paddings or have fixed width
+@button__padding: @indent__base 50px; // is set up to false when buttons don't depend on side paddings or have fixed width
 @button__width: false; // is set up to false when buttons depend on side paddings or to fixed value when needed
-@button__height: 56px;
 
 //  Display settings
 @button__display: inline-block;
@@ -32,18 +31,18 @@
 //  Default = secondary button
 @button__color: @primary-black;
 @button__background: @color-beige;
-@button__border: none;
+@button__border: 1px solid @color-beige;
 @button__gradient-color-start: false;
 @button__gradient-color-end: false;
 
-@button__hover__color: @primary-black;
+@button__hover__color: @color-gray-dark1;
 @button__hover__background: none;
 @button__hover__border: 1px solid @primary-black;
 @button__hover__gradient-color-start: false;
 @button__hover__gradient-color-end: false;
 
 @button__active__color: @color-gray;
-@button__active__background: none;
+@button__active__background: 1px solid @color-gray;
 @button__active__border: 1px solid @color-gray;
 @button__active__gradient-color-start: false;
 @button__active__gradient-color-end: false;
@@ -66,7 +65,7 @@
 @button-primary__gradient-direction: false;
 
 @button-primary__background: @color-green-light2;
-@button-primary__border: none;
+@button-primary__border: 1px solid @color-green-light2;
 @button-primary__color: @primary-black;
 @button-primary__gradient-color-start: false;
 @button-primary__gradient-color-end: false;
@@ -78,13 +77,13 @@
 @button-primary__hover__gradient-color-end: false;
 
 @button-primary__active__background: @color-green-light3;
-@button-primary__active__border: none;
-@button-primary__active__color: @color-gray;
+@button-primary__active__border: 1px solid @color-green-light3;
+@button-primary__active__color: @primary-black;
 @button-primary__active__gradient-color-start: false;
 @button-primary__active__gradient-color-end: false;
 
 @button-primary__disabled__background: @color-gray-light1;
-@button-primary__disabled__border: none;
+@button-primary__disabled__border: 1px solid @color-gray-light1;
 @button-primary__disabled__color: @color-gray-dark2;
 @button-primary__disabled__gradient-color-start: false;
 @button-primary__disabled__gradient-color-end: false;
