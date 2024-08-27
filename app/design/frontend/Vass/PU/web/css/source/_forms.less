@@ -39,35 +39,26 @@
     // Input Text
 
     .mage-error {
-        .lib-css(padding, @form-validation-note__padding);
+        padding: @form-validation-note__padding;
     }
 
     .input-text.mage-error{
         &:focus {
-            .lib-css(color, @secondary-black);
-            .lib-css(border, @form-element-validation__focus__border);
+            color: @secondary-black;
+            border: @form-element-validation__focus__border;
         }
         &:active {
-            .lib-css(color, @secondary-black);
+            color: @secondary-black;
         }
     }
     .note {
-        .lib-css(padding, @form-validation-note__padding);
-    }
-
-    input,
-    select,
-    textarea {
-        &:focus {
-            outline: none !important;
-            box-shadow: none !important;
-        }
+        padding: @form-validation-note__padding;
     }
 
     // Select
     select {
         &:active {
-            .lib-css(color, @secondary-black);
+            color: @secondary-black;
         }
     }
 }
@@ -75,8 +66,16 @@
 // Mobile
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .input-text {
-        .lib-css(height, @form-element-input__height__mobile) !important;
+    select,
+    input[type="text"],
+    input[type="password"],
+    input[type="url"],
+    input[type="tel"],
+    input[type="search"],
+    input[type="number"],
+    input[type*="date"],
+    input[type="email"] {
+        height: @form-element-input__height__mobile;
     }
 }
 
