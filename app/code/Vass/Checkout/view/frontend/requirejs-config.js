@@ -3,12 +3,16 @@ var config = {
         '*': {
             'general-validation': 'Vass_Checkout/js/general-validation',
             'validation-documento': 'Vass_Checkout/js/validation-documento',
-            'Magento_SalesRule/template/payment/discount.html': 'Vass_Checkout/template/payment/discount.html'
+            'Magento_SalesRule/template/payment/discount.html': 'Vass_Checkout/template/payment/discount.html',
+            'popups': 'Vass_Checkout/js/popups',
+            'texto-checkbox': 'Vass_Checkout/js/texto-checkbox'
         }
     },
     paths: {
         'general-validation': 'Vass_Checkout/js/general-validation',
-        'validation-documento': 'Vass_Checkout/js/validation-documento'
+        'validation-documento': 'Vass_Checkout/js/validation-documento',
+        'popups': 'Vass_Checkout/js/popups',
+        'texto-checkbox': 'Vass_Checkout/js/texto-checkbox'
     },
     shim: {
         'general-validation': {
@@ -19,5 +23,13 @@ var config = {
             deps: ['jquery'],
             exports: 'validation-documento'
         },
+        'popups': {
+            deps: ['jquery'],
+            exports: 'popups'
+        },
+        'texto-checkbox': {
+            deps: ['jquery'],
+            exports: 'popups'
+        }
     }
 };
