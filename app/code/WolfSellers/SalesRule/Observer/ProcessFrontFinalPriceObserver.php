@@ -25,7 +25,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\SalesRule\Model\ResourceModel\Rule\CollectionFactory as RulesCollectionFactory;
 use Magento\Catalog\Model\Product;
 use Magento\Quote\Api\CartRepositoryInterface;
-use Psr\Log\LoggerInterface;
+use WolfSellers\Checkout\Logger\Logger;
 
 
 /**
@@ -76,7 +76,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
     protected bool $hasOriginalPriceEnabled;
 
     /** @var Logger */
-    private LoggerInterface $logger;
+    private Logger $logger;
 
     /**
      * @param RulePricesStorage $rulePricesStorage
@@ -91,7 +91,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
      * @param Product $itemProduct
      * @param ResourceSalesRuleFactory $resourceSalesRuleFactory
      * @param CartRepositoryInterface $quoteRepository
-     * @param LoggerInterface $logger
+     * @param Logger $logger
      */
     public function __construct(
         RulePricesStorage $rulePricesStorage,
@@ -106,7 +106,7 @@ class ProcessFrontFinalPriceObserver implements ObserverInterface
         Product $itemProduct,
         ResourceSalesRuleFactory $resourceSalesRuleFactory,
         CartRepositoryInterface $quoteRepository,
-        LoggerInterface $logger
+        Logger $logger
     ) {
         $this->rulePricesStorage = $rulePricesStorage;
         $this->resourceRuleFactory = $resourceRuleFactory;

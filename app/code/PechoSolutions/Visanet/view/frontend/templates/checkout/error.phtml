@@ -5,14 +5,14 @@
  */
 
 // @codingStandardsIgnoreFile
-
-$items = $block->getQuoteItems(); 
+/** @var \PechoSolutions\Visanet\Block\Onepage\Success $block */
+$items = $block->getQuoteItems();
 $quoteData = $block->getQuoteData();
+$quote = $block->getQuote();
 
 $shippingData = $block->getQuoteShippingAddress();
 $billing =$block->getQuoteBillingAddress();
-// $currencyCode=$block->getCurrency();
-$currencyCode="S/";
+$currencyCode=$block->getCurrency();
 $currencyDesc=$block->getCurrencyCode();
 ?>
 
@@ -22,17 +22,17 @@ $currencyDesc=$block->getCurrencyCode();
 
     <div class="content" id="areaImprimir">
         <div class="title">
-            Algo no salio bien con su pedido  
+            Algo no salio bien con su pedido
         </div>
 
     <?php  if (!empty($_SESSION['autorizado'])){   ?>
 
-        <p><strong>Desgraciadamente tu pedido no puede procesarse el banco/comercio ha rechazado tu transación. Por favor intenta realizar la compra de nuevo</strong></p> <br>      
-        <p><span><strong>Motivo:</strong></span> ("Operación denegada. Transacción no puede ser procesada") </p>
-        <p><span><strong>Moneda:</strong></span> <?=$currencyDesc?></p>
-          
+        <p><strong>Desgraciadamente tu pedido no puede procesarse el banco/comercio ha rechazado tu transación. Por favor intenta realizar la compra de nuevo</strong></p> <br>
+        <p><span><strong>Motivo:</strong></span> (<?=$_SESSION['CODACCION']?>) <?=$_SESSION['DSC_COD_ACCION']?></p>
+        <p><span><strong>Moneda:</strong></span> Sol peruano</p>
+
     <?php } ?>
-        <div style="padding: 20px 0;">       
+        <div style="padding: 20px 0;">
             <a href="<?PHP echo $block->getBaseUrl().'checkout/#payment' ?>" class="btn_regresar_a_comprar"> <- Volver a intentar </a>
         </div>
         <div class="pedido-numero">
@@ -57,12 +57,12 @@ $currencyDesc=$block->getCurrencyCode();
                 </tr>
 
                 <?php
-                
+
                 $n = 1;
                 $total = 0;
 
                 foreach ($items as $item) {
- 
+
                     $_product = $block->getProduct($item->getProductId());
                     $imageHelper  = $this->helper(\Magento\Catalog\Helper\Image::class);
 
@@ -114,21 +114,21 @@ $currencyDesc=$block->getCurrencyCode();
                     $n++;
                 }
 
-                ?> 
+                ?>
 
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Sub Total: </td>
-                    <td align="center"> <?PHP echo $currencyCode.number_format($quoteData['subtotal'],2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($quote->getSubtotal(),2);  ?></td>
                 </tr>
 
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Costo de envío: </td>
-                    <td align="center"> <?PHP echo $currencyCode.number_format($shippingData['shipping_amount'],2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($shippingData['shipping_amount'],2);  ?></td>
                 </tr>
 
-                <?PHP 
+                <?PHP
 
                     if( ($shippingData['discount_amount']*1) > 0){
 
@@ -137,10 +137,10 @@ $currencyDesc=$block->getCurrencyCode();
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> - Total descuentos: </td>
-                    <td align="center"> <?PHP echo $currencyCode.number_format($shippingData['discount_amount'],2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($shippingData['discount_amount'],2);  ?></td>
                 </tr>
 
-                <?PHP 
+                <?PHP
                     }
                 ?>
 
@@ -148,7 +148,7 @@ $currencyDesc=$block->getCurrencyCode();
                 <tr class="pedido_header">
                     <td colspan="2"></td>
                     <td align="right"> Total: </td>
-                    <td align="center"> <?PHP echo $currencyCode.number_format($quoteData['grand_total'],2);  ?></td>
+                    <td align="center"><?PHP echo $currencyCode.number_format($quote->getGrandTotal(),2);  ?></td>
                 </tr>
 
 
@@ -227,8 +227,8 @@ $currencyDesc=$block->getCurrencyCode();
 
             </div>
 
-        </div> 
-        
+        </div>
+
         <div class="">
                 <input class="btn btn-default" type="button" onclick="printDiv('areaImprimir')" value="Imprimir" />
 
