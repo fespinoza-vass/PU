@@ -13,17 +13,92 @@
                 <value id="analytics_tiktok_com" type="host">analytics.tiktok.com</value>
                 <value id="js_hubspot_com" type="host">js.hubspot.com</value>
                 <value id="js_usemessages_com" type="host">js.usemessages.com</value>
+                <value id="nr-data-net-script" type="host">*.nr-data.net</value>
+                <value id="newrelic-script" type="host">*.newrelic.com</value>
+                <value id="vnforapps-script" type="host">*.vnforapps.com</value>
+                <value id="facebook-script" type="host">*.facebook.com</value>
+                <value id="facebook-net-script" type="host">*.facebook.net</value>
+                <value id="luckyorange-script" type="host">*.luckyorange.com</value>
+                <value id="doubleclick-script" type="host">*.doubleclick.net</value>
+                <value id="hsleadflows-script" type="host">*.hsleadflows.net</value>
+                <value id="hscollectedforms-script" type="host">*.hscollectedforms.net</value>
+                <value id="hs-analytics-script" type="host">*.hs-analytics.net</value>
+                <value id="hs-banner-script" type="host">*.hs-banner.com</value>
+                <value id="hs-scripts-script" type="host">*.hs-scripts.com</value>
+                <value id="hsadspixel-script" type="host">*.hsadspixel.net</value>
+                <value id="omappapi-script" type="host">*.omappapi.com</value>
+                <value id="googleadservices-script" type="host">www.googleadservices.com</value>
+                <value id="google-analytics-script" type="host">www.google-analytics.com</value>
+                <value id="googleads-g-doubleclick-script" type="host">googleads.g.doubleclick.net</value>
+                <value id="analytics-google-script" type="host">analytics.google.com</value>
+                <value id="googletagmanager-script" type="host">www.googletagmanager.com</value>
+                <value id="paypal-script" type="host">www.paypal.com</value>
+                <value id="sandbox-paypal-script" type="host">www.sandbox.paypal.com</value>
+                <value id="paypalobjects-script" type="host">www.paypalobjects.com</value>
+                <value id="paypal-t-script" type="host">t.paypal.com</value>
+                <value id="adobedtm-script" type="host">assets.adobedtm.com</value>
+                <value id="amcglobal-script" type="host">amcglobal.sc.omtrdc.net</value>
+                <value id="adobe-commerce-script" type="host">commerce.adobe.net</value>
+                <value id="typekit-script" type="host">use.typekit.net</value>
+                <value id="magento-recs-sdk-adobe-script" type="host">magento-recs-sdk.adobe.net</value>
+                <value id="ytimg-script" type="host">s.ytimg.com</value>
+                <value id="googleapis-script" type="host">*.googleapis.com</value>
+                <value id="gstatic-script" type="host">*.gstatic.com</value>
+                <value id="recaptcha-google-script" type="host">www.google.com/recaptcha/</value>
+                <value id="recaptcha-gstatic-script" type="host">www.gstatic.com/recaptcha/</value>
+                <value id="braintreegateway-script" type="host">js.braintreegateway.com</value>
+                <value id="braintree-assets-script" type="host">assets.braintreegateway.com</value>
+                <value id="paypal-c-script" type="host">c.paypal.com</value>
+                <value id="pay-google-script" type="host">pay.google.com</value>
+                <value id="braintree-api-script" type="host">api.braintreegateway.com</value>
+                <value id="sandbox-braintree-api-script" type="host">api.sandbox.braintreegateway.com</value>
+                <value id="braintree-client-analytics-script" type="host">client-analytics.braintreegateway.com</value>
+                <value id="sandbox-braintree-client-analytics-script" type="host">client-analytics.sandbox.braintreegateway.com</value>
+                <value id="paypal-star-script" type="host">*.paypal.com</value>
+                <value id="cardinalcommerce-script" type="host">geostag.cardinalcommerce.com</value>
+                <value id="cardinalcommerce-api-script" type="host">geoapi.cardinalcommerce.com</value>
+                <value id="cardinalcommerce-eafstag-script" type="host">1eafstag.cardinalcommerce.com</value>
+                <value id="cardinalcommerce-eafapi-script" type="host">1eafapi.cardinalcommerce.com</value>
+                <value id="cardinalcommerce-songbird-script" type="host">songbird.cardinalcommerce.com</value>
+                <value id="ccdc02-includestest-script" type="host">includestest.ccdc02.com</value>
+                <value id="unpkg-script" type="host">unpkg.com</value>
+                <value id="adobedtm-commerce-script" type="host">commerce.adobedtm.com</value>
+                <value id="makeupar-plugins-media-script" type="host">plugins-media.makeupar.com</value>
             </values>
         </policy>
         <policy id="frame-src">
             <values>
                 <value id="td_doubleclick_net" type="host">td.doubleclick.net</value>
+                <value id="www_google" type="host">www.google.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="omappapi-style" type="host">*.omappapi.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="perfumeriasunidas-img" type="host">*.perfumeriasunidas.com</value>
+                <value id="www_google-img" type="host">*.google.com</value>
+                <value id="mx_google-img" type="host">*.google.com.mx</value>
+                <value id="hubapi-img" type="host">*.hubapi.com</value>
+                <value id="hubspot-img" type="host">*.hubspot.com</value>
+                <value id="hsforms-img" type="host">*.hsforms.com</value>
+                <value id="facebook-img" type="host">*.facebook.com</value>
             </values>
         </policy>
         <policy id="connect-src">
             <values>
                 <value id="analytics_tiktok_com" type="host">analytics.tiktok.com</value>
                 <value id="forms_hscollectedforms_net" type="host">forms.hscollectedforms.net</value>
+                <value id="doubleclick-connect" type="host">*.doubleclick.net</value>
+                <value id="omappapi-connect" type="host">*.omappapi.com</value>
+                <value id="luckyorange-connect" type="host">*.luckyorange.com</value>
+                <value id="hubapi-connect" type="host">*.hubapi.com</value>
+                <value id="hubspot-connect" type="host">*.hubspot.com</value>
+                <value id="nr-data-net" type="host">*.nr-data.net</value>
+                <value id="newrelic" type="host">*.newrelic.com</value>
             </values>
         </policy>
     </policies>

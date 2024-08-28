@@ -1,0 +1,23 @@
+
+{
+    "name": "vass/module-niubizvisanet",
+    "description": "Visanet payment method ",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Victor Sandoval",
+            "email": "victor.sandoval@vasscompany.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Vass\\NiubizVisanet\\": ""
+        }
+    }
+}

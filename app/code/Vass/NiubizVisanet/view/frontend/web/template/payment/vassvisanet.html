@@ -1,0 +1,115 @@
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()" />
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <!-- Render the native credit card form. -->
+        <form class="form" data-bind="attr: {'id': getCode() + '-form'}">
+            <!-- ko template: 'Magento_Payment/payment/cc-form' --><!-- /ko -->
+        </form>
+
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button data-role="review-save"
+                        type="submit"
+                        data-bind="
+                        attr: {title: $t('Place Order')},
+                        enable: (getCode() == isChecked()),
+                        click: beforePlaceOrder,
+                        css: {disabled: !isPlaceOrderActionAllowed()}
+                        "
+                        class="action primary checkout"
+                        disabled>
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="payment-payform-visanet">
+        <div class="col-12">
+            <div class="row justify-content-md-center">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Formulario de pago</h4>
+                      <div class="row">
+                        <div class="col-12">
+                          <div id="txtNumeroTarjeta" class="form-control form-control-sm ncp-card"></div>
+                          <small id="msjNroTarjeta" class="form-text text-muted red-text m-0"></small>
+                        </div>
+                        
+                      </div>
+                      <br>
+          
+                      <div class="row mt-0">
+                        <div class="col-6">
+                          <div id="txtFechaVencimiento" class="form-control form-control-sm"></div>
+                          <small id="msjFechaVencimiento" class="form-text text-muted red-text m-0"></small>
+                        </div>
+                        <div class="col-6">
+                          <div id="txtCvv" class="form-control form-control-sm"></div>
+                          <small id="msjCvv" class="form-text text-muted red-text m-0"></small>
+                        </div>
+                      </div>
+          
+                      <div class="row mt-4">
+                        <div class="col-6">
+                          <input type="text" id="nombre" class="form-control form-control-sm" placeholder="Nombre">
+                        </div>
+                        <div class="col-6">
+                          <input type="text" id="apellido" class="form-control form-control-sm" placeholder="Apellido">
+                        </div>
+                      </div>
+          
+                      <div class="row mt-4">
+                        <div class="col-12">
+                          <input type="text" id="email" class="form-control form-control-sm" placeholder="Email">
+                        </div>
+                      </div>
+          
+                      <div class="row mt-4">
+                        <div class="col-md-12" id="cuotas" style="display: none;">
+                        </div>
+                      </div>
+          
+                      <!-- <div class="row">
+                        <div class="col-12">
+                          <button class="btn btn-primary btn-block" onclick="pay()" id="btnProcesar"></button>
+                        </div>
+                      </div> -->
+          
+                    </div>
+                  </div>
+                </div>
+              </div>
+    </div>
+</div>
+
+        
