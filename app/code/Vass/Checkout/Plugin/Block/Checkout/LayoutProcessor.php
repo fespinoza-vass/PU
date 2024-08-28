@@ -52,11 +52,31 @@ class LayoutProcessor
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['company']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio']['visible']= true;
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio'] = [
+            'component' => 'Magento_Ui/js/form/element/abstract',  // Ajusta este componente si es necesario
+            'config' => [
+                'sortOrder' => 150,
+            ],
+            'dataScope' => 'shippingAddress.custom_attributes.referencia_envio',
+            'label' => __('Referencia de Envío'),
+            'provider' => 'checkoutProvider',
+            'visible' => true,
+        ];
+        
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['dni']['visible']=false;
-        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['visible'] = true;
+            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker'] = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'sortOrder' => 35,
+            ],
+            'dataScope' => 'shippingAddress.custom_attributes.numero_identificacion_picker',
+            'label' => __('Número de Identificación'),
+            'provider' => 'checkoutProvider',
+            'visible' => true,
+        ];
+        
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['nombre_completo_picker']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -78,7 +98,7 @@ class LayoutProcessor
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['picker']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['visible']=false; 
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['visible']=true; 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['region_id']['observable']=false; 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -88,7 +108,18 @@ class LayoutProcessor
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['postcode']['visible']=false;
             
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['telephone']['visible'] = true; 
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['telephone'] = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'sortOrder' => 40,
+                'template' => 'ui/form/field',
+            ],
+            'dataScope' => 'shippingAddress.telephone',
+            'label' => __('Número de teléfono'),
+            'placeholder' => __('Ingrese número de teléfono'),
+            'provider' => 'checkoutProvider',
+            'visible' => true,
+        ];    
 
             //validacion select
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -110,6 +141,7 @@ class LayoutProcessor
                         'required-entry' => true
                     ],
                 ],
+                'sortOrder' => 30,
                 'dataType' => 'text',
                 'label' => __('Tipo de Documento'),
                 'provider' => 'checkoutProvider',
