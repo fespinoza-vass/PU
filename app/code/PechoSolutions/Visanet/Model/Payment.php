@@ -26,10 +26,10 @@ class Payment extends AbstractMethod
     protected $_publicKey;
     protected $_merchantId;
     protected $quoteFactory;
-    protected $helperConfig;
+    private $helperConfig;
     protected $visanetManager;
     protected $cartRepository;
-    protected $encryptor;
+    private $encryptor;
     protected $registry;
     protected $_supportedCurrencyCodes = array('USD', 'PEN');
     protected $_debugReplacePrivateDataKeys = ['number', 'exp_month', 'exp_year', 'cvc', 'source_id'];
@@ -86,10 +86,6 @@ class Payment extends AbstractMethod
      */
     public function capture(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
-        // $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        // $logger = new \Zend\Log\Logger();
-        // $logger->addWriter($writer); 
-
 	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
         $logger = new \Zend_Log();
         $logger->addWriter($writer);
@@ -186,7 +182,7 @@ class Payment extends AbstractMethod
  
                 if(trim($transactionToken) == ''){
                     
-                    throw new \Magento\Framework\Validator\Exception(__('Token de transacción no recibido'));
+                    throw new \Magento\Framework\Validator\Exception(__('Token de transacci�n no recibido'));
                 }
                 //$amount = round(($amount * 100),2) /100 ;
                 $rawRespuestaVisa = $this->visanetManager->authorization($ambiente, $sessionKey, $amount,$transactionToken, $quote_Id,$merchant_id,$currencyCode);
@@ -216,7 +212,7 @@ class Payment extends AbstractMethod
 
 
 
-                    $codaccion = $resultado['dataMap']['ACTION_CODE']; // Código de denegación y aprobación. El Código de aprobación: 000.
+                    $codaccion = $resultado['dataMap']['ACTION_CODE']; // C�digo de denegaci�n y aprobaci�n. El C�digo de aprobaci�n: 000.
                     //$autorizado = $resultado['dataMap']['RESPUESTA'];
 
                    $tarjeta="";
@@ -232,9 +228,9 @@ class Payment extends AbstractMethod
 
 
                     $fecha_pedido = $resultado['dataMap']['TRANSACTION_DATE'];
-                    $id_unico = $resultado['dataMap']['ID_UNICO'];  // ID único de la transacción del sistema Visanet
+                    $id_unico = $resultado['dataMap']['ID_UNICO'];  // ID �nico de la transacci�n del sistema Visanet
 
-                    $dsc_cod_accion = $resultado['dataMap']['ACTION_DESCRIPTION']; // Descripción del código de acción, permite identificar el motivo de rechazo de una operación.
+                    $dsc_cod_accion = $resultado['dataMap']['ACTION_DESCRIPTION']; // Descripci�n del c�digo de acci�n, permite identificar el motivo de rechazo de una operaci�n.
                     //$nrocuota = $resultado['dataMap']['NROCUOTA']; //Nro de cuota
 
                     //$_SESSION['autorizado'] = $autorizado;
@@ -292,14 +288,14 @@ class Payment extends AbstractMethod
 
                     if(isset($resultado['data']['ACTION_CODE']))
                     {
-                        $codaccion = $resultado['data']['ACTION_CODE']; // Código de denegación y aprobación. El Código de aprobación: 000.
+                        $codaccion = $resultado['data']['ACTION_CODE']; // C�digo de denegaci�n y aprobaci�n. El C�digo de aprobaci�n: 000.
                     }else{
                         $codaccion ="";
                     }
                     
                     if(isset($resultado['data']['ACTION_DESCRIPTION']))
                     {
-                        $dsc_cod_accion = $resultado['data']['ACTION_DESCRIPTION']; // Descripción del código de acción, permite identificar el motivo de rechazo de una operación.    
+                        $dsc_cod_accion = $resultado['data']['ACTION_DESCRIPTION']; // Descripci�n del c�digo de acci�n, permite identificar el motivo de rechazo de una operaci�n.    
                     }else{
                         $dsc_cod_accion = "";
                     }
@@ -323,7 +319,7 @@ class Payment extends AbstractMethod
                         $dsc_cod_accion = $rawRespuestaVisa;
                     }
 
-                    if($dsc_cod_accion == '') $dsc_cod_accion = 'No se pudo completar la operación';
+                    if($dsc_cod_accion == '') $dsc_cod_accion = 'No se pudo completar la operaci�n';
   
                     throw new \Magento\Framework\Validator\Exception( __($dsc_cod_accion) );
                 }

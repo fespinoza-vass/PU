@@ -10,10 +10,10 @@ use Magento\Sales\Model\OrderFactory;
 use Magento\InventoryInStorePickupSales\Model\ResourceModel\OrderPickupLocation\GetPickupLocationCodeByOrderId;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use WolfSellers\Bopis\Model\ResourceModel\AbstractBopisCollection;
-// use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
-// use WolfSellers\DireccionesTiendas\Api\Data\DireccionesTiendasInterface;
-//use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
-// use WolfSellers\OrderQR\Logger\Logger;
+use WolfSellers\DireccionesTiendas\Api\DireccionesTiendasRepositoryInterface;
+use WolfSellers\DireccionesTiendas\Api\Data\DireccionesTiendasInterface;
+use WolfSellers\EnvioRapido\Helper\DistrictGeoname;
+use WolfSellers\OrderQR\Logger\Logger;
 use WolfSellers\InventoryReservationBySource\Helper\InventoryBySourceHelper;
 
 /**
@@ -51,14 +51,14 @@ class AssingSource
     public function __construct(
         protected GetPickupLocationCodeByOrderId        $_getPickupLocationCodeByOrderId,
         protected SearchCriteriaBuilder                 $_searchCriteriaBuilder,
-        // protected DireccionesTiendasRepositoryInterface $direccionesTiendasRepository,
-        // protected Logger                                $_logger,
-        // DistrictGeoname                                 $districtGeoname,
+        protected DireccionesTiendasRepositoryInterface $direccionesTiendasRepository,
+        protected Logger                                $_logger,
+        DistrictGeoname                                 $districtGeoname,
         GetSourceItemsBySkuInterface                    $sourceItemsBySku,
         InventoryBySourceHelper                         $inventoryBySourceHelper
     ) {
         $this->_inventoryBySource = $inventoryBySourceHelper;
-        // $this->_districtGeoname = $districtGeoname;
+        $this->_districtGeoname = $districtGeoname;
         $this->_sourceItemsBySku = $sourceItemsBySku;
     }
 
@@ -72,7 +72,7 @@ class AssingSource
         $order = $result;
         try{
             if($order->getShippingMethod() == self::FAST_SHIPPING_METHOD_CODE){
-                // $this->_districtGeoname->assignSourceToOrder($order);
+                $this->_districtGeoname->assignSourceToOrder($order);
             }
             if($order->getShippingMethod() == self::REGULAR_SHIPPING_METHOD_CODE ||
                 str_contains($order->getShippingMethod(),self::URBANO_SHIPPING_METHOD_CODE)
@@ -87,7 +87,7 @@ class AssingSource
                 $order->setData('needs_supply_instore', $supply);
             }
         }catch (\Throwable $error){
-            // $this->_logger->error($error->getMessage());
+            $this->_logger->error($error->getMessage());
         }
 
         return $result;

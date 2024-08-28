@@ -17,6 +17,7 @@ class Hello extends \Magento\Framework\App\Action\Action {
     
     protected $config;
     private $encryptor;   
+    private $scopeConfig;   
     protected $checkoutSession;
     protected $resultJsonFactory;   
     protected $customerSession;
@@ -63,13 +64,9 @@ class Hello extends \Magento\Framework\App\Action\Action {
 
     public function execute() {         
 
-        // $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
-        // $logger = new \Zend\Log\Logger();
-        // $logger->addWriter($writer);
-      
 	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
         $logger = new \Zend_Log();
-        $logger->addWriter($writer);
+        $logger->addWriter($writer);      
 
 
         $quote = $this->checkoutSession->getQuote();
