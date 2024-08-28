@@ -70,16 +70,18 @@ class AfterPlaceOrder implements ObserverInterface {
             $collection = $objectManager->create('Izipay\Core\Model\Izipay')->getCollection()->addFieldToFilter('order_number', $orderNumber)->addFieldToFilter('type_request', "Form Izipay Response"); 
             $izipay_log = $collection->getFirstItem();
 
-            $this->_logger->debug("JSON RESPONSE:".$izipay_log->getResponse());
+            $this->_logger->debug("JSON RESPONSssE:".$izipay_log->getId());
+            $this->_logger->debug("JSON RESPONSssE:".$izipay_log->getOrderNumber());
+            $this->_logger->debug("JSON RESPONSssE:".$izipay_log->getResponse());
             $json_response = json_decode($izipay_log->getResponse(), true);
 
-            if (isset($json_response["response"])) {
-                $json_response = json_decode($json_response["response"]["payloadHttp"], true);
-                $json_response = $json_response["response"];
-            } else {
-                $json_response = json_decode($json_response["payloadHttp"], true);
-                $json_response = $json_response["response"];
-            }
+            // if (isset($json_response["response"])) {
+            //     $json_response = json_decode($json_response["response"]["payloadHttp"], true);
+            //     $json_response = $json_response["response"];
+            // } else {
+            //     $json_response = json_decode($json_response["payloadHttp"], true);
+            //     $json_response = $json_response["response"];
+            // }
             $message_payment = $this->_helper->getPaymentStatuses($order_full->getIzipayPaymentCodeResponse());
             
             $json_response["code"] = $order_full->getIzipayPaymentCodeResponse();
