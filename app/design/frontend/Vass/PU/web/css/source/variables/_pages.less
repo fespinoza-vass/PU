@@ -15,16 +15,11 @@
 @pager__line-height: 36px;
 
 // Pager General Flexbox
-@pager-items__display: flex;
-@pager-items__justify-content: center;
-@pager-items__align-items: center;
 @pager-items__align-gap: 10px;
-@pager-items__vertical-align: middle;
 @pager-items__height: 50px;
 @pager-items__width: auto;
 
 // Pager Item
-@pager-item__display: inline-block;
 @pager-item__margin: 0;
 @pager-item__padding: 8px 22px;
 
@@ -39,14 +34,10 @@
 @pager-action__hover__color: @primary-white;
 @pager-action__hover__background: @primary-black;
 @pager-action__hover__cursor: pointer;
-@pager-action__hover__display: flex;
-@pager-action__hover__justify-content: center;
-@pager-action__hover__align-items: center;
 
 // Action Disabled
 @pager-action__disable__cursor: not-allowed;
 @pager-action__disable__pointer-events: none;
-@pager-action__disable__opacity: 0.5;
 
 // Pager Current Page
 @pager-current__font-weight: @font-weight__regular;
@@ -69,14 +60,14 @@
 
 // Icons
 @pager-icon__use: true;
-@pager-icon__previous-content: @icon-prev;
-@pager-icon__next-content: @icon-next;
+@pager-icon__previous-content: @icon-arrow-left;
+@pager-icon__next-content: @icon-arrow-right;
 @pager-icon__text-hide: true;
 @pager-icon__position: before;
-@pager-icon__font: @icon-font;
+@pager-icon__font: @icons__font-name;
 @pager-icon__font-margin: 0 0 0 -6px;
 @pager-icon__font-vertical-align: top;
-@pager-icon__font-size: 46px;
+@pager-icon__font-size: 16px;
 @pager-icon__font-line-height: @icon-font__line-height;
 
 // Gradient Backgrounds (Default to false)
