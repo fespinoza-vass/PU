@@ -57,13 +57,7 @@
                 <?php else: ?>
                     <!-- Disable action on first page -->
                     <li class="item pages-item-previous">
-                        <span class="action previous disabled icon icon-arrow-left"
-                           href="javascript:void(0);"
-                           aria-disabled="true"
-                           style="pointer-events: none;">
-                            <span class="label"><?= $block->escapeHtml(__('Page')) ?></span>
-                            <span><?= $block->escapeHtml(__('Previous')) ?></span>
-                        </span>
+                        <span class="action previous disabled icon icon-arrow-left"></span>
                     </li>
                 <?php endif;?>
 
@@ -144,13 +138,7 @@
                 <?php else: ?>
                     <!-- Disable action on last page -->
                     <li class="item pages-item-next">
-                        <span class="action next disabled icon icon-arrow-right"
-                           href="javascript:void(0);"
-                           aria-disabled="true"
-                           style="pointer-events: none;">
-                            <span class="label"><?= $block->escapeHtml(__('Page')) ?></span>
-                            <span><?= $block->escapeHtml(__('Next')) ?></span>
-                        </span>
+                        <span class="action next disabled icon icon-arrow-right"></span>
                     </li>
                 <?php endif;?>
             </ul>
