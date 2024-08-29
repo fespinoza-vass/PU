@@ -12,13 +12,16 @@
         .lib-pager();
 
         .items {
-            display: @pager-items__display;
-            justify-content: @pager-items__justify-content;
-            align-items: @pager-items__align-items;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             gap: @pager-items__align-gap;
         }
 
         .action {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: @pager-items__width;
             color: @primary-black;
             background-color: @primary-white;
@@ -29,9 +32,6 @@
                 background-color: @pager-action__hover__background;
                 color: @pager-action__hover__color;
                 cursor: @pager-action__hover__cursor;
-                display: @pager-action__hover__display;
-                justify-content: @pager-action__hover__justify-content;
-                align-items: @pager-action__hover__align-items;
             }
 
             &.disabled {
@@ -39,14 +39,19 @@
                 color: @color-gray-dark1;
                 cursor: @pager-action__disable__cursor;
                 pointer-events: @pager-action__disable__pointer-events;
-                opacity: @pager-action__disable__opacity;
+                opacity: 0.5;
+            }
+
+            &.next, &.previous {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             &.next:before, &.previous:before {
                 line-height: 1;
                 margin: 0;
-                vertical-align: @pager-items__vertical-align;
-                display: @pager-item__display;
+                display: inline-block;
                 font-weight: @pager__font-weight;
                 text-align: center;
                 width: @pager-action__width;
