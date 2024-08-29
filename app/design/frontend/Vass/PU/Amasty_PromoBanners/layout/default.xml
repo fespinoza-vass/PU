@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="head.components">
+            <block after="-" class="Amasty\PromoBanners\Block\Container"
+                   name="ambanners.top" template="top-banner.phtml"
+                   ifconfig="amasty_banners_lite/general/enable_top_banner">
+                <action method="setPosition">
+                    <argument name="position" xsi:type="string">10</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
