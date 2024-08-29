@@ -1,0 +1,46 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+& when (@media-common = true) {
+    .modal-popup {
+        .modal-inner-wrap {
+            .lib-css(padding, @popup__padding);
+            .lib-css(gap, 12px);
+            .lib-css(border, @popup__border);
+            .lib-css(border-radius, @popup__border-radius);
+            .lib-css(box-shadow, @popup__shadow);
+            .lib-css(max-width, @popup__max-width) !important; // Confirm Popups have a default max-width
+            .lib-css(max-height, @popup__max-height);
+
+            .modal-footer,
+            .modal-header,
+            .modal-content {
+                .lib-css(padding, 0);
+            }
+        }
+
+        .modal-footer {
+            .lib-css(display, flex);
+            .lib-css(justify-content, end);
+            .lib-css(gap, 14px);
+            .lib-css(border-top, none) !important; // Slide Popups has border-top that can't be overide
+
+            button {
+                .lib-css(height, 40px);
+                .lib-css(text-align, center);
+                .lib-css(padding, 0 13px);
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .modal-popup {
+        .modal-footer {
+            .lib-css(justify-content, center);
+        }
+    }
+}
+

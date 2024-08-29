@@ -1,19 +1,22 @@
-// /**
-//  * Copyright © Magento, Inc. All rights reserved.
-//  * See COPYING.txt for license details.
-//  */
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
 
 //
 //  Popup variables
 //  _____________________________________________
 
 @popup__width: 100%;
+@popup__max-width: 652px;
 @popup__height: auto;
-@popup__padding: 22px;
-@popup__background: @color-white;
-@popup__border-color: @color-gray-light3;
+@popup__max-height: 80%;
+@popup__padding: 32px;
+@popup__background: @primary-white;
+@popup__border-color: @secondary-white;
 @popup__border: 1px solid @popup__border-color;
-@popup__shadow: 0 3px 3px rgba(0,0,0,.15);
+@popup__border-radius: 8px;
+@popup__shadow: 0 12px 16px -4px @color-shadow;
 @popup__fade: opacity .3s linear;
 @popup__z-index: 1001;
 
@@ -34,7 +37,7 @@
 @popup-footer__margin: false;
 
 @popup-title-headings: true; // [true|false]
-@popup-title-headings__level: h3; // [h1|h2|h3|h4|h5|h6]
+@popup-title-headings__level: h4; // [h1|h2|h3|h4|h5|h6]
 
 @popup-button-close__icon: true; // [true|false]
 @popup-button-close__reset: true; // [true|false]
