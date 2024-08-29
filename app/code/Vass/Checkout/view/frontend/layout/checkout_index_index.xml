@@ -6,13 +6,4 @@
         <script src="Vass_Checkout::js/popups.js"/>
          <script src="Vass_Checkout::js/texto-checkbox.js"/>
     </head>
-      <body>
-        <referenceContainer name="checkout.onepage.payment">
-            <block class="Magento\Cms\Block\Block" name="metodos-pago-cms-block">
-                <arguments>
-                    <argument name="block_id" xsi:type="string">metodos-de-pago</argument>
-                </arguments>
-            </block>
-        </referenceContainer>
-    </body>
 </page>
