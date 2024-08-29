@@ -1,0 +1,16 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+/* @var $block Container */
+
+use Amasty\PromoBanners\Block\Container; ?>
+
+<div
+    style="display: none"
+    class="header-banner ambanners ambanner-<?= /* @noEscape */ $block->getPosition() ?>"
+    data-position="<?= /* @noEscape */ $block->getPosition() ?>"
+    data-role="amasty-banner-container"
+></div>
