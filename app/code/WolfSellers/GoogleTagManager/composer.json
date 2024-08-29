@@ -1,0 +1,11 @@
+{
+    "name": "wolf-sellers/magento2-google-tag-manager",
+    "description": "Google Tag Manager integration for Magento 2",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "WolfSellers\\GoogleTagManager\\": ""
+        }
+    }
+}
