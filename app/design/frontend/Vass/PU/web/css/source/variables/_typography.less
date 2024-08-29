@@ -33,6 +33,11 @@
 @font-size-unit-convert: true; // Controls whether font-size values are converted to the specified font-size unit
 
 @font-size__base: unit(@font-size-unit-ratio * @font-size-ratio__base, px); // Base font size value in <b>px</b>
+@font-size__h1: 36px;
+@font-size__h2: 32px;
+@font-size__h3: 28px;
+@font-size__h4: 26px;
+@font-size__h5: 22px;
 @font-size__xl: 24px;
 @font-size__l: 18px;
 @font-size__m: 16px;
@@ -141,56 +146,56 @@
 //  ---------------------------------------------
 
 @heading__font-family__base: @font-family__secondary;
-@heading__font-weight__base: @font-weight__light;
+@heading__font-weight__base: @font-weight__regular;
 @heading__line-height__base: 1.1;
-@heading__color__base: false;
+@heading__color__base: @primary-black;
 @heading__font-style__base: false;
 @heading__margin-top__base: @indent__base;
 @heading__margin-bottom__base: @indent__base;
 
-@h1__font-size: ceil((@font-size__base * 1.85)); // 26px
+@h1__font-size: @font-size__h1;
 @h1__font-color: @heading__color__base;
 @h1__font-family: @heading__font-family__base;
 @h1__font-weight: @heading__font-weight__base;
 @h1__font-style: @heading__font-style__base;
-@h1__line-height: @heading__line-height__base;
+@h1__line-height: 44px;
 @h1__margin-top: 0;
 @h1__margin-bottom: @heading__margin-bottom__base;
-@h1__font-size-desktop: ceil((@font-size__base * 2.85)); // 40px
+@h1__font-size-desktop: @font-size__h1;
 
-@h2__font-size: ceil((@font-size__base * 1.85)); // 26px
+@h2__font-size: @font-size__h2;
 @h2__font-color: @heading__color__base;
-@h2__font-family: @heading__font-family__base;
+@h2__font-family: @font-family-name__base;
 @h2__font-weight: @heading__font-weight__base;
 @h2__font-style: @heading__font-style__base;
-@h2__line-height: @heading__line-height__base;
+@h2__line-height: 40px;
 @h2__margin-top: @indent__m;
 @h2__margin-bottom: @heading__margin-bottom__base;
 
-@h3__font-size: ceil((@font-size__base * 1.28)); // 18px
+@h3__font-size: @font-size__h3;
 @h3__font-color: @heading__color__base;
-@h3__font-family: @heading__font-family__base;
+@h3__font-family: @font-family-name__base;
 @h3__font-weight: @heading__font-weight__base;
 @h3__font-style: @heading__font-style__base;
-@h3__line-height: @heading__line-height__base;
+@h3__line-height: 36px;
 @h3__margin-top: @indent__base * .75;
 @h3__margin-bottom: @indent__s;
 
-@h4__font-size: @font-size__base; // 14px
+@h4__font-size: @font-size__h4;
 @h4__font-color: @heading__color__base;
 @h4__font-family: @heading__font-family__base;
 @h4__font-weight: @font-weight__bold;
 @h4__font-style: @heading__font-style__base;
-@h4__line-height: @heading__line-height__base;
+@h4__line-height: 38px;
 @h4__margin-top: @heading__margin-top__base;
 @h4__margin-bottom: @heading__margin-bottom__base;
 
-@h5__font-size: ceil((@font-size__base * .85)); // 12px
+@h5__font-size: @font-size__h5;
 @h5__font-color: @heading__color__base;
-@h5__font-family: @heading__font-family__base;
+@h5__font-family: @font-family-name__base;
 @h5__font-weight: @font-weight__bold;
 @h5__font-style: @heading__font-style__base;
-@h5__line-height: @heading__line-height__base;
+@h5__line-height: 32px;
 @h5__margin-top: @heading__margin-top__base;
 @h5__margin-bottom: @heading__margin-bottom__base;
 
