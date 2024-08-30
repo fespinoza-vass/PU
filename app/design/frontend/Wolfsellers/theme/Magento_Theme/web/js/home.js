@@ -156,17 +156,6 @@ require([
 	        });
     	}
 
-		let urlLocal = window.location.href;
-
-		if(urlLocal.includes('?mobile')){
-			$('.page-wrapper').css('padding-top', 'inherit');
-
-			$('#ammenu-header-container')
-				.add('.ambanners')
-				.add('.page-footer')
-				.remove();
-		};
-
     });
 
 });
