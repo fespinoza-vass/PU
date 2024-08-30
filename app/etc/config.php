@@ -595,7 +595,7 @@ return [
         'Amasty_Customform' => 1,
         'Amasty_ElasticSearch' => 0,
         'Amasty_Xsearch' => 0,
-        'Amasty_Feed' => 0,
+        'Amasty_Feed' => 1,
         'Amasty_Geoip' => 1,
         'Amasty_InvisibleCaptcha' => 1,
         'Amasty_Label' => 1,
