@@ -19,8 +19,7 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
     protected $paymentMethodManagement;
     protected $cookieManager;
     protected $cookieMetadataFactory;   
-    private $helperData; 
-    protected $helperConfig;
+    protected $helperData;     
     protected $customerSession;
     protected $orderRepository;
     protected $storeManager;
@@ -67,6 +66,10 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
 
 
     public function execute() { 
+        // $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/visanew.log');
+        // $logger = new \Zend\Log\Logger();
+        // $logger->addWriter($writer); 
+        // $logger->info("Web Capture");
 
 	$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/visanew.log');
         $logger = new \Zend_Log();
@@ -153,7 +156,7 @@ class Web extends \Magento\Framework\App\Action\Action implements HttpPostAction
                         $logger->info("email:".$quote->getBillingAddress()->getEmail() ); 
                     }    
                     
-                    $logger->info("first Name".$quote->getBillingAddress()->getFirstname() ); 
+                    
                     
                     $orderId = $this->cartManagement->placeOrder($quote->getId());
                     $order = $this->orderRepository->get( $orderId);
