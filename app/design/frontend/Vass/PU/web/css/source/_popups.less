@@ -6,13 +6,13 @@
 & when (@media-common = true) {
     .modal-popup {
         .modal-inner-wrap {
-            .lib-css(padding, @popup__padding);
-            .lib-css(gap, 12px);
-            .lib-css(border, @popup__border);
-            .lib-css(border-radius, @popup__border-radius);
+            gap: 12px;
+            padding: @popup__padding;
+            border:  @popup__border;
+            border-radius: @popup__border-radius;
+            max-height: @popup__max-height;
             .lib-css(box-shadow, @popup__shadow);
             .lib-css(max-width, @popup__max-width) !important; // Confirm Popups have a default max-width
-            .lib-css(max-height, @popup__max-height);
 
             .modal-footer,
             .modal-header,
@@ -22,10 +22,9 @@
         }
 
         .modal-footer {
-            .lib-css(display, flex);
-            .lib-css(justify-content, end);
-            .lib-css(gap, 14px);
-            .lib-css(border-top, none) !important; // Slide Popups has border-top that can't be overide
+            display: flex;
+            justify-content: end;
+            gap: 14px;
 
             button {
                 .lib-css(height, 40px);
