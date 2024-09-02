@@ -37,6 +37,13 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .modal-popup {
+        width: 100%;
+
+        .modal-inner-wrap {
+            margin: 5rem auto !important; //Override to center popup
+            max-width: @popup__max-width;
+        }
+
         .modal-footer {
             .lib-css(justify-content, center);
         }

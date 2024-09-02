@@ -1,7 +1,7 @@
-// /**
-//  * Copyright © Magento, Inc. All rights reserved.
-//  * See COPYING.txt for license details.
-//  */
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
 
 //
 //  Variables
@@ -45,18 +45,6 @@
                 .action-hide-popup {
                     &:extend(.abs-action-button-as-link all);
                 }
-            }
-        }
-    }
-}
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .checkout-index-index {
-        .modal-popup {
-            .modal-inner-wrap {
-                .lib-css(margin-left, -(@checkout-modal-popup__width/2));
-                .lib-css(width, @checkout-modal-popup__width);
-                left: 50%;
             }
         }
     }
