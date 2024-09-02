@@ -631,7 +631,7 @@ return [
         'Amasty_ShopbySeo' => 1,
         'Amasty_Sorting' => 1,
         'Amasty_Storelocator' => 1,
-        'Amasty_ElasticSearchGraphQl' => 1,
+        'Amasty_ElasticSearchGraphQl' => 0,
         'Fastly_Cdn' => 1,
         'Amasty_CheckoutDeliveryDate' => 1,
         'PayPal_BraintreeGraphQl' => 1,
