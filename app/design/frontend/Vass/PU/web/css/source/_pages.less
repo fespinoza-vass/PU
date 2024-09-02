@@ -22,16 +22,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: @pager-items__width;
+            width: @pager-action__items-width;
+            height: @pager-action__items-height;
             color: @primary-black;
             background-color: @primary-white;
             border-radius: @pager__radius;
-            height: @pager-items__height;
 
             &:hover {
                 background-color: @pager-action__hover__background;
                 color: @pager-action__hover__color;
                 cursor: @pager-action__hover__cursor;
+                border-radius: 8px;
             }
 
             &.disabled {
@@ -53,7 +54,6 @@
                 display: inline-block;
                 font-weight: @pager__font-weight;
                 text-align: center;
-                width: @pager-action__width;
             }
         }
 
@@ -61,28 +61,24 @@
             .page {
                 background-color: @pager-current__background;
                 color: @pager-current__color;
-                padding: @pager-item__padding;
                 border-radius: @pager__radius;
-                height: auto;
-                width: @pager-items__width;
             }
         }
 
         .page {
             color: @pager__color;
             background-color: @primary-white;
-            padding: @pager-item__padding;
             border-radius: @pager__radius;
             gap: @pager-current__gap;
+            padding: @pager-item__padding;
             height: @pager-items__height;
+            min-width: @pager-items__width;
         }
 
         a.page {
             color: @pager__color;
             display: inline-block;
-            padding: @pager-item__padding;
             text-decoration: @pager__text-decoration;
-            height: auto;
         }
     }
 }
@@ -93,7 +89,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
     .pages {
-        float: none !important;
+        float: none !important; // Override rule to set centered content on mobile
     }
 }
 
