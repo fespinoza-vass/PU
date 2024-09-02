@@ -8,61 +8,35 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-
     .message.info {
         .lib-message(info);
-        .lib-css(padding, @message__padding-mobile);
-        .lib-typography(
-            @_color: @primary-white;
-            @_font-size: @message__font-size-mobile;
-        );
     }
 
     .message.error {
         .lib-message(error);
-        .lib-css(padding, @message__padding-mobile);
-        .lib-typography(
-            @_color: @primary-white;
-            @_font-size: @message__font-size-mobile;
-        );
     }
 
     .message.warning {
         .lib-message(warning);
-        .lib-css(padding, @message__padding-mobile);
-        .lib-typography(
-            @_color: @primary-white;
-            @_font-size: @message__font-size-mobile;
-        );
     }
 
     .message.notice {
         .lib-message(notice);
-        .lib-typography(
-            @_color: @primary-white;
-            @_font-size: @message__font-size-mobile;
-        );
     }
-
 
     .message.success {        
         .lib-message(success);
-        .lib-css(padding, @message__padding-mobile);
-        .lib-typography(
-            @_color: @primary-white;
-            @_font-size: @message__font-size-mobile;
-            );
-        }
+    }
 
-        .message-success.success.message, .message-info.info.message, 
-        .message-error.error.message, .message-warning.warning.message, 
-        .message-notice.notice.message {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    .message-success.success.message, .message-info.info.message, 
+    .message-error.error.message, .message-warning.warning.message, 
+    .message-notice.notice.message {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-        .message > #addtocartclose {
+    .message > .closeAlert {
         font-size: @message-icon__font-size;
 
         &:hover {
@@ -70,46 +44,50 @@
         }
     }
 
+    .icon-close:before {
+        content: @icon-close;
+        font-family: @icons__font-name;
+    }
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xs) {
     .message.info {
-        .lib-css(padding, @message__padding);
+        .lib-css(padding, @message__padding-desktop);
         .lib-typography(
             @_color: @primary-white;
-            @_font-size: @message__font-size;
+            @_font-size: @message__font-size-desktop;
         );
     }
 
     .message.error {
-        .lib-css(padding, @message__padding);
+        .lib-css(padding, @message__padding-desktop);
         .lib-typography(
             @_color: @primary-white;
-            @_font-size: @message__font-size;
+            @_font-size: @message__font-size-desktop;
         );
     }
 
     .message.warning {
-        .lib-css(padding, @message__padding);
+        .lib-css(padding, @message__padding-desktop);
         .lib-typography(
             @_color: @primary-white;
-            @_font-size: @message__font-size;
+            @_font-size: @message__font-size-desktop;
         );
     }
 
     .message.notice {
-        .lib-css(padding, @message__padding);
+        .lib-css(padding, @message__padding-desktop);
         .lib-typography(
             @_color: @primary-white;
-            @_font-size: @message__font-size;
+            @_font-size: @message__font-size-desktop;
         );
     }
 
     .message.success {
-        .lib-css(padding, @message__padding);
+        .lib-css(padding, @message__padding-desktop);
         .lib-typography(
             @_color: @primary-white;
-            @_font-size: @message__font-size;
+            @_font-size: @message__font-size-desktop;
         );
     }
 }
