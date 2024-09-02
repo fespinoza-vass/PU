@@ -31,12 +31,17 @@
         .lib-message(success);
     }
 
-    .message-success.success.message, .message-info.info.message, 
-    .message-error.error.message, .message-warning.warning.message, 
-    .message-notice.notice.message {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .message {
+
+        &-success.success,
+        &-info.info,
+        &-error.error,
+        &-warning.warning,
+        &-notice.notice {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
     }
 
     .message > .closeAlert {
