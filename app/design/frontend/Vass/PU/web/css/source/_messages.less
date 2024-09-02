@@ -10,6 +10,9 @@
 & when (@media-common = true) {
     .message.info {
         .lib-message(info);
+        .lib-typography(
+            @_color: @primary-white;
+        );
     }
 
     .message.error {
@@ -62,7 +65,6 @@
     .message.error {
         .lib-css(padding, @message__padding-desktop);
         .lib-typography(
-            @_color: @primary-white;
             @_font-size: @message__font-size-desktop;
         );
     }
@@ -70,7 +72,6 @@
     .message.warning {
         .lib-css(padding, @message__padding-desktop);
         .lib-typography(
-            @_color: @primary-white;
             @_font-size: @message__font-size-desktop;
         );
     }
@@ -78,7 +79,6 @@
     .message.notice {
         .lib-css(padding, @message__padding-desktop);
         .lib-typography(
-            @_color: @primary-white;
             @_font-size: @message__font-size-desktop;
         );
     }
@@ -86,7 +86,6 @@
     .message.success {
         .lib-css(padding, @message__padding-desktop);
         .lib-typography(
-            @_color: @primary-white;
             @_font-size: @message__font-size-desktop;
         );
     }
