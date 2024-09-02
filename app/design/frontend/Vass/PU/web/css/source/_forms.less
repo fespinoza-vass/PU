@@ -56,9 +56,32 @@
     }
 
     // Select
-    select {
-        &:active {
-            color: @secondary-black;
+
+    .field {
+        &:has(select) {
+            position: relative;
+        }
+
+        &:has(select)::before {
+            content: @icon-down;
+            font-family: @icons__font-name;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            height: 25px;
+            width: 25px;
+            pointer-events: none;
+        }
+
+        &:has(select:active)::before {
+            content: @icon-up;
+        }
+
+        select {
+            .lib-css(appearance, none);
+            &:active {
+                color: @secondary-black;
+            }
         }
     }
 }
