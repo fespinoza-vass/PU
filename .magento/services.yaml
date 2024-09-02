@@ -9,10 +9,6 @@ mysql:
 redis:
     type: redis:6.2
 
-opensearch:
-    type: opensearch:1.2
-    disk: 1024
-
 rabbitmq:
     type: rabbitmq:3.9
     disk: 1024
