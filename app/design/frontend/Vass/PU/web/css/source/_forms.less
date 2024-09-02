@@ -72,6 +72,9 @@
             width: 25px;
             pointer-events: none;
         }
+        &:has(select.mage-error)::before {
+            top: 42%;
+        }
 
         &:has(select:active)::before {
             content: @icon-up;
