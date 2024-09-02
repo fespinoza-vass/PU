@@ -9,40 +9,196 @@
  * @var $escaper Magento\Framework\Escaper
  */
 ?>
-
+<?php $_order = $block->getOrder() ?>
+<?php $shippingMehod = $_order->getShippingAddress() ?>
+ 
 <div class="checkout-success">
-    <?php if ($block->getOrderId()):?>
-        <div class="success-messages">
-            <?php if ($block->getCanViewOrder()):?>
-                <p><?= $escaper->escapeHtml(__('Your order number is:')) ?>
-                    <a href="<?= /* @noEscape */$block->getViewOrderUrl() ?>"
-                       class="order-number">
-                        <strong>
-                            <?= /* @noEscape */$block->getOrderId() ?>
-                        </strong>
-                    </a>
-                </p>
-            <?php  else: ?>
-                <p>
-                    <?= $escaper->escapeHtml(__('Your order # is:')) ?>
-                    <span>
-                        <?= /* @noEscape */$block->getOrderId() ?>
-                    </span>
-                </p>
-            <?php endif;?>
-            <p><?= $escaper->escapeHtml(__('We\'ll email you an order confirmxzfbdfzxhsdrhsdrhdshation with details and tracking info.')) ?></p>
+    <div class="success-container">
+        <h1 class="success-title">¡Gracias por tu compra!</h1>
+        <div class="success-order-number">Tu ID de pedido es: <?= $_order->getIncrementId(); ?>
+ </div>
+
+        <!-- Contenido para desktop -->
+        <div class="success-section">
+            <div class="success-section__right success-order-details">
+                <h3 class="success-order-details__title">Detalle de Compra</h3>
+                
+                <div class="success-order-summary">
+                    <div class="success-order-summary__item success-order-summary__date">Fecha de pedido: <?= $_order->getCreatedAt(2); ?></div>
+                </div>
+                
+                <div class="success-address-details">
+                    <div class="success-address-details__row">
+                        <div class="success-address-details__col">
+                            <strong>Destinatario</strong><br>
+                            <span>Nombre: <span>Christopher</span></span><br>
+                            <span>Apellidos: <span>Pérez Osadón</span></span><br>
+                            <span>DNI: <span>1213415</span></span> <br>
+                            <span>Correo: <span>juan.perez@gmail.com</span></span>
+                        </div>
+                        <div class="success-address-details__col">
+                            <strong>Mi dirección</strong><br>
+                            <span>Departamento: <span>Lima</span></span><br>
+                            <span>Provincia:  <span>Lima</span></span><br>
+                            <span>Distrito: <span>Pueblo Libre</span></span><br>
+                            <span>Dirección: <span>Calle José Pérez, Av.Brasil 1540</span></span><br>
+                            <span>Referencia: <span>ninguna</span></span><br>
+                            <span>Número de teléfono: <span>01 237 13 35</span></span>
+                        </div>
+                        <div class="success-address-details__col">
+                            <strong>Forma de pago</strong><br>
+                            <span><span>Tarjeta Visa</span></span>
+                        </div>
+                    </div>
+                </div>
+                <h3>Datos de Compra</h3>
+                <div class="success-order-details__grid">
+                    <div class="success-order-grid">
+                        <!-- Encabezados -->
+                        <div class="success-order-grid__header">Nombre de producto</div>
+                        <div class="success-order-grid__header">SKU</div>
+                        <div class="success-order-grid__header">Precio</div>
+                        <div class="success-order-grid__header">Cantidad</div>
+                        <div class="success-order-grid__header">Subtotal</div>
+                
+                        <!-- Filas de productos -->
+                        <div class="success-order-grid__item">Set Be Delicious Eau de Parfum 100 ml</div>
+                        <div class="success-order-grid__item">24-MB01</div>
+                        <div class="success-order-grid__item">S/254.25</div>
+                        <div class="success-order-grid__item">1</div>
+                        <div class="success-order-grid__item">S/254.25</div>
+                
+                        <div class="success-order-grid__item">Desmaquillante de Ojos y Labios 125 ml</div>
+                        <div class="success-order-grid__item">2-M3R1A</div>
+                        <div class="success-order-grid__item">S/189.00</div>
+                        <div class="success-order-grid__item">1</div>
+                        <div class="success-order-grid__item">S/189.00</div>
+                
+                        <div class="success-order-grid__item">Dior Le Baume Edición Limitada - Bálsamo Multiuso Revitalizante 50 ml</div>
+                        <div class="success-order-grid__item">30-VFE23</div>
+                        <div class="success-order-grid__item">S/265.00</div>
+                        <div class="success-order-grid__item">1</div>
+                        <div class="success-order-grid__item">S/265.00</div>
+                
+                        <div class="success-order-grid__item">Set Rénérgie Multi Lift Yeux 15 ml</div>
+                        <div class="success-order-grid__item">23-V3RFV</div>
+                        <div class="success-order-grid__item">S/497.00</div>
+                        <div class="success-order-grid__item">2</div>
+                        <div class="success-order-grid__item">S/994.00</div>
+                    </div>
+                
+                    <!-- Resumen de totales -->
+                    <div class="success-order-overview">
+                        <div class="success-order-overview__row">
+                            <span>Subtotal</span>
+                            <span>S/1,702.25</span>
+                        </div>
+                        <div class="success-order-overview__row">
+                            <span>Costo de envío</span>
+                            <span>S/16.06</span>
+                        </div>
+                        <div class="success-order-overview__row success-order-overview__total">
+                            <strong>Total</strong>
+                            <strong>S/1,718.31</strong>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mensaje de confirmación -->
+                <div class="success-message">
+                        Tu pedido ha sido recibido. ¡Gracias por comprar con nosotros!
+                    </div>
         </div>
-        <?= $block->getChildHtml('details') ?>
-    <?php endif;?>
 
-    <?= $block->getAdditionalInfoHtml() ?>
-    <?= $block->getChildHtml('cms') ?>
+        <!-- Contenido para mobile -->
+        <div class="success-summary__dates">
+            <div class="success-summary__date-item success-summary__date-item--success">
+                <span class="success-summary__date-label">Fecha de pedido:</span>
+                <span class="success-summary__date-value">30 de mayo del 2024</span>
+            </div>
+            <div class="success-summary__date-item success-summary__date-item--success">
+                <span class="success-summary__date-label">Fecha de entrega:</span>
+                <span class="success-summary__date-value">25 de junio del 2024</span>
+            </div>
+        </div>
+        <div class="success-summary__section">
+            <button class="success-summary__collapsible collapsible-open" type="button">Destinatario</button>
+            <div class="success-summary__content">
+                <p class="success-summary__info"><span>Nombre:</span> Christopher</p>
+                <p class="success-summary__info"><span>Apellidos:</span> Pérez Osadón</p>
+                <p class="success-summary__info"><span>DNI:</span> 1213415</p>
+                <p class="success-summary__info"><span>Correo:</span> juan.perez@gmail.com</p>
+            </div>
 
-    <div class="actions-toolbar">
-        <div class="primary">
-            <a class="action primary continue" href="<?= /* @noEscape */$block->getUrl() ?>">
-                <span><?= $escaper->escapeHtml(__('Continue Shopping')) ?></span>
-            </a>
+            <button class="success-summary__collapsible collapsible-open" type="button">Mi dirección</button>
+            <div class="success-summary__content">
+                <p class="success-summary__info"><span>Departamento:</span> Lima</p>
+                <p class="success-summary__info"><span>Provincia:</span> Lima</p>
+                <p class="success-summary__info"><span>Distrito:</span> Pueblo Libre</p>
+                <p class="success-summary__info"><span>Dirección:</span> Calle José Pérez, Av. Brasil 1540</p>
+                <p class="success-summary__info"><span>Referencia:</span> ninguna</p>
+                <p class="success-summary__info"><span>Número de teléfono:</span> 01 237 13 35</p>
+            </div>
+
+            <button class="success-summary__collapsible collapsible-open" type="button">Forma de pago</button>
+            <div class="success-summary__content">
+                <p class="success-summary__info">Tarjeta Visa</p>
+            </div>
+
+            <button class="success-summary__collapsible collapsible-open" type="button">Detalle de la compra</button>
+            <div class="success-summary__content">
+                <p class="success-summary__info"><span>Nombre de producto:</span> Set Be Delicious Eau de Parfum 100 ml</p>
+                <p class="success-summary__info"><span>SKU:</span> 24-MB01</p>
+                <p class="success-summary__info"><span>Precio:</span> S/254.25</p>
+                <p class="success-summary__info"><span>Cantidad:</span> 1</p>
+                <p class="success-summary__info"><span>Subtotal:</span> S/254.25</p>
+                <div class="success-summary__totals">
+                    <p class="success-summary__total"><span>Subtotal:</span> S/254.25</p>
+                    <p class="success-summary__total"><span>Costo de envío:</span> S/16.06</p>
+                    <p class="success-summary__total success-summary__total--bold"><strong>Total:</strong> S/1702.25</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            // Activar colapsadores solo en mobile
+            $('.success-summary__collapsible').each(function () {
+                var button = $(this);
+                button.addClass('collapsible-open');
+                button.on('click', function () {
+                    var content = button.next();
+                    if (content.css('display') === 'block') {
+                        content.css('display', 'none');
+                        button.removeClass('collapsible-open');
+                    } else {
+                        content.css('display', 'block');
+                        button.addClass('collapsible-open');
+                    }
+                    checkAllOpen();
+                });
+
+                // Inicializar desplegados
+                button.next().css('display', 'block');
+            });
+
+            function checkAllOpen() {
+                var allOpen = $('.success-summary__collapsible').toArray().every(function (button) {
+                    return $(button).hasClass('collapsible-open');
+                });
+
+                var orderDetails = $('.success-section__right .success-order-details');
+                if (allOpen) {
+                    orderDetails.css('display', 'none');
+                } else {
+                    orderDetails.css('display', 'block');
+                }
+            }
+
+            // Eliminar la clase page-title-wrapper si existe
+            $('.page-title-wrapper').remove();
+        });
+    });
+</script>
