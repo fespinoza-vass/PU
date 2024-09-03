@@ -46,6 +46,11 @@
     //  -----------------------------------------
 
     form {
+        .field {
+            ._lib-form-field-required();
+            .lib-form-field();
+        }
+
         .mage-error {
             padding: @form-validation-note__padding;
         }
@@ -58,10 +63,9 @@
 
         input.mage-error,
         select.mage-error {
-            color: @secondary-black;
-
             &:focus {
                 border: @form-element-validation__focus__border;
+                color: @form-element-input__focus__color;
             }
         }
 

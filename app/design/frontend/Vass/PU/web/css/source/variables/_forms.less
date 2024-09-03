@@ -37,7 +37,7 @@
 @form-element-input__disabled__background: @color-gray-light3;
 @form-element-input__disabled__border: none;
 @form-element-input__disabled__opacity: .5;
-@form-element-input__disabled__color: @form-element-input__color;
+@form-element-input__disabled__color: @color-gray-dark3;
 @form-element-input__disabled__font-style: @form-element-input__font-style;
 
 //  Focus state
@@ -103,7 +103,7 @@
 @select__vertical-align: @form-element-input__vertical-align;
 @select__background-clip: @form-element-input__background-clip; // [border-box|content-box|padding-box]
 @select__font-size: @form-element-input__font-size;
-@select__color: @color-gray-dark3;
+@select__color: @color-gray-light4;
 @select__font-family: @form-element-input__font-family;
 @select__font-weight: @form-element-input__font-weight;
 @select__font-style: @form-element-input__font-style;
@@ -123,7 +123,7 @@
 //  Focus state
 @select__focus__background: false;
 @select__focus__border: 0.5px solid @color-gray-light2;
-@select__focus__color: @color-gray-dark3;
+@select__focus__color: @select__color;
 @select__focus__font-style: @form-element-input__focus__font-style;
 
 //
@@ -254,12 +254,12 @@
 
 //  Form field label
 @form-field-label__align: false;
-@form-field-label__color: false;
-@form-field-label__font-size: false;
+@form-field-label__color: @color-gray-light4;
+@form-field-label__font-size: @font-size__m;
 @form-field-label__font-family: false;
-@form-field-label__font-weight: @font-weight__bold;
+@form-field-label__font-weight: @font-weight__heavier;
 @form-field-label__font-style: false;
-@form-field-label__line-height: false;
+@form-field-label__line-height: 20px;
 
 @form-field-type-label-inline__margin: false;
 @form-field-type-label-inline__padding-top: 6px;
@@ -267,7 +267,7 @@
 @form-field-type-label-inline__width: 100%;
 @form-field-type-label-inline__align: right;
 
-@form-field-type-label-block__margin: 0 0 @indent__xs;
+@form-field-type-label-block__margin: 0;
 @form-field-type-label-block__padding: false;
 @form-field-type-label-block__align: @form-field-label__align;
 
@@ -275,7 +275,7 @@
 @form-field-type-control-inline__width: 100%;
 
 //  Form field label asterisk
-@form-field-label-asterisk__color: #000;
+@form-field-label-asterisk__color: @color-gray-light4;
 @form-field-label-asterisk__font-size: @font-size__m;
 @form-field-label-asterisk__font-family: false;
 @form-field-label-asterisk__font-weight: false;
