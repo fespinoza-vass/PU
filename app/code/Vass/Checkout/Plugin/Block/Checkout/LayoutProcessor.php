@@ -50,33 +50,9 @@ class LayoutProcessor
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['direccion_fiscal']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['company']['visible']=false;
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['company']['visible']=false;        
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio'] = [
-            'component' => 'Magento_Ui/js/form/element/abstract',  // Ajusta este componente si es necesario
-            'config' => [
-                'sortOrder' => 150,
-            ],
-            'dataScope' => 'shippingAddress.custom_attributes.referencia_envio',
-            'label' => __('Referencia de Envío'),
-            'provider' => 'checkoutProvider',
-            'visible' => true,
-        ];
-        
-        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['dni']['visible']=false;
-            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker'] = [
-            'component' => 'Magento_Ui/js/form/element/abstract',
-            'config' => [
-                'sortOrder' => 35,
-            ],
-            'dataScope' => 'shippingAddress.custom_attributes.numero_identificacion_picker',
-            'label' => __('Número de Identificación'),
-            'provider' => 'checkoutProvider',
-            'visible' => true,
-        ];
-        
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['dni']['visible']=false;        
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['nombre_completo_picker']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -119,34 +95,56 @@ class LayoutProcessor
             'placeholder' => __('Ingrese número de teléfono'),
             'provider' => 'checkoutProvider',
             'visible' => true,
-        ];    
+        ];
 
-            //validacion select
-            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-                ['shippingAddress']['children']['shipping-address-fieldset']['children']['identificacion_picker'] = [
-                'component' => 'Magento_Ui/js/form/element/select',
-                'config' => [
-                    'customScope' => 'shippingAddress.custom_attributes',
-                    'dataScope' => 'shippingAddress.custom_attributes.identificacion_picker',
-                    'label' => __('Tipo de Documento'),
-                    'provider' => 'checkoutProvider',
-                    'visible' => true,
-                    'options' => [
-                        ['value' => '', 'label' => __('Seleccione un tipo de documento')],
-                        ["label"=>"DNI","value"=>868],
-                        ["label"=>"Pasaporte","value"=>865]
-                    ],
-                    'value' => $this->getIdentificacionCustomer($idCustomer),
-                    'validation' => [
-                        'required-entry' => true
-                    ],
+        // //validacion select
+        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['identificacion_picker'] = [
+            'component' => 'Magento_Ui/js/form/element/select',
+            'config' => [
+                'customScope' => 'shippingAddress.custom_attributes',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/select',
+                'id' => 'identificacion_picker',
+                'options' => [
+                    ['value' => '', 'label' => __('Seleccione un tipo de documento')],
+                    ["label"=>"DNI","value"=>868],
+                    ["label"=>"Pasaporte","value"=>865]
                 ],
-                'sortOrder' => 30,
-                'dataType' => 'text',
-                'label' => __('Tipo de Documento'),
-                'provider' => 'checkoutProvider',
-                'visible' => true,
-            ];
+                'value' => $this->getIdentificacionCustomer($idCustomer),
+                'validation' => [
+                    'required-entry' => true
+                ],
+            ],
+            'dataScope' => 'shippingAddress.custom_attributes.identificacion_picker',
+            'sortOrder' => 30,
+            'label' => __('Tipo de Documento'),
+            'provider' => 'checkoutProvider',
+            'visible' => true,
+        ];
+
+            
+
+        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['config']['sortOrder'] = 35;
+
+        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio'] = [
+            'component' => 'Magento_Ui/js/form/element/abstract',  // Ajusta este componente si es necesario
+            'config' => [
+                'customScope' => 'shippingAddress.custom_attributes',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'id' => 'referencia_envio',
+                'sortOrder' => 150
+            ],
+            'dataScope' => 'shippingAddress.custom_attributes.referencia_envio',
+            'label' => __('Referencia de Envío'),
+            'provider' => 'checkoutProvider',
+            'visible' => true,
+            'value' => $this->getNumIdentificacionCustomer($idCustomer)
+        ];
+        
 
              //telephone
       
@@ -229,9 +227,7 @@ class LayoutProcessor
                 
                 
             ];
-
-
-            
+          
 
             // Añadiendo el checkbox a la ruta especificada
             $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox'] = $check_terminos;
@@ -302,6 +298,9 @@ class LayoutProcessor
                 'observable' => true
             ];
 
+            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['config']['sortOrder']= 90;
+
             // Añadir los campos al layout
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['city'] = $cityField;
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['colony'] = $colonyField;
@@ -317,9 +316,6 @@ class LayoutProcessor
 
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['telephone']['value'] = $this->getTelefonoCustomer($idCustomer);
-
-            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['value'] = $this->getNumIdentificacionCustomer($idCustomer);
 
         /////BILLING ADDRESS
 
