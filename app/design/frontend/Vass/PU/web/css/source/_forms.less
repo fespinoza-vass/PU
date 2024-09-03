@@ -4,6 +4,11 @@
  */
 
 & when (@media-common = true) {
+
+    //
+    //  Input radio
+    //  -----------------------------------------
+
     input[type="radio"] {
         .lib-css(appearance, none);
         width: 20px;
@@ -35,4 +40,69 @@
             }
         }
     }
+
+    //
+    //  Input
+    //  -----------------------------------------
+
+    form {
+        .mage-error {
+            padding: @form-validation-note__padding;
+        }
+
+        .note {
+            .lib-font-size(14);
+            color: @color-gray-light4;
+            padding: @form-validation-note__padding;
+        }
+
+        input.mage-error,
+        select.mage-error {
+            color: @secondary-black;
+
+            &:focus {
+                border: @form-element-validation__focus__border;
+            }
+        }
+
+        input,
+        select {
+            color: @secondary-black;
+
+            &::placeholder {
+                .lib-font-size(@font-size__m)
+            }
+        }
+    }
+
+    //
+    //  Select
+    //  -----------------------------------------
+
+    .control {
+        &:has(select) {
+            position: relative;
+
+            &:after {
+                content: @icon-down;
+                font-family: @icons__font-name;
+                position: absolute;
+                pointer-events: none;
+                color: #000;
+                .lib-font-size(11);
+                top: ~"calc((@{select__height} / 2) + 10px)";
+                transform: translateY(-50%);
+                right: 22px;
+            }
+
+            &:has(select:active)::after {
+                content: @icon-up;
+            }
+        }
+
+        select {
+            .lib-css(appearance, none);
+        }
+    }
 }
+
