@@ -4,6 +4,11 @@
  */
 
 & when (@media-common = true) {
+
+    //
+    //  Input radio
+    //  -----------------------------------------
+
     input[type="radio"] {
         .lib-css(appearance, none);
         width: 20px;
@@ -36,76 +41,68 @@
         }
     }
 
-    // Input Text
+    //
+    //  Input
+    //  -----------------------------------------
 
-    div.mage-error {
-        padding: @form-validation-note__padding;
-    }
-
-    .input-text.mage-error{
-        &:focus {
-            color: @secondary-black;
-            border: @form-element-validation__focus__border;
+    form {
+        .mage-error {
+            padding: @form-validation-note__padding;
         }
-        &:active {
+
+        .note {
+            .lib-font-size(14);
+            color: @color-gray-light4;
+            padding: @form-validation-note__padding;
+        }
+
+        input.mage-error,
+        select.mage-error {
             color: @secondary-black;
+
+            &:focus {
+                border: @form-element-validation__focus__border;
+            }
+        }
+
+        input,
+        select {
+            color: @secondary-black;
+
+            &::placeholder {
+                .lib-font-size(@font-size__m)
+            }
         }
     }
 
-    .note {
-        padding: @form-validation-note__padding;
-    }
+    //
+    //  Select
+    //  -----------------------------------------
 
-    // Select
-
-    .field {
+    .control {
         &:has(select) {
             position: relative;
-        }
 
-        &:has(select)::before {
-            content: @icon-down;
-            font-family: @icons__font-name;
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            height: 25px;
-            width: 25px;
-            pointer-events: none;
-        }
+            &:after {
+                content: @icon-down;
+                font-family: @icons__font-name;
+                position: absolute;
+                pointer-events: none;
+                color: #000;
+                .lib-font-size(11);
+                top: ~"calc((@{select__height} / 2) + 10px)";
+                transform: translateY(-50%);
+                right: 22px;
+            }
 
-        &:has(select.mage-error)::before {
-            top: 42%;
-        }
-
-        &:has(select:active)::before {
-            content: @icon-up;
+            &:has(select:active)::after {
+                content: @icon-up;
+            }
         }
 
         select {
             .lib-css(appearance, none);
-            &:active {
-                color: @secondary-black;
-            }
         }
-    }
-}
-
-//
-//  Mobile
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    select,
-    input[type="text"],
-    input[type="password"],
-    input[type="url"],
-    input[type="tel"],
-    input[type="search"],
-    input[type="number"],
-    input[type*="date"],
-    input[type="email"] {
-        height: @form-element-input__height__mobile;
     }
 }
 
