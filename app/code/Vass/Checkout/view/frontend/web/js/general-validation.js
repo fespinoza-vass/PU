@@ -6,6 +6,7 @@ require([
 
 
     $(document).ready(function () {
+        $('.checkout-payment-method').css('display', 'none');
         // Función para aplicar el placeholder y la validación de solo letras
         function addPlaceholderAndValidation(inputName, placeholderText) {
             var $input = $('input[name="' + inputName + '"]');
@@ -65,5 +66,6 @@ require([
         }, 500); 
 
         $('input[name="country_id"]').closest('.field').hide();
+       
     });
 });

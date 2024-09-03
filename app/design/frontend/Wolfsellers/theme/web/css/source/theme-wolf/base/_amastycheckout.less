@@ -23,9 +23,34 @@
     #s_method_instore_pickup{
         display: none !important;
     }
+    
+    .document-type-checkout-choices .radio {
+        width: 15px;
+        height: 15px;
+        accent-color: var(--Texto, #000); /* Cambia el color del radio button */
+    }
 
+    .action.primary.checkout {
+        display: flex; /* Convierte el botón en un contenedor flex */
+        justify-content: center; /* Centra el contenido horizontalmente */
+        align-items: center; /* Centra el contenido verticalmente */
+        padding: 10px 20px; /* Ajusta el espacio interno del botón */
+    }
 
+    .action.primary.checkout.amasty{
+        display: none !important;
+    }
 
+    .checkout-payment-method .payment-methods .actions-toolbar .primary {
+        padding: 0 !important; /* Sobrescribe el padding anterior */
+    }
+
+    .error-validation-izipay-document-number{
+        margin: 0 auto !important;
+        padding-bottom: 20px;
+    }
+    
+   
     
 
 }
@@ -98,7 +123,32 @@
         width: 100% !important;
     }
 
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+      
     div[name="shippingAddress.region_id"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .select {
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] .select {
+        width: 100% !important;
+        max-width: 384px !important;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] {
         width: 100% !important;
     }
 
@@ -349,6 +399,112 @@
             .payment-option-content{
                 padding: 0 !important;
             }
+
+             //billing
+        div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; /* Mantiene los botones apilados verticalmente */
+            align-items: flex-start; /* Alinea los botones a la izquierda */
+            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; /* Asegura que los botones sigan apilados */
+            gap: 10px; /* Espacio entre los botones */
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+        }
+
+        .document-type-checkout {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra todo el contenido horizontalmente */
+            text-align: center; /* Asegura que el texto dentro esté centrado */
+            margin: 0 auto; /* Centra el contenedor principal */
+        }
+        
+        .document-type-checkout-choices {
+            display: flex;
+            justify-content: center; /* Centra los radio buttons dentro del contenedor */
+            gap: 20px; /* Espacio entre los botones */
+        }
+        
+        .field.choice {
+            display: flex;
+            align-items: center;
+        }
+
+        .extra-fields-izipay{
+            width: 100% !important;
+            margin: 0 !important;
+
+        }
+        
 }
 
 
@@ -364,6 +520,12 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .extra-fields-izipay{
+        width: 100% !important;
+        margin: 0 !important;
+
+    }
+    
     .opc-block-summary.amcheckout-summary-container {
         margin: 0 !important;
     }    
@@ -603,6 +765,32 @@
         border: 0.8px solid #979797;
         background: #FFF;
     }
+
+      
+    div[name="shippingAddress.region_id"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.city"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .select {
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] .select {
+        width: 100% !important;
+        max-width: 384px !important;
+    }
+
 
         //sidebar
 
@@ -898,6 +1086,107 @@
             font-weight: 400 !important;
             line-height: normal !important;
         }
+
+         //billing
+         div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; /* Mantiene los botones apilados verticalmente */
+            align-items: flex-start; /* Alinea los botones a la izquierda */
+            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; /* Asegura que los botones sigan apilados */
+            gap: 10px; /* Espacio entre los botones */
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+        }
+
+        .document-type-checkout {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra todo el contenido horizontalmente */
+            text-align: center; /* Asegura que el texto dentro esté centrado */
+            margin: 0 auto; /* Centra el contenedor principal */
+        }
+        
+        .document-type-checkout-choices {
+            display: flex;
+            justify-content: center; /* Centra los radio buttons dentro del contenedor */
+            gap: 20px; /* Espacio entre los botones */
+        }
+        
+        .field.choice {
+            display: flex;
+            align-items: center;
+        }
+        
+        
 
 }
 
@@ -1044,6 +1333,17 @@
     div[name="shippingAddress.street.0"] {
         width: 100% !important;
     }
+
+    div[name="shippingAddress.street.0"] .label {
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
     
     div[name="shippingAddress.street.0"] .input-text {
         width: 100% !important;
@@ -1058,8 +1358,22 @@
         display: none !important;
       }
     
-      div[name="shippingAddress.region_id"] {
+    div[name="shippingAddress.region_id"] {
         width: 100% !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.region_id"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 
     div[name="shippingAddress.telephone"] {
@@ -1097,13 +1411,9 @@
         line-height: normal;
     }
 
-    div[name="shippingAddress.custom_attributes.colony"] .input-text {
+    div[name="shippingAddress.custom_attributes.colony"] .select {
         width: 100% !important;
         max-width: 384px;
-        height: 39px;
-        border-radius: 8px;
-        border: 0.8px solid #979797;
-        background: #FFF;
     }
 
     div[name="shippingAddress.city"] label {
@@ -1115,13 +1425,9 @@
         line-height: normal;
     }
 
-    div[name="shippingAddress.city"] .input-text {
+    div[name="shippingAddress.custom_attributes.city"] .select {
         width: 100% !important;
-        max-width: 384px;
-        height: 39px;
-        border-radius: 8px;
-        border: 0.8px solid #979797;
-        background: #FFF;
+        max-width: 384px !important;
     }
 
 
@@ -1141,6 +1447,38 @@
         border-radius: 8px;
         border: 0.8px solid #979797;
         background: #FFF;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.city"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .field .label  {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 
         //sidebar
@@ -1439,11 +1777,134 @@
         }
 
 
+        p .checkout-billing-address-title {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            line-height: normal !important;
+        }
+
+        //billing
+        div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; /* Mantiene los botones apilados verticalmente */
+            align-items: flex-start; /* Alinea los botones a la izquierda */
+            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; /* Asegura que los botones sigan apilados */
+            gap: 10px; /* Espacio entre los botones */
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+        }
+
+        .document-type-checkout {
+            display: block; /* Estilo normal para escritorio */
+            text-align: left; /* Ajusta según el diseño para escritorio */
+            margin: 0; /* Ajusta el margen según lo que desees para escritorio */
+        }
+
+        .document-type-checkout-choices {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px; /* Espacio entre los grupos de radio buttons */
+        }
+        
+        .field.choice {
+            display: flex;
+            align-items: center; /* Alinea el radio button y el texto en el mismo nivel */
+        }
+
+        .document-type-checkout p{
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+    
+        }
+        
+        
+        
+        
+    
+
+
 
             
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+       
     .checkout-column .opc{
         border-radius: 12px !important;
         background: #FFF;
@@ -1583,6 +2044,16 @@
     div[name="shippingAddress.street.0"] {
         width: 100% !important;
     }
+
+    div[name="shippingAddress.street.0"] .label {
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
     
     div[name="shippingAddress.street.0"] .input-text {
         width: 100% !important;
@@ -1595,10 +2066,30 @@
     
     input[name="street[1]"] {
         display: none !important;
-      }
-    
-      div[name="shippingAddress.region_id"] {
+    }
+
+    div[name="shippingAddress.region_id"] .select{
         width: 100% !important;
+        max-width: 384px;
+    }
+    
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px !important;
+    }
+
+    div[name="shippingAddress.region_id"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .select {
+        width: 100% !important;
+        max-width: 384px !important;
     }
 
     div[name="shippingAddress.custom_attributes.referencia_envio"] label {
@@ -1617,6 +2108,42 @@
         border-radius: 8px;
         border: 0.8px solid #979797;
         background: #FFF;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] {
+        width: 100% !important;
+    }
+    div[name="shippingAddress.custom_attributes.city"] .select {
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.city"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .field .label  {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 
            //sidebar
@@ -1912,6 +2439,123 @@
         .opc-block-summary.amcheckout-summary-container {
             margin: 0 !important;
         }
+
+         //billing
+         div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; /* Mantiene los botones apilados verticalmente */
+            align-items: flex-start; /* Alinea los botones a la izquierda */
+            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; /* Asegura que los botones sigan apilados */
+            gap: 10px; /* Espacio entre los botones */
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+        }
+
+        .document-type-checkout {
+            display: block; /* Estilo normal para escritorio */
+            text-align: left; /* Ajusta según el diseño para escritorio */
+            margin: 0; /* Ajusta el margen según lo que desees para escritorio */
+        }
+        
+        .document-type-checkout-choices {
+            display: flex;
+            gap: 20px; /* Espacio entre los grupos de radio buttons */
+            justify-content: flex-start;
+        }
+        
+        .field.choice {
+            display: flex;
+            align-items: center; /* Alinea el radio button y el texto en el mismo nivel */
+        }
+
+        .document-type-checkout-choices .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        .document-type-checkout p{
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+    
+        }
+        
         
 
 

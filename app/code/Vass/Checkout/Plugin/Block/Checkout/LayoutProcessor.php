@@ -250,7 +250,7 @@ class LayoutProcessor
                 'dataScope' => 'shippingAddress.custom_attributes.city',
                 'label' => 'Provincia',
                 'provider' => 'checkoutProvider',
-                'sortOrder' => 210,
+                'sortOrder' => 90,
                 'validation' => [
                     'required-entry' => true
                 ],
