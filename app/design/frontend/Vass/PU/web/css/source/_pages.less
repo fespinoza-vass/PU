@@ -88,8 +88,13 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
-    .pages {
-        float: none !important; // Override rule to set centered content on mobile
+    .account {
+        .columns {
+            .toolbar .pages {
+                float: none; // Override rule to set centered content on mobile account
+            }
+
+        }
     }
 }
 
