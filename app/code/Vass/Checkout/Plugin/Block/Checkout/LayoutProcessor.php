@@ -6,6 +6,7 @@ namespace Vass\Checkout\Plugin\Block\Checkout;
 
 use Magento\Customer\Model\Session;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Psr\Log\LoggerInterface;
 
 class LayoutProcessor
 {
@@ -18,6 +19,8 @@ class LayoutProcessor
      * @var CustomerRepositoryInterface
      */
     private CustomerRepositoryInterface $customerRepository;
+
+    private LoggerInterface $logger;
     
     /**
      * @param Session $session
@@ -25,24 +28,21 @@ class LayoutProcessor
      */
     public function __construct(
         Session $session,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        LoggerInterface $logger
     ) {
         $this->session = $session;
         $this->_customerRepository = $customerRepository;
-
+        $this->logger = $logger;
     }
 
     public function afterProcess(
-        \Magento\Checkout\Block\Checkout\LayoutProcessor $subject,
+        \Amasty\CheckoutStyleSwitcher\Block\Onepage\BillingAddressRelocateProcessor $subject,
         array $jsLayout
         
     ) {
         $idCustomer =$this->session->getCustomerId();
 
-
-            // var_dump($this->getIdentificacionCustomer($idCustomer));
-            // var_dump($this->getNumIdentificacionCustomer($idCustomer));
-        
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['ruc']['visible']=false;
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
@@ -320,7 +320,26 @@ class LayoutProcessor
 
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['value'] = $this->getNumIdentificacionCustomer($idCustomer);
-            
+
+        /////BILLING ADDRESS
+
+        $fieldsToShow = [
+            'ruc',
+            'razon_social',
+            'direccion_fiscal'
+        ];
+
+
+        $billingAddressFields = &$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']
+        ['billing-address-form']['children']['form-fields']['children'];
+
+        foreach ($billingAddressFields as $field => $value) {
+            if (!in_array($field, $fieldsToShow)) {
+                unset($billingAddressFields[$field]);
+            }
+        }
+        $this->logger->debug('billing LP Vass', $billingAddressFields);
+        
         return $jsLayout;
 
         
