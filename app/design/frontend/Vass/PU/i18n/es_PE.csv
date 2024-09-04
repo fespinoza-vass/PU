@@ -1,2 +1,5 @@
 "Enter your mail","Introduce tu email"
 "Subscribe","Suscríbete"
+"You should accept the privacy policy","Aceptar la política de privacidad"
+"I have read and accept the <a class='alink' href='%1'>General Purchase Conditions</a>, the <a class='alink' href='%2'>Privacy Policy</a>, and <a class='alink' href='%3'>Legal Notice.</a>","He leído y acepto las <a class='alink' href='%1'>Condiciones Generales de Compra</a>, la <a class='alink' href='%2'>Política de Privacidad</a>, y el <a class='alink' href='%3'>Aviso Legal.</a>"
+"I have read and accept the <a class='alink' href='%1'>General Purchase Conditions</a>, the <a class='alink' href='%2'>Privacy Policy</a>, and <a class='alink' href='%3'>Legal Notice.</a>"\", 'general-conditions','privacy-policy','legal-notice'","He leído y acepto las <a class='alink' href='%1'>Condiciones Generales de Compra</a>, la <a class='alink' href='%2'>Política de Privacidad</a>, y el <a class='alink' href='%3'>Aviso Legal.</a>"\",'condiciones-generales-compra','politica-privacidad','aviso-legal'"
