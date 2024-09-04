@@ -115,10 +115,25 @@
         }
     }
 
+    .block.newsletter .label {
+        position: relative !important;
+        height: auto !important;
+        width: auto !important;
+    }
+    //TODO
     .block.newsletter {
+        position: relative;
+        height: auto;
+        width: auto;
         display: flex;
         justify-content: flex-end;
         margin: 0;
+
+        & .label {
+            position: relative;
+            height: auto;
+            width: auto;
+        }
 
         .form.subscribe {
             max-width: 567px;
