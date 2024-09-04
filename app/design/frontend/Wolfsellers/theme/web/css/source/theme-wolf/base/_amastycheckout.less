@@ -30,27 +30,37 @@
         accent-color: var(--Texto, #000); /* Cambia el color del radio button */
     }
 
-    .action.primary.checkout {
-        display: flex; /* Convierte el botón en un contenedor flex */
-        justify-content: center; /* Centra el contenido horizontalmente */
-        align-items: center; /* Centra el contenido verticalmente */
-        padding: 10px 20px; /* Ajusta el espacio interno del botón */
-    }
+    
 
-    .action.primary.checkout.amasty{
-        display: none !important;
+    .action.primary.checkout {
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        padding: 10px 20px; 
     }
 
     .checkout-payment-method .payment-methods .actions-toolbar .primary {
-        padding: 0 !important; /* Sobrescribe el padding anterior */
+        padding: 0 !important; 
     }
 
     .error-validation-izipay-document-number{
         margin: 0 auto !important;
         padding-bottom: 20px;
     }
+
+    .action.action-add.primary {
+        display: flex; 
+        justify-content: center;
+        align-items: center; 
+        padding: 10px 20px; 
+        text-align: center; 
+    }
+
     
    
+    
+    
+    
     
 
 }
@@ -1878,9 +1888,10 @@
             gap: 20px; /* Espacio entre los grupos de radio buttons */
         }
         
-        .field.choice {
+        .document-type-checkout-choices .field.choice {
             display: flex;
-            align-items: center; /* Alinea el radio button y el texto en el mismo nivel */
+            align-items: center;
+            margin-top: 20px; 
         }
 
         .document-type-checkout p{
@@ -1893,6 +1904,16 @@
     
         }
         
+        
+        
+        
+        
+    
+
+
+
+            
+            
         
         
         
@@ -2532,9 +2553,11 @@
             justify-content: flex-start;
         }
         
-        .field.choice {
+         .document-type-checkout-choices.field.choice {
             display: flex;
-            align-items: center; /* Alinea el radio button y el texto en el mismo nivel */
+            align-items: center;
+            margin-top: 20px; /* Alinea el radio button y el texto en el mismo nivel */
+            
         }
 
         .document-type-checkout-choices .label {

@@ -126,7 +126,12 @@ class LayoutProcessor
             
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-            ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['config']['sortOrder'] = 35;
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['config']['sortOrder'] = 35;
+
+        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['validation'] = [
+            'required-entry' => true // Establece el campo como obligatorio
+        ];
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio'] = [
