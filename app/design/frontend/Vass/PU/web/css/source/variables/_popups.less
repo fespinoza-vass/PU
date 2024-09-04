@@ -1,0 +1,83 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Popup variables
+//  _____________________________________________
+
+@popup__width: 100%;
+@popup__max-width: 690px;
+@popup__height: auto;
+@popup__max-height: 90%;
+@popup__padding: 32px;
+@popup__background: @primary-white;
+@popup__border-color: @secondary-white;
+@popup__border: 1px solid @popup__border-color;
+@popup__border-radius: 8px;
+@popup__shadow: 0 20px 24px -4px @color-shadow;
+@popup__fade: opacity .3s linear;
+@popup__z-index: 1001;
+
+@popup__position: fixed;
+@popup__position-top: 50%;
+@popup__position-right: 0;
+@popup__position-bottom: 0;
+@popup__position-left: 50%;
+
+@popup__margin-top: false;
+@popup__margin-right: false;
+@popup__margin-bottom: false;
+@popup__margin-left: false;
+
+@popup-content__height: auto;
+@popup-content__margin: false;
+@popup-header__margin: 0 0 25px;
+@popup-footer__margin: false;
+
+@popup-title-headings: true; // [true|false]
+@popup-title-headings__level: h4; // [h1|h2|h3|h4|h5|h6]
+
+@popup-button-close__icon: true; // [true|false]
+@popup-button-close__reset: true; // [true|false]
+@popup-button-close__position: absolute;
+@popup-button-close__position-top: @indent__s;
+@popup-button-close__position-right: @indent__s;
+@popup-button-close__position-bottom: false;
+@popup-button-close__position-left: false;
+
+//  Actions toolbar variables
+@popup-actions-toolbar: false; // [true|false]
+@popup-actions-toolbar__margin: @actions-toolbar__margin;
+@popup-actions-toolbar__padding: @actions-toolbar__padding;
+
+@popup-actions-toolbar-actions__position: @actions-toolbar-actions__position;
+@popup-actions-toolbar-actions__reverse: @actions-toolbar-actions__reverse;
+@popup-actions-toolbar-actions__margin: @actions-toolbar-actions__margin;
+@popup-actions-toolbar-actions-primary__margin: @actions-toolbar-actions-primary__margin;
+@popup-actions-toolbar-actions-secondary__margin: @actions-toolbar-actions-secondary__margin;
+
+@popup-actions-toolbar-actions-links__margin-top: @actions-toolbar-actions-links__margin-top;
+@popup-actions-toolbar-actions-links-primary__margin-top: @actions-toolbar-actions-links-primary__margin-top;
+@popup-actions-toolbar-actions-links-secondary__margin-top: @actions-toolbar-actions-links-secondary__margin-top;
+
+//  Popup Icons variables
+@popup-icon-font: @icons__font-name;
+@popup-icon-font__content: @icon-close;
+@popup-icon-font__size: 12px;
+@popup-icon-font__line-height: 12px;
+@popup-icon-font__color: @button-icon__color;
+@popup-icon-font__color-hover: @button-icon__hover__font-color;
+@popup-icon-font__color-active: @button-icon__active__font-color;
+@popup-icon-font__margin: @button-icon__margin;
+@popup-icon-font__vertical-align: @button-icon__vertical-align;
+@popup-icon-font__position: @button-icon__position;
+@popup-icon-font__text-hide: true;
+
+//  Window overlay variables
+@overlay__background: @color-black;
+@overlay__opacity: .5;
+@overlay__opacity-old: 50;
+@overlay__fade: opacity .15s linear;
+@overlay__z-index: 1000;
