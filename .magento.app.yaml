@@ -28,6 +28,7 @@ runtime:
 relationships:
     database: "mysql:mysql"
     redis: "redis:redis"
+    opensearch: "opensearch:opensearch"
     rabbitmq: "rabbitmq:rabbitmq"
 
 # The configuration of app when it is exposed to the web.
