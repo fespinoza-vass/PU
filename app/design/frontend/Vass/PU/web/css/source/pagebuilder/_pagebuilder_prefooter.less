@@ -11,10 +11,12 @@
 
     .prefooter-section {
         display: flex;
+        padding: 56px 100px;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         gap: 20px;
+        background-color: @primary-black;
     }
 
     .prefooter-text {
@@ -22,51 +24,30 @@
         align-items: center;
         gap: 15px;
         min-height: 78px;
+        min-width: 302px;
 
         p {
-            max-width: 250px;
-            color: @primary-white;
+            font-family: @font-family-name__base;
             .lib-font-size(16);
+            color: @primary-white;
             line-height: @line-height__xl;
-            margin: 0 !important;
         }
 
-        &:before {
-            background: @primary-white;
-            height: 65px;
-            width: 65px;
-            min-width: 65px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            .lib-font-size(26);
-        }
-    }
-
-    .icon-gift,
-    .icon-truck-window,
-    .icon-discount-bordered,
-    .icon-mark-refresh {
-        &:before {
+        &.icon {
             font-family: @icon-font;
+            .lib-font-size(32);
+            padding-right: 15px;
+
+            &:before {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 65px;
+                width: 65px;
+                border-radius: 50%;
+                background: @primary-white;
+            }
         }
-    }
-
-    .icon-gift {
-        content: @icon-gift;
-    }
-
-    .icon-truck-window {
-        content: @icon-truck-window;
-    }
-
-    .icon-discount-bordered {
-        content: @icon-discount-bordered;
-    }
-
-    .icon-mark-refresh {
-        content: @icon-mark-refresh;
     }
 }
 
@@ -91,21 +72,19 @@
     .prefooter-text {
         flex-direction: column;
         text-align: center;
+        min-width: 100px;
 
         p {
-            max-width: 160px;
+            width: auto;
         }
-    }
+        &.icon {
+            .lib-font-size(42);
+            padding: 0;
 
-    .icon-gift,
-    .icon-truck-window,
-    .icon-discount-bordered,
-    .icon-mark-refresh {
-        &:before {
-            height: 86px;
-            width: 86px;
-            min-width: 86px;
-            font-size: 42px;
+            &:before {
+                height: 86px;
+                width: 86px;
+            }
         }
     }
 
@@ -117,29 +96,9 @@
 
         .prefooter-column {
             flex: 1 1 45%;
-
         }
     }
     .page-wrapper > .page-bottom {
         padding: 0;
-    }
-}
-
-//
-// Desktop
-// _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-
-    .prefooter-section {
-        padding: 56px 160px;
-    }
-
-    .page-products {
-        .prefooter-section {
-            .row-full-width-inner {
-                padding: 0 160px;
-            }
-        }
     }
 }
