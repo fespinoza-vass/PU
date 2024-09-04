@@ -51,7 +51,6 @@
         position: static;
         .lib-css(transform, translateX(100%));
         .lib-css(transition, transform .3s ease-in-out);
-        width: auto;
     }
 }
 
@@ -175,6 +174,14 @@
         .modal-footer {
             padding-left: @modal-popup__padding;
             padding-right: @modal-popup__padding;
+
+            .action {
+                &.primary,
+                &.secondary {
+                    height: auto;
+                    padding: 9px 31px;
+                }
+            }
         }
 
         .modal-header,
@@ -211,7 +218,6 @@
             .lib-modal-slide();
 
             .modal-inner-wrap {
-                margin: 0;
                 max-height: 90vh; /** iOS webkit fix height problem when added long content **/
             }
         }

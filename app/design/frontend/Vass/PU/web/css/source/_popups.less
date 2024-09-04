@@ -12,7 +12,7 @@
             border-radius: @popup__border-radius;
             max-height: @popup__max-height;
             .lib-css(box-shadow, @popup__shadow);
-            .lib-css(max-width, @popup__max-width) !important; // Confirm Popups have a default max-width
+            .lib-css(max-width, @popup__max-width);
 
             .modal-footer,
             .modal-header,
@@ -40,8 +40,8 @@
         width: 100%;
 
         .modal-inner-wrap {
-            margin: 5rem auto !important; //Override to center popup
             max-width: @popup__max-width;
+            width: ~"calc(100% - (@{layout-indent__width} * 2))";
         }
 
         .modal-footer {
