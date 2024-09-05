@@ -3,4 +3,5 @@
     <type name="Amasty\CheckoutStyleSwitcher\Block\Onepage\BillingAddressRelocateProcessor">
         <plugin name="add_custom_field_checkout_form" type="Vass\Checkout\Plugin\Block\Checkout\LayoutProcessor" sortOrder="200"/> 
     </type>
+    <preference for="Magento\Checkout\Block\Onepage\Success" type="Vass\Checkout\Block\Onepage\Success" />
 </config>

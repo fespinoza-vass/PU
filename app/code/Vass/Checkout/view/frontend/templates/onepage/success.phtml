@@ -9,13 +9,15 @@
  * @var $escaper Magento\Framework\Escaper
  */
 ?>
-<?php $_order = $block->getOrder() ?>
-<?php $shippingMehod = $_order->getShippingAddress() ?>
+<?php
+$orderObject =  $block->getOrderInfo();
+if ($orderObject) {
+?>
  
 <div class="checkout-success">
     <div class="success-container">
         <h1 class="success-title">¡Gracias por tu compra!</h1>
-        <div class="success-order-number">Tu ID de pedido es: <?= $_order->getIncrementId(); ?>
+        <div class="success-order-number">Tu ID de pedido es: <?= $orderObject->getIncrementId() ?> </div>
  </div>
 
         <!-- Contenido para desktop -->
@@ -24,30 +26,30 @@
                 <h3 class="success-order-details__title">Detalle de Compra</h3>
                 
                 <div class="success-order-summary">
-                    <div class="success-order-summary__item success-order-summary__date">Fecha de pedido: <?= $_order->getCreatedAt(2); ?></div>
+                    <div class="success-order-summary__item success-order-summary__date">Fecha de pedido:  <?= $block->getCreatedOrder($orderObject) ?>  </div>
                 </div>
                 
                 <div class="success-address-details">
                     <div class="success-address-details__row">
                         <div class="success-address-details__col">
                             <strong>Destinatario</strong><br>
-                            <span>Nombre: <span>Christopher</span></span><br>
-                            <span>Apellidos: <span>Pérez Osadón</span></span><br>
-                            <span>DNI: <span>1213415</span></span> <br>
-                            <span>Correo: <span>juan.perez@gmail.com</span></span>
+                            <span>Nombre: <span> <?= $orderObject->getCustomerName() ?> </span></span><br>
+                            <span>Apellidos: <span> <?= $orderObject->getCustomerLastName() ?> </span></span><br>
+                            <span>DNI: <span><?= $orderObject->getNumeroIDentificacionPicker() ?></span></span> <br>
+                            <span>Correo: <span><?= $orderObject->getCustomerEmail() ?></span></span>
                         </div>
                         <div class="success-address-details__col">
                             <strong>Mi dirección</strong><br>
-                            <span>Departamento: <span>Lima</span></span><br>
-                            <span>Provincia:  <span>Lima</span></span><br>
-                            <span>Distrito: <span>Pueblo Libre</span></span><br>
-                            <span>Dirección: <span>Calle José Pérez, Av.Brasil 1540</span></span><br>
-                            <span>Referencia: <span>ninguna</span></span><br>
-                            <span>Número de teléfono: <span>01 237 13 35</span></span>
+                            <span>Departamento: <span><?= $orderObject->getShippingAddress()->getRegion() ?></span></span><br>
+                            <span>Provincia:  <span><?= $orderObject->getShippingAddress()->getCity() ?></span></span><br>
+                            <span>Distrito: <span><?= $orderObject->getShippingAddress()->getColony() ?></span></span><br>
+                            <span>Dirección: <span><?= $orderObject->getShippingAddress()->getStreet()[0] ?></span></span><br>
+                            <span>Referencia: <span><?= $orderObject->getShippingAddress()->getReferenciaEnvio() ?></span></span><br>
+                            <span>Número de teléfono: <span><?= $orderObject->getShippingAddress()->getTelephone() ?></span></span>
                         </div>
                         <div class="success-address-details__col">
                             <strong>Forma de pago</strong><br>
-                            <span><span>Tarjeta Visa</span></span>
+                            <span><?= $block->getChildHtml('order.izipay.payment') ?></span>
                         </div>
                     </div>
                 </div>
@@ -60,48 +62,30 @@
                         <div class="success-order-grid__header">Precio</div>
                         <div class="success-order-grid__header">Cantidad</div>
                         <div class="success-order-grid__header">Subtotal</div>
-                
-                        <!-- Filas de productos -->
-                        <div class="success-order-grid__item">Set Be Delicious Eau de Parfum 100 ml</div>
-                        <div class="success-order-grid__item">24-MB01</div>
-                        <div class="success-order-grid__item">S/254.25</div>
-                        <div class="success-order-grid__item">1</div>
-                        <div class="success-order-grid__item">S/254.25</div>
-                
-                        <div class="success-order-grid__item">Desmaquillante de Ojos y Labios 125 ml</div>
-                        <div class="success-order-grid__item">2-M3R1A</div>
-                        <div class="success-order-grid__item">S/189.00</div>
-                        <div class="success-order-grid__item">1</div>
-                        <div class="success-order-grid__item">S/189.00</div>
-                
-                        <div class="success-order-grid__item">Dior Le Baume Edición Limitada - Bálsamo Multiuso Revitalizante 50 ml</div>
-                        <div class="success-order-grid__item">30-VFE23</div>
-                        <div class="success-order-grid__item">S/265.00</div>
-                        <div class="success-order-grid__item">1</div>
-                        <div class="success-order-grid__item">S/265.00</div>
-                
-                        <div class="success-order-grid__item">Set Rénérgie Multi Lift Yeux 15 ml</div>
-                        <div class="success-order-grid__item">23-V3RFV</div>
-                        <div class="success-order-grid__item">S/497.00</div>
-                        <div class="success-order-grid__item">2</div>
-                        <div class="success-order-grid__item">S/994.00</div>
+
+                        <?php foreach ($orderObject->getAllVisibleItems() as $item): ?>
+                        <div class="success-order-grid__item"><?= $item->getName() ?></div>
+                        <div class="success-order-grid__item"><?= $item->getSku() ?></div>
+                        <div class="success-order-grid__item"><span>S/</span><?= $block->escapeHtml(number_format($item->getPriceInclTax(),2)) ?></div>
+                        <div class="success-order-grid__item"><?= number_format($item->getQtyOrdered(),0) ?></div>
+                        <div class="success-order-grid__item"><span>S/</span><?= $block->escapeHtml(number_format($item->getRowTotalInclTax(),2)) ?></div>
+                        <?php endforeach; ?>
                     </div>
                 
-                    <!-- Resumen de totales -->
                     <div class="success-order-overview">
-                        <div class="success-order-overview__row">
-                            <span>Subtotal</span>
-                            <span>S/1,702.25</span>
-                        </div>
-                        <div class="success-order-overview__row">
-                            <span>Costo de envío</span>
-                            <span>S/16.06</span>
-                        </div>
-                        <div class="success-order-overview__row success-order-overview__total">
-                            <strong>Total</strong>
-                            <strong>S/1,718.31</strong>
-                        </div>
+                    <div class="success-order-overview__row">
+                        <span>Subtotal</span>
+                        <span>S/<?= $block->escapeHtml(number_format($orderObject->getSubtotal(),2)) ?></span>
                     </div>
+                    <div class="success-order-overview__row">
+                        <span>Costo de envío</span>
+                        <span>S/<?= $block->escapeHtml(number_format($orderObject->getShippingAmount(),2)) ?></span>
+                    </div>
+                    <div class="success-order-overview__row success-order-overview__total">
+                        <strong>Total</strong>
+                        <strong>S/<?= $block->escapeHtml(number_format($orderObject->getGrandTotal(),2)) ?></strong>
+                    </div>
+                </div>
                 </div>
                 <!-- Mensaje de confirmación -->
                 <div class="success-message">
@@ -202,3 +186,6 @@
         });
     });
 </script>
+<?php 
+}
+?>

@@ -214,7 +214,7 @@ define(
                         var izipay_document_number = $("[name='izipay_document_number']").val();
                         var izipay_company_name = $("[name='izipay_razon_social']").val();
 
-                        var billingData = quote.billingAddress._latestValue;
+                        var billingData = quote.shippingAddress._latestValue;
 
                         var alternative_payment_method_selected = $('[name="izipay-alternative-payment"]:checked').val();
                         var has_izipay_alternative_methods = $('[name="has-izipay-alternative-methods').val();
@@ -229,6 +229,18 @@ define(
                         }*/
                         var postal_code = "00051";
                         var dateTimeIzi = Math.floor(Date.now()) * 1000;
+
+                        var customAttributes = billingData.customAttributes;
+
+                        var colonyValue = null;
+
+                        for (var i = 0; i < customAttributes.length; i++) {
+                            if (customAttributes[i].attribute_code === 'colony') {
+                                colonyValue = customAttributes[i].value;
+                                break;
+                            }
+                        }
+
                         const iziConfig = {
                             publicKey: izipay_public_key,
                             config: {
@@ -254,7 +266,7 @@ define(
                                     phoneNumber: billingData.telephone,
                                     street: street_full.substring(0,40),
                                     city: billingData.city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-                                    state: billingData.region.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+                                    state: colonyValue.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
                                     country: billingData.countryId,
                                     postalCode: postal_code,
                                     document: izipay_document_number,
