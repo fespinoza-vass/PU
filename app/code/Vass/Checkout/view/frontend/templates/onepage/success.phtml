@@ -35,7 +35,7 @@ if ($orderObject) {
                             <strong>Destinatario</strong><br>
                             <span>Nombre: <span> <?= $orderObject->getCustomerName() ?> </span></span><br>
                             <span>Apellidos: <span> <?= $orderObject->getCustomerLastName() ?> </span></span><br>
-                            <span>DNI: <span><?= $orderObject->getNumeroIDentificacionPicker() ?></span></span> <br>
+                            <span><?= $orderObject->getIdentificacionPicker() ?> <span><?= $orderObject->getNumeroIdentificacionPicker() ?></span></span> <br>
                             <span>Correo: <span><?= $orderObject->getCustomerEmail() ?></span></span>
                         </div>
                         <div class="success-address-details__col">
@@ -96,50 +96,48 @@ if ($orderObject) {
         <!-- Contenido para mobile -->
         <div class="success-summary__dates">
             <div class="success-summary__date-item success-summary__date-item--success">
-                <span class="success-summary__date-label">Fecha de pedido:</span>
-                <span class="success-summary__date-value">30 de mayo del 2024</span>
-            </div>
-            <div class="success-summary__date-item success-summary__date-item--success">
-                <span class="success-summary__date-label">Fecha de entrega:</span>
-                <span class="success-summary__date-value">25 de junio del 2024</span>
+                <span class="success-summary__date-label">Fecha de pedido: </span>
+                <span class="success-summary__date-value"><?= $block->getCreatedOrder($orderObject) ?> </span>
             </div>
         </div>
         <div class="success-summary__section">
             <button class="success-summary__collapsible collapsible-open" type="button">Destinatario</button>
             <div class="success-summary__content">
-                <p class="success-summary__info"><span>Nombre:</span> Christopher</p>
-                <p class="success-summary__info"><span>Apellidos:</span> Pérez Osadón</p>
-                <p class="success-summary__info"><span>DNI:</span> 1213415</p>
-                <p class="success-summary__info"><span>Correo:</span> juan.perez@gmail.com</p>
+                <p class="success-summary__info"><span>Nombre:</span> <?= $orderObject->getCustomerName() ?></p>
+                <p class="success-summary__info"><span>Apellidos:</span> <?= $orderObject->getCustomerLastName() ?></p>
+                <p class="success-summary__info"><span>DNI:</span> <?= $orderObject->getNumeroIDentificacionPicker() ?></p>
+                <p class="success-summary__info"><span>Correo:</span> <?= $orderObject->getCustomerEmail() ?></p>
             </div>
 
             <button class="success-summary__collapsible collapsible-open" type="button">Mi dirección</button>
             <div class="success-summary__content">
-                <p class="success-summary__info"><span>Departamento:</span> Lima</p>
-                <p class="success-summary__info"><span>Provincia:</span> Lima</p>
-                <p class="success-summary__info"><span>Distrito:</span> Pueblo Libre</p>
-                <p class="success-summary__info"><span>Dirección:</span> Calle José Pérez, Av. Brasil 1540</p>
-                <p class="success-summary__info"><span>Referencia:</span> ninguna</p>
-                <p class="success-summary__info"><span>Número de teléfono:</span> 01 237 13 35</p>
+                <p class="success-summary__info"><span>Departamento:</span> <?= $orderObject->getShippingAddress()->getRegion() ?></p>
+                <p class="success-summary__info"><span>Provincia:</span> <?= $orderObject->getShippingAddress()->getCity() ?></p>
+                <p class="success-summary__info"><span>Distrito:</span> <?= $orderObject->getShippingAddress()->getColony() ?></p>
+                <p class="success-summary__info"><span>Dirección:</span> <?= $orderObject->getShippingAddress()->getStreet()[0] ?></p>
+                <p class="success-summary__info"><span>Referencia:</span> <?= $orderObject->getShippingAddress()->getReferenciaEnvio() ?></p>
+                <p class="success-summary__info"><span>Número de teléfono:</span> <?= $orderObject->getShippingAddress()->getTelephone() ?></p>
             </div>
 
             <button class="success-summary__collapsible collapsible-open" type="button">Forma de pago</button>
             <div class="success-summary__content">
-                <p class="success-summary__info">Tarjeta Visa</p>
+                <p class="success-summary__info"><?= $block->getChildHtml('order.izipay.payment') ?></p>
             </div>
 
             <button class="success-summary__collapsible collapsible-open" type="button">Detalle de la compra</button>
             <div class="success-summary__content">
-                <p class="success-summary__info"><span>Nombre de producto:</span> Set Be Delicious Eau de Parfum 100 ml</p>
-                <p class="success-summary__info"><span>SKU:</span> 24-MB01</p>
-                <p class="success-summary__info"><span>Precio:</span> S/254.25</p>
-                <p class="success-summary__info"><span>Cantidad:</span> 1</p>
-                <p class="success-summary__info"><span>Subtotal:</span> S/254.25</p>
+            <?php foreach ($orderObject->getAllVisibleItems() as $item): ?>
+                <p class="success-summary__info"><span>Nombre de producto:</span> <?= $item->getName() ?></p>
+                <p class="success-summary__info"><span>SKU:</span> <?= $item->getSku() ?></p>
+                <p class="success-summary__info"><span>Precio:</span> S/<?= $block->escapeHtml(number_format($item->getPriceInclTax(),2)) ?></p>
+                <p class="success-summary__info"><span>Cantidad:</span> <?= number_format($item->getQtyOrdered(),0) ?></p>
+                <p class="success-summary__info"><span>Subtotal:</span> S/<?= $block->escapeHtml(number_format($item->getRowTotalInclTax(),2)) ?></p>
                 <div class="success-summary__totals">
-                    <p class="success-summary__total"><span>Subtotal:</span> S/254.25</p>
-                    <p class="success-summary__total"><span>Costo de envío:</span> S/16.06</p>
-                    <p class="success-summary__total success-summary__total--bold"><strong>Total:</strong> S/1702.25</p>
+                    <p class="success-summary__total"><span>Subtotal:</span> S/<?= $block->escapeHtml(number_format($orderObject->getSubtotal(),2)) ?></p>
+                    <p class="success-summary__total"><span>Costo de envío:</span> S/<?= $block->escapeHtml(number_format($orderObject->getShippingAmount(),2)) ?></p>
+                    <p class="success-summary__total success-summary__total--bold"><strong>Total:</strong> S/<?= $block->escapeHtml(number_format($orderObject->getGrandTotal(),2)) ?></p>
                 </div>
+            <?php endforeach; ?>
             </div>
         </div>
     </div>
