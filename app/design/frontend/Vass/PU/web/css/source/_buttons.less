@@ -1,0 +1,57 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    button,
+    .action-primary,
+    .action-secondary,
+    a.action.primary,
+    a.action.secondary {
+        .lib-css(border-radius, @button__border-radius);
+        .lib-css(height, @button__height);
+        .lib-css(text-transform, @button__text-transform);
+        text-align: center;
+        .lib-font-size(@font-size__m);
+    }
+
+    .action.primary,
+    .action-primary {
+        .lib-button-primary();
+        text-transform: @button__text-transform;
+
+        &:disabled {
+            background: @button-primary__disabled__background;
+            border: @button-primary__disabled__border;
+            color: @button-primary__disabled__color;
+        }
+    }
+
+    .action.secondary,
+    .action-secondary {
+        .lib-button();
+        text-transform: @button__text-transform;
+
+        &:disabled {
+            background: @button__disabled__background;
+            border: @button__disabled__border;
+            color: @button__disabled__color;
+        }
+    }
+
+    button {
+        .lib-css(line-height, @button__line-height);
+    }
+
+    a.action.primary,
+    a.action.secondary {
+        .lib-link-as-button();
+        text-transform: @button__text-transform;
+    }
+}
