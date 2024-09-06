@@ -1,8 +1,37 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Magento_Customer/js/customer-data.js"/>
+    </head>
     <body>
         <referenceContainer name="header.panel" remove="true"/>
+        <referenceContainer name="header" remove="true" />
+        <referenceBlock name="register-link" remove="true" />
+        <referenceBlock name='catalog.compare.link' remove="true"/>
+        <referenceBlock name='amsearch.full_with.trigger' remove="true"/>
 
-        <move element="top.links" destination="header-wrapper"/>
+        <referenceContainer name="header-wrapper">
+            <container name="header-logo-search" as="header-logo-search" htmlTag="div" htmlClass="header-logo-search" before="-"/>
+            <container name="header-links" as="header-wrapper" htmlTag="div" htmlClass="header links">
+                <container name="header-links-left" as="header-links-left" htmlTag="div" htmlClass="header-links-left" before="-">
+                    <block name="stores" template="Magento_Theme::html/stores.phtml" />
+                </container>
+                <container name="header-links-right" as="header-links-right" htmlTag="div" htmlClass="header-links-right" after="header-links-right">
+                    <block class="Magento\Wishlist\Block\Link" name="wishlist" template="Magento_Wishlist::link.phtml" before="-"/>
+                </container>
+            </container>
+        </referenceContainer>
+
+        <move element="amasty.menu.toggle" destination="header-logo-search" before="-"/>
+        <move element="ammenu.logo" destination="header-logo-search" after="amasty.menu.toggle"/>
+        <move element="minicart" destination="header-links-right" after="wishlist"/>
+        <move element="authorization-link" destination="header-links-right" after="-" />
     </body>
 </page>
