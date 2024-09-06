@@ -10,6 +10,8 @@
 & when (@media-common = true) {
 
     button,
+    .action-primary,
+    .action-secondary,
     a.action.primary,
     a.action.secondary {
         .lib-css(border-radius, @button__border-radius);
@@ -19,7 +21,8 @@
         .lib-font-size(@font-size__m);
     }
 
-    .action.primary {
+    .action.primary,
+    .action-primary {
         .lib-button-primary();
         text-transform: @button__text-transform;
 
@@ -30,7 +33,8 @@
         }
     }
 
-    .action.secondary {
+    .action.secondary,
+    .action-secondary {
         .lib-button();
         text-transform: @button__text-transform;
 
