@@ -1,0 +1,98 @@
+/**
+* @copyright Copyright (c) 2024 VASS
+* @author VASS Team
+*/
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .message.info {
+        .lib-message(info);
+        .lib-typography(
+            @_color: @primary-white;
+        );
+    }
+
+    .message.error {
+        .lib-message(error);
+    }
+
+    .message.warning {
+        .lib-message(warning);
+    }
+
+    .message.notice {
+        .lib-message(notice);
+    }
+
+    .message.success {
+        .lib-message(success);
+    }
+
+    .message {
+
+        &-success.success,
+        &-info.info,
+        &-error.error,
+        &-warning.warning,
+        &-notice.notice {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .message > .closeAlert {
+        font-size: @message-icon__font-size;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .message.info {
+        .lib-css(padding, @message__padding-desktop);
+        .lib-typography(
+            @_color: @primary-white;
+            @_font-size: @message__font-size-desktop;
+        );
+    }
+
+    .message.error {
+        .lib-css(padding, @message__padding-desktop);
+        .lib-typography(
+            @_color: @primary-black;
+            @_font-size: @message__font-size-desktop;
+        );
+    }
+
+    .message.warning {
+        .lib-css(padding, @message__padding-desktop);
+        .lib-typography(
+            @_color: @primary-black;
+            @_font-size: @message__font-size-desktop;
+        );
+    }
+
+    .message.notice {
+        .lib-css(padding, @message__padding-desktop);
+        .lib-typography(
+            @_color: @primary-black;
+            @_font-size: @message__font-size-desktop;
+        );
+    }
+
+    .message.success {
+        .lib-css(padding, @message__padding-desktop);
+        .lib-typography(
+            @_color: @primary-black;
+            @_font-size: @message__font-size-desktop;
+        );
+    }
+}
+
