@@ -1,0 +1,106 @@
+//
+//  Toggle Component
+//  ______________________________________________
+
+//
+//  Helpers
+//  ----------------------------------------------
+
+._ammenu-toggle-buttons {
+    &:hover {
+        filter: brightness(85%);
+    }
+
+    &:active {
+        filter: brightness(50%);
+    }
+}
+
+//
+//  Variable
+//  ----------------------------------------------
+
+@ammenu-toggle-button__size: 40px;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ammenu-toggle {
+        .ammenu-flex(center, center);
+        .ammenu-reset(button);
+
+        cursor: pointer;
+        height: @ammenu-toggle-button__size / 2;
+        min-width: @ammenu-toggle-button__size;
+        outline: none;
+        transition: .1s;
+        width: @ammenu-toggle-button__size;
+        z-index: 1;
+    }
+
+    .ammenu-button.-hamburger {
+        & {
+            .ammenu-flex(none, center);
+            ._ammenu-toggle-buttons;
+
+            background: transparent;
+            border-bottom: 1px solid;
+            border-color: inherit;
+            border-left: none;
+            border-radius: 0;
+            border-right: none;
+            border-top: 1px solid;
+            cursor: pointer;
+            display: inline-flex;
+            height: 17px;
+            margin: @ammenu__indent__xl @ammenu__indent__xl @ammenu__indent__xl 0;
+            padding: 0;
+            position: relative;
+            transition: none;
+            width: 25px;
+        }
+
+        &:not(.-hamburger) {
+            display: none;
+        }
+
+        &:before {
+            border-top: 1px solid;
+            content: '';
+            width: 100%;
+        }
+    }
+
+    .ammenu-button.-close {
+        & {
+            .ammenu-reset(button);
+            .ammenu-flex(center, center);
+            ._ammenu-toggle-buttons;
+
+            color: #000;
+            cursor: pointer;
+            height: @ammenu__indent__xl;
+            position: relative;
+            width: @ammenu__indent__xl;
+        }
+
+        &:after,
+        &:before {
+            background-color: currentColor;
+            content: '';
+            height: 1px;
+            position: absolute;
+            width: 18px;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+}
