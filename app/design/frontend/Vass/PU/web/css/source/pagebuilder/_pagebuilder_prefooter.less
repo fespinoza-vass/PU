@@ -1,0 +1,103 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+// Common
+// _____________________________________________
+
+& when (@media-common = true) {
+
+    .prefooter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: @indent__l @indent__base;
+        background-color: @primary-black;
+
+        &__columns {
+            > .pagebuilder-column-line {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 9px;
+            }
+
+            .prefooter__column {
+                max-width: ~"calc(50% - 18px)";
+            }
+        }
+
+        &__text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: @indent__base;
+
+            p {
+                font-family: @font-family-name__base;
+                .lib-font-size(@font-size__m);
+                color: @primary-white;
+                line-height: 22px;
+                padding: 0 @indent__s;
+            }
+
+            &.icon {
+                font-family: @icon-font;
+                .lib-font-size(42);
+
+                &:before {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 86px;
+                    width: 86px;
+                    border-radius: 50%;
+                    background: @primary-white;
+                }
+            }
+        }
+    }
+}
+
+//
+// Desktop
+// _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    .prefooter {
+        padding: 48px 80px;
+
+        &__columns {
+            > .pagebuilder-column-line {
+                flex-wrap: nowrap;
+                gap: 0;
+                column-gap: @indent__m;
+            }
+        }
+
+        &__text {
+            flex-direction: row;
+            text-align: left;
+            gap: 0;
+
+            p {
+                max-width: 215px;
+                padding: 0 0 0 20px;
+            }
+
+            &.icon {
+                &:before {
+                    font-size: 32px;
+                    min-width: 65px;
+                    width: 65px;
+                    height: 65px;
+                }
+            }
+        }
+    }
+}
