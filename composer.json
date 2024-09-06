@@ -23,7 +23,7 @@
         }
     },
     "require": {
-        "amasty/base": "^1.16",
+        "amasty/base": "^1.14.2",
         "amasty/feed": "^2.6",
         "amasty/label": "^2.1",
         "amasty/mega-menu": "^2.4.2",
@@ -33,8 +33,6 @@
         "amasty/module-elastic-search-graphql": "^1.0",
         "amasty/module-magento-custom-form": "^1.17",
         "amasty/module-mega-menu-package-pro": "^2.4.2",
-        "amasty/module-one-step-checkout-core": "^1.3",
-        "amasty/module-one-step-checkout-pro-package": "^2.5",
         "amasty/module-promo-banners": "^1.1",
         "amasty/module-promo-countdown": "^1.1",
         "amasty/module-shipping-bar": "^1.1",
@@ -49,14 +47,9 @@
         "amasty/sorting": "^2.10",
         "bacon/bacon-qr-code": "^2.0",
         "laminas/laminas-log": "^2.15",
-        "magento/catalog-service": "^3.1",
         "magento/composer-root-update-plugin": "~2.0",
-        "magento/live-search": "^4.2",
         "magento/magento-cloud-metapackage": ">=2.4.5 <2.4.6",
-        "magento/module-data-services-graphql": "^1.2",
-        "magento/module-page-builder-product-recommendations": "^2.0",
-        "magento/module-visual-product-recommendations": "^2.0",
-        "magento/product-recommendations": "^6.0",
+        "magento/product-recommendations": "^3.3",
         "ocramius/proxy-manager": "^2.8",
         "phpoffice/phpspreadsheet": "^1.27",
         "wolfsellers/module-enabledisabletfa": "^1.0"
