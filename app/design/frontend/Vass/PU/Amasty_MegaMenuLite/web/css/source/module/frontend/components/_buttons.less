@@ -45,21 +45,15 @@
             .ammenu-flex(none, center);
             ._ammenu-toggle-buttons;
 
+            border: none;
             background: transparent;
-            border-bottom: 1px solid;
-            border-color: inherit;
-            border-left: none;
-            border-radius: 0;
-            border-right: none;
-            border-top: 1px solid;
             cursor: pointer;
             display: inline-flex;
-            height: 17px;
-            margin: @ammenu__indent__xl @ammenu__indent__xl @ammenu__indent__xl 0;
+            height: 24px;
             padding: 0;
             position: relative;
             transition: none;
-            width: 25px;
+            width: 24px;
         }
 
         &:not(.-hamburger) {
@@ -67,9 +61,10 @@
         }
 
         &:before {
-            border-top: 1px solid;
-            content: '';
-            width: 100%;
+            content: @icon-menu;
+            font-family: @icons__font-name;
+            font-size: 24px;
+            color: @primary-black;
         }
     }
 
@@ -89,7 +84,8 @@
         &:after,
         &:before {
             background-color: currentColor;
-            content: '';
+            content: @icon-menu;
+            font-family: @icons__font-name;
             height: 1px;
             position: absolute;
             width: 18px;

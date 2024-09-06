@@ -1,13 +1,11 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
 //
 //  Base Styles
 //  ______________________________________________
-
-//
-//  Variables
-//  ----------------------------------------------
-
-@ammenu__color__grey__head: #e5e5e5;
-@ammenu-icon__size: 20px;
 
 //
 //  Common
@@ -32,6 +30,12 @@
             }
 
             .ammenu-button.-hamburger {
+                &::before {
+                    content: @icon-menu;
+                    font-family: @icons__font-name;
+                    font-size: 24px;
+                    color: @primary-black;
+                }
                 margin-left: @ammenu__indent__xl;
             }
         }
@@ -125,12 +129,11 @@
                 background-repeat: no-repeat;
                 background-size: cover;
                 box-sizing: border-box;
-                height: @ammenu-icon__size;
-                -webkit-mask-size: cover;
-                mask-size: cover;
-                min-width: @ammenu-icon__size;
+                height: 24px;
+                .lib-css(mask-size, cover);
+                min-width: 24px;
                 position: relative;
-                width: @ammenu-icon__size;
+                width: 24px;
             }
 
             &.-toggle {
@@ -188,13 +191,12 @@
             .ammenu-flex(none, center);
             .ammenu-transition(.1);
 
-            margin-bottom: 10px;
             position: relative;
         }
 
         .ammenu-logo {
             display: inline-flex;
-            margin: 0 auto 0 0;
+            margin: 0;
             min-width: 110px;
         }
 
@@ -231,6 +233,10 @@
         right: 0;
         top: 120%;
         z-index: 9;
+    }
+
+    .ammenu-logo {
+        height: 15px;
     }
 }
 
