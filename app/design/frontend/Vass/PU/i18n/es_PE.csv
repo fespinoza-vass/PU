@@ -1,7 +1,7 @@
 "Enter your mail","Introduce tu email"
 "Subscribe","Suscribirme"
 "You should accept the privacy policy","Debe aceptar la Política de Privacidad"
-"I have read and accept the <a class=""alink"" href=""general-conditions"">General Purchase Conditions</a>, the <a class=""alink"" href=""privacy-policy"">Privacy Policy</a>, and the <a class=""alink"" href=""legal-notice"">Legal Notice</a>.","He leído y acepto las <a class=""alink"" href=""condiciones-generales-compra"">Condiciones Generales de Compra</a>, la <a class=""alink"" href=""politica-privacidad"">Política de Privacidad</a>, y el <a class=""alink"" href=""aviso-legal"">Aviso Legal</a>."
+"I have read and accept the <a class=""alink"" href=""%1"">General Purchase Conditions</a>, the <a class=""alink"" href=""privacy-policy"">Privacy Policy</a>, and the <a class=""alink"" href=""legal-notice"">Legal Notice</a>.","He leído y acepto las <a class=""alink"" href=""%1"">Condiciones Generales de Compra</a>, la <a class=""alink"" href=""politica-privacidad"">Política de Privacidad</a>, y el <a class=""alink"" href=""aviso-legal"">Aviso Legal</a>."
 "This email address is already subscribed.","Esta dirección de correo ya está suscrita"
 "Thank you for your subscription","Gracias por su suscripción"
 "Please enter a valid email address (Ex: johndoe@domain.com).","Por favor ingrese un email válido (Ej: juan@dominio.com)"
