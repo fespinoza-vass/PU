@@ -7,13 +7,14 @@
           novalidate
           action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
           method="post"
+          data-mage-init='{"validation": {"errorClass": "mage-error"}}'
           id="newsletter-validate-detail">
         <div class="newsletter__row">
             <div class="field newsletter">
                 <div class="control">
                     <label for="newsletter">
                         <input name="email" type="email" id="newsletter"
-                               placeholder="<?= $block->escapeHtmlAttr(__('Enter your mail')) ?>"
+                               placeholder="<?= $block->escapeHtml(__('Enter your mail')) ?>"
                                data-mage-init='{"mage/trim-input":{}}'
                                data-validate="{required:true, 'validate-email':true}"
                         />
@@ -23,22 +24,21 @@
             <div class="actions">
                 <button id="subscribe"
                         class="action subscribe newsletter secondary"
-                        title="<?= $block->escapeHtmlAttr(__('Subscribe')) ?>"
+                        title="<?= $block->escapeHtml(__('Subscribe')) ?>"
                         type="submit"
                         aria-label="Subscribe"
                         disabled>
-                    <span><?= $block->escapeHtmlAttr(__('Subscribe')) ?></span>
+                    <span><?= $block->escapeHtml(__('Subscribe')) ?></span>
                 </button>
             </div>
         </div>
 
         <div class="field choice tos">
-            <div id="tos-error" class="error-message"></div>
             <input name="tos" type="checkbox" id="tos" data-validate="{required:true}" data-msg-required="<?= __('You should accept the privacy policy') ?>" title="<?php echo __('I accept the legal terms and conditions'); ?>"/>
             <label class="label" for="tos">
-                <span>
-                    <?= __("I have read and accept the <a class='alink' href='%1'>General Purchase Conditions</a>, the <a class='alink' href='%2'>Privacy Policy</a>, and <a class='alink' href='%3'>Legal Notice.</a>", 'general-conditions', 'privacy-policy', 'legal-notice') ?>
-                </span>
+        <span>
+            <?= __('I have read and accept the <a class="alink" href="general-conditions">General Purchase Conditions</a>, the <a class="alink" href="privacy-policy">Privacy Policy</a>, and the <a class="alink" href="legal-notice">Legal Notice</a>.') ?>
+        </span>
             </label>
         </div>
     </form>
@@ -58,17 +58,6 @@
                     $('#subscribe').attr('disabled', 'disabled');
                 else
                     $('#subscribe').attr('disabled', false);
-            });
-
-            // Validate the tos checkbox and show error message if needed
-            $('form').on('submit', function(event) {
-                let tosChecked = $('#tos').is(':checked');
-                if (!tosChecked) {
-                    event.preventDefault();
-                    $('#tos-error').text('<?= __('You should accept the privacy policy') ?>').show();
-                } else {
-                    $('#tos-error').hide();
-                }
             });
         });
     });
