@@ -105,21 +105,27 @@
                     > li {
                         margin: 0;
                         align-items: center;
-                        font-size: @font-size__base;
+                        .lib-font-size(@font-size__base);
                         list-style: none;
                         display: flex;
                         a {
                             cursor: pointer;
                             display: flex;
                             align-items: center;
-                            font-size: 16px;
+                            .lib-font-size(@font-size__m);
                             text-decoration: none;
                             .icon {
-                                font-size: 24px;
+                                display: flex;
+                                align-items: center;
+                                gap: 8px;
+                                &::before {
+                                    .lib-font-size(@font-size__xl);
+                                }
                             }
                         }
 
                         .account-link {
+                            gap: 8px;
                             span {
                                 white-space: nowrap;
                                 overflow: hidden;
@@ -134,21 +140,6 @@
 
                         .stores-link {
                             gap: 6px;
-                            &::before {
-                                content: @icon-shop;
-                                font-family: @icons__font-name;
-                                font-size: 24px;
-                                margin: 0 8px 0 0;
-                            }
-                        }
-
-                        .account-link {
-                            gap: 8px;
-                            &::before {
-                                content: @icon-user;
-                                font-family: @icons__font-name;
-                                font-size: 24px;
-                            }
                         }
                     }
                 }
@@ -337,7 +328,7 @@
             }
 
             li {
-                font-size: @font-size__s;
+                .lib-font-size(@font-size__s);
                 margin: 0;
             }
 
@@ -501,9 +492,13 @@
                         display: none;
                     }
 
-                    > li {
-                        .account-link {
+                    > li a{
+                        .icon {
+                            margin-right: 6px;
                             gap: 4px;
+                        }
+                        .icon:has(span) {
+                            margin-right: 0;
                         }
                     }
                 }

@@ -19,6 +19,7 @@ if ($block->isLoggedIn()) {
     <?php if ($block->isLoggedIn()): ?>
         <a href="<?= $block->getUrl('customer/account') ?>"
             class="account-link">
+            <icon class="icon icon-user" />
             <span data-bind="text: customer().fullname">
             </span>
         </a>
@@ -26,6 +27,7 @@ if ($block->isLoggedIn()) {
         <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
             <?= /* @noEscape */ $dataPostParam ?>
             class="account-link">
+            <icon class="icon icon-user" />
             <?= $escaper->escapeHtml($block->getLabel()) ?>
         </a>
     <?php endif; ?>
