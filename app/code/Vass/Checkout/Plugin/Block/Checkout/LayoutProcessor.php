@@ -256,8 +256,10 @@ class LayoutProcessor
                     'required-entry' => true
                 ],
                 'options' => [[
-                    'label' => '',
-                    'value' => '',
+                    'label' => 'Seleccione una Provincia', 
+                    'value' => '', 
+                    'disabled' => true, 
+                    'selected' => true, 
                 ]], 
                 'filterBy' => [
                     'target' => 'shippingAddress.region_id',
@@ -287,9 +289,11 @@ class LayoutProcessor
                 'validation' => [
                     'required-entry' => true
                 ],
-                'options' =>[[
-                    'label' => '',
-                    'value' => '',
+                'options' => [[
+                    'label' => 'Seleccione un Distrito', 
+                    'value' => '', 
+                    'disabled' => true, 
+                    'selected' => true, 
                 ]],
                 'filterBy' => [
                     'target' => 'shippingAddress.custom_attributes.city',
