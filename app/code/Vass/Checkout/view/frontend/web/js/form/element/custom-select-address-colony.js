@@ -42,8 +42,8 @@ define([
                 data: {region_id: regionId, city: cityId },
                 success: function (data) {
                     console.log(data);
-                    this.colonies = JSON.parse(data);
-                    self.setOptions(this.colonies);
+                    self.colonies = JSON.parse(data);
+                    self.setOptions(self.colonies);
                 }
             });
         },
@@ -64,17 +64,6 @@ define([
             registry.get(this.parentName + '.' + 'postcode', function (postcodeField) {
                 postcodeField.value(zipcode);
             }.bind(this));
-
-            // if (address && address.regionId && address.countryId) {
-            //     rateRegistry.set(address.getKey(), null);
-            //     rateRegistry.set(address.getCacheKey(), null);
-            //     quote.shippingAddress(address);
-            //     rateService.updateRates(quote.shippingAddress());
-            //     console.log('Shipments update');
-            // }else{
-            //     console.log('no es posible actualizar shipments');
-            // }
-            
         }
     });
 });
