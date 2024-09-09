@@ -49,7 +49,7 @@
                 },
                 visible: inputValue && inputValue().length">
     </button>
-    <button class="amsearch-button -loupe -clear -icon -disabled"
+    <button class="amsearch-button -loupe -clear -icon"
             data-bind="
                 event: {
                     click: search
@@ -60,5 +60,6 @@
                 attr: {
                     title: $t('Search')
                 }">
+                <icon class="icon icon-search" />
     </button>
 </section>

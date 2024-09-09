@@ -5,6 +5,12 @@
 
 @import '_mixins.less';
 
+@search-message__color: #fafafa;
+@search-link__color__hover: #006bb4;
+@search-link__color__active: #004c80;
+@empty-search__color: #1f1b1b;
+@empty-search__color__background: #fbfcfe;
+
 & when (@media-common = true) {
     .amsearch-form-block {
         & {
@@ -40,7 +46,7 @@
     .amsearch-message-block {
         & {
             align-items: center;
-            background: #fafafa;
+            background: @search-message__color;
             display: flex;
             font-size: 18px;
             justify-content: center;
@@ -63,12 +69,12 @@
         }
 
         &:hover {
-            color: #006bb4;
+            color: @search-link__color__hover;
             text-decoration: underline;
         }
 
         &:active {
-            color: #004c80;
+            color: @search-link__color__hover;
         }
     }
 
@@ -98,8 +104,8 @@
 
     .amsearch-emptysearch-cms {
         & {
-            background: #fbfcfe;
-            color: #1f1b1b;
+            background: @empty-search__color__background;
+            color: @empty-search__color;
             padding: 30px;
         }
 
@@ -134,7 +140,7 @@
     }
 
     .amsearch-highlight {
-        color: var(--amsearch-color-highlight, @amsearch-product-sought__background);
+        color: @amsearch-product-sought__background;
         font-weight: 700;
     }
 }

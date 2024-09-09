@@ -84,6 +84,10 @@
             margin: 0 auto;
             gap: 60px;
 
+            .icon::before {
+                font-family: @icons__font-name;
+            }
+
             &::after, &::before {
                 display: none;
             }
@@ -175,6 +179,7 @@
                     );
                 }
             }
+
         }
     }
 
@@ -478,7 +483,7 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m + 1) {
     .header {
         &.content {
-            padding: 16px !important; // Override padding-left and padding-right in header
+            padding: 16px;
             margin-bottom: 70px;
             gap: 6px;
 

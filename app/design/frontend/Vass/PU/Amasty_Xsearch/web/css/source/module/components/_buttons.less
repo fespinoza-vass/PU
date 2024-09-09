@@ -24,7 +24,6 @@
             display: inline-block;
             transition: .3s;
         }
-
         &.-icon {
             &:hover,
             &:focus {
@@ -52,15 +51,6 @@
             background-image: @amsearch-icon__background__close;
             border: 0;
             padding: 16px;
-        }
-
-        &.-loupe {
-            &::before {
-                content: @icon-search;
-                font-family: @icons__font-name;
-                font-size: 16px;
-                color: @primary-white;
-            }
         }
 
         &.-wishlist,
@@ -154,6 +144,10 @@
             }
         }
     }
+
+    .icon-search {
+        .lib-font-size(18px);
+    }
 }
 
 //
@@ -166,5 +160,15 @@
         &.-close:hover {
             filter: brightness(0%);
         }
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .icon-search {
+        .lib-font-size(13px);
     }
 }
