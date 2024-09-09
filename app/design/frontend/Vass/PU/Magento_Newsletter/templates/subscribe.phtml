@@ -35,9 +35,13 @@
 
         <div class="field choice tos">
             <input name="tos" type="checkbox" id="tos" data-validate="{required:true}" data-msg-required="<?= __('You should accept the privacy policy') ?>" title="<?php echo __('I accept the legal terms and conditions'); ?>"/>
-            <label class="label" for="tos">
+            <label class="label label-text-wrapper" for="tos">
         <span>
-            <?= __('I have read and accept the <a class="alink" href="general-conditions">General Purchase Conditions</a>, the <a class="alink" href="privacy-policy">Privacy Policy</a>, and the <a class="alink" href="legal-notice">Legal Notice</a>.') ?>
+            <?= __('I have read and accept the <a class="alink" href="%1">General Purchase Conditions</a>, the <a class="alink" href="%2">Privacy Policy</a>, and the <a class="alink" href="%3">Legal Notice</a>.',
+            'tos',
+            'privacy-policy',
+            'legal-notice')
+            ?>
         </span>
             </label>
         </div>
