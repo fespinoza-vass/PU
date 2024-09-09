@@ -9,12 +9,13 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="after.body.start">
-            <block 
-                   after="-"
-                   class="Magento\Framework\View\Element\Template" 
-                   name="footer.accordion"
-                   template="Magento_Theme::js/theme.phtml"
-            />
+            <block class="Magento\Framework\View\Element\Template" name="theme.js"
+                   template="Magento_Theme::js/theme.phtml" after="-"/>
         </referenceContainer>
+
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
     </body>
 </page>

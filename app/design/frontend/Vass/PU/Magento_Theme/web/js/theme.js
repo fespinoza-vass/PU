@@ -1,11 +1,16 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
 define([
     "jquery",
-    ], function ($) {
-        'use strict';
+], function ($) {
+    'use strict';
 
-        $('.footer__accordion-column').click(function(e){
-            e.preventDefault();
-            $(this).toggleClass('footer__accordion');
+    $(document).ready(function () {
+        $(document).on('click', '.footer__accordion-column', function (e) {
+            $(this).toggleClass('active');
         });
-        
     });
+});
