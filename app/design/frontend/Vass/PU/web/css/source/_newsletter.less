@@ -8,195 +8,117 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-    .newsletter__block {
-        height: 160px;
-        background-color: @color-green-light2;
-    }
 
-    .newsletter__text-column {
-        padding-top: 40px;
-    }
+    .newsletter {
 
-    .newsletter__newsletter-column {
-        padding-top: 20px;
-    }
-
-    .newsletter__title {
-        color: @secondary-black;
-        font-family: @font-family-name__secondary;
-        .lib-font-size(26);
-        font-weight: 400;
-        line-height: 38px;
-        text-transform: uppercase;
-    }
-
-    .newsletter__subtitle {
-        color: @secondary-black;
-        font-family: @font-family-name__base;
-        .lib-font-size(18);
-        font-weight: 300;
-        line-height: 32px;
-    }
-
-    .newsletter__row {
-        display: flex;
-        padding-bottom: 16px;
-        justify-content: flex-end;
-
-        input {
-            max-width: 396px;
-            margin-right: 8px;
-            width: 100%;
-            height: 48px;
-            padding: 16px;
-            color: #000;
-            .lib-font-size(16);
-            line-height: 26px;
+        &__block {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+//            flex-wrap: wrap;
+            padding: @indent__l @indent__base;
+            background-color: @color-green-light2;
         }
 
-        .action.subscribe {
-            height: 48px;
+        &__text-column {
+            width: 100%;
+        }
+
+        &__newsletter-column {
+            width: 100%;
+            height: auto;
+        }
+
+        &__title {
+            color: @secondary-black;
+            font-family: @font-family__secondary;
+            .lib-font-size(26);
+            font-weight: @font-weight__regular;
             text-transform: uppercase;
         }
-    }
 
-    .footer-newsletter {
-        th,
-        .inner.ui-sortable,
-        .submitButton,
-        .columnContainer {
-            padding: 0 !important;
+        &__subtitle {
+            color: @secondary-black;
+            font-family: @font-family__base;
+            .lib-font-size(@font-size__l);
+            font-weight: @font-weight__light;
+            line-height: @line-height__l;
         }
 
-        .inner.ui-sortable {
+        &__row {
             display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            padding-bottom: @indent__base;
+            gap: @indent__xs;
 
-            .textFormFieldBlock {
-                width: 100%;
-                padding: 0;
 
-                input {
-                    margin: 0;
+            input {
+                .lib-font-size(@font-size__m);
+                width: @input-text__width;
+                max-width: 219px;
+                margin-right: 0 !important;
+                height: @input-text__height;
+                padding: @form-element-input__padding;
+                color: @primary-black;
+                line-height: @line-height__xl;
+                border: @form-element-input__border;
+                background-color: @primary-white;
+            }
+
+            .action {
+                &.subscribe {
+                    display: @button__display;
+                    height: @button__height;
+                    width: 153px;
+                    padding: @button__padding__l;
+                    background-color: @primary-black;
+                    color: @primary-white;
+                    border: @button__border-radius;
+                    cursor: @button__cursor;
+                    border: @button__border-radius;
+                    text-transform: none;
+
+                    &:hover {
+                        background-color: @color-gray-dark1;
+                    }
                 }
             }
-
-            .submitButtonWrapper {
-                margin: 0;
-                padding: 0;
-            }
-
-            .submitButton {
-                min-width: 155px;
-                margin-left: 5px;
-                height: 65px;
-            }
-        }
-
-        .notification-container {
-            margin: 0;
-            padding-bottom: 10px;
         }
     }
 
-    .newsletter-tooltip-wrapper {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        margin-top: 10px;
-
-        .newsletter-tooltip {
-            .lib-font-size(12);
-            .lib-tooltip(top);
-
-            .tooltip-content {
-                width: 345px;
-                margin: 0 15px;
-            }
-        }
-    }
-
-    .block.newsletter .label {
-        position: relative !important;
-        height: auto !important;
-        width: auto !important;
-    }
-    //TODO
-    .block.newsletter {
-        position: relative;
-        height: auto;
-        width: auto;
-        display: flex;
-        justify-content: flex-end;
-        margin: 0;
-
-        & .label {
-            position: relative;
+    .block {
+        &.newsletter {
             height: auto;
-            width: auto;
-        }
+            margin: 0;
+            .label {
+                position: relative !important; //Rules to fix missing TOS label block
+                height: auto !important; //Rules to fix missing TOS label block
+                width: auto !important; //Rules to fix missing TOS label block
+                max-width: 320px;
+                border: 0;
+                padding: 0;
+            }
+            & .action {
+                width: auto;
+            }
 
-        .form.subscribe {
-            max-width: 567px;
-            width: 100%;
+            & .field {
+                display: flex;
+                flex-direction: row;
+                align-items: baseline;
 
-            .tos {
-                .label {
-                    color: @secondary-black;
-                    .lib-font-size(14);
-                    line-height: 18px;
+                & .choice {
+                    & .tos {
+                        line-height: @line-height__l;
+                        width: auto;
+                        max-width: 371px;
+                        gap: 5px;
+                    }
                 }
             }
         }
-    }
-}
-
-//
-//  Mobile
-//  _____________________________________________
-
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .newsletter__subtitle {
-        .lib-font-size(16);
-        line-height: 30px;
-        padding-bottom: 25px;
-    }
-
-    .newsletter__title {
-        .lib-font-size(24);
-        line-height: 36px;
-    }
-
-    .newsletter__row {
-        flex-direction: column;
-        gap: 8px
-    }
-
-    .newsletter__row {
-        .action.subscribe {
-            width: 100%;
-        }
-    }
-
-    .block.newsletter {
-        padding-bottom: 30px;
-
-    }
-
-    .footer-newsletter {
-        .inner.ui-sortable {
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .submitButton {
-            margin-left: 0;
-        }
-    }
-
-    .newsletter-tooltip-wrapper {
-        justify-content: flex-start;
-        margin-bottom: 20px;
     }
 }
 
@@ -205,37 +127,85 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .newsletter__columns {
-        padding: 0 60px;
-    }
 
-    .subscribe-columns {
-        padding-top: 32px;
-    }
-
-    .subscribe__title {
-        color: #000;
-        font-family: @font-family__secondary;
-        .lib-font-size(28);
-        font-style: normal;
-        font-weight: @font-weight__regular;
-        line-height: 35px;
-        padding-left: 8%;
-    }
-
-    .subscribe__text {
-        color: solid 1px var(--ba-negro, #000);
-        font-family: @font-family__secondary;
-        font-size: @font-size__l;
-        font-weight: @font-weight__light;
-        line-height: 32px;
-        padding-bottom: 32px;
-        padding-left: 8%;
-    }
-
-    .newsletter__row {
-        input {
-            width: 396px;
+    .newsletter {
+        &__block {
+            justify-content: flex-start;
+            flex-direction: column;
+            min-height: 282px;
+            width: 100%;
+            padding: 24px 16px;
         }
+
+        &__columns {
+            gap: 20px;
+        }
+
+        &__text-column {
+            width: 100%;
+            height: 104px;
+            padding-top: 0;
+        }
+
+        &__title {
+            .lib-font-size(@font-size__xl);
+            line-height: @line-height__xl;
+            padding: 4px 0px 4px 0px;
+        }
+
+        &__subtitle {
+            .lib-font-size(@font-size__m);
+            line-height: @line-height__l;
+            padding: 4px 0px 4px 0px;
+        }
+
+        &__row {
+            flex-direction: row;
+            gap: @indent__xs;
+        }
+
+    }
+
+    .warning-span {
+        max-width: 322px;
+    }
+
+    .block {
+        &.newsletter {
+            padding-top: 0;
+
+            & input {
+                margin-right: 0;
+                gap: 8px;
+            }
+
+            & .field {
+                & .choice {
+                    & .tos {
+                        line-height: @line-height__s;
+                        flex-wrap: wrap;
+                        max-width: 500px;
+                    }
+                }
+            }
+
+            &__row {
+                max-width: 557px;
+                &.input {
+                    min-width: 396px;
+                }
+            }
+
+            .action {
+                &.subscribe {
+                    text-transform: @button__text-transform;
+                    width: 134px;
+                }
+            }
+        }
+    }
+
+    .newsletter-tooltip-wrapper {
+        justify-content: flex-start;
     }
 }
