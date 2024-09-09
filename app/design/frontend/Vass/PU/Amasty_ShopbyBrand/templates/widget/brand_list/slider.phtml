@@ -83,9 +83,9 @@ $sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
     </style>
     <div class="ambrands-slider-container <?= /* @noEscape */ $sliderId ?>">
         <?php if ($block->getTitle()): ?>
-            <div class="amslider-header-container">
+            <h2 class="amslider-header-container">
                 <?= $escaper->escapeHtml($block->getTitle()) ?>
-            </div>
+            </h2>
         <?php endif;?>
         <div class="ambrands-slider amslider <?= $escaper->escapeHtml($isSliderEnable ? '-enable' : '') ?>"
              id="<?= /** @noEscape */ $sliderId ?>">
