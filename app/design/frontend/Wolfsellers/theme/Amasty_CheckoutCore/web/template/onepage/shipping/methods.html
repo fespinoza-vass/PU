@@ -83,12 +83,25 @@
                                         <!-- ko template: getTemplate() --><!-- /ko -->
                                         <!-- /ko -->
                                     </td>
-                                 
+
+
+                                    <!-- ko if: method.method_code === "aereo" -->
                                     <td class="col col-method"
-                                        data-bind="text: method.method_title, attr: {'id': 'label_method_' + method.method_code + '_' + method.carrier_code}"></td>
+                                        data-bind="text: 'Envío Regular', attr: {'id': 'label_method_' + method.method_code + '_' + method.carrier_code}">
+                                    </td>
 
                                     <td class="col col-carrier"
-                                        data-bind="text: method.carrier_title, attr: {'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code, 'colspan': $parent.getColspanCarrier(method)}"></td>
+                                        data-bind="text: ' Tu pedido llegará entre 5 a 15 días hábiles, después de realizar la compra.', attr: {'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code, 'colspan': $parent.getColspanCarrier(method)}"></td>
+                                    <!-- /ko -->
+
+                                    <!-- ko if: method.method_code === "terrestre" -->
+                                    <td class="col col-method"
+                                        data-bind="text: 'Envío Regular', attr: {'id': 'label_method_' + method.method_code + '_' + method.carrier_code}">
+                                    </td>
+
+                                    <td class="col col-carrier"
+                                        data-bind="text: 'Tu pedido llegará hasta en 3 días hábiles, después de realizar la compra.', attr: {'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code, 'colspan': $parent.getColspanCarrier(method)}"></td>
+                                    <!-- /ko -->
 
                                     <!-- ko if: $parent.isShippingMethodTooltip(method) -->
                                     <td class="col col-comment">
@@ -176,7 +189,7 @@
                         <!-- /ko -->
                     </form>
                     <!-- /ko -->
-                    <!-- ko ifnot: rates().length > 0 --><div class="no-quotes-block"><!-- ko i18n: 'Sorry, no quotes awewewere available for this order at this time'--><!-- /ko --></div><!-- /ko -->
+                    <!-- ko ifnot: rates().length > 0 --><div class="no-quotes-block"><!-- ko i18n: 'Sorry, no quotes are available for this order at this time'--><!-- /ko --></div><!-- /ko -->
                 </div>
             </div>
         </div>
