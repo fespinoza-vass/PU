@@ -30,8 +30,6 @@
         accent-color: var(--Texto, #000); /* Cambia el color del radio button */
     }
 
-    
-
     .action.primary.checkout {
         display: flex; 
         justify-content: center; 
@@ -59,22 +57,18 @@
     .message.warning {
         display: none !important;
     }
- 
+
     #giftcardaccount-placer{
         display: none !important;
     }
- 
+
     .action.primary.checkout.amasty {
         display: none !important;
     }
 
-    
-   
-    
-    
-    
-    
-
+    .authentication-wrapper{
+        width: auto !important;
+    }
 }
 
 //
@@ -201,7 +195,7 @@
             width: 100%;
             align-items: center;
             flex: 1 0 0;
-            border-radius: 10px;
+            border-radius: 10px 0 0 10px;
             border: 0.8px solid #979797;
             background: #FFF;
     
@@ -526,6 +520,27 @@
             margin: 0 !important;
 
         }
+
+        .primary > button.action-update,
+        .primary > button.action-cancel {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
+            width: 100%;
+            margin: 0 auto;
+            float: none;
+        }
+    
+        .primary > button.action-update span,
+        .primary > button.action-cancel span {
+            display: inline-block; 
+        }
         
 }
 
@@ -607,7 +622,6 @@
     
     div[name="shippingAddress.firstname"] .input-text {
         width: 100% !important;
-        max-width: 384px;
         height: 39px;
         border-radius: 8px;
         border: 0.8px solid #979797;
@@ -629,7 +643,6 @@
     
     div[name="shippingAddress.lastname"] .input-text {
         width: 100%;
-        max-width: 384px;
         height: 39px;
         border-radius: 8px;
         border: 0.8px solid #979797;
@@ -666,7 +679,7 @@
     }
     
     div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] {
-        width: 40% !important;
+        width: 100% !important;
     }
     
     div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] label{
@@ -692,7 +705,6 @@
     
     div[name="shippingAddress.street.0"] .input-text {
         width: 100% !important;
-        max-width: 384px;
         height: 39px;
         border-radius: 8px;
         border: 0.8px solid #979797;
@@ -726,7 +738,6 @@
 
     div[name="shippingAddress.telephone"] .input-text {
         width: 100% !important;
-        max-width: 384px;
         height: 39px;
         border-radius: 8px;
         border: 0.8px solid #979797;
@@ -744,7 +755,6 @@
 
     div[name="shippingAddress.custom_attributes.colony"] .input-text {
         width: 100% !important;
-        max-width: 384px;
         height: 39px;
         border-radius: 8px;
         border: 0.8px solid #979797;
@@ -762,7 +772,6 @@
 
     div[name="shippingAddress.city"] .input-text {
         width: 100% !important;
-        max-width: 384px;
         height: 39px;
         border-radius: 8px;
         border: 0.8px solid #979797;
@@ -781,7 +790,6 @@
 
     div[name="shippingAddress.custom_attributes.referencia_envio"] .input-text {
         width: 100% !important;
-        max-width: 384px;
         height: 39px;
         border-radius: 8px;
         border: 0.8px solid #979797;
@@ -810,7 +818,6 @@
 
     div[name="shippingAddress.custom_attributes.city"] .select {
         width: 100% !important;
-        max-width: 384px !important;
     }
 
 
@@ -833,7 +840,7 @@
             width: 100%;
             align-items: center;
             flex: 1 0 0;
-            border-radius: 10px;
+            border-radius: 10px 0 0 10px;
             border: 0.8px solid #979797;
             background: #FFF;
     
@@ -1166,15 +1173,15 @@
 
         .actions-toolbar {
             display: flex;
-            flex-direction: column; /* Mantiene los botones apilados verticalmente */
-            align-items: flex-start; /* Alinea los botones a la izquierda */
-            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+            flex-direction: column; 
+            align-items: flex-start; 
+            gap: 10px;
         }
         
         .primary {
             display: flex;
-            flex-direction: column; /* Asegura que los botones sigan apilados */
-            gap: 10px; /* Espacio entre los botones */
+            flex-direction: column; 
+            gap: 10px; 
         }
         
         button.action {
@@ -1186,15 +1193,15 @@
             cursor: pointer;
             font-size: 14px;
             transition: background-color 0.3s ease;
-            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+            margin: 5px 0 !important;
         }
 
         .document-type-checkout {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centra todo el contenido horizontalmente */
-            text-align: center; /* Asegura que el texto dentro esté centrado */
-            margin: 0 auto; /* Centra el contenedor principal */
+            align-items: center;
+            text-align: center; 
+            margin: 0 auto;
         }
         
         .document-type-checkout-choices {
@@ -1206,6 +1213,27 @@
         .field.choice {
             display: flex;
             align-items: center;
+        }
+
+        .primary > button.action-update,
+        .primary > button.action-cancel {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
+            width: 100%;
+            margin: 0 auto;
+            float: none;
+        }
+    
+        .primary > button.action-update span,
+        .primary > button.action-cancel span {
+            display: inline-block; 
         }
         
         
@@ -1522,7 +1550,7 @@
             width: 100%;
             align-items: center;
             flex: 1 0 0;
-            border-radius: 10px;
+            border-radius: 10px 0 0 10px;
             border: 0.8px solid #979797;
             background: #FFF;
     
@@ -1915,6 +1943,29 @@
             line-height: normal;
     
         }
+
+        .primary > button.action-update,
+        .primary > button.action-cancel {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
+            width: 100%;
+            max-width: 384px;
+            margin: 0 auto;
+            float: none;
+        }
+    
+        .primary > button.action-update span,
+        .primary > button.action-cancel span {
+            display: inline-block; 
+        }
+
         
         
         
@@ -2198,7 +2249,7 @@
         width: 100%;
         align-items: center;
         flex: 1 0 0;
-        border-radius: 10px;
+        border-radius: 10px 0 0 10px;
         border: 0.8px solid #979797;
         background: #FFF;
 
@@ -2594,14 +2645,14 @@
         .primary > button.action-update,
         .primary > button.action-cancel {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #000;
-            color: #fff;
-            cursor: pointer;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
             width: 100%;
             max-width: 384px;
             margin: 0 auto;
@@ -2610,19 +2661,8 @@
     
         .primary > button.action-update span,
         .primary > button.action-cancel span {
-            display: inline-block;
+            display: inline-block; 
         }
-        
-
-
-
-        
-        
-            
-
-    
-
-    
 
 }
 
