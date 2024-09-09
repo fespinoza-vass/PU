@@ -283,7 +283,7 @@ class LayoutProcessor
                 'dataScope' => 'shippingAddress.custom_attributes.colony',
                 'label' => 'Distrito',
                 'provider' => 'checkoutProvider',
-                'sortOrder' => 80,
+                'sortOrder' => 75,
                 'validation' => [
                     'required-entry' => true
                 ],
