@@ -73,38 +73,31 @@ class AfterPlaceOrder implements ObserverInterface {
             $this->_logger->debug("JSON RESPONSssE:".$izipay_log->getId());
             $this->_logger->debug("JSON RESPONSssE:".$izipay_log->getOrderNumber());
             $this->_logger->debug("JSON RESPONSssE:".$izipay_log->getResponse());
-            $json_response = json_decode($izipay_log->getResponse(), true);
-
-            // if (isset($json_response["response"])) {
-            //     $json_response = json_decode($json_response["response"]["payloadHttp"], true);
-            //     $json_response = $json_response["response"];
-            // } else {
-            //     $json_response = json_decode($json_response["payloadHttp"], true);
-            //     $json_response = $json_response["response"];
-            // }
-            $message_payment = $this->_helper->getPaymentStatuses($order_full->getIzipayPaymentCodeResponse());
             
-            $json_response["code"] = $order_full->getIzipayPaymentCodeResponse();
-            $json_response["messageUser"] = $message_payment;
+            if(!is_null($izipay_log->getResponse())){
+                $json_response = json_decode($izipay_log->getResponse(), true);
 
-            $block->setData('izipay_response', $json_response);
-
-            if ($order_full->getIzipayPaymentCodeResponse() == "00") {
-                $procesing_status = $this->_helper->getProcessingStatus();
-                $order_full->setStatus($procesing_status);
-            } else {
-                $pending_payment_status = $this->_helper->getPendingPaymentStatus();
-                $order_full->setStatus($pending_payment_status);
+                $message_payment = $this->_helper->getPaymentStatuses($order_full->getIzipayPaymentCodeResponse());
+                
+                $json_response["code"] = $order_full->getIzipayPaymentCodeResponse();
+                $json_response["messageUser"] = $message_payment;
+    
+                $block->setData('izipay_response', $json_response);
+    
+                if ($order_full->getIzipayPaymentCodeResponse() == "00") {
+                    $procesing_status = $this->_helper->getProcessingStatus();
+                    $order_full->setStatus($procesing_status);
+                } else {
+                    $pending_payment_status = $this->_helper->getPendingPaymentStatus();
+                    $order_full->setStatus($pending_payment_status);
+                }
+    
+                //Comentario en el pedido
+                $history = $order_full->addStatusHistoryComment("Response Izipay: ".$message_payment." <br /> Response Code:".$order_full->getIzipayPaymentCodeResponse());
+                $history->save();
+                $order_full->save();
             }
 
-            //Comentario en el pedido
-            $history = $order_full->addStatusHistoryComment("Response Izipay: ".$message_payment." <br /> Response Code:".$order_full->getIzipayPaymentCodeResponse());
-            $history->save();
-            $order_full->save();
-
-            //$sesion = $objectManager->get(\Magento\Checkout\Model\Type\Onepage::class)->getCheckout();
-            //$sesion->clearQuote();
-            //$this->_checkoutSession->clearQuote();
 
             return $page;
         }
