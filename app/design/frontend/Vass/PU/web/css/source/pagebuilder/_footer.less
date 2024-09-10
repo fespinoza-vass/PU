@@ -146,7 +146,7 @@
     .page-footer {
         width: 100%;
         margin: 0 auto;
-        padding: 40px 0;
+        padding: 40px 0 0;
     }
 
     .footer {
@@ -178,11 +178,13 @@
         }
 
         &__bottom {
-            max-width: @layout__max-width;
-            padding: 24px 80px;
-            box-sizing: border-box;
-            margin: 0 auto;
+            display: flex;
             width: 100% !important; // Override pagebuilder
+
+            .pagebuilder-column-line {
+                max-width: @layout__max-width;
+                padding: 24px 80px
+            }
         }
 
         &__column {
@@ -219,14 +221,6 @@
 
         &__payment-methods {
             justify-content: flex-end !important; // Override pagebuilder
-        }
-    }
-}
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
-    .footer {
-        &__bottom {
-            box-sizing: content-box;
         }
     }
 }
