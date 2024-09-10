@@ -18,7 +18,7 @@
             flex-wrap: wrap;
             padding: @indent__l @indent__base;
             background-color: @color-green-light2;
-            max-height: 300px;
+            max-height: 280px;
         }
 
         &__text-column {
@@ -101,8 +101,8 @@
             height: auto;
 
             & input {
-                margin-right: @indent__s;
-                padding-right: @indent__m;
+                margin-right: 20px !important; // Force to fix checkbox input position
+                padding-right: 24px !important; // Force to fix checkbox input position
                 z-index: 1;
             }
 
@@ -164,7 +164,7 @@
         &__text-column {
             width: 100%;
             height: 104px;
-            padding-top: 0;
+            padding-top: @indent__m;
         }
 
         &__title {
