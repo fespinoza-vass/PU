@@ -23,7 +23,7 @@
 @ambrands-slider-title__color: #333;
 @ambrands-slider-bullet__color: #333;
 @ambrands-slider-bullet__active__color: #1979c2;
-@ambrands-slider-bullet__size: 6px;
+@ambrands-slider-bullet__size: 4px;
 
 //
 //  Common
@@ -69,7 +69,9 @@
         }
 
         .swiper-pagination-bullet-active {
-            background: @ambrands-slider-bullet__active__color;
+            width: 6px;
+            height: 6px;
+            background-color: @primary-black;
         }
 
         .swiper-slide {
@@ -399,8 +401,5 @@
     .swiper-pagination {
         display: block;
         margin: 0;
-        .swiper-pagination-bullet-active {
-            background-color: @primary-black;
-        }
     }
 }
