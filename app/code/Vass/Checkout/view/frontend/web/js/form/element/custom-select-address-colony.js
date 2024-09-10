@@ -31,7 +31,7 @@ define([
                 address.postcode = selectedColony;
                 quote.shippingAddress(address);
                 $('input[name="postcode"]').val(selectedColony);
-               self.recalculateShippingRates(selectedColony);
+               self.recalculateShippingRates(selectedColony, quote);
             });
         },
 
@@ -47,7 +47,7 @@ define([
                 }
             });
         },
-        recalculateShippingRates: function (selectedColony) {
+        recalculateShippingRates: function (selectedColony, quote) {
             var optSelected;
             var zipcode;
             if(_.isUndefined(selectedColony) && _.isEmpty(selectedColony)){
@@ -65,10 +65,11 @@ define([
                 postcodeField.value(zipcode);
             }.bind(this));
 
-            if (address && address.regionId && address.countryId) {
-                rateRegistry.set(address.getKey(), null);
-                rateRegistry.set(address.getCacheKey(), null);
-                quote.shippingAddress(address);
+            var shipping = quote.shippingAddress();
+            if (shipping && shipping.regionId && shipping.countryId) {
+                rateRegistry.set(shipping.getKey(), null);
+                rateRegistry.set(shipping.getCacheKey(), null);
+                quote.shippingAddress(shipping);
                 rateService.updateRates(quote.shippingAddress());
                 console.log('Shipments update');
             }else{
