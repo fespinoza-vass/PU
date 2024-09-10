@@ -27,10 +27,6 @@ define([
 
             $(document).on('change', '[name="custom_attributes[colony]"]', function () {
                 var selectedColony = $(this).val();
-                var address = quote.shippingAddress();
-                address.postcode = selectedColony;
-                quote.shippingAddress(address);
-                $('input[name="postcode"]').val(selectedColony);
                self.recalculateShippingRates(selectedColony, quote);
             });
         },
