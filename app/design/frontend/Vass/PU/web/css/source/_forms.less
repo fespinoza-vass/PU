@@ -120,27 +120,27 @@
         background-color: @primary-white;
         border: 0.5px solid @primary-black;
         position: relative;
+        border-radius: 1px;
         cursor: pointer;
 
         &:checked::before {
             content: @icon-close;
             //content: @icon-check; // Change once Lina updates font icon suite
             font-family: @icon-font;
-            width: 12px;
+            width: 8px;
             height: 8px;
             position: absolute;
-            top: 40%;
-            left: 40%;
+            top: 37%;
+            left: 46%;
             transform: translate(-50%, -50%);
+
+            &:disabled {
+                font-family: @icon-font;
+            }
         }
 
         &:disabled {
             border-color: @color-gray-light1;
-
-            &::before {
-                background-color: @color-gray-light1;
-            }
         }
     }
 }
-
