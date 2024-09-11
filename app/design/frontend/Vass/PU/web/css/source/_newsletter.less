@@ -10,15 +10,15 @@
 & when (@media-common = true) {
 
     .newsletter {
-
         &__block {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
             align-items: flex-start;
             flex-wrap: wrap;
-            padding: @indent__l @indent__base;
+            padding: @indent__m @indent__base;
             background-color: @color-green-light2;
-            max-height: 280px;
+            height: 100%;
+            max-height: 300px;
         }
 
         &__text-column {
@@ -34,15 +34,16 @@
             font-family: @font-family__secondary;
             .lib-font-size(@h4__font-size);
             font-weight: @font-weight__regular;
+            line-height: @line-height__xl;
             text-transform: uppercase;
         }
 
         &__subtitle {
             color: @secondary-black;
             font-family: @font-family__base;
-            .lib-font-size(18);
+            .lib-font-size(@font-size__l);
             font-weight: @font-weight__light;
-            line-height: @line-height__s;
+            line-height: @line-height__l;
         }
 
         &__row {
@@ -95,20 +96,19 @@
         }
     }
 
-    .block {
-
-        &.newsletter {
+    .newsletter__newsletter-column {
+        & .block.newsletter {
             height: auto;
 
             & input {
-                margin-right: 20px !important; // Force to fix checkbox input position
-                padding-right: 24px !important; // Force to fix checkbox input position
+                margin-right: @indent__s;
+                padding-right: @indent__m;
                 z-index: 1;
             }
 
             & .label {
                 width: auto;
-                max-width: 320px;
+                max-width: 370px;
                 border: 0;
                 padding: 0;
 
@@ -129,13 +129,30 @@
                 flex-direction: row;
                 align-items: baseline;
 
-                & .choice.tos {
-                    line-height: @line-height__l;
+                &.choice.tos {
+                    width: 100%;
+                    max-width: 560px;
                     margin-right: 0;
-                    max-width: 371px;
-                    gap: @indent__s;
+                    line-height: @line-height__l;
                 }
             }
+        }
+    }
+}
+
+//
+//  Tablet
+//  _____________________________________________
+
+@media (min-width: @screen__xs) and (max-width: @screen__m) {
+    .newsletter {
+
+        &__text-column {
+            align-items: center;
+        }
+
+        &__newsletter-column {
+            align-items: center;
         }
     }
 }
@@ -145,16 +162,13 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-
     .newsletter {
-
         &__block {
-            justify-content: flex-start;
             align-items: center;
             flex-direction: column;
             width: 100%;
             padding: 24px 16px;
-            max-height: 180px;
+            height: 180px;
         }
 
         &__columns {
@@ -170,13 +184,11 @@
         &__title {
             .lib-font-size(@font-size__xl);
             line-height: @line-height__xl;
-            padding: 4px 0;
         }
 
         &__subtitle {
             .lib-font-size(@font-size__m);
             line-height: @line-height__l;
-            padding: 4px 0;
         }
 
         &__row {
@@ -185,9 +197,10 @@
 
     }
 
-    .block {
-
-        &.newsletter {
+    .newsletter__newsletter-column {
+        .block.newsletter {
+            max-width: 750px;
+            width: 100%;
             padding-top: 0;
 
             & input {
@@ -196,21 +209,21 @@
             }
 
             & .label.label-text-wrapper {
+                width: 100%;
                 max-width: 535px;
             }
 
             & .field {
                 &.newsletter {
-                    width: auto;
-                    min-width: 400px;
+                    width: 100%;
+                    max-width: 400px;
                     padding: 0;
                 }
 
                 &.choice.tos {
-                    width: auto;
-                    min-width: 540px;
+                    width: 100%;
+                    max-width: 560px;
                     line-height: @line-height__s;
-                    flex-wrap: wrap;
                 }
             }
 
