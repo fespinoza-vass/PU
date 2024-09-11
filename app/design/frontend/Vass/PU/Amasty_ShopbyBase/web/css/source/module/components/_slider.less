@@ -17,9 +17,12 @@
 @ambrands-slider-arrow__active__color: #95b5d7;
 @ambrands-slider-arrow__disabled__color: #ececec;
 
-@ambrands-slider-title__color: #333;
-@ambrands-slider-bullet__color: #333;
-@ambrands-slider-bullet__active__color: #1979c2;
+@ambrands-slider-arrow__next__background-image: false;
+@ambrands-slider-arrow__prev__background-image: false;
+@ambrands-slider-arrow__size: 40px;
+@ambrands-slider-title__color: @color-gray-dark2;
+@ambrands-slider-bullet__color: @color-gray-dark2;
+@ambrands-slider-bullet__active__color: @primary-black;
 @ambrands-slider-bullet__size: 4px;
 
 //
@@ -68,7 +71,7 @@
         .swiper-pagination-bullet-active {
             width: 6px;
             height: 6px;
-            background-color: @primary-black;
+            background-color: @ambrands-slider-bullet__active__color;
         }
 
         .swiper-slide {
