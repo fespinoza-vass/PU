@@ -26,7 +26,6 @@ $sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
         <?php if ($isSliderEnable): ?>
         #<?= /* @noEscape */ $sliderId ?> {
             max-width: <?= /* @noEscape */ $buttonWidth * 2 + $sliderWidth; ?>px;
-            padding: 0 <?= /* @noEscape */ $buttonWidth + 10 ?>px;
         }
         <?php endif;?>
 
@@ -155,9 +154,15 @@ $sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
                     <?php endif; ?>
                     breakpoints: {
                     <?php for ($i = 1; $i <= $itemsPerView; $i++): ?>
-                        <?= ($i + 1) * ($imgWidth + 20 + 10) + $buttonWidth * 2; ?> : {
-                            slidesPerView: <?= (int) $i ?>
-                        },
+                        <?php if ($i >= 4): ?>
+                            <?= ($i + 1) * ($imgWidth + 30)?> : {
+                                slidesPerView: <?= (int) $i ?>
+                            },
+                        <?php else: ?>
+                            <?= ($i) * ($imgWidth + 35)?> : {
+                                slidesPerView: <?= (int) $i ?>
+                            },
+                        <?php endif; ?>
                     <?php endfor; ?>
                     },
                     navigation: {
