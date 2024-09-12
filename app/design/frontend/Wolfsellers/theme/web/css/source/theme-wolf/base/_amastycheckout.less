@@ -5,8 +5,12 @@
 
     .checkout-index-index{
 
-        .am-checkout:not(.-modern){
-            background: none;
+        .am-checkout{
+            margin: 0;
+            padding: 0;
+            &:not(.-modern){
+                background: none;
+            }
         }
 
         .ambanners{
@@ -17,6 +21,11 @@
             position: inherit !important;
             top: inherit !important;
             filter: invert(1) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 20px !important;
+            margin-bottom: inherit !important;
             .header{
                 &.content{
                     justify-content: center !important;
@@ -104,13 +113,32 @@
                                 }
                             }
                         }
-                        .payment-method-content{
-                            padding: 0;
+                        .checkout-payment-method{
+                            .discount-code{
+                                margin: 0;
+                                padding: 0 0 20px 0;
+                                .payment-option-content{
+                                  .form-discount{
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    .payment-option-inner{
+                                        margin: 0;
+                                        .action{
+                                            background: #000;
+                                            border: 1px solid;
+                                        }
+                                    }
+                                  }  
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+
+
 
         .document-type-checkout{
             display: flex;
@@ -517,16 +545,16 @@
                 display: none !important;
             }
     
-            .payment-option-inner {
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
+            // .payment-option-inner {
+            //     display: flex;
+            //     align-items: center;
+            //     width: 100%;
+            // }
             
-            .payment-option-inner .field {
-                flex-grow: 1;
-                margin-bottom: 0; /* Elimina cualquier margen inferior */
-            }
+            // .payment-option-inner .field {
+            //     flex-grow: 1;
+            //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+            // }
             
             .actions-toolbar {
                 display: flex;
@@ -729,6 +757,13 @@
             &.am-opc-wrapper{
                 flex-flow: row;
                 gap: 20px;
+                .checkout-column{
+                    .checkout-block{
+                        .payment-method-content{
+                            padding: 0px;
+                        }
+                    }
+                }
             }
         }
     }
@@ -1173,16 +1208,16 @@
                 display: none !important;
             }
     
-            .payment-option-inner {
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
+            // .payment-option-inner {
+            //     display: flex;
+            //     align-items: center;
+            //     width: 100%;
+            // }
             
-            .payment-option-inner .field {
-                flex-grow: 1;
-                margin-bottom: 0; /* Elimina cualquier margen inferior */
-            }
+            // .payment-option-inner .field {
+            //     flex-grow: 1;
+            //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+            // }
             
             .actions-toolbar {
                 display: flex;
@@ -1883,16 +1918,16 @@
                 display: none !important;
             }
     
-            .payment-option-inner {
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
+            // .payment-option-inner {
+            //     display: flex;
+            //     align-items: center;
+            //     width: 100%;
+            // }
             
-            .payment-option-inner .field {
-                flex-grow: 1;
-                margin-bottom: 0; /* Elimina cualquier margen inferior */
-            }
+            // .payment-option-inner .field {
+            //     flex-grow: 1;
+            //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+            // }
             
             .actions-toolbar {
                 display: flex;
@@ -2577,16 +2612,16 @@
             display: none !important;
         }
 
-        .payment-option-inner {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
+        // .payment-option-inner {
+        //     display: flex;
+        //     align-items: center;
+        //     width: 100%;
+        // }
         
-        .payment-option-inner .field {
-            flex-grow: 1;
-            margin-bottom: 0; /* Elimina cualquier margen inferior */
-        }
+        // .payment-option-inner .field {
+        //     flex-grow: 1;
+        //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+        // }
         
         .actions-toolbar {
             display: flex;
