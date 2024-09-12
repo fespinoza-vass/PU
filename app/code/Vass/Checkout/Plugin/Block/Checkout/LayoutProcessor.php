@@ -328,8 +328,7 @@ class LayoutProcessor
         ];
 
 
-        $billingAddressFields = &$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']
-        ['billing-address-form']['children']['form-fields']['children'];
+        $billingAddressFields =$jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children'];
 
         if(!is_null($billingAddressFields)){
             foreach ($billingAddressFields as $field => $value) {

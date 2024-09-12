@@ -4,8 +4,9 @@ define([
     'Magento_Ui/js/form/element/select',
     'Amasty_CheckoutCore/js/model/shipping-rate-service-override',
     'Magento_Checkout/js/model/shipping-rate-registry',
-    'uiRegistry'
-], function ($, quote, select, rateService, rateRegistry, registry ) {
+    'uiRegistry',
+    'Magento_Checkout/js/model/full-screen-loader'
+], function ($, quote, select, rateService, rateRegistry, registry, fullScreenLoader) {
     'use strict';
 
     return select.extend({
@@ -22,6 +23,7 @@ define([
                 console.log('Ciudad seleccionada:', selectedCity);
                  var regionId = $(this).parent().parent().parent().find('select[name="region_id"]').val();
                 self.filterCities(selectedCity,regionId);
+                    fullScreenLoader.startLoader();
             });
 
 
@@ -40,6 +42,7 @@ define([
                     console.log(data);
                     this.colonies = JSON.parse(data);
                     self.setOptions(this.colonies);
+                    fullScreenLoader.stopLoader();
                 }
             });
         },

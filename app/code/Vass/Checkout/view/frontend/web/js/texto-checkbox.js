@@ -1,10 +1,14 @@
 require(['jquery'], function($) {
     $(document).ready(function() {
-        var added = [false, false, false]; 
+        var added = [false, false, false]; // Ajustar la longitud según los checkbox relevantes
 
-        // Función para agregar los <strong> a los <span>
+        // Función para agregar los <strong> a los <span> específicos de los checkbox
         function addStrongToSpans() {
-            var $spanElements = $('span[data-bind="text: description || label"]');
+            // Selecciona solo los <span> dentro de los checkbox específicos
+            var $spanElements = $([
+                'div[name="checkout.sidebar.additional.checkbox_privacidad"] span[data-bind="text: description || label"]',
+                'div[name="checkout.sidebar.additional.checkbox_newsletter"] span[data-bind="text: description || label"]'
+            ].join(', '));
 
             $spanElements.each(function(index) {
                 var $spanElement = $(this);
@@ -12,22 +16,26 @@ require(['jquery'], function($) {
                 if (!added[index] && $spanElement.length) {
                     var strongText1, strongId1, strongText2, strongId2;
 
+                    // Configuración de textos y IDs según el índice correspondiente
                     switch (index) {
-                        case 0:
+                        case 0: // Para el checkbox_privacidad
                             strongText1 = 'Términos y Condiciones ';
                             strongText2 = 'y la Política de Protección de Datos Personales.';
                             strongId1 = 'tyc';
                             strongId2 = 'privacidad';
                             break;
-                        case 1:
+                        case 1: // Para el checkbox_newsletter
                             strongText1 = 'Comunicaciones de Publicidad y Promociones.';
                             strongId1 = 'comunicaciones';
                             break;
                     }
 
                     if (strongText1) {
+                        // Aplicar el estilo de fuente al <span> completo
+                        $spanElement.css('font-size', '12px');
+
                         $spanElement.html(function(_, html) {
-                            // Concatenar ambos <strong> en un solo span
+                            // Concatenar ambos <strong> en un solo span si existen dos textos
                             if (strongText2 && strongId2) {
                                 return html + ' <strong id="' + strongId1 + '">' + strongText1 + '</strong> <strong id="' + strongId2 + '">' + strongText2 + '</strong>';
                             } else {
@@ -36,7 +44,6 @@ require(['jquery'], function($) {
                         });
 
                         added[index] = true;
-                        console.log('Se agregaron los <strong> con ids "' + strongId1 + '" y "' + strongId2 + '" al <span> número ' + (index + 1));
                     }
                 }
             });
@@ -46,13 +53,16 @@ require(['jquery'], function($) {
         var observer = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.addedNodes.length || mutation.removedNodes.length) {
-                    addStrongToSpans(); 
+                    addStrongToSpans();
                 }
             });
         });
 
-        // Configurar el observador en el body (o un contenedor más específico si sabes dónde ocurren los cambios)
-        observer.observe(document.body, { childList: true, subtree: true });
+        // Configurar el observador en el body
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
 
         // Llamar a la función para buscar los <span> y modificar su contenido
         addStrongToSpans();
@@ -75,13 +85,16 @@ require(['jquery'], function($) {
         var observer2 = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.addedNodes.length || mutation.removedNodes.length) {
-                    modifyClasses(); // Vuelve a intentar modificar clases
+                    modifyClasses();
                 }
             });
         });
 
         // Configurar el observador en el body
-        observer2.observe(document.body, { childList: true, subtree: true });
+        observer2.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
 
         // Intentar modificar clases al cargar
         modifyClasses();
