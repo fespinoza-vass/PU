@@ -2,7 +2,7 @@ require(['jquery'], function($) {
     $(document).ready(function() {
         var added = [false, false, false]; 
 
-        // Función para agregar el <strong> a los <span>
+        // Función para agregar los <strong> a los <span>
         function addStrongToSpans() {
             var $spanElements = $('span[data-bind="text: description || label"]');
 
@@ -10,30 +10,33 @@ require(['jquery'], function($) {
                 var $spanElement = $(this);
 
                 if (!added[index] && $spanElement.length) {
-                    var strongText, strongId;
+                    var strongText1, strongId1, strongText2, strongId2;
 
                     switch (index) {
                         case 0:
-                            strongText = 'Términos y Condiciones.';
-                            strongId = 'tyc';
+                            strongText1 = 'Términos y Condiciones ';
+                            strongText2 = 'y la Política de Protección de Datos Personales.';
+                            strongId1 = 'tyc';
+                            strongId2 = 'privacidad';
                             break;
                         case 1:
-                            strongText = 'Política de Protección de Datos Personales.';
-                            strongId = 'privacidad';
-                            break;
-                        case 2:
-                            strongText = 'Comunicaciones de Publicidad y Promociones.';
-                            strongId = 'comunicaciones';
+                            strongText1 = 'Comunicaciones de Publicidad y Promociones.';
+                            strongId1 = 'comunicaciones';
                             break;
                     }
 
-                    if (strongText) {
+                    if (strongText1) {
                         $spanElement.html(function(_, html) {
-                            return html + ' <strong id="' + strongId + '">' + strongText + '</strong>';
+                            // Concatenar ambos <strong> en un solo span
+                            if (strongText2 && strongId2) {
+                                return html + ' <strong id="' + strongId1 + '">' + strongText1 + '</strong> <strong id="' + strongId2 + '">' + strongText2 + '</strong>';
+                            } else {
+                                return html + ' <strong id="' + strongId1 + '">' + strongText1 + '</strong>';
+                            }
                         });
 
                         added[index] = true;
-                        console.log('Se agregó el <strong> con id "' + strongId + '" al <span> número ' + (index + 1));
+                        console.log('Se agregaron los <strong> con ids "' + strongId1 + '" y "' + strongId2 + '" al <span> número ' + (index + 1));
                     }
                 }
             });
