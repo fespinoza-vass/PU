@@ -321,11 +321,28 @@ button:not(.primary) {
     box-sizing: border-box;
 }
 
+.return-home-link {
+    margin-top: 1rem; 
+    display: flex; 
+    justify-content: flex-start; 
+}
+
+.return-home {
+    color: #000 !important; 
+    text-decoration: underline; 
+    font-size: 16px; 
+    display: flex; 
+    align-items: center; 
+    gap: 0.3em; 
+    padding: 0.2em 0.5em; 
+    cursor: pointer; 
+}
+
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
     body, html {
-    overflow-x: hidden; /* Asegura que no haya scroll horizontal en todo el documento */
+    overflow-x: hidden; 
 }
     .success-section {
          flex-direction: column;
@@ -338,7 +355,7 @@ button:not(.primary) {
     display: flex;
     align-items: center;
     padding: 8px;
-    background: #e8f5e9; /* Fondo verde claro */
+    background: #e8f5e9; 
     border-radius: 4px;
     margin-bottom: 8px;
     border-bottom: 1px solid #ccc;

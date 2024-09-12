@@ -123,15 +123,28 @@ class LayoutProcessor
             'visible' => true,
         ];
 
-            
-
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['config']['sortOrder'] = 35;
-
-        $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']['validation'] = [
-            'required-entry' => true // Establece el campo como obligatorio
+            ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker'] = [
+            'component' => 'Magento_Ui/js/form/element/abstract',
+            'config' => [
+                'customScope' => 'shippingAddress.custom_attributes',
+                'template' => 'ui/form/field',
+                'elementTmpl' => 'ui/form/element/input',
+                'id' => 'numero_identificacion_picker',
+                'sortOrder' => 35,
+                'validation' => [
+                    'required-entry' => true
+                ],
+            ],
+            'dataScope' => 'shippingAddress.custom_attributes.numero_identificacion_picker',
+            'label' => __('Número de Identificación'),
+            'provider' => 'checkoutProvider',
+            'visible' => true,
+            'value' =>  $this->getNumIdentificacionCustomer($idCustomer)       
         ];
+
+        $this->logger->info('dni',$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']);
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio'] = [
@@ -146,8 +159,7 @@ class LayoutProcessor
             'dataScope' => 'shippingAddress.custom_attributes.referencia_envio',
             'label' => __('Referencia de Envío'),
             'provider' => 'checkoutProvider',
-            'visible' => true,
-            'value' => $this->getNumIdentificacionCustomer($idCustomer)
+            'visible' => true            
         ];
         
 
@@ -173,24 +185,6 @@ class LayoutProcessor
 
       
 
-            $check_terminos = [
-                'component' => 'Magento_Ui/js/form/element/abstract',
-                'config' => [
-                    'customScope' => 'checkout.sidebar.additional.custom_attributes',
-                    'template' => 'ui/form/field',
-                    'elementTmpl' => 'ui/form/element/checkbox',
-                    'id' => 'checkbox_terminos',
-                ],
-                'dataScope' => 'checkout.sidebar.additional.checkbox_terminos',
-                'description' => 'He leído y acepto los',
-                'provider' => 'checkoutProvider',
-                'visible' => true,
-                'validation' => [
-                    'required-entry' => false,
-                ],
-                'sortOrder' => 100,
-                
-            ];
         
             $checkbox_privacidad = [
                 'component' => 'Magento_Ui/js/form/element/abstract',
@@ -201,7 +195,7 @@ class LayoutProcessor
                     'id' => 'checkbox_privacidad',
                 ],
                 'dataScope' => 'checkout.sidebar.additional.checkbox_privacidad',
-                'description' => 'He leído y acepto la', // Cambia esto a la etiqueta deseada
+                'description' => 'He leído y acepto los', // Cambia esto a la etiqueta deseada
                 'provider' => 'checkoutProvider',
                 'visible' => true,
                 'validation' => [
@@ -235,7 +229,6 @@ class LayoutProcessor
           
 
             // Añadiendo el checkbox a la ruta especificada
-            $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox'] = $check_terminos;
             $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox2'] = $checkbox_privacidad;
             $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox3'] = $checkbox_newsletter;
 
@@ -338,11 +331,14 @@ class LayoutProcessor
         $billingAddressFields = &$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']
         ['billing-address-form']['children']['form-fields']['children'];
 
-        foreach ($billingAddressFields as $field => $value) {
-            if (!in_array($field, $fieldsToShow)) {
-                unset($billingAddressFields[$field]);
+        if(!is_null($billingAddressFields)){
+            foreach ($billingAddressFields as $field => $value) {
+                if (!in_array($field, $fieldsToShow)) {
+                    unset($billingAddressFields[$field]);
+                }
             }
         }
+
         $this->logger->debug('billing LP Vass', $billingAddressFields);
         
         return $jsLayout;
