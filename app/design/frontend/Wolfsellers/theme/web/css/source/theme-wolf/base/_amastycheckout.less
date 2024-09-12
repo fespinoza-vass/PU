@@ -4,27 +4,80 @@
 & when (@media-common = true) {
 
     .checkout-index-index{
+
+        .am-checkout:not(.-modern){
+            background: none;
+        }
+
+        .ambanners{
+            display: none;
+        }
+
+        .page-header{
+            position: inherit;
+            top: inherit;
+            filter: invert(1);
+            .header{
+                &.content{
+                    justify-content: center;
+                    .content-logo{
+                        .logo{
+                            width: 100%;
+                            max-width: 240px;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+
         .opc-wrapper{
             &.am-opc-wrapper{
                 display: flex;
                 .checkout-column{
                     box-sizing: border-box;
-                    padding: 10px;
+                    padding: 20px;
                     border-radius: 1rem;
                     background: #fff;
                     height: fit-content;
                     box-shadow: @box-shadow;
+                    .checkout-block{
+                        transition: inherit;
+                        background: inherit;
+                        box-shadow: none;
+                        margin: 0;
+                        padding: 0;
+                        &:hover{
+                            box-shadow: none;
+                        }
+                        .opc-block-summary{
+                            margin: 0;
+                            padding: 0;
+                            background: none;
+                            .minicart-items{
+                                &.delete{
+                                    border: none;
+                                }
+                            }
+                        }
+                        .payment-option-content{
+                            padding: 0;
+                        }
+                    }
                 }
             }
         }
-
     }
 
-    // .checkout-block {
-    //     border-radius: 12px !important;
-    //     background: #FFF !important;
-    //     box-shadow: 0px 8px 6.6px 0px rgba(0, 0, 0, 0.15) !important;
-    // }
+    .amcheckout-method{
+        display: flex;
+        flex-flow: wrap;
+        .col-carrier{
+            width: 100%;
+            padding: 5px;
+        }
+    }
+
 
     .opc-block-summary.amcheckout-summary-container {
         margin: 0 !important;
@@ -2703,14 +2756,3 @@
         }
 
 }
-
-
-
-
-
-
-
-
-
-
-
