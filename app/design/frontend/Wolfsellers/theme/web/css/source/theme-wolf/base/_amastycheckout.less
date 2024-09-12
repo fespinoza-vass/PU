@@ -4,27 +4,96 @@
 & when (@media-common = true) {
 
     .checkout-index-index{
+
+        .am-checkout:not(.-modern){
+            background: none;
+        }
+
+        .ambanners{
+            display: none;
+        }
+
+        .page-header{
+            position: inherit;
+            top: inherit;
+            filter: invert(1);
+            .header{
+                &.content{
+                    justify-content: center;
+                    .content-logo{
+                        .logo{
+                            width: 100%;
+                            max-width: 240px;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+
         .opc-wrapper{
             &.am-opc-wrapper{
                 display: flex;
                 .checkout-column{
                     box-sizing: border-box;
-                    padding: 10px;
+                    padding: 20px;
                     border-radius: 1rem;
                     background: #fff;
                     height: fit-content;
                     box-shadow: @box-shadow;
+                    .checkout-block{
+                        transition: inherit;
+                        background: inherit;
+                        box-shadow: none;
+                        margin: 0;
+                        padding: 0;
+                        &:hover{
+                            box-shadow: none;
+                        }
+                        .opc-block-summary{
+                            margin: 0;
+                            padding: 0;
+                            background: none;
+                            .minicart-items{
+                                &.delete{
+                                    border: none;
+                                }
+                            }
+                        }
+                        .payment-option-content{
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .document-type-checkout{
+            display: flex;
+            align-items: normal;
+            &-choices {
+                display: flex;
+                justify-content: space-around;
+                gap: 20px;
+                .radio {
+                    width: 15px;
+                    height: 15px;
+                    accent-color: var(--Texto, #000); /* Cambia el color del radio button */
                 }
             }
         }
 
     }
 
-    // .checkout-block {
-    //     border-radius: 12px !important;
-    //     background: #FFF !important;
-    //     box-shadow: 0px 8px 6.6px 0px rgba(0, 0, 0, 0.15) !important;
-    // }
+    .amcheckout-method{
+        display: flex;
+        flex-flow: wrap;
+        .col-carrier{
+            width: 100%;
+            padding: 5px;
+        }
+    }
+
 
     .opc-block-summary.amcheckout-summary-container {
         margin: 0 !important;
@@ -42,11 +111,11 @@
         display: none !important;
     }
     
-    .document-type-checkout-choices .radio {
-        width: 15px;
-        height: 15px;
-        accent-color: var(--Texto, #000); /* Cambia el color del radio button */
-    }
+    // .document-type-checkout-choices .radio {
+    //     width: 15px;
+    //     height: 15px;
+    //     accent-color: var(--Texto, #000); /* Cambia el color del radio button */
+    // }
 
     .action.primary.checkout {
         display: flex; 
@@ -547,11 +616,11 @@
             margin: 0 auto; /* Centra el contenedor principal */
         }
         
-        .document-type-checkout-choices {
-            display: flex;
-            justify-content: center; /* Centra los radio buttons dentro del contenedor */
-            gap: 20px; /* Espacio entre los botones */
-        }
+        // .document-type-checkout-choices {
+        //     display: flex;
+        //     justify-content: center; /* Centra los radio buttons dentro del contenedor */
+        //     gap: 20px; /* Espacio entre los botones */
+        // }
         
         .field.choice {
             display: flex;
@@ -1249,19 +1318,19 @@
             margin: 5px 0 !important;
         }
 
-        .document-type-checkout {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center; 
-            margin: 0 auto;
-        }
+        // .document-type-checkout {
+        //     display: flex;
+        //     flex-direction: column;
+        //     align-items: center;
+        //     text-align: center; 
+        //     margin: 0 auto;
+        // }
         
-        .document-type-checkout-choices {
-            display: flex;
-            justify-content: center; /* Centra los radio buttons dentro del contenedor */
-            gap: 20px; /* Espacio entre los botones */
-        }
+        // .document-type-checkout-choices {
+        //     display: flex;
+        //     justify-content: center; /* Centra los radio buttons dentro del contenedor */
+        //     gap: 20px; /* Espacio entre los botones */
+        // }
         
         .field.choice {
             display: flex;
@@ -1969,23 +2038,23 @@
             margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
         }
 
-        .document-type-checkout {
-            display: block; /* Estilo normal para escritorio */
-            text-align: left; /* Ajusta según el diseño para escritorio */
-            margin: 0; /* Ajusta el margen según lo que desees para escritorio */
-        }
+        // .document-type-checkout {
+        //     display: block; /* Estilo normal para escritorio */
+        //     text-align: left; /* Ajusta según el diseño para escritorio */
+        //     margin: 0; /* Ajusta el margen según lo que desees para escritorio */
+        // }
 
-        .document-type-checkout-choices {
-            display: flex;
-            justify-content: flex-start;
-            gap: 20px; /* Espacio entre los grupos de radio buttons */
-        }
+        // .document-type-checkout-choices {
+        //     display: flex;
+        //     justify-content: flex-start;
+        //     gap: 20px; /* Espacio entre los grupos de radio buttons */
+        // }
         
-        .document-type-checkout-choices .field.choice {
-            display: flex;
-            align-items: center;
-            margin-top: 20px; 
-        }
+        // .document-type-checkout-choices .field.choice {
+        //     display: flex;
+        //     align-items: center;
+        //     margin-top: 20px; 
+        // }
 
         .document-type-checkout p{
             color: var(--Texto, #000);
@@ -1994,7 +2063,6 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
-    
         }
 
         .primary > button.action-update,
@@ -2657,24 +2725,24 @@
             margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
         }
 
-        .document-type-checkout {
-            display: block; /* Estilo normal para escritorio */
-            text-align: left; /* Ajusta según el diseño para escritorio */
-            margin: 0; /* Ajusta el margen según lo que desees para escritorio */
-        }
+        // .document-type-checkout {
+        //     display: block; /* Estilo normal para escritorio */
+        //     text-align: left; /* Ajusta según el diseño para escritorio */
+        //     margin: 0; /* Ajusta el margen según lo que desees para escritorio */
+        // }
         
-        .document-type-checkout-choices {
-            display: flex;
-            gap: 20px; /* Espacio entre los grupos de radio buttons */
-            justify-content: flex-start;
-        }
+        // .document-type-checkout-choices {
+        //     display: flex;
+        //     gap: 20px; /* Espacio entre los grupos de radio buttons */
+        //     justify-content: flex-start;
+        // }
         
-         .document-type-checkout-choices.field.choice {
-            display: flex;
-            align-items: center;
-            margin-top: 20px; /* Alinea el radio button y el texto en el mismo nivel */
+        //  .document-type-checkout-choices.field.choice {
+        //     display: flex;
+        //     align-items: center;
+        //     margin-top: 20px; /* Alinea el radio button y el texto en el mismo nivel */
             
-        }
+        // }
 
         .document-type-checkout-choices .label {
             color: var(--Texto, #000);
@@ -2718,14 +2786,3 @@
         }
 
 }
-
-
-
-
-
-
-
-
-
-
-
