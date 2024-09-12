@@ -14,17 +14,17 @@
         }
 
         .page-header{
-            position: inherit;
-            top: inherit;
-            filter: invert(1);
+            position: inherit !important;
+            top: inherit !important;
+            filter: invert(1) !important;
             .header{
                 &.content{
-                    justify-content: center;
+                    justify-content: center !important;
                     .content-logo{
                         .logo{
-                            width: 100%;
-                            max-width: 240px;
-                            margin: 0;
+                            width: 100% !important;
+                            max-width: 240px !important;
+                            margin: 0 !important;
                         }
                     }
                 }
@@ -50,17 +50,61 @@
                         &:hover{
                             box-shadow: none;
                         }
+                        .fieldset{
+                            &:last-child{
+                                margin-bottom: 0;
+                            }
+                        }
                         .opc-block-summary{
                             margin: 0;
                             padding: 0;
                             background: none;
                             .minicart-items{
-                                &.delete{
-                                    border: none;
+                                &-wrapper{
+                                    padding: 20px 0 0;
+                                }
+                                .product-item{
+                                    .product{
+                                        display: flex;
+                                        flex-flow: row;
+                                        align-items: center;
+                                        gap: 10px;
+                                        &::after,
+                                        &::before{
+                                            content: none;
+                                        }
+                                        .delete{
+                                            padding: 6px;
+                                        }
+                                        &-image-container{
+                                            margin-left: inherit;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                        }
+                                        &-item-details{
+                                            padding-left: inherit;
+                                            .product-item-inner{
+                                                display: flex;
+                                                flex-flow: row;
+                                                align-items: center;
+                                                margin: 0;
+                                                gap: 10px;
+                                                .details-qty{
+                                                    .qty{
+                                                        width: 34px;
+                                                        height: 34px;
+                                                        padding: 0;
+                                                        text-align: center;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                        .payment-option-content{
+                        .payment-method-content{
                             padding: 0;
                         }
                     }
@@ -70,11 +114,13 @@
 
         .document-type-checkout{
             display: flex;
-            align-items: normal;
+            flex-flow: wrap;
+            gap: 10px;
             &-choices {
                 display: flex;
                 justify-content: space-around;
                 gap: 20px;
+                width: 100%;
                 .radio {
                     width: 15px;
                     height: 15px;
@@ -82,7 +128,6 @@
                 }
             }
         }
-
     }
 
     .amcheckout-method{
@@ -184,6 +229,13 @@
             &.am-opc-wrapper{
                 flex-flow: column;
                 gap: 10px;
+                .checkout-column{
+                    .checkout-block{
+                        .payment-method-content{
+                            padding: 10px;
+                        }
+                    }
+                }
             }
         }
     }
@@ -209,6 +261,7 @@
         background: #fff !important;
         margin: 0 auto !important;
     }
+
     #customer-email {
         display: flex;
         width: 85% !important;
@@ -216,6 +269,7 @@
         flex-direction: column;
         align-items: flex-start;
     }
+
     .amcheckout-email .field-tooltip {
         right: 10px;
     }
