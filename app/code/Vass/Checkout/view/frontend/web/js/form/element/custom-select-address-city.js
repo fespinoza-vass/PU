@@ -2,8 +2,10 @@ define([
     'jquery',
     'Magento_Checkout/js/model/quote',
     'ko',
-    'Magento_Ui/js/form/element/select'
-], function ($, quote, ko, select) {
+    'Magento_Ui/js/form/element/select',
+    'uiRegistry',
+    'Magento_Checkout/js/model/full-screen-loader'
+], function ($, quote, ko, select, registry, fullScreenLoader) {
     'use strict';
 
     return select.extend({
@@ -13,8 +15,14 @@ define([
 
             $(document).on('change', '[name="region_id"]', function () {
                 var selectedRegion = $(this).val();
-                console.log('Region seleccionada:', selectedRegion);
-                self.filterCities(selectedRegion);
+                if(selectedRegion.length > 0){
+                    console.log('Region seleccionada:', selectedRegion);
+                    fullScreenLoader.startLoader();
+                    self.filterCities(selectedRegion);
+                }else{
+                    var selectComponent = registry.get('checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset.region_id');
+                    selectComponent.value('');
+                }
             });
             
         },
@@ -27,6 +35,7 @@ define([
                 success: function (data) {
                     console.log(self);
                     self.setOptions(JSON.parse(data));
+                    fullScreenLoader.stopLoader();
                 }
             });
         }
