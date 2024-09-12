@@ -173,24 +173,6 @@ class LayoutProcessor
 
       
 
-            $check_terminos = [
-                'component' => 'Magento_Ui/js/form/element/abstract',
-                'config' => [
-                    'customScope' => 'checkout.sidebar.additional.custom_attributes',
-                    'template' => 'ui/form/field',
-                    'elementTmpl' => 'ui/form/element/checkbox',
-                    'id' => 'checkbox_terminos',
-                ],
-                'dataScope' => 'checkout.sidebar.additional.checkbox_terminos',
-                'description' => 'He leído y acepto los',
-                'provider' => 'checkoutProvider',
-                'visible' => true,
-                'validation' => [
-                    'required-entry' => false,
-                ],
-                'sortOrder' => 100,
-                
-            ];
         
             $checkbox_privacidad = [
                 'component' => 'Magento_Ui/js/form/element/abstract',
@@ -201,7 +183,7 @@ class LayoutProcessor
                     'id' => 'checkbox_privacidad',
                 ],
                 'dataScope' => 'checkout.sidebar.additional.checkbox_privacidad',
-                'description' => 'He leído y acepto la', // Cambia esto a la etiqueta deseada
+                'description' => 'He leído y acepto los', // Cambia esto a la etiqueta deseada
                 'provider' => 'checkoutProvider',
                 'visible' => true,
                 'validation' => [
@@ -235,7 +217,6 @@ class LayoutProcessor
           
 
             // Añadiendo el checkbox a la ruta especificada
-            $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox'] = $check_terminos;
             $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox2'] = $checkbox_privacidad;
             $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['custom_checkbox3'] = $checkbox_newsletter;
 

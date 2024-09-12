@@ -15,10 +15,15 @@ if ($orderObject) {
 ?>
  
 <div class="checkout-success">
+<div class="return-home-link">
+    <a href="/" class="return-home">
+        &lt; Volver al Home
+    </a>
+</div>
     <div class="success-container">
         <h1 class="success-title">¡Gracias por tu compra!</h1>
         <div class="success-order-number">Tu ID de pedido es: <?= $orderObject->getIncrementId() ?> </div>
- </div>
+    </div>
 
         <!-- Contenido para desktop -->
         <div class="success-section">
@@ -35,7 +40,7 @@ if ($orderObject) {
                             <strong>Destinatario</strong><br>
                             <span>Nombre: <span> <?= $orderObject->getCustomerName() ?> </span></span><br>
                             <span>Apellidos: <span> <?= $orderObject->getCustomerLastName() ?> </span></span><br>
-                            <span><?= $orderObject->getIdentificacionPicker() ?> <span><?= $orderObject->getNumeroIdentificacionPicker() ?></span></span> <br>
+                            <span>DNI: <span><?= $orderObject->getNumeroIdentificacionPicker() ?></span></span> <br>
                             <span>Correo: <span><?= $orderObject->getCustomerEmail() ?></span></span>
                         </div>
                         <div class="success-address-details__col">
@@ -43,9 +48,9 @@ if ($orderObject) {
                             <span>Departamento: <span><?= $orderObject->getShippingAddress()->getRegion() ?></span></span><br>
                             <span>Provincia:  <span><?= $orderObject->getShippingAddress()->getCity() ?></span></span><br>
                             <span>Distrito: <span><?= $orderObject->getShippingAddress()->getColony() ?></span></span><br>
+                            <span>Número de teléfono: <span><?= $orderObject->getShippingAddress()->getTelephone() ?></span></span>
                             <span>Dirección: <span><?= $orderObject->getShippingAddress()->getStreet()[0] ?></span></span><br>
                             <span>Referencia: <span><?= $orderObject->getShippingAddress()->getReferenciaEnvio() ?></span></span><br>
-                            <span>Número de teléfono: <span><?= $orderObject->getShippingAddress()->getTelephone() ?></span></span>
                         </div>
                         <div class="success-address-details__col">
                             <strong>Forma de pago</strong><br>
@@ -114,9 +119,9 @@ if ($orderObject) {
                 <p class="success-summary__info"><span>Departamento:</span> <?= $orderObject->getShippingAddress()->getRegion() ?></p>
                 <p class="success-summary__info"><span>Provincia:</span> <?= $orderObject->getShippingAddress()->getCity() ?></p>
                 <p class="success-summary__info"><span>Distrito:</span> <?= $orderObject->getShippingAddress()->getColony() ?></p>
+                <p class="success-summary__info"><span>Número de teléfono:</span> <?= $orderObject->getShippingAddress()->getTelephone() ?></p>
                 <p class="success-summary__info"><span>Dirección:</span> <?= $orderObject->getShippingAddress()->getStreet()[0] ?></p>
                 <p class="success-summary__info"><span>Referencia:</span> <?= $orderObject->getShippingAddress()->getReferenciaEnvio() ?></p>
-                <p class="success-summary__info"><span>Número de teléfono:</span> <?= $orderObject->getShippingAddress()->getTelephone() ?></p>
             </div>
 
             <button class="success-summary__collapsible collapsible-open" type="button">Forma de pago</button>
