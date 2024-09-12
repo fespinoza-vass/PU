@@ -334,26 +334,6 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
             ];
         }
 
-        $aereoExist = false;
-        foreach ($quoteMethods as $method) {
-            if ($method['method'] === 'aereo') {
-                $aereoExist = true;
-                break;
-            }
-        }
-
-        if ($aereoExist) {
-            $quoteMethods = array_filter($quoteMethods, function ($method) {
-                return $method['method'] !== 'terrestre';
-            });
-        } else {
-            $quoteMethods = array_filter($quoteMethods, function ($method) {
-                return $method['method'] === 'terrestre';
-            });
-        }
-
-        $quoteMethods = array_values($quoteMethods);
-
         return $quoteMethods;
     }
 
