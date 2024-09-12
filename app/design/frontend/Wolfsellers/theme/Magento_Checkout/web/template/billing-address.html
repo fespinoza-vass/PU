@@ -4,13 +4,9 @@
  * See COPYING.txt for license details.
  */
 -->
-<div class="document-type-checkout rounded">
-    <div>
-        <label>
-            <div class="field choice">
-                <p class="checkout-billing-address-title">¿Qué tipo documento quiere?</p>
-            </div>
-        </label>
+<div class="document-type-checkout">
+    <div class="document-type-checkout-title">
+        <p class="checkout-billing-address-title">¿Qué tipo documento quiere?</p>
     </div>
     <div class="document-type-checkout-choices">
 
@@ -23,10 +19,12 @@
         
         </div>
         <div class="field choice" data-bind="visible: canUseShippingAddress()">
+
             <input type="radio" id="bill" class="radio" name="billing-address-same-as-shipping" value="1" data-bind="checked:isAddressSameAsShipping, checkedValue: false, click: useShippingAddress" />
             <label class="label" data-bind="attr: {for: 'bill'}" for="bill"> 
                 <span>Factura</span>
             </label>
+            
         </div>
     </div>
 </div>
