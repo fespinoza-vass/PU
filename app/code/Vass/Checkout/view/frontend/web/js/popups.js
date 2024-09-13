@@ -8,7 +8,12 @@ require([
         var popupOpened = false;
         var popupInstance;
 
-        function openPopup(pageId, popupTitle) {
+        // Función para construir la URL usando window.location
+        function getUrl(path) {
+            return window.location.origin + path; // Construye la URL base + path
+        }
+
+        function openPopup(pageUrl, popupTitle) {
             if (popupOpened) {
                 return; // Evita abrir el popup si ya está abierto
             }
@@ -19,15 +24,13 @@ require([
                 'display': 'none'
             });
 
-            var pageUrl = '/cms/page/view/page_id/' + pageId;
-
             $.ajax({
                 url: pageUrl,
                 type: 'GET',
                 success: function(response) {
                     var $content = $('<div>').html(response);
                     var content = $content.find('main').html() || $content.html();
-                    
+
                     if (!content) {
                         // Maneja el caso en que no hay contenido
                         return;
@@ -37,21 +40,20 @@ require([
                         type: 'popup',
                         responsive: true,
                         innerScroll: true,
-                        title: '',  
+                        title: popupTitle,
                         buttons: [{
                             text: $.mage.__('Cerrar'),
-                            class: 'action-secondary modal-close', 
-                            click: function () {
-                                this.closeModal(); 
+                            class: 'action-secondary modal-close',
+                            click: function() {
+                                this.closeModal();
                             }
                         }],
-                        closeOnEscape: true, 
+                        closeOnEscape: true,
                         closed: function() {
-                            popupOpened = false; 
+                            popupOpened = false;
 
-                            
                             $('.header.content').css({
-                                'display': '' 
+                                'display': ''
                             });
                         }
                     };
@@ -64,6 +66,9 @@ require([
                     // Inicializa el popup
                     popupInstance = modal(popupOptions, $('<div>').html(content));
                     popupInstance.openModal();
+
+                    // Oculta la clase .modal-title después de abrir el popup
+                    $('.modal-popup .modal-title').hide();
 
                     $('.modal-popup').prepend('<button class="action-close" type="button" title="Cerrar"><span aria-hidden="true">×</span></button>');
 
@@ -84,37 +89,29 @@ require([
                     popupOpened = false;
 
                     $('.header.content').css({
-                        'display': '' 
+                        'display': ''
                     });
                 }
             });
         }
 
-        // Configura el evento para el <strong> con el id "tyc"
+        // Configura los eventos utilizando getUrl para construir la URL
         $(document).on('click', '#tyc', function(event) {
-            event.stopPropagation(); 
-            event.preventDefault(); 
-            openPopup('1396', 'Términos y Condiciones');
+            event.stopPropagation();
+            event.preventDefault();
+            openPopup(getUrl('/popup-tyc'), 'Términos y Condiciones');
         });
 
-        // Configura el evento para el <strong> con el id "privacidad"
         $(document).on('click', '#privacidad', function(event) {
-            event.stopPropagation(); 
-            event.preventDefault(); 
-            openPopup('1397', 'Política de Protección de Datos Personales');
+            event.stopPropagation();
+            event.preventDefault();
+            openPopup(getUrl('/privacidad-datos-personales'), 'Política de Protección de Datos Personales');
         });
 
-        // Configura el evento para el <strong> con el id "comunicaciones"
         $(document).on('click', '#comunicaciones', function(event) {
-            event.stopPropagation(); 
-            event.preventDefault(); 
-            openPopup('1398', 'Comunicaciones de Publicidad y Promociones');
-        });
-
-        // Configura el evento para el <span> si también necesitas manejarlo
-        $(document).on('click', 'span[data-bind="text: description || label"]', function(event) {
-            event.stopPropagation(); 
-            event.preventDefault(); 
+            event.stopPropagation();
+            event.preventDefault();
+            openPopup(getUrl('/politicas-de-publicidad'), 'Comunicaciones de Publicidad y Promociones');
         });
     });
 });
