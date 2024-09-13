@@ -5,8 +5,12 @@
 
     .checkout-index-index{
 
-        .am-checkout:not(.-modern){
-            background: none;
+        .am-checkout{
+            margin: 0;
+            padding: 0;
+            &:not(.-modern){
+                background: none;
+            }
         }
 
         .ambanners{
@@ -17,6 +21,11 @@
             position: inherit !important;
             top: inherit !important;
             filter: invert(1) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 20px !important;
+            margin-bottom: inherit !important;
             .header{
                 &.content{
                     justify-content: center !important;
@@ -32,6 +41,11 @@
         }
 
         .opc-wrapper{
+            .form-login,
+            .form-shipping-address,
+            .methods-shipping{
+                padding: 0;
+            }
             &.am-opc-wrapper{
                 display: flex;
                 .checkout-column{
@@ -84,6 +98,12 @@
                                         }
                                         &-item-details{
                                             padding-left: inherit;
+                                            .label{
+                                                flex: 1 1 60%;
+                                            }
+                                            .qty-controls{
+                                                display: flex;
+                                            }
                                             .product-item-inner{
                                                 display: flex;
                                                 flex-flow: row;
@@ -91,11 +111,34 @@
                                                 margin: 0;
                                                 gap: 10px;
                                                 .details-qty{
-                                                    .qty{
-                                                        width: 34px;
-                                                        height: 34px;
-                                                        padding: 0;
-                                                        text-align: center;
+                                                    display: flex;
+                                                    align-items: stretch;
+                                                    justify-content: center;
+                                                    .quantity-controls{
+                                                        display: flex;
+                                                        align-items: center;
+                                                        justify-content: stretch;
+                                                        border: 1px solid #aaaaaa;
+                                                        border-radius: 1rem;
+                                                        overflow: hidden;
+                                                        button,
+                                                        input{
+                                                            text-align: center;
+                                                            height: 30px;
+                                                            margin: 0;
+                                                        }
+                                                        .quantity-button{
+                                                            flex: 1 1 50%;
+                                                        }
+                                                        .qty{
+                                                            width: 20%;
+                                                            border: none;
+                                                            border-left: 1px solid #aaaaaa;
+                                                            border-right: 1px solid #aaaaaa;
+                                                            border-radius: 0;
+                                                            padding: 0;
+                                                            flex: 1 1 80%;
+                                                        }
                                                     }
                                                 }
                                             }
@@ -104,8 +147,35 @@
                                 }
                             }
                         }
-                        .payment-method-content{
-                            padding: 0;
+                        .checkout-payment-method{
+                            .discount-code{
+                                margin: 0;
+                                padding: 0 0 20px 0;
+                                .form-discount{
+                                    display: flex;
+                                    flex-flow: row;
+                                    align-items: center;
+                                    justify-content: space-between;
+                                    .payment-option-inner{
+                                        flex: 1 1 100%;
+                                        margin: 0;
+                                    }
+                                    .action{
+                                        background: #000;
+                                        border: 1px solid;
+                                        text-align: center;
+                                        box-shadow: none;
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                        .payment-option-inner{
+                            .action-apply{
+                                background: #000;
+                                border: 1px solid;
+                                text-align: center;
+                            }
                         }
                     }
                 }
@@ -517,16 +587,16 @@
                 display: none !important;
             }
     
-            .payment-option-inner {
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
+            // .payment-option-inner {
+            //     display: flex;
+            //     align-items: center;
+            //     width: 100%;
+            // }
             
-            .payment-option-inner .field {
-                flex-grow: 1;
-                margin-bottom: 0; /* Elimina cualquier margen inferior */
-            }
+            // .payment-option-inner .field {
+            //     flex-grow: 1;
+            //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+            // }
             
             .actions-toolbar {
                 display: flex;
@@ -729,6 +799,13 @@
             &.am-opc-wrapper{
                 flex-flow: row;
                 gap: 20px;
+                .checkout-column{
+                    .checkout-block{
+                        .payment-method-content{
+                            padding: 0px;
+                        }
+                    }
+                }
             }
         }
     }
@@ -1173,16 +1250,16 @@
                 display: none !important;
             }
     
-            .payment-option-inner {
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
+            // .payment-option-inner {
+            //     display: flex;
+            //     align-items: center;
+            //     width: 100%;
+            // }
             
-            .payment-option-inner .field {
-                flex-grow: 1;
-                margin-bottom: 0; /* Elimina cualquier margen inferior */
-            }
+            // .payment-option-inner .field {
+            //     flex-grow: 1;
+            //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+            // }
             
             .actions-toolbar {
                 display: flex;
@@ -1883,16 +1960,16 @@
                 display: none !important;
             }
     
-            .payment-option-inner {
-                display: flex;
-                align-items: center;
-                width: 100%;
-            }
+            // .payment-option-inner {
+            //     display: flex;
+            //     align-items: center;
+            //     width: 100%;
+            // }
             
-            .payment-option-inner .field {
-                flex-grow: 1;
-                margin-bottom: 0; /* Elimina cualquier margen inferior */
-            }
+            // .payment-option-inner .field {
+            //     flex-grow: 1;
+            //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+            // }
             
             .actions-toolbar {
                 display: flex;
@@ -2577,16 +2654,16 @@
             display: none !important;
         }
 
-        .payment-option-inner {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
+        // .payment-option-inner {
+        //     display: flex;
+        //     align-items: center;
+        //     width: 100%;
+        // }
         
-        .payment-option-inner .field {
-            flex-grow: 1;
-            margin-bottom: 0; /* Elimina cualquier margen inferior */
-        }
+        // .payment-option-inner .field {
+        //     flex-grow: 1;
+        //     margin-bottom: 0; /* Elimina cualquier margen inferior */
+        // }
         
         .actions-toolbar {
             display: flex;
