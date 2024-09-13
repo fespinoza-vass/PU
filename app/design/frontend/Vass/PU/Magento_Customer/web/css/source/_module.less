@@ -31,6 +31,11 @@
 
 & when (@media-common = true) {
     .login-container {
+        .customer-login-image {
+            max-height: 192px;
+            width: 100%;
+            margin-bottom: 24px;
+        }
         .block {
             &-new-customer {
                 .actions-toolbar {
@@ -40,14 +45,63 @@
 
             .block-title {
                 &:extend(.abs-login-block-title all);
-                .lib-font-size(18);
+                border-bottom: 0;
+                padding: 0;
+                strong {
+                    .lib-font-size(18);
+                    font-weight: 700;
+                }
             }
         }
 
         .fieldset {
             .lib-form-hasrequired(bottom);
+            &.login {
+                border: 0;
+                gap: 24px;
+                padding: 0;
+                .actions-toolbar {
+                    > div {
+                        margin-bottom: 20px;
+                        button {
+                            width: 100%;
+                        }
+                    }
+                }
+                .control {
+                    position: relative;
+                    .field.choice{
+                        position: absolute;
+                        z-index: 10;
+                        right: 10px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        .checkbox {
+                            .lib-css(appearance, none);
+                            cursor: pointer;
+                            &:hover {
+                                &::before {
+                                    opacity: 0.7;
+                                }
+                            }
+                            &:before {
+                                content: @icon-plus;
+                                font-family: @icons__font-name;
+                                font-size: 24px;
+                            }
+                        }
+                        .label {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .create-account {
+                display: flex;
+                gap: 10px;
+            }
             &:after {
-                margin-top: 35px;
+                display: none;
             }
         }
     }
@@ -409,24 +463,38 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
-
+        padding: 0 95px;
         .block {
+            width: 100%;
             &:extend(.abs-blocks-2columns all);
-            .login {
-                .actions-toolbar {
-                    > .primary {
-                        margin-bottom: 0;
-                        margin-right: @indent__l;
-                    }
+            .block-content {
+                display: flex;
+                .block-left,
+                .block-right {
+                    flex: 1;
+                }
+                .block-right {
+                    padding: 36px 32px;
+                }
 
-                    > .secondary {
-                        float: left;
-                    }
+                .customer-login-image {
+                    max-height: 492px;
+                    margin-bottom: 0;
                 }
             }
         }
 
         .fieldset {
+            &.login {
+                .actions-toolbar {
+                    > div {
+                        button {
+                            width: 50%;
+                        }
+                    }
+                }
+            }
+
             &:after {
                 &:extend(.abs-margin-for-forms-desktop all);
             }
