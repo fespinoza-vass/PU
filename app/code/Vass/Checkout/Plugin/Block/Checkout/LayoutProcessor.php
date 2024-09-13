@@ -143,9 +143,6 @@ class LayoutProcessor
             'value' =>  $this->getNumIdentificacionCustomer($idCustomer)       
         ];
 
-        $this->logger->info('dni',$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
-        ['shippingAddress']['children']['shipping-address-fieldset']['children']['numero_identificacion_picker']);
-
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
             ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio'] = [
             'component' => 'Magento_Ui/js/form/element/abstract',  // Ajusta este componente si es necesario
@@ -328,7 +325,8 @@ class LayoutProcessor
         ];
 
 
-        $billingAddressFields =$jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children'];
+        $billingAddressFields = &$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']['shippingAddress']['children']
+        ['billing-address-form']['children']['form-fields']['children'];
 
         if(!is_null($billingAddressFields)){
             foreach ($billingAddressFields as $field => $value) {

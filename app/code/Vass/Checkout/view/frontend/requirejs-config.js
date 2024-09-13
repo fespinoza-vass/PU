@@ -31,5 +31,12 @@ var config = {
             deps: ['jquery'],
             exports: 'popups'
         }
+    },
+    config: {
+        mixins: {
+            'Amasty_Checkout/js/view/billing-address-mixin': {
+                'Vass_Checkout/js/view/billing-address-mixin-update': true
+            }
+        }
     }
 };
