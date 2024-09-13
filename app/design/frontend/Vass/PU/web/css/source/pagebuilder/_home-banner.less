@@ -1,0 +1,44 @@
+& when (@media-common = true) {
+    .home-banner {
+        padding: 0;
+        .pagebuilder-banner-wrapper {
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+            .pagebuilder-overlay {
+                padding: 0 30px;
+            }
+            [data-element='content'] {
+                h2 {
+                    font-family: @font-family__secondary;
+                }
+            }
+        }
+        button.pagebuilder-button-primary {
+            padding: 16px 40px;
+            .lib-font-size(16px);
+
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .home-banner {
+        .pagebuilder-banner-wrapper {
+            min-height: 480px;
+            .pagebuilder-overlay {
+                padding: 0 0 0 100px;
+            }
+            [data-element='content'] {
+                h2 {
+                    .lib-font-size(40px);
+                }
+
+                p {
+                    .lib-font-size(26px);
+                }
+            }
+        }
+    }
+}
+
