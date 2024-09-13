@@ -17,7 +17,7 @@ if ($orderObject) {
 <div class="checkout-success">
 <div class="return-home-link">
     <a href="/" class="return-home">
-        &lt; Volver al Home
+        &lt; Regresar a la pagina principal
     </a>
 </div>
     <div class="success-container">
@@ -40,7 +40,6 @@ if ($orderObject) {
                             <strong>Destinatario</strong><br>
                             <span>Nombre: <span> <?= $orderObject->getCustomerName() ?> </span></span><br>
                             <span>Apellidos: <span> <?= $orderObject->getCustomerLastName() ?> </span></span><br>
-                            <span>DNI: <span><?= $orderObject->getNumeroIdentificacionPicker() ?></span></span> <br>
                             <span>Correo: <span><?= $orderObject->getCustomerEmail() ?></span></span>
                         </div>
                         <div class="success-address-details__col">

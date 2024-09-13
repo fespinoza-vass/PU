@@ -1,5 +1,5 @@
 <!-- ko if: canShowDeleteButton() -->
-<div class="delete" data-bind="click: deleteItem.bind($data, $parent)"></div>
+<div class="action delete" data-bind="click: deleteItem.bind($data, $parent)"></div>
 <!-- /ko -->
 
 <!-- ko foreach: getRegion('before_details') -->
@@ -184,3 +184,17 @@
 
     });
 </script>
+<style>
+.checkout-index-index .opc-block-summary .minicart-items .delete {
+    background: none !important; /* Elimina el fondo */
+    border: none !important; /* Elimina el borde */
+    padding: 0 !important; /* Remueve el padding */
+    width: auto !important; /* Restablece el ancho */
+    height: auto !important; /* Restablece la altura */
+    content: '\e601'; /* Asegúrate de definir el contenido del tacho si usas un ícono */
+    font-family: 'Font Awesome 5 Free'; /* Asegúrate de usar la fuente correcta */
+    font-weight: 900; /* Ajusta según el peso necesario */
+    display: inline-block; /* Asegura que el ícono se muestre correctamente */
+    margin-right: 5px; /* Espacio opcional entre el ícono y el texto */
+}
+</style>
