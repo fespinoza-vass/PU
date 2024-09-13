@@ -77,18 +77,10 @@ define([
 
         switch (platform) {
             case 'android':
-                if (window.AppFacade[command]) {
-                    console.error('Error: AppFacade not found')
-                } else {
-                    window.AppFacade[command](JSON.stringify(params))
-                }
+                window.AppFacade[command](JSON.stringify(params))
                 break
             case 'ios':
-                if (!window.webkit?.messageHandlers?.AppFacade?.postMessage) {
-                    console.error('Error: AppFacade not found')
-                } else {
-                    window.webkit.messageHandlers.AppFacade.postMessage({command, ...params})
-                }
+                window.webkit.messageHandlers.AppFacade.postMessage({command, ...params})
                 break
         }
     }
