@@ -101,5 +101,26 @@ require([
         }, 500); 
 
         $('input[name="country_id"]').closest('.field').hide();
+ 
+        $('.quantity-button').on('click', function () {
+            let input = $(this).parent().find('.qty'),
+                actualQty = parseInt(input.val());
+        
+            if (isNaN(actualQty)) {
+                actualQty = 0; 
+            }
+        
+            if ($(this).hasClass('increase')) {
+                input.val(actualQty + 1); // Incrementar
+                console.log('subir');
+            } else if ($(this).hasClass('decrease')) {
+                if (actualQty > 0) {
+                    input.val(actualQty - 1); 
+                }
+                console.log('bajar');
+            }
+        
+            input.trigger('change');
+        });
     });
 });

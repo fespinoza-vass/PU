@@ -34,7 +34,7 @@ var config = {
     },
     config: {
         mixins: {
-            'Amasty_Checkout/js/view/billing-address-mixin': {
+            'Magento_Checkout/js/view/billing-address': {
                 'Vass_Checkout/js/view/billing-address-mixin-update': true
             }
         }

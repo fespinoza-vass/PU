@@ -1,17 +1,28 @@
+/**
+ * Billing address view mixin for store flag is billing form in edit mode (visible)
+ */
 define([
-    'jquery',
-    'mage/utils/wrapper'
-], function ($, wrapper) {
+    'ko',
+    'underscore',
+    'Magento_Customer/js/model/customer',
+    'Magento_Checkout/js/model/quote',
+    'Magento_Checkout/js/checkout-data'
+], function (ko, _, customer, quote, checkoutData) {
     'use strict';
 
     return function (billingAddress) {
-        billingAddress.updateAddress = wrapper.wrapSuper(billingAddress.updateAddress, function () {
-            console.log('Custom logic before updateAddress');
-            this._super();
-            console.log('Custom logic after updateAddress');
-        });
+        return billingAddress.extend({
 
-        return billingAddress;
+            /**
+             * Update address action
+             *
+             * @return {*}
+             */
+            updateAddress: function () {
+                this._super();
+
+                console.log('aqui');
+            }
+        });
     };
 });
-    
