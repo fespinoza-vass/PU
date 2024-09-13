@@ -9,20 +9,15 @@ define([
     'Magento_Checkout/js/checkout-data'
 ], function (ko, _, customer, quote, checkoutData) {
     'use strict';
+    return function (updateAddress) {
 
-    return function (billingAddress) {
-        return billingAddress.extend({
+        return wrapper.wrap(updateAddress, function (originalUpdateAddress, config, element) {
 
-            /**
-             * Update address action
-             *
-             * @return {*}
-             */
-            updateAddress: function () {
-                this._super();
+            originalUpdateAddress(config, element);
 
-                console.log('aqui');
-            }
+            console.log('aqui');
+
         });
+
     };
 });
