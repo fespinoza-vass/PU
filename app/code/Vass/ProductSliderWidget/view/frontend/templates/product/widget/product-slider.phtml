@@ -58,7 +58,6 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                     </a>
                                 </span>
 
-                                <?= $block->getProductPrice($_item) ?>
                                 <?php if ($_item->getTypeId() === 'configurable'): ?>
                                     <?= $block->getLayout()
                                         ->createBlock(\Magento\Swatches\Block\Product\Renderer\Configurable::class)
@@ -67,6 +66,7 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                     ?>
                                 <?php endif; ?>
 
+                                <?= $block->getProductPrice($_item) ?>
 
                                 <div class="product-item-inner">
                                     <div class="product-item-actions">
