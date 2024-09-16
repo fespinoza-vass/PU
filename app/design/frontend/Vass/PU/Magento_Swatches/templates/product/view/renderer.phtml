@@ -1,0 +1,31 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+?>
+<?php
+/** @var $block \Magento\Swatches\Block\Product\Renderer\Configurable */
+/** @var \Magento\Swatches\ViewModel\Product\Renderer\Configurable $configurableViewModel */
+$configurableViewModel = $block->getConfigurableViewModel();
+$product = $block->getProduct();
+?>
+<div class="swatch-opt swatch-opt-id-<?=$product->getId()?>" data-role="swatch-options"></div>
+
+<script type="text/x-magento-init">
+{
+        ".swatch-opt-id-<?=$product->getId()?>": {
+            "Magento_Swatches/js/swatch-renderer": {
+                "jsonConfig": <?= /* @noEscape */ $swatchOptions = $block->getJsonConfig() ?>,
+                "jsonSwatchConfig": <?= /* @noEscape */ $swatchOptions = $block->getJsonSwatchConfig() ?>,
+                "mediaCallback": "<?= $block->escapeJs($block->escapeUrl($block->getMediaCallback())) ?>",
+                "gallerySwitchStrategy": "<?= $block->escapeJs($block->getVar('gallery_switch_strategy', 'Magento_ConfigurableProduct')) ?: 'replace'; ?>",
+                "jsonSwatchImageSizeConfig": <?= /* @noEscape */ $block->getJsonSwatchSizeConfig() ?>,
+                "showTooltip": <?= $block->escapeJs($configurableViewModel?->getShowSwatchTooltip() ?? true) ?>
+            }
+        },
+        "*" : {
+            "Magento_Swatches/js/catalog-add-to-cart": {}
+        }
+}
+</script>

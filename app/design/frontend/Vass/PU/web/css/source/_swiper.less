@@ -1,0 +1,175 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .swiper {
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        overflow: hidden;
+        list-style: none;
+        padding: 0;
+        z-index: 1;
+
+        &:not(.swiper-container-initialized) {
+            visibility: hidden;
+        }
+    }
+
+    .slider {
+        position: relative;
+
+        .swiper-button-next,
+        .swiper-button-prev,
+        .swiper-next,
+        .swiper-prev {
+            background-color: @primary-white;
+            border: 1px solid @primary-black;
+            color: @primary-black;
+            cursor: pointer;
+            height: 48px;
+            width: 48px;
+            font-size: 15px;
+            line-height: 34px;
+            text-align: center;
+            border-radius: 50%;
+
+            &:hover {
+                background-color: @primary-black;
+                color: @primary-white;
+            }
+
+            &:after {
+                font-family: @icons__font-name;
+                content: @icon-right;
+                .lib-font-size(15);
+                line-height: 15px;
+            }
+
+            &.swiper-button-disabled {
+                border-color: @color-gray-light1;
+                color: @color-gray-light1;
+                pointer-events: initial;
+            }
+        }
+
+        .swiper-button-prev,
+        .swiper-prev {
+            &:after {
+                content: @icon-left;
+            }
+        }
+    }
+
+    .swiper-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        transition-property: transform;
+        box-sizing: content-box;
+    }
+
+    .swiper-android .swiper-slide,
+    .swiper-wrapper {
+        transform: translate3d(0, 0, 0);
+    }
+
+    .swiper-pointer-events {
+        touch-action: pan-y;
+
+        &.swiper-vertical {
+            touch-action: pan-x;
+        }
+    }
+
+    .swiper-slide {
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition-property: transform;
+
+        .product-item-info {
+            overflow: hidden;
+        }
+    }
+
+    .swiper-slide-invisible-blank {
+        visibility: hidden;
+    }
+
+    .swiper-autoheight,
+    .swiper-autoheight .swiper-slide {
+        height: auto;
+    }
+
+    .swiper-autoheight .swiper-wrapper {
+        align-items: flex-start;
+        transition-property: transform, height;
+    }
+
+    .swiper-backface-hidden .swiper-slide {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
+    .swiper-button-lock {
+        display: none;
+    }
+
+    .swiper-pagination.swiper-pagination-bullets {
+        margin: 0;
+
+        &.swiper-pagination-clickable {
+            .swiper-pagination-bullet {
+                width: 4px;
+                height: 4px;
+                background-color: @color-gray-dark2;
+                border: 0;
+                margin: 0 12px;
+
+                &.swiper-pagination-bullet-active {
+                    background-color: @primary-black;
+                    width: 6px;
+                    height: 6px;
+                }
+            }
+        }
+    }
+
+    //
+    //  Products Slider
+    //  _____________________________________________
+
+    .slider {
+        .swiper-button-next,
+        .swiper-button-prev,
+        .swiper-next,
+        .swiper-prev {
+            display: none;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .slider {
+        .swiper-pagination {
+            display: none;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev,
+        .swiper-next,
+        .swiper-prev {
+            display: flex;
+        }
+    }
+}
