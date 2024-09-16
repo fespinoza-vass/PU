@@ -31,7 +31,7 @@ define([
             let pathRegister = 'customer/app/register';
             let customer = customerData.get('customer');
             let cart = customerData.get('cart');
-            let customerName = '', customerLastName = '', cartQty = 0;
+            var customerName = '', customerLastName = '', cartQty = 0;
 
             if (customer().fullname) {
                 customerName = customer().firstname ?? '';
