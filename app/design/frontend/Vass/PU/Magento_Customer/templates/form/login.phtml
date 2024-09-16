@@ -14,12 +14,12 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
     <div class="block-content" aria-labelledby="block-customer-login-heading">
         <div class="block-left">
             <img class="customer-login-image"
-                src="/pub/media/customer/customer_image.png"
+                src="<?= $this->getViewFileUrl('Magento_Customer::image/customer_image.png'); ?>"
                 alt="">
         </div>
         <div class="block-right">
             <div class="block-title">
-                <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Registered Customers')) ?></strong>
+                <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Personal information')) ?></strong>
             </div>
             <form class="form form-login"
                   action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
@@ -37,7 +37,7 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
                                    title="<?= $block->escapeHtmlAttr(__('Email')) ?>"
                                    data-mage-init='{"mage/trim-input":{}}'
                                    data-validate="{required:true, 'validate-email':true}"
-                                   placeholder="<?= $block->escapeHtml('Ingresa tu correo electrónico') ?>">
+                                   placeholder="<?= $block->escapeHtml(__('Enter your email')) ?>">
                         </div>
                     </div>
                     <div class="field password required">
@@ -48,8 +48,9 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
                                    class="input-text" id="pass"
                                    title="<?= $block->escapeHtmlAttr(__('Password')) ?>"
                                    data-validate="{required:true}"
-                                   placeholder="<?= $block->escapeHtml('Ingresa tu contraseña') ?>">
+                                   placeholder="<?= $block->escapeHtml(__('Enter your password')) ?>">
                             <div class="field choice" data-bind="scope: 'showPassword'">
+                                <icon class="icon icon-plus"></icon>
                                 <!-- ko template: getTemplate() --><!-- /ko -->
                             </div>
                         </div>
@@ -62,7 +63,9 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
                     </div>
                     <div class="create-account">
                        <p><?= $block->escapeHtmlAttr(__("You don't have an account?")) ?></p>
-                       <a href="<?= $block->escapeUrl($block->getUrl('customer/account/create')) ?>"><?= $block->escapeHtmlAttr(__('Create an Account')) ?></a>
+                       <a href="<?= $block->escapeUrl($block->getUrl('customer/account/create')) ?>">
+                            <?= $block->escapeHtmlAttr(__('Create an Account')) ?>
+                       </a>
                     </div>
                 </fieldset>
             </form>
