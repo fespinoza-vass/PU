@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
-    <menu>
-        <add id="Izipay_Core::izipay" title="Izipay" module="Izipay_Core" sortOrder="60" resource="Izipay_Core::izipay" parent="Magento_Sales::sales"/>
-        <add id="Izipay_Core::log" title="Logs" module="Izipay_Core" sortOrder="60" parent="Izipay_Core::izipay" resource="Izipay_Core::log" action="izipay/log/index"/>
-        <add id="Izipay_Core::notification" title="Notificaciones" module="Izipay_Core" sortOrder="70" parent="Izipay_Core::izipay" resource="Izipay_Core::notification" action="izipay/notification/index"/>
-    </menu>
-</config>

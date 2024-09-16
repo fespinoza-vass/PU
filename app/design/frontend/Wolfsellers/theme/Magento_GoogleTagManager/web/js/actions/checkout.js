@@ -16,19 +16,22 @@ define([
      * @param {Object} cart - cart data
      * @param {String} stepIndex - step index
      * @param {String} stepDescription - step description
+     *
      * @param {String} currencyCode - currency code
      * @param {Object} dataUser - data user
      * @private
      */
     function notify(cart, stepIndex, stepDescription, currencyCode, dataUser) {
-        if (stepIndex === "2") {
+
+        if( stepIndex === "2" ) {
+
             const info = {
                 'event': "begin_checkout",
                 'pagePostAuthor': "Perfumerias Unidas",
                 'ecomm_pagetype': "Checkout",
-                'ecomm_prodid': cart.ids, // array de id de los productos
+                'ecomm_prodid': cart.ids, //array de id de los productos
                 'ecomm_prodsku': cart.skus,
-                'ecomm_totalvalue': cart.totals.total, // suma de los valores de los productos
+                'ecomm_totalvalue':768, //suma de los valores de los productos
                 'ecomm_totalquantity': cart.items.length,
                 'cartContent': {
                     'totals': {
@@ -42,7 +45,7 @@ define([
                 'ecommerce': {
                     'currencyCode': currencyCode,
                     'checkout': {
-                        'actionField': {'step': 1}, // Paso1
+                        'actionField': {'step': 1}, //Paso1
                         'products': cart.items
                     },
                 },
@@ -63,7 +66,7 @@ define([
                             'step': stepIndex,
                             'description': stepDescription
                         },
-                        'products': []
+                        'products': [ ]
                     }
                 }
             };
@@ -81,31 +84,8 @@ define([
         window.dataLayer.push(dlUpdate);
     }
 
-/**
- * Notifies a purchase event to the dataLayer.
- *
- * @param {Object} order - The order object containing the purchase details.
- * @param {string} order.actionField - The action field for the purchase.
- * @param {Array} order.products - An array of products in the purchase.
- * @param {string} order.currencyCode - The currency code for the purchase.
- * @return {void} This function does not return a value.
- */
-    function notifyPurchase(order) {
-        const purchaseData = {
-            'event': 'purchase',
-            'ecommerce': {
-                'purchase': {
-                    'actionField': order.actionField,
-                    'products': order.products
-                },
-                'currencyCode': order.currencyCode
-            }
-        };
-
-        window.dataLayer.push(purchaseData);
-    }
-
     return function (data) {
+
         var events = {
                 shipping: {
                     desctiption: 'shipping',
@@ -123,21 +103,12 @@ define([
                 }
             });
 
-        if (window.dataLayer) {
-            notify(data.cart, events.shipping.index, events.shipping.desctiption, data.currencyCode, data.dataUser);
-        } else {
+        window.dataLayer ?
+            notify(data.cart, events.shipping.index, events.shipping.desctiption) :
             $(document).on(
                 'ga:inited',
                 notify.bind(this, data.cart, events.shipping.index, events.shipping.desctiption, data.currencyCode, data.dataUser)
             );
-        }
-
-        $(document).on('order:placed', function (event, orderData) {
-            if (window.dataLayer) {
-                notifyPurchase(orderData);
-            } else {
-                $(document).on('ga:inited', notifyPurchase.bind(this, orderData));
-            }
-        });
     };
 });
+
