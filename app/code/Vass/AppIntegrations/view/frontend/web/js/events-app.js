@@ -82,6 +82,9 @@ define([
                 break
             case 'ios':
                 window.webkit.messageHandlers.AppFacade.postMessage({command, ...params})
+                var originalError = console.error;
+                window.webkit.messageHandlers.jsError.postMessage(message);
+                originalError.apply(console, arguments);
                 break
         }
     }
