@@ -19,7 +19,6 @@
                         <argument name="login_button_view_model" xsi:type="object">Magento\Customer\ViewModel\LoginButton</argument>
                     </arguments>
                 </block>
-                <block class="Magento\Customer\Block\Form\Login\Info" name="customer.new" template="Magento_Customer::newcustomer.phtml"/>
             </container>
             <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
                 <arguments>

@@ -30,10 +30,24 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+    .customer-account-login {
+        .page-title-wrapper {
+            text-align: center;
+            margin-bottom: 20px;
+            .page-title {
+                .base {
+                    .lib-font-size(24px);
+                }
+            }
+        }
+    }
+
     .login-container {
         .customer-login-image {
             max-height: 192px;
             width: 100%;
+            height: auto;
+            object-fit: cover;
             margin-bottom: 24px;
         }
         .block {
@@ -52,6 +66,11 @@
                     font-weight: 700;
                 }
             }
+            .block-right {
+                border-radius: 2px;
+                background-color: @primary-white;
+            }
+
         }
 
         .fieldset {
@@ -65,6 +84,7 @@
                         margin-bottom: 20px;
                         button {
                             width: 100%;
+                            height: 54px;
                         }
                     }
                 }
@@ -76,6 +96,11 @@
                         right: 10px;
                         top: 50%;
                         transform: translateY(-50%);
+                        //bloqueado hasta que pasen nuevo icono
+                        .icon-plus:before {
+                            .lib-font-size(24px);
+                        }
+
                         .checkbox {
                             .lib-css(appearance, none);
                             cursor: pointer;
@@ -84,12 +109,9 @@
                                     opacity: 0.7;
                                 }
                             }
-                            &:before {
-                                content: @icon-plus;
-                                font-family: @icons__font-name;
-                                font-size: 24px;
-                            }
+
                         }
+
                         .label {
                             display: none;
                         }
@@ -99,6 +121,9 @@
             .create-account {
                 display: flex;
                 gap: 10px;
+                a {
+                    text-transform: uppercase;
+                }
             }
             &:after {
                 display: none;
@@ -461,6 +486,16 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .customer-account-login {
+        .page-title-wrapper {
+            .page-title {
+                .base {
+                    .lib-font-size(36px);
+                }
+            }
+        }
+    }
+
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
         padding: 0 95px;
@@ -478,7 +513,7 @@
                 }
 
                 .customer-login-image {
-                    max-height: 492px;
+                    min-height: 492px;
                     margin-bottom: 0;
                 }
             }
@@ -489,7 +524,7 @@
                 .actions-toolbar {
                     > div {
                         button {
-                            width: 50%;
+                            width: 250px;
                         }
                     }
                 }
