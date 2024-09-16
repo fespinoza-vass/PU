@@ -18,10 +18,11 @@
             padding: @indent__m @indent__base;
             background-color: @color-green-light2;
             height: 100%;
-            max-height: 300px;
         }
 
         &__text-column {
+            gap: 10px;
+            margin-bottom: 24px;
             width: 100%;
         }
 
@@ -32,18 +33,16 @@
         &__title {
             color: @secondary-black;
             font-family: @font-family__secondary;
-            .lib-font-size(@h4__font-size);
-            font-weight: @font-weight__regular;
-            line-height: @line-height__xl;
+            .lib-font-size(@font-size__xl);
+            line-height: 36px;
             text-transform: uppercase;
         }
 
         &__subtitle {
             color: @secondary-black;
             font-family: @font-family__base;
-            .lib-font-size(@font-size__l);
-            font-weight: @font-weight__light;
-            line-height: @line-height__l;
+            .lib-font-size(@font-size__m);
+            line-height: 22px;
         }
 
         &__row {
@@ -51,13 +50,12 @@
             justify-content: flex-start;
             align-items: center;
             width: 100%;
-            padding-bottom: @indent__base;
-            gap: @indent__s;
+            margin-bottom: @indent__base;
+            gap: 8px;
 
-            & input {
+            input {
                 .lib-font-size(@font-size__m);
                 width: @input-text__width;
-                margin-right: 0;
                 height: @input-text__height;
                 padding: @form-element-input__padding;
                 color: @primary-black;
@@ -66,7 +64,7 @@
                 background-color: @primary-white;
             }
 
-            & .action.subscribe {
+            .action.subscribe {
                 position: relative;
                 display: @button__display;
                 height: @button__height;
@@ -85,56 +83,65 @@
             }
         }
 
-        & #newsletter-error {
+        #newsletter-error {
             position: absolute;
             padding-bottom: @indent__s;
         }
 
-        & #tos-error {
+        #tos-error {
             position: absolute;
             padding-top: @indent__xl;
         }
     }
 
     .newsletter__newsletter-column {
-        & .block.newsletter {
+        .block.newsletter {
+            margin: 0;
             height: auto;
 
-            & input {
-                margin-right: @indent__s;
-                padding-right: @indent__m;
+            input {
+                margin: 0;
                 z-index: 1;
+                padding: 8px;
             }
 
-            & .label {
+            .label {
                 width: auto;
-                max-width: 370px;
                 border: 0;
                 padding: 0;
 
                 &.label-text-wrapper {
                     .lib-font-size(14);
+                    color: @primary-black;
                     position: relative;
                     height: auto;
                     width: auto;
                 }
             }
 
-            & .action {
+            .action {
                 width: auto;
             }
 
-            & .field {
+            .field {
                 display: flex;
                 flex-direction: row;
                 align-items: baseline;
 
                 &.choice.tos {
                     width: 100%;
-                    max-width: 560px;
-                    margin-right: 0;
+                    margin: 0;
                     line-height: @line-height__l;
+                    max-width: 360px;
+
+                    input {
+                        margin-right: 15px;
+                    }
                 }
+            }
+
+            .actions {
+                width: auto;
             }
         }
     }
@@ -167,18 +174,19 @@
             align-items: center;
             flex-direction: column;
             width: 100%;
-            padding: 24px 16px;
+            padding: 26px 80px;
             height: 180px;
         }
 
         &__columns {
-            gap: @indent__s;
+            gap: 8px;
         }
 
         &__text-column {
             width: 100%;
             height: 104px;
-            padding-top: @indent__m;
+            padding-top: 20px;
+            gap: 0;
         }
 
         &__title {
@@ -189,6 +197,7 @@
         &__subtitle {
             .lib-font-size(@font-size__m);
             line-height: @line-height__l;
+            font-weight: @font-weight__light;
         }
 
         &__row {
@@ -198,22 +207,30 @@
     }
 
     .newsletter__newsletter-column {
+        > div {
+            margin-left: auto;
+        }
+
         .block.newsletter {
-            max-width: 750px;
+            margin: 0;
+            max-width: initial;
             width: 100%;
             padding-top: 0;
 
-            & input {
-                margin-right: @indent__s;
-                padding-right: @indent__m;
+            .field {
+                margin: 0;
             }
 
-            & .label.label-text-wrapper {
+            input {
+                margin: 0;
+                padding: 8px;
+            }
+
+            .label.label-text-wrapper {
                 width: 100%;
-                max-width: 535px;
             }
 
-            & .field {
+            .field {
                 &.newsletter {
                     width: 100%;
                     max-width: 400px;
@@ -221,16 +238,30 @@
                 }
 
                 &.choice.tos {
-                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    width: 99%;
                     max-width: 560px;
                     line-height: @line-height__s;
                 }
             }
+        }
 
-            & .action.subscribe {
-                text-transform: @button__text-transform;
-                width: 134px;
-            }
+        .action.subscribe {
+            padding: 16px 24px;
+            width: auto;
+            text-transform: @button__text-transform;
+        }
+
+        .form.subscribe {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+        }
+
+        .actions {
+            display: block;
+            width: auto;
         }
     }
 }

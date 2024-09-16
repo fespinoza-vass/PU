@@ -26,8 +26,7 @@
                         class="action subscribe newsletter secondary"
                         title="<?= $block->escapeHtml(__('Subscribe')) ?>"
                         type="submit"
-                        aria-label="Subscribe"
-                        disabled>
+                        aria-label="Subscribe">
                     <span><?= $block->escapeHtml(__('Subscribe')) ?></span>
                 </button>
             </div>
@@ -47,22 +46,3 @@
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-    require(["jquery"], function($) {
-        $(document).ready(function() {
-            $('#newsletter').on('keyup', function() {
-                let empty = false;
-
-                $('#newsletter').each(function() {
-                    empty = $(this).val().length == 0;
-                });
-
-                if (empty)
-                    $('#subscribe').attr('disabled', 'disabled');
-                else
-                    $('#subscribe').attr('disabled', false);
-            });
-        });
-    });
-</script>
