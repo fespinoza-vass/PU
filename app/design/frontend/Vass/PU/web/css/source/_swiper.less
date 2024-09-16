@@ -20,6 +20,10 @@
         &:not(.swiper-container-initialized) {
             visibility: hidden;
         }
+    }
+
+    .slider {
+        position: relative;
 
         .swiper-button-next,
         .swiper-button-prev,
@@ -145,7 +149,7 @@
     //  Products Slider
     //  _____________________________________________
 
-    .swiper {
+    .slider {
         .swiper-button-next,
         .swiper-button-prev,
         .swiper-next,
@@ -156,7 +160,7 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .swiper {
+    .slider {
         .swiper-pagination {
             display: none;
         }

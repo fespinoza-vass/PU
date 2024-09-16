@@ -10,7 +10,7 @@
     <body>
         <referenceContainer name="head.components">
             <block after="-" class="Amasty\PromoBanners\Block\Container"
-                   name="ambanners.top" template="top-banner.phtml"
+                   name="ambanners.top" template="Amasty_PromoBanners::top-banner.phtml"
                    ifconfig="amasty_banners_lite/general/enable_top_banner">
                 <action method="setPosition">
                     <argument name="position" xsi:type="string">10</argument>

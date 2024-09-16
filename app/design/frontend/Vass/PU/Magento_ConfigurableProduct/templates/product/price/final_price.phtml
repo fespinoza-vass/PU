@@ -26,14 +26,15 @@ $schema = ($block->getZone() == 'item_view') ? true : false;
         'include_container' => true,
         'schema' => $schema,
     ]);
-?>
-</span>
+    ?>
 
-<?php if ($maxPrice > $finalPriceModel->getAmount()): ?>
-    <span class="max-price">
-    - <?= $priceHelper->currency($maxPrice, true, true); ?>
+    <?php if ($maxPrice > $finalPriceModel->getAmount()): ?>
+        <span class="max-price">
+            - <?= $priceHelper->currency($maxPrice, true, true); ?>
+        </span>
+    <?php endif; ?>
+
 </span>
-<?php endif; ?>
 
 
 <?php if (!$block->isProductList() && $block->hasSpecialPrice()) : ?>
