@@ -256,7 +256,7 @@
 							.amform-form-fieldset{
 								.amcform-multi-page{
 									.amcform-page-wrap{
-										padding: 0 20px;
+										padding: 20px 20px 0;
 										.fb-h3{
 											margin: 25px 0 15px;
 										}
@@ -276,7 +276,7 @@
 										}
 										.field{
 											&.fb-checkbox {
-												margin-top: 20px;
+												margin: 0 auto 20px 0px !important;
                                                 .lib-css(display, flex) !important; 
                                                 position: relative ;
 												.lib-checkboxs;
@@ -304,9 +304,9 @@
                                                 }
                                                 .control {
                                                     > div{
-                                                        margin-top: -66px;
+                                                        margin-top: -72px !important;
                                                         margin-bottom: 0px;
-                                                        margin-left: 16px;
+                                                        margin-left: 29px;
                                                         &.popro{
                                                             margin-top: -58px;
                                                         }
@@ -315,12 +315,12 @@
                                                             margin-top: -58px;
 															margin-left: 6px;
                                                             p{
-                                                                margin: 0 0 0 140px !important;
+                                                                // margin: 0 0 0 14px !important;
                                                                 font-size: 14px;
                                                             }
                                                         }
                                                         &.amform-wysiwyg p{
-                                                            margin: 0 0 0 140px;
+                                                            margin: 0 0 0 14px;
                                                             .lib-font-size(14);
 															position: relative;
                                                         }
@@ -336,6 +336,59 @@
 				}
 			}
 		}
+		[class*="field-wysiwyg"]{
+			height: 0;
+			margin: 0 !important;
+		}
+
+		.amform-label_fake {
+			margin-top: -55px !important;
+			position: relative;
+			margin-left: 40px !important;
+		}
+	}
+
+	#hone-1663959313880{
+		text-transform: lowercase;
+		text-align: center;
+	}
+
+	#hone-1663959313880::first-letter {
+		text-transform: uppercase; /* Convierte solo la primera letra a mayúsculas */
+	}
+
+	label[for="checkbox-1663957584880-0"] {
+		left: 13px !important;
+		top: -25px !important
+	}
+
+
+	label[for="checkbox-1674495739012-0"] {
+		margin-top: -10px !important;
+    	margin-left: 11px !important;
+	}
+
+	#wysiwyg-1674495724464{
+		.amform-layout-one{
+			margin: 0;
+		}
+	}
+	
+	label.fb-wysiwyg-label{
+		.label{
+			margin: 0 !important;
+		}
+	}
+
+	#wysiwyg-1674495760647{
+		margin-top: -57px !important;
+        margin-left: 28px !important;
+
+	}
+
+	#checkbox-1663957584880\[\]\-error{
+		top: 40px;
+    	left: 25px;
 	}
 }
 
@@ -387,11 +440,12 @@
 											.amcform-submit{
 												background: @black;
 												width: 100%;
+												margin-top: 30px;
 											}
 										}
 										.field{
 											&.fb-checkbox {
-												margin-top: 20px;
+												margin: 0 auto 20px 0px !important;
                                                 .lib-css(display, flex) !important; 
                                                 position: relative ;
 												.lib-checkboxs;
@@ -419,9 +473,9 @@
                                                 }
                                                 .control {
                                                     > div{
-                                                        margin-top: -66px;
+                                                        margin-top: -72px !important;
                                                         margin-bottom: 0px;
-                                                        margin-left: 16px;
+                                                        margin-left: 28px;
                                                         &.popro{
                                                             margin-top: -58px;
                                                         }
@@ -429,12 +483,12 @@
                                                         &.popro{
                                                             margin-top: -58px;
                                                             p{
-                                                                margin: 0 0 0 130px !important;
+                                                                margin: 0 0 0 13px !important;
                                                                 font-size: 14px;
                                                             }
                                                         }
                                                         &.amform-wysiwyg p{
-                                                            margin: 0 0 0 140px;
+                                                            margin: 0 0 0 14px;
                                                             .lib-font-size(14);
 															position: relative;
 															span{
@@ -520,4 +574,35 @@
 			}
 		}
 	}
+
+	#hone-1663959313880{
+		text-transform: lowercase;
+		text-align: center;
+	}
+
+	#hone-1663959313880::first-letter {
+		text-transform: uppercase; /* Convierte solo la primera letra a mayúsculas */
+	}
+
+	label[for="checkbox-1663957584880-0"] {
+		left: 13px !important;
+		top: -25px !important
+	}
+
+
+	label[for="checkbox-1674495739012-0"] {
+		margin-top: -10px !important;
+    	margin-left: 11px !important;
+	}
+
+	// #wysiwyg-1674495760647{
+	// 	margin-top: -57px !important;
+    //     margin-left: 20px !important;
+
+	// }
+
+	// #checkbox-1663957584880\[\]\-error{
+	// 	top: 40px;
+    // 	left: 25px;
+	// }
 }

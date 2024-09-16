@@ -1,0 +1,2716 @@
+//
+//  Common (styles-m.css)
+//  _____________________________________________
+& when (@media-common = true) {
+
+    .checkout-index-index{
+        .opc-wrapper{
+            &.am-opc-wrapper{
+                display: flex;
+                .checkout-column{
+                    box-sizing: border-box;
+                    padding: 10px;
+                    border-radius: 1rem;
+                    background: #fff;
+                    height: fit-content;
+                    box-shadow: @box-shadow;
+                }
+            }
+        }
+
+    }
+
+    // .checkout-block {
+    //     border-radius: 12px !important;
+    //     background: #FFF !important;
+    //     box-shadow: 0px 8px 6.6px 0px rgba(0, 0, 0, 0.15) !important;
+    // }
+
+    .opc-block-summary.amcheckout-summary-container {
+        margin: 0 !important;
+    }
+
+    #label_method_pickup_instore{
+        display: none !important;
+    }
+
+    #label_carrier_pickup_instore{
+        display: none !important;
+    }
+
+    #s_method_instore_pickup{
+        display: none !important;
+    }
+    
+    .document-type-checkout-choices .radio {
+        width: 15px;
+        height: 15px;
+        accent-color: var(--Texto, #000); /* Cambia el color del radio button */
+    }
+
+    .action.primary.checkout {
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        padding: 10px 20px; 
+    }
+
+    .checkout-payment-method .payment-methods .actions-toolbar .primary {
+        padding: 0 !important; 
+    }
+
+    .error-validation-izipay-document-number{
+        margin: 0 auto !important;
+        padding-bottom: 20px;
+    }
+
+    .action.action-add.primary {
+        display: flex; 
+        justify-content: center;
+        align-items: center; 
+        padding: 10px 20px; 
+        text-align: center; 
+    }
+
+    .message.warning {
+        display: none !important;
+    }
+
+    #giftcardaccount-placer{
+        display: none !important;
+    }
+
+    .action.primary.checkout.amasty {
+        display: none !important;
+    }
+
+    .authentication-wrapper{
+        width: auto !important;
+    }
+}
+
+//
+//  Mobile (styles-m.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+    .checkout-index-index{
+        .opc-wrapper{
+            &.am-opc-wrapper{
+                flex-flow: column;
+                gap: 10px;
+            }
+        }
+    }
+
+    // .checkout-block {
+    //     width: 100%;
+    //     max-width: 493px;
+    //     border-radius: 12px !important;
+    //     background: #FFF;
+    //     box-shadow: 0px 4px 6.6px 0px rgba(0, 0, 0, 0.15);
+    // }
+
+    .opc-estimated-wrapper{
+        display: none !important;
+    }
+
+    .form-login{
+        background: #fff !important;
+        margin: 0 auto !important;
+    }
+
+    .form-shipping-address{
+        background: #fff !important;
+        margin: 0 auto !important;
+    }
+    #customer-email {
+        display: flex;
+        width: 85% !important;
+        max-width: 85%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .amcheckout-email .field-tooltip {
+        right: 10px;
+    }
+    
+    div[name="shippingAddress.firstname"] {
+        width: 100% !important;
+    }
+    div[name="shippingAddress.lastname"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.telephone"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.telephone"] .input-text {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.telephone"] .field-tooltip{
+        display: none !important;
+    }
+
+    div[name="shippingAddress.street.0"] {
+        width: 100% !important;
+    }
+    
+    input[name="street[1]"] {
+        display: none !important;
+    }
+
+    div[name="shippingAddress.region_id"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+      
+    div[name="shippingAddress.region_id"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .select {
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] .select {
+        width: 100% !important;
+        max-width: 384px !important;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] {
+        width: 100% !important;
+    }
+
+
+    //shipping
+    #co-shipping-method-form{
+        background: #fff !important;
+        margin: 0 !important;
+
+    }
+
+           //sidebar
+
+           .totals{
+            .mark{
+            background: #FFF !important;
+            .value{
+                display: none !important;
+            }
+            }
+        .amount{
+            background: #fff !important;
+        }
+        }
+    
+        #discount-code{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            flex: 1 0 0;
+            border-radius: 10px 0 0 10px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+    
+        }
+    
+        #discount-form{
+            display: flex;
+            flex-flow: row;
+        }
+    
+        .actions-toolbar {
+            padding-left: 0 !important;
+            .primary .action {
+                border-radius: 0px 10px 10px 0px;
+                background: var(--Texto, #000);
+                height: 47px;
+                margin-bottom: 0;
+    
+                span {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: "Open Sans";
+                    font-size: 19px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
+            }
+    
+            #block-discount-heading span {
+                color: #3E3E3E;
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+        }
+    
+        /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field {
+                display: flex;
+                align-items: center; /* Alinea verticalmente el checkbox con el texto */
+    
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 14px !important;
+                height: 14px !important;
+                padding: 2px !important;
+                margin-right: 10px; /* Espacio entre el checkbox y el texto */
+                flex-shrink: 0; /* Evita que el checkbox se reduzca */
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+    
+            /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field {
+                display: flex;
+                align-items: center; 
+                margin-bottom: 16px;
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 14px !important;
+                height: 14px !important;
+                padding: 2px !important;
+                margin-right: 10px; 
+                flex-shrink: 0;
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+    
+            /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 14px !important;
+                height: 14px !important;
+                padding: 2px !important;
+                margin-right: 10px; /* Espacio entre el checkbox y el texto */
+                flex-shrink: 0; /* Evita que el checkbox se reduzca */
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+
+            #tyc{
+                cursor: pointer;
+            }
+    
+            #privacidad{
+                cursor: pointer;
+            }
+    
+            #comunicaciones{
+                cursor: pointer;
+            }
+    
+    
+            .amcheckout-checkboxes {
+                display: none !important;
+            }
+    
+            .payment-option-inner {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .payment-option-inner .field {
+                flex-grow: 1;
+                margin-bottom: 0; /* Elimina cualquier margen inferior */
+            }
+            
+            .actions-toolbar {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0;
+                flex: 0 0 40%;
+                position: inherit;
+                max-width: 100%;
+            }
+            
+            .actions-toolbar .primary {
+                width: 100%;
+                margin-bottom: 0 !important;
+            }
+    
+            .action.primary.checkout.amasty {
+                display: flex;
+                height: 44px;
+                padding: 10px;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                align-self: stretch;
+                border-radius: 8px;
+                background: var(--Texto, #000);;
+                width: 100%;
+                margin-top: 30px;
+            }
+    
+            .payment-option.opc-payment-additional.discount-code {
+                padding: 8px;
+            }
+    
+            // .checkout-index-index .opc-block-summary {
+            //     margin: -24px -12px 0 !important;
+            //     padding: 0px 12px !important;
+            // }
+    
+            .checkout-index-index .additional-options {
+                margin: 24px 7px 30px !important;
+            }
+    
+            .payment-option-title.field.choice span.action.action-toggle span {
+                color: #3E3E3E;
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+    
+            .payment-option-content{
+                padding: 0 !important;
+            }
+
+             //billing
+        div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; /* Mantiene los botones apilados verticalmente */
+            align-items: flex-start; /* Alinea los botones a la izquierda */
+            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; /* Asegura que los botones sigan apilados */
+            gap: 10px; /* Espacio entre los botones */
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+        }
+
+        .document-type-checkout {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra todo el contenido horizontalmente */
+            text-align: center; /* Asegura que el texto dentro esté centrado */
+            margin: 0 auto; /* Centra el contenedor principal */
+        }
+        
+        .document-type-checkout-choices {
+            display: flex;
+            justify-content: center; /* Centra los radio buttons dentro del contenedor */
+            gap: 20px; /* Espacio entre los botones */
+        }
+        
+        .field.choice {
+            display: flex;
+            align-items: center;
+        }
+
+        .extra-fields-izipay{
+            width: 100% !important;
+            margin: 0 !important;
+
+        }
+
+        .primary > button.action-update,
+        .primary > button.action-cancel {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
+            width: 100%;
+            margin: 0 auto;
+            float: none;
+        }
+    
+        .primary > button.action-update span,
+        .primary > button.action-cancel span {
+            display: inline-block; 
+        }
+        
+}
+
+
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: 375px) {
+        // Estilos para pantallas <= 375px
+    }
+}
+
+
+//
+//  Desktop (style-l.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    
+    .checkout-index-index{
+        .opc-wrapper{
+            &.am-opc-wrapper{
+                flex-flow: row;
+                gap: 20px;
+            }
+        }
+    }
+
+    .extra-fields-izipay{
+        width: 100% !important;
+        margin: 0 !important;
+
+    }
+    
+    .opc-block-summary.amcheckout-summary-container {
+        margin: 0 !important;
+    }    
+
+    .checkout-column .opc{
+        border-radius: 12px !important;
+        background: #FFF;
+        box-shadow: 0px 4px 6.6px 0px rgba(0, 0, 0, 0.15);
+        margin: 0 !important;
+    }
+
+    label[for="customer-email"] {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    #customer-email{
+        display: flex;
+        width: 100%;
+        max-width: 351px;
+        height: 39px;
+        padding: 8px 16px;
+        align-items: center;
+        gap: 10px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    .note span {
+        width: 350px;
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.firstname"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.firstname"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.firstname"] .input-text {
+        width: 100% !important;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.lastname"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.lastname"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.lastname"] .input-text {
+        width: 100%;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] {
+        width: 50% !important;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] label {
+        width: 175px;
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] .input-text {
+        height: 39px;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+        max-width: 180px;
+        gap: 0px;
+        border-radius: 8px 0px 0px 0px;
+        border: 0.8px 0px 0px 0px;
+        opacity: 0px;
+    
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] label{
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] .input-text{
+        height: 47px;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.street.0"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.street.0"] .input-text {
+        width: 100% !important;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    input[name="street[1]"] {
+        display: none !important;
+      }
+    
+      div[name="shippingAddress.region_id"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.telephone"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.telephone"] .field-tooltip{
+        display: none !important;
+    }
+
+    div[name="shippingAddress.telephone"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.telephone"] .input-text {
+        width: 100% !important;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .input-text {
+        width: 100% !important;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+    div[name="shippingAddress.city"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.city"] .input-text {
+        width: 100% !important;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.referencia_envio"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.referencia_envio"] .input-text {
+        width: 100% !important;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+      
+    div[name="shippingAddress.region_id"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.city"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .select {
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] .select {
+        width: 100% !important;
+    }
+
+
+        //sidebar
+
+        .totals{
+            .mark{
+            background: #FFF !important;
+            .value{
+                display: none !important;
+            }
+            }
+        .amount{
+            background: #fff !important;
+        }
+        }
+    
+        #discount-code{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            flex: 1 0 0;
+            border-radius: 10px 0 0 10px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+    
+        }
+    
+        #discount-form{
+            display: flex;
+            flex-flow: row;
+        }
+    
+        .actions-toolbar {
+            .primary .action {
+                border-radius: 0px 10px 10px 0px;
+                background: var(--Texto, #000);
+                height: 47px;
+                width: 100%;
+    
+                span {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: "Open Sans";
+                    font-size: 19px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
+            }
+    
+            #block-discount-heading span {
+                color: #3E3E3E;
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+        }
+    
+        /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field {
+                display: flex;
+                align-items: center; /* Alinea verticalmente el checkbox con el texto */
+    
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 16px !important;
+                height: 16px !important;
+                padding: 2px !important;
+                margin-right: 10px; /* Espacio entre el checkbox y el texto */
+                flex-shrink: 0; /* Evita que el checkbox se reduzca */
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+    
+            /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field {
+                display: flex;
+                align-items: center; 
+                margin-bottom: 16px;
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 16px !important;
+                height: 16px !important;
+                padding: 2px !important;
+                margin-right: 10px; 
+                flex-shrink: 0;
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+
+            #tyc{
+                cursor: pointer;
+            }
+
+            #privacidad{
+                cursor: pointer;
+            }
+
+            #comunicaciones{
+                cursor: pointer;
+            }
+            
+    
+            
+    
+            /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 16px !important;
+                height: 16px !important;
+                padding: 2px !important;
+                margin-right: 10px; /* Espacio entre el checkbox y el texto */
+                flex-shrink: 0; /* Evita que el checkbox se reduzca */
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+    
+            .amcheckout-checkboxes {
+                display: none !important;
+            }
+    
+            .payment-option-inner {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .payment-option-inner .field {
+                flex-grow: 1;
+                margin-bottom: 0; /* Elimina cualquier margen inferior */
+            }
+            
+            .actions-toolbar {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0;
+                flex: 0 0 40%;
+                position: inherit;
+                max-width: 100%;
+                padding-left: 0 !important;
+            }
+            
+            .actions-toolbar .primary {
+                width: 100%;
+            }
+    
+            .action.primary.checkout.amasty {
+                display: flex;
+                height: 44px;
+                padding: 10px;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                align-self: stretch;
+                border-radius: 8px;
+                background: var(--Texto, #000);;
+                width: 100%;
+            }
+    
+            .payment-option.opc-payment-additional.discount-code {
+                padding: 8px;
+            }
+    
+            // .checkout-index-index .opc-block-summary {
+            //     margin: -24px -12px 0 !important;
+            //     padding: 0px 12px !important;
+            // }
+    
+            .checkout-index-index .additional-options {
+                margin: 24px 7px 30px !important;
+            }
+    
+            .payment-option-title.field.choice span.action.action-toggle span {
+                color: #3E3E3E;
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;    
+            }
+
+            .payment-option-content{
+                padding: 0 !important;
+            }
+
+            .product-item-name-custom {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            .details-qty .label span {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+            .cart-price .price {
+                color: var(--Texto, #000) !important;
+                text-align: right;
+                font-family: "Open Sans" !important;
+                font-size: 16px !important;
+                font-style: normal !important;
+                font-weight: 700 !important;
+                line-height: normal !important;
+            }
+
+
+        .totals.sub {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: normal !important;
+        }
+
+        .price {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 16px !important; 
+            font-style: normal !important;
+            font-weight: 700 !important;
+            line-height: normal !important;
+        }
+
+        .mark .label {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: normal !important;
+        }
+
+         //billing
+         div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-start; 
+            gap: 10px;
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; 
+            gap: 10px; 
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;
+        }
+
+        .document-type-checkout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center; 
+            margin: 0 auto;
+        }
+        
+        .document-type-checkout-choices {
+            display: flex;
+            justify-content: center; /* Centra los radio buttons dentro del contenedor */
+            gap: 20px; /* Espacio entre los botones */
+        }
+        
+        .field.choice {
+            display: flex;
+            align-items: center;
+        }
+
+        .primary > button.action-update,
+        .primary > button.action-cancel {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
+            width: 100%;
+            margin: 0 auto;
+            float: none;
+        }
+    
+        .primary > button.action-update span,
+        .primary > button.action-cancel span {
+            display: inline-block; 
+        }
+        
+        
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+
+    .opc-block-summary.amcheckout-summary-container {
+        margin: 0 !important;
+    }    
+
+    .checkout-column .opc{
+        border-radius: 12px !important;
+        background: #FFF;
+        box-shadow: 0px 4px 6.6px 0px rgba(0, 0, 0, 0.15);
+        margin: 0 !important;
+    }
+
+    label[for="customer-email"] {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    #customer-email{
+        display: flex;
+        width: 100%;
+        max-width: 351px;
+        height: 39px;
+        padding: 8px 16px;
+        align-items: center;
+        gap: 10px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    .note span {
+        width: 350px;
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.firstname"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.firstname"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.firstname"] .input-text {
+        width: 100% !important;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.lastname"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.lastname"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.lastname"] .input-text {
+        width: 100%;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] {
+        width: 50% !important;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] label {
+        width: 175px;
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] .input-text {
+        height: 39px;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+        max-width: 180px;
+        gap: 0px;
+        border-radius: 8px 0px 0px 0px;
+        border: 0.8px 0px 0px 0px;
+        opacity: 0px;
+    
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] {
+        width: 40% !important;
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] label{
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] .input-text{
+        height: 47px;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.street.0"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.street.0"] .label {
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    
+    div[name="shippingAddress.street.0"] .input-text {
+        width: 100% !important;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    input[name="street[1]"] {
+        display: none !important;
+      }
+    
+    div[name="shippingAddress.region_id"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.region_id"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.telephone"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.telephone"] .field-tooltip{
+        display: none !important;
+    }
+
+    div[name="shippingAddress.telephone"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.telephone"] .input-text {
+        width: 100% !important;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .select {
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.city"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] .select {
+        width: 100% !important;
+        max-width: 384px !important;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.referencia_envio"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.referencia_envio"] .input-text {
+        width: 100% !important;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.city"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .field .label  {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+        //sidebar
+
+        .totals{
+            .mark{
+            background: #FFF !important;
+            .value{
+                display: none !important;
+            }
+            }
+        .amount{
+            background: #fff !important;
+        }
+        }
+    
+        #discount-code{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            flex: 1 0 0;
+            border-radius: 10px 0 0 10px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+    
+        }
+    
+        #discount-form{
+            display: flex;
+            flex-flow: row;
+        }
+    
+        .actions-toolbar {
+            .primary .action {
+                border-radius: 0px 10px 10px 0px;
+                background: var(--Texto, #000);
+                height: 47px;
+                width: 100%;
+    
+                span {
+                    color: #FFF;
+                    text-align: center;
+                    font-family: "Open Sans";
+                    font-size: 19px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
+            }
+    
+            #block-discount-heading span {
+                color: #3E3E3E;
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+        }
+    
+        /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field {
+                display: flex;
+                align-items: center; /* Alinea verticalmente el checkbox con el texto */
+    
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 16px !important;
+                height: 16px !important;
+                padding: 2px !important;
+                margin-right: 10px; /* Espacio entre el checkbox y el texto */
+                flex-shrink: 0; /* Evita que el checkbox se reduzca */
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+    
+            /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field {
+                display: flex;
+                align-items: center; 
+                margin-bottom: 16px;
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 16px !important;
+                height: 16px !important;
+                padding: 2px !important;
+                margin-right: 10px; 
+                flex-shrink: 0;
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+
+            #tyc{
+                cursor: pointer;
+            }
+
+            #privacidad{
+                cursor: pointer;
+            }
+
+            #comunicaciones{
+                cursor: pointer;
+            }
+            
+    
+            
+    
+            /* Contenedor del checkbox */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+    
+            /* Checkbox */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .checkbox {
+                border-radius: 2px !important;
+                border: 0.5px solid var(--Texto, #000) !important;
+                background: #FFF !important;
+                width: 16px !important;
+                height: 16px !important;
+                padding: 2px !important;
+                margin-right: 10px; /* Espacio entre el checkbox y el texto */
+                flex-shrink: 0; /* Evita que el checkbox se reduzca */
+                top: 0 !important;
+            }
+    
+            /* Texto del label */
+            div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .label {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.2; /* Ajusta la altura de línea */
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+    
+            .amcheckout-checkboxes {
+                display: none !important;
+            }
+    
+            .payment-option-inner {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .payment-option-inner .field {
+                flex-grow: 1;
+                margin-bottom: 0; /* Elimina cualquier margen inferior */
+            }
+            
+            .actions-toolbar {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0;
+                flex: 0 0 40%;
+                position: inherit;
+                max-width: 100%;
+                padding-left: 0 !important;
+            }
+            
+            .actions-toolbar .primary {
+                width: 100%;
+            }
+    
+            .action.primary.checkout.amasty {
+                display: flex;
+                height: 44px;
+                padding: 10px;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                align-self: stretch;
+                border-radius: 8px;
+                background: var(--Texto, #000);;
+                width: 100%;
+            }
+    
+            .payment-option.opc-payment-additional.discount-code {
+                padding: 8px;
+            }
+    
+            // .checkout-index-index .opc-block-summary {
+            //     margin: -24px -12px 0 !important;
+            //     padding: 0px 12px !important;
+            // }
+    
+            .checkout-index-index .additional-options {
+                margin: 24px 7px 30px !important;
+            }
+    
+            .payment-option-title.field.choice span.action.action-toggle span {
+                color: #3E3E3E;
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;    
+            }
+
+            .payment-option-content{
+                padding: 0 !important;
+            }
+
+            .product-item-name-custom {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            .details-qty .label span {
+                color: var(--Texto, #000);
+                font-family: "Open Sans";
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+            .cart-price .price {
+                color: var(--Texto, #000) !important;
+                text-align: right;
+                font-family: "Open Sans" !important;
+                font-size: 16px !important;
+                font-style: normal !important;
+                font-weight: 700 !important;
+                line-height: normal !important;
+            }
+
+
+        .totals.sub {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: normal !important;
+        }
+
+        .price {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 16px !important; 
+            font-style: normal !important;
+            font-weight: 700 !important;
+            line-height: normal !important;
+        }
+
+        .mark .label {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: normal !important;
+        }
+
+
+        p .checkout-billing-address-title {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            line-height: normal !important;
+        }
+
+        //billing
+        div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; /* Mantiene los botones apilados verticalmente */
+            align-items: flex-start; /* Alinea los botones a la izquierda */
+            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; /* Asegura que los botones sigan apilados */
+            gap: 10px; /* Espacio entre los botones */
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+        }
+
+        .document-type-checkout {
+            display: block; /* Estilo normal para escritorio */
+            text-align: left; /* Ajusta según el diseño para escritorio */
+            margin: 0; /* Ajusta el margen según lo que desees para escritorio */
+        }
+
+        .document-type-checkout-choices {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px; /* Espacio entre los grupos de radio buttons */
+        }
+        
+        .document-type-checkout-choices .field.choice {
+            display: flex;
+            align-items: center;
+            margin-top: 20px; 
+        }
+
+        .document-type-checkout p{
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+    
+        }
+
+        .primary > button.action-update,
+        .primary > button.action-cancel {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
+            width: 100%;
+            max-width: 384px;
+            margin: 0 auto;
+            float: none;
+        }
+    
+        .primary > button.action-update span,
+        .primary > button.action-cancel span {
+            display: inline-block; 
+        }
+
+        
+        
+        
+        
+        
+    
+
+
+
+            
+            
+        
+        
+        
+    
+
+
+
+            
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+       
+    .checkout-column .opc{
+        border-radius: 12px !important;
+        background: #FFF;
+        box-shadow: 0px 4px 6.6px 0px rgba(0, 0, 0, 0.15);
+        margin: 0 !important;
+    }
+
+    label[for="customer-email"] {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    #customer-email{
+        display: flex;
+        width: 100%;
+        max-width: 351px;
+        height: 39px;
+        padding: 8px 16px;
+        align-items: center;
+        gap: 10px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    .note span {
+        width: 350px;
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.firstname"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.firstname"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.firstname"] .input-text {
+        width: 100% !important;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.lastname"] {
+        width: 100% !important;
+    }
+    
+    div[name="shippingAddress.lastname"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.lastname"] .input-text {
+        width: 100%;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] {
+        width: 45% !important;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] label {
+        width: 175px;
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.custom_attributes.identificacion_picker"] .input-text {
+        height: 39px;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+        max-width: 180px;
+        gap: 0px;
+        border-radius: 8px 0px 0px 0px;
+        border: 0.8px 0px 0px 0px;
+        opacity: 0px;
+    
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] {
+        width: 50% !important;
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] label{
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.custom_attributes.numero_identificacion_picker"] .input-text{
+        height: 47px;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+    
+    div[name="shippingAddress.street.0"] {
+        width: 100% !important;
+    }
+
+    div[name="shippingAddress.street.0"] .label {
+        height: 19px;
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+    div[name="shippingAddress.street.0"] .input-text {
+        width: 100% !important;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+    
+    input[name="street[1]"] {
+        display: none !important;
+    }
+
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px;
+    }
+    
+    div[name="shippingAddress.region_id"] .select{
+        width: 100% !important;
+        max-width: 384px !important;
+    }
+
+    div[name="shippingAddress.region_id"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .select {
+        width: 100% !important;
+        max-width: 384px !important;
+    }
+
+    div[name="shippingAddress.custom_attributes.referencia_envio"] label {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    div[name="shippingAddress.custom_attributes.referencia_envio"] .input-text {
+        width: 100% !important;
+        max-width: 384px;
+        height: 39px;
+        border-radius: 8px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+    }
+
+    div[name="shippingAddress.custom_attributes.city"] {
+        width: 100% !important;
+    }
+    div[name="shippingAddress.custom_attributes.city"] .select {
+        width: 100% !important;
+        max-width: 384px;
+    }
+
+    div[name="shippingAddress.custom_attributes.colony"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+
+    div[name="shippingAddress.custom_attributes.city"] .label span {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .field .label  {
+        color: #000;
+        font-family: "Open Sans";
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+           //sidebar
+
+    .totals{
+        .mark{
+        background: #FFF !important;
+        .value{
+            display: none !important;
+        }
+        }
+    .amount{
+        background: #fff !important;
+    }
+    }
+
+    #discount-code{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex: 1 0 0;
+        border-radius: 10px 0 0 10px;
+        border: 0.8px solid #979797;
+        background: #FFF;
+
+    }
+
+    #discount-form{
+        display: flex;
+        flex-flow: row;
+    }
+
+    .actions-toolbar {
+        padding-left: 10px;
+        .primary .action {
+            border-radius: 0px 10px 10px 0px;
+            background: var(--Texto, #000);
+            height: 47px;
+
+            span {
+                color: #FFF;
+                text-align: center;
+                font-family: "Open Sans";
+                font-size: 19px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+        }
+
+        #block-discount-heading span {
+            color: #3E3E3E;
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+
+    /* Contenedor del checkbox */
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field {
+            display: flex;
+            align-items: center; /* Alinea verticalmente el checkbox con el texto */
+
+        }
+
+        /* Checkbox */
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .checkbox {
+            border-radius: 2px !important;
+            border: 0.5px solid var(--Texto, #000) !important;
+            background: #FFF !important;
+            width: 16px !important;
+            height: 16px !important;
+            padding: 2px !important;
+            margin-right: 10px; /* Espacio entre el checkbox y el texto */
+            flex-shrink: 0; /* Evita que el checkbox se reduzca */
+            top: 0 !important;
+        }
+
+        /* Texto del label */
+        div[name="checkout.sidebar.additional.checkbox_newsletter"] .control .field .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.2; /* Ajusta la altura de línea */
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        /* Contenedor del checkbox */
+        div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field {
+            display: flex;
+            align-items: center; 
+            margin-bottom: 16px;
+        }
+
+        /* Checkbox */
+        div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .checkbox {
+            border-radius: 2px !important;
+            border: 0.5px solid var(--Texto, #000) !important;
+            background: #FFF !important;
+            width: 16px !important;
+            height: 16px !important;
+            padding: 2px !important;
+            margin-right: 10px; 
+            flex-shrink: 0;
+            top: 0 !important;
+        }
+
+        /* Texto del label */
+        div[name="checkout.sidebar.additional.checkbox_terminos"] .control .field .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.2; /* Ajusta la altura de línea */
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        #tyc{
+            cursor: pointer;
+        }
+
+        #privacidad{
+            cursor: pointer;
+        }
+
+        #comunicaciones{
+            cursor: pointer;
+        }
+
+        /* Contenedor del checkbox */
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        /* Checkbox */
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .checkbox {
+            border-radius: 2px !important;
+            border: 0.5px solid var(--Texto, #000) !important;
+            background: #FFF !important;
+            width: 16px !important;
+            height: 16px !important;
+            padding: 2px !important;
+            margin-right: 10px; /* Espacio entre el checkbox y el texto */
+            flex-shrink: 0; /* Evita que el checkbox se reduzca */
+            top: 0 !important;
+        }
+
+        /* Texto del label */
+        div[name="checkout.sidebar.additional.checkbox_privacidad"] .control .field .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.2; /* Ajusta la altura de línea */
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .amcheckout-checkboxes {
+            display: none !important;
+        }
+
+        .payment-option-inner {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .payment-option-inner .field {
+            flex-grow: 1;
+            margin-bottom: 0; /* Elimina cualquier margen inferior */
+        }
+        
+        .actions-toolbar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            flex: 0 0 40%;
+            position: inherit;
+            max-width: 100%;
+        }
+        
+        .actions-toolbar .primary {
+            width: 100%;
+        }
+
+        .action.primary.checkout.amasty {
+            display: flex;
+            height: 44px;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            align-self: stretch;
+            border-radius: 8px;
+            background: var(--Texto, #000);;
+            width: 100%;
+        }
+
+        .payment-option.opc-payment-additional.discount-code {
+            padding: 8px;
+        }
+
+        // .checkout-index-index .opc-block-summary {
+        //     margin: -24px -12px 0 !important;
+        //     padding: 0px 12px !important;
+        // }
+
+        .checkout-index-index .additional-options {
+            margin: 24px 7px 30px !important;
+        }
+
+        .payment-option-title.field.choice span.action.action-toggle span {
+            color: #3E3E3E;
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .payment-option-content{
+            padding: 0 !important;
+        }
+
+        .product-item-name-custom {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+        .details-qty .label span {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .cart-price .price {
+            color: var(--Texto, #000) !important;
+            text-align: right;
+            font-family: "Open Sans" !important;
+            font-size: 16px !important;
+            font-style: normal !important;
+            font-weight: 700 !important;
+            line-height: normal !important;
+        }
+        
+        .totals.sub {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: normal !important;
+        }
+
+        .price {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 16px !important; 
+            font-style: normal !important;
+            font-weight: 700 !important;
+            line-height: normal !important;
+        }
+
+        .mark .label {
+            color: var(--Texto, #000) !important;
+            font-family: "Open Sans" !important;
+            font-size: 14px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: normal !important;
+        }
+
+        .opc-block-summary.amcheckout-summary-container {
+            margin: 0 !important;
+        }
+
+         //billing
+         div[name="billingAddressshared.custom_attributes.razon_social"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.razon_social"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.direccion_fiscal"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        div[name="billingAddressshared.custom_attributes.ruc"] label {
+            color: #000;
+            font-family: "Open Sans";
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        div[name="billingAddressshared.custom_attributes.ruc"] .input-text {
+            width: 100%;
+            max-width: 384px;
+            height: 39px;
+            border-radius: 8px;
+            border: 0.8px solid #979797;
+            background: #FFF;
+        }
+
+        .actions-toolbar {
+            display: flex;
+            flex-direction: column; /* Mantiene los botones apilados verticalmente */
+            align-items: flex-start; /* Alinea los botones a la izquierda */
+            gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+        }
+        
+        .primary {
+            display: flex;
+            flex-direction: column; /* Asegura que los botones sigan apilados */
+            gap: 10px; /* Espacio entre los botones */
+        }
+        
+        button.action {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin: 5px 0 !important;/* Añade un margen superior e inferior para separar */
+        }
+
+        .document-type-checkout {
+            display: block; /* Estilo normal para escritorio */
+            text-align: left; /* Ajusta según el diseño para escritorio */
+            margin: 0; /* Ajusta el margen según lo que desees para escritorio */
+        }
+        
+        .document-type-checkout-choices {
+            display: flex;
+            gap: 20px; /* Espacio entre los grupos de radio buttons */
+            justify-content: flex-start;
+        }
+        
+         .document-type-checkout-choices.field.choice {
+            display: flex;
+            align-items: center;
+            margin-top: 20px; /* Alinea el radio button y el texto en el mismo nivel */
+            
+        }
+
+        .document-type-checkout-choices .label {
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        .document-type-checkout p{
+            color: var(--Texto, #000);
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+    
+        }
+        
+        .primary > button.action-update,
+        .primary > button.action-cancel {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #000; 
+            color: #fff; 
+            cursor: pointer; 
+            width: 100%;
+            max-width: 384px;
+            margin: 0 auto;
+            float: none;
+        }
+    
+        .primary > button.action-update span,
+        .primary > button.action-cancel span {
+            display: inline-block; 
+        }
+
+}
+
+
+
+
+
+
+
+
+
+
+
