@@ -33,29 +33,33 @@ define([
             let cart = customerData.get('cart');
             var customerName = '', customerLastName = '', cartQty = 0;
 
-            if (customer().fullname) {
-                customerName = customer().firstname ?? '';
-                customerLastName = customer().fullname.replace(customerName, '').trim() ?? '';
-            }
-
             if (cart().summary_count) {
                 cartQty = cart().summary_count;
             }
 
             // Login and Register events
-            if (pathUrl.startsWith('/' + pathLogin)) {
-                logEvent(paramMobile, 'loginSuccess', {
-                    name: customerName,
-                    lastName: customerLastName,
-                    cartQty: cartQty,
-                });
-            } else if (pathUrl.startsWith('/' + pathRegister)) {
-                logEvent(paramMobile, 'registerSuccess', {
-                    name: customerName,
-                    lastName: customerLastName,
-                    cartQty: cartQty,
-                });
-            }
+            customer.subscribe(function () {
+                setTimeout(function () {
+                    if (customer().fullname) {
+                        customerName = customer().firstname ?? '';
+                        customerLastName = customer().fullname.replace(customerName, '').trim() ?? '';
+                    }
+
+                    if (pathUrl.startsWith('/' + pathLogin)) {
+                        logEvent(paramMobile, 'loginSuccess', {
+                            name: customerName,
+                            lastName: customerLastName,
+                            cartQty: cartQty,
+                        });
+                    } else if (pathUrl.startsWith('/' + pathRegister)) {
+                        logEvent(paramMobile, 'registerSuccess', {
+                            name: customerName,
+                            lastName: customerLastName,
+                            cartQty: cartQty,
+                        });
+                    }
+                }, 300)
+            });
 
             // Cart events
             cart.subscribe(function () {
