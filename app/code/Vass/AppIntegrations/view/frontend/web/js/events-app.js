@@ -63,12 +63,9 @@ define([
 
             // Cart events
             cart.subscribe(function () {
-                if (cart().summary_count !== cartQty) {
-                    logEvent(paramMobile, 'updateCart', {
-                        qty: cart().summary_count,
-                    });
-                    cartQty = cart().summary_count;
-                }
+                logEvent(paramMobile, 'updateCart', {
+                    qty: cart().summary_count,
+                });
             });
         }
     });
