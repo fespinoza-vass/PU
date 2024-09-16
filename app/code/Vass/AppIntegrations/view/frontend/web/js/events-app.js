@@ -58,7 +58,7 @@ define([
                             cartQty: cartQty,
                         });
                     }
-                }, 300)
+                }, 1000)
             });
 
             // Cart events
