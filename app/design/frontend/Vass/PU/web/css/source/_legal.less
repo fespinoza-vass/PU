@@ -72,7 +72,7 @@
                 .lib-font-size(@font-size__l);
                 line-height: 28px;
                 font-weight: @font-weight__bold;
-                margin-top: 0;
+                margin-top: @line-height__s;
             }
         }
 
@@ -137,38 +137,6 @@
         gap: @indent__m;
     }
 
-    .breadcrumbs {
-        position: relative;
-        left: 227px;
-        width: calc(100% - 50px);
-        gap: 10px;
-
-        strong {
-            color: @primary-black;
-            .lib-font-size(12);
-            font-weight: @font-weight__semibold;
-        }
-
-        .items {
-            .lib-font-size(12);
-            line-height: @line-height__xl;
-            color: @color-gray;
-
-            & .item {
-
-                a:hover {
-                    text-decoration: none;
-                }
-
-                &.item:not(:last-child):after {
-                    content: "|";
-                    height: @indent__base;
-                    margin: 0 @indent__base;
-                }
-            }
-        }
-    }
-
     .legal {
         &__title {
             h1 {
@@ -207,10 +175,6 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .desktop-menu {
-        display: none;
-    }
-
-    .breadcrumbs {
         display: none;
     }
 
