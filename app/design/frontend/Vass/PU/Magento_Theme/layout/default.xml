@@ -42,5 +42,25 @@
         <move element="ammenu.logo" destination="header-logo-search" after="amasty.menu.toggle"/>
         <move element="minicart" destination="header-links-right" after="wishlist"/>
         <move element="authorization-link" destination="header-links-right" after="-" />
+        <referenceContainer name="main.content">
+            <container name="main.top.content.full" htmlTag="div" htmlClass="main-content-top-full" label="Main Content Top Full" before="-"/>
+            <container name="main_wrapper" htmlTag="div" htmlClass="main-wrapper"/>
+            <container name="main.content.full" htmlTag="div" htmlClass="main-content-full" label="Main Content Full" after="-">
+                <container name="after.main.content.full" htmlTag="div" htmlClass="after-main-content-full" label="After Main Content Full" after="-" />
+            </container>
+        </referenceContainer>
+
+        <referenceContainer name="footer-container">
+            <container name="footer-top-content-full" before="footer" label="Page Footer Top Full" htmlTag="div" htmlClass="footer-top-full"/>
+        </referenceContainer>
+
+        <referenceContainer name="page.bottom.container">
+            <container name="page.bottom.full" label="Before Page Footer Full" htmlTag="div" htmlClass="before-footer-full" before="-"/>
+        </referenceContainer>
+
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
     </body>
 </page>
