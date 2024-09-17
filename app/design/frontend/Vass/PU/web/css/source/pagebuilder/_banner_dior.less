@@ -19,17 +19,21 @@
             &-headding {
                 .lib-heading(h2);
                 .lib-font-size(@font-size__xl);
+                line-height: 32px;
                 font-family: @font-family__secondary;
-                margin: 0;
+                margin: 0 0 10px;
             }
 
             &-par {
                 .lib-font-size(@font-size__m);
+                line-height: 22px;
             }
         }
 
         &__image {
-            max-height: 160px;
+            .pagebuilder-overlay {
+                min-height: 160px;
+            }
         }
     }
 }
@@ -41,28 +45,43 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .banner-dior {
         &__block {
-            margin: 0 120px 80px 120px;
+            margin: 0;
+            padding: 0 120px;
         }
 
         &__columns {
             display: flex;
             flex-direction: row-reverse;
             max-height: 200px;
+
+            .pagebuilder-column-line:last-of-type {
+                width: ~"calc(100% - 80px)" !important; // Override default styles pagebuilder
+            }
         }
 
         &__text {
-            background: @color-beige;
             padding: 0 70px;
+            min-height: 210px;
+            background: @color-beige;
+            justify-content: center !important; // Override default styles pagebuilder
 
             &-headding {
                 .lib-font-size(40);
-                margin-bottom: 10px;
+                line-height: 52px;
                 margin-top: 0;
+            }
+
+            &-par {
+                p {
+                    margin: 0;
+                }
             }
         }
 
         &__image {
-            max-height: 200px;
+            .pagebuilder-overlay {
+                min-height: 210px;
+            }
         }
     }
 }
