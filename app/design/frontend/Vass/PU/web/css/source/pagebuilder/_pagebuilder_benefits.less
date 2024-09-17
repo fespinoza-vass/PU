@@ -1,0 +1,133 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+// Common
+// _____________________________________________
+
+& when (@media-common = true) {
+    .benefits {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: @indent__l @indent__base;
+        background-color: @primary-black;
+
+        &__title {
+            p {
+                flex-direction: row;
+                text-align: center;
+                font-family: @font-family__secondary;
+                .lib-font-size(@font-size__xl);
+                color: @primary-white;
+                line-height: @indent__l;
+                padding-bottom: 12px;
+            }
+        }
+
+        &__columns {
+            > .pagebuilder-column-line {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: @indent__s;
+            }
+
+            .benefits__column {
+                align-items: center;
+                max-width: ~"calc(50% - 18px)";
+            }
+        }
+
+        &__text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 163px;
+            gap: @indent__base;
+
+            p {
+                font-family: @font-family__base;
+                .lib-font-size(@font-size__m);
+                color: @primary-white;
+                line-height: @line-height__l;
+                padding: 0 @indent__s;
+            }
+
+            &.icon {
+                font-family: @icon-font;
+                .lib-font-size(42);
+
+                &:before {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 86px;
+                    width: 86px;
+                    border-radius: 50%;
+                    background: @primary-white;
+                }
+            }
+
+            &:last-child {
+                max-width: 200px;
+            }
+        }
+
+    }
+}
+
+//
+// Desktop
+// _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    .benefits {
+        height: auto;
+        padding: 80px 120px;
+
+        &__title {
+            display: none;
+            padding-bottom: 41px;
+        }
+
+        &__columns {
+            > .pagebuilder-column-line {
+                flex-wrap: nowrap;
+                gap: 0;
+                column-gap: @indent__m;
+            }
+        }
+
+        &__columns {
+            max-width: 940px;
+            margin: 0 auto;
+        }
+
+
+        &__text {
+            flex-direction: column;
+            text-align: center;
+            max-width: 217px;
+            gap: @indent__base;
+
+            p {
+                max-width: 215px;
+                padding: 10px 0 0 0;
+            }
+
+            &.icon {
+                &:before {
+                    .lib-font-size(68);
+                    width: 138px;
+                    height: 138px;
+                }
+            }
+        }
+    }
+}
