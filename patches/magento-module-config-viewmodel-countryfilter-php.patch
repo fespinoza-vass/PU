@@ -1,0 +1,33 @@
+--- /dev/null
++++ ../ViewModel/CountryFilter.php
+@@ -35,20 +35,21 @@
+     /**
+      * Fetch EU countries list
+      *
+-     * @param  Int|null $storeId
++     * @param  int|null $storeId
+      * @return array
+      */
+     public function getEuCountryList(int $storeId = null): array
+     {
+-        $euCountries = explode(
+-            ',',
+-            $this->scopeConfig->getValue(
+-                self::XML_PATH_EU_COUNTRIES_LIST,
+-                ScopeInterface::SCOPE_STORE,
+-                $storeId
+-            )
++        $euCountries = $this->scopeConfig->getValue(
++            self::XML_PATH_EU_COUNTRIES_LIST,
++            ScopeInterface::SCOPE_STORE,
++            $storeId
+         );
+ 
+-        return $euCountries;
++        if ($euCountries === null) {
++            return [];
++        }
++
++        return explode(',', $euCountries);
+     }
+ }
