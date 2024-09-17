@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="top.search" destination="header-logo-search" after="ammenu.logo" />
+    </body>
+</layout>
