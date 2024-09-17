@@ -1,0 +1,102 @@
+//
+//  Toggle Component
+//  ______________________________________________
+
+//
+//  Helpers
+//  ----------------------------------------------
+
+._ammenu-toggle-buttons {
+    &:hover {
+        filter: brightness(85%);
+    }
+
+    &:active {
+        filter: brightness(50%);
+    }
+}
+
+//
+//  Variable
+//  ----------------------------------------------
+
+@ammenu-toggle-button__size: 40px;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ammenu-toggle {
+        .ammenu-flex(center, center);
+        .ammenu-reset(button);
+
+        cursor: pointer;
+        height: @ammenu-toggle-button__size / 2;
+        min-width: @ammenu-toggle-button__size;
+        outline: none;
+        transition: .1s;
+        width: @ammenu-toggle-button__size;
+        z-index: 1;
+    }
+
+    .ammenu-button.-hamburger {
+        & {
+            .ammenu-flex(none, center);
+            ._ammenu-toggle-buttons;
+
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: inline-flex;
+            height: 24px;
+            padding: 0;
+            position: relative;
+            transition: none;
+            width: 24px;
+        }
+
+        &:not(.-hamburger) {
+            display: none;
+        }
+
+        &:before {
+            content: @icon-menu;
+            font-family: @icons__font-name;
+            font-size: 24px;
+            color: @primary-black;
+        }
+    }
+
+    .ammenu-button.-close {
+        & {
+            .ammenu-reset(button);
+            .ammenu-flex(center, center);
+            ._ammenu-toggle-buttons;
+
+            color: #000;
+            cursor: pointer;
+            height: @ammenu__indent__xl;
+            position: relative;
+            width: @ammenu__indent__xl;
+        }
+
+        &:after,
+        &:before {
+            background-color: currentColor;
+            content: @icon-menu;
+            font-family: @icons__font-name;
+            height: 1px;
+            position: absolute;
+            width: 18px;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+}
