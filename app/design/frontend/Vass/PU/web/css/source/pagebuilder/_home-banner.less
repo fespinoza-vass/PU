@@ -8,17 +8,25 @@
             .pagebuilder-overlay {
                 padding: 0 30px;
             }
+
             [data-element='content'] {
                 h2 {
                     font-family: @font-family__secondary;
                     .lib-font-size(24px);
+                    margin: 0;
+                    margin-bottom: 30px;
+                }
+
+                p:last-child {
+                    margin: 0;
                 }
             }
         }
+
         button.pagebuilder-button-primary {
             padding: 16px 40px;
             .lib-font-size(16px);
-
+            margin-top: 30px;
         }
     }
 }
@@ -43,17 +51,25 @@
     .home-banner {
         .pagebuilder-banner-wrapper {
             min-height: 480px;
+            margin: 0 15px;
             .pagebuilder-overlay {
                 padding: 0 0 0 100px;
             }
+
             [data-element='content'] {
                 h2 {
                     .lib-font-size(40px);
+                    margin-bottom: 40px;
                 }
 
                 p {
                     .lib-font-size(26px);
+                    margin: 0;
                 }
+            }
+
+            button.pagebuilder-button-primary {
+                margin-top: 40px;
             }
         }
     }
