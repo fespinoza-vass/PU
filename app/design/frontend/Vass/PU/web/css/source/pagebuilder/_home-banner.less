@@ -1,10 +1,18 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+
 & when (@media-common = true) {
     .home-banner {
         padding: 0;
+
         .pagebuilder-banner-wrapper {
             min-height: 360px;
             display: flex;
             align-items: center;
+
             .pagebuilder-overlay {
                 padding: 0 30px;
             }
@@ -12,7 +20,7 @@
             [data-element='content'] {
                 h2 {
                     font-family: @font-family__secondary;
-                    .lib-font-size(24px);
+                    .lib-font-size(@font-size__xl);
                     margin: 0;
                     margin-bottom: 30px;
                 }
@@ -25,7 +33,7 @@
 
         button.pagebuilder-button-primary {
             padding: 16px 40px;
-            .lib-font-size(16px);
+            .lib-font-size(@font-size__m);
             margin-top: 30px;
         }
     }
@@ -52,18 +60,19 @@
         .pagebuilder-banner-wrapper {
             min-height: 480px;
             margin: 0 15px;
+
             .pagebuilder-overlay {
                 padding: 0 0 0 100px;
             }
 
             [data-element='content'] {
                 h2 {
-                    .lib-font-size(40px);
+                    .lib-font-size(40);
                     margin-bottom: 40px;
                 }
 
                 p {
-                    .lib-font-size(26px);
+                    .lib-font-size(26);
                     margin: 0;
                 }
             }
