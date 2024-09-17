@@ -124,14 +124,14 @@
         cursor: pointer;
 
         &:checked::before {
-            content: @icon-close;
-            //content: @icon-check; // Change once Lina updates font icon suite
+            content: @icon-check;
             font-family: @icon-font;
-            width: 8px;
-            height: 8px;
+            .lib-font-size(8);
+            width: 2px;
+            height: 0;
             position: absolute;
-            top: 37%;
-            left: 46%;
+            top: 31%;
+            left: 23%;
             transform: translate(-50%, -50%);
 
             &:disabled {
