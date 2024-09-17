@@ -34,9 +34,10 @@
         .page-title-wrapper {
             text-align: center;
             margin-bottom: 20px;
+
             .page-title {
                 .base {
-                    .lib-font-size(24px);
+                    .lib-font-size(@font-size__xl);
                 }
             }
         }
@@ -44,6 +45,7 @@
 
     .login-container {
         padding: 0 25px;
+
         .customer-login-image {
             max-height: 192px;
             width: 100%;
@@ -51,6 +53,7 @@
             object-fit: cover;
             margin-bottom: 24px;
         }
+
         .block {
             &-new-customer {
                 .actions-toolbar {
@@ -62,11 +65,13 @@
                 &:extend(.abs-login-block-title all);
                 border-bottom: 0;
                 padding: 0;
+
                 strong {
-                    .lib-font-size(18);
+                    .lib-font-size(@font-size__l);
                     font-weight: 700;
                 }
             }
+
             .block-right {
                 border-radius: 2px;
                 background-color: @primary-white;
@@ -76,29 +81,35 @@
 
         .fieldset {
             .lib-form-hasrequired(bottom);
+
             &.login {
                 border: 0;
                 gap: 24px;
                 padding: 0;
+
                 .actions-toolbar {
                     > div {
                         margin-bottom: 20px;
+
                         button {
                             width: 100%;
                             height: 54px;
                         }
                     }
                 }
+
                 .control {
                     position: relative;
-                    .field.choice{
+
+                    .field.choice {
                         position: absolute;
                         z-index: 10;
                         right: 10px;
                         top: 50%;
                         transform: translateY(-50%);
+
                         .icon-eye:before {
-                            .lib-font-size(18px);
+                            .lib-font-size(@font-size__l);
                             color: @primary-black;
                             position: absolute;
                             top: 50%;
@@ -118,13 +129,16 @@
                     }
                 }
             }
+
             .create-account {
                 display: flex;
                 gap: 10px;
+
                 a {
                     text-transform: uppercase;
                 }
             }
+
             &:after {
                 display: none;
             }
@@ -200,13 +214,14 @@
 
             .toolbar {
                 text-align: center;
+
                 .limiter-options {
                     width: auto;
                 }
             }
 
             .limiter {
-                >.label {
+                > .label {
                     &:extend(.abs-visually-hidden all);
                 }
             }
@@ -316,6 +331,7 @@
 
     .block {
         &:extend(.abs-margin-for-blocks-and-widgets all);
+
         .column.main & {
             &:last-child {
                 margin-bottom: 0;
@@ -327,6 +343,7 @@
 
             strong {
                 .lib-heading(h4);
+
                 .column.main & {
                     font-size: @h3__font-size;
                 }
@@ -490,7 +507,7 @@
         .page-title-wrapper {
             .page-title {
                 .base {
-                    .lib-font-size(36px);
+                    .lib-font-size(36);
                 }
             }
         }
@@ -499,11 +516,14 @@
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
         padding: 0 95px;
+
         .block {
             width: 100%;
             &:extend(.abs-blocks-2columns all);
+
             .block-content {
                 display: flex;
+
                 .block-left,
                 .block-right {
                     flex: 1;
