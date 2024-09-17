@@ -6,7 +6,7 @@
 & when (@media-common = true) {
     .banner-dior {
         &__block {
-            margin: 0 0 32px 0;
+            margin: 0 16px 32px 16px;
         }
 
         &__text {
@@ -21,6 +21,7 @@
                 font-family: @font-family__secondary;
                 margin: 0;
             }
+
             &-par {
                 .lib-font-size(16px);
             }
@@ -29,9 +30,7 @@
         &__image {
             max-height: 160px;
         }
-
     }
-
 }
 
 //
@@ -41,13 +40,13 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .banner-dior {
         &__block {
-            margin: 0 95px 80px 95px;
+            margin: 0 120px 80px 120px;
         }
 
         &__columns {
             display: flex;
             flex-direction: row-reverse;
-            max-height: 210px;
+            max-height: 200px;
         }
 
         &__text {
@@ -61,7 +60,7 @@
         }
 
         &__image {
-            max-height: 210px;
+            max-height: 200px;
         }
     }
 }
