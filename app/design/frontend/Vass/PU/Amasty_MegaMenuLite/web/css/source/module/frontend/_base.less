@@ -13,10 +13,7 @@
 
 & when (@media-common = true) {
     .ammenu-header-container {
-        & {
-            min-height: 64px;
-            position: relative;
-        }
+        position: relative;
 
         &.page-header {
             margin-bottom: 0;
@@ -223,16 +220,24 @@
 //  ----------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .ammenu-header-container .block-search .minisearch .control {
-        background: #fff;
-        border: none;
-        box-sizing: border-box;
-        left: 0;
-        margin: 0;
-        position: absolute;
-        right: 0;
-        top: 120%;
-        z-index: 9;
+    .ammenu-header-container {
+        min-height: 125px;
+
+        .block-search {
+            .minisearch {
+                .control {
+                    background: #fff;
+                    border: none;
+                    box-sizing: border-box;
+                    left: 0;
+                    margin: 0;
+                    position: absolute;
+                    right: 0;
+                    top: 120%;
+                    z-index: 9;
+                }
+            }
+        }
     }
 
     .ammenu-logo {
@@ -244,7 +249,7 @@
 //  Tablet only
 //  ----------------------------------------------
 
-@media (max-width: @screen__l + 1) {
+@media (max-width: @screen__l) {
     .ammenu-header-container.-sticky .header.content {
         padding: @ammenu__indent;
     }
