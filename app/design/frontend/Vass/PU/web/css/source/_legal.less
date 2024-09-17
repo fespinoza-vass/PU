@@ -36,12 +36,11 @@
         &__text {
             height: 100%;
             width: 100%;
-            padding: @font-size__xl;
+            padding: @indent__m;
             background-color: @primary-white;
 
             p {
                 .lib-font-size(@font-size__m);
-                font-size: @font-size__m;
                 line-height: @line-height__xl;
                 text-align: left;
                 margin-bottom: @indent__m;
@@ -59,7 +58,7 @@
         &__title {
             h1 {
                 .lib-font-size(@font-size__xl);
-                font-family: @font-family-name__secondary;
+                font-family: @font-family__secondary;
                 color: @h1__font-color;
                 line-height: @indent__l;
                 font-weight: @h1__font-weight;
@@ -129,6 +128,10 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = (@screen__m + 1)) {
+    .control {
+        display: none;
+    }
+
     .mobile-menu {
         display: none;
     }
