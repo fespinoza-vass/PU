@@ -8,13 +8,64 @@
 // _____________________________________________
 
 & when (@media-common = true) {
+    .card-slider__wrapper {
+        position: relative;
+        padding: @indent__m;
 
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+
+        &-img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        &-content {
+            position: absolute;
+            top: 354px; // Provisional
+            left: 108px; // Provisional
+            width: 437px; // Provisional
+            height: 166px; // Provisional
+            text-align: center;
+            padding: @font-size__m @font-size__xl;
+            background-color: @color-green-light2;
+            padding: 20px;
+            gap: @indent__s;
+        }
+
+        &-title {
+            font-size: 1.5rem;
+            color: @primary-black;
+            margin-bottom: @indent__s;
+        }
+
+        &-description {
+            font-size: 1rem;
+            color: @primary-black;
+            margin-bottom: 15px;
+        }
+
+        &-link {
+            font-size: 1rem;
+            color: @link__color;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .swiper-pagination-card-slider {
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
 }
 
-//
+    //
 // Desktop
 // _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-
-}
+//.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+//
+//}
