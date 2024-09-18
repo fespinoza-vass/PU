@@ -15,62 +15,42 @@ $description = $block->getDescription();
 $textUrl = $block->getTextUrl();
 $url = $block->getUrl();
 $count = count($images);
-$maxStars = 5;
 
 ?>
-<div class="ba-review-slider__wrapper">
-    <div class="ba-review-prev">
-        <span class="icon icon-arrow-left"></span>
-    </div>
-    <div class="ba-review-slider swiper">
+<div class="card-slider__wrapper">
+    <div class="card-slider swiper">
         <div class="swiper-wrapper">
             <?php for ($i = 0; $i < $count; $i++): ?>
                 <?php if ($images[$i]): ?>
                     <div class="swiper-slide">
-                        <div class="swiper-slide">
-                            <div class="swiper-slide">
-                                <div class="ba-review__wrapper">
-                                    <div class="ba-review-info-img">
-                                        <img class="ba-review-img" src="<?= /** @noEscape */ $images[$i]; ?>" />
-                                    </div>
-                                    <div class="ba-review__rightcol">
-                                         <span class="home-subtitle home-subtitle--inside">
-                                            <?= /** @noEscape */ $title[$i]; ?>
-                                        </span>
-                                        <div class="ba-review-info">
-                                            <div class="ba-review-label-star">
-                                                <span class="ba-review-label">
-                                                    <?= /** @noEscape */ $description[$i]; ?>
-                                                </span>
-                                            </div>
-                                            <span class="ba-review-title">
-                                                    <?= /** @noEscape */ $textUrl[$i]; ?>
-                                                </span>
-                                            <span class="ba-review-name">
-                                                    <?= /** @noEscape */ $url[$i]; ?>
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="card-slider__wrapper">
+                            <div class="card-slider-info-img">
+                                <img class="card-slider-img" src="<?= /** @noEscape */ $images[$i]; ?>" />
+                            </div>
+                            <div class="card-slider__content">
+                                <h3 class="card-slider-title">
+                                    <?= /** @noEscape */ $title[$i]; ?>
+                                </h3>
+                                <p class="card-slider-description">
+                                    <?= /** @noEscape */ $description[$i]; ?>
+                                </p>
+                                <a class="card-slider-link" href="<?= /** @noEscape */ $url[$i]; ?>">
+                                    <?= /** @noEscape */ $textUrl[$i]; ?>
+                                </a>
                             </div>
                         </div>
                     </div>
                 <?php endif; ?>
             <?php endfor; ?>
         </div>
-        <div class="swiper-scrollbar-review swiper-scrollbar-horizontal"></div>
-    </div>
-    <div class="ba-review-next">
-        <span class="icon icon-arrow-right"></span>
+        <div class="swiper-pagination-card-slider"></div>
     </div>
 </div>
-
-<?php $i = 0 ?>
 
 <script type="text/x-magento-init">
     {
         "*": {
-            "Vass_HomeCardsSlider/js/cards_slider": {}
+            "Vass_CardsSlider/js/cards_slider": {}
         }
     }
 </script>
