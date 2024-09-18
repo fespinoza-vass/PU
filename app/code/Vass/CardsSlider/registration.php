@@ -2,6 +2,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Vass_SliderReview',
+    'Vass_CardsSlider',
     __DIR__
 );
