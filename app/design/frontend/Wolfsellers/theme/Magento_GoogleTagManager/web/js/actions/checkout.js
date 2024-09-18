@@ -81,15 +81,15 @@ define([
         window.dataLayer.push(dlUpdate);
     }
 
-/**
- * Notifies a purchase event to the dataLayer.
- *
- * @param {Object} order - The order object containing the purchase details.
- * @param {string} order.actionField - The action field for the purchase.
- * @param {Array} order.products - An array of products in the purchase.
- * @param {string} order.currencyCode - The currency code for the purchase.
- * @return {void} This function does not return a value.
- */
+    /**
+     * Notifies a purchase event to the dataLayer.
+     *
+     * @param {Object} order - The order object containing the purchase details.
+     * @param {string} order.actionField - The action field for the purchase.
+     * @param {Array} order.products - An array of products in the purchase.
+     * @param {string} order.currencyCode - The currency code for the purchase.
+     * @return {void} This function does not return a value.
+     */
     function notifyPurchase(order) {
         const purchaseData = {
             'event': 'purchase',
