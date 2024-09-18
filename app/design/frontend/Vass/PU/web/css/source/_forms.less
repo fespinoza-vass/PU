@@ -33,7 +33,6 @@
 
         &:disabled {
             border-color: @color-gray-light1;
-            cursor: not-allowed;
 
             &::before {
                 background-color: @color-gray-light1;
@@ -135,11 +134,13 @@
             transform: translate(-50%, -50%);
 
             &:disabled {
+                color: @color-gray-light1;
                 font-family: @icon-font;
             }
         }
 
         &:disabled {
+            color: @color-gray-light1;
             border-color: @color-gray-light1;
         }
     }
