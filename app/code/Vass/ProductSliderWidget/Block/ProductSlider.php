@@ -61,11 +61,6 @@ class ProductSlider extends AbstractProduct implements BlockInterface, IdentityI
     protected Pager $pager;
 
     /**
-     * @var PriceCurrencyInterface
-     */
-    private PriceCurrencyInterface $priceCurrency;
-
-    /**
      * Json Serializer Instance
      *
      * @var Json
@@ -80,6 +75,7 @@ class ProductSlider extends AbstractProduct implements BlockInterface, IdentityI
      * @param Builder $sqlBuilder
      * @param Rule $rule
      * @param Conditions $conditionsHelper
+     * @param PriceCurrencyInterface $priceCurrency
      * @param array $data
      * @param Json|null $json
      */
@@ -91,6 +87,7 @@ class ProductSlider extends AbstractProduct implements BlockInterface, IdentityI
         protected Builder $sqlBuilder,
         protected Rule $rule,
         protected Conditions $conditionsHelper,
+        protected PriceCurrencyInterface $priceCurrency,
         array $data = [],
         Json $json = null
     ) {
@@ -361,10 +358,6 @@ class ProductSlider extends AbstractProduct implements BlockInterface, IdentityI
      */
     private function getPriceCurrency(): PriceCurrencyInterface
     {
-        if ($this->priceCurrency === null) {
-            $this->priceCurrency = ObjectManager::getInstance()
-                ->get(PriceCurrencyInterface::class);
-        }
         return $this->priceCurrency;
     }
 
