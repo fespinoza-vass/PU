@@ -7,20 +7,7 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <script src="Magento_Customer/js/customer-data.js"/>
-    </head>
     <body>
-        <referenceContainer name="header.panel" remove="true"/>
-        <referenceContainer name="header" remove="true" />
-        <referenceBlock name="register-link" remove="true" />
-        <referenceBlock name='catalog.compare.link' remove="true"/>
-        <referenceBlock name='amsearch.full_with.trigger' remove="true"/>
-        <referenceBlock name="form.subscribe" remove="true"/>
-        <referenceBlock name="footer_links" remove="true"/>
-        <referenceBlock name="report.bugs" remove="true"/>
-        <referenceBlock name="copyright" remove="true"/>
-
         <referenceContainer name="header-wrapper">
             <container name="header-logo-search" as="header-logo-search" htmlTag="div" htmlClass="header-logo-search" before="-"/>
             <container name="header-links" as="header-wrapper" htmlTag="div" htmlClass="header links">
@@ -38,10 +25,6 @@
                    template="Magento_Theme::js/theme.phtml" after="-"/>
         </referenceContainer>
 
-        <move element="amasty.menu.toggle" destination="header-logo-search" before="-"/>
-        <move element="ammenu.logo" destination="header-logo-search" after="amasty.menu.toggle"/>
-        <move element="minicart" destination="header-links-right" after="wishlist"/>
-        <move element="authorization-link" destination="header-links-right" after="-" />
         <referenceContainer name="main.content">
             <container name="main.top.content.full" htmlTag="div" htmlClass="main-content-top-full" label="Main Content Top Full" before="-"/>
             <container name="main_wrapper" htmlTag="div" htmlClass="main-wrapper"/>
@@ -62,5 +45,22 @@
         <referenceBlock name="footer_links" remove="true"/>
         <referenceBlock name="report.bugs" remove="true"/>
         <referenceBlock name="copyright" remove="true"/>
+        <referenceContainer name="header.panel" remove="true"/>
+        <referenceContainer name="header" remove="true" />
+        <referenceBlock name="register-link" remove="true" />
+        <referenceBlock name='catalog.compare.link' remove="true"/>
+        <referenceBlock name='amsearch.full_with.trigger' remove="true"/>
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
+
+        <move element="amasty.menu.toggle" destination="header-logo-search" before="-"/>
+        <move element="ammenu.logo" destination="header-logo-search" after="amasty.menu.toggle"/>
+        <move element="minicart" destination="header-links-right" after="wishlist"/>
+        <move element="authorization-link" destination="header-links-right" after="-" />
+        <move element="columns.top" destination="main_wrapper" before="-" />
+        <move element="columns" destination="main_wrapper" after="columns.top" />
+        <move element="breadcrumbs" destination="main_wrapper" before="-" />
     </body>
 </page>

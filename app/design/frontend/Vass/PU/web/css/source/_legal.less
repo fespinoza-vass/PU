@@ -1,0 +1,187 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .mobile-desktop {
+        display: none;
+    }
+
+    .pagebuilder-column-line {
+        gap: @indent__base;
+    }
+
+    .legal {
+
+        &__row-page-content {
+            padding-top: 30px;
+        }
+
+        &__columns {
+            padding-left: @indent__base;
+            padding-right: @indent__base;
+        }
+
+        &__menu {
+            height: auto;
+            width: 100%;
+        }
+
+        &__text {
+            height: 100%;
+            width: 100%;
+            padding: @indent__m;
+            background-color: @primary-white;
+
+            p {
+                .lib-font-size(@font-size__m);
+                line-height: @line-height__xl;
+                text-align: left;
+                margin-bottom: @indent__m;
+
+                ul > li {
+                    line-height: @line-height__xl;
+                }
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        &__title {
+            h1 {
+                .lib-font-size(@font-size__xl);
+                font-family: @font-family__secondary;
+                color: @h1__font-color;
+                line-height: @indent__l;
+                font-weight: @h1__font-weight;
+                text-align: center;
+                text-transform: uppercase;
+                margin-bottom: @indent__l;
+            }
+
+            h5 {
+                .lib-font-size(@font-size__l);
+                line-height: 28px;
+                font-weight: @font-weight__bold;
+                margin: 24px 0;
+            }
+        }
+
+        &__section {
+            padding-top: 30px;
+        }
+
+        &__list {
+            padding: 0;
+            margin: 0;
+            gap: @indent__s;
+
+            ul {
+                list-style-type: none;
+                padding-inline-start: 0;
+
+                li {
+                    margin-bottom: 0;
+
+                    a {
+                        .lib-font-size(@font-size__m);
+                        font-weight: @font-weight__regular;
+                        font-family: @font-family__base;
+                        line-height: @line-height__l;
+                        text-decoration: none;
+                        color: @secondary-black;
+                        display: block;
+                        position: relative;
+                        padding: @indent__base @indent__base @indent__base @indent__m;
+                        background-color: @primary-white;
+
+                        &.active {
+                            font-weight: @font-weight__semibold;
+
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                height: 100%;
+                                width: 4px;
+                                background-color: @color-green-light2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = (@screen__m + 1)) {
+    .control {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+
+    .pagebuilder-column-line {
+        gap: @indent__m;
+    }
+
+    .legal {
+        &__title {
+            h1 {
+                .lib-font-size(@h1__font-size);
+                margin-bottom: @indent__xl;
+            }
+
+            h5 {
+                .lib-font-size(22);
+                line-height: @indent__l;
+                font-weight: @font-weight__bold;
+            }
+        }
+
+        &__text {
+            padding: 40px;
+
+            p {
+                .lib-font-size(@font-size__m);
+                font-size: @font-size__m;
+                line-height: @line-height__xl;
+                text-align: left;
+                margin-bottom: @indent__m;
+
+                ul > li {
+                    line-height: @line-height__xl;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .desktop-menu {
+        display: none;
+    }
+
+    .ammenu-menu-wrapper {
+        margin-bottom: 0;
+    }
+}
