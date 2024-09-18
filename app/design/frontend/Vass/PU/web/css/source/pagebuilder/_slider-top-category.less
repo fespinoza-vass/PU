@@ -37,7 +37,7 @@
 // Desktop
 // _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .pagebuilder-slider.cat-carousel {
         padding: 0 16px 24px 16px;
         .pagebuilder-slide-wrapper {
@@ -52,11 +52,6 @@
             .pagebuilder-collage-content {
                 p {
                     .lib-font-size(@font-size__xl);
-                    a {
-                        .lib-font-size(@font-size__m);
-                        text-transform: uppercase;
-                        text-underline-offset: 4px;
-                    }
                 }
             }
         }
