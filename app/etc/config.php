@@ -616,6 +616,7 @@ return [
         'Vass_General' => 1,
         'Vass_NiubizVisanet' => 1,
         'Vass_ProductSliderWidget' => 1,
+        'Vass_SliderReview' => 1,
         'WolfSellers_Adminwolf' => 1,
         'WolfSellers_AmastyLabel' => 0,
         'WolfSellers_AmastyMegaMenu' => 1,
