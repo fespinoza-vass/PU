@@ -584,6 +584,7 @@ return [
         'Amasty_InvisibleCaptcha' => 1,
         'Amasty_Label' => 1,
         'Amasty_LabelGraphQl' => 1,
+        'Amasty_LibSwiperJs' => 1,
         'Amasty_MegaMenuLite' => 1,
         'Amasty_MegaMenu' => 1,
         'Amasty_MegaMenuGraphQl' => 1,
