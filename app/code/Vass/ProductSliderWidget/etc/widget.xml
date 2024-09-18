@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_ProductSliderWidget
+ * @author VASS Team
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="vass_product_slider" class="Vass\ProductSliderWidget\Block\ProductSlider" is_email_compatible="true"
+            placeholder_image="Magento_CatalogWidget::images/products_list.png" ttl="86400">
+        <label translate="true">Products Slider</label>
+        <description translate="true">List of Products</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" sort_order="10" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="html_id" xsi:type="text" sort_order="20" required="true" visible="true">
+                <label translate="true">HTML ID</label>
+            </parameter>
+            <parameter name="products_count" sort_order="30" xsi:type="text" required="true" visible="true">
+                <label translate="true">Total of Products to Load</label>
+                <description translate="true">Maximum number of products to load</description>
+                <value>10</value>
+            </parameter>
+            <parameter name="desktop_products_qty" sort_order="40" visible="true" xsi:type="text" required="true">
+                <label>Products to display in Desktop</label>
+                <description translate="true">Number of products to display in desktop carrousel. (0 for auto)</description>
+                <value>5</value>
+            </parameter>
+            <parameter name="tablet_products_qty" sort_order="50" visible="true" xsi:type="text" required="true">
+                <label>Products to display in Tablet</label>
+                <description translate="true">Number of products to display in tablet carrousel. (0 for auto)</description>
+                <value>3</value>
+            </parameter>
+            <parameter name="mobile_products_qty" sort_order="60" visible="true" xsi:type="text" required="true">
+                <label>Products to display in Mobile</label>
+                <description translate="true">Number of products to display in mobile carrousel. (0 for auto)</description>
+                <value>2</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="false">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="product/widget/product-slider.phtml" selected="true">
+                        <label translate="true">Products Slider Template</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="condition" xsi:type="conditions" visible="true" required="true" sort_order="70"
+                       class="Magento\CatalogWidget\Block\Product\Widget\Conditions">
+                <label translate="true">Conditions</label>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="content">
+                <template name="grid" value="default" />
+            </container>
+            <container name="content.top">
+                <template name="grid" value="default" />
+            </container>
+            <container name="content.bottom">
+                <template name="grid" value="default" />
+            </container>
+        </containers>
+    </widget>
+</widgets>

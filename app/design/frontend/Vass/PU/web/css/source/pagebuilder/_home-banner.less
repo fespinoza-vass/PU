@@ -1,0 +1,87 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+
+& when (@media-common = true) {
+    .home-banner {
+        padding: 0;
+
+        .pagebuilder-banner-wrapper {
+            min-height: 360px;
+            display: flex;
+            align-items: center;
+
+            .pagebuilder-overlay {
+                padding: 0 40px;
+            }
+
+            .pagebuilder-collage-content {
+                h2 {
+                    font-family: @font-family__secondary;
+                    .lib-font-size(@font-size__xl);
+                    margin: 0;
+                    margin-bottom: 30px;
+                }
+
+                p:last-child {
+                    margin: 0;
+                }
+
+                button.pagebuilder-button-primary {
+                    padding: 16px 40px;
+                    .lib-font-size(@font-size__m);
+                    margin-top: 30px;
+                }
+            }
+        }
+
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .home-no-mobile-image {
+        .pagebuilder-banner-wrapper {
+            background-image: none;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .home-banner {
+        .pagebuilder-banner-wrapper {
+            min-height: 480px;
+
+            .pagebuilder-overlay {
+                padding: 0 0 0 100px;
+            }
+
+            .pagebuilder-collage-content {
+                h2 {
+                    .lib-font-size(40);
+                    margin-bottom: 24px;
+                }
+
+                p {
+                    .lib-font-size(26);
+                    margin: 0;
+                }
+
+                button.pagebuilder-button-primary {
+                    margin-top: 40px;
+                }
+            }
+
+        }
+    }
+}
+

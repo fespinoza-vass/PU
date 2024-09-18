@@ -1,0 +1,15 @@
+--- /dev/null
++++ ../src/Util/Standards.php
+@@ -34,6 +34,12 @@
+         }
+ 
+         $resolvedInstalledPaths = [];
++        $vendorDir = dirname(dirname(dirname(dirname(__DIR__))));
++        $phpCompatibilityDir = $vendorDir . '/phpcompatibility/php-compatibility/PHPCompatibility';
++        if (is_dir($phpCompatibilityDir)) {
++            $resolvedInstalledPaths[] = $phpCompatibilityDir;
++        }
++        
+         foreach ($installedPaths as $installedPath) {
+             if (substr($installedPath, 0, 1) === '.') {
+                 $installedPath = Common::realPath(__DIR__.$ds.'..'.$ds.'..'.$ds.$installedPath);
