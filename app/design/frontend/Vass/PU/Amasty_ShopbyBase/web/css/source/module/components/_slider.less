@@ -36,14 +36,12 @@
     }
 
     .amslider {
-        & {
-            position: relative;
-            margin: 30px auto;
-        }
+        position: relative;
+        margin: 0 auto;
+        overflow: hidden;
 
         .swiper-pagination {
             position: static;
-            padding-bottom: 35px;
         }
 
         .swiper-container > .wrapper {
@@ -149,13 +147,14 @@
             background-image: @ambrands-slider-arrow__prev__background-image;
         }
     }
+
     // END Override slider styles
 
     .amslider-header-container {
         text-align: center;
-        .lib-heading(h2);
         font-family: @font-family__secondary;
-        margin: 0 0 48px 0;
+        .lib-font-size(36);
+        margin: 0 0 40px 0;
     }
 
     .children-category .amslider {
@@ -169,14 +168,14 @@
 
     .amslider.ambrands-slider {
         & {
-            margin-top: 20px;
+            margin-top: 0;
             padding: 0;
-            max-width: 100%;
+            max-width: 100% !important; // Override styles Amasty Js
         }
 
         .ambrands-inner {
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 0;
         }
 
         .ambrands-swiper-brand {
@@ -219,6 +218,7 @@
             padding: 0;
             height: auto;
         }
+
         // END Override slider styles
     }
 
@@ -270,6 +270,7 @@
             align-items: baseline;
         }
     }
+
     // END Override slider styles
 
     .amslider .swiper-slide {
@@ -335,11 +336,15 @@
             transition: all .3s ease;
         }
     }
+
     // END Override slider styles
 
     .ambrands-slider-container {
+        max-width: @layout__max-width;
+        margin: 0 auto;
         padding: 80px 120px;
     }
+
     .swiper-pagination {
         display: none;
     }
@@ -347,7 +352,7 @@
     .amslider .swiper-slide .swiper-category-item:not(:root:root),
     .amslider .swiper-slide .ambrands-swiper-brand:not(:root:root),
     .amslider .slide .category-item:not(:root:root) {
-        padding: 10px;
+        padding: 0;
     }
 
     //IE percentage max-width of flex element bug fix
@@ -391,9 +396,11 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .ambrands-slider-container {
-        padding: 0;
+        padding: 32px 24px;
+
         .amslider-header-container {
             margin: 0 0 24px 0;
+            .lib-font-size(@font-size__xl);
         }
     }
 

@@ -137,7 +137,7 @@ $sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
         <script>
             require(['jquery', 'swiper', 'domReady!'], function ($, Swiper) {
                 new Swiper('#<?= /** @noEscape */ $sliderId ?> .swiper-container', {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                     loop: <?= (int) $block->getLoop() ?>,
                     simulateTouch: <?= (int) $block->getSimulateTouch() ?>,
                     <?php if ($block->isPaginationShow()): ?>
@@ -155,11 +155,21 @@ $sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
                     <?php for ($i = 1; $i <= $itemsPerView; $i++): ?>
                         <?php if ($i >= 4): ?>
                             <?= ($i + 1) * ($imgWidth + 30)?> : {
-                                slidesPerView: <?= (int) $i ?>
+                                slidesPerView: <?= (int) $i ?>,
+                                <?php if(($i + 1) * ($imgWidth + 30) > 1024) :?>
+                                    spaceBetween: 48
+                                <?php else: ?>
+                                    spaceBetween: 24
+                                <?php endif; ?>
                             },
                         <?php else: ?>
                             <?= ($i) * ($imgWidth + 35)?> : {
-                                slidesPerView: <?= (int) $i ?>
+                                slidesPerView: <?= (int) $i ?>,
+                                <?php if(($i + 1) * ($imgWidth + 30) > 1024) :?>
+                                    spaceBetween: 48
+                                <?php else: ?>
+                                    spaceBetween: 24
+                                <?php endif; ?>
                             },
                         <?php endif; ?>
                     <?php endfor; ?>
@@ -168,7 +178,7 @@ $sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
                         nextEl: '#<?= /** @noEscape */ $sliderId ?> .swiper-button-next',
                         prevEl: '#<?= /** @noEscape */ $sliderId ?> .swiper-button-prev'
                     },
-                    spaceBetween: 10
+                    spaceBetween: 24
                 });
             });
         </script>
