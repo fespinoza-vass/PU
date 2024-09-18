@@ -1,5 +1,5 @@
 <?php
-namespace Vass\SliderReview\Block\Adminhtml\Widget\Type;
+namespace Vass\CardsSlider\Block\Adminhtml\Widget\Type;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context as TemplateContext;

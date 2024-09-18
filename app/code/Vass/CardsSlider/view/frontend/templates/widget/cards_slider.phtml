@@ -5,17 +5,15 @@
  */
 
 /**
- * @var \Vass\ReviewSlider\Block\Widget\ReviewSlider $block
+ * @var \Vass\CardsSlider\Block\Widget\CardsSlider $block
  * @var \Magento\Framework\Escaper $escaper
  */
 
 $images = $block->getImages();
-$texts = $block->getText();
-$names = $block->getNames();
-$stars = $block->getStars();
-$urls = $block->getUrls();
-$label = $block->getLabel();
 $title = $block->getTitle();
+$description = $block->getDescription();
+$textUrl = $block->getTextUrl();
+$url = $block->getUrl();
 $count = count($images);
 $maxStars = 5;
 
@@ -31,38 +29,27 @@ $maxStars = 5;
                     <div class="swiper-slide">
                         <div class="swiper-slide">
                             <div class="swiper-slide">
-                                <span class="home-subtitle home-subtitle--outside">
-                                    <?= /** @noEscape */ $title; ?>
-                                </span>
                                 <div class="ba-review__wrapper">
                                     <div class="ba-review-info-img">
                                         <img class="ba-review-img" src="<?= /** @noEscape */ $images[$i]; ?>" />
                                     </div>
                                     <div class="ba-review__rightcol">
                                          <span class="home-subtitle home-subtitle--inside">
-                                            <?= /** @noEscape */ $title; ?>
+                                            <?= /** @noEscape */ $title[$i]; ?>
                                         </span>
                                         <div class="ba-review-info">
                                             <div class="ba-review-label-star">
                                                 <span class="ba-review-label">
-                                                    <?= /** @noEscape */ $label[$i]; ?>
-                                                </span>
-                                                <span class="ba-review-star">
-                                                    <?php for ($j = 0; $j < $stars[$i]; $j++): ?>
-                                                        <span class="icon icon-full-start star-gold"></span>
-                                                    <?php endfor; ?>
-                                                    <?php for ($j = $stars[$i]; $j < $maxStars; $j++): ?>
-                                                        <span class="icon icon-full-start star-grey"></span>
-                                                    <?php endfor; ?>
+                                                    <?= /** @noEscape */ $description[$i]; ?>
                                                 </span>
                                             </div>
-                                                <span class="ba-review-title">
-                                                    <?= /** @noEscape */ $texts[$i]; ?>
+                                            <span class="ba-review-title">
+                                                    <?= /** @noEscape */ $textUrl[$i]; ?>
                                                 </span>
-                                                <span class="ba-review-name">
-                                                    <?= /** @noEscape */ $names[$i]; ?>
+                                            <span class="ba-review-name">
+                                                    <?= /** @noEscape */ $url[$i]; ?>
                                                 </span>
-                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +70,7 @@ $maxStars = 5;
 <script type="text/x-magento-init">
     {
         "*": {
-            "Vass_SliderReview/js/review-slider": {}
+            "Vass_HomeCardsSlider/js/cards_slider": {}
         }
     }
 </script>
