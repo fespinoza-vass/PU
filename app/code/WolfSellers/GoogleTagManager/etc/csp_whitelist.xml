@@ -53,9 +53,7 @@
                 <value id="braintree-api-script" type="host">api.braintreegateway.com</value>
                 <value id="sandbox-braintree-api-script" type="host">api.sandbox.braintreegateway.com</value>
                 <value id="braintree-client-analytics-script" type="host">client-analytics.braintreegateway.com</value>
-                <value id="sandbox-braintree-client-analytics-script" type="host">
-                    client-analytics.sandbox.braintreegateway.com
-                </value>
+                <value id="sandbox-braintree-client-analytics-script" type="host">client-analytics.sandbox.braintreegateway.com</value>
                 <value id="paypal-star-script" type="host">*.paypal.com</value>
                 <value id="cardinalcommerce-script" type="host">geostag.cardinalcommerce.com</value>
                 <value id="cardinalcommerce-api-script" type="host">geoapi.cardinalcommerce.com</value>
