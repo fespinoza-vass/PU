@@ -20,7 +20,7 @@
             <div class="swiper-wrapper">
                 <?php foreach ($block->getItems() as $item): ?>
                     <?php if ($item['image'] && $item['label']): ?>
-                        <a class="item swiper-slide" href="#">
+                        <a class="item swiper-slide" href="<?= $escaper->escapeUrl($item['link']) ?>">
                             <img class="item__image" src="<?= $escaper->escapeUrl($item['image']) ?>" alt="promotion">
                             <span class="item__label"><?= $escaper->escapeHtml($item['label']) ?></span>
                         </a>
