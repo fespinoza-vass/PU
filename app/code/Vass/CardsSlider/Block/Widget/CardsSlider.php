@@ -2,6 +2,7 @@
 
 namespace Vass\CardsSlider\Block\Widget;
 
+use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Widget\Block\BlockInterface;
@@ -10,11 +11,23 @@ use Magento\Store\Model\StoreManagerInterface as StoreManager;
 class CardsSlider extends Template implements BlockInterface
 {
     /**
+     * Max value to deploy slides
+     */
+    private const MAX_SLIDES_AVAILABLE = 6;
+
+    /**
+     * Number of slidesPerView depends of screen format
+     */
+    private const SLIDES_IN_DESKTOP = 2.5;
+    private const SLIDES_IN_TABLET = 2;
+    private const SLIDES_IN_MOBILE = 1;
+
+    /**
      * Template file for the widget
      *
      * @var string
      */
-    protected $_template = 'widget/cards_slider.phtml';
+    protected $_template = 'widget/cards-slider.phtml';
 
     /**
      * Constructor
@@ -31,25 +44,28 @@ class CardsSlider extends Template implements BlockInterface
     }
 
     /**
+     * Get the slider data
+     *
+     * @param string $type
+     * @return array
+     */
+    private function getSliderData(string $type): array
+    {
+        $data = [];
+        for ($i = 1; $i <= self::MAX_SLIDES_AVAILABLE; $i++) {
+            $data[] = $this->getData("{$type}_{$i}");
+        }
+        return $data;
+    }
+
+    /**
      * Get the slider images
      *
      * @return array
      */
     public function getImages(): array
     {
-        $image1 = $this->getData('image_1');
-        $image2 = $this->getData('image_2');
-        $image3 = $this->getData('image_3');
-        $image4 = $this->getData('image_4');
-        $image5 = $this->getData('image_5');
-        $image6 = $this->getData('image_6');
-        return [
-            $image1,
-            $image2,
-            $image3,
-            $image4,
-            $image5,
-            $image6];
+        return $this->getSliderData('image');
     }
 
     /**
@@ -59,20 +75,7 @@ class CardsSlider extends Template implements BlockInterface
      */
     public function getTitle(): array
     {
-        $title1 = $this->getData('title_1');
-        $title2 = $this->getData('title_2');
-        $title3 = $this->getData('title_3');
-        $title4 = $this->getData('title_4');
-        $title5 = $this->getData('title_5');
-        $title6 = $this->getData('title_6');
-        return [
-            $title1,
-            $title2,
-            $title3,
-            $title4,
-            $title5,
-            $title6
-        ];
+        return $this->getSliderData('title');
     }
 
     /**
@@ -82,20 +85,7 @@ class CardsSlider extends Template implements BlockInterface
      */
     public function getDescription(): array
     {
-        $description1 = $this->getData('description_1');
-        $description2 = $this->getData('description_2');
-        $description3 = $this->getData('description_3');
-        $description4 = $this->getData('description_4');
-        $description5 = $this->getData('description_5');
-        $description6 = $this->getData('description_6');
-        return [
-            $description1,
-            $description2,
-            $description3,
-            $description4,
-            $description5,
-            $description6
-        ];
+        return $this->getSliderData('description');
     }
 
     /**
@@ -105,24 +95,11 @@ class CardsSlider extends Template implements BlockInterface
      */
     public function getTextUrl(): array
     {
-        $urlText1 = $this->getData('urlText_1');
-        $urlText2 = $this->getData('urlText_2');
-        $urlText3 = $this->getData('urlText_3');
-        $urlText4 = $this->getData('urlText_4');
-        $urlText5 = $this->getData('urlText_5');
-        $urlText6 = $this->getData('urlText_6');
-        return [
-            $urlText1,
-            $urlText2,
-            $urlText3,
-            $urlText4,
-            $urlText5,
-            $urlText6
-        ];
+        return $this->getSliderData('urlText');
     }
 
     /**
-     * Get the slider URLs
+     * Get the slider URLs with optional routing and parameters
      *
      * @param string $route
      * @param array $params
@@ -130,19 +107,54 @@ class CardsSlider extends Template implements BlockInterface
      */
     public function getUrl($route = '', $params = []): array
     {
-        $url1 = $this->getData('url_1');
-        $url2 = $this->getData('url_2');
-        $url3 = $this->getData('url_3');
-        $url4 = $this->getData('url_4');
-        $url5 = $this->getData('url_5');
-        $url6 = $this->getData('url_6');
-        return [
-            $url1,
-            $url2,
-            $url3,
-            $url4,
-            $url5,
-            $url6
-        ];
+        $urls = [];
+        for ($i = 1; $i <= self::MAX_SLIDES_AVAILABLE; $i++) {
+            $url = $this->getData("url_{$i}");
+            if ($route) {
+                $url = $this->getUrlBuilder()->getUrl($route, $params);
+            }
+            $urls[] = $url;
+        }
+        return $urls;
+    }
+
+    /**
+     * Get URL builder instance
+     *
+     * @return UrlInterface
+     */
+    protected function getUrlBuilder()
+    {
+        return $this->_urlBuilder;
+    }
+
+    /**
+     * Get the number of slides to show in desktop view
+     *
+     * @return float
+     */
+    public function getSlidesToShowInDesktop(): float
+    {
+        return self::SLIDES_IN_DESKTOP;
+    }
+
+    /**
+     * Get the number of slides to show in tablet view
+     *
+     * @return int
+     */
+    public function getSlidesToShowInTablet(): int
+    {
+        return self::SLIDES_IN_TABLET;
+    }
+
+    /**
+     * Get the number of slides to show in mobile view
+     *
+     * @return int
+     */
+    public function getSlidesToShowMobile(): int
+    {
+        return self::SLIDES_IN_MOBILE;
     }
 }
