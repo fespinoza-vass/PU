@@ -609,6 +609,7 @@ return [
         'Vass_NiubizVisanet' => 1,
         'Vass_ProductSliderWidget' => 1,
         'Vass_PromotionsSlider' => 1,
+        'Vass_PromotionsSliderCards' => 1,
         'WolfSellers_Adminwolf' => 1,
         'WolfSellers_AmastyLabel' => 0,
         'WolfSellers_AmastyMegaMenu' => 1,

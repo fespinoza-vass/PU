@@ -1,0 +1,67 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_PromotionsSliderCards
+ * @author VASS Team
+ */
+
+/** @var PromotionsSlider $block */
+/** @var Escaper $escaper */
+
+use Magento\Framework\Escaper;
+use Vass\PromotionsSlider\Block\PromotionsSlider;
+
+?>
+
+<?php if (count($block->getItems())): ?>
+    <div class="promotions-cards">
+        <div id="promotions-cards-slider" class="promotions-cards__slide swiper-wrapper swiper">
+            <div class="swiper-wrapper">
+                <?php foreach ($block->getItems() as $item): ?>
+                    <?php if ($item['main_image'] && $item['title']): ?>
+                        <div class="item swiper-slide">
+                            <div class="item__logos">
+                                <?php if ($item['first_logo']): ?>
+                                    <img class="item__logo" src="<?= $escaper->escapeUrl($item['first_logo']) ?>"
+                                         alt="logo">
+                                <?php endif; ?>
+
+                                <?php if ($item['secondary_logo']): ?>
+                                    <img class="item__logo" src="<?= $escaper->escapeUrl($item['secondary_logo']) ?>"
+                                         alt="logo">
+                                <?php endif; ?>
+
+                                <?php if ($item['tertiary_logo']): ?>
+                                    <img class="item__logo" src="<?= $escaper->escapeUrl($item['tertiary_logo']) ?>"
+                                         alt="logo">
+                                <?php endif; ?>
+                            </div>
+                            <img class="item__image" src="<?= $escaper->escapeUrl($item['main_image']) ?>"
+                                 alt="promotion">
+                            <span class="item__title">
+                                <?= /** @noEscape */ html_entity_decode($item['title']) // phpcs:ignore ?>
+                            </span>
+                            <a href="<?= $escaper->escapeUrl($item['link']) ?>" class="item__link action primary">
+                                <?= $escaper->escapeHtml($item['label_link']) ?>
+                            </a>
+                            <span class="item__info">
+                                <?= $escaper->escapeHtml($item['info']) ?>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "#promotions-cards-slider": {
+                "promotionsCardsSlider": {}
+            }
+        }
+    </script>
+<?php endif; ?>
+
+
