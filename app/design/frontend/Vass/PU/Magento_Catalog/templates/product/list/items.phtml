@@ -1,43 +1,195 @@
 <?php
 /**
  * @copyright Copyright (c) 2024 VASS
- * @package Vass_ProductSliderWidget
  * @author VASS Team
  */
 
+/**
+ * @var AbstractProduct $block
+ * @var SecureHtmlRenderer $secureRenderer
+ * @var Escaper $escaper
+ */
+
+use Magento\Catalog\Block\Product\AbstractProduct;
+use Magento\Catalog\Block\Product\ProductList\Crosssell;
+use Magento\Catalog\Block\Product\ProductList\Related;
+use Magento\Catalog\Block\Product\ProductList\Upsell;
 use Magento\Catalog\Block\Product\ReviewRendererInterface;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\Escaper;
-use Magento\Swatches\Block\Product\Renderer\Configurable;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Magento\Wishlist\Helper\Data;
-use Vass\ProductSliderWidget\Block\ProductSlider;
 use Vass\ProductSliderWidget\Helper\PreparePostData;
 
-/** @var $block ProductSlider */
-/** @var $escaper Escaper */
+switch ($type = $block->getType()) {
+
+    case 'related-rule':
+        if ($exist = $block->hasItems()) {
+            $type = 'related';
+            $mode = 'grid';
+            $class = $type;
+
+            $image = 'related_products_list';
+            $title = __('Related Products');
+            $items = $block->getAllItems();
+            $limit = $block->getPositionLimit();
+            $shuffle = (int)$block->isShuffled();
+            $isWeightedRandom = (int)$block->getRotation()->isWeightedRandom($block->getProductListType());
+            $canItemsAddToCart = $block->canItemsAddToCart();
+
+            $showAddTo = true;
+            $showCart = false;
+            $templateType = null;
+            $description = false;
+        }
+        break;
+
+    case 'related':
+        /** @var Related $block */
+        if ($exist = $block->getItems()->getSize()) {
+            $type = 'related';
+            $mode = 'grid';
+            $class = $type;
+
+            $image = 'related_products_list';
+            $title = __('Related Products');
+            $items = $block->getItems();
+            $limit = 0;
+            $shuffle = 0;
+            $isWeightedRandom = 0;
+            $canItemsAddToCart = $block->canItemsAddToCart();
+
+            $showAddTo = true;
+            $showCart = false;
+            $templateType = null;
+            $description = false;
+        }
+        break;
+
+    case 'upsell-rule':
+        if ($exist = $block->hasItems()) {
+            $type = 'upsell';
+            $mode = 'grid';
+            $class = $type;
+
+            $image = 'upsell_products_list';
+            $title = __('We found other products you might like!');
+            $items = $block->getAllItems();
+            $limit = $block->getPositionLimit();
+            $shuffle = (int)$block->isShuffled();
+            $isWeightedRandom = (int)$block->getRotation()->isWeightedRandom($block->getProductListType());
+
+            $showAddTo = false;
+            $showCart = false;
+            $templateType = null;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'upsell':
+        /** @var Upsell $block */
+        if ($exist = count($block->getItemCollection()->getItems())) {
+            $type = 'upsell';
+            $mode = 'grid';
+            $class = $type;
+
+            $image = 'upsell_products_list';
+            $title = __('We found other products you might like!');
+            $items = $block->getItemCollection()->getItems();
+            $limit = $block->getItemLimit('upsell');
+            $shuffle = 0;
+            $isWeightedRandom = 0;
+
+            $showAddTo = false;
+            $showCart = false;
+            $templateType = null;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'crosssell-rule':
+        /** @var Crosssell $block */
+        if ($exist = $block->hasItems()) {
+            $type = 'crosssell';
+            $mode = 'grid';
+            $class = $type;
+
+            $image = 'cart_cross_sell_products';
+            $title = __('More Choices:');
+            $items = $block->getItemCollection();
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = ReviewRendererInterface::SHORT_VIEW;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'crosssell':
+        /** @var Crosssell $block */
+        if ($exist = count($block->getItems())) {
+            $type = 'crosssell';
+            $mode = 'grid';
+            $class = $type;
+
+            $image = 'cart_cross_sell_products';
+            $title = __('More Choices:');
+            $items = $block->getItems();
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = ReviewRendererInterface::SHORT_VIEW;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'new':
+        if ($exist = $block->getProductCollection()) {
+            $type = 'new';
+            $mode = 'grid';
+            $type = $type . ' ' . $mode;
+
+            $class = 'widget' . ' ' . $type;
+
+            $image = 'new_products_content_widget_grid';
+            $title = __('New Products');
+            $items = $exist;
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = ReviewRendererInterface::SHORT_VIEW;
+            $description = ($mode == 'list') ? true : false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    default:
+        $exist = null;
+}
+
+$idSwiper = $type . '-slide';
+$_item = null;
 ?>
-<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())): ?>
-    <?php
-    $type = 'grid';
-    $mode = 'grid';
-    $image = 'category_page_grid';
-    $items = $block->getProductCollection()->getItems();
-    $showWishlist = true;
-    $showCart = true;
-    $templateType = ReviewRendererInterface::FULL_VIEW;
-    $description = false;
-    $htmlId = $block->getHtmlId();
-    ?>
-    <div class="product-grid products-slider slider <?= /** @noEscape */ $mode ?>">
-        <?php if ($block->getTitle()): ?>
-            <h3 class="product-grid__title skew-title"><?= $escaper->escapeHtml(__($block->getTitle())) ?></h3>
+
+<?php if ($exist): ?>
+    <div class="product-grid products-slider slider <?= /** @noEscape */$mode ?>">
+        <?php if ($title): ?>
+            <h3 class="product-grid__title skew-title">
+                <?= $escaper->escapeHtml($title) ?>
+            </h3>
         <?php endif ?>
+
         <div class="products-slider__content">
-            <div class="swiper-button-prev" id="<?= $htmlId ?>-prev">
+            <div class="swiper-button-prev" id="<?= /** @noEscape */$idSwiper ?>-prev">
                 <span class="icon icon-pointer-left"></span>
             </div>
-            <div id="<?= /** @noEscape */ $htmlId ?>" class="products-slider__wrapper swiper">
-                <div class="product-items swiper-wrapper <?= /** @noEscape */ $mode ?>">
+
+            <div id="<?= /** @noEscape */$idSwiper ?>" class="products-slider__wrapper swiper">
+                <div class="product-items swiper-wrapper <?= /** @noEscape */$mode ?>">
                     <?php foreach ($items as $_item): ?>
                         <div class="item product product-item swiper-slide">
                             <div class="product-item-info">
@@ -47,6 +199,7 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                         <?= $block->getImage($_item, $image, ['loading' => 'lazy'])->toHtml() ?>
                                     </a>
                                 </div>
+
                                 <div class="product details product-item-details">
                                     <div class="product-top-name">
                                         <span class="product-brand">
@@ -71,7 +224,6 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                             ?>
                                         <?php endif; ?>
                                     </div>
-
 
                                     <?= $block->getProductPrice($_item) ?>
 
@@ -98,7 +250,8 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                                            name="<?= /* @noEscape */
                                                            ActionInterface::PARAM_NAME_URL_ENCODED ?>"
                                                            value="<?= $escaper->escapeHtml($value) ?>">
-                                                    <?= /* @noEscape */ $block->getBlockHtml('formkey') ?>
+                                                    <?= /* @noEscape */
+                                                    $block->getBlockHtml('formkey') ?>
                                                     <button type="submit"
                                                             title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
                                                             class="action tocart primary icon icon-shopping-bag">
@@ -106,7 +259,8 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                                     </button>
                                                 </form>
                                             <?php endif; ?>
-                                            <?php if ($this->helper(Data::class)->isAllow() && $showWishlist): // phpcs:ignore ?>
+
+                                            <?php if ($this->helper(Data::class)->isAllow()): // phpcs:ignore ?>
                                                 <div class="secondary-addto-links actions-secondary"
                                                      data-role="add-to-links">
                                                     <a href="#"
@@ -123,37 +277,38 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach ?>
+                    <?php endforeach; ?>
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-button-next" id="<?= $htmlId ?>-next">
+
+            <div class="swiper-button-next" id="<?= /** @noEscape */$idSwiper ?>-next">
                 <span class="icon icon-pointer-right"></span>
             </div>
         </div>
     </div>
 
-    <script type="text/x-magento-init">
-        {
-            "[data-role=tocart-form]": {
-                "catalogAddToCart": {
-                    "product_sku": "<?= $escaper->escapeJs($_item->getSku()) ?>"
+    <?php if (!$block->isRedirectToCartEnabled() && $_item): ?>
+        <script type="text/x-magento-init">
+            {
+                "[data-role=tocart-form], .form.map.checkout": {
+                    "catalogAddToCart": {
+                        "product_sku": "<?= $block->escapeJs($_item->getSku()) ?>"
                     }
                 }
             }
-    </script>
+        </script>
+    <?php endif; ?>
 
     <script type="text/x-magento-init">
         {
-            "#<?= /** @noEscape */$htmlId ?>": {
-            "productsSlider": {
-                "slidesInDesktop": "<?= $escaper->escapeJs($block->getProductsToShowInDesktop()) ?>",
-                "slidesInTablet": "<?= $escaper->escapeJs($block->getProductsToShowInTablet()) ?>",
-                "slidesInMobile": "<?= $escaper->escapeJs($block->getProductsToShowInMobile()) ?>"
+            "#<?= /** @noEscape */$idSwiper ?>": {
+                "Magento_Catalog/js/slider": {
+                    "slidesInDesktop": "3",
+                    "slidesInTablet": "2",
+                    "slidesInMobile": "1"
+                }
             }
         }
-    }
     </script>
 <?php endif; ?>
-
-
