@@ -1,0 +1,42 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_PromotionsSlider
+ * @author VASS Team
+ */
+
+/** @var \Vass\PromotionsSlider\Block\PromotionsSlider $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?php if (count($block->getItems())): ?>
+    <div class="promotions">
+        <div class="promotions__info">
+            <h2 class="promotions__title"><?= $escaper->escapeHtml($block->getTitle()) ?></h2>
+            <span class="promotions__subtitle"><?= $escaper->escapeHtml($block->getSubtitle()) ?></span>
+        </div>
+
+        <div id="promotions-slider" class="promotions__slide swiper">
+            <div class="swiper-wrapper">
+                <?php foreach ($block->getItems() as $item): ?>
+                    <?php if ($item['image'] && $item['label']): ?>
+                        <a class="item swiper-slide" href="#">
+                            <img class="item__image" src="<?= $escaper->escapeUrl($item['image']) ?>" alt="promotion">
+                            <span class="item__label"><?= $escaper->escapeHtml($item['label']) ?></span>
+                        </a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "#promotions-slider": {
+                "promotionsSlider": {}
+            }
+        }
+    </script>
+<?php endif; ?>
+
+
