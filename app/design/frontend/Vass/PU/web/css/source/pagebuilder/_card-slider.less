@@ -8,9 +8,12 @@
 // _____________________________________________
 
 & when (@media-common = true) {
-    .card-slider__wrapper {
-        position: relative;
-        padding: @indent__m;
+
+    .card-slider {
+
+        &__wrapper {
+            position: relative;
+        }
 
         .swiper-slide {
             display: flex;
@@ -19,20 +22,17 @@
 
         &-img {
             max-width: 100%;
-            border-radius: 8px;
             margin-bottom: 15px;
         }
 
         &-content {
             position: absolute;
-            top: 354px; // Provisional
-            left: 108px; // Provisional
-            width: 437px; // Provisional
-            height: 166px; // Provisional
+            bottom: 0;
+            left: 0;
+            width: 100%;
             text-align: center;
-            padding: @font-size__m @font-size__xl;
+            padding: @indent__base @indent__m;
             background-color: @color-green-light2;
-            padding: 20px;
             gap: @indent__s;
         }
 
@@ -62,10 +62,29 @@
     }
 }
 
-    //
+//
+// Tablet
+// _____________________________________________
+
+@media (min-width: @screen__xs) and (max-width: @screen__m) {
+    .card-slider__wrapper {
+        &__content {
+            width: 70%;
+            height: auto;
+            margin: 0 auto;
+        }
+    }
+}
+
+//
 // Desktop
 // _____________________________________________
 
-//.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-//
-//}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .card-slider__wrapper {
+        &__content {
+            width: 437px;
+            height: auto;
+        }
+    }
+}
