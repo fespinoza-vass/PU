@@ -7,7 +7,7 @@
 var config = {
     map: {
         '*': {
-            promotionsSlider: 'Vass_PromotionsSlider/js/promotions-slider'
+            promotionsSlider: 'Vass_PromotionsSlider/js/slider'
         }
     }
 };

@@ -19,7 +19,7 @@ class PromotionsSlider extends Template implements BlockInterface
      *
      * @var string
      */
-    protected $_template = "widget/promotions-slider.phtml";
+    protected $_template = "widget/promotions.phtml";
 
     /**
      * Get the title of the slider
@@ -48,14 +48,14 @@ class PromotionsSlider extends Template implements BlockInterface
      */
     public function getItems(): array
     {
-        for ($i = 0; $i <= 5; $i++) {
-            $images[] = [
+        for ($i = 1; $i <= 5; $i++) {
+            $data[] = [
                 'image' => $this->getData('image_' . $i) ?? '',
                 'label' => $this->getData('label_' . $i) ?? '',
                 'link' => $this->getData('link_' . $i) ?? '',
             ];
         }
 
-        return $images;
+        return $data;
     }
 }
