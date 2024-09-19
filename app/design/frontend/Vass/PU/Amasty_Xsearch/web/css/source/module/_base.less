@@ -82,9 +82,9 @@
     .amsearch-wrapper-block {
         box-sizing: border-box;
         display: inline-block;
-        margin: @amsearch__indent 0 0 0;
+        margin: 0;
+        padding: 24px 16px 16px;
         order: 1;
-        padding: @amsearch__indent__l 0;
         position: relative;
         width: 100%;
         max-width: 542px;
@@ -92,16 +92,6 @@
 
     .nav-sections .navigation {
         z-index: 2;
-    }
-
-    .page-header .amsearch-wrapper-block:before {
-        background: @amsearch-border__color;
-        content: '';
-        height: 1px;
-        margin: 0 -@amsearch__indent__m;
-        position: absolute;
-        top: 0;
-        width: ~'calc(100% + @{amsearch__indent__m} * 2)';
     }
 
     .amsearch-emptysearch-cms {
@@ -148,8 +138,6 @@
 }
 
 
-
-
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
 
     .catalogsearch-result-index .amsearch-pagebuilder-carousel .product-item-info {
@@ -157,8 +145,6 @@
         width: 240px;
     }
 }
-
-
 
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
@@ -169,13 +155,12 @@
     .amsearch-wrapper-block {
         order: initial;
         width: auto;
+        padding: 0;
     }
 
-    .page-header .amsearch-wrapper-block {
-        & {
+    .page-header {
+        .amsearch-wrapper-block {
             float: right;
-            margin: 0;
-            padding: 16px;
             width: 100%;
         }
 
@@ -202,8 +187,6 @@
         }
     }
 }
-
-
 
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {

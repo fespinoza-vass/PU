@@ -17,9 +17,15 @@ define([
                 slidesInMobile = config.slidesInMobile,
                 swiperOptions = {
                     slidesPerView: slidesInMobile,
+                    slidesPerGroup: slidesInMobile,
                     spaceBetween: 16,
                     freeMode: false,
                     a11y: false,
+                    loop: true,
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
                     navigation: {
                         nextEl: `#${element.id}-next`,
                         prevEl: `#${element.id}-prev`
@@ -31,10 +37,12 @@ define([
                     breakpoints: {
                         1024: {
                             slidesPerView: slidesInDesktop,
+                            slidesPerGroup: slidesInDesktop,
                             spaceBetween: 24,
                         },
                         768: {
                             slidesPerView: slidesInTablet,
+                            slidesPerGroup: slidesInTablet,
                             spaceBetween: 16,
                         }
                     }

@@ -33,7 +33,6 @@
 
         &:disabled {
             border-color: @color-gray-light1;
-            cursor: not-allowed;
 
             &::before {
                 background-color: @color-gray-light1;
@@ -92,7 +91,7 @@
                 font-family: @icons__font-name;
                 position: absolute;
                 pointer-events: none;
-                color: #000;
+                color: @secondary-black;
                 .lib-font-size(11);
                 top: ~"calc((@{select__height} / 2) + 10px)";
                 transform: translateY(-50%);
@@ -108,5 +107,41 @@
             .lib-css(appearance, none);
         }
     }
-}
 
+    //
+    //  Checkbox
+    //  -----------------------------------------
+
+    input[type="checkbox"] {
+        .lib-css(appearance, none);
+        width: 20px;
+        height: 20px;
+        background-color: @primary-white;
+        border: 0.5px solid @primary-black;
+        position: relative;
+        border-radius: 1px;
+        cursor: pointer;
+
+        &:checked::before {
+            content: @icon-check;
+            font-family: @icon-font;
+            .lib-font-size(8);
+            width: 2px;
+            height: 0;
+            position: absolute;
+            top: 5px;
+            left: 4px;
+            transform: translate(-50%, -50%);
+
+            &:disabled {
+                color: @color-gray-light1;
+                font-family: @icon-font;
+            }
+        }
+
+        &:disabled {
+            color: @color-gray-light1;
+            border-color: @color-gray-light1;
+        }
+    }
+}

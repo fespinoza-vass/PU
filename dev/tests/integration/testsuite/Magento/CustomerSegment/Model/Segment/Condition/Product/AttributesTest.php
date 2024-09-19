@@ -5,11 +5,11 @@
  */
 namespace Magento\CustomerSegment\Model\Segment\Condition\Product;
 
+use Magento\CustomerSegment\Model\ResourceModel\Segment as ResourceModel;
 use Magento\CustomerSegment\Model\Segment\Condition\Product\Attributes as ProductAttributesCondition;
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
-use Magento\Quote\Api\CartRepositoryInterface;
-use Magento\CustomerSegment\Model\ResourceModel\Segment as ResourceModel;
 
 /**
  * Test for @see \Magento\CustomerSegment\Model\Segment\Condition\Product\Attributes
@@ -109,7 +109,7 @@ class AttributesTest extends \PHPUnit\Framework\TestCase
                 [],             // $productIds
                 false,          // $combineProductCondition
                 "item.product_id IN (SELECT `main`.`entity_id` FROM `{$productEntityTable}` AS `main` "
-                . "WHERE ((main.sku = 'test-sku')) AND (main.created_in <= 1) AND (main.updated_in > 1))"
+                . "WHERE ((`main`.`sku` = 'test-sku')) AND (main.created_in <= 1) AND (main.updated_in > 1))"
             ],
             'Specified product ids; combine product condition' => [
                 false,          // $requireValid
@@ -118,7 +118,7 @@ class AttributesTest extends \PHPUnit\Framework\TestCase
                 [12, 24],       // $productIds
                 true,           // $combineProductCondition
                 "item.product_id IN (SELECT `main`.`entity_id` FROM `{$productEntityTable}` AS `main` "
-                . "WHERE ((main.sku = 'test-sku') AND (main.entity_id IN (12, 24))) AND (main.created_in <= 1) "
+                . "WHERE ((`main`.`sku` = 'test-sku') AND (main.entity_id IN (12, 24))) AND (main.created_in <= 1) "
                 . "AND (main.updated_in > 1))"
             ],
         ];
