@@ -1,0 +1,92 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .promotions-cards {
+        padding: @indent__base @indent__base @indent__l;
+        background: @secondary-white;
+
+        &__slide {
+            &.swiper {
+                padding-bottom: 40px;
+            }
+        }
+
+        .item {
+            box-sizing: border-box;
+            background: @color-green-light2;
+            padding: @indent__base @indent__base @indent__m;
+
+            &__logos {
+                background: @primary-black;
+                padding: 20px 36px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                gap: @indent__s;
+                margin-bottom: @indent__base;
+            }
+
+            &__image {
+                width: 100%;
+                height: auto;
+                margin-bottom: @indent__m;
+            }
+
+            &__title {
+                display: block;
+                text-align: center;
+                .lib-font-size(20);
+                line-height: 32px;
+                margin-bottom: @indent__m;
+
+                .discount {
+                    font-family: @font-family__secondary;
+                    .lib-font-size(28);
+                    line-height: 34px;
+                }
+            }
+
+            &__link {
+                width: 100%;
+                margin-bottom: @indent__m;
+                background: transparent;
+                border-color: @primary-black;
+                line-height: @font-size__xl;
+
+                &:hover {
+                    background: @color-beige;
+                    border-color: @color-beige;
+                }
+            }
+
+            &__info {
+                display: block;
+                text-align: center;
+                .lib-font-size(14);
+                font-weight: @font-weight__light;
+                line-height: 22px;
+            }
+        }
+
+        .swiper-pagination {
+            z-index: 20;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .promotions-cards {
+        padding: 28px 120px 80px;
+
+        .swiper-wrapper {
+            max-width: @layout__max-width;
+        }
+    }
+}
