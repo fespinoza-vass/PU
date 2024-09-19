@@ -202,8 +202,8 @@
                         @_icon-font-position: before,
                         @_icon-font-size: 24px,
                         @_icon-font-color: @primary-black,
-                        @_icon-font-color-hover: @color-gray-dark1,
-                        @_icon-font-color-active: @color-green-light2
+                        @_icon-font-color-hover: @primary-black,
+                        @_icon-font-color-active: @color-gray-dark2
                     );
                 }
             }
@@ -546,6 +546,27 @@
 
                 .header-links-left {
                     display: none;
+                }
+
+                .minicart-wrapper {
+                    .lib-dropdown(
+                        @_toggle-selector: ~'.action.showcart',
+                        @_options-selector: ~'.block-minicart',
+                        @_dropdown-list-width: 320px,
+                        @_dropdown-list-position-right: 0,
+                        @_dropdown-list-pointer-position: right,
+                        @_dropdown-list-pointer-position-left-right: 26px,
+                        @_dropdown-list-z-index: 101,
+                        @_dropdown-toggle-icon-content: @icon-cart,
+                        @_dropdown-toggle-active-icon-content: @icon-cart,
+                        @_dropdown-list-item-padding: false,
+                        @_dropdown-list-item-hover: false,
+                        @_icon-font-position: before,
+                        @_icon-font-size: 24px,
+                        @_icon-font-color: @primary-black,
+                        @_icon-font-color-hover: @color-gray-dark1,
+                        @_icon-font-color-active: @color-green-light2
+                    );
                 }
             }
         }

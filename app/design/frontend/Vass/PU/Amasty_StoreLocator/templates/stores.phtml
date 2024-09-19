@@ -5,7 +5,7 @@
  */
 ?>
 <li class="header-top-stores">
-    <a class="stores-link" href="<?= $block->escapeHtml($block->getLinkToMap()) ?>" <?= /* @noEscape */ $block->getLinkAttributes() ?>>
+    <a class="stores-link" href="<?= $block->escapeUrl($block->getLinkToMap()) ?>" <?= /* @noEscape */ $block->getLinkAttributes() ?>>
         <icon class="icon icon-shop" />
         <?= $block->escapeHtml(__('Stores')) ?>
     </a>
