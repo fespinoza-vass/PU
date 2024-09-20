@@ -28,6 +28,7 @@
                     color: @primary-black;
 
                     a {
+                        .lib-font-size(@font-size__m);
                         color: @color-gray-dark1;
                         margin-bottom: 0;
                     }
@@ -42,7 +43,7 @@
             padding: 16px;
             gap: 24px;
             flex-wrap: unset;
-            width: auto !important;
+            width: auto !important; // Override pagebuilder styles that break images
         }
     }
 
@@ -66,9 +67,9 @@
                     }
 
                     p {
-                        margin: 0;
                         .lib-font-size(14);
                         color: @primary-black;
+                        margin: 0;
                     }
                 }
             }
@@ -112,7 +113,7 @@
 
             .pagebuilder-collage-content {
                 p {
-                    .lib-font-size(@font-size__xl);
+                    .lib-font-size(26);
                 }
             }
         }
@@ -120,7 +121,7 @@
 
     .category-banner {
         .pagebuilder-column-line {
-            min-height: 180px;
+            min-height: 184px;
 
             .category-banner__content {
                 p {
@@ -143,7 +144,7 @@
 
             .category-banner__image-left,
             .category-banner__image-right {
-                min-height: 180px;
+                min-height: 184px;
             }
         }
     }
