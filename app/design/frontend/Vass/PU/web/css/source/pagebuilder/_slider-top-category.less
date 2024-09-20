@@ -4,6 +4,12 @@
  */
 
 & when (@media-common = true) {
+    .category-banner__desktop {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+
     .pagebuilder-slider.cat-carousel {
         padding: 0 16px 32px 16px;
 
@@ -22,10 +28,49 @@
 
                     a {
                         color: @color-gray-dark1;
+                        margin-bottom: 0;
                     }
                 }
             }
 
+        }
+    }
+
+    .category-banner {
+        .pagebuilder-column-line {
+            padding: 16px;
+            gap: 24px;
+            flex-wrap: unset;
+            width: auto !important;
+        }
+    }
+
+    .category-banner__mobile {
+        min-height: 94px;
+
+        .pagebuilder-banner-wrapper {
+            margin: 16px;
+
+            .pagebuilder-overlay {
+                padding: 0;
+                min-height: 86px;
+                display: flex;
+                align-items: center;
+
+                .pagebuilder-collage-content {
+                    width: 49%;
+
+                    & > div {
+                        min-height: auto;
+                    }
+
+                    p {
+                        margin: 0;
+                        .lib-font-size(14);
+                        color: @primary-black;
+                    }
+                }
+            }
         }
     }
 
@@ -34,11 +79,24 @@
     }
 }
 
+
 //
 // Desktop
 // _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .category-banner__mobile {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+
+    .category-banner__desktop {
+        visibility: visible;
+        width: auto;
+        height: auto;
+    }
+
     .pagebuilder-slider.cat-carousel {
         padding: 0 16px 24px 16px;
 
@@ -55,6 +113,36 @@
                 p {
                     .lib-font-size(@font-size__xl);
                 }
+            }
+        }
+    }
+
+    .category-banner {
+        .pagebuilder-column-line {
+            min-height: 180px;
+
+            .category-banner__content {
+                p {
+                    .lib-font-size(20);
+                    color: @primary-black;
+                    font-weight: @font-weight__heavier;
+
+                    &:has(a) {
+                        margin: 0;
+                    }
+
+                    a {
+                        .lib-font-size(@font-size__m);
+                        font-weight: @font-weight__regular;
+                        color: @color-gray-dark1;
+                    }
+                }
+
+            }
+
+            .category-banner__image-left,
+            .category-banner__image-right {
+                min-height: 180px;
             }
         }
     }
