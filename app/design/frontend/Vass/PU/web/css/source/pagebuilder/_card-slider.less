@@ -3,7 +3,6 @@
  * @author VASS Team
  */
 
-
 //
 // Common
 // _____________________________________________
@@ -14,11 +13,17 @@
     }
 
     .card-slider {
+
+        .swiper {
+            max-height: 339px;
+
+        }
+
         &__wrapper {
-            width: 100%;
-            height: 339px;
-            padding: 0;
             position: relative;
+            height: auto;
+            width: 100%;
+            padding: 0;
         }
 
         .swiper-slide {
@@ -28,39 +33,43 @@
             flex-direction: column;
         }
 
-        &__info {
-            display: flex;
-            justify-content: center;
+        &__img {
             width: 100%;
 
-            .img {
+            .card-img {
                 max-height: 315px;
+                height: 100%;
                 width: 100%;
                 object-fit: cover;
+                overflow: hidden;
             }
         }
 
         &__content {
-            position: relative;
-            bottom: 0;
-            width: 332px;
-            padding: @indent__s 26;
+            position: absolute;
+            bottom: 7px;
+            right: 0;
+            width: 72%;
+            padding: @indent__base @indent__m;
             background-color: @color-green-light2;
-            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             gap: @indent__s;
+            box-sizing: border-box;
+
+            a {
+                text-decoration: none;
+            }
 
             .title {
                 font-family: @font-family__secondary;
                 .lib-font-size(@font-size__xl);
                 font-weight: (@font-weight__regular);
-                line-height: @indent__xl;
+                line-height: @line-height__l;
                 text-align: left;
                 color: @primary-black;
-                margin-bottom: @indent__s;
-                text-decoration: none;
+                margin-top: 0;
             }
 
             .description {
@@ -69,18 +78,12 @@
                 line-height: @indent__m;
                 text-align: left;
                 color: @primary-black;
-                margin-bottom: 15px;
                 text-decoration: none;
             }
 
             .link {
                 display: none;
             }
-        }
-
-        .swiper-pagination {
-            text-align: center;
-            margin-top: 10px;
         }
     }
 }
@@ -93,26 +96,63 @@
         pointer-events: none;
     }
 
+    .swiper-wrapper {
+        .slider {
+            padding-bottom: 20px;
+        }
+    }
+
     .card-slider {
 
+        .swiper {
+            max-height: 560px;
+            height: 100%;
+        }
+
+        &__wrapper {
+            height: auto;
+            gap: @indent__m;
+        }
+
+        &__img {
+            width: 100%;
+
+            .card-img {
+                max-height: 480px;
+                height: 100%;
+            }
+        }
+
         &__content {
-            width: 400px;
-            padding: @indent__base;
 
             .title {
                 .lib-font-size(26);
+                line-height: @line-height__l;
+                font-weight: @font-weight__regular;
             }
 
             .description {
                 .lib-font-size(@font-size__l);
+                line-height: @line-height__s;
             }
 
             .link {
                 display: block;
                 .lib-font-size(@font-size__m);
+                line-height: @line-height__s;
                 color: @link__color;
                 text-decoration: underline;
+                text-transform: uppercase;
             }
+        }
+    }
+    .swiper-pagination {
+        position: absolute;
+        display: block;
+        text-align: center;
+
+        &.slider {
+            bottom: -10px
         }
     }
 }
