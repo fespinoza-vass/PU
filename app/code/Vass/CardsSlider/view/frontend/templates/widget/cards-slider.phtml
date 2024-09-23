@@ -22,7 +22,7 @@ $urls = $block->getUrl();
 
 <div class="card-slider__wrapper">
     <div class="card-slider swiper">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper slider">
             <?php if (!empty($images) && is_array($images)): ?>
                 <?php foreach ($images as $index => $image): ?>
                     <?php if ($image): ?>
@@ -53,7 +53,7 @@ $urls = $block->getUrl();
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="swiper-pagination slider"></div>
     </div>
 </div>
 
