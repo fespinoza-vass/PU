@@ -9,9 +9,10 @@ define(
         'mage/url',
         'Magento_Checkout/js/model/payment/additional-validators',
         'Magento_Checkout/js/model/full-screen-loader',
-        'Magento_Customer/js/model/customer'
+        'Magento_Customer/js/model/customer',
+        'Magento_Ui/js/model/messageList'
     ],
-    function (Component, agreementsAssigner, errorProcessor, $, quote, redirectOnSuccessAction, url, additionalValidators, fullScreenLoader, customer ) {
+    function (Component, agreementsAssigner, errorProcessor, $, quote, redirectOnSuccessAction, url, additionalValidators, fullScreenLoader, customer, messageList ) {
         'use strict';
  
         return Component.extend({
@@ -165,6 +166,19 @@ define(
             placeOrderIzipay : function() {
                 var self = this;
                 console.log("Open izipay");
+
+                var checkboxValuePrivacity = $('[name="sidebar[additional][checkbox_privacidad]').is(':checked');
+                var checkboxValueNews = $('[name="sidebar[additional][checkbox_newsletter]"]').is(':checked');
+            
+                if (!checkboxValuePrivacity) {
+                    messageList.addErrorMessage({ message: 'Por favor, acepta los términos de privacidad y política de datos personales.' });
+                    return false;
+                }
+
+                if (!checkboxValueNews) {
+                    messageList.addErrorMessage({ message: 'Por favor, acepta los términos de publicidad y promociones' });
+                    return false;
+                }
 
                 // Si todo es valido entra.
                 if(additionalValidators.validate()) {
