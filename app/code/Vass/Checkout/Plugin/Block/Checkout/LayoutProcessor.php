@@ -331,12 +331,10 @@ class LayoutProcessor
         if(!is_null($billingAddressFields)){
             foreach ($billingAddressFields as $field => $value) {
                 if (!in_array($field, $fieldsToShow)) {
-                    unset($billingAddressFields[$field]);
+                    $billingAddressFields[$field]['visible']=false;
                 }
             }
         }
-
-        $this->logger->debug('billing LP Vass', $billingAddressFields);
         
         return $jsLayout;
 

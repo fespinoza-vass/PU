@@ -1,23 +1,35 @@
-/**
- * Billing address view mixin for store flag is billing form in edit mode (visible)
- */
 define([
-    'ko',
-    'underscore',
-    'Magento_Customer/js/model/customer',
+    'jquery',
+    'mage/utils/wrapper',
     'Magento_Checkout/js/model/quote',
-    'Magento_Checkout/js/checkout-data'
-], function (ko, _, customer, quote, checkoutData) {
+    'uiRegistry'
+], function ($, wrapper, quote, registry) {
     'use strict';
-    return function (updateAddress) {
 
-        return wrapper.wrap(updateAddress, function (originalUpdateAddress, config, element) {
+    return function (Component) {
+        return Component.extend({
 
-            originalUpdateAddress(config, element);
+            initialize: function () {
+                this._super();
 
-            console.log('aqui');
+                this.updateAddress = wrapper.wrap(this.updateAddress, function (originalMethod) {
 
+                    var shippingAddress = quote.shippingAddress();
+
+                    var name = registry.get('checkout.steps.shipping-step.shippingAddress.billing-address-form.form-fields.firstname');
+                    var lastname = registry.get('checkout.steps.shipping-step.shippingAddress.billing-address-form.form-fields.lastname');
+                    var street = registry.get('checkout.steps.shipping-step.shippingAddress.billing-address-form.form-fields.street[0]');
+                    var telephone = registry.get('checkout.steps.shipping-step.shippingAddress.billing-address-form.form-fields.telephone');
+                    name.value(shippingAddress.firstname);
+                    lastname.value(shippingAddress.lastname);
+                    // street.value(shippingAddress.street);
+                    telephone.value(shippingAddress.telephone);
+
+                    originalMethod();   
+                });
+
+                return this;
+            }
         });
-
     };
 });
