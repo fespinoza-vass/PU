@@ -183,6 +183,8 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
 
         $this->getSelect()->where("sales_order_item.product_type = 'simple'");
 
+        $this->addFilterToMap('purchase_date', 'sales_order_item.created_at');
+
         return $this;
     }
 }
