@@ -53,4 +53,28 @@
     .items {
         .lib-list-reset-styles();
     }
+
+    a,
+    .alink {
+        text-underline-offset: 4px;
+    }
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    a,
+    .alink {
+        color: @link__desktop__color;
+
+        &:hover {
+            color: @link__desktop__hover__color;
+        }
+
+        &:active {
+            color: @link__desktop__active__color;
+        }
+    }
 }
