@@ -8,6 +8,7 @@
 // _____________________________________________
 
 & when (@media-common = true) {
+
     .link-only-mobile {
         display: block;
     }
@@ -23,7 +24,8 @@
             position: relative;
             height: auto;
             width: 100%;
-            padding: 0;
+            padding: 0 0 20px;
+
         }
 
         .swiper-slide {
@@ -86,6 +88,12 @@
             }
         }
     }
+
+    .card-slider {
+        .swiper-pagination {
+            bottom: 4px;
+        }
+    }
 }
 
 //
@@ -96,10 +104,8 @@
         pointer-events: none;
     }
 
-    .swiper-wrapper {
-        .slider {
-            padding-bottom: 20px;
-        }
+    .swiper-wrapper.slider {
+        padding-bottom: 20px;
     }
 
     .card-slider {
@@ -144,15 +150,6 @@
                 text-decoration: underline;
                 text-transform: uppercase;
             }
-        }
-    }
-    .swiper-pagination {
-        position: absolute;
-        display: block;
-        text-align: center;
-
-        &.slider {
-            bottom: -10px
         }
     }
 }
