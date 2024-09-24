@@ -1,0 +1,139 @@
+type Query {
+    rewards: Rewards @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\Rewards")
+    @doc(description: "Customer rewards information query."),
+    guestRewards(page: Int! @doc(description: "Id of the page: PAGE_PRODUCT = 0; PAGE_CART = 1; PAGE_CHECKOUT = 2.")): HighlightOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\GuestHighlight")
+    @doc(description: "Information about highlight points available for guest."),
+    getRewardsStatistic: GetRewardsStatisticOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\GetRewardsStatistic")
+    getExpiringData: GetExpiringDataArrayOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\GetExpiringData")
+    getCustomerNotificationOptions: GetCustomerNotificationOptionsOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\GetCustomerNotificationOptions")
+    getRewardsProperty: GetRewardsPropertyOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\GetRewardsProperty")
+}
+
+type GetRewardsStatisticOutput {
+    balance: String @doc(description: "Current customer balance")
+    rewarded: String @doc(description: "Total earned")
+    redeemed: String @doc(description: "Total spent")
+    expired: String @doc(description: "Expired")
+}
+
+type GetExpiringDataArrayOutput {
+    expiring_data: [GetExpiringDataOutput] @doc(description: "Expiring data array")
+}
+
+type GetExpiringDataOutput {
+    amount: Float @doc(description: "Expiring amount"),
+    expiration_date: String @doc(description: "Expiring date")
+}
+
+type GetCustomerNotificationOptionsOutput {
+    amrewards_earning_notification: Boolean @doc(description: "Send email when customer earns reward points")
+    amrewards_expire_notification: Boolean @doc(description: "Send email when customer reward points are about to expire")
+}
+
+type GetRewardsPropertyOutput {
+    points_rate: Float @doc(description: "Currency points rate"),
+    current_currency_code: String @doc(description: "Currency currency code")
+}
+
+type StoreConfig @doc(description: "The type contains information about a store config") {
+    amrewards_general_enabled: Boolean @doc(description: "Is enabled reward points")
+    amrewards_points_rate: Float @doc(description: "Points spending rate")
+    amrewards_points_minimum_reward: String @doc(description: "Minimum Points Requirement")
+    amrewards_spending_block_tooltip_enabled: Boolean @doc(description: "Add tooltip in reward point block")
+    amrewards_spending_block_tooltip_text: String @doc(description: "Tooltip text")
+    amrewards_highlight_cart: Boolean @doc(description: "Show in cart")
+    amrewards_highlight_checkout: Boolean @doc(description: "Show on checkout page")
+    amrewards_highlight_product: Boolean @doc(description: "Show on product pages")
+    amrewards_highlight_category: Boolean @doc(description: "Show on categories pages")
+    amrewards_highlight_guest: Boolean @doc(description: "Show highlight for guests")
+    amrewards_highlight_color: String @doc(description: "Text color")
+    amrewards_customer_description_enable: Boolean @doc(description: "Show reward points description in customer account")
+    amrewards_customer_description_message: String @doc(description: "Reward points description")
+    amrewards_customer_show_balance: Boolean @doc(description: "Show actual reward points balance on storefront")
+    amrewards_customer_balance_label: String @doc(description: "Customer account balance label")
+    amrewards_restriction_message_enabled: Boolean @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\RestrictionMessage") @doc(description: "Can show restriction message")
+    amrewards_restriction_message_text: String @doc(description: "Restriction message text")
+    amrewards_notification_send_earn: Boolean @doc(description: "Send email when customer earns reward points")
+    amrewards_notification_subscribe_by_default_to_earn_notifications: Boolean @doc(description: "Subscribe customers by default to earn notifications")
+    amrewards_notification_send_expire: Boolean @doc(description: "Send email when customer's reward points are about to expire")
+    amrewards_notification_subscribe_by_default_to_expire_notifications: Boolean @doc(description: "Subscribe customers by default to expire notifications")
+}
+
+type Mutation {
+    useRewardPoints(input: UseRewardPointsInput): UseRewardPointsOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\UseRewardPoints")
+    @doc(description: "Apply or cancel (set points to 0) rewards points to current cart.")
+    saveNotificationOptions(input: SaveNotificationOptionsInput): SaveNotificationOptionsOutput
+    @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\SaveNotificationOptions")
+}
+
+input UseRewardPointsInput @doc(description: "Defines the input required to run the useRewardPoints mutation") {
+    cart_id: String! @doc(description: "The unique ID that identifies the customer's cart")
+    points: Float! @doc(description: "Reward points to spent")
+}
+
+input SaveNotificationOptionsInput @doc(description: "Defines the input required to run the addGiftMessageForOrderItems mutation") {
+    earn_option: Boolean @doc(description: "Receive emails when reward points are added to the balance")
+    expire_option: Boolean @doc(description: "Receive emails when reward points are about to expire")
+}
+
+type UseRewardPointsOutput {
+    response: String @doc(description: "Mutation response")
+    cart: Cart! @doc(description: "Describes the contents of the specified shopping cart")
+}
+
+type SaveNotificationOptionsOutput {
+    response: String @doc(description: "Mutation response")
+}
+
+type Rewards {
+    balance: Float @doc(description: "Current customer rewards balance."),
+    history: HistoryOutput @doc(description: "Information about the movement of reward points."),
+    highlight: HighlightQuery @doc(description: "Customer rewards information query."),
+}
+
+type HistoryOutput {
+    total_count: Int @doc(description: "Total amount of history records."),
+    items(pageSize: Int = 10, currentPage: Int = 1): [HistoryItem] @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\HistoryItems")
+        @doc(description: "History records. Count must be limited.")
+}
+
+type HistoryItem {
+    action_date: String @doc(description: "The date of transaction."),
+    amount: Float @doc(description: "Transaction amount of reward points."),
+    comment: String @doc(description: "Comment of reward points."),
+    action: String @doc(description: "Type of transaction or accrual source."),
+    points_left: Float @doc(description: "Customer reward point balance after transaction done."),
+    visible_for_customer: Boolean @doc(description: "Visible comment for customer."),
+    admin_name: String @doc(description: "Name of admin who made transaction."),
+    expiration_date: String @doc(description: "Reward points expiration. Null if spending action or points are lifelong.")
+    expiring_amount: Float @doc(description: "Expiring amount.")
+    days_left: String @doc(description: "Expiration days left.")
+}
+
+type HighlightQuery {
+    category (productId: Int! @doc(description: "Id of the product"), attributes: String @doc(description: "Product adding request data.")): HighlightOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\HighlightCategory")
+    @doc(description: "Information about highlight points available by category."),
+    cart: HighlightOutput @resolver(class: "Amasty\\RewardsGraphQl\\Model\\Resolver\\HighlightCart") @doc(description: "Information about highlight points available by cart content."),
+}
+
+type HighlightOutput {
+    visible: Boolean @doc(description: "Is capture visible on storefront.")
+    caption_color: String @doc(description: "Capture custom color.")
+    caption_text: String @doc(description: "Amout of points with description.")
+}
+
+type Cart {
+    amasty_rewards_highlights: HighlightOutput @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\HighlightCart") @doc(description: "Information about highlight points available by cart content.")
+    amasty_rewards_guest_cart_highlights: HighlightOutput @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\GuestHighlightCart") @doc(description: "Information about guest highlight points available by cart content.")
+    amasty_rewards_guest_checkout_highlights: HighlightOutput @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\GuestHighlightCheckout") @doc(description: "Information about guest highlight points available by checkout content.")
+    amasty_rewards_used_points: UsedPointsOutput @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\UsedPointsInCart") @doc(description: "Information about used points in cart.")
+}
+
+interface ProductInterface {
+    amasty_rewards_highlights (attributes: String @doc(description: "Product adding request data.")): HighlightOutput @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\HighlightProduct") @doc(description: "Information about highlight points available by product.")
+    amasty_rewards_guest_highlights: HighlightOutput @resolver(class: "\\Amasty\\RewardsGraphQl\\Model\\Resolver\\GuestHighlightProduct") @doc(description: "Information about guest highlight points available by product.")
+}
+
+type UsedPointsOutput {
+    used_points: Float @doc(description: "Used points.")
+}

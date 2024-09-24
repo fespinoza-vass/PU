@@ -1,0 +1,23 @@
+{
+    "name": "amasty/module-reward-points-lite-package",
+    "description": "Reward Points Lite Package by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.17.0",
+        "amasty/rewards": ">=2.0.2"
+    },
+    "homepage": "https://amasty.com/",
+    "type": "magento2-module",
+    "version": "2.3.0",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\RewardPointsLite\\": ""
+        }
+    }
+}

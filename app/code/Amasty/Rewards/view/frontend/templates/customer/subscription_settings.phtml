@@ -1,0 +1,41 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Reward Points Base for Magento 2
+ */
+
+use Amasty\Rewards\Block\Frontend\Customer\SubscriptionSettings;
+use Magento\Framework\Escaper;
+
+/**
+ * @var SubscriptionSettings $block
+ * @var Escaper $escaper
+ */
+
+$showEarning = $block->showEarningCheckbox();
+$showExpire = $block->showExpireCheckbox();
+?>
+<?php if ($showEarning || $showExpire): ?>
+    <form action="<?= $escaper->escapeUrl($block->getUrl('amrewards/customer/updateNotification')) ?>" method="post" id="notification-settings">
+        <fieldset class="fieldset">
+            <legend class="legend"><span><?= $escaper->escapeHtml(__('Notification options')) ?></span></legend>
+            <?php if ($showEarning): ?>
+                <div class="field choice">
+                    <input type="checkbox" name="subscribe_earning" id="subscribe_earning" value="1" <?php if ($block->isSubscribedForEarnings()): ?> checked="checked"<?php endif; ?> />
+                    <label class="label" for="subscribe_earning"><span><?=  $escaper->escapeHtml(__('Receive emails when reward points are added to the balance')) ?></span></label>
+                </div>
+            <?php endif; ?>
+            <?php if ($showExpire): ?>
+                <div class="field choice">
+                    <input type="checkbox" name="subscribe_expire" id="subscribe_expire" value="1" <?php if ($block->isSubscribedForExpiring()): ?> checked="checked"<?php endif; ?>/>
+                    <label class="label" for="subscribe_expire"><span><?= $escaper->escapeHtml(__('Receive emails when reward points are about to expire')) ?></span></label>
+                </div>
+            <?php endif; ?>
+            <button type="submit" class="action save primary" title="<?= $escaper->escapeHtml(__('Save Notification Options')) ?>">
+                <span><?= $escaper->escapeHtml(__('Save Notification Options')) ?></span>
+            </button>
+        </fieldset>
+    </form>
+    <br/>
+<?php endif; ?>

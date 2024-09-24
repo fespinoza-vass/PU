@@ -1,0 +1,30 @@
+{
+    "name": "amasty/module-reward-points-subscription-package-lite",
+    "description": "Reward Points Subscription Package Lite by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/module-reward-points-lite-package": ">=2.0.2",
+        "amasty/base": ">=1.16.0"
+    },
+    "suggest": {
+        "amasty/module-rewards-hyva-compatibility": "Install this package to insure Amasty extension works with Hyv\u00e4 Theme.",
+        "amasty/module-rewards-referral-hyva": "Install this package to use customer sign up referral action functionality with Hyv\u00e4 Theme.",
+        "amasty/module-rewards-hyva-checkout": "Install this package to ensure Reward Points extension works with Hyvä Checkout.",
+        "amasty/module-rewards-referral": "Install this package to use customer sign up referral action functionality.",
+        "amasty/module-reward-points-shipping": "This package provides the possibility of covering shipping with reward points."
+    },
+    "homepage": "https://amasty.com/",
+    "type": "magento2-module",
+    "version": "2.4.0",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\RewardPointsSubscriptionPackageLite\\": ""
+        }
+    }
+}

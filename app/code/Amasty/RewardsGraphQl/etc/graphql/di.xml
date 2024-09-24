@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Reward Points GraphQL (System)
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+        <arguments>
+            <argument name="extendedConfigData" xsi:type="array">
+                <item name="amrewards_general_enabled" xsi:type="string">amrewards/general/enabled</item>
+                <item name="amrewards_points_rate" xsi:type="string">amrewards/points/rate</item>
+                <item name="amrewards_points_minimum_reward" xsi:type="string">amrewards/points/minimum_reward</item>
+                <item name="amrewards_spending_block_tooltip_enabled" xsi:type="string">amrewards/spending_config/block_tooltip_enabled</item>
+                <item name="amrewards_spending_block_tooltip_text" xsi:type="string">amrewards/spending_config/block_tooltip_text</item>
+                <item name="amrewards_highlight_cart" xsi:type="string">amrewards/highlight/cart</item>
+                <item name="amrewards_highlight_checkout" xsi:type="string">amrewards/highlight/checkout</item>
+                <item name="amrewards_highlight_product" xsi:type="string">amrewards/highlight/product</item>
+                <item name="amrewards_highlight_category" xsi:type="string">amrewards/highlight/category</item>
+                <item name="amrewards_highlight_guest" xsi:type="string">amrewards/highlight/guest</item>
+                <item name="amrewards_highlight_color" xsi:type="string">amrewards/highlight/color</item>
+                <item name="amrewards_customer_description_enable" xsi:type="string">amrewards/customer/description_enable</item>
+                <item name="amrewards_customer_description_message" xsi:type="string">amrewards/customer/description_message</item>
+                <item name="amrewards_customer_show_balance" xsi:type="string">amrewards/customer/show_balance</item>
+                <item name="amrewards_customer_balance_label" xsi:type="string">amrewards/customer/balance_label</item>
+                <item name="amrewards_restriction_message_text" xsi:type="string">amrewards/reward_program_restriction/message_text</item>
+                <item name="amrewards_notification_send_earn" xsi:type="string">amrewards/notification/send_earn_notification</item>
+                <item name="amrewards_notification_subscribe_by_default_to_earn_notifications" xsi:type="string">amrewards/notification/subscribe_by_default_to_earn_notifications</item>
+                <item name="amrewards_notification_send_expire" xsi:type="string">amrewards/notification/send_expire_notification</item>
+                <item name="amrewards_notification_subscribe_by_default_to_expire_notifications" xsi:type="string">amrewards/notification/subscribe_by_default_to_expire_notifications</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CustomerGraphQl\Model\Customer\CreateCustomerAccount">
+        <plugin name="Amasty_RewardsGraphQl::executeCustomerRegisterSuccessAction" type="Amasty\RewardsGraphQl\Plugin\CustomerGraphQl\Model\Customer\CreateCustomerAccount\ExecuteRegisterAction"/>
+    </type>
+</config>
