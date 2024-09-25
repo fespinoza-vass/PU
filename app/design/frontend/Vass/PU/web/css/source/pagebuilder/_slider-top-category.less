@@ -11,20 +11,20 @@
     }
 
     .pagebuilder-slider.cat-carousel {
-        padding: 0 16px 32px 16px;
+        padding: 0 @indent__base @indent__l @indent__base;
         background-color: @primary-white;
 
         .pagebuilder-slide-wrapper {
             min-height: 270px;
 
             .pagebuilder-overlay {
-                padding: 24px 85px 24px 24px;
+                padding: @indent__m 85px @indent__m @indent__m;
             }
 
             .pagebuilder-collage-content {
                 p {
                     .lib-font-size(@font-size__l);
-                    margin-bottom: 16px;
+                    margin-bottom: @indent__base;
                     color: @primary-black;
 
                     a {
@@ -40,27 +40,26 @@
 
     .category-banner {
         .pagebuilder-column-line {
-            padding: 16px;
-            gap: 24px;
+            padding: @indent__base;
+            gap: @indent__m;
             flex-wrap: unset;
             width: auto !important; // Override pagebuilder styles that break images
         }
     }
 
     .category-banner__mobile {
-        min-height: 94px;
-
         .pagebuilder-banner-wrapper {
-            margin: 8px 8px 8px 24px;
+            margin: 8px;
 
             .pagebuilder-overlay {
                 padding: 0;
                 min-height: 86px;
                 display: flex;
                 align-items: center;
+                margin-left: @indent__base;
 
                 .pagebuilder-collage-content {
-                    width: 49%;
+                    width: 50%;
 
                     & > div {
                         min-height: auto;
@@ -100,7 +99,7 @@
     }
 
     .pagebuilder-slider.cat-carousel {
-        padding: 0 16px 64px 16px;
+        padding: 0 @indent__m 64px @indent__m;
 
         .pagebuilder-slide-wrapper {
             display: flex;
@@ -121,8 +120,6 @@
 
     .category-banner {
         .pagebuilder-column-line {
-            min-height: 184px;
-
             .category-banner__content {
                 p {
                     .lib-font-size(20);
