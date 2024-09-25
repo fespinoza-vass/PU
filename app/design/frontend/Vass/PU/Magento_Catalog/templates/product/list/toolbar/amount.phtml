@@ -17,8 +17,7 @@
         <?= $block->escapeHtml(
             __(
                 '%1 Products found',
-                '<span class="toolbar-number">' . $localeFormatter->formatNumber($block->getTotalNum()) . '</span>',
-
+                '<span class="toolbar-number">' . $localeFormatter->formatNumber($block->getTotalNum()) . '</span>'
             ),
             ['span']
         ) ?>
