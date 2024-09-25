@@ -4,12 +4,6 @@
  */
 
 & when (@media-common = true) {
-    .category-banner__desktop {
-        visibility: hidden;
-        width: 0;
-        height: 0;
-    }
-
     .pagebuilder-slider.cat-carousel {
         padding: 0 @indent__base @indent__l @indent__base;
         background-color: @primary-white;
@@ -78,6 +72,15 @@
     }
 }
 
+//
+// Mobile
+// _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .category-banner__desktop {
+        display: none !important; // Override default styles pagebuilder
+    }
+}
 
 //
 // Desktop
@@ -85,16 +88,9 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .category-banner__mobile {
-        visibility: hidden;
-        width: 0;
-        height: 0;
+        display: none !important; // Override default styles pagebuilder
     }
 
-    .category-banner__desktop {
-        visibility: visible;
-        width: auto;
-        height: auto;
-    }
 
     .pagebuilder-slider.cat-carousel {
         padding: 0 @indent__m 64px @indent__m;
