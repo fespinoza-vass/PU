@@ -18,7 +18,6 @@
     <div class="toolbar toolbar-products" data-mage-init='{"productListToolbarForm":<?= /* @noEscape */ $widgetOptions ?>}'>
         <?php if ($block->getIsBottom()): ?>
             <?= $block->getPagerHtml() ?>
-            <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/limiter.phtml')) ?>
         <?php else: ?>
             <?= $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')) ?>
             <?php if ($block->isExpanded()): ?>
