@@ -88,7 +88,7 @@ $createAccountButtonViewModel = $block->getData('create_account_button_view_mode
                                value="<?= $escaper->escapeHtml($formData->getEmail()) ?>"
                                title="<?= $escaper->escapeHtml(__('Email')) ?>"
                                class="input-text"
-                               placeholder="<?= $escaper->escapeHtml(__('Enter your email'))?>"
+                               placeholder="<?= $escaper->escapeHtml(__('Email')) ?>"
                                data-validate="{required:true, 'validate-email':true}"/>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ $createAccountButtonViewModel = $block->getData('create_account_button_view_mode
                                data-password-min-character-sets="<?= /* @noEscape */ $requiredCharacterClassesNumber ?>"
                                data-validate="{required:true, 'validate-customer-password':true}"
                                autocomplete="off"
-                               placeholder="<?= $escaper->escapeHtml(__('Enter your password'))?>">
+                               placeholder="<?= $escaper->escapeHtml(__('Password')) ?>">
                     </div>
                 </div>
                 <div class="field confirmation required">
@@ -119,7 +119,7 @@ $createAccountButtonViewModel = $block->getData('create_account_button_view_mode
                                id="password-confirmation"
                                class="input-text"
                                data-validate="{required:true, equalTo:'#password'}"
-                               placeholder="<?= $escaper->escapeHtml(__('Enter your confirmed password'))?>"/>
+                               placeholder="<?= $escaper->escapeHtml(__('Confirm Password')) ?>"/>
                     </div>
                 </div>
                 <div class="checkbox-section">

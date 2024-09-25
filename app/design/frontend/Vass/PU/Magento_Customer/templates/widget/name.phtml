@@ -65,7 +65,7 @@ $suffix = $block->showSuffix();
                        value="<?= $block->escapeHtmlAttr($block->getObject()->getFirstname()) ?>"
                        title="<?= $block->escapeHtmlAttr($block->getStoreLabel('firstname')) ?>"
                        class="input-text <?= $block->escapeHtmlAttr($block->getAttributeValidationClass('firstname')) ?>" <?= ($block->getAttributeValidationClass('firstname') == 'required-entry') ? ' data-validate="{required:true}"' : '' ?>
-                       placeholder="<?= $block->escapeHtml(__('Enter your name'))?>">
+                       placeholder="<?= $block->escapeHtml($block->getStoreLabel('firstname')) ?>">
             </div>
         </div>
     <?php if ($middle) : ?>
@@ -89,7 +89,7 @@ $suffix = $block->showSuffix();
                        value="<?= $block->escapeHtmlAttr($block->getObject()->getLastname()) ?>"
                        title="<?= $block->escapeHtmlAttr($block->getStoreLabel('lastname')) ?>"
                        class="input-text <?= $block->escapeHtmlAttr($block->getAttributeValidationClass('lastname')) ?>" <?= ($block->getAttributeValidationClass('lastname') == 'required-entry') ? ' data-validate="{required:true}"' : '' ?>
-                       placeholder="<?= $block->escapeHtml(__('Enter your surname'))?>">
+                       placeholder="<?= $block->escapeHtml($block->getStoreLabel('lastname')) ?>">
             </div>
         </div>
     <?php if ($suffix) : ?>
