@@ -14,7 +14,7 @@
         padding: 0 @indent__base @indent__l @indent__base;
         background-color: @primary-white;
 
-        .pagebuilder-slide-wrapper {
+        .category-top-banner {
             min-height: 270px;
 
             .pagebuilder-overlay {
@@ -34,7 +34,6 @@
                     }
                 }
             }
-
         }
     }
 
@@ -48,9 +47,8 @@
     }
 
     .category-banner__mobile {
-        .pagebuilder-banner-wrapper {
+        .category-banner {
             margin: 8px;
-
             .pagebuilder-overlay {
                 padding: 0;
                 min-height: 86px;
@@ -101,20 +99,23 @@
     .pagebuilder-slider.cat-carousel {
         padding: 0 @indent__m 64px @indent__m;
 
-        .pagebuilder-slide-wrapper {
-            display: flex;
-            align-items: center;
+        .category-top-banner {
             min-height: 240px;
+            .pagebuilder-slide-wrapper {
+                display: flex;
+                align-items: center;
 
-            .pagebuilder-overlay {
-                margin-left: 56%;
-            }
+                .pagebuilder-overlay {
+                    margin-left: 56%;
+                }
 
-            .pagebuilder-collage-content {
-                p {
-                    .lib-font-size(26);
+                .pagebuilder-collage-content {
+                    p {
+                        .lib-font-size(26);
+                    }
                 }
             }
+
         }
     }
 
