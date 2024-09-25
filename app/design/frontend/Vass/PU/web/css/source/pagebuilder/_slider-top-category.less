@@ -41,6 +41,8 @@
     }
 
     .category-banner__mobile {
+        margin-bottom: @indent__m;
+
         .category-banner {
             margin: 8px;
             .pagebuilder-overlay {
@@ -91,9 +93,8 @@
         display: none !important; // Override default styles pagebuilder
     }
 
-
     .pagebuilder-slider.cat-carousel {
-        padding: 0 @indent__m 64px @indent__m;
+        padding: 0 @indent__base 40px @indent__base;
 
         .category-top-banner {
             min-height: 240px;
@@ -115,7 +116,9 @@
         }
     }
 
-    .category-banner {
+    .category-banner__desktop {
+        margin-bottom: @indent__m;
+
         .pagebuilder-column-line {
             .category-banner__content {
                 p {
