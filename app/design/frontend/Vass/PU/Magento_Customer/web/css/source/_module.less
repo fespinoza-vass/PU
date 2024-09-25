@@ -19,12 +19,6 @@
 
 @account-nav-item-hover: @color-gray91;
 
-@_password-default: @color-gray-light01;
-@_password-weak: #ffafae;
-@_password-medium: #ffd6b3;
-@_password-strong: #c5eeac;
-@_password-very-strong: #81b562;
-
 //
 //  Common
 //  _____________________________________________
@@ -37,22 +31,23 @@
 
             .page-title {
                 .base {
+                    margin: @indent__l 0;
                     .lib-font-size(@font-size__xl);
                 }
             }
         }
     }
 
+    .customer-login-image {
+        max-height: 192px;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 24px;
+    }
+
     .login-container {
         padding: 0 25px;
-
-        .customer-login-image {
-            max-height: 192px;
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            margin-bottom: 24px;
-        }
 
         .block {
             &-new-customer {
@@ -145,6 +140,157 @@
             }
         }
     }
+
+    .form-create-account {
+        width: auto;
+        padding: @indent__m @indent__base;
+        background: @primary-white;
+
+        .fieldset {
+            border: 0;
+            padding: 0;
+
+            .legend {
+                border-bottom: 0;
+                margin-bottom: @indent__m;
+
+                span {
+                    .lib-font-size(@font-size__l);
+                    font-weight: @font-weight__bold;
+                }
+            }
+
+            &.account {
+                .legend {
+                    padding-top: @indent__l;
+                }
+            }
+
+            .checkbox-section {
+                display: flex;
+                flex-direction: column;
+                gap: @indent__l;
+                margin-top: @indent__l;
+            }
+
+            .field {
+                margin-bottom: 8px;
+
+                &.choice {
+                    display: flex;
+                    align-items: center;
+                    margin: 0;
+
+                    &.tos {
+                        position: relative;
+
+                        .label {
+                            align-items: center;
+                            color: @primary-black;
+                            font-weight: @font-weight__regular;
+                        }
+
+                        .mage-error {
+                            padding: 0;
+                            margin: @indent__base;
+                        }
+
+                        #tos-error {
+                            position: absolute;
+                            padding-top: 64px;
+                        }
+
+                        .checkbox {
+                            margin: 0 10px 0 0;
+                            flex-shrink: 0;
+                        }
+                    }
+
+                    .label {
+                        align-items: center;
+                    }
+
+                    .checkbox {
+                        margin: 0 10px 0 0;
+                    }
+                }
+            }
+
+            .control {
+                position: relative;
+
+                &.customer-dob {
+                    &::before {
+                        .lib-font-size(@font-size__l);
+                        position: absolute;
+                        content: @icon-calendar;
+                        font-family: @icons__font-name;
+                        color: @color-gray-dark3;
+                        top: calc((56px / 2) + 10px);;
+                        right: 20px;
+                        transform: translateY(-50%);
+                    }
+
+                    button {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .actions-toolbar {
+            button {
+                margin: @indent__l 0;
+                width: 100%;
+            }
+        }
+
+        .login-account {
+            display: flex;
+            gap: 10px;
+
+            a {
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .customer-account-create {
+        .page-title {
+            text-align: center;
+            .lib-font-size(@font-size__xl);
+            margin: @indent__l 0;
+        }
+    }
+
+    .customer-account-forgotpassword {
+        .page-title {
+            text-align: center;
+            .lib-font-size(@font-size__xl);
+            margin: @indent__l 0;
+        }
+
+        .form.password.forget {
+            padding: 32px 16px;
+            background-color: @primary-white;
+
+            .fieldset {
+                border: none;
+                padding: 0;
+
+                .note {
+                    padding: 0;
+                    font-weight: 700;
+                    .lib-font-size(@font-size__l);
+                }
+            }
+
+            .actions-toolbar {
+                margin-top: 24px;
+            }
+        }
+    }
+
 
     .block-addresses-list {
         .items.addresses {
@@ -381,63 +527,23 @@
     }
 
     .password-strength-meter {
-        background-color: @_password-default;
-        height: @form-element-input__height;
-        line-height: @form-element-input__height;
-        padding: @form-element-input__padding;
-        position: relative;
-        z-index: 1;
-
-        &:before {
-            content: '';
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            z-index: -1;
-        }
-
-        .password-none & {
-            &:before {
-                background-color: @_password-default;
-                width: 100%;
-            }
-        }
-
-        .password-weak & {
-            &:before {
-                background-color: @_password-weak;
-                width: 25%;
-            }
-        }
-
-        .password-medium & {
-            &:before {
-                background-color: @_password-medium;
-                width: 50%;
-            }
-        }
-
-        .password-strong & {
-            &:before {
-                background-color: @_password-strong;
-                width: 75%;
-            }
-        }
-
-        .password-very-strong & {
-            &:before {
-                background-color: @_password-very-strong;
-                width: 100%;
-            }
-        }
+        display: none;
     }
 
     .control.captcha-image {
         .lib-css(margin-top, @indent__s);
 
+        .captcha-reload {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
         .captcha-img {
             vertical-align: middle;
+            margin: 0;
         }
     }
 }
@@ -562,6 +668,111 @@
         }
     }
 
+    .customer-account-create {
+        .page-title {
+            .lib-font-size(32);
+        }
+    }
+
+    .register-container {
+        display: flex;
+        width: 100%;
+
+        .block-left,
+        .block-right {
+            width: 50%;
+        }
+
+        .block-left {
+            margin-right: 24px;
+        }
+
+        .block-right {
+            background: @primary-white;
+        }
+
+        .customer-login-image {
+            min-height: 100%;
+        }
+
+        .form-create-account {
+            padding: 36px @indent__l;
+
+            .fieldset {
+                display: flex;
+                flex-wrap: wrap;
+                gap: @indent__base;
+
+                &.info {
+                    .field {
+                        width: calc(50% - 8px);
+
+                        &.field-numero_de_identificacion {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                &.account {
+                    .legend {
+                        padding-top: 36px;
+                    }
+
+                    .field {
+                        width: 100%;
+
+                        &.password,
+                        &.confirmation {
+                            width: calc(50% - 8px);
+                        }
+                    }
+                }
+
+                .field {
+                    &.choice {
+                        &.tos {
+                            #tos-error {
+                                position: absolute;
+                                padding-top: @indent__xl;
+                            }
+                        }
+                    }
+                }
+
+                .checkbox-section {
+                    gap: @indent__m;
+                    margin: 0;
+                }
+            }
+
+            .actions-toolbar {
+                button {
+                    width: 50%;
+                    margin: @indent__m 0;
+                }
+            }
+        }
+
+    }
+
+    .customer-account-forgotpassword {
+        .page-title {
+            margin-top: 60px;
+            margin-bottom: 40px;
+            .lib-font-size(32);
+        }
+
+        .column.main {
+            display: flex;
+            justify-content: center;
+
+            .form.password.forget {
+                padding: 32px;
+            }
+        }
+    }
+
+
     //  Full name fieldset
     .fieldset {
         .fullname {
@@ -585,8 +796,6 @@
 
     .form.password.reset,
     .form.send.confirmation,
-    .form.password.forget,
-    .form.create.account,
     .form.search.advanced,
     .form.form-orders-search {
         min-width: 600px;
@@ -659,8 +868,15 @@
     }
 
     .control.captcha-image {
+        display: flex;
+        gap: 16px;
+
+        .captcha-reload {
+            margin-top: 0;
+        }
+
         .captcha-img {
-            margin: 0 @indent__s @indent__s 0;
+            margin: 0;
         }
     }
 }
