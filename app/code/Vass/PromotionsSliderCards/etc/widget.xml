@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_PromotionsSliderCards
+ * @author VASS Team
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="vass_promotions_slider_cards" class="Vass\PromotionsSliderCards\Block\PromotionsSliderCards"
+            ttl="86400">
+        <label translate="true">Promotions Slider Cards</label>
+        <description translate="true">Promotions Slider Cards</description>
+        <parameters>
+
+            <!-- Item 1 -->
+            <parameter name="main_image_1" xsi:type="block" required="true" visible="true" sort_order="10">
+                <label translate="true">Main Image 1</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="first_logo_1" xsi:type="block" required="true" visible="true" sort_order="20">
+                <label translate="true">First Logo 1</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="secondary_logo_1" xsi:type="block" required="true" visible="true" sort_order="30">
+                <label translate="true">Secondary Logo 1</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="tertiary_logo_1" xsi:type="block" required="true" visible="true" sort_order="40">
+                <label translate="true">Tertiary Logo 1</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+
+            <parameter name="title_1" xsi:type="text" sort_order="50" visible="true">
+                <label translate="true">Title 1</label>
+            </parameter>
+
+            <parameter name="label_link_1" xsi:type="text" sort_order="60" visible="true">
+                <label translate="true">Label Link 1</label>
+            </parameter>
+
+            <parameter name="link_1" xsi:type="text" sort_order="70" visible="true">
+                <label translate="true">Link 1</label>
+            </parameter>
+
+            <parameter name="info_1" xsi:type="text" sort_order="80" visible="true">
+                <label translate="true">Info Text 1</label>
+            </parameter>
+
+            <!-- Item 2 -->
+            <parameter name="main_image_2" xsi:type="block" required="true" visible="true" sort_order="90">
+                <label translate="true">Main Image 2</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="first_logo_2" xsi:type="block" required="true" visible="true" sort_order="100">
+                <label translate="true">First Logo 2</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="secondary_logo_2" xsi:type="block" required="true" visible="true" sort_order="110">
+                <label translate="true">Secondary Logo 2</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="tertiary_logo_2" xsi:type="block" required="true" visible="true" sort_order="120">
+                <label translate="true">Tertiary Logo 2</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="title_2" xsi:type="text" sort_order="130" visible="true">
+                <label translate="true">Title 2</label>
+            </parameter>
+
+            <parameter name="label_link_2" xsi:type="text" sort_order="140" visible="true">
+                <label translate="true">Label Link 2</label>
+            </parameter>
+
+            <parameter name="link_2" xsi:type="text" sort_order="150" visible="true">
+                <label translate="true">Link 2</label>
+            </parameter>
+
+            <parameter name="info_2" xsi:type="text" sort_order="160" visible="true">
+                <label translate="true">Info Text 2</label>
+            </parameter>
+
+            <!-- Item 3 -->
+            <parameter name="main_image_3" xsi:type="block" required="true" visible="true" sort_order="170">
+                <label translate="true">Main Image 3</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="first_logo_3" xsi:type="block" required="true" visible="true" sort_order="180">
+                <label translate="true">First Logo 3</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="secondary_logo_3" xsi:type="block" required="true" visible="true" sort_order="190">
+                <label translate="true">Secondary Logo 3</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="tertiary_logo_3" xsi:type="block" required="true" visible="true" sort_order="200">
+                <label translate="true">Tertiary Logo 3</label>
+                <block class="Vass\PromotionsSliderCards\Block\Adminhtml\Widget\ImageChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Choose Image...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+
+            <parameter name="title_3" xsi:type="text" sort_order="210" visible="true">
+                <label translate="true">Title 3</label>
+            </parameter>
+
+            <parameter name="label_link_3" xsi:type="text" sort_order="220" visible="true">
+                <label translate="true">Label Link 3</label>
+            </parameter>
+
+            <parameter name="link_3" xsi:type="text" sort_order="230" visible="true">
+                <label translate="true">Link 3</label>
+            </parameter>
+
+            <parameter name="info_3" xsi:type="text" sort_order="240" visible="true">
+                <label translate="true">Info Text 3</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
