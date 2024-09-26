@@ -24,7 +24,7 @@
 & when (@media-common = true) {
     //  Product Lists
     .products {
-        margin: @indent__m 0;
+        margin: @indent__l 0;
     }
 
     .product {
@@ -39,7 +39,8 @@
 
             .products-grid & {
                 display: inline-block;
-                margin-left: 2%;
+                margin-left: 0
+                ;
                 padding: 0;
                 width: calc(~'(100% - 2%) / 2');
             }
@@ -333,7 +334,7 @@
     .page-products.page-layout-3columns {
         .products-grid {
             .product-item {
-                margin-left: 2%;
+                margin-left: 0;
                 padding: 0;
                 width: calc(~'(100% - 4%) / 3');
 
@@ -353,7 +354,7 @@
     .page-products {
         .products-grid {
             .product-item {
-                margin-left: 2%;
+                margin-left: 0;
                 padding: 0;
                 width: calc(~'(100% - 4%) / 3');
 
@@ -410,12 +411,12 @@
             }
 
             .product-item {
-                margin-left: 2%;
+                margin-left: 0;
                 padding: 0;
                 width: calc(~'(100% - 6%) / 4');
 
                 &:nth-child(3n + 1) {
-                    margin-left: 2%;
+                    margin-left: 0;
                 }
 
                 &:nth-child(4n + 1) {
