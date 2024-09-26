@@ -158,6 +158,7 @@
             .fieldset {
                 border: 0;
                 padding: 0;
+                gap: @indent__base;
 
                 .legend {
                     border-bottom: 0;
@@ -179,7 +180,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: @indent__l;
-                    margin-top: @indent__l;
+                    margin-top: @indent__m;
 
                     .field {
                         &.choice {
@@ -198,12 +199,11 @@
                                 #tos-error {
                                     margin: @indent__base;
                                     position: absolute;
-                                    padding-top: 64px;
+                                    padding-top: 70px;
                                 }
                             }
 
                             .label {
-                                align-items: center;
                                 color: @primary-black;
                                 font-weight: @font-weight__regular;
                             }
@@ -644,9 +644,6 @@
             margin-bottom: 40px;
             .lib-font-size(32);
         }
-    }
-
-    .customer-account-create {
 
         .register-container {
             display: flex;
@@ -673,7 +670,6 @@
                 .fieldset {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: @indent__base;
 
                     &.info {
                         .field {
