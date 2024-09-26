@@ -8,6 +8,19 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+
+    body.catalog-category-view {
+        .product-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+    
+            .product-item {
+                width: 100%;
+            }
+        }
+    }
+
     .products-slider {
         padding: @indent__l @indent__base;
 
