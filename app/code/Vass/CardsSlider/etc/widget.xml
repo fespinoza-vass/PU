@@ -1,153 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_CardsSlider
+ * @author VASS Team
+ */
+-->
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">
     <widget id="vass_cardsslider" class="Vass\CardsSlider\Block\Widget\CardsSlider">
         <label translate="true">Cards Slider</label>
-        <description>Configuración de Cards Slider</description>
+        <description>Cards Slider Configuration</description>
         <parameters>
 
             <!-- Config Slider 1 -->
             <parameter xsi:type="block" name="image_1" visible="true" sort_order="10">
-                <label translate="true">Adjuntar imagen 1</label>
+                <label translate="true">Attach Image 1</label>
                 <block class="Vass\CardsSlider\Block\Adminhtml\Widget\Type\ImageChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string">Elegir Imagen...</item>
+                            <item name="open" xsi:type="string">Choose Image...</item>
                         </item>
                     </data>
                 </block>
             </parameter>
             <parameter name="title_1" sort_order="11" visible="true" xsi:type="text">
-                <label>Título</label>
+                <label>Title</label>
             </parameter>
             <parameter name="description_1" sort_order="12" visible="true" xsi:type="text">
-                <label>Descripción</label>
+                <label>Description</label>
             </parameter>
             <parameter name="urlText_1" sort_order="13" visible="true" xsi:type="text">
-                <label>Texto Url</label>
+                <label>URL Text</label>
             </parameter>
             <parameter name="url_1" sort_order="14" visible="true" xsi:type="text">
-                <label>Url</label>
+                <label>URL</label>
             </parameter>
 
             <!-- Config Slider 2 -->
             <parameter xsi:type="block" name="image_2" visible="true" sort_order="15">
-                <label translate="true">Adjuntar imagen 2</label>
+                <label translate="true">Attach Image 2</label>
                 <block class="Vass\CardsSlider\Block\Adminhtml\Widget\Type\ImageChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string">Elegir Imagen...</item>
+                            <item name="open" xsi:type="string">Choose Image...</item>
                         </item>
                     </data>
                 </block>
             </parameter>
             <parameter name="title_2" sort_order="16" visible="true" xsi:type="text">
-                <label>Título</label>
+                <label>Title</label>
             </parameter>
             <parameter name="description_2" sort_order="17" visible="true" xsi:type="text">
-                <label>Descripción</label>
+                <label>Description</label>
             </parameter>
             <parameter name="urlText_2" sort_order="18" visible="true" xsi:type="text">
-                <label>Texto Url</label>
+                <label>URL Text</label>
             </parameter>
             <parameter name="url_2" sort_order="19" visible="true" xsi:type="text">
-                <label>Url</label>
+                <label>URL</label>
             </parameter>
 
             <!-- Config Slider 3 -->
             <parameter xsi:type="block" name="image_3" visible="true" sort_order="20">
-                <label translate="true">Adjuntar imagen 3</label>
+                <label translate="true">Attach Image 3</label>
                 <block class="Vass\CardsSlider\Block\Adminhtml\Widget\Type\ImageChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string">Elegir Imagen...</item>
+                            <item name="open" xsi:type="string">Choose Image...</item>
                         </item>
                     </data>
                 </block>
             </parameter>
             <parameter name="title_3" sort_order="21" visible="true" xsi:type="text">
-                <label>Título</label>
+                <label>Title</label>
             </parameter>
             <parameter name="description_3" sort_order="22" visible="true" xsi:type="text">
-                <label>Descripción</label>
+                <label>Description</label>
             </parameter>
             <parameter name="urlText_3" sort_order="23" visible="true" xsi:type="text">
-                <label>Texto Url</label>
+                <label>URL Text</label>
             </parameter>
             <parameter name="url_3" sort_order="24" visible="true" xsi:type="text">
-                <label>Url</label>
+                <label>URL</label>
             </parameter>
 
             <!-- Config Slider 4 -->
             <parameter xsi:type="block" name="image_4" visible="true" sort_order="25">
-                <label translate="true">Adjuntar imagen 4</label>
+                <label translate="true">Attach Image 4</label>
                 <block class="Vass\CardsSlider\Block\Adminhtml\Widget\Type\ImageChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string">Elegir Imagen...</item>
+                            <item name="open" xsi:type="string">Choose Image...</item>
                         </item>
                     </data>
                 </block>
             </parameter>
             <parameter name="title_4" sort_order="26" visible="true" xsi:type="text">
-                <label>Título</label>
+                <label>Title</label>
             </parameter>
             <parameter name="description_4" sort_order="27" visible="true" xsi:type="text">
-                <label>Descripción</label>
+                <label>Description</label>
             </parameter>
             <parameter name="urlText_4" sort_order="28" visible="true" xsi:type="text">
-                <label>Texto Url</label>
+                <label>URL Text</label>
             </parameter>
             <parameter name="url_4" sort_order="29" visible="true" xsi:type="text">
-                <label>Url</label>
+                <label>URL</label>
             </parameter>
 
             <!-- Config Slider 5 -->
             <parameter xsi:type="block" name="image_5" visible="true" sort_order="30">
-                <label translate="true">Adjuntar imagen 5</label>
+                <label translate="true">Attach Image 5</label>
                 <block class="Vass\CardsSlider\Block\Adminhtml\Widget\Type\ImageChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string">Elegir Imagen...</item>
+                            <item name="open" xsi:type="string">Choose Image...</item>
                         </item>
                     </data>
                 </block>
             </parameter>
             <parameter name="title_5" sort_order="31" visible="true" xsi:type="text">
-                <label>Título</label>
+                <label>Title</label>
             </parameter>
             <parameter name="description_5" sort_order="32" visible="true" xsi:type="text">
-                <label>Descripción</label>
+                <label>Description</label>
             </parameter>
             <parameter name="urlText_5" sort_order="33" visible="true" xsi:type="text">
-                <label>Texto Url</label>
+                <label>URL Text</label>
             </parameter>
             <parameter name="url_5" sort_order="34" visible="true" xsi:type="text">
-                <label>Url</label>
+                <label>URL</label>
             </parameter>
 
             <!-- Config Slider 6 -->
             <parameter xsi:type="block" name="image_6" visible="true" sort_order="35">
-                <label translate="true">Adjuntar imagen 6</label>
+                <label translate="true">Attach Image 6</label>
                 <block class="Vass\CardsSlider\Block\Adminhtml\Widget\Type\ImageChooser">
                     <data>
                         <item name="button" xsi:type="array">
-                            <item name="open" xsi:type="string">Elegir Imagen...</item>
+                            <item name="open" xsi:type="string">Choose Image...</item>
                         </item>
                     </data>
                 </block>
             </parameter>
             <parameter name="title_6" sort_order="36" visible="true" xsi:type="text">
-                <label>Título</label>
+                <label>Title</label>
             </parameter>
             <parameter name="description_6" sort_order="37" visible="true" xsi:type="text">
-                <label>Descripción</label>
+                <label>Description</label>
             </parameter>
             <parameter name="urlText_6" sort_order="38" visible="true" xsi:type="text">
-                <label>Texto Url</label>
+                <label>URL Text</label>
             </parameter>
             <parameter name="url_6" sort_order="39" visible="true" xsi:type="text">
-                <label>Url</label>
+                <label>URL</label>
             </parameter>
         </parameters>
     </widget>
