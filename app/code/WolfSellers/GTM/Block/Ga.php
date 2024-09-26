@@ -202,7 +202,6 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 $dataRule = implode(', ', $dataRule);
 
                 $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
-                // TODO revisar estos ocultos
                 $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
                 $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
                 //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
