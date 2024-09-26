@@ -34,7 +34,10 @@
                         name="product-addtocart-button"
                         title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
                         class="action primary tocart"
-                        id="product-addtocart-button" disabled>
+                        id="product-addtocart-button"
+                        data-gtm-product-id="<?= $block->escapeHtmlAttr($_product->getId()) ?>"
+                        data-gtm-product-name="<?= $block->escapeHtmlAttr($_product->getName()) ?>"
+                        disabled>
                     <span><?= $block->escapeHtml($buttonTitle) ?></span>
                 </button>
                 <?= $block->getChildHtml('', true) ?>
