@@ -12,7 +12,11 @@
             <container name="header-logo-search" as="header-logo-search" htmlTag="div" htmlClass="header-logo-search" before="-"/>
             <container name="header-links" as="header-wrapper" htmlTag="div" htmlClass="header links">
                 <container name="header-links-left" as="header-links-left" htmlTag="div" htmlClass="header-links-left" before="-">
-                    <block class="Amasty\Storelocator\Block\Location" name="stores" template="Amasty_StoreLocator::stores.phtml" />
+                    <block class="Magento\Framework\View\Element\Template" name="stores" template="Magento_Theme::header/stores.phtml">
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">Vass\AmastyStoreLocator\ViewModel\StoreLocator</argument>
+                        </arguments>
+                    </block>
                 </container>
                 <container name="header-links-right" as="header-links-right" htmlTag="div" htmlClass="header-links-right" after="header-links-right">
                     <block class="Magento\Wishlist\Block\Link" name="wishlist" template="Magento_Wishlist::link.phtml" before="-"/>
