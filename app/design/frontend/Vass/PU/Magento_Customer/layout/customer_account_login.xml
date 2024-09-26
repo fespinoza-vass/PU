@@ -12,6 +12,7 @@
                 <argument translate="true" name="title" xsi:type="string">Customer Login</argument>
             </action>
         </referenceBlock>
+
         <referenceBlock name="customer.new" remove="true"/>
     </body>
 </page>
