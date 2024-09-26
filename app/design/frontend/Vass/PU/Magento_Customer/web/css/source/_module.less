@@ -36,6 +36,7 @@
 
             .page-title {
                 margin: @indent__l 0;
+                line-height: 32px;
 
                 .base {
                     .lib-font-size(@font-size__xl);
@@ -47,10 +48,11 @@
     .login-container {
         margin-bottom: 40px;
 
+        .block-left
         .customer-login-image {
             max-height: 192px;
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: cover;
             margin-bottom: @indent__m;
         }
@@ -541,8 +543,8 @@
                 }
 
                 .customer-login-image {
-                    min-height: 492px;
-                    margin-bottom: 0;
+                    max-height: none;
+                    width: auto;
                 }
             }
         }
