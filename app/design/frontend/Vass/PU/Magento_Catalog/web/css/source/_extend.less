@@ -12,7 +12,7 @@
     body.catalog-category-view {
         .product-items {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
     
             .product-item {
@@ -200,6 +200,13 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    body.catalog-category-view {
+        .product-items {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
     .product-items {
         .price-box {
             flex-direction: row-reverse;
