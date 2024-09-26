@@ -1,0 +1,28 @@
+<?php
+/** @var $block \WolfSellers\GTM\Block\DataLayer */
+?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+<!--    --><?php //if ($addToCartData = $block->getAddToCartData()): ?>
+//    console.log('AddToCart Data:', <?php //= json_encode($addToCartData) ?>//);
+//    dataLayer.push(<?php //= json_encode($addToCartData) ?>//);
+//    <?php //endif; ?>
+    <?php if ($checkoutData = $block->getBeginCheckoutData()): ?>
+    console.log('BeginCheckout Data:', <?= json_encode($checkoutData) ?>);
+    dataLayer.push(<?= json_encode($checkoutData) ?>);
+    <?php endif; ?>
+    <?php if ($orderData = $block->getOrderSuccessData()): ?>
+    console.log('OrderSuccess Data:', <?= json_encode($orderData) ?>);
+    dataLayer.push(<?= json_encode($orderData) ?>);
+    <?php endif; ?>
+</script>
+
+<!-- Debug Output - Remove in production -->
+<div style="display:none;">
+    <h3>GTM Debug Data:</h3>
+    <pre>
+    AddToCart: <?= json_encode($block->getAddToCartData(), JSON_PRETTY_PRINT) ?>
+    BeginCheckout: <?= json_encode($block->getBeginCheckoutData(), JSON_PRETTY_PRINT) ?>
+    OrderSuccess: <?= json_encode($block->getOrderSuccessData(), JSON_PRETTY_PRINT) ?>
+</pre>
+</div>
