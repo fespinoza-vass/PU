@@ -125,12 +125,13 @@ $sliderId = BrandSlider::HTML_ID . random_int(1, 10000);
                             </a>
                         <?php endforeach; ?>
                     </div>
+
+                    <?php if ($block->isPaginationShow()): ?>
+                        <div class="swiper-pagination"></div>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            <?php if ($block->isPaginationShow()): ?>
-                <div class="swiper-pagination"></div>
-            <?php endif; ?>
         </div>
     </div>
     <?php if ($isSliderEnable): ?>

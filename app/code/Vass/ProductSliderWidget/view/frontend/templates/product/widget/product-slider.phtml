@@ -98,8 +98,7 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
                                                            name="<?= /* @noEscape */
                                                            ActionInterface::PARAM_NAME_URL_ENCODED ?>"
                                                            value="<?= $escaper->escapeHtml($value) ?>">
-                                                    <?= /* @noEscape */
-                                                    $block->getBlockHtml('formkey') ?>
+                                                    <?= /* @noEscape */ $block->getBlockHtml('formkey') ?>
                                                     <button type="submit"
                                                             title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
                                                             class="action tocart primary icon icon-shopping-bag">
@@ -146,8 +145,7 @@ use Vass\ProductSliderWidget\Helper\PreparePostData;
 
     <script type="text/x-magento-init">
         {
-            "#<?= /** @noEscape */
-        $htmlId ?>": {
+            "#<?= /** @noEscape */$htmlId ?>": {
             "productsSlider": {
                 "slidesInDesktop": "<?= $escaper->escapeJs($block->getProductsToShowInDesktop()) ?>",
                 "slidesInTablet": "<?= $escaper->escapeJs($block->getProductsToShowInTablet()) ?>",
