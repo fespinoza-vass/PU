@@ -26,6 +26,12 @@
         &:extend(.abs-add-clearfix all);
     }
 
+    .amount-sorter:first-of-type {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .toolbar-amount {
         display: block;
         line-height: @toolbar-mode-icon-font-size + 2;
@@ -39,16 +45,21 @@
     }
 
     .toolbar-products {
-        margin-bottom: @indent__xl;
         padding: 0 @indent__s;
         text-align: center;
         &:extend(.abs-add-clearfix all);
+
+        &:before, 
+        &:after {
+            content: none;
+        }
 
         .pages {
             display: none;
 
             .products.wrapper ~ & {
                 display: block;
+                float: none !important;
             }
         }
 
@@ -61,6 +72,10 @@
 
     .sorter {
         padding: 4px 0 0;
+
+        .control  > select {
+            margin: 0;
+        }
 
         .products.wrapper ~ .toolbar & {
             display: none;
