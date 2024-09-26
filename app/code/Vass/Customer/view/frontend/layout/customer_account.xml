@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_Customer
+ * @author Vass Team
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      label="Customer My Account (All Pages)" design_abstraction="custom">
+    <head>
+        <title>My Account</title>
+    </head>
+    <body>
+        <attribute name="class" value="account"/>
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Framework\View\Element\Template" template="Vass_Customer::account/head-sidebar.phtml"
+                   name="head.sidebar.customer.account" before="sidebar.main.account_nav">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Vass\Customer\ViewModel\Customer</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
