@@ -141,119 +141,6 @@
         }
     }
 
-    .form-create-account {
-        width: auto;
-        padding: @indent__m @indent__base;
-        background: @primary-white;
-
-        .fieldset {
-            border: 0;
-            padding: 0;
-
-            .legend {
-                border-bottom: 0;
-                margin-bottom: @indent__m;
-
-                span {
-                    .lib-font-size(@font-size__l);
-                    font-weight: @font-weight__bold;
-                }
-            }
-
-            &.account {
-                .legend {
-                    padding-top: @indent__l;
-                }
-            }
-
-            .checkbox-section {
-                display: flex;
-                flex-direction: column;
-                gap: @indent__l;
-                margin-top: @indent__l;
-            }
-
-            .field {
-                margin-bottom: 8px;
-
-                &.choice {
-                    display: flex;
-                    align-items: center;
-                    margin: 0;
-
-                    &.tos {
-                        position: relative;
-
-                        .label {
-                            align-items: center;
-                            font-weight: @font-weight__regular;
-                        }
-
-                        .mage-error {
-                            padding: 0;
-                            margin: @indent__base;
-                        }
-
-                        #tos-error {
-                            position: absolute;
-                            padding-top: 64px;
-                        }
-
-                        .checkbox {
-                            margin: 0 10px 0 0;
-                            flex-shrink: 0;
-                        }
-                    }
-
-                    .label {
-                        align-items: center;
-                        color: @primary-black;
-                    }
-
-                    .checkbox {
-                        margin: 0 10px 0 0;
-                    }
-                }
-            }
-
-            .control {
-                position: relative;
-
-                &.customer-dob {
-                    &::before {
-                        .lib-font-size(@font-size__l);
-                        position: absolute;
-                        content: @icon-calendar;
-                        font-family: @icons__font-name;
-                        color: @color-gray-dark3;
-                        top: calc((56px / 2) + 10px);;
-                        right: 20px;
-                        transform: translateY(-50%);
-                    }
-
-                    button {
-                        display: none;
-                    }
-                }
-            }
-        }
-
-        .actions-toolbar {
-            button {
-                margin: @indent__l 0;
-                width: 100%;
-            }
-        }
-
-        .login-account {
-            display: flex;
-            gap: 10px;
-
-            a {
-                text-transform: uppercase;
-            }
-        }
-    }
 
     .customer-account-create {
         .page-title {
@@ -261,6 +148,112 @@
             line-height: 32px;
             .lib-font-size(@font-size__xl);
             margin: @indent__l 0;
+        }
+
+        .form-create-account {
+            width: auto;
+            padding: @indent__m @indent__base;
+            background: @primary-white;
+
+            .fieldset {
+                border: 0;
+                padding: 0;
+
+                .legend {
+                    border-bottom: 0;
+                    margin-bottom: @indent__m;
+
+                    span {
+                        .lib-font-size(@font-size__l);
+                        font-weight: @font-weight__bold;
+                    }
+                }
+
+                &.account {
+                    .legend {
+                        padding-top: @indent__l;
+                    }
+                }
+
+                .checkbox-section {
+                    display: flex;
+                    flex-direction: column;
+                    gap: @indent__l;
+                    margin-top: @indent__l;
+
+                    .field {
+                        &.choice {
+                            margin-bottom: 8px;
+                            display: flex;
+                            align-items: center;
+                            margin: 0;
+
+                            &.tos {
+                                position: relative;
+
+                                .mage-error {
+                                    padding: 0;
+                                }
+
+                                #tos-error {
+                                    margin: @indent__base;
+                                    position: absolute;
+                                    padding-top: 64px;
+                                }
+                            }
+
+                            .label {
+                                align-items: center;
+                                color: @primary-black;
+                                font-weight: @font-weight__regular;
+                            }
+
+                            .checkbox {
+                                margin: 0;
+                                margin-right: @indent__base;
+                                flex-shrink: 0;
+                            }
+                        }
+                    }
+                }
+
+                .control {
+                    position: relative;
+
+                    &.customer-dob {
+                        &::before {
+                            .lib-font-size(@font-size__l);
+                            position: absolute;
+                            content: @icon-calendar;
+                            font-family: @icons__font-name;
+                            color: @color-gray-dark3;
+                            top: ~"calc((56px / 2) + 10px)";
+                            right: 20px;
+                            transform: translateY(-50%);
+                        }
+
+                        .ui-datepicker-trigger {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .actions-toolbar {
+                .submit {
+                    margin: @indent__l 0;
+                    width: 100%;
+                }
+            }
+
+            .login-account {
+                display: flex;
+                gap: 12px;
+
+                .login-account-link {
+                    text-transform: uppercase;
+                }
+            }
         }
     }
 
@@ -507,30 +500,6 @@
         }
     }
 
-    //
-    //  Password Strength Meter
-    //  ---------------------------------------------
-
-    .field.password {
-        .control {
-            .lib-vendor-prefix-display();
-            .lib-vendor-prefix-flex-direction();
-
-            .mage-error {
-                .lib-vendor-prefix-order(2);
-            }
-
-            .input-text {
-                .lib-vendor-prefix-order(0);
-                z-index: 2;
-            }
-        }
-    }
-
-    .password-strength-meter {
-        display: none;
-    }
-
     .control.captcha-image {
         .lib-css(margin-top, @indent__s);
 
@@ -677,85 +646,84 @@
         }
     }
 
-    .register-container {
-        display: flex;
-        width: 100%;
+    .customer-account-create {
 
-        .block-left,
-        .block-right {
-            width: 50%;
-        }
+        .register-container {
+            display: flex;
+            width: 100%;
 
-        .block-left {
-            margin-right: 24px;
-        }
+            .block-left,
+            .block-right {
+                width: 50%;
+            }
 
-        .block-right {
-            background: @primary-white;
-        }
+            .block-left {
+                margin-right: 24px;
 
-        .customer-login-image {
-            min-height: 100%;
-        }
+                .customer-login-image {
+                    min-height: 100%;
+                    margin: 0;
+                }
+            }
 
-        .form-create-account {
-            padding: 36px @indent__l;
 
-            .fieldset {
-                display: flex;
-                flex-wrap: wrap;
-                gap: @indent__base;
+            .form-create-account {
+                padding: 36px @indent__l;
 
-                &.info {
-                    .field {
-                        width: calc(50% - 8px);
+                .fieldset {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: @indent__base;
 
-                        &.field-numero_de_identificacion {
+                    &.info {
+                        .field {
+                            width: ~"calc(50% - 8px)";
+
+                            &.field-numero_de_identificacion {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    &.account {
+                        .legend {
+                            padding-top: 36px;
+                        }
+
+                        .field {
                             width: 100%;
+
+                            &.password,
+                            &.confirmation {
+                                width: ~"calc(50% - 8px)";
+                            }
                         }
                     }
-                }
 
-                &.account {
-                    .legend {
-                        padding-top: 36px;
-                    }
+                    .checkbox-section {
+                        gap: @indent__m;
+                        margin: 0;
 
-                    .field {
-                        width: 100%;
-
-                        &.password,
-                        &.confirmation {
-                            width: calc(50% - 8px);
-                        }
-                    }
-                }
-
-                .field {
-                    &.choice {
-                        &.tos {
-                            #tos-error {
-                                position: absolute;
-                                padding-top: @indent__xl;
+                        .field {
+                            &.choice {
+                                &.tos {
+                                    #tos-error {
+                                        padding-top: @indent__xl;
+                                    }
+                                }
                             }
                         }
                     }
                 }
 
-                .checkbox-section {
-                    gap: @indent__m;
-                    margin: 0;
-                }
-            }
-
-            .actions-toolbar {
-                button {
-                    width: 50%;
-                    margin: @indent__m 0;
+                .actions-toolbar {
+                    button {
+                        width: 250px;
+                        margin: @indent__m 0;
+                    }
                 }
             }
         }
-
     }
 
     .customer-account-forgotpassword {

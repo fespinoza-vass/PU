@@ -169,7 +169,7 @@ $createAccountButtonViewModel = $block->getData('create_account_button_view_mode
             </div>
             <div class="login-account">
                 <p><?= $escaper->escapeHtmlAttr(__("Do you have an account?")) ?></p>
-                <a href="<?= $escaper->escapeUrl($block->getUrl('customer/account/create')) ?>">
+                <a class="login-account-link" href="<?= $escaper->escapeUrl($block->getUrl('customer/account/create')) ?>">
                      <?= $escaper->escapeHtmlAttr(__('Customer Login')) ?>
                 </a>
             </div>
