@@ -457,8 +457,10 @@ require([
             if (!numeroIdentificacion.valid()) {
                 errorDiv.text("Ingrese entre 6 y 12 caracteres alfanuméricos para el pasaporte.");
                 errorDiv.css('display', 'block'); // Mostrar el mensaje de error personalizado
+                numeroIdentificacion.addClass('mage-error'); // Agregar clase si el campo no es válido
             } else {
                 errorDiv.css('display', 'none'); // Ocultar el mensaje de error
+                numeroIdentificacion.removeClass('mage-error'); // Eliminar borde rojo si el campo es válido
             }
         }
 
@@ -481,8 +483,10 @@ require([
             if (!numeroIdentificacion.valid()) {
                 errorDiv.text("Ingrese exactamente 8 números para el DNI.");
                 errorDiv.css('display', 'block'); // Mostrar el mensaje de error personalizado
+                numeroIdentificacion.addClass('mage-error'); // Agregar clase si el campo no es válido
             } else {
                 errorDiv.css('display', 'none'); // Ocultar el mensaje de error
+                numeroIdentificacion.removeClass('mage-error'); // Eliminar borde rojo si el campo es válido
             }
         }
     });
@@ -497,5 +501,3 @@ require([
     }
 });
 </script>
-
-
