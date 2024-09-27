@@ -395,5 +395,107 @@ $formData = $block->getFormData();
         }
     }
 </script>
+<script type="text/javascript">
+require([
+    'jquery',
+    'mage/validation',
+    'domReady!'
+], function ($) {
+    // Función para limpiar el campo de número de identificación y todos los mensajes de error
+    function limpiarCampoIdentificacion() {
+        var numeroIdentificacion = $('#numero_de_identificacion');
+        var errorDiv = $('#custom-numero_de_identificacion-error'); // Div personalizado para el error
+
+        // Limpiar el input de número de identificación
+        numeroIdentificacion.val('');
+
+        // Limpiar cualquier mensaje de error visible (incluyendo errores generados por Magento)
+        errorDiv.text('').css('display', 'none');
+        
+        // Limpiar todos los errores que Magento pueda haber generado
+        numeroIdentificacion.removeClass('mage-error');
+        numeroIdentificacion.closest('.field').find('.mage-error').remove(); // Elimina cualquier mensaje de error generado por Magento
+        numeroIdentificacion.closest('.field').find('.validation-advice').remove(); // Elimina mensajes de validación adicionales
+
+        // También eliminar cualquier error agregado directamente al input
+        numeroIdentificacion.attr('aria-invalid', 'false'); // Quitar el estado de invalidez del campo
+    }
+
+    // Escuchar el cambio en el select de tipo de documento
+    $('#identificacion').on('change', function () {
+        limpiarCampoIdentificacion();
+    });
+
+    // Escuchar el evento keyup en el input de número de identificación
+    $('#numero_de_identificacion').on('keyup', function () {
+        var tipoDocumento = $('#identificacion').val();
+        var numeroIdentificacion = $(this); // El input de número de identificación
+        var errorDiv = $('#custom-numero_de_identificacion-error'); // Div personalizado donde se muestra el error
+
+        // Remover clases preexistentes de validación de Magento
+        numeroIdentificacion.removeClass('validate-digits validate-length minimum-length-8 maximum-length-8 mage-error');
+
+        // Remover cualquier validación anterior
+        numeroIdentificacion.rules('remove');
+
+        // Validación para Pasaporte (865): Alfanumérico, entre 6 y 12 caracteres
+        if (tipoDocumento === '865') {
+            numeroIdentificacion.rules('add', {
+                required: true,
+                alphanumeric: true, // Validación alfanumérica
+                minlength: 6,
+                maxlength: 12,
+                messages: {
+                    required: "El número de pasaporte es obligatorio.",
+                    alphanumeric: "Solo se permiten caracteres alfanuméricos.",
+                    minlength: "El pasaporte debe tener al menos 6 caracteres.",
+                    maxlength: "El pasaporte debe tener como máximo 12 caracteres."
+                }
+            });
+
+            // Validar el campo y ajustar el mensaje de error usando CSS
+            if (!numeroIdentificacion.valid()) {
+                errorDiv.text("Ingrese entre 6 y 12 caracteres alfanuméricos para el pasaporte.");
+                errorDiv.css('display', 'block'); // Mostrar el mensaje de error personalizado
+            } else {
+                errorDiv.css('display', 'none'); // Ocultar el mensaje de error
+            }
+        }
+
+        // Validación para DNI (868): Numérico, 8 caracteres
+        else if (tipoDocumento === '868') {
+            numeroIdentificacion.rules('add', {
+                required: true,
+                digits: true, // Solo números
+                minlength: 8,
+                maxlength: 8,
+                messages: {
+                    required: "El número de DNI es obligatorio.",
+                    digits: "Solo se permiten números.",
+                    minlength: "El DNI debe tener exactamente 8 caracteres.",
+                    maxlength: "El DNI debe tener exactamente 8 caracteres."
+                }
+            });
+
+            // Validar el campo y ajustar el mensaje de error usando CSS
+            if (!numeroIdentificacion.valid()) {
+                errorDiv.text("Ingrese exactamente 8 números para el DNI.");
+                errorDiv.css('display', 'block'); // Mostrar el mensaje de error personalizado
+            } else {
+                errorDiv.css('display', 'none'); // Ocultar el mensaje de error
+            }
+        }
+    });
+
+    // Disparar el evento keyup cuando el campo ya tiene algún valor (al cargar la página)
+    $('#numero_de_identificacion').trigger('keyup');
+
+    // Crear un nuevo div para el mensaje de error personalizado si no existe
+    if ($('#custom-numero_de_identificacion-error').length === 0) {
+        var customErrorDiv = $('<div id="custom-numero_de_identificacion-error" class="mage-error" style="display:none;"></div>');
+        $('#numero_de_identificacion').after(customErrorDiv);
+    }
+});
+</script>
 
 
