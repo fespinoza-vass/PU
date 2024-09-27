@@ -1,0 +1,89 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block
+ * @var \Vass\Customer\ViewModel\Customer $viewModel
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$viewModel = $block->getData('view_model');
+$customer = $viewModel->getCustomer();
+?>
+
+<div class="block block-dashboard-info">
+    <div class="block-content">
+        <div class="box box-information">
+            <div class="box-content">
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Name')) ?>
+                    <div class="blocked">
+                        <?= $escaper->escapeHtml($customer->getFirstname()) ?>
+                    </div>
+                </div>
+
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Last Name')) ?>
+                    <div class="blocked">
+                        <?= $escaper->escapeHtml($customer->getLastname()) ?>
+                    </div>
+                </div>
+
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Email')) ?>
+                    <div class="blocked">
+                        <?= $escaper->escapeHtml($customer->getEmail()) ?>
+                    </div>
+                </div>
+
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Gender')) ?>
+                    <div class="blocked">
+                        <?= $escaper->escapeHtml($customer->getGender()) ?>
+                    </div>
+                </div>
+
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Date of Birth')) ?>
+                    <div class="blocked">
+                        <?= $escaper->escapeHtml($customer->getDob()) ?>
+                        <!-- TODO: formato de fecha -->
+                    </div>
+                </div>
+
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Telephone/Phone')) ?>
+                    <div class="blocked">
+                        <?= $escaper->escapeHtml($customer->getTelefono()) ?>
+                    </div>
+                </div>
+
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Identification Number')) ?>
+                    <div class="blocked">
+                        <?= $escaper->escapeHtml($customer->getNumeroDeIdentificacion()) ?>
+                    </div>
+                </div>
+
+                <div class="costumer-field">
+                    <?= $escaper->escapeHtml(__('Password')) ?>
+                    <div class="blocked">
+                        **************
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-actions">
+                <a class="action edit primary" href="<?= $escaper->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+                    <span><?= $escaper->escapeHtml(__('Edit')) ?></span>
+                </a>
+
+                <a class="action secondary" href="<?= $escaper->escapeUrl($block->getChangePasswordUrl()) ?>" class="action change-password">
+                    <?= $escaper->escapeHtml(__('Change Password')) ?>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
