@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"      xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="izipay_document_type" nullable="true" length="10" comment="Tipo de Documento"/>
+        <column xsi:type="varchar" name="izipay_razon_social" nullable="true" length="100" comment="Razón Social Izipay"/>
+        <column xsi:type="varchar" name="izipay_document_number" nullable="true" length="15" comment="Número de Documento"/>
+        <column xsi:type="varchar" name="izipay_transaction_id" nullable="true" length="15" comment="TransactionId Izipay"/>
+        <column xsi:type="varchar" name="izipay_order_number" nullable="true" length="15" comment="Order Number Izipay"/>
+        <column xsi:type="varchar" name="izipay_payment_code_response" nullable="true" length="5" comment="Response Code Izipay"/>
+    </table>
+    <table name="sales_order" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="izipay_document_type" nullable="true" length="10" comment="Tipo de Documento"/>
+        <column xsi:type="varchar" name="izipay_razon_social" nullable="true" length="100" comment="Razón Social Izipay"/>
+        <column xsi:type="varchar" name="izipay_document_number" nullable="true" length="15" comment="Número de Documento"/>
+        <column xsi:type="varchar" name="izipay_transaction_id" nullable="true" length="15" comment="TransactionId Izipay"/>
+        <column xsi:type="varchar" name="izipay_order_number" nullable="true" length="15" comment="Order Number Izipay"/>
+        <column xsi:type="varchar" name="izipay_payment_code_response" nullable="true" length="5" comment="Response Code Izipay"/>
+    </table>
+</schema>

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
-        <plugin name="add_custom_field_checkout_form" type="Vass\Checkout\Plugin\Block\Checkout\LayoutProcessor"/> 
+    <type name="Amasty\CheckoutStyleSwitcher\Block\Onepage\BillingAddressRelocateProcessor">
+        <plugin name="add_custom_field_checkout_form" type="Vass\Checkout\Plugin\Block\Checkout\LayoutProcessor" sortOrder="200"/> 
     </type>
+    <preference for="Magento\Checkout\Block\Onepage\Success" type="Vass\Checkout\Block\Onepage\Success" />
 </config>
