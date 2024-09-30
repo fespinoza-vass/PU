@@ -6,6 +6,7 @@
 "Enter your email", "Ingresa tu correo electrónico"
 "Enter your password", "Ingresa tu contraseña"
 "Enter your confirmed password", "Ingresa confirmación de contraseña"
+"Enter Captcha", "Ingresa el captcha"
 "Enter your name", "Ingresa tu nombre"
 "Enter your surname", "Ingresa tu apellido"
 "Sign Up for Newsletter", "He leído y acepto el envío de comunicaciones"
@@ -21,3 +22,4 @@
 "This email address is already subscribed.","Esta dirección de correo ya está suscrita"
 "Thank you for your subscription","Gracias por su suscripción"
 "Please enter a valid email address (Ex: johndoe@domain.com).","Por favor ingrese un email válido (Ej: juan@dominio.com)"
+"Reload captcha", "Mostrar otro captcha"
