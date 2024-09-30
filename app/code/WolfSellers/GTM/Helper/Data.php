@@ -1,4 +1,10 @@
 <?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_GTM
+ * @author VASS Team
+ */
+
 namespace WolfSellers\GTM\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;

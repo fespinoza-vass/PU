@@ -1,7 +1,8 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_GTM
+ * @author VASS Team
  */
 
 namespace WolfSellers\GTM\Block;
@@ -83,10 +84,10 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         Rule                                $rule,
         StoreManagerInterface               $storeManager,
         Proxy                               $sessionProxy,
-        TimezoneInterface                                $date,
-        Image                                                      $imageHelper,
-        \Magento\Catalog\Helper\Data                               $catalogHelper,
-        array                                                      $data = []
+        TimezoneInterface                   $date,
+        Image                               $imageHelper,
+        \Magento\Catalog\Helper\Data        $catalogHelper,
+        array                               $data = []
     )
     {
         $this->cookieHelper = $cookieHelper;
