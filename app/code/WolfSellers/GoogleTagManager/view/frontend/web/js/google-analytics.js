@@ -1,6 +1,7 @@
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_GoogleTagManager
+ * @author VASS Team
  */
 /* jscs:disable */
 /* eslint-disable */
@@ -39,7 +40,7 @@ define([
             /* Global site tag (gtag.js) - Google Analytics */
             measurementId = config.pageTrackingData.measurementId;
             if (window.gtag) {
-                gtag('config', measurementId, { 'anonymize_ip': true });
+                gtag('config', measurementId, {'anonymize_ip': true});
                 // Purchase Event
                 if (!purchaseEventTriggered && config.ordersTrackingData.hasOwnProperty('currency')) {
                     var purchaseObject = config.ordersTrackingData.orders[0];
@@ -48,7 +49,7 @@ define([
                     purchaseEventTriggered = true;
                 }
             } else {
-                (function(d,s,u){
+                (function (d, s, u) {
                     var gtagScript = d.createElement(s);
                     gtagScript.type = 'text/javascript';
                     gtagScript.async = true;
@@ -56,10 +57,14 @@ define([
                     d.head.insertBefore(gtagScript, d.head.children[0]);
                 })(document, 'script', 'https://www.googletagmanager.com/gtag/js?id=' + measurementId);
                 window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
+
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+
                 gtag('js', new Date());
                 gtag('set', 'developer_id.dYjhlMD', true);
-                gtag('config', measurementId, { 'anonymize_ip': true });
+                gtag('config', measurementId, {'anonymize_ip': true});
                 // Purchase Event
                 if (!purchaseEventTriggered && config.ordersTrackingData.hasOwnProperty('currency')) {
                     var purchaseObject = config.ordersTrackingData.orders[0];

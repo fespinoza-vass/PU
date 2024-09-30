@@ -1,4 +1,10 @@
 <?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_GTM
+ * @author VASS Team
+ */
+
 namespace WolfSellers\GTM\Block;
 
 use Magento\Framework\View\Element\Template;
@@ -12,10 +18,11 @@ class DataLayer extends Template
 
     public function __construct(
         Template\Context $context,
-        Registry $registry,
-        LoggerInterface $logger,
-        array $data = []
-    ) {
+        Registry         $registry,
+        LoggerInterface  $logger,
+        array            $data = []
+    )
+    {
         $this->registry = $registry;
         $this->logger = $logger;
         parent::__construct($context, $data);
