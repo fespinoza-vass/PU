@@ -32,7 +32,7 @@ class CardsSlider extends Template implements BlockInterface
      *
      * @var string
      */
-    protected string $_template = 'widget/cards-slider.phtml';
+    protected $_template = 'widget/cards-slider.phtml';
 
     /**
      * Constructor
@@ -110,7 +110,7 @@ class CardsSlider extends Template implements BlockInterface
      * @param array $params
      * @return array
      */
-    public function getUrl(string $route = '', array $params = []): array
+    public function getUrl($route = '', $params = [])
     {
         $urls = [];
         for ($i = 1; $i <= self::MAX_SLIDES_AVAILABLE; $i++) {
