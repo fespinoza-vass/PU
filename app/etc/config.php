@@ -629,6 +629,7 @@ return [
         'WolfSellers_Flow' => 1,
         'WolfSellers_FreeGiftBanner' => 1,
         'WolfSellers_FreeShipping' => 1,
+        'WolfSellers_GTM' => 1,
         'WolfSellers_GoogleTagManager' => 1,
         'WolfSellers_LoginUser' => 1,
         'WolfSellers_OrderTracking' => 1,
