@@ -14,10 +14,8 @@
     }
 
     .card-slider {
-
         .swiper {
-            max-height: 339px;
-
+            height: auto;
         }
 
         &__wrapper {
@@ -25,7 +23,6 @@
             height: auto;
             width: 100%;
             padding: 0 0 20px;
-
         }
 
         .swiper-slide {
@@ -37,10 +34,9 @@
 
         &__img {
             width: 100%;
-
-            .card-img {
                 max-height: 315px;
-                height: 100%;
+            .card-img {
+                height: inherit;
                 width: 100%;
                 object-fit: cover;
                 overflow: hidden;
@@ -60,12 +56,11 @@
             gap: @indent__s;
             box-sizing: border-box;
 
-            a {
+            .link {
                 text-decoration: none;
             }
 
             .title {
-                font-family: @font-family__secondary;
                 .lib-font-size(@font-size__xl);
                 font-weight: (@font-weight__regular);
                 line-height: @line-height__l;
@@ -75,7 +70,6 @@
             }
 
             .description {
-                font-family: @font-family__base;
                 .lib-font-size(@font-size__m);
                 line-height: @indent__m;
                 text-align: left;
@@ -111,7 +105,7 @@
     .card-slider {
 
         .swiper {
-            max-height: 560px;
+            height: auto;
             height: 100%;
         }
 
