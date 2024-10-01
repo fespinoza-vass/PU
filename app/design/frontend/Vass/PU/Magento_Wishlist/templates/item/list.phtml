@@ -1,0 +1,82 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/**
+ * @var \Magento\Wishlist\Block\Customer\Wishlist\Items $block
+ * @var Escaper $escaper
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Catalog\Block\Product\ReviewRendererInterface;
+use Magento\Swatches\Block\Product\Renderer\Configurable;
+
+$columns = $block->getColumns();
+
+$image = 'wishlist_thumbnail';
+$templateType = ReviewRendererInterface::SHORT_VIEW;
+
+?>
+
+<div class="products-grid wishlist">
+    <?php if (count($block->getItems())) : ?>
+        <?php foreach ($block->getItems() as $_item) : ?>
+            <div class="item product product-item swiper-slide">
+                <div class="product-item-info">
+                    <div class="product-item-image">
+                        <a href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>"
+                           class="image__link">
+                            <?php #$block->getImage($item, $image)->toHtml() ?>
+                            <img src="https://www.druni.es/media/catalog/product/1/6/1659252.jpg?quality=80&fit=bounds&height=700&width=700&canvas=700:700"
+                                 alt="1659252"
+                                 loading="lazy">
+                        </a>
+                    </div>
+
+                    <div class="product details product-item-details">
+                        <div class="product-top-name">
+                            <span class="product-brand">
+                                <?= $escaper->escapeHtml($_item->getAttributeText('manufacturer') ?? ''); ?>
+                            </span>
+
+                            <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
+                        </div>
+
+                        <span class="product-item-name">
+                            <a title="<?= $escaper->escapeHtml($_item->getName()) ?>"
+                               href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>"
+                               class="product-item-link">
+                                <?= $escaper->escapeHtml($_item->getName()) ?>
+                            </a>
+                        </span>
+
+                        <div class="options-swatches">
+                            <?php if ($_item->getTypeId() === 'configurable'): ?>
+                                <?= $block->getLayout()
+                                    ->createBlock(Configurable::class)
+                                    ->setProduct($_item)
+                                    ->toHtml();
+                                ?>
+                            <?php endif; ?>
+                        </div>
+
+                        <?= $block->getProductPrice($_item) ?>
+                    </div>
+
+                    <?php #foreach ($columns as $column) : ?>
+                        <?php # $column->setItem($item)->toHtml();?>
+                    <?php #endforeach; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <div class="message info empty">
+            <span><?= $block->escapeHtml(__('This Wish List has no Items')) ?></span>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php foreach ($columns as $column) : ?>
+    <?= $column->getAdditionalHtml() ?>
+<?php endforeach; ?>
