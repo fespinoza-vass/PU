@@ -1,4 +1,9 @@
 <?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_CardsSlider
+ * @author VASS Team
+ */
 
 namespace Vass\CardsSlider\Block\Widget;
 
@@ -27,7 +32,7 @@ class CardsSlider extends Template implements BlockInterface
      *
      * @var string
      */
-    protected $_template = 'widget/cards-slider.phtml';
+    protected string $_template = 'widget/cards-slider.phtml';
 
     /**
      * Constructor
@@ -105,13 +110,13 @@ class CardsSlider extends Template implements BlockInterface
      * @param array $params
      * @return array
      */
-    public function getUrl($route = '', $params = []): array
+    public function getUrl(string $route = '', array $params = []): array
     {
         $urls = [];
         for ($i = 1; $i <= self::MAX_SLIDES_AVAILABLE; $i++) {
             $url = $this->getData("url_{$i}");
             if ($route) {
-                $url = $this->getUrlBuilder()->getUrl($route, $params);
+                $url = $this->getUrlBuilder()->getUrl($route, array_merge($params, ['id' => $i]));
             }
             $urls[] = $url;
         }
@@ -123,7 +128,7 @@ class CardsSlider extends Template implements BlockInterface
      *
      * @return UrlInterface
      */
-    protected function getUrlBuilder()
+    protected function getUrlBuilder(): UrlInterface
     {
         return $this->_urlBuilder;
     }
@@ -153,7 +158,7 @@ class CardsSlider extends Template implements BlockInterface
      *
      * @return int
      */
-    public function getSlidesToShowMobile(): int
+    public function getSlidesToShowInMobile(): int
     {
         return self::SLIDES_IN_MOBILE;
     }
