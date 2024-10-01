@@ -1,9 +1,11 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_GTM
+ * @author VASS Team
  */
-namespace WolfSellers\GoogleTagManager\Block;
+
+namespace WolfSellers\GTM\Block;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Helper\Image;
@@ -13,9 +15,12 @@ use Magento\CatalogRule\Api\CatalogRuleRepositoryInterface;
 use Magento\CatalogRule\Model\ResourceModel\Rule;
 use Magento\Cookie\Helper\Cookie;
 use Magento\Customer\Model\Session\Proxy;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\GoogleTagManager\Helper\Data;
+use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Item;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -33,7 +38,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
     protected $helper;
 
     /**
-     * @var \Magento\Cookie\Helper\Cookie
+     * @var Cookie
      */
     protected $cookieHelper;
 
@@ -42,13 +47,13 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
      */
     protected $jsonHelper;
     private \Magento\Catalog\Helper\Data $_catalogHelper;
-    private \Magento\Catalog\Helper\Image $imageHelper;
-    private \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository;
-    private \Magento\Framework\Stdlib\DateTime\TimezoneInterface $_date;
-    private \Magento\Customer\Model\Session\Proxy $sessionProxy;
-    private \Magento\CatalogRule\Model\ResourceModel\Rule $ruleResource;
-    private \Magento\Catalog\Api\CategoryRepositoryInterface $_categoryRepository;
-    private \Magento\Catalog\Model\Product\Attribute\Repository $attributerepository;
+    public Image $imageHelper;
+    private CatalogRuleRepositoryInterface $catalogRuleRepository;
+    private TimezoneInterface $_date;
+    private Proxy $sessionProxy;
+    private Rule $ruleResource;
+    public CategoryRepositoryInterface $_categoryRepository;
+    public Repository $attributerepository;
 
     /**
      * @param Context $context
@@ -68,30 +73,31 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $salesOrderCollection,
-        \Magento\GoogleTagManager\Helper\Data $googleAnalyticsData,
-        \Magento\Cookie\Helper\Cookie $cookieHelper,
+        Context                             $context,
+        CollectionFactory                   $salesOrderCollection,
+        Data                                $googleAnalyticsData,
+        Cookie                              $cookieHelper,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
-        \Magento\Catalog\Model\Product\Attribute\Repository $attributerepository,
-        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
-        \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
-        \Magento\CatalogRule\Model\ResourceModel\Rule $rule,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Customer\Model\Session\Proxy $sessionProxy,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
-        \Magento\Catalog\Helper\Image $imageHelper,
-        \Magento\Catalog\Helper\Data $catalogHelper,
-        array $data = []
-    ) {
+        Repository                          $attributerepository,
+        CategoryRepositoryInterface         $categoryRepository,
+        CatalogRuleRepositoryInterface      $catalogRuleRepository,
+        Rule                                $rule,
+        StoreManagerInterface               $storeManager,
+        Proxy                               $sessionProxy,
+        TimezoneInterface                   $date,
+        Image                               $imageHelper,
+        \Magento\Catalog\Helper\Data        $catalogHelper,
+        array                               $data = []
+    )
+    {
         $this->cookieHelper = $cookieHelper;
         $this->jsonHelper = $jsonHelper;
         $this->attributerepository = $attributerepository;
         $this->_categoryRepository = $categoryRepository;
         $this->ruleResource = $rule;
         $this->_storeManager = $storeManager;
-        $this->sessionProxy= $sessionProxy;
-        $this->_date =  $date;
+        $this->sessionProxy = $sessionProxy;
+        $this->_date = $date;
         $this->catalogRuleRepository = $catalogRuleRepository;
         $this->imageHelper = $imageHelper;
         parent::__construct($context, $salesOrderCollection, $googleAnalyticsData, $data, $cookieHelper);
@@ -162,7 +168,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         $collection = $this->_salesOrderCollection->create();
         $collection->addFieldToFilter('entity_id', ['in' => $orderIds]);
 
-        /** @var \Magento\Sales\Model\Order $order */
+        /** @var Order $order */
         foreach ($collection as $order) {
             $orderData = [
                 'id' => $order->getIncrementId(),
@@ -173,12 +179,12 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             ];
 
             $products = [];
-            /** @var \Magento\Sales\Model\Order\Item $item*/
+            /** @var Item $item */
             foreach ($order->getAllVisibleItems() as $item) {
 
                 /** Get Name Categories of product */
                 $categories = [];
-                foreach($item->getProduct()->getCategoryIds() as $categoryId){
+                foreach ($item->getProduct()->getCategoryIds() as $categoryId) {
                     array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
                 }
 
@@ -189,15 +195,14 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 /** Get Rules of product */
                 $rules = $this->getRules($item->getProduct()->getId());
                 $dataRule = [];
-                if($rules){
-                    foreach ($rules as $rule){
+                if ($rules) {
+                    foreach ($rules as $rule) {
                         $dataRule[] = $rule;
                     }
                 }
-                $dataRule = implode( ', ', $dataRule);
+                $dataRule = implode(', ', $dataRule);
 
                 $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
-
                 $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
                 $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
                 //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
@@ -205,8 +210,8 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 $options = $this->attributerepository->get('manufacturer')->getOptions();
 
                 $brand = '';
-                foreach($options as $options_value){
-                    if($options_value->getValue() == $item->getProduct()->getData('manufacturer')){
+                foreach ($options as $options_value) {
+                    if ($options_value->getValue() == $item->getProduct()->getData('manufacturer')) {
                         $brand = $options_value->getLabel();
                     }
                 }
@@ -219,14 +224,14 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                     'name' => $item->getName(),
                     'sku' => $item->getSku(),
                     'price' => $item->getBasePrice(),
-                    'category'  => $category,
+                    'category' => $category,
                     'sub_categoria' => $subcategory,
                     'familia' => $family,
-                    'genero'    => $gender,
-                    'tamano'    => $size,
+                    'genero' => $gender,
+                    'tamano' => $size,
                     'quantity' => $item->getQtyOrdered(),
                     'promotion' => $dataRule,
-                    'brand'     => $brand,
+                    'brand' => $brand,
                     'productURL' => $item->getProduct()->getProductUrl(),
                     'imageURL' => $imageUrl
 
@@ -269,7 +274,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
         $promos = [];
 
-        foreach ($rules as $rule){
+        foreach ($rules as $rule) {
             $promo = $this->catalogRuleRepository->get($rule['rule_id']);
             array_push($promos, $promo->getName());
         }
@@ -281,14 +286,14 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
      * Retries current product to send via gtag
      * @return Product|null
      */
-    public function getProductBlock(): ? Product
+    public function getProductBlock(): ?Product
     {
         return $this->_catalogHelper->getProduct();
     }
 
     /**
      * @return array
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getCategoryName(): array
     {
@@ -296,12 +301,12 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
         $product = $this->getProductBlock();
         $categories = [];
 
-        if (empty($product)){
+        if (empty($product)) {
 
             return $categories;
         }
 
-        foreach($product->getCategoryIds() as $categoryId){
+        foreach ($product->getCategoryIds() as $categoryId) {
 
             $categories[] = $this->_categoryRepository->get($categoryId)->getName();
         }
@@ -310,7 +315,7 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
 
     /**
      * @return string|null
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getCurrencyCode(): ?string
     {
