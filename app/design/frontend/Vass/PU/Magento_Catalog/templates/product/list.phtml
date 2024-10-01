@@ -54,7 +54,7 @@ $_helper = $block->getData('outputHelper');
         <div class="products list items product-items">
             <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
             <?php foreach ($_productCollection as $_product): ?>
-                <div class="item product product-item swiper-slide">
+                <div class="item product product-item">
                     <div class="product-item-info"
                         id="product-item-info_<?= /* @noEscape */ $_product->getId() ?>"
                         data-container="product-<?= /* @noEscape */ $viewMode ?>"
