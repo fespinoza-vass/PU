@@ -9,8 +9,6 @@
 
 & when (@media-common = true) {
     .products-slider {
-        padding-top: @indent__l;
-
         .products-slider__wrapper {
             padding-bottom: 28px;
 
@@ -24,6 +22,10 @@
             .swiper-pagination {
                 bottom: 0;
             }
+        }
+
+        &.products-related-slider {
+            padding-top: @indent__l;
         }
 
         p {
