@@ -21,7 +21,7 @@ $urls = $block->getUrl();
 ?>
 
 <div class="card-slider__wrapper">
-    <div class="card-slider swiper">
+    <div id="card-slider" class="card-slider swiper">
         <div class="swiper-wrapper slider">
             <?php if (!empty($images) && is_array($images)): ?>
                 <?php foreach ($images as $index => $image): ?>
@@ -61,9 +61,9 @@ $urls = $block->getUrl();
 
 <script type="text/x-magento-init">
     {
-        ".card-slider.swiper": {
+        "#card-slider": {
             "cardsSlider": {
-                "slidesInMobile": "<?= $escaper->escapeJs($block->getSlidesToShowMobile()) ?>",
+                "slidesInMobile": "<?= $escaper->escapeJs($block->getSlidesToShowInMobile()) ?>",
                 "slidesInDesktop": "<?= $escaper->escapeJs($block->getSlidesToShowInDesktop()) ?>",
                 "slidesInTablet": "<?= $escaper->escapeJs($block->getSlidesToShowInTablet()) ?>"
             }
