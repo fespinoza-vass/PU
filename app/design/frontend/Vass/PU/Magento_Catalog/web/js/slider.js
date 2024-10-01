@@ -12,7 +12,6 @@ define([
 
     return function (config, element){
         $(document).ready(function () {
-            console.log(`#${element.id}-next`)
             let slidesInDesktop = config.slidesInDesktop,
                 slidesInTablet = config.slidesInTablet,
                 slidesInMobile = config.slidesInMobile,
@@ -22,7 +21,7 @@ define([
                     spaceBetween: 16,
                     loop: true,
                     autoplay: {
-                        delay: 100,
+                        delay: 3000,
                         disableOnInteraction: false,
                     },
                     navigation: {

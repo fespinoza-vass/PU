@@ -20,6 +20,7 @@ use Magento\Framework\Escaper;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Magento\Wishlist\Helper\Data;
 use Vass\ProductSliderWidget\Helper\PreparePostData;
+use Magento\ConfigurableProduct\Block\Product\View\Type\Configurable;
 
 switch ($type = $block->getType()) {
 
@@ -30,7 +31,7 @@ switch ($type = $block->getType()) {
             $class = $type;
 
             $image = 'related_products_list';
-            $title = __('Related Products');
+            $title = __('Other customers also bought');
             $items = $block->getAllItems();
             $limit = $block->getPositionLimit();
             $shuffle = (int)$block->isShuffled();
@@ -52,7 +53,7 @@ switch ($type = $block->getType()) {
             $class = $type;
 
             $image = 'related_products_list';
-            $title = __('Related Products');
+            $title = __('Other customers also bought');
             $items = $block->getItems();
             $limit = 0;
             $shuffle = 0;
@@ -65,50 +66,6 @@ switch ($type = $block->getType()) {
             $description = false;
         }
         break;
-
-    case 'upsell-rule':
-        if ($exist = $block->hasItems()) {
-            $type = 'upsell';
-            $mode = 'grid';
-            $class = $type;
-
-            $image = 'upsell_products_list';
-            $title = __('We found other products you might like!');
-            $items = $block->getAllItems();
-            $limit = $block->getPositionLimit();
-            $shuffle = (int)$block->isShuffled();
-            $isWeightedRandom = (int)$block->getRotation()->isWeightedRandom($block->getProductListType());
-
-            $showAddTo = false;
-            $showCart = false;
-            $templateType = null;
-            $description = false;
-            $canItemsAddToCart = false;
-        }
-        break;
-
-    case 'upsell':
-        /** @var Upsell $block */
-        if ($exist = count($block->getItemCollection()->getItems())) {
-            $type = 'upsell';
-            $mode = 'grid';
-            $class = $type;
-
-            $image = 'upsell_products_list';
-            $title = __('We found other products you might like!');
-            $items = $block->getItemCollection()->getItems();
-            $limit = $block->getItemLimit('upsell');
-            $shuffle = 0;
-            $isWeightedRandom = 0;
-
-            $showAddTo = false;
-            $showCart = false;
-            $templateType = null;
-            $description = false;
-            $canItemsAddToCart = false;
-        }
-        break;
-
     case 'crosssell-rule':
         /** @var Crosssell $block */
         if ($exist = $block->hasItems()) {
@@ -184,10 +141,6 @@ $_item = null;
         <?php endif ?>
 
         <div class="products-slider__content">
-            <div class="swiper-button-prev" id="<?= /** @noEscape */$idSwiper ?>-prev">
-                <span class="icon icon-pointer-left"></span>
-            </div>
-
             <div id="<?= /** @noEscape */$idSwiper ?>" class="products-slider__wrapper swiper">
                 <div class="product-items swiper-wrapper <?= /** @noEscape */$mode ?>">
                     <?php foreach ($items as $_item): ?>
@@ -281,10 +234,6 @@ $_item = null;
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-
-            <div class="swiper-button-next" id="<?= /** @noEscape */$idSwiper ?>-next">
-                <span class="icon icon-pointer-right"></span>
-            </div>
         </div>
     </div>
 
@@ -306,7 +255,7 @@ $_item = null;
                 "Magento_Catalog/js/slider": {
                     "slidesInDesktop": "3",
                     "slidesInTablet": "2",
-                    "slidesInMobile": "1"
+                    "slidesInMobile": "2"
                 }
             }
         }
