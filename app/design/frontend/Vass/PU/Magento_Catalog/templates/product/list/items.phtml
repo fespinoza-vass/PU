@@ -141,6 +141,10 @@ $_item = null;
         <?php endif ?>
 
         <div class="products-slider__content">
+            <div class="swiper-button-prev" id="<?= /** @noEscape */$idSwiper ?>-prev">
+                <span class="icon icon-pointer-left"></span>
+            </div>
+
             <div id="<?= /** @noEscape */$idSwiper ?>" class="products-slider__wrapper swiper">
                 <div class="product-items swiper-wrapper <?= /** @noEscape */$mode ?>">
                     <?php foreach ($items as $_item): ?>
@@ -233,6 +237,10 @@ $_item = null;
                     <?php endforeach; ?>
                 </div>
                 <div class="swiper-pagination"></div>
+            </div>
+
+            <div class="swiper-button-next" id="<?= /** @noEscape */$idSwiper ?>-next">
+                <span class="icon icon-pointer-right"></span>
             </div>
         </div>
     </div>
