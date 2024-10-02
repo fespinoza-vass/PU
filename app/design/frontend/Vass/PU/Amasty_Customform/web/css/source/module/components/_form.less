@@ -1,0 +1,175 @@
+//
+//  Form
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amform-form {
+        margin: 0 auto @amcform__indent;
+        max-width: @amcform-form__width;
+    }
+
+    .amform-form-fieldset.fieldset {
+        margin-bottom: @amcform__indent;
+    }
+
+    .amform-form .fb-number .control {
+        max-width: 200px;
+    }
+
+    .amform-groupv2 {
+        display: inline-block;
+    }
+
+    .amcform-gdpr {
+        & {
+            display: none;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        //  WCAG compatibility
+        a {
+            text-decoration: underline;
+        }
+
+        .amform-form & > .label > .amform-checkbox {
+            display: inline-block;
+            opacity: 1;
+        }
+    }
+
+    .amform-versiontwo-label {
+        display: inline;
+        margin-right: @amcform__indent;
+        padding-right: @amcform__indent * 2;
+        word-break: break-all;
+    }
+
+    .amform-form .amform-hide-formload,
+    .amform-form .amform-hide-formload.action.primary {
+        display: none;
+    }
+
+    .amform-form .action.primary,
+    .amform-parent .action.primary {
+        & {
+            background: @color-blue2;
+            min-width: 120px;
+            padding: 9px;
+        }
+
+        &:hover {
+            background: @amcform-button__hover__background;
+        }
+
+        &:disabled {
+            background: @amcform-button__disable__background;
+        }
+    }
+
+    .amcform-toolbar {
+        text-align: right;
+    }
+
+    .amcform-toolbar > div {
+        display: inline-block;
+    }
+
+    .amform-form:not(.default) .amform-checkbox,
+    .amform-form:not(.default) .amform-radio,
+    .amform-form:not(.default) .amform-checkboxtwo,
+    .amform-form:not(.default) .amform-radiotwo {
+        & {
+            display: block;
+            opacity: 0;
+        }
+
+        & + label {
+            line-height: 16px;
+            padding-left: 26px;
+            position: relative;
+        }
+
+        & + label:before {
+            border: 1px solid @amcform-pager__border-color;
+            border-radius: 1px;
+            box-sizing: border-box;
+            content: '';
+            display: block;
+            height: 16px;
+            left: 0;
+            margin-right: 10px;
+            position: absolute;
+            top: 2px;
+            width: 16px;
+        }
+
+        &:checked + label:before {
+            background: @amcform-button__background;
+            border-color: @amcform-button__background;
+        }
+    }
+
+    .amform-form:not(.default) .amform-checkbox:checked + label:after,
+    .amform-form:not(.default) .amform-checkboxtwo:checked + label:after {
+        border-bottom: 2px solid @color-white;
+        border-right: 2px solid @color-white;
+        content: '';
+        height: 9px;
+        left: 5px;
+        position: absolute;
+        top: 3px;
+        transform: rotate(45deg);
+        width: 4px;
+    }
+
+    .amform-form:not(.default) .amform-radio + label:before,
+    .amform-form:not(.default) .amform-radiotwo + label:before {
+        border-radius: 50%;
+    }
+
+    .amform-form:not(.default) .amform-radio:checked + label:before,
+    .amform-form:not(.default) .amform-radiotwo:checked + label:before {
+        background: @color-white;
+        border-width: 4px;
+    }
+
+    .amform-form:not(.default) .kc-toggle {
+        & {
+            background: @amcform-pager__border-color;
+            border: 0;
+            border-radius: 20px;
+            height: 16px;
+            margin: 0 4px 0 0;
+            width: 26px;
+        }
+
+        &.on {
+            background: @amcform-button__background;
+        }
+    }
+
+    .amform-form:not(.default) .kc-toggle .kct-inner {
+        background: @color-white;
+        border: 0;
+        border-radius: 12px;
+        height: 12px;
+        left: 2px;
+        top: 2px;
+        width: 12px;
+    }
+
+    .amform-form:not(.default) .kc-toggle.on .kct-inner {
+        left: 12px;
+    }
+
+    .amform-form:not(.default) .kct-on,
+    .amform-form:not(.default) .kct-off,
+    .amform-form:not(.default) .kct-handle {
+        display: none;
+    }
+}
