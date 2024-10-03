@@ -1,8 +1,7 @@
 <?php
 /**
- * @copyright Copyright (c) 2024 VASS
- * @package Vass_Magento_LayeredNavigation
- * @author VASS Team
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 
 // @codingStandardsIgnoreFile
@@ -12,8 +11,7 @@
  * Category layered navigation state
  *
  * @var $block \Magento\LayeredNavigation\Block\Navigation\State
- * @var \Magento\Framework\Escaper $escaper
- * */
+ */
 ?>
 <?php $_filters = $block->getActiveFilters() ?>
 <?php if (!empty($_filters)): ?>
@@ -30,21 +28,21 @@
                 <span class="filter-value"><?= $block->escapeHtml($block->stripTags($_filter->getLabel())) ?></span>
                 <?php
                 $clearLinkUrl = $_filter->getClearLinkUrl();
-                $currentFilterName = $block->escapeHtml(__($_filter->getName()) . " " . $block->stripTags($_filter->getLabel()));
+                $currentFilterName = $block->escapeHtmlAttr(__($_filter->getName()) . " " . $block->stripTags($_filter->getLabel()));
                 if ($clearLinkUrl):
                     ?>
                     <a class="action previous" href="<?= $block->escapeUrl($_filter->getRemoveUrl()) ?>"
-                       title="<?= $block->escapeHtml(__('Previous')) ?>">
+                       title="<?= $block->escapeHtmlAttr(__('Previous')) ?>">
                         <span><?= $block->escapeHtml(__('Previous')) ?></span>
                     </a>
                     <a class="action remove"
-                       title="<?= $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?>"
-                       href="<?= $block->escapeHtml($clearLinkUrl) ?>">
+                       title="<?= $block->escapeHtmlAttr($_filter->getFilter()->getClearLinkText()) ?>"
+                       href="<?= $block->escapeUrl($clearLinkUrl) ?>">
                         <span><?= $block->escapeHtml($_filter->getFilter()->getClearLinkText()) ?></span>
                     </a>
                 <?php else: ?>
-                    <a class="action remove" href="<?= $block->escapeHtml($_filter->getRemoveUrl()) ?>"
-                       title="<?= /* @noEscape */ $block->escapeHtml(__('Remove')) . " " . $currentFilterName ?>">
+                    <a class="action remove" href="<?= $block->escapeUrl($_filter->getRemoveUrl()) ?>"
+                       title="<?= /* @noEscape */ $block->escapeHtmlAttr(__('Remove')) . " " . $currentFilterName ?>">
                         <span><?= $block->escapeHtml(__('Remove This Item')) ?></span>
                     </a>
                 <?php endif; ?>
