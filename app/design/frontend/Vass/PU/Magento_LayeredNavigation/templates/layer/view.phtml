@@ -1,8 +1,7 @@
 <?php
 /**
- * @copyright Copyright (c) 2024 VASS
- * @package Vass_Magento_LayeredNavigation
- * @author VASS Team
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
 ?>
 <?php
@@ -10,7 +9,6 @@
  * Category layered navigation
  *
  * @var $block \Magento\LayeredNavigation\Block\Navigation
- * @var \Magento\Framework\Escaper $escaper
  */
 ?>
 
@@ -31,15 +29,17 @@
     }'>
         <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
         <div class="block-title filter-title" data-count="<?= /* @noEscape */ $filtered ?>">
-            <strong data-role="title"><?= $block->escapeHtml(__('Filter')); ?></strong>
+            <strong data-role="title"><?= $block->escapeHtml(__('Filter')); ?>
+                <span class="filter-title-icon"></span>
+            </strong>
         </div>
         <div class="block-content filter-content">
             <?= $block->getChildHtml('state') ?>
 
             <?php if ($block->getLayer()->getState()->getFilters()) : ?>
                 <div class="block-actions filter-actions">
-                    <a href="<?= $block->escapeHtml($block->getClearUrl()) ?>" class="action clear filter-clear">
-                        <span><?= $block->escapeHtml(__('Clear Filters')) ?></span>
+                    <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>" class="action clear filter-clear">
+                        <span><?= $block->escapeHtml(__('Clear filters')) ?></span>
                     </a>
                 </div>
             <?php endif; ?>
@@ -47,7 +47,7 @@
             <?php foreach ($block->getFilters() as $filter) : ?>
                 <?php if ($filter->getItemsCount()) : ?>
                     <?php if (!$wrapOptions) : ?>
-                        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Filter')) ?></strong>
+                        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Shopping Options')) ?></strong>
                         <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='
                         {
                             "accordion":
