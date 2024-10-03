@@ -54,6 +54,7 @@
         <referenceBlock name="footer_links" remove="true"/>
         <referenceBlock name="report.bugs" remove="true"/>
         <referenceBlock name="copyright" remove="true"/>
+        <referenceBlock name="div.sidebar.additional" remove="true" />
 
         <move element="amasty.menu.toggle" destination="header-logo-search" before="-"/>
         <move element="ammenu.logo" destination="header-logo-search" after="amasty.menu.toggle"/>
