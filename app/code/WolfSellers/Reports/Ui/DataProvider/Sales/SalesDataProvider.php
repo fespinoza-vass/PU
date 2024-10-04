@@ -45,7 +45,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         parent::_initSelect();
         $this->getSelect()->joinLeft(
             "sales_order_item",
-            "sales_order_item.order_id=main_table.entity_id",
+            "sales_order_item.order_id=main_table.entity_id AND sales_order_item.parent_item_id is NULL",
             [
                 "sales_order_item.item_id",
                 "sales_order_item.sku",
@@ -63,11 +63,12 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
 
 
         $this->getSelect()->columns(new \Zend_Db_Expr("( sales_order_item.original_price - sales_order_item.price) as discount_product"));
-        $this->getSelect()->columns(new \Zend_Db_Expr("DATE_SUB(sales_order_item.created_at, INTERVAL 5 hour ) as purchase_date"));
+//        $this->getSelect()->columns(new \Zend_Db_Expr("DATE_SUB(sales_order_item.created_at, INTERVAL 5 hour ) as purchase_date"));
+        $this->getSelect()->columns(new \Zend_Db_Expr("sales_order_item.created_at  as purchase_date"));
 
         $this->getSelect()->joinLeft(
             "catalog_product_entity",
-            "catalog_product_entity.sku=sales_order_item.sku AND catalog_product_entity.entity_id=sales_order_item.product_id"
+            "catalog_product_entity.sku=sales_order_item.sku"
         );
 
 
@@ -150,12 +151,16 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         );
 
         $this->getSelect()->joinLeft(
-            "customer_address_entity_varchar",
-            "customer_address_entity_varchar.entity_id=sales_order_address.customer_address_id AND customer_address_entity_varchar.attribute_id = 700",
+            new \Zend_Db_Expr("(
+                SELECT postcode, MIN(localidad) as localidad
+                FROM wolfsellers_zipcode
+                GROUP BY postcode
+            )"),
+            "t.postcode = sales_order_address.postcode",
             [
-                "value as city"
+                "t.localidad as city"
             ]
-        );
+            );
 
         $this->getSelect()->joinLeft(
             "sales_order_payment",
@@ -179,10 +184,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
                 "IFNULL(sales_order.ubigeo_estimated_delivery,main_table.shipping_information) as urbano_information",
             ]
         );
-
-
-        $this->getSelect()->where("sales_order_item.product_type = 'simple'");
-
+             
         $this->addFilterToMap('purchase_date', 'sales_order_item.created_at');
 
         return $this;
