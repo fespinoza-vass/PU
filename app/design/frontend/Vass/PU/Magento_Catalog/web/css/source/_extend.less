@@ -8,6 +8,19 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
+
+    .catalog-category-view {
+        .product-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: @indent__m @indent__base;
+    
+            .product-item {
+                width: 100%;
+            }
+        }
+    }
+
     .products-slider {
         padding: @indent__l @indent__base;
 
@@ -45,6 +58,7 @@
 
         .product-item {
             background-color: @primary-white;
+            position: relative;
         }
 
         .product-item-details {
@@ -187,6 +201,14 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    .catalog-category-view {
+        .product-items {
+            grid-template-columns: repeat(3, 1fr);
+            gap: @indent__m;
+        }
+    }
+
     .product-items {
         .price-box {
             flex-direction: row-reverse;
@@ -330,7 +352,7 @@
             flex-direction: row-reverse;
             justify-content: center;
             align-items: center;
-            margin-top: 16px;
+            margin-top: @indent__base;
             font-family: @font-family__base;
 
             &:before {
