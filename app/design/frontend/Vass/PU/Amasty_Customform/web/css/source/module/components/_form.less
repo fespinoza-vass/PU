@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2024 VASS
  * @author VASS Team
  */
- 
+
 //
 //  Form
 //  _____________________________________
@@ -96,13 +96,18 @@
                 align-items: center;
                 flex-wrap: wrap;
                 gap: @indent__base;
+                position: relative;
 
-                &.cbform-checkbox {
+                .cbform-checkbox {
                     flex: 1;
+                    padding: 0;
+                    margin: 0;
+                }
 
-                    input {
-                        margin: 0;
-                    }
+                .control > .mage-error {
+                    position: absolute;
+                    bottom: 20px;
+                    width: max-content;
                 }
             }
 
