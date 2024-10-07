@@ -31,8 +31,8 @@ $postfix = uniqid();
                         "clearUrl": "<?= $escaper->escapeUrl($block->getClearUrl()) ?>",
                         "buttonPosition": "<?= $escaper->escapeHtml($block->getButtonPosition()) ?>"
                     }}'
-                    title="<?= $escaper->escapeHtmlAttr(__('Apply Filters')) ?>"
-                    aria-label="<?= $escaper->escapeHtmlAttr(__('Apply Filters')) ?>"
+                    title="<?= $escaper->escapeHtml(__('Apply Filters')) ?>"
+                    aria-label="<?= $escaper->escapeHtml(__('Apply Filters')) ?>"
                     class="action-primary">
                 <?= $escaper->escapeHtml( __('Apply Filters')) ?>
             </button>

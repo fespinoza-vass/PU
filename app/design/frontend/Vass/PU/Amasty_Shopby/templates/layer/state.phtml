@@ -4,14 +4,9 @@
  * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
  * @package Improved Layered Navigation Base for Magento 2
  */
-
-use Amasty\Shopby\Block\Navigation\State;
-use Magento\Catalog\Model\Layer\Filter\Item;
-use Magento\Framework\Escaper;
-
 /**
- * @var State $block
- * @var Escaper $escaper
+ * @var \Amasty\Shopby\Block\Navigation\State $block
+ * @var \Magento\Framework\Escaper $escaper
  */
 
 $filters = $block->getActiveFilters();
@@ -27,27 +22,24 @@ $value = [];
               role="heading"
               aria-level="2"
               data-role="title"
-              data-count="<?= /* @noEscape */
-              count($filters) ?>">
+              data-count="<?= /* @noEscape */ count($filters) ?>">
             <?= $escaper->escapeHtml(__('Filters Applied')) ?>
         </span>
-        <ol class="amshopby-items   items">
+        <ol class="amshopby-items items">
             <?php foreach ($filters as $filter): ?>
                 <?php
-                /** @var Item $filter */
-                $filterSetting = $block->getFilterSetting($filter->getFilter());
-                $value = $value ?: $filter->getValue();
-                $resultValue = $block->getFilterValue($value, $filter);
-                $clearLinkUrl = $filter->getClearLinkUrl();
-                $currentFilterName = __('Remove') . " state.phtml" . __($filter->getName())
-                    . " " . $block->stripTags($filter->getLabel());
+                    /** @var \Magento\Catalog\Model\Layer\Filter\Item $filter */
+                    $filterSetting = $block->getFilterSetting($filter->getFilter());
+                    $value = $value ?: $filter->getValue();
+                    $resultValue = $block->getFilterValue($value, $filter);
+                    $clearLinkUrl = $filter->getClearLinkUrl();
+                    $currentFilterName = __('Remove') . " " . __($filter->getName())
+                        . " " . $block->stripTags($filter->getLabel());
                 ?>
                 <li class="item amshopby-item"
                     data-am-js="shopby-item"
-                    data-container="<?= /* @noEscape */
-                    $filter->getFilter()->getRequestVar() ?>"
-                    data-value="<?= /* @noEscape */
-                    $block->getDataValue($resultValue) ?>">
+                    data-container="<?= /* @noEscape */ $filter->getFilter()->getRequestVar() ?>"
+                    data-value="<?= /* @noEscape */ $block->getDataValue($resultValue) ?>">
                     <?php if ($clearLinkUrl): ?>
                         <a class="action previous"
                            href="<?= $escaper->escapeUrl($filter->getRemoveUrl()) ?>"
@@ -70,8 +62,7 @@ $value = [];
                         <?= $escaper->escapeHtml(__($filter->getName())) ?>
                     </span>
                     <div class="amshopby-filter-value">
-                        <?= /* @noEscape */
-                        $block->viewLabel($filter) ?>
+                        <?= /* @noEscape */ $block->viewLabel($filter) ?>
                     </div>
                 </li>
 
@@ -79,8 +70,7 @@ $value = [];
             <?php endforeach; ?>
             <li class="amshopby-button-wrap">
                 <?php if ($block->getUnfoldedCount() && $block->getUnfoldedCount() < count($filters)): ?>
-                    <?= /* @noEscape */
-                    $block->createShowMoreButtonBlock() ?>
+                    <?= /* @noEscape */ $block->createShowMoreButtonBlock() ?>
                 <?php endif; ?>
             </li>
         </ol>
@@ -89,12 +79,11 @@ $value = [];
             {
                 "[data-am-js='shopby-container']": {
                     "amShopbyFilterContainer": {
-                            "collectFilters": <?= /* @noEscape */
-            $block->collectFilters() ?>,
+                            "collectFilters": <?= /* @noEscape */ $block->collectFilters() ?>,
                             "numberOfUnfoldedOptions": <?= $escaper->escapeHtml($block->getUnfoldedCount()) ?>
+                       }
+                }
             }
-     }
- }
         </script>
     </div>
 <?php endif; ?>
