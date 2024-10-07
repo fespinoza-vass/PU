@@ -124,7 +124,8 @@ define([
                 if (oneColumn) {
                     oneColumnWrapper.length ?
                         posTop = oneColumnWrapper.offset().top - buttonHeight - marginHeight :
-                        console.warn('Improved Layered Navigation: You do not have default selector for filters in one-column design.');
+                        console.warn('Improved Layered Navigation: You do not have default selector' +
+                            'for filters in one-column design.');
                 } else {
                     posTop = topFiltersWrapper.offset().top - buttonHeight - marginHeight;
                 }
@@ -214,54 +215,6 @@ define([
                 "visibility": "visible",
                 "display": "block"
             });
-
-            //temporary fix for apply button on 1column
-            // if (leftPosition.length) {
-            //     self.changePositionOnScroll(top, left, leftPosition);
-            // }
-        },
-
-        changePositionOnScroll: function (buttonTop, buttonLeft, leftPosition) {
-            console.log("hey");
-            // var self = this,
-            //     windowHeight = $(window).height(),
-            //     buttonContainer = $(self.showButtonContainer),
-            //     buttonContainerHeight = buttonContainer.outerHeight(),
-            //     filterLeft = leftPosition.length ? leftPosition.offset().left : buttonTop,
-            //     filterWidth = leftPosition.length ? leftPosition.width() : windowHeight;
-            //
-            // $(window).off(self.scrollEvent).on(self.scrollEvent, function () {
-            //     var scrollTop = $(window).scrollTop(),
-            //         scrollBottom = scrollTop + windowHeight;
-            //
-            //     if ((scrollBottom - buttonTop) <= buttonContainerHeight) {
-            //         buttonContainer
-            //             .addClass('')
-            //             .css({
-            //                 'top': windowHeight - buttonContainerHeight,
-            //                 'left': filterLeft,
-            //                 'width': filterWidth
-            //             });
-            //     } else if (buttonTop - scrollTop <= 0) {
-            //         buttonContainer
-            //             .addClass('')
-            //             .css({
-            //                 'top': '5px',
-            //                 'left': filterLeft,
-            //                 'width': filterWidth
-            //             });
-            //     } else if (buttonContainer.hasClass('')) {
-            //         buttonContainer
-            //             .css({
-            //                 'top': buttonTop,
-            //                 'left': buttonLeft,
-            //                 'width': 'inherit'
-            //             })
-            //             .removeClass('-fixed');
-            //     }
-            // });
-            //
-            // $(window).trigger(self.scrollEvent);
         },
 
         removeShowButton: function () {
