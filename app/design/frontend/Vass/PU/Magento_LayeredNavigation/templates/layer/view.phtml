@@ -1,7 +1,8 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_Magento_LayeredNavigation
+ * @author VASS Team
  */
 ?>
 <?php
@@ -9,6 +10,7 @@
  * Category layered navigation
  *
  * @var $block \Magento\LayeredNavigation\Block\Navigation
+ * @var \Magento\Framework\Escaper $escaper
  */
 ?>
 
@@ -38,8 +40,8 @@
 
             <?php if ($block->getLayer()->getState()->getFilters()) : ?>
                 <div class="block-actions filter-actions">
-                    <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>" class="action clear filter-clear">
-                        <span><?= $block->escapeHtml(__('Clear filters')) ?></span>
+                    <a href="<?= $block->escapeHtml($block->getClearUrl()) ?>" class="action clear filter-clear">
+                        <span><?= $block->escapeHtml(__('Clear Filters')) ?></span>
                     </a>
                 </div>
             <?php endif; ?>
