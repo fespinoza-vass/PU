@@ -1,3 +1,8 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+ 
 //
 //  Form
 //  _____________________________________
@@ -22,7 +27,7 @@
                 padding-top: @indent__l;
                 background-color: @tertiary-white;
 
-                .amform-title {
+                .cbform-title {
                     .lib-font-size(20);
                     font-weight: @font-weight__bold;
                     color: @primary-white;
@@ -53,18 +58,20 @@
                 }
             }
 
-            .amform-textarea {
+            .cbform-textarea {
                 height: 136px;
                 margin-top: @indent__base;
             }
 
-            .fb-label-checkbox {
+            .cb-label-checkbox {
                 & > p {
                     margin: 0;
                 }
             }
 
             &.fb-radio {
+                margin-bottom: @indent__m;
+
                 .label {
                     margin-bottom: @indent__base;
                 }
@@ -78,52 +85,66 @@
                         align-items: center;
                         gap: @indent__s;
 
-                        .amform-radiotwo {
+                        .cbform-radiotwo {
                             margin: 0;
                         }
                     }
                 }
             }
 
-            &:has(.fb-label-checkbox) {
-                max-width: 90%;
-                padding-right: 0;
-                padding-left: 12px;
-                margin: 0;
-                margin-top: 16px;
+            &:has(.cbform-checkbox) {
+                align-items: center;
+                flex-wrap: wrap;
+                gap: @indent__base;
+
+                &.cbform-checkbox {
+                    flex: 1;
+
+                    input {
+                        margin: 0;
+                    }
+                }
             }
 
-            &:has(.amform-section-title) {
+            &:has(.cb-label-checkbox) {
+                flex: 1;
+                padding-right: @indent__base;
+                padding-left: 12px;
+                margin: 0;
+                margin-top: @indent__base;
+            }
+
+            &:has(.cbform-section-title) {
                 .lib-font-size(@font-size__l);
                 font-weight: @font-weight__bold;
                 margin-bottom: 6px;
             }
 
-            &:has(.amform-section-subtitle) {
+            &:has(.cbform-section-subtitle) {
                 .lib-font-size(14);
                 margin-bottom: @indent__base;
                 color: @primary-black;
             }
 
 
-            .amform-info {
+            &:has(.cbform-info) {
                 font-weight: @font-weight__heavier;
                 color: @primary-black;
                 margin-top: @indent__m;
             }
 
-            &:has(.amcform-last-field) {
+            &:has(.cbform-last-field) {
                 margin-bottom: @indent__l;
             }
 
-            &:has(.amform-title) {
+            &:has(.cbform-title) {
                 margin-bottom: @indent__l;
             }
 
             .control {
                 position: relative;
 
-                &:has(.amform-date) {
+                &:has(.cbform-date) {
                     &::after {
                         .lib-font-size(@font-size__l);
                         position: absolute;
@@ -136,7 +157,7 @@
                     }
                 }
 
-                .amform-date {
+                .cbform-date {
                     .lib-form-element-input(@_type: input-text);
                 }
 
@@ -150,7 +171,6 @@
                     margin-right: 0;
                 }
             }
-
         }
 
         .amcform-toolbar {
@@ -169,49 +189,46 @@
 //  -------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-
     .amform-layout-two {
         max-width: 50%;
         margin-right: 2%;
     }
 
     .amform-form {
-        .amform-textarea {
-            margin-top: 8px;
-        }
+        max-width: 792px;
+        margin: 0 auto;
 
         .field {
             padding: 0 @indent__l;
             margin-bottom: @indent__m;
 
-            &.fb-checkbox {
-                padding-left: @indent__l;
-            }
-
-            &:has(.amform-field-right) {
+            &:has(.cbform-field-right) {
                 padding-left: 8px;
                 padding-right: @indent__l;
             }
 
-            &:has(.amform-field-left) {
+            &:has(.cbform-field-left) {
                 padding-left: @indent__l;
                 padding-right: 8px;
             }
 
+            &:has(.cb-label-checkbox) {
+                max-width: 55%;
+                margin: 0;
+                padding-left: @indent__base;
+            }
+
+            &:has(.cbform-checkbox) {
+                padding-left: @indent__l;
+                margin: 0;
+            }
+
             .control {
-                &:has(.amcform-firstdate) {
+                &:has(.cbform-firstdate) {
                     max-width: 49%;
                 }
             }
 
-            &:has(.fb-label-checkbox) {
-                max-width: 50%;
-                margin: 0;
-            }
-
-            &.fb-checkbox {
-                margin: 0;
-            }
         }
 
         .amcform-toolbar {
