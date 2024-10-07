@@ -8,7 +8,7 @@
 /** @var \Magento\Wishlist\Block\Customer\Wishlist $block */
 ?>
 
-<div class="form-wishlist-container">
+<div class="form-wishlist-container <?php if (!$block->hasWishlistItems()) : ?> empty <?php endif ?>">
     <?php if ($this->helper(\Magento\Wishlist\Helper\Data::class)->isAllow()) : ?>
         <?= ($block->getChildHtml('wishlist.rss.link')) ?>
         <form class="form-wishlist-items" id="wishlist-view-form"
@@ -26,7 +26,13 @@
                 <?php $block->getChildBlock('items')->setItems($block->getWishlistItems()); ?>
                 <?= $block->getChildHtml('items') ?>
             <?php else : ?>
-                <div class="message info empty"><span><?= $block->escapeHtml(__('You have no items in your wish list.')) ?></span></div>
+                <div class="empty-wishlist">
+                    <div class="message info empty">
+                        <span>
+                            <?= $block->escapeHtml(__('You have no items in your wish list.')) ?>
+                        </span>
+                    </div>
+                </div>
             <?php endif ?>
             <?= $block->getChildHtml('bottom') ?>
             <div class="actions-toolbar">
