@@ -9,7 +9,7 @@ define([
 
     var options = {
         widgets: {
-            collapsible: '{"collapsible":{"openedState": "active", "collapsible": true, "active": true, '
+            collapsible: '{"collapsible":{"openedState": "active", "collapsible": true, "active": false, '
                 + '"collateral": { "openedState": "filter-active", "element": "body" } }}',
             accordion: '{"accordion":{"openedState": "active", "collapsible": true, "active": false, '
                 + '"multipleCollapsible": %1}}'
@@ -47,10 +47,10 @@ define([
                     $element = $(options.selectors.topNav + ' ' + blockClass).clone(),
                     $sidebar = $(options.selectors.sidebar).first();
 
-                //$(options.selectors.topFilterActions);
-                //$element.find(options.selectors.filterTitle);
-                $(options.selectors.topFilterActions).hide();
-                $element.find(options.selectors.filterTitle).css('display', 'none');
+                $(options.selectors.topFilterActions);
+                $element.find(options.selectors.filterTitle);
+                // $(options.selectors.topFilterActions).hide();
+                // $element.find(options.selectors.filterTitle).css('display', 'none');
                 $element
                     .addClass(options.classes.allTop)
                     .attr('data-mage-init', options.widgets.collapsible);
