@@ -1,24 +1,39 @@
-require(['jquery', 'domReady!'], function($) {
+require([
+    'jquery',
+    'mage/translate',
+    'domReady!'
+], function($, $t) {
     $(document).ready(function() {
-        var tipoDocumentoSelector = 'select[name="custom_attributes[identificacion_picker]"]';
-        var numeroIdentificacionInput = 'input[name="custom_attributes[numero_identificacion_picker]"]';
+        const OPTIONS = {
+            DNI: '868',
+            PASSPORT: '865'
+        }
 
-        // Añade un manejador de eventos para el cambio en el select
-        $(document).on('change', tipoDocumentoSelector, function() {
-            var selectedValue = $(this).val();
-            var $input = $(numeroIdentificacionInput);
+        let load = false;
+        let documentSelector = 'select[name="custom_attributes[identificacion_picker]"]';
+        let numberDocumentInput = 'input[name="custom_attributes[numero_identificacion_picker]"]';
 
-            // Limpia el campo de entrada y las validaciones y mensajes anteriores
-            $input.val(''); // Limpia el campo de entrada
+        // On change event handler for the select
+        $(document).on('change', documentSelector, function() {
+            let self = this;
+            let selectedValue = $(this).val();
+            let $input = $(numberDocumentInput);
+            let $select = $(documentSelector);
+
+            // clear the input field
+            $input.val('');
             $input.removeAttr('data-validate');
-            $input.off('keyup'); // Desvincula el evento de keyup
+            $input.off('keyup');
+            $input.parent().parent().addClass('_error');
+            $input.siblings('.field-error').remove();
+            if (!$input.siblings('.field-error').length) {
+                showValidationMessage($t('This is a required field.'));
+            }
 
-            // Elimina el mensaje de validación personalizado y el borde rojo
-            $input.siblings('.field-error').remove(); 
-            $input.css('border-color', ''); // Elimina el color de borde
-
-            if (selectedValue === '868') { // DNI
-                console.log('Configurando validación para DNI');
+            if (selectedValue === OPTIONS.DNI) {
+                $input.off('keyup');
+                $select.parent().parent().removeClass('_error');
+                $select.siblings('.field-error').remove();
                 $input.attr('data-validate', JSON.stringify({
                     'required-entry': true,
                     'validate-length': { min: 8, max: 8 },
@@ -26,26 +41,12 @@ require(['jquery', 'domReady!'], function($) {
                 }));
 
                 $input.on('keyup', function(event) {
-                    var value = $(this).val().replace(/\D/g, ''); // Elimina caracteres no numéricos
-                    $(this).val(value);
-                    
-                    // Validación de longitud para DNI
-                    if (!/^\d{8}$/.test(value)) {
-                        showValidationMessage('Por favor, ingrese 8 dígitos.');
-                        $(this).css('border-color', '#ed8380'); // Agrega el color de borde en error
-                    } else {
-                        // Elimina el mensaje de validación si es válido
-                        $input.siblings('.field-error').remove();
-                        $(this).css('border-color', ''); // Elimina el color de borde si es válido
-                    }
-
-                    // Elimina el mensaje de campo obligatorio cuando se escribe
-                    if (value.length > 0) {
-                        $input.siblings('.field-error').filter('.field-required').remove();
-                    }
+                    validateDNI(event, $(this));
                 });
-            } else if (selectedValue === '865') { // Pasaporte
-                console.log('Configurando validación para Pasaporte');
+            } else if (selectedValue === OPTIONS.PASSPORT) {
+                $input.off('keyup');
+                $select.parent().parent().removeClass('_error');
+                $select.siblings('.field-error').remove();
                 $input.attr('data-validate', JSON.stringify({
                     'required-entry': true,
                     'validate-length': { min: 6, max: 12 },
@@ -53,80 +54,85 @@ require(['jquery', 'domReady!'], function($) {
                 }));
 
                 $input.on('keyup', function(event) {
-                    var value = $(this).val().replace(/[^a-zA-Z0-9]/g, ''); // Elimina caracteres no alfanuméricos
-                    $(this).val(value);
-                    
-                    // Validación de longitud para Pasaporte
-                    if (!/^[a-zA-Z0-9]{6,12}$/.test(value)) {
-                        showValidationMessage('Por favor, ingrese entre 6 y 12 caracteres.');
-                        $(this).css('border-color', '#ed8380'); // Agrega el color de borde en error
-                    } else {
-                        // Elimina el mensaje de validación si es válido
-                        $input.siblings('.field-error').remove();
-                        $(this).css('border-color', ''); // Elimina el color de borde si es válido
-                    }
-
-                    // Elimina el mensaje de campo obligatorio cuando se escribe
-                    if (value.length > 0) {
-                        $input.siblings('.field-error').filter('.field-required').remove();
-                    }
+                    validatePassport(event, $(this));
                 });
             } else {
-                console.log('Configurando validación para otro tipo de documento o sin validación específica');
-                $input.off('keyup'); // Desvincula el evento de keyup
+                $select.val(OPTIONS.DNI);
+                $select.siblings('.field-error').remove();
+                $input.siblings('.field-error').remove();
+
+                setTimeout(function() {
+                    if (!$input.siblings('.field-error').length) {
+                        showValidationMessage($t('This is a required field.'));
+                        $input.parent().parent().addClass('_error');
+                        $input.focus();
+                    }
+                }, 1000);
+
+                $input.on('keyup', function(event) {
+                    validateDNI(event, $(this));
+                });
             }
-
-            // Limpia el error nativo y el mensaje personalizado cuando se cambia la opción en el select
-            $input.siblings('.field-error').remove(); // Elimina el mensaje de validación personalizado
-            $input.css('border-color', ''); // Elimina el color de borde
-            personalizeNativeErrorMessage($input);
-
-            // Llamada manualmente a la validación de Magento 2 para actualizar el estado
-            $input.trigger('change');
         });
 
-        function showValidationMessage(message) {
-            var $input = $(numeroIdentificacionInput);
-            // Elimina cualquier mensaje de validación previo
+        function showValidationMessage(message, input = true) {
+            let $input = null;
+            if (input) {
+                $input = $(numberDocumentInput);
+            } else {
+                $input = $(documentSelector);
+            }
+
+            let id = $input.attr('id');
             $input.siblings('.field-error').remove();
-            // Agrega el mensaje personalizado
-            $input.after('<div class="field-error">' + message + '</div>');
+            $input.after(`<div class="field-error" id="error-${id}">${message}</div>`);
         }
 
-        function personalizeNativeErrorMessage($input) {
-            // Selecciona el div del mensaje de error nativo basado en `data-bind` del input específico
-            var errorDiv = $input.siblings().filter(function() {
-                return $(this).attr('data-bind') && $(this).attr('data-bind').includes('element.errorId');
-            });
+        function validatePassport(event, input) {
+            let value = input.val().replace(/[^a-zA-Z0-9]/g, '');
+            input.val(value);
 
-            if (errorDiv.length) {
-                // Cambia el texto del mensaje de error
-                errorDiv.find('span').text(''); // Elimina el mensaje de error nativo
-                errorDiv.css('color', ''); // Elimina el color del mensaje de error nativo
+            if (!/^[a-zA-Z0-9]{6,12}$/.test(value)) {
+                showValidationMessage($t('Please enter between %1 and %2 symbols.')
+                    .replace('%1', 6).replace('%2', 12));
+                input.parent().parent().addClass('_error');
+            } else {
+                input.siblings('.field-error').remove();
+                input.parent().parent().removeClass('_error');
             }
         }
 
-        // Personalizar el mensaje de error nativo al perder el foco
-        $(document).on('blur', numeroIdentificacionInput, function() {
-            var $input = $(this);
-            // Selecciona el div del mensaje de error nativo basado en `data-bind` del input específico
-            var errorDiv = $input.siblings().filter(function() {
-                return $(this).attr('data-bind') && $(this).attr('data-bind').includes('element.errorId');
+        function validateDNI(event, input) {
+            let value = input.val().replace(/\D/g, '');
+            input.val(value);
+
+            // Validate length for DNI
+            if (!/^\d{8}$/.test(value)) {
+                showValidationMessage($t('Please enter less or equal than %1 symbols.').replace('%1', 8));
+                input.parent().parent().addClass('_error');
+            } else {
+                input.siblings('.field-error').remove();
+                input.parent().parent().removeClass('_error');
+            }
+        }
+
+        $(document).on('blur', numberDocumentInput, function() {
+            let $input = $(this);
+            let errorDiv = $input.siblings().filter(function() {
+                return $(this).attr('id') && $(this).attr('id').includes('error');
             });
 
             if (errorDiv.length) {
-                // Elimina el mensaje de error nativo
                 errorDiv.find('span').text('');
-                errorDiv.css('color', ''); // Elimina el color del mensaje de error nativo
+                $input.parent().parent().addClass('_error');
             }
 
-            // Mostrar mensaje de campo obligatorio si el campo está vacío
             if (!$input.val()) {
-                showValidationMessage('Este es un campo obligatorio.');
+                $input.parent().parent().addClass('_error');
+                showValidationMessage($t('This is a required field.'));
             }
         });
 
-        // Llamada inicial para establecer el estado correcto al cargar la página
-        $(tipoDocumentoSelector).trigger('change');
+        $(documentSelector).trigger('change');
     });
 });

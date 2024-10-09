@@ -35,7 +35,19 @@ var config = {
     config: {
         mixins: {
             'Magento_Checkout/js/view/billing-address': {
-                'Vass_Checkout/js/view/billing-address-mixin-update': true
+                'Vass_Checkout/js/view/billing-address-mixin': true
+            },
+            'Magento_Checkout/js/view/payment/default': {
+                'Vass_Checkout/js/view/payment/default-mixin': true
+            },
+            'Magento_Checkout/js/view/shipping-information/address-renderer/default': {
+                'Vass_Checkout/js/view/shipping-information/address-renderer/default-mixin': true
+            },
+            'Magento_Checkout/js/view/billing-address/list': {
+                'Vass_Checkout/js/view/billing-address/list-mixin': true
+            },
+            'Amasty_CheckoutCore/js/view/payment/method-renderer/default-mixin': {
+                'Vass_Checkout/js/view/payment/method-renderer/default-mixin': true
             }
         }
     }
