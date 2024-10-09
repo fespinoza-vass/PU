@@ -37,12 +37,54 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel);
     }
 
+    
+    /**
+     * @param mixed $field
+     * @param null $condition
+     * @return $this|Collection|\Magento\Framework\Data\Collection\AbstractDb
+     */
+    public function addFieldToFilter($field, $condition = null)
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $logger = $objectManager->create(\Psr\Log\LoggerInterface::class);
+
+        $logger->debug('Mensaje de depuración personalizado.');
+        $logger->debug((string) $field);
+        $logger->debug('cond', $condition);
+        
+        if ($field == 'purchase_date') {
+            if (isset($condition['gteq'])) {
+                $condition['gteq'] = $this->adjustDateTime($condition['gteq']);
+            }
+            if (isset($condition['lteq'])) {
+                $condition['lteq'] = $this->adjustDateTime($condition['lteq']);
+            }
+        }
+
+                $logger->debug('condd', $condition);
+
+
+        return parent::addFieldToFilter($field, $condition);
+    }
+
+    protected function adjustDateTime($dateTime)
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $logger = $objectManager->create(\Psr\Log\LoggerInterface::class);
+
+
+        $adjustedDateTime = new \DateTime($dateTime);
+        $adjustedDateTime->modify('+5 hours');
+        return $adjustedDateTime->format('Y-m-d H:i:s');
+    }
+
     /**
      * @inheritdoc
      */
     protected function _initSelect()
     {
         parent::_initSelect();
+        
         $this->getSelect()->joinLeft(
             "sales_order_item",
             "sales_order_item.order_id=main_table.entity_id AND sales_order_item.parent_item_id is NULL",
@@ -63,8 +105,8 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
 
 
         $this->getSelect()->columns(new \Zend_Db_Expr("( sales_order_item.original_price - sales_order_item.price) as discount_product"));
-//        $this->getSelect()->columns(new \Zend_Db_Expr("DATE_SUB(sales_order_item.created_at, INTERVAL 5 hour ) as purchase_date"));
-        $this->getSelect()->columns(new \Zend_Db_Expr("sales_order_item.created_at  as purchase_date"));
+        $this->getSelect()->columns(new \Zend_Db_Expr("DATE_SUB(sales_order_item.created_at, INTERVAL 5 hour ) as purchase_date"));
+    //    $this->getSelect()->columns(new \Zend_Db_Expr("sales_order_item.created_at  as purchase_date"));
 
         $this->getSelect()->joinLeft(
             "catalog_product_entity",
@@ -120,12 +162,15 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
         );
 
         $this->getSelect()->joinLeft(
-            "customer_address_entity",
-            "customer_address_entity.entity_id=main_table.customer_id",
-            ["customer_address_entity.firstname","customer_address_entity.lastname"]
+            "sales_order_address as soa",
+            "soa.parent_id=main_table.entity_id AND soa.address_type = 'billing'",
+            [
+                "soa.invoice_required as invoice"
+            ]
         );
 
-        $this->getSelect()->columns(new \Zend_Db_Expr("IF(customer_address_entity.vat_id <> '','FACTURA','BOLETA') as tipopedido"));
+        $this->getSelect()->columns(new \Zend_Db_Expr("IF(soa.invoice_required = '1','FACTURA','BOLETA') as tipopedido"));
+
 
 
         $this->getSelect()->columns(new \Zend_Db_Expr("CONCAT(shipping_information,' ', '150140') as shipping_information"));
