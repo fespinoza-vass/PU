@@ -1,3 +1,9 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+
 //
 //  Show button styles
 //  __________________________________________________
@@ -15,7 +21,7 @@
 & when (@media-common = true) {
     .am_shopby_apply_filters {
         & {
-            position: fixed;
+            position: absolute;
             z-index: 999;
             width: 100%;
             transition: left .2s ease-in-out;
@@ -33,11 +39,13 @@
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
-            margin: 0 auto;
-            padding: 15px 0;
             width: 100%;
-            border-top: 1px solid @secondary-black;
             text-align: center;
+        }
+
+        .action-primary {
+            width: 100%;
+            margin: 15px;
         }
 
         > .am-items {
@@ -65,7 +73,7 @@
 }
 
 //
-//  Tablet
+//  Desktop
 //  --------------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
@@ -90,7 +98,7 @@
 
     .am-show-button {
         & {
-            position: relative;
+            position: absolute;
             justify-content: space-between;
             margin: 0 0 10px;
             padding: 12px 10px;
@@ -98,6 +106,7 @@
             width: inherit;
             border: none;
             border-radius: 6px;
+            background-color: white;
         }
 
         > .am-items {
