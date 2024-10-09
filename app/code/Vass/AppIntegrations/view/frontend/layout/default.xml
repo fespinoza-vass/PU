@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_AppIntegrations
+ * @author Vass Team
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template" template="Vass_AppIntegrations::js/events-js.phtml"
+                   name="events_app_js"/>
+        </referenceContainer>
+    </body>
+</page>

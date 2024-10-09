@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="content">
+        <field name="category_app_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Category APP Image</item>
+                    <item name="formElement" xsi:type="string">imageUploader</item> <!-- Cambia el tipo de campo -->
+                    <item name="dataScope" xsi:type="string">category_app_image</item>
+                    <item name="dataType" xsi:type="string">image</item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item> <!-- Template de vista previa -->
+                    <item name="note" xsi:type="string">Maximum file size: 4 MB. Allowed file types: JPG, GIF, PNG.</item> <!-- Mensaje de advertencia -->
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="catalog/category_image/upload"/> <!-- URL para la subida de imagen -->
+                    </item>
+                    <item name="allowedExtensions" xsi:type="string">jpg jpeg gif png</item> <!-- Extensiones permitidas -->
+                    <item name="maxFileSize" xsi:type="number">4194304</item> <!-- Tamaño máximo en bytes (4MB) -->
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

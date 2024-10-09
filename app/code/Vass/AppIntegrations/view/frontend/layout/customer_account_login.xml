@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_AppIntegrations
+ * @author Vass Team
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="form.additional.info">
+            <block class="Magento\Framework\View\Element\Template" name="form_additional_info_platform"
+                   template="Vass_AppIntegrations::additional-info-platform.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Vass\AppIntegrations\ViewModel\Platform</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
