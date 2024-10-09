@@ -54,6 +54,7 @@ define([
                     $('body').trigger('processStop');
                     $('body > .loading-mask').remove();
                     $(document).off('ajaxComplete');
+                    $(".billing-address-same-as-shipping").click();
                     clearInterval(intervalFunction);
                 }
             }, 2000);
