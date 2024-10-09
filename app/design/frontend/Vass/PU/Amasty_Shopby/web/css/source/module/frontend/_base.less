@@ -1,3 +1,8 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
 //
 //  Base Styles
 //  __________________________________________________
@@ -21,11 +26,9 @@
     }
 
     .filter .filter-current.active .items {
-        display: inline-block !important;
-    }
-
-    .amshopby-filter-current .amshopby-remove {
-        right: 7px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .ui-tooltip .arrow {
@@ -529,15 +532,10 @@
             vertical-align: middle;
         }
 
-        .amshopby-items {
-            padding: 0 0 0 10px;
-        }
-
         .amshopby-item.item {
             .am-flex(none, center);
 
             flex-wrap: wrap;
-            padding: 0 0 0 20px;
             position: relative;
         }
 
@@ -575,7 +573,7 @@
                 .am-flex(center, center);
 
                 height: 12px;
-                left: 0;
+                right: 6px;
                 position: absolute;
                 width: 12px;
             }
