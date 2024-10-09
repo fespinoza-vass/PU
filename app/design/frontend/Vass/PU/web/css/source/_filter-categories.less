@@ -13,34 +13,11 @@
         display: none;
     }
 
-    .filter {
-        &.active {
-            display: block;
-            height: 100%;
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 500;
-            width: 100%;
-            background-color: @primary-white;
-
-            .filter {
-                &-options {
-
-                    overflow-y: auto;
-                    height: calc(100vh - 100px);
-                    position: relative;
-                }
-                &-title {
-                    strong {
-                        position: fixed;
-                        border: 0;
-                        top: 55px;
-                        .lib-font-size(20);
-                    }
-
+    body {
+        .filter {
+            &.active {
+                .filter-title {
                     strong:after {
-                        position: fixed;
                         -webkit-font-smoothing: antialiased;
                         -moz-osx-font-smoothing: grayscale;
                         .lib-font-size(@font-size__m);
@@ -67,23 +44,13 @@
             &.block {
                 margin-bottom: 0;
 
-                &-subtitle {
-                    display: block;
-                }
+            &-subtitle {
+                display: block;
             }
+        }
 
         &-title {
             margin-top: 32px;
-
-            strong {
-                .lib-font-size(@font-size__m);
-                border: 1px solid @secondary-black;
-                border-radius: 3px;
-                line-height: @line-height__l;
-                padding: @indent__s @indent__m;
-                z-index: 2;
-            &-title {
-                margin-top: 32px;
 
                 strong {
                     .lib-font-size(@font-size__m);
@@ -101,61 +68,68 @@
                     padding-left: @indent__xs;
                 }
 
-                    &[data-count]:after {
-                        .lib-css(color, @color-white);
-                        background: @theme__color__secondary;
-                        border-radius: 2px;
-                        content: attr(data-count);
-                        display: inline-block;
-                        font-size: .8em;
-                        line-height: 1;
-                        margin: 0 @indent__xs;
-                        min-width: 1em;
-                        padding: 2px;
-                    }
+                &[data-count]:after {
+                    .lib-css(color, @color-white);
+                    background: @theme__color__secondary;
+                    border-radius: 2px;
+                    content: attr(data-count);
+                    display: inline-block;
+                    font-size: .8em;
+                    line-height: 1;
+                    margin: 0 @indent__xs;
+                    min-width: 1em;
+                    padding: 2px;
+                }
 
-                    &.disabled {
-                        opacity: .5;
-                    }
+                &.disabled {
+                    opacity: .5;
                 }
             }
-
-        .block-subtitle {
-            font-size: @font-size__base;
-            line-height: 1em;
-            padding: @indent__s @indent__s @indent__base;
         }
 
-            &-current {
-                margin: 0;
-
-                .items {
-                    padding: @indent__xs @indent__s;
-                }
-
-                .item {
-                    padding-left: 17px;
-                    position: relative;
-                    z-index: 1;
-                }
-
-                .filter-subtitle {
-                    display: none;
-                }
-
-                .action.remove {
-                    &:extend(.abs-remove-button-for-blocks all);
-                    left: -2px;
-                    position: absolute;
-                    top: -1px;
-                }
+            .block-subtitle {
+                border-bottom: @border-width__base solid @border-color__base;
+                font-size: @font-size__base;
+                font-weight: @font-weight__semibold;
+                line-height: 1em;
+                padding: @indent__s @indent__s @indent__base;
             }
 
-            &-actions {
-                margin-bottom: @indent__m;
-                padding: 0 @indent__s;
+        &-current {
+            margin: 0;
+
+            .items {
+                padding: @indent__xs @indent__s;
             }
 
+            .item {
+                padding-left: 17px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .filter-subtitle {
+                display: none;
+            }
+
+            .action.remove {
+                &:extend(.abs-remove-button-for-blocks all);
+                left: -2px;
+                position: absolute;
+                top: -1px;
+            }
+        }
+
+        &-actions {
+            margin-bottom: @indent__m;
+            padding: 0 @indent__s;
+        }
+
+        &-label {
+            &:after {
+                content: ': ';
+            }
+        }
         &-label {
             &:after {
                 content: ': ';
@@ -215,31 +189,29 @@
                 margin: 0;
                 padding: @indent__s;
 
-                    .item {
-                        line-height: 1.5em;
-                        margin: @indent__s 0;
-                    }
+                .item {
+                    line-height: 1.5em;
+                    margin: @indent__s 0;
+                }
 
-                    a {
-                        margin-left: -5px;
-                        margin-right: -5px;
-                        padding-left: 5px;
-                        padding-right: 7px;
+                a {
+                    margin-left: -5px;
+                    margin-right: -5px;
+                    padding-left: 5px;
+                    padding-right: 7px;
 
-                        &:hover {
+                    &:hover {
+                        background-color: @color-gray91;
+                        text-decoration: none;
+
+                        & + .count {
                             background-color: @color-gray91;
-                            text-decoration: none;
-
-                            & + .count {
-                                background-color: @color-gray91;
-                            }
                         }
                     }
                 }
 
-                    .filter-count-label {
-                        &:extend(.abs-visually-hidden all);
-                    }
+                .filter-count-label {
+                    &:extend(.abs-visually-hidden all);
                 }
             }
         }
@@ -320,7 +292,7 @@
         }
 
         &-options-content {
-            padding: @indent__xs @indent__s;
+            padding: 0;
         }
     }
 
