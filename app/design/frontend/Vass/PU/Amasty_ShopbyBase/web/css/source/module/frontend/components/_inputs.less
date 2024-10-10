@@ -1,0 +1,75 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Imports
+//  --------------------------------------------------
+
+@import '../../module/_mixins';
+
+//
+//  Common
+//  --------------------------------------------------
+
+.am-checkbox-mixin() {
+    & {
+        .am-visually-hidden;
+
+    }
+
+    & + .amshopby-choice {
+        .am-word-break;
+
+    }
+
+    & + .amshopby-choice:before,
+    & + .amshopby-choice:after {
+
+    }
+
+    & + .amshopby-choice:before {
+
+    }
+
+    & + .amshopby-choice:after {
+        content: none;
+    }
+
+    & + .amshopby-choice:hover:before,
+    &:checked + .amshopby-choice:before {
+    }
+
+    &:checked + .amshopby-choice:after {
+        content: '';
+    }
+
+    &:active + .amshopby-choice:before,
+    &:focus + .amshopby-choice:before {
+        ._keyfocus &,
+        & {
+        }
+    }
+
+    &:not(:checked).mage-error + .amshopby-choice:before {
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .filter-options input[type='checkbox'] {
+    }
+}
+
+//
+//  Desktop
+//  --------------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .filter-options input[type='checkbox'] {
+    }
+}
