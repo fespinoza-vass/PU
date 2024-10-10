@@ -19,7 +19,6 @@ use Magento\Framework\Escaper;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Magento\Wishlist\Helper\Data;
 use Vass\ProductSliderWidget\Helper\PreparePostData;
-use Magento\ConfigurableProduct\Block\Product\View\Type\Configurable;
 
 $class = 'amshopby-morefrom';
 $image = 'am_brand_more_from_image';
@@ -34,6 +33,7 @@ $description = false;
 ?>
 
 <div class="product-grid products-slider slider grid">
+    <?php if ($items): ?>
     <div class="block-title title">
         <h3 class="product-grid__title skew-title">
             <?= $escaper->escapeHtml($title) ?>
@@ -140,6 +140,7 @@ $description = false;
             <span class="icon icon-pointer-right"></span>
         </div>
     </div>
+    <?php endif; ?>
 </div>
 
 <script type="text/x-magento-init">
