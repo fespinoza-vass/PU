@@ -1,9 +1,8 @@
-/*phpcs:ignoreFile*/
-/*
-formBuilder - https://formbuilder.online/
-Version: 1.24.2
-Author: Kevin Chappell <kevin.b.chappell@gmail.com>
-*/
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
 .kc-toggle {
     position: relative;
     margin: 4px 0 0 2px;
