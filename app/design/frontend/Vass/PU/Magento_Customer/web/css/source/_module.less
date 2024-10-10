@@ -1,7 +1,7 @@
-// /**
-//  * Copyright © Magento, Inc. All rights reserved.
-//  * See COPYING.txt for license details.
-//  */
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
 
 //
 //  Variables
@@ -26,8 +26,6 @@
 @_password-strong: #c5eeac;
 @_password-very-strong: #81b562;
 
-@font-size__xxl: 26px;
-
 
 // Gap
 @gap_2: 2px;
@@ -40,6 +38,12 @@
 // Padding
 @padding_40: 40px;
 
+// Font size
+@font-size__xxl: 26px;
+@font-size__xxxl: 37px;
+
+// Indent
+@indent__8: 8px;
 
 //
 //  Common
@@ -125,9 +129,9 @@
 
                         &:after {
                             position: absolute;
-                            content: '\e9479';
+                            content: @icon-calendar;
                             font-family: @icons__font-name;
-                            font-size: 19px;
+                            .lib-font-size(19px);
                             top: 13px;
                             right: 20px;
                         }
@@ -183,11 +187,11 @@
             display: grid;
             place-items: center;
             gap: @gap_8;
-            padding: 40px 0;
+            padding: @gap_40 0;
             width: 100%;
 
             .head__icon.icon.icon-user {
-                font-size: 37.5px;
+                .lib-font-size(@font-size__xxxl);
             }
 
             .head__title {
@@ -221,7 +225,7 @@
 
                      .primary {
                          button {
-                             padding: 16px 40px;
+                             padding: @indent__base @padding_40;
                          }
                      }
                  }
@@ -241,7 +245,7 @@
         }
 
         .column.main {
-            background-color: #ffffff;
+            background-color: @primary-white;
             padding-bottom: 0;
 
             .toolbar {
@@ -283,8 +287,8 @@
                                 }
 
                                 #limiter {
-                                    height: 40px;
-                                    padding: 8px 24px 8px 16px;
+                                    .lib-css(height, 40px);
+                                    padding: @indent__8 @indent__m @indent__8 @indent__base;
                                     margin: 0;
                                 }
                             }
@@ -305,10 +309,6 @@
 
             .block:not(.widget) .block-content .box {
                 margin-bottom: 0;
-            }
-
-            h2 {
-                margin-top: 0;
             }
 
             .toolbar {
@@ -370,8 +370,8 @@
                             display: flex;
                             flex-direction: column;
                             gap: @indent__m;
-                            border: 1px solid #F3F3F3;
-                            padding: 16px;
+                            border: 1px solid @secondary-white;
+                            padding: @indent__base;
 
                             .address-data {
                                 .address-title {
@@ -414,7 +414,7 @@
 
                         .counter.qty {
                             position: absolute;
-                            bottom: -80px;
+                            bottom: -72px;
                         }
                     }
 
@@ -457,7 +457,7 @@
 
         .action {
             &.secondary {
-                background-color: #ffffff;
+                background-color: @primary-white;
                 border: 1px solid @secondary-black;
             }
         }
@@ -485,7 +485,7 @@
                         .orders-body {
                             display: flex;
                             flex-direction: column;
-                            gap: 16px;
+                            gap: @indent__base;
                             margin-bottom: 40px;
 
                             .order-row.row {
@@ -507,7 +507,7 @@
 
                     .order-products-toolbar.toolbar {
                         &.top {
-                            margin-bottom: 24px;
+                            margin-bottom: @indent__m;
 
                             .pager {
                                 .toolbar-amount {
@@ -527,8 +527,8 @@
                                     }
 
                                     #limiter {
-                                        height: 40px;
-                                        padding: 8px 24px 8px 16px;
+                                        .lib-css(height, 40px);
+                                        padding: @indent__8 @indent__m @indent__8 @indent__base;
                                         margin: 0;
                                     }
                                 }
@@ -565,7 +565,7 @@
             .page-title-wrapper {
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: @indent__s;
 
                 .page-title {
                     margin-right: 0;
@@ -595,15 +595,15 @@
                         display: inline-block;
                         text-decoration: none;
                         text-transform: uppercase;
-                        background-color: #ffffff;
-                        border: 1px solid #000000;
+                        background-color: @primary-white;
+                        border: 1px solid @secondary-black;
                         border-radius: 2px;
                         text-align: center;
-                        font-size: 1.6rem;
+                        .lib-font-size(@font-size__m);
                         margin: 0;
                         font-family: @font-family__base;
                         font-weight: @font-weight__regular;
-                        padding: 16px 40px;
+                        padding: @indent__base @padding_40;
                         line-height: inherit;
                     }
                 }
@@ -720,9 +720,9 @@
             line-height: 22px;
             font-weight: @font-weight__bold;
             font-family: @font-family__base;
-            color: #ffffff;
+            color: @primary-white;
             margin: 0;
-            padding: 8px 16px;
+            padding: @indent__8 @indent__base;
         }
     }
 
@@ -753,7 +753,7 @@
             padding: 0;
 
             .nav.items {
-                background-color: #ffffff;
+                background-color: @primary-white;
 
                 .item {
                     margin: 0;
@@ -767,7 +767,7 @@
                         .lib-css(color, @account-nav-color);
                         border-left: 3px solid transparent;
                         display: block;
-                        padding: 16px 16px 16px 24px;
+                        padding: @indent__base @indent__base @indent__base @indent__m;
                         .lib-font-size(@font-size__m);
                         line-height: 22px;
                         font-family: @font-family__base;
@@ -787,6 +787,7 @@
                         strong {
                             .lib-css(border-color, @color-green-light2);
                             .lib-css(color, @account-nav-current-color);
+                            .lib-css(font-weight, @font-weight__semibold);
                             .lib-css(font-weight, @font-weight__semibold);
                         }
 
@@ -956,7 +957,7 @@
         .column.main {
             position: relative;
             border-radius: 2px;
-            padding: 24px 16px;
+            padding: @indent__m @indent__base;
             margin-top: 200px;
             margin-bottom: 32px;
 
@@ -1067,7 +1068,7 @@
                         gap: @indent__m;
 
                         .wishlist-title {
-                            font-size: @font-size__l;
+                            .lib-font-size(@font-size__l);
                             line-height: 28px;
                             color: @primary-black;
 
@@ -1089,7 +1090,7 @@
                     .products-grid.wishlist {
                         display: grid;
                         grid-template-columns: repeat(2, 1fr);
-                        gap: 32px 16px;
+                        gap: @indent__l @indent__base;
 
                         .product-item {
                             padding: 0;
@@ -1109,13 +1110,13 @@
                 }
 
                 &.empty {
-                    background-color: #ffffff;
-                    padding: 24px 16px;
+                    background-color: @primary-white;
+                    padding: @indent__m @indent__base;
                     border-radius: 4px;
 
                     .wishlist-title {
                         strong {
-                            font-size: @font-size__l;
+                            .lib-font-size(@font-size__l);
                             line-height: 28px;
                             color: @primary-black;
                         }
@@ -1168,10 +1169,10 @@
 
             .title.block-collapsible-nav-title {
                 display: flex;
-                margin: 0 16px;
-                padding: 8px 24px;
+                margin: 0 @indent__base;
+                padding: @indent__8 @indent__m;
                 justify-content: space-between;
-                background-color: #ffffff;
+                background-color: @primary-white;
                 border: 1px solid @color-gray-light2;
                 height: 56px;
                 border-radius: 2px;
@@ -1198,10 +1199,10 @@
                 padding: 0;
 
                 .page-title-wrapper {
-                    background-color: #ffffff;
-                    padding-top: 24px;
-                    padding-right: 16px;
-                    padding-left: 16px;
+                    background-color: @primary-white;
+                    padding-top: @indent__m;
+                    padding-right: @indent__base;
+                    padding-left: @indent__base;
 
                     .page-title {
                         margin-bottom: 0;
@@ -1212,9 +1213,9 @@
                 .order-history-container {
                     .order-products-toolbar.toolbar {
                         &.top {
-                            background-color: #ffffff;
+                            background-color: @primary-white;
                             margin-bottom: 0;
-                            padding: 24px 16px 0;
+                            padding: @indent__m @indent__base 0;
 
                             .pager {
                                 .limiter,
@@ -1230,8 +1231,8 @@
                     }
 
                     .orders-history {
-                        background-color: #ffffff;
-                        padding: 24px 16px;
+                        background-color: @primary-white;
+                        padding: @indent__m @indent__base;
 
                         .orders-header.row {
                             display: none;
@@ -1247,12 +1248,12 @@
                                 grid-template-rows: 0.5fr repeat(2, 1fr);
                                 gap: @indent__m;
                                 border-top: 1px solid @color-gray-light1;
-                                padding-top: 24px;
+                                padding-top: @indent__m;
                                 margin-bottom: 0;
 
                                 .col {
                                     display: flex;
-                                    gap: 10px;
+                                    gap: @indent__s;
 
                                     &.id {
                                         justify-content: space-between;
@@ -1280,7 +1281,7 @@
 
                                         .actions-buttons {
                                             display: flex;
-                                            gap: 32px;
+                                            gap: @indent__l;
                                             text-transform: uppercase;
                                         }
                                     }
@@ -1301,9 +1302,9 @@
             }
 
             .empty-order-history-container {
-                background-color: #ffffff;
+                background-color: @primary-white;
                 margin-bottom: 32px;
-                padding: 24px 16px 32px;
+                padding: @indent__m @indent__base @indent__l;
 
                 .message.info.empty {
                     border-radius: 0;
@@ -1328,7 +1329,7 @@
                                 width: 100%;
                                 display: flex;
                                 justify-content: center;
-                                padding: 16px 0;
+                                padding: @indent__base 0;
                             }
                         }
                     }
@@ -1336,7 +1337,7 @@
 
                 .order-links {
                     margin-bottom: 0;
-                    padding-bottom: 16px;
+                    padding-bottom: @indent__base;
                 }
 
                 .block.block-order-details-view {
@@ -1369,8 +1370,8 @@
                         display: flex;
                         flex-direction: column;
                         gap: 18px;
-                        padding-top: 24px;
-                        padding-bottom: 24px;
+                        padding-top: @indent__m;
+                        padding-bottom: @indent__m;
                         border-top: 1px solid @color-gray-dark3;
                         border-bottom: 1px solid @color-gray-dark3;
                         margin-bottom: 26px;
@@ -1382,8 +1383,8 @@
                     }
 
                     .table-wrapper.order-items {
-                        padding-top: 24px;
-                        padding-bottom: 24px;
+                        padding-top: @indent__m;
+                        padding-bottom: @indent__m;
 
                         .data.order-items-container {
                             display: flex;
@@ -1399,7 +1400,7 @@
                                     display: grid;
                                     grid-template-columns: repeat(4, 1fr);
                                     grid-template-rows: 1fr 2fr repeat(2, 1fr);
-                                    gap: 10px;
+                                    gap: @indent__s;
                                     row-gap: @indent__m;
 
                                     .mobile {
@@ -1603,7 +1604,7 @@
 
     .account {
         .account-sidebar__head {
-            background-color: #ffffff;
+            background-color: @primary-white;
         }
 
         .page-main > .main-wrapper {
@@ -1638,7 +1639,7 @@
             }
 
             .page-title-wrapper:not(.wishlist-index-index .page-title-wrapper) {
-                padding: 40px 40px 0 40px;
+                padding: @padding_40 @padding_40 0 @padding_40;
             }
 
             .block-wishlist-management .wishlist-title strong,
@@ -1661,7 +1662,7 @@
             }
 
             .form-content {
-                padding: 40px;
+                padding: @padding_40;
 
                 .form-address-edit,
                 .form-edit-account {
@@ -1716,7 +1717,7 @@
                     }
 
                     .action.save.primary {
-                        padding: 16px 40px;
+                        padding: @indent__base @padding_40;
                     }
                 }
             }
@@ -1724,7 +1725,7 @@
 
         .block.block-collapsible-nav {
             width: 100%;
-            background-color: #ffffff;
+            background-color: @primary-white;
         }
 
         .sidebar.sidebar-main {
@@ -1761,8 +1762,8 @@
 
                     a.action {
                         width: 100%;
-                        padding: 16px 40px;
-                        font-size: 16px;
+                        padding: @indent__base @padding_40;
+                        .lib-font-size(@font-size__m);
                         font-weight: 400;
                         line-height: 22px;
                         min-width: 263px;
@@ -1807,14 +1808,14 @@
         &.sales-order-history {
             .column.main {
                 .order-history-container {
-                    padding: 40px 40px 0 40px;
+                    padding: @padding_40 @padding_40 0 @padding_40;
 
                     .orders-history {
                         display: flex;
                         flex-direction: column;
-                        gap: 10px;
+                        gap: @indent__s;
                         border-top: 1px solid @color-gray-light1;
-                        padding-top: 24px;
+                        padding-top: @indent__m;
 
                         .orders-header.row {
                             display: grid;
@@ -1852,9 +1853,9 @@
                             line-height: 22px;
                             font-weight: @font-weight__bold;
                             font-family: @font-family__base;
-                            color: #ffffff;
+                            color: @primary-white;
                             margin: 0;
-                            padding: 8px 16px;
+                            padding: @indent__8 @indent__base;
                         }
                     }
                 }
@@ -1882,8 +1883,8 @@
 
             .column.main {
                 .items.order-links {
-                    margin: 0 40px;
-                    padding-bottom: 24px;
+                    margin: 0 @padding_40;
+                    padding-bottom: @indent__m;
                 }
 
                 .order-details-items.ordered {
@@ -1897,12 +1898,12 @@
                             display: flex;
                             flex-direction: column;
                             gap: @indent__m;
-                            padding: 0 40px;
+                            padding: 0 @padding_40;
 
                             .row.header-row {
                                 display: grid;
                                 grid-template-columns: 2fr repeat(4, 1fr);
-                                gap: @gap_40;;
+                                gap: @gap_40;
                                 .lib-font-size(@font-size__m);
                                 line-height: 22px;
                                 font-weight: @font-weight__bold;
@@ -1951,10 +1952,10 @@
                         display: flex;
                         flex-direction: column;
                         gap: 18px;
-                        margin: 0 40px;
+                        margin: 0 @padding_40;
                         border-bottom: 1px solid @color-gray-dark3;
                         border-top: 1px solid @color-gray-dark3;
-                        padding: 24px 0 40px;
+                        padding: @indent__m 0 @padding_40;
 
                         div {
                             display: flex;
@@ -1967,7 +1968,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: 36px;
-                    padding: 40px;
+                    padding: @padding_40 @padding_40 0;
 
                     .block-content {
                         display: flex;
@@ -1991,7 +1992,7 @@
 
     .block-addresses-list {
         .block-content {
-            padding: 40px;
+            padding: @padding_40;
 
             .addresses-wrapper.additional-addresses {
                 display: grid;
@@ -2003,7 +2004,7 @@
                     flex-direction: column;
                     gap: @indent__m;
                     border: 1px solid #F3F3F3;
-                    padding: 32px;
+                    padding: @indent__l;
 
                     .address-data {
                         display: flex;
@@ -2025,7 +2026,7 @@
 
                         .action {
                             height: auto;
-                            padding: 16px 40px;
+                            padding: @indent__base @padding_40;
                         }
                     }
                 }
