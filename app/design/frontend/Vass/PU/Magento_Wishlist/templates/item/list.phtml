@@ -19,11 +19,11 @@ $templateType = ReviewRendererInterface::SHORT_VIEW;
 
 ?>
 
-<!-- TODO: editar el card de cada elemento -->
 <div class="products-grid wishlist">
     <?php if (count($block->getItems())) : ?>
+    <div class="products list items product-items">
         <?php foreach ($block->getItems() as $item) : ?>
-            <div class="item product product-item swiper-slide">
+            <div class="item product product-item">
                 <div class="product-item-info">
                     <div class="product details product-item-details">
                         <?php foreach ($columns as $column) : ?>
@@ -33,6 +33,7 @@ $templateType = ReviewRendererInterface::SHORT_VIEW;
                 </div>
             </div>
         <?php endforeach; ?>
+    </div>
     <?php else : ?>
         <div class="message info empty">
             <span><?= $block->escapeHtml(__('This Wish List has no Items')) ?></span>

@@ -1,10 +1,19 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright © 2024 VASS
+ * @author VASS Team
  */
-
-/** @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column $block */
+/**
+ * @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
 $product = $block->getItem()->getProduct();
 ?>
-<?= $block->getReviewsSummaryHtml($product, 'short') ?>
+
+<div class="product-top-name">
+    <span class="product-brand">
+        <?= $block->escapeHtml($product->getAttributeText('manufacturer') ?? '') ?>
+    </span>
+    <?= $block->getReviewsSummaryHtml($product, 'short') ?>
+</div>
+

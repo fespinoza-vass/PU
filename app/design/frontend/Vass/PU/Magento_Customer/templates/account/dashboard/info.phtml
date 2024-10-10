@@ -41,16 +41,14 @@ $customer = $viewModel->getCustomer();
                 <div class="costumer-field">
                     <?= $escaper->escapeHtml(__('Gender')) ?>
                     <div class="blocked">
-                        <!-- TODO: genero -->
-                        <?= $escaper->escapeHtml($customer->getGender()) ?>
+                        <?= $escaper->escapeHtml($viewModel->getGender()) ?>
                     </div>
                 </div>
 
                 <div class="costumer-field">
                     <?= $escaper->escapeHtml(__('Date of Birth')) ?>
                     <div class="blocked">
-                        <?= $escaper->escapeHtml($customer->getDob()) ?>
-                        <!-- TODO: formato de fecha -->
+                        <?= $escaper->escapeHtml($viewModel->formatDate($customer->getDob())) ?>
                     </div>
                 </div>
 
