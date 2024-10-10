@@ -43,7 +43,7 @@
         width: 100%;
         height: auto;
         object-fit: cover;
-        margin-bottom: 24px;
+        margin-bottom: @indent__m;
     }
 
     .login-container {
@@ -63,14 +63,14 @@
 
                 strong {
                     .lib-font-size(@font-size__l);
-                    font-weight: 700;
+                    font-weight: @font-weight__bold;
                 }
             }
 
             .block-right {
                 border-radius: 2px;
                 background-color: @primary-white;
-                padding: 24px 16px;
+                padding: @indent__m @indent__base;
             }
 
         }
@@ -80,7 +80,7 @@
 
             &.login {
                 border: 0;
-                gap: 24px;
+                gap: @indent__m;
                 padding: 0;
 
                 .actions-toolbar {
@@ -265,7 +265,7 @@
         }
 
         .form.password.forget {
-            padding: 32px 16px;
+            padding: @indent__l @indent__m;
             background-color: @primary-white;
 
             .fieldset {
@@ -349,10 +349,6 @@
 
     .account {
         .column.main {
-            h2 {
-                margin-top: 0;
-            }
-
             .toolbar {
                 text-align: center;
 
@@ -607,11 +603,11 @@
                 }
 
                 .block-left {
-                    margin-right: 24px;
+                    margin-right: @indent__m;
                 }
 
                 .block-right {
-                    padding: 36px 32px;
+                    padding: 36px @indent__l;
                 }
 
                 .customer-login-image {
@@ -655,7 +651,7 @@
             }
 
             .block-left {
-                margin-right: 24px;
+                margin-right: @indent__m;
 
                 .customer-login-image {
                     min-height: 100%;
@@ -836,7 +832,7 @@
 
     .control.captcha-image {
         display: flex;
-        gap: 16px;
+        gap: @indent__base;
 
         .captcha-reload {
             margin-top: 0;
