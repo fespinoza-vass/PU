@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <izipay>
+                <model>Izipay\Core\Model\Izipay</model>
+                <environment>sandbox</environment>
+                <sort_order>20</sort_order>
+
+                <active>0</active>
+                <title>Pago con Izipay</title>
+                <globalenv>
+                    <type_access>AT</type_access>
+                </globalenv>
+
+                <!-- config by default-->
+                <paymentoptions>
+                    <method1>
+                        <paymentactive>0</paymentactive>
+                        <paymentmethod>CARD</paymentmethod>
+                        <paymenttitle>Método de pago 1</paymenttitle>
+                    </method1>
+                    <method2>
+                        <paymentactive>0</paymentactive>
+                        <paymentmethod>CARD</paymentmethod>
+                        <paymenttitle>Método de pago 2</paymenttitle>
+                    </method2>
+                    <method3>
+                        <paymentactive>0</paymentactive>
+                        <paymentmethod>CARD</paymentmethod>
+                        <paymenttitle>Método de pago 3</paymenttitle>
+                    </method3>
+                    <method4>
+                        <paymentactive>0</paymentactive>
+                        <paymentmethod>CARD</paymentmethod>
+                        <paymenttitle>Método de pago 4</paymenttitle>
+                    </method4>
+                    <method5>
+                        <paymentactive>0</paymentactive>
+                        <paymentmethod>CARD</paymentmethod>
+                        <paymenttitle>Método de pago 5</paymenttitle>
+                    </method5>
+                </paymentoptions>
+
+
+                <processing_izipay>processing</processing_izipay>
+                <pending_payment_izipay>pending_payment</pending_payment_izipay>
+                <canceled_izipay>canceled</canceled_izipay>
+            </izipay>
+        </payment>
+    </default>
+</config>

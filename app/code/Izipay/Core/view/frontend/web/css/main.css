@@ -1,0 +1,66 @@
+@media only screen and (max-width: 768px) {
+	.container-success{
+		width: 100%;
+	}
+
+	.container-success table{
+		width: 100%;
+	}
+}
+
+.container-success{
+    margin: 0 auto;
+    width: 90%;
+	max-width: 500px;
+}
+
+.container-success table{
+    margin: 0 auto;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.text-right{
+	float: right;
+}
+.actions-toolbar{
+	display:inline-block;
+}
+
+.izipay-payment{
+	text-align: center;
+	text-align: center;
+    border: 1px solid #b4b4b4;
+    padding: 35px 15px;
+    max-width: 400px;
+    margin: auto;
+    border-radius: 25px;
+}
+
+.izipay-payment h4 {
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.izipay-intermediate-button{
+	display:none;
+}
+
+.checkout-success-wrapper {
+    text-align: center;
+}
+
+.container-success .order-code{
+	margin-top: 20px;
+	font-size: 16px;
+}
+
+.your-order-is{
+	margin-top: 20px;
+}
+
+.bg-body{
+	background-color: #f8f8f8;
+}
