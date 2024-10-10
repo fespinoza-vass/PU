@@ -26,12 +26,11 @@ class StoreLocator implements ArgumentInterface
     }
 
     /**
-     * Get Customer data
+     * Get Link to store locator
      *
-     * @return CustomerModel|null
+     * @return string|null
      */
-
-    public function getLinkToMap($params = [])
+    public function getLinkToMap($params = []): string
     {
         return $this->urlBuilder->getUrl(
             $this->configProvider->getUrl(),
