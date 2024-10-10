@@ -4,10 +4,13 @@
  * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
  * @package Improved Layered Navigation Base for Magento 2
  */
-/** @var \Amasty\Shopby\Block\Navigation\ApplyButton $block */
-/** @var \Magento\Framework\Escaper $escaper */
 
+use Amasty\Shopby\Block\Navigation\ApplyButton;
 use Amasty\Shopby\Block\Navigation\UrlModifier;
+use Magento\Framework\Escaper;
+
+/** @var ApplyButton $block */
+/** @var Escaper $escaper */
 
 $postfix = uniqid();
 ?>
@@ -16,14 +19,16 @@ $postfix = uniqid();
     <?php if (!$block->isAjaxEnabled()): ?>
         <form data-amshopby-filter="">
             <input type="hidden"
-                   name="<?= /* @noEscape */ UrlModifier::VAR_REPLACE_URL ?>"
+                   name="<?= /* @noEscape */
+                   UrlModifier::VAR_REPLACE_URL ?>"
                    value="1"/>
         </form>
     <?php endif; ?>
     <div class="am_shopby_apply_filters">
         <div class="am-show-button">
             <button amshopby-apply-filter="1"
-                    id="amasty_shopby_apply_filters_<?= /* @noEscape */ $postfix ?>"
+                    id="amasty_shopby_apply_filters_<?= /* @noEscape */
+                    $postfix ?>"
                     data-mage-init='{"amShopbyApplyFilters":{
                         "ajaxEnabled": <?= $block->isAjaxEnabled() ? '1' : '0' ?>,
                         "ajaxSettingEnabled": <?= $block->isAjaxSettingEnabled() ? '1' : '0' ?>,
@@ -34,7 +39,7 @@ $postfix = uniqid();
                     title="<?= $escaper->escapeHtml(__('Apply Filters')) ?>"
                     aria-label="<?= $escaper->escapeHtml(__('Apply Filters')) ?>"
                     class="action-primary">
-                <?= $escaper->escapeHtml( __('Apply Filters')) ?>
+                <?= $escaper->escapeHtml(__('Apply Filters')) ?>
             </button>
         </div>
     </div>
