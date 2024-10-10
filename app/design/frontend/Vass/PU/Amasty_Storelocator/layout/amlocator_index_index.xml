@@ -8,6 +8,11 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="main">
+            <block class="Magento\Cms\Block\Block" name="store-locator-banner" before="-">
+              <arguments>
+                <argument name="block_id" xsi:type="string">store-locator-banner</argument>
+              </arguments>
+            </block>
             <block class="Amasty\Storelocator\Block\Location" name="amasty.locator.center"
                    template="Amasty_Storelocator::center.phtml" output="1">
                 <arguments>
@@ -18,5 +23,7 @@
                 <container name="extra.filters" as="extra_filters" />
             </block>
         </referenceContainer>
+
+        <referenceBlock name="page.main.title" remove="true" />
     </body>
 </page>

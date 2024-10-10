@@ -7,11 +7,34 @@
 //  ----------------------------------------------
 
 & when (@media-common = true) {
+
+    .banner-store-locator {
+        margin-bottom: @indent__base;
+        min-height: 245px;
+
+        .pagebuilder-column-line {
+            gap: 0;
+        }
+
+        .banner-store-locator__img {
+            min-height: auto;
+            box-shadow: inset 0px -10px 20px 6px #cbbbac;
+            width: 100%;
+            min-height: 125px;
+        }
+
+        .banner-store-locator__title {
+            margin: 0;
+            margin-left: @indent__m;
+            .lib-font-size(@font-size__xl);
+        }
+    }
+
     .amlocator-main-container {
         & {
             text-align: left;
-            font-size: 1.4rem;
-            color: #000;
+            .lib-font-size(@font-size__m);
+            color: @secondary-black;
             min-width: 50vw;
             line-height: 1.42857143;
             font-weight: 400;
@@ -50,55 +73,6 @@
                     line-height: 1.42857143;
                 }
             }
-        }
-    }
-
-    .amlocator-search-container {
-        & {
-            padding: 5px 15px;
-            margin-bottom: 10px;
-            background: #f8f8f8;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .amlocator-title {
-            display: inline-block;
-            margin-bottom: 5px;
-        }
-
-        .amlocator-block {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .amlocator-block.-search {
-            margin-bottom: 0;
-        }
-
-        .amlocator-text,
-        .amlocator-select {
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-            width: initial;
-        }
-
-        .amlocator-select {
-            height: 40px;
-        }
-
-        .amlocator-select.-measurement {
-            min-width: inherit;
-            background-color: #f8f8f8;
-            height: inherit;
-            line-height: 1;
-            border: none;
-        }
-
-        .amlocator-button.-nearby {
-            width: 100%;
-            margin-left: auto;
         }
     }
 
@@ -268,7 +242,7 @@
             padding: 5px 15px;
             font-weight: 600;
             font-size: 16px;
-            color: #000;
+            color: @secondary-black;
             cursor: pointer;
         }
 
@@ -408,8 +382,9 @@
         }
 
         .amlocator-map {
+            margin: @indent__l 0;
             width: 100%;
-            height: 300px;
+            height: 304px;
         }
     }
 
@@ -476,10 +451,11 @@
     .amlocator-store-desc {
         & {
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 52px;
             overflow: auto;
-            font-size: 14px;
-            background: #f6f6f6;
+            .lib-font-size(@font-size__m);
+            line-height: 22px;
+            background: @primary-white;
             cursor: pointer;
         }
 
@@ -488,20 +464,23 @@
         }
 
         .amlocator-title {
-            margin-bottom: 10px;
+            margin-bottom: @indent__m;
             font-weight: bold;
             font-size: 16px;
         }
 
         .amlocator-title .amlocator-link {
+            .lib-font-size(@font-size__l);
+            font-weight: @font-weight__bold;
             word-break: break-all;
             word-wrap: break-word;
-            color: #000;
+            color: @secondary-black;
+            text-decoration: none;
         }
 
         .amlocator-block {
             .lib-vendor-prefix-display(flex);
-            margin: 15px;
+            padding: @indent__m;
         }
 
         .amlocator-image {
@@ -525,7 +504,7 @@
         }
 
         .amlocator-today {
-            color: #000;
+            color: @secondary-black;
             background: #9dd4ff;
         }
     }
@@ -541,18 +520,18 @@
             -webkit-box-pack: justify;
             -ms-flex-pack: justify;
             justify-content: space-between;
-            margin-top: 5px;
-            padding: 5px 15px 5px 35px;
-            background: #dfdfdf;
+            padding: @indent__s @indent__s @indent__s 40px;
+            background: @color-gray-light1;
         }
 
         .amlocator-today:before {
             content: "";
             position: absolute;
-            top: 8px;
-            left: 15px;
-            width: 14px;
-            height: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            width: 20px;
+            height: 20px;
             .lib-css(background, @amlocator-clock-icon__blue__background);
             background-size: contain;
         }
@@ -613,12 +592,12 @@
             padding: 8px 10px;
             font-weight: normal;
             line-height: 1;
-            color: #000;
+            color: @secondary-black;
             background: #f8f8f8;
         }
 
         .pages a.page {
-            color: #000;
+            color: @secondary-black;
         }
 
         .pages .item {
@@ -650,7 +629,7 @@
 
         .pages .items a.action:before {
             font-size: 14px;
-            color: #000;
+            color: @secondary-black;
         }
 
         .pages .items a.action:hover:before {
@@ -689,6 +668,31 @@
 //  --------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .banner-store-locator {
+        margin-bottom: @indent__base;
+        min-height: 238px;
+
+        .pagebuilder-column-line {
+            gap: @indent__base;
+        }
+
+        .banner-store-locator__img {
+            min-height: 238px;
+            box-shadow: inset -20px 0px 20px 6px #cbbbac;
+        }
+
+        .banner-store-locator__title {
+            margin: 0;
+        }
+    }
+
+    .amlocator-main-container {
+        & {
+            margin: 80px 70px 32px 70px;
+
+        }
+    }
+
     .amlocator-main-container .amlocator-search-container {
         & {
             width: 33%;
@@ -730,22 +734,21 @@
         }
 
         .amlocator-block.-map {
-            width: 67%;
-            height: 80vh;
+            width: 60%;
+            height: 100%;
             max-height: 800px;
-            padding-left: 15px;
+            padding-left: @indent__m;
         }
 
         .amlocator-block.-storelist {
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
             order: inherit;
-            width: 33%;
+            width: 40%;
         }
 
         .amlocator-map {
             height: 100%;
+            margin: 0;
+            margin-bottom: @indent__l;
         }
 
         //overwrite gmaps close infoWindow button
