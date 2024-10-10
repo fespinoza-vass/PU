@@ -4,29 +4,11 @@
  */
 
 //
-//  Filter items styles
-//  __________________________________________________
-
-//
 //  Imports
 //  --------------------------------------------------
 
-@import '../../_mixins';
+@import '../../module/_mixins';
 
-//
-//  Variables
-//  --------------------------------------------------
-
-@amshopby-filter-item__hover__color: #000;
-@amshopby-filter-item__active__color: #474747;
-@amshopby-filter-item__pressed__color: #000;
-@amshopby-show-more__color: #000;
-@amshopby-show-more__hover__color: #000;
-@amshopby-filter-content-multiselect__hover__color: #000;
-
-@amshopby-color-white: #fff;
-@amshopby-color-light-grey: #aaa;
-@amshopby-color-grey: #666;
 
 //
 //  Common
@@ -136,12 +118,12 @@
         }
 
         .ui-widget-overlay {
-            background: @amshopby-color-light-grey;
+            background: @color-gray-light1;
             opacity: .3;
         }
 
         .ui-widget-shadow {
-            box-shadow: 0 0 5px @amshopby-color-grey;
+            box-shadow: 0 0 5px @color-gray-dark2;
         }
 
         .filter-options-content .rating-summary {
@@ -207,16 +189,16 @@
     .filter-options-content .item a {
         &:hover {
             background-color: transparent;
-            color: @amshopby-filter-item__active__color;
+            color: @color-gray-light4;
         }
 
         &:hover .count {
-            color: @amshopby-filter-item__active__color;
+            color: @color-gray-light4;
         }
 
         &:active,
         &:active .count {
-            color: @amshopby-filter-item__pressed__color;
+            color: @secondary-black;
             text-decoration: none;
         }
     }
@@ -244,10 +226,10 @@
         .filter-options-content & {
             background: transparent;
             border: 0;
-            color: @amshopby-show-more__color;
+            color: @secondary-black;
             cursor: pointer;
             display: none;
-            font-size: 14px;
+            .lib-font-size(14);
             font-weight: @font-weight__regular;
             letter-spacing: .03em;
             line-height: 20px;
@@ -265,14 +247,14 @@
         &:hover,
         .filter-options-content &:hover {
             background-color: transparent;
-            color: @amshopby-show-more__hover__color;
+            color: @secondary-black;
             text-decoration: none;
         }
 
         &:active,
         .filter-options-content &:active {
             box-shadow: none;
-            color: @amshopby-show-more__color;
+            color: @secondary-black;
         }
 
         &:before {
