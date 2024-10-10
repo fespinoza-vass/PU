@@ -1,0 +1,16 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_AppIntegrations
+ * @author Vass Team
+ */
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Vass\AppIntegrations\ViewModel\Platform $viewModel
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$viewModel = $block->getData('view_model');
+?>
+
+<input name="platform" type="hidden" value="<?= $escaper->escapeHtml($viewModel->getPlatform()) ?>" />

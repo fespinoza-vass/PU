@@ -1,0 +1,64 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<if args="visible()">
+    <div class="select-address__wrapper">
+        <div class="select-address select-address__name" style="display: none">
+            <span><!-- ko i18n: 'Name' --><!-- /ko -->:</span>
+            <span data-bind="text: getCustomerName()"></span>
+        </div>
+
+        <div class="select-address select-address__lastname" style="display: none">
+            <span><!-- ko i18n: 'Last Name' --><!-- /ko -->:</span>
+            <span data-bind="text: getCustomerLastName()"></span>
+        </div>
+
+        <div class="select-address select-address__document" style="display: none">
+            <span><span data-bind="text: getDocumentType()"></span>:</span>
+            <span data-bind="text: getDocument()"></span>
+        </div>
+
+        <div class="select-address select-address__region">
+            <span><!-- ko i18n: 'Region' --><!-- /ko -->:</span>
+            <span data-bind="if: getRegion()">
+                <span data-bind="text: getRegion()"></span>
+            </span>
+            <span data-bind="ifnot: getRegion()">
+                <!-- ko i18n: 'None' --><!-- /ko -->
+            </span>
+        </div>
+
+        <div class="select-address select-address__province">
+            <span><!-- ko i18n: 'Province' --><!-- /ko -->:</span>
+            <span data-bind="text: getCity()"></span>
+        </div>
+
+        <div class="select-address select-address__colony">
+            <span><!-- ko i18n: 'Colony' --><!-- /ko -->:</span>
+            <span data-bind="text: getColony()"></span>
+        </div>
+
+        <div class="select-address select-address__street">
+            <span><!-- ko i18n: 'Street' --><!-- /ko -->:</span>
+            <span><text args="_.values(address().street).join(', ')"></text></span>
+        </div>
+
+        <div class="select-address select-address__reference">
+            <span><!-- ko i18n: 'Reference' --><!-- /ko -->:</span>
+            <span data-bind="text: getReference()"></span>
+        </div>
+
+        <div class="select-address select-address__telephone">
+            <span><!-- ko i18n: 'Telephone' --><!-- /ko -->:</span>
+            <span data-bind="if: address().telephone">
+                <span data-bind="text: address().telephone"></span>
+            </span>
+            <span data-bind="ifnot: address().telephone">
+                <!-- ko i18n: 'None' --><!-- /ko -->
+            </span>
+        </div>
+    </div>
+</if>

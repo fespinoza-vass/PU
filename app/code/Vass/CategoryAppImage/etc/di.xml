@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Category\Attribute\Backend\Image">
+        <plugin name="validate_image_size" type="Vass\CategoryAppImage\Plugin\ValidateImage" />
+    </type>
+    <type name="Magento\Catalog\Model\Category\DataProvider">
+        <plugin name="category_app_image_plugin" type="Vass\CategoryAppImage\Plugin\CategoryAppImage" />
+    </type>
+    <type name="Magento\Catalog\Model\Category\DataProvider">
+        <plugin name="category_app_image_attribute" type="Vass\CategoryAppImage\Plugin\CategoryAppImage" />
+    </type>
+
+</config>
