@@ -4,14 +4,10 @@
  */
 
 //
-//  Base Styles
-//  __________________________________________________
-
-//
 //  Imports
 //  --------------------------------------------------
 
-@import '../_mixins';
+@import '../module/_mixins';
 
 //
 //  Common
@@ -21,7 +17,7 @@
 
     .amshopby-filter-current .amshopby-item.item {
         background-color: @color-gray-light5;
-        padding: 5px;
+        padding: @indent__xs;
         padding-right: 25px;
     }
 
@@ -61,7 +57,7 @@
     }
 
     .amshopby-item .filter-value {
-        margin-left: 5px;
+        margin-left: @indent__xs;
     }
 
     .amshopby-filter-tooltip {
@@ -83,11 +79,11 @@
     }
 
     .filter-options-item .filter-options-title:after {
-        font-size: 14px;
+        .lib-font-size(14);
     }
 
     .range.am-fromto-widget .am-filter-go {
-        margin: 0 10px;
+        margin: 0 @indent__s;
         vertical-align: top;
     }
 
@@ -117,7 +113,7 @@
             background-repeat: no-repeat;
             background-size: contain;
             display: inline-block;
-            margin: 0 10px 0 0;
+            margin: 0 @indent__s 0 0;
         }
 
         > .item {
@@ -140,7 +136,7 @@
     .filter-options .am-swatch-wrapper {
         & {
             line-height: initial;
-            margin: 0 0 5px !important;
+            margin: 0 0 @indent__xs !important;
         }
 
         &.-amshopby-hidden {
@@ -162,7 +158,7 @@
         }
 
         .filter-options-content {
-            background-color: #fff;
+            background-color: @primary-white;
             border: 1px solid transparent;
             border-radius: 6px;
             box-shadow: 0 4px 8px rgba(190, 199, 219, .21), 0 6px 25px rgba(190, 199, 219, .28);
@@ -174,7 +170,7 @@
 
         .am-filter-items-rating li {
             & {
-                margin: 0 0 10px;
+                margin: 0 0 @indent__s;
             }
 
             &:last-child {
@@ -193,11 +189,11 @@
 
     .filter-options .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
         right: 8px;
-        top: 5px;
+        top: @indent__xs;
     }
 
     .page-layout-1column .filter-options-item.active .filter-options-content {
-        padding: 10px 15px;
+        padding: @indent__s 15px;
     }
 
     .page-layout-1column .filter-options-content li.item {
@@ -250,7 +246,7 @@
             font-size: 0;
             height: 0;
             line-height: 0;
-            margin: 5px 0;
+            margin: @indent__xs 0;
         }
     }
 
@@ -267,6 +263,7 @@
             display: none;
         }
     }
+
     // end magento styles override
 
     .am-filter-items-attr_price {
@@ -291,7 +288,7 @@
 
     .amshopby-category-dropdown {
         & {
-            background-color: #fff;
+            background-color: @primary-white;
             border: 1px solid @amshopby-dropdown__border-color;
             cursor: pointer;
             display: block;
@@ -305,7 +302,7 @@
         }
 
         &:after {
-            border-color: #000 transparent transparent;
+            border-color: @secondary-black transparent transparent;
             border-style: solid;
             border-width: .5rem .4rem 0;
             box-sizing: border-box;
@@ -358,7 +355,7 @@
             border: 1px solid #a79d95;
             border-radius: 1px;
             display: inline-block;
-            font-size: 1.2rem;
+            .lib-font-size(@font-size__l);
             margin: .3rem 0 .3rem .3rem;
             padding: .3rem 2.4rem .4rem 1rem;
             position: relative;
@@ -372,7 +369,7 @@
             bottom: 0;
             box-shadow: none;
             color: #514943;
-            font-size: .5em;
+            .lib-font-size(8);
             height: auto;
             line-height: 1;
             margin: 0;
@@ -385,7 +382,7 @@
 
         .action-close:before {
             content: 'x';
-            font-size: 10px;
+            .lib-font-size(@font-size__s);
             transition: color .1s linear;
         }
 
@@ -408,7 +405,7 @@
 
         .am-input {
             left: 0;
-            margin: 0 5px 0 0;
+            margin: 0 @indent__xs 0 0;
             position: absolute;
             top: 4px;
         }
@@ -504,12 +501,12 @@
         & {
             clear: both;
             display: inline-block;
-            margin-right: 5px;
+            margin-right: @indent__xs;
         }
 
         img {
             float: left;
-            margin: 0 5px 5px 0;
+            margin: 0 @indent__xs @indent__xs 0;
         }
 
         img:not([src*='/resized']) {
@@ -544,7 +541,7 @@
                 .am-flex();
 
                 font-weight: 600;
-                padding: 0 5px 0 0;
+                padding: 0 @indent__xs 0 0;
             }
 
             &:after {
@@ -610,7 +607,7 @@
         }
 
         .am-shopby-swatch-label {
-            margin-left: 10px;
+            margin-left: @indent__s;
         }
 
         .swatch-option-link-layered {
@@ -626,10 +623,10 @@
 
     .am-dropdown .am-select,
     .am-dropdown .chosen-container .chosen-choices {
-        background-color: #fff;
+        background-color: @primary-white;
         border-color: #ccc;
         font-family: @font-family__base;
-        font-size: 14px;
+        .lib-font-size(14);
         min-height: 32px;
     }
 
@@ -638,7 +635,7 @@
     }
 
     .am-dropdown .chosen-container-multi .chosen-choices li.search-field input[type='text'] {
-        color: #000;
+        color: @secondary-black;
         font-family: @font-family__base;
         min-width: 100px;
     }
@@ -707,7 +704,7 @@
         }
 
         .filter-options-title {
-            padding-right: 5px;
+            padding-right: @indent__xs;
         }
 
         .filter-options-title:after {
@@ -726,7 +723,7 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .sidebar.sidebar-main.-amshopby-sticky {
         & {
-            background: #fff;
+            background: @primary-white;
             position: sticky;
             top: 0;
             z-index: 10;
