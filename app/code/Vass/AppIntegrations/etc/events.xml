@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_AppIntegrations
+ * @author Vass Team
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="layout_generate_blocks_before">
+        <observer name="vass_seo_data" instance="Vass\AppIntegrations\Observer\CookieLogged"/>
+    </event>
+</config>
