@@ -1,0 +1,97 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_AsyncOrder
+ * @author Vass Team
+ */
+
+/**
+ * @var \Magento\AsyncOrder\Block\Order\History $block
+ */
+?>
+
+<div class="order-history-container">
+    <?php $_orders = $block->getOrders(); ?>
+    <?= $block->getChildHtml('info') ?>
+    <?php if ($_orders && count($_orders)) : ?>
+        <div class="order-products-toolbar toolbar top"><?= $block->getPagerHtml() ?></div>
+
+        <div class="orders-history">
+            <div class="orders-header row">
+                <div class="col id"><?= $block->escapeHtml(__('Order #')) ?></div>
+                <div class="col date"><?= $block->escapeHtml(__('Date')) ?></div>
+                <?= $block->getChildHtml('extra.column.header') ?>
+                <div class="col total"><?= $block->escapeHtml(__('Order Total')) ?></div>
+                <div class="col status"><?= $block->escapeHtml(__('Status')) ?></div>
+                <div class="col actions"><?= $block->escapeHtml(__('Action')) ?></div>
+            </div>
+            <div class="orders-body">
+                <?php foreach ($_orders as $_order) : ?>
+                    <div class="order-row row">
+                        <div class="col id" data-th="<?= $block->escapeHtml(__('Order #')) ?>">
+                            <div class="header id mobile"><?= $block->escapeHtml(__('Order #')) ?></div>
+                            <?= $block->escapeHtml($_order->getRealOrderId()) ?>
+                        </div>
+
+                        <div class="col date" data-th="<?= $block->escapeHtml(__('Date')) ?>">
+                            <div class="header date mobile"><?= $block->escapeHtml(__('Date')) ?></div>
+                            <?= /* @noEscape */ $block->formatDate($_order->getCreatedAt()) ?>
+                        </div>
+
+                        <?php $extra = $block->getChildBlock('extra.container'); ?>
+                        <?php if ($extra) : ?>
+                            <?php $extra->setOrder($_order); ?>
+                            <?= $extra->getChildHtml() ?>
+                        <?php endif; ?>
+
+                        <div class="col total" data-th="<?= $block->escapeHtml(__('Order Total')) ?>">
+                            <div class="header total mobile"><?= $block->escapeHtml(__('Order Total')) ?></div>
+                            <?= /* @noEscape */ $_order->formatPrice($_order->getGrandTotal()) ?>
+                        </div>
+
+                        <div class="col status" data-th="<?= $block->escapeHtml(__('Status')) ?>">
+                            <div class="header status mobile"><?= $block->escapeHtml(__('Status')) ?></div>
+                            <?= $block->escapeHtml($_order->getStatusLabel()) ?>
+                        </div>
+
+                        <div class="col actions" data-th="<?= $block->escapeHtml(__('Actions')) ?>">
+                            <div class="header actions mobile"><?= $block->escapeHtml(__('Actions')) ?></div>
+
+                            <div class="actions-buttons">
+                                <?php if ($_order->getStatus() != Magento\AsyncOrder\Model\OrderManagement::STATUS_RECEIVED) : ?>
+                                    <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
+                                        <span><?= $block->escapeHtml(__('View Order')) ?></span>
+                                    </a>
+                                    <?php if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder($_order->getEntityId())) : ?>
+                                        <a href="#" data-post='<?= /* @noEscape */
+                                        $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+                                            ->getPostData($block->getReorderUrl($_order))
+                                        ?>' class="action order">
+                                            <span><?= $block->escapeHtml(__('Reorder')) ?></span>
+                                        </a>
+                                    <?php endif ?>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <?php if ($block->getPagerHtml()) : ?>
+            <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+        <?php endif ?>
+    <?php else : ?>
+        <div class="empty-order-history-container">
+            <div class="message info empty">
+                <span><?= $block->escapeHtml($block->getEmptyOrdersMessage()) ?></span>
+            </div>
+
+            <div class="link-go-shopping-container">
+                <a href="<?= $block->getUrl() ?>" class="action go-shopping">
+                    <span><?= $block->escapeHtml(__('Go shopping')) ?></span>
+                </a>
+            </div>
+        </div>
+    <?php endif ?>
+</div>

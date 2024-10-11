@@ -15,8 +15,7 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
     <div class="block-content" aria-labelledby="block-customer-login-heading">
         <div class="block-left">
             <img class="customer-login-image"
-                src="<?= $escaper->escapeUrl($this->getViewFileUrl('Magento_Customer::image/customer_image.png')); ?>"
-                alt="">
+                src="<?= $escaper->escapeUrl($this->getViewFileUrl('Magento_Customer::image/customer_image.png')); ?>">
         </div>
         <div class="block-right">
             <div class="block-title">
@@ -38,7 +37,7 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
                                    title="<?= $escaper->escapeHtmlAttr(__('Email')) ?>"
                                    data-mage-init='{"mage/trim-input":{}}'
                                    data-validate="{required:true, 'validate-email':true}"
-                                   placeholder="<?= $escaper->escapeHtml(__('Enter your email')) ?>">
+                                   placeholder="<?= $escaper->escapeHtml(__('Email')) ?>">
                         </div>
                     </div>
                     <div class="field password required">
@@ -49,7 +48,7 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
                                    class="input-text" id="pass"
                                    title="<?= $escaper->escapeHtmlAttr(__('Password')) ?>"
                                    data-validate="{required:true}"
-                                   placeholder="<?= $escaper->escapeHtml(__('Enter your password')) ?>">
+                                   placeholder="<?= $escaper->escapeHtml(__('Password')) ?>">
                             <div class="field choice" data-bind="scope: 'showPassword'">
                                 <icon class="icon icon-eye"></icon>
                                 <!-- ko template: getTemplate() --><!-- /ko -->
@@ -64,7 +63,7 @@ $loginButtonViewModel = $block->getData('login_button_view_model');
                     </div>
                     <div class="create-account">
                        <p><?= $escaper->escapeHtmlAttr(__("You don't have an account?")) ?></p>
-                       <a href="<?= $escaper->escapeUrl($block->getUrl('customer/account/create')) ?>">
+                       <a  class="create-account-link" href="<?= $escaper->escapeUrl($block->getUrl('customer/account/create')) ?>">
                             <?= $escaper->escapeHtmlAttr(__('Create an Account')) ?>
                        </a>
                     </div>
