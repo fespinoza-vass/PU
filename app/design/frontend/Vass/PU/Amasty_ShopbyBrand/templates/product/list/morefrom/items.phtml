@@ -1,0 +1,159 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+use Magento\Swatches\Block\Product\Renderer\Configurable;
+
+/**
+ * @var \Amasty\ShopbyBrand\Block\Catalog\Product\ProductList\MoreFrom $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+use Magento\Catalog\Block\Product\AbstractProduct;
+use Magento\Catalog\Block\Product\ProductList\Crosssell;
+use Magento\Catalog\Block\Product\ProductList\Related;
+use Magento\Catalog\Block\Product\ProductList\Upsell;
+use Magento\Catalog\Block\Product\ReviewRendererInterface;
+use Magento\Framework\App\ActionInterface;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Magento\Wishlist\Helper\Data;
+use Vass\ProductSliderWidget\Helper\PreparePostData;
+
+$class = 'amshopby-morefrom';
+$image = 'am_brand_more_from_image';
+$title = $block->getTitle();
+$items = $block->getItems();
+$idSwiper = 'product-brand';
+
+$showAddTo = true;
+$showCart = true;
+$templateType = null;
+$description = false;
+?>
+
+<div class="product-grid products-slider slider grid">
+    <?php if ($items): ?>
+    <div class="block-title title">
+        <h3 class="product-grid__title skew-title">
+            <?= $escaper->escapeHtml($title) ?>
+        </h3>
+    </div>
+    <div class="products-slider__content">
+        <div class="swiper-button-prev" id="<?= /** @noEscape */$idSwiper ?>-prev">
+            <span class="icon icon-pointer-left"></span>
+        </div>
+
+        <div id="<?= /** @noEscape */$idSwiper ?>" class="products-slider__wrapper swiper">
+        <div class="product-items swiper-wrapper grid">
+            <?php foreach ($items as $_item): ?>
+                <div class="item product product-item swiper-slide">
+                    <div class="product-item-info">
+                        <div class="product-item-image">
+                            <a href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>"
+                               class="image__link">
+                                <?= $block->getImage($_item, $image, ['loading' => 'lazy'])->toHtml() ?>
+                            </a>
+                        </div>
+
+                    <div class="product details product-item-details">
+                        <div class="product-top-name">
+                            <span class="product-brand">
+                                <?= $block->escapeHtml($_item->getAttributeText('manufacturer') ?? ''); ?>
+                            </span>
+                            <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
+                        </div>
+                        <span class="product-item-name">
+                            <a title="<?= $escaper->escapeHtml($_item->getName()) ?>"
+                               href="<?= $escaper->escapeUrl($block->getProductUrl($_item)) ?>"
+                               class="product-item-link">
+                                <?= $escaper->escapeHtml($_item->getName()) ?>
+                            </a>
+                        </span>
+
+                    <div class="options-swatches">
+                        <?php if ($_item->getTypeId() === 'configurable'): ?>
+                            <?= $block->getLayout()
+                                ->createBlock(Configurable::class)
+                                ->setProduct($_item)
+                                ->toHtml();
+                            ?>
+                        <?php endif; ?>
+                    </div>
+
+                    <?= $block->getProductPrice($_item) ?>
+
+                    <div class="product-item-inner">
+                        <div class="product-item-actions">
+                            <?php if ($_item->isSaleable()): ?>
+                                <?php
+                                $postDataHelper = $this->helper(PreparePostData::class); // phpcs:ignore
+                                $postData = $postDataHelper->getData(
+                                    $block->getAddToCartUrl($_item),
+                                    ['product' => $_item->getEntityId()]
+                                );
+                                $value = $postData['data'][ActionInterface::PARAM_NAME_URL_ENCODED];
+                                ?>
+                                <form data-role="tocart-form"
+                                      data-product-sku="<?= $escaper->escapeHtmlAttr($_item->getSku()) ?>"
+                                      action="<?= $escaper->escapeUrl($block->getAddToCartUrl($_item)) ?>"
+                                      method="post">
+                                    <input type="hidden" name="product"
+                                           value="<?= /* @noEscape */
+                                           (int)$_item->getEntityId() ?>">
+                                    <input type="hidden"
+                                           name="<?= /* @noEscape */
+                                           ActionInterface::PARAM_NAME_URL_ENCODED ?>"
+                                           value="<?= $escaper->escapeHtml($value) ?>">
+                                    <?= /* @noEscape */
+                                    $block->getBlockHtml('formkey') ?>
+                                    <button type="submit"
+                                            title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                            class="action tocart primary icon icon-shopping-bag">
+                                        <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                    </button>
+                                </form>
+                            <?php endif; ?>
+
+                            <?php if ($this->helper(Data::class)->isAllow()): // phpcs:ignore ?>
+                                <div class="secondary-addto-links actions-secondary"
+                                     data-role="add-to-links">
+                                    <a href="#"
+                                       data-post='<?= /** @noEscape */
+                                       $block->getAddToWishlistParams($_item) ?>'
+                                       class="icon icon-wishlist-empty"
+                                       data-action="add-to-wishlist"
+                                       title="<?= $escaper->escapeHtmlAttr(__('Add to Wish List')) ?>">
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper-button-next" id="<?= /** @noEscape */$idSwiper ?>-next">
+            <span class="icon icon-pointer-right"></span>
+        </div>
+    </div>
+    <?php endif; ?>
+</div>
+
+<script type="text/x-magento-init">
+        {
+            "#<?= /** @noEscape */$idSwiper ?>": {
+                "Magento_Catalog/js/slider": {
+                    "slidesInDesktop": "3",
+                    "slidesInTablet": "2",
+                    "slidesInMobile": "2"
+                }
+            }
+        }
+</script>

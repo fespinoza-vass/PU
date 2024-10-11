@@ -1,5 +1,11 @@
 <?php
-namespace Vass\SliderReview\Block\Adminhtml\Widget\Type;
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_CardsSlider
+ * @author VASS Team
+ */
+
+namespace Vass\CardsSlider\Block\Adminhtml\Widget\Type;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context as TemplateContext;
@@ -9,13 +15,15 @@ use Magento\Framework\Data\Form\Element\Factory;
 use Magento\Framework\Data\Form\Element\Factory as FormElementFactory;
 use Magento\Framework\Data\Form\Element\Text;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\SomeModule\ElementFactory;
+use Magento\Ui\DataProvider\Mapper\FormElement;
 
 class ImageChooser extends Template
 {
     /**
      * @var Factory
      */
-    protected $_elementFactory;
+    protected FormElementFactory $_elementFactory;
     /**
      * @param TemplateContext $context
      * @param FormElementFactory $elementFactory
