@@ -181,37 +181,37 @@ $colonyVal = $colonyAttr ? $colonyAttr->getValue() : '';
                         <?= /* @noEscape */ $secureRenderer->renderStyleAsTag("display: none;", 'div.message.warning') ?>
                     </div>
                 </div>
-
-                <?php if ($block->isDefaultBilling()): ?>
-                    <div class="message info">
-                        <span><?= $escaper->escapeHtml(__("It's a default billing address.")) ?></span>
-                    </div>
-                <?php elseif ($block->canSetAsDefaultBilling()): ?>
-                    <div class="field choice set billing">
-                        <input type="checkbox" id="primary_billing" name="default_billing" value="1" class="checkbox">
-                        <label class="label" for="primary_billing">
-                            <span><?= $escaper->escapeHtml(__('Use as my default billing address')) ?></span>
-                        </label>
-                    </div>
-                <?php else: ?>
-                    <input type="hidden" name="default_billing" value="1" />
-                <?php endif; ?>
-
-                <?php if ($block->isDefaultShipping()): ?>
-                    <div class="message info">
-                        <span><?= $escaper->escapeHtml(__("It's a default shipping address.")) ?></span>
-                    </div>
-                <?php elseif ($block->canSetAsDefaultShipping()): ?>
-                    <div class="field choice set shipping">
-                        <input type="checkbox" id="primary_shipping" name="default_shipping" value="1" class="checkbox">
-                        <label class="label" for="primary_shipping">
-                            <span><?= $escaper->escapeHtml(__('Use as my default shipping address')) ?></span>
-                        </label>
-                    </div>
-                <?php else: ?>
-                    <input type="hidden" name="default_shipping" value="1">
-                <?php endif; ?>
             </div>
+
+            <?php if ($block->isDefaultBilling()): ?>
+                <div class="message info">
+                    <span><?= $escaper->escapeHtml(__("It's a default billing address.")) ?></span>
+                </div>
+            <?php elseif ($block->canSetAsDefaultBilling()): ?>
+                <div class="field choice set billing">
+                    <input type="checkbox" id="primary_billing" name="default_billing" value="1" class="checkbox">
+                    <label class="label" for="primary_billing">
+                        <span><?= $escaper->escapeHtml(__('Use as my default billing address')) ?></span>
+                    </label>
+                </div>
+            <?php else: ?>
+                <input type="hidden" name="default_billing" value="1" />
+            <?php endif; ?>
+
+            <?php if ($block->isDefaultShipping()): ?>
+                <div class="message info">
+                    <span><?= $escaper->escapeHtml(__("It's a default shipping address.")) ?></span>
+                </div>
+            <?php elseif ($block->canSetAsDefaultShipping()): ?>
+                <div class="field choice set shipping">
+                    <input type="checkbox" id="primary_shipping" name="default_shipping" value="1" class="checkbox">
+                    <label class="label" for="primary_shipping">
+                        <span><?= $escaper->escapeHtml(__('Use as my default shipping address')) ?></span>
+                    </label>
+                </div>
+            <?php else: ?>
+                <input type="hidden" name="default_shipping" value="1">
+            <?php endif; ?>
         </div>
 
         <div class="actions-toolbar">

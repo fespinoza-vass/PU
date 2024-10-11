@@ -637,6 +637,7 @@
 
         .block.block-collapsible-nav {
             margin-bottom: 0;
+            position: inherit;
 
             .delimiter {
                 display: none;
@@ -1136,10 +1137,7 @@
             display: grid;
             place-items: center;
             padding: @indent__l 0;
-            position: absolute;
-            top: 0;
             width: 100%;
-            left: 0;
 
             .head__icon.icon.icon-user {
                 display: none;
@@ -1151,6 +1149,15 @@
             }
         }
 
+        .columns {
+            display: flex;
+            flex-direction: column;
+
+            .sidebar-main {
+                order: 0;
+            }
+        }
+
         .sidebar-additional {
             display: none;
         }
@@ -1159,7 +1166,7 @@
             position: relative;
             border-radius: 2px;
             padding: @indent__m @indent__base;
-            margin-top: 200px;
+            margin-top: 24px;
             margin-bottom: 32px;
 
             .page-title {
@@ -1278,7 +1285,6 @@
             .column.main {
                 background-color: inherit;
                 padding: 0;
-                margin-top: 216px;
             }
         }
 
@@ -1287,7 +1293,7 @@
 
             .title.block-collapsible-nav-title {
                 display: flex;
-                margin: 0 @indent__base;
+                margin: 0;
                 padding: 8px @indent__m;
                 justify-content: space-between;
                 background-color: @primary-white;
@@ -1869,7 +1875,6 @@
 
         .page-main > .main-wrapper {
             padding: 56px 0;
-            max-width: 1200px;
         }
 
         .columns {
@@ -1877,6 +1882,7 @@
             flex-direction: row;
             justify-content: center;
             gap: @indent__m;
+            padding: 0 120px;Z
 
             &:after {
                 display: none;
@@ -1933,7 +1939,7 @@
                     .form-user-data {
                         display: flex;
                         flex-direction: column;
-                        gap: 40px;
+                        gap: 24px;
 
                         .form-fields-grid {
                             display: grid;
@@ -2226,16 +2232,19 @@
             padding: 40px;
 
             .addresses-wrapper.additional-addresses {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                display: flex;
+                flex-wrap: wrap;
                 gap: @indent__m;
 
                 .address-item {
                     display: flex;
                     flex-direction: column;
                     gap: @indent__m;
-                    border: 1px solid #F3F3F3;
+                    border: 1px solid @secondary-white;
                     padding: @indent__l;
+                    max-width: 380px;
+                    box-sizing: border-box;
+                    width: 100%;
 
                     .address-data {
                         display: flex;
