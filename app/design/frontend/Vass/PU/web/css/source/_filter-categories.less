@@ -13,18 +13,40 @@
         display: none;
     }
 
-    body {
-        .filter {
-            &.active {
-                .filter-title {
+    .filter {
+        &.active {
+            display: block;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 500;
+            width: 100%;
+            background-color: @primary-white;
+
+            .filter {
+                &-options {
+                    overflow-y: auto;
+                    height: calc(100vh - 136px);
+                    position: relative;
+                }
+
+                &-title {
+                    strong {
+                        position: fixed;
+                        border: 0;
+                        top: 55px;
+                        .lib-font-size(20);
+                    }
+
                     strong:after {
                         position: fixed;
                         -webkit-font-smoothing: antialiased;
                         -moz-osx-font-smoothing: grayscale;
-                        .lib-font-size(@font-size__m);
+                        .lib-font-size(@font-size__s);
                         line-height: inherit;
                         color: @tertiary-black;
-                        content: @icon-filters;
+                        content: @icon-close;
                         font-family: @icons__font-name;
                         display: inline-block;
                         text-align: center;
@@ -42,31 +64,24 @@
                 display: block;
             }
         }
-            &.block {
-                margin-bottom: 0;
-
-            &-subtitle {
-                display: block;
-            }
-        }
 
         &-title {
             margin-top: 32px;
 
-                strong {
-                    .lib-font-size(@font-size__m);
-                    border: 1px solid @secondary-black;
-                    border-radius: 3px;
-                    font-weight: @font-weight__regular;
-                    line-height: @line-height__l;
-                    padding: @indent__s @indent__m;
-                    z-index: 2;
+            strong {
+                .lib-font-size(@font-size__m);
+                border: 1px solid @secondary-black;
+                border-radius: 3px;
+                font-weight: @font-weight__regular;
+                line-height: @line-height__l;
+                padding: @indent__s @indent__m;
+                z-index: 2;
 
                 &::after {
                     .lib-font-size(14);
                     font-family: @icons__font-name;
                     content: @icon-filters;
-                    padding-left: @indent__xs;
+                    padding-left: @indent__s;
                 }
 
                 &[data-count]:after {
@@ -88,20 +103,14 @@
             }
         }
 
-            .block-subtitle {
-                border-bottom: @border-width__base solid @border-color__base;
-                font-size: @font-size__base;
-                font-weight: @font-weight__semibold;
-                line-height: 1em;
-                padding: @indent__s @indent__s @indent__base;
-            }
+        .block-subtitle {
+            font-size: @font-size__base;
+            line-height: 1em;
+            padding: @indent__s @indent__s @indent__base;
+        }
 
         &-current {
             margin: 0;
-
-            .items {
-                padding: @indent__xs @indent__s;
-            }
 
             .item {
                 padding-left: 17px;
@@ -119,11 +128,11 @@
                 position: absolute;
                 top: -1px;
             }
-        }
 
-        &-actions {
-            margin-bottom: @indent__m;
-            padding: 0 @indent__s;
+            & + .filter-action {
+                display: inline;
+                padding-left: 20px;
+            }
         }
 
         &-label {
@@ -131,18 +140,6 @@
                 content: ': ';
             }
         }
-        &-label {
-            &:after {
-                content: ': ';
-            }
-        }
-            &-label {
-                font-weight: @font-weight__bold;
-
-                &:after {
-                    content: ': ';
-                }
-            }
 
         &-options {
             display: none;
@@ -155,7 +152,7 @@
                 cursor: pointer;
                 margin: 0;
                 overflow: hidden;
-                padding: @indent__s @indent__s + 30px 0 @indent__s;
+                padding: @indent__s 40px 0 0;
                 position: relative;
                 word-break: break-all;
                 z-index: 1;
@@ -196,9 +193,7 @@
                 }
 
                 a {
-                    margin-left: -5px;
                     margin-right: -5px;
-                    padding-left: 5px;
                     padding-right: 7px;
 
                     &:hover {
@@ -261,7 +256,7 @@
                 z-index: 2;
 
                 strong {
-                    .lib-font-size(@font-size__l);
+                    .lib-font-size(20);
                     background: none;
                     color: @secondary-black;
                     left: auto;
@@ -277,17 +272,19 @@
                 overflow: scroll;
                 position: relative;
                 right: 0;
-                top: 0;
+                top: @indent__l;
                 z-index: 10;
+            }
+        }
+
+        &-current {
+            & + .filter-actions {
+                display: inline;
             }
         }
 
         &-subtitle {
             display: none;
-        }
-
-        &-actions {
-            margin: -35px -@indent__s @indent__m;
         }
 
         &-options-content {
@@ -385,9 +382,27 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .filter .block-subtitle {
-        .lib-font-size(20);
-        font-weight: @font-weight__bold;
+    .filter {
+        .block-subtitle {
+            .lib-font-size(20);
+            font-weight: @font-weight__bold;
+            padding: 0;
+        }
+
+        &-options {
+            .filter-options-title {
+                padding: @indent__m 40px 0 0;
+
+                &:after {
+                    right: 6px;
+                    top: @indent__m;
+                }
+            }
+        }
+
+        &-actions {
+            padding: 0;
+        }
     }
 
     .block {
@@ -401,13 +416,12 @@
                 }
 
                 &-options-content {
-                    padding: @indent__xs 0;
-                    padding-left: @indent__s;
+                    padding: 0;
                 }
 
                 &-options {
                     display: block;
-                    padding: @indent__base 0;
+                    padding: 0;
 
                     &.filter-options-title {
                         margin: 0;
