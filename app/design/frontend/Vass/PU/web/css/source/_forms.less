@@ -118,7 +118,7 @@
         height: 20px;
         background-color: @primary-white;
         border: 0.5px solid @primary-black;
-        position: relative;
+        position: absolute;
         border-radius: 1px;
         cursor: pointer;
 
@@ -128,8 +128,8 @@
             .lib-font-size(8);
             width: 2px;
             height: 0;
-            position: absolute;
-            top: 5px;
+            position: inherit;
+            top: @indent__xs;
             left: 4px;
             transform: translate(-50%, -50%);
 
