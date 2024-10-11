@@ -7,7 +7,7 @@
 //  Imports
 //  --------------------------------------------------
 
-@import '../../module/_mixins';
+@import '../../_mixins';
 
 //
 //  Common
@@ -15,12 +15,11 @@
 
 & when (@media-common = true) {
     .am_shopby_apply_filters {
-        & {
-            position: absolute;
-            z-index: 999;
-            width: 100%;
-            transition: left .2s ease-in-out;
-        }
+        position: sticky;
+        bottom: 0;
+        z-index: 999;
+        width: 100%;
+        transition: left .2s ease-in-out;
 
         &.visible {
             bottom: 0;
@@ -28,15 +27,14 @@
     }
 
     .am-show-button {
-        & {
-            z-index: 211;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            width: 100%;
-            text-align: center;
-        }
+        position: inherit;
+        z-index: 211;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 100%;
+        text-align: center;
 
         .action-primary {
             width: 100%;
@@ -46,7 +44,7 @@
         > .am-items {
             display: none;
             margin: 0;
-            padding: 0 10px;
+            padding: 0 @indent__s;
             color: @secondary-black;
             .lib-font-size(14);
             line-height: 22px;
@@ -73,14 +71,12 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .am_shopby_apply_filters {
-        & {
-            position: absolute;
-            bottom: inherit;
-            z-index: 212;
-            display: block;
-            padding: 0;
-            width: inherit;
-        }
+        position: inherit;
+        bottom: inherit;
+        z-index: 212;
+        display: block;
+        padding: 0;
+        width: inherit;
 
         &.-fixed {
             position: fixed;
@@ -92,29 +88,23 @@
     }
 
     .am-show-button {
-        & {
-            position: absolute;
-            justify-content: space-between;
-            margin: 0 0 @indent__s;
-            padding: 12px @indent__s;
-            min-width: 180px;
-            width: inherit;
-            border: none;
-            border-radius: 6px;
-            background-color: white;
+        position: inherit;
+        justify-content: space-between;
+        margin: 0 0 @indent__s;
+        min-width: 180px;
+        width: inherit;
+        border: none;
+        border-radius: 6px;
+        background-color: white;
+
+        .action-primary {
+            width: 100%;
+            margin: 15px;
         }
 
         > .am-items {
             margin: 0 auto;
             display: none;
-        }
-
-        &.-vertical:before {
-            bottom: 0;
-        }
-
-        &.-horizontal:before {
-            bottom: 0;
         }
     }
 }

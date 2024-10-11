@@ -7,8 +7,18 @@
 //  Imports
 //  --------------------------------------------------
 
-@import '../../module/_mixins';
+@import '../../_mixins';
 
+@amshopby-filter-item__hover__color: @amshopby__hover__color;
+@amshopby-filter-item__active__color: @amshopby__primary__color;
+@amshopby-filter-item__pressed__color: @amshopby__pressed__color;
+@amshopby-show-more__color: #070605;
+@amshopby-show-more__hover__color: #838382;
+@amshopby-filter-content-multiselect__hover__color: #757575;
+
+@amshopby-color-white: #fff;
+@amshopby-color-light-grey: #aaa;
+@amshopby-color-grey: #666;
 
 //
 //  Common
@@ -45,8 +55,7 @@
         }
 
         .count {
-            display: inline-flex;
-            padding-left: 0;
+            display: none;
         }
 
         .am-shopby-swatch-label .count {
@@ -72,7 +81,7 @@
 
     .amasty-catalog-topnav .filter-options-item .filter-options-content {
         & {
-            padding-bottom: 10px;
+            padding-bottom: @indent__s;
         }
 
         .items:not(.items-children):not(.am-category-view),
@@ -187,6 +196,8 @@
     }
 
     .filter-options-content .item a {
+        .lib-font-size(@font-size__l);
+
         &:hover {
             background-color: transparent;
             color: @color-gray-light4;
@@ -231,9 +242,9 @@
             display: none;
             .lib-font-size(14);
             font-weight: @font-weight__regular;
-            letter-spacing: .03em;
+            letter-spacing: @indent__xs;
             line-height: 20px;
-            margin: 10px 0 0;
+            margin: @indent__s 0 0;
             position: relative;
         }
 
@@ -304,10 +315,6 @@
         & {
             color: inherit;
         }
-
-        .count {
-        }
-
     }
 }
 
@@ -319,7 +326,7 @@
     .items:not(.items-children):not(.am-category-view),
     .am-category-wrapper,
     .amshopby-fromto-wrap {
-        margin: 0 10px;
+        margin: 0 @indent__s;
     }
 
     .filter-options-content .am-ranges .items.-am-multiselect .item [class*='am-filter-item'] {
@@ -330,7 +337,8 @@
     .filter-options {
         .am-labels-folding .item .am-collapse-icon ~ [class*='am-filter-item-'],
         .am-labels-folding .item {
-            padding-left: 35px;
+            padding-left: 37px;
+            position: absolute;
         }
 
         .items:not(.items-children).-am-multiselect > .item.-is-by-click .items-children.-folding .item.-is-expanded,
@@ -382,7 +390,7 @@
         }
 
         &.-active {
-            margin-bottom: 10px;
+            margin-bottom: @indent__s;
         }
     }
 }
