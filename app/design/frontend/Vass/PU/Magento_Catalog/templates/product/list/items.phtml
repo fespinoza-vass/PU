@@ -4,22 +4,22 @@
  * @author VASS Team
  */
 
-/**
- * @var AbstractProduct $block
- * @var SecureHtmlRenderer $secureRenderer
- * @var Escaper $escaper
- */
-
+use Magento\Swatches\Block\Product\Renderer\Configurable;
 use Magento\Catalog\Block\Product\AbstractProduct;
 use Magento\Catalog\Block\Product\ProductList\Crosssell;
 use Magento\Catalog\Block\Product\ProductList\Related;
-use Magento\Catalog\Block\Product\ProductList\Upsell;
 use Magento\Catalog\Block\Product\ReviewRendererInterface;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Magento\Wishlist\Helper\Data;
 use Vass\ProductSliderWidget\Helper\PreparePostData;
+
+/**
+ * @var AbstractProduct $block
+ * @var SecureHtmlRenderer $secureRenderer
+ * @var Escaper $escaper
+ */
 
 switch ($type = $block->getType()) {
 
