@@ -8,6 +8,7 @@
 //  --------------------------------------------------
 
 @import '../../_mixins';
+
 @amshopby-choice-element__border-color: #e3e3e3;
 //
 //  Common
@@ -21,18 +22,4 @@
     &:checked + .amshopby-choice:after {
         content: '';
     }
-}
-
-//
-//  Mobile
-//  --------------------------------------------------
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-}
-
-//
-//  Desktop
-//  --------------------------------------------------
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
 }

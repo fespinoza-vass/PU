@@ -15,6 +15,7 @@
 
 & when (@media-common = true) {
     .am_shopby_apply_filters {
+        background-color: @primary-white;
         position: sticky;
         bottom: 0;
         z-index: 999;
@@ -27,7 +28,7 @@
     }
 
     .am-show-button {
-        position: inherit;
+        position: initial;
         z-index: 211;
         display: flex;
         align-items: center;
@@ -75,7 +76,7 @@
         bottom: inherit;
         z-index: 212;
         display: block;
-        padding: 0;
+        padding-top: @indent__m;
         width: inherit;
 
         &.-fixed {
