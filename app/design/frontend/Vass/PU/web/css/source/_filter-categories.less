@@ -385,7 +385,6 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-
     .filter .block-subtitle {
         .lib-font-size(20);
         font-weight: @font-weight__bold;
@@ -394,7 +393,7 @@
     .block {
         &.filter {
             background-color: @primary-white;
-            padding: 12px;
+            padding: 40px;
 
             .filter {
                 &-title {
@@ -409,6 +408,11 @@
                 &-options {
                     display: block;
                     padding: @indent__base 0;
+
+                    &.filter-options-title {
+                        margin: 0;
+                        padding-top: 12px;
+                    }
                 }
             }
         }

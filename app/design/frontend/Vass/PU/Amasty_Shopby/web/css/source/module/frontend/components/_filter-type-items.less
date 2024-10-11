@@ -9,17 +9,6 @@
 
 @import '../../_mixins';
 
-@amshopby-filter-item__hover__color: @amshopby__hover__color;
-@amshopby-filter-item__active__color: @amshopby__primary__color;
-@amshopby-filter-item__pressed__color: @amshopby__pressed__color;
-@amshopby-show-more__color: #070605;
-@amshopby-show-more__hover__color: #838382;
-@amshopby-filter-content-multiselect__hover__color: #757575;
-
-@amshopby-color-white: #fff;
-@amshopby-color-light-grey: #aaa;
-@amshopby-color-grey: #666;
-
 //
 //  Common
 //  --------------------------------------------------
@@ -197,6 +186,7 @@
 
     .filter-options-content .item a {
         .lib-font-size(@font-size__l);
+        font-weight: @font-weight__light;
 
         &:hover {
             background-color: transparent;
@@ -308,13 +298,8 @@
         text-decoration: none;
     }
 
-    .filter-content [class*='am-filter-item']:hover ~ .amshopby-choice:before {
-    }
-
     .filter-content .items.-am-multiselect [class*='am-filter-item']:hover {
-        & {
-            color: inherit;
-        }
+        color: inherit;
     }
 }
 
@@ -323,11 +308,6 @@
 //  --------------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .items:not(.items-children):not(.am-category-view),
-    .am-category-wrapper,
-    .amshopby-fromto-wrap {
-        margin: 0 @indent__s;
-    }
 
     .filter-options-content .am-ranges .items.-am-multiselect .item [class*='am-filter-item'] {
         padding-left: 35px;
@@ -400,15 +380,21 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .filter-options-content .am-ranges .items.-am-multiselect .item {
-        & {
-            position: relative;
-            .lib-font-size(@font-size__l);
-            font-weight: @font-weight__light;
+    .filter-options-item .filter-options-content {
+        .items [class*='am-filter-item'] {
+            margin-left: 12px;
+            padding: 0;
         }
+    }
+
+    .filter-options-content .am-ranges .items.-am-multiselect .item {
+        position: relative;
+        .lib-font-size(@font-size__l);
+        font-weight: @font-weight__light;
+
 
         [class*='am-filter-item'] {
-            padding-left: 28px;
+            padding-left: 20px;
         }
     }
 }
