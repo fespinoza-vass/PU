@@ -165,6 +165,8 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
             "sales_order_address as soa",
             "soa.parent_id=main_table.entity_id AND soa.address_type = 'billing'",
             [
+                "soa.razon_social as razon_social",
+                "soa.ruc as ruc",
                 "soa.invoice_required as invoice"
             ]
         );
@@ -189,9 +191,7 @@ class SalesDataProvider  extends \Magento\Framework\View\Element\UiComponent\Dat
                 "sales_order_address.lastname as apellido_cliente",
                 "sales_order_address.vat_id as dni",
                 "sales_order_address.region as region",
-                "sales_order_address.city as provincia",
-                "company as razon_social",
-                "vat_id as ruc"
+                "sales_order_address.city as provincia"
             ]
         );
 
