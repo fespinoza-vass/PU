@@ -1,0 +1,234 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @var $block \Magento\Customer\Block\Form\Register
+ */
+?>
+<?= $block->getChildHtml('form_fields_before') ?>
+<?php /* Extensions placeholder */ ?>
+<?= $block->getChildHtml('customer.form.register.extra') ?>
+<?php
+/** @var \Magento\Customer\Helper\Address $addressHelper */
+$addressHelper = $block->getData('addressHelper');
+/** @var \Magento\Directory\Helper\Data $directoryHelper */
+$directoryHelper = $block->getData('directoryHelper');
+$formData = $block->getFormData();
+/** @var \Magento\CustomerCustomAttributes\ViewModel\Address\RegionProvider $regionProvider */
+$regionProvider = $block->getRegionProvider();
+/** @var \Magento\Customer\ViewModel\CreateAccountButton $createAccountButtonViewModel */
+$createAccountButtonViewModel = $block->getData('create_account_button_view_model');
+?>
+<div class="register-container">
+    <div class="block-left">
+        <img class="customer-login-image"
+                    src="<?= $escaper->escapeUrl($this->getViewFileUrl('Magento_Customer::image/register_image.png')); ?>"
+                    alt="">
+    </div>
+    <div class="block-right">
+        <form class="form create account form-create-account"
+              action="<?= $escaper->escapeUrl($block->getPostActionUrl()) ?>"
+              method="post"
+              id="form-validate"
+              enctype="multipart/form-data"
+              autocomplete="off">
+            <?= /* @noEscape */ $block->getChildHtml('form_fields_before_in_form') ?>
+            <?= /* @noEscape */ $block->getBlockHtml('formkey'); ?>
+            <fieldset class="fieldset create info">
+                <legend class="legend"><span><?= $escaper->escapeHtml(__('Personal Information')) ?></span></legend>
+                <?php $_gender = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Gender::class) ?>
+                <input type="hidden" name="success_url" value="<?= $escaper->escapeUrl($block->getSuccessUrl()) ?>"/>
+                <input type="hidden" name="error_url" value="<?= $escaper->escapeUrl($block->getErrorUrl()) ?>"/>
+                <?= $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Name::class)
+                    ->setObject($formData)
+                    ->setForceUseCustomerAttributes(true)
+                    ->toHtml()
+                ?>
+                <?php if ($_gender->isEnabled()): ?>
+                    <?= $_gender->setGender($formData->getGender())->toHtml() ?>
+                <?php endif ?>
+
+                <?php $customerAttributes = $block->getChildBlock('customer_form_user_attributes');?>
+                <?php if ($customerAttributes): ?>
+                    <?php $customerAttributes->setObject($formData)
+                        ->setEntityType('customer')
+                        ->setShowContainer(false);?>
+                    <?php $block->restoreSessionData($customerAttributes->getMetadataForm());?>
+                    <?= $customerAttributes->toHtml() ?>
+                <?php endif;?>
+
+                <?php $_dob = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Dob::class) ?>
+                <?php if ($_dob->isEnabled()): ?>
+                    <?= $_dob->setDate($formData->getDob())->toHtml() ?>
+                <?php endif ?>
+
+                <?php $_taxvat = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Taxvat::class) ?>
+                <?php if ($_taxvat->isEnabled()): ?>
+                    <?= $_taxvat->setTaxvat($formData->getTaxvat())->toHtml() ?>
+                <?php endif ?>
+            </fieldset>
+            <fieldset class="fieldset create account" data-hasrequired="<?= $escaper->escapeHtmlAttr(__('* Required Fields')) ?>">
+                <legend class="legend"><span><?= $escaper->escapeHtml(__('Sign-in Information')) ?></span></legend>
+                <div class="field required">
+                    <label for="email_address" class="label"><span><?= $escaper->escapeHtml(__('Email')) ?></span></label>
+                    <div class="control">
+                        <input type="email"
+                               name="email"
+                               id="email_address"
+                               autocomplete="email"
+                               value="<?= $escaper->escapeHtml($formData->getEmail()) ?>"
+                               title="<?= $escaper->escapeHtml(__('Email')) ?>"
+                               class="input-text"
+                               placeholder="<?= $escaper->escapeHtml(__('Email')) ?>"
+                               data-validate="{required:true, 'validate-email':true}"/>
+                    </div>
+                </div>
+                <div class="field password required">
+                    <label for="password" class="label"><span><?= $escaper->escapeHtml(__('Password')) ?></span></label>
+                    <div class="control">
+                        <?php $requiredCharacterClassesNumber = $escaper->escapeHtmlAttr(
+                            $block->getRequiredCharacterClassesNumber()
+                        ); ?>
+                        <input type="password" name="password" id="password"
+                               title="<?= $escaper->escapeHtmlAttr(__('Password')) ?>"
+                               class="input-text"
+                               data-password-min-length="<?= $escaper->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                               data-password-min-character-sets="<?= /* @noEscape */ $requiredCharacterClassesNumber ?>"
+                               data-validate="{required:true, 'validate-customer-password':true}"
+                               autocomplete="off"
+                               placeholder="<?= $escaper->escapeHtml(__('Password')) ?>">
+                    </div>
+                </div>
+                <div class="field confirmation required">
+                    <label for="password-confirmation" class="label">
+                        <span><?= $escaper->escapeHtml(__('Confirm Password')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input type="password"
+                               name="password_confirmation"
+                               title="<?= $escaper->escapeHtmlAttr(__('Confirm Password')) ?>"
+                               id="password-confirmation"
+                               class="input-text"
+                               data-validate="{required:true, equalTo:'#password'}"
+                               placeholder="<?= $escaper->escapeHtml(__('Confirm Password')) ?>"/>
+                    </div>
+                </div>
+                <div class="checkbox-section">
+                    <div class="field choice" data-bind="scope: 'showPassword'">
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                    </div>
+                    <div class="field choice tos">
+                        <input name="tos" type="checkbox" id="tos" class="checkbox" data-validate="{required:true}" data-msg-required="<?= __('You should accept the privacy policy') ?>" title="<?php echo __('I accept the legal terms and conditions'); ?>"/>
+                        <label class="label label-text-wrapper" for="tos">
+                            <span>
+                            <?= __('I have read and accept the <a class="alink" href="%1">Terms and Conditions</a> and <a class="alink" href="%2">Personal Data Protection *</a>',
+                            $escaper->escapeUrl($block->getUrl('terminos-y-condiciones')),
+                            $escaper->escapeUrl($block->getUrl('politicas-de-proteccion-de-datos-personales')),
+                            )
+                            ?>
+                            </span>
+                        </label>
+                    </div>
+                    <?php if ($block->isNewsletterEnabled()): ?>
+                    <div class="field choice newsletter">
+                        <input type="checkbox"
+                               name="is_subscribed"
+                               title="<?= $block->escapeHtmlAttr(__('Sign Up for Newsletter')) ?>"
+                               value="1"
+                               id="is_subscribed"
+                            <?php if ($formData->getIsSubscribed()): ?> checked="checked"<?php endif; ?>
+                               class="checkbox"/>
+                        <label for="is_subscribed" class="label">
+                            <span><?= $block->escapeHtml(__('Sign Up for Newsletter')) ?></span>
+                        </label>
+                    </div>
+                    <?php /* Extensions placeholder */ ?>
+                    <?= $block->getChildHtml('customer.form.register.newsletter') ?>
+                    <?php endif ?>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit"
+                            class="action submit primary"
+                            title="<?= $escaper->escapeHtmlAttr(__('Create an Account')) ?>"
+                            id="send2"
+                        <?php if ($createAccountButtonViewModel->disabled()): ?> disabled="disabled" <?php endif; ?>>
+                        <span><?= $escaper->escapeHtml(__('Create an Account')) ?></span>
+                    </button>
+                </div>
+            </div>
+            <div class="login-account">
+                <p><?= $escaper->escapeHtmlAttr(__("Do you have an account?")) ?></p>
+                <a class="login-account-link" href="<?= $escaper->escapeUrl($block->getUrl('customer/account/login')) ?>">
+                     <?= $escaper->escapeHtmlAttr(__('Customer Login')) ?>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php if ($block->getShowAddressFields()): ?>
+    <?php
+    $displayAllRegions = $block->getConfig("general/region/display_all") ? "true" : "false";
+    ?>
+<?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
+<script type="text/x-magento-init">
+    {
+        "#country": {
+            "directoryRegionUpdater": {
+                "optionalRegionAllowed": <?= /* @noEscape */ $displayAllRegions ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                "regionJson": <?= /* @noEscape */ $regionProvider->getRegionJson() ?>,
+                "defaultRegion": "<?= /* @noEscape */ $formData->getRegionId() ?>",
+                "countriesWithOptionalZip": <?= /* @noEscape */ $directoryHelper->getCountriesWithOptionalZip(true) ?>
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+<?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_CustomerCustomAttributes/validation": {
+                "ignore": <?= (int) ($_dob->isEnabled() || $customerAttributes->hasUserDefinedAttributes()) ?>,
+                "hasUserDefinedAttributes": <?= (int) $customerAttributes->hasUserDefinedAttributes() ?>,
+                "isDobEnabled": <?= (int) $_dob->isEnabled() ?>,
+                "disableAutoComplete": true,
+                "mixins": [
+                    "Magento_CustomerCustomAttributes/error-placement",
+                    "Magento_CustomerCustomAttributes/validation-ignore"
+                ]
+            },
+            "Magento_Customer/js/block-submit-on-send": {
+                "formId": "form-validate"
+            },
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "showPassword": {
+                        "component": "Magento_Customer/js/show-password",
+                        "passwordSelector": "#password,#password-confirmation"
+                    }
+                }
+            }
+        },
+        ".field.password": {
+            "passwordStrengthIndicator": {
+                "formSelector": "form.form-create-account"
+            }
+        }
+    }
+</script>
