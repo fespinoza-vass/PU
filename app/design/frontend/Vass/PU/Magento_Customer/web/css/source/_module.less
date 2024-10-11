@@ -18,34 +18,12 @@
 @account-nav-delimiter__border-color: @color-gray82;
 
 @account-nav-item-hover: @color-gray91;
-@account-background-color: #fafafa;
 
 @_password-default: @color-gray-light01;
 @_password-weak: #ffafae;
 @_password-medium: #ffd6b3;
 @_password-strong: #c5eeac;
 @_password-very-strong: #81b562;
-
-@font-size__xxl: 26px;
-
-
-// Gap
-@gap_2: 2px;
-@gap_8: 8px;
-@gap_10: 10px;
-@gap_15: 15px;
-@gap_16: 16px;
-@gap_40: 40px;
-
-// Padding
-@padding_40: 40px;
-
-// Font size
-@font-size__xxl: 26px;
-@font-size__xxxl: 37px;
-
-// Indent
-@indent__8: 8px;
 
 //
 //  Common
@@ -69,15 +47,15 @@
     }
 
     .login-container {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
 
-        .block-left
-        .customer-login-image {
-            max-height: 192px;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            margin-bottom: @indent__m;
+        .block-left {
+            .customer-login-image {
+                max-height: 192px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
 
         .block {
@@ -102,6 +80,10 @@
                 border-radius: 2px;
                 background-color: @primary-white;
                 padding: @indent__m @indent__base;
+            }
+
+            &-left {
+                margin-bottom: 24px;
             }
         }
 
@@ -172,8 +154,22 @@
         }
     }
 
-
     .customer-account-create {
+        .block-left {
+            margin-bottom: 24px;
+
+            .customer-register-image {
+                max-height: 192px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .register-container {
+            margin-bottom: 32px;
+        }
+
         .page-title {
             text-align: center;
             line-height: 32px;
@@ -299,6 +295,7 @@
         .form.password.forget {
             padding: @indent__l @indent__m;
             background-color: @primary-white;
+            margin-bottom: 32px;
 
             .fieldset {
                 border: none;
@@ -307,6 +304,7 @@
                 .field {
                     margin-bottom: 8px;
                 }
+
                 .note {
                     padding: 0;
                     font-weight: @font-weight__bold;
@@ -434,18 +432,18 @@
 
     .account {
         #maincontent {
-            background-color: @account-background-color;
+            background-color: @tertiary-white;
         }
 
         .account-sidebar__head {
             display: grid;
             place-items: center;
-            gap: @gap_8;
-            padding: @gap_40 0;
+            gap: 8px;
+            padding: 40px 0;
             width: 100%;
 
             .head__icon.icon.icon-user {
-                .lib-font-size(@font-size__xxxl);
+                .lib-font-size(37);
             }
 
             .head__title {
@@ -469,22 +467,22 @@
             }
         }
 
-         #maincontent {
-             .block-addresses-list {
-                 .block-content {
-                     &:after,
-                     &:before {
-                         display: none;
-                     }
+        #maincontent {
+            .block-addresses-list {
+                .block-content {
+                    &:after,
+                    &:before {
+                        display: none;
+                    }
 
-                     .primary {
-                         button {
-                             padding: @indent__base @padding_40;
-                         }
-                     }
-                 }
-             }
-         }
+                    .primary {
+                        button {
+                            padding: @indent__base 40px;
+                        }
+                    }
+                }
+            }
+        }
 
         form {
             .field {
@@ -570,7 +568,7 @@
             }
 
             .limiter {
-                >.label {
+                > .label {
                     &:extend(.abs-visually-hidden all);
                 }
             }
@@ -591,7 +589,7 @@
                     color: @color-gray-light4;
                     display: flex;
                     flex-direction: column;
-                    gap: @gap_2;
+                    gap: 2px;
 
                     .blocked {
                         font-weight: @font-weight__regular;
@@ -810,7 +808,7 @@
                         margin: 0;
                         font-family: @font-family__base;
                         font-weight: @font-weight__regular;
-                        padding: @indent__base @padding_40;
+                        padding: @indent__base 40px;
                         line-height: inherit;
                     }
                 }
@@ -913,7 +911,7 @@
             font-family: @font-family__base;
             color: @primary-white;
             margin: 0;
-            padding: @indent__8 @indent__base;
+            padding: 8px @indent__base;
         }
     }
 
@@ -930,7 +928,7 @@
     //  Account navigation
     //  ---------------------------------------------
 
-    .account  {
+    .account {
         .ambanners.ambanner-2 {
             display: none;
             height: 0;
@@ -1065,6 +1063,7 @@
 
             strong {
                 .lib-heading(h4);
+
                 .column.main & {
                     font-size: @h3__font-size;
                 }
@@ -1174,7 +1173,7 @@
             .block .box-actions {
                 display: flex;
                 flex-direction: column;
-                gap: @gap_16;
+                gap: 16px;
                 margin-top: 24px;
 
                 .action {
@@ -1205,11 +1204,11 @@
                     .field {
                         display: flex;
                         flex-direction: column;
-                        gap: @gap_8;
+                        gap: 8px;
 
                         &.choice {
                             flex-direction: row;
-                            gap: @gap_15;
+                            gap: 15px;
 
                             input[type="checkbox"] {
                                 margin: 0;
@@ -1245,12 +1244,12 @@
                             .address-data {
                                 display: flex;
                                 flex-direction: column;
-                                gap: @gap_10;
+                                gap: 10px;
                             }
 
                             .address-actions {
                                 display: flex;
-                                gap: @gap_16;
+                                gap: 16px;
 
                                 .action {
                                     height: auto;
@@ -1289,7 +1288,7 @@
             .title.block-collapsible-nav-title {
                 display: flex;
                 margin: 0 @indent__base;
-                padding: @indent__8 @indent__m;
+                padding: 8px @indent__m;
                 justify-content: space-between;
                 background-color: @primary-white;
                 border: 1px solid @color-gray-light2;
@@ -1676,6 +1675,7 @@
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
         padding: 0 95px;
+        margin-bottom: 80px;
 
         .block {
             width: 100%;
@@ -1701,6 +1701,10 @@
                     max-height: none;
                     width: auto;
                 }
+            }
+
+            &-left {
+                margin-bottom: 0;
             }
         }
 
@@ -1731,6 +1735,7 @@
         .register-container {
             display: flex;
             width: 100%;
+            margin-bottom: 80px;
 
             .block-left,
             .block-right {
@@ -1740,12 +1745,11 @@
             .block-left {
                 margin-right: @indent__m;
 
-                .customer-login-image {
+                .customer-register-image {
                     min-height: 100%;
                     margin: 0;
                 }
             }
-
 
             .form-create-account {
                 padding: 36px @indent__l;
@@ -1818,7 +1822,8 @@
 
             .form.password.forget {
                 padding: 32px;
-                max-width: 522px;
+                max-width: 520px;
+                margin-bottom: 80px;
             }
         }
     }
@@ -1894,12 +1899,12 @@
             }
 
             .page-title-wrapper:not(.wishlist-index-index .page-title-wrapper) {
-                padding: @padding_40 @padding_40 0 @padding_40;
+                padding: 40px 40px 0 40px;
             }
 
             .block-wishlist-management .wishlist-title strong,
             .page-title {
-                .lib-font-size(@font-size__xxl);
+                .lib-font-size(26);
                 line-height: 28px;
                 font-weight: @font-weight__bold;
                 font-family: @font-family__base;
@@ -1917,18 +1922,18 @@
             }
 
             .form-content {
-                padding: @padding_40;
+                padding: 40px;
 
                 .form-address-edit,
                 .form-edit-account {
                     display: flex;
                     flex-direction: column;
-                    gap: @gap_40;
+                    gap: 40px;
 
                     .form-user-data {
                         display: flex;
                         flex-direction: column;
-                        gap: @gap_40;
+                        gap: 40px;
 
                         .form-fields-grid {
                             display: grid;
@@ -1944,7 +1949,7 @@
                             .field {
                                 margin: 0;
                                 display: flex;
-                                gap: @gap_15;
+                                gap: 15px;
 
                                 input[type="checkbox"] {
                                     margin: 0;
@@ -1958,7 +1963,7 @@
                         margin: 0;
                         display: flex;
                         flex-direction: column;
-                        gap: @gap_8;
+                        gap: 8px;
 
                         &.choice {
                             flex-direction: row;
@@ -1972,7 +1977,7 @@
                     }
 
                     .action.save.primary {
-                        padding: @indent__base @padding_40;
+                        padding: @indent__base 40px;
                     }
                 }
             }
@@ -2002,12 +2007,12 @@
         }
 
         .block.block-dashboard-info {
-            padding: @padding_40;
+            padding: 40px;
 
             .box.box-information {
                 display: flex;
                 flex-direction: column;
-                gap: @gap_40;
+                gap: 40px;
 
                 .box-actions {
                     display: flex;
@@ -2017,7 +2022,7 @@
 
                     a.action {
                         width: 100%;
-                        padding: @indent__base @padding_40;
+                        padding: @indent__base 40px;
                         .lib-font-size(@font-size__m);
                         font-weight: 400;
                         line-height: 22px;
@@ -2034,7 +2039,7 @@
         &.sales-order-history {
             .column.main {
                 .order-history-container {
-                    padding: @padding_40 @padding_40 0 @padding_40;
+                    padding: 40px 40px 0 40px;
 
                     .orders-history {
                         display: flex;
@@ -2081,7 +2086,7 @@
                             font-family: @font-family__base;
                             color: @primary-white;
                             margin: 0;
-                            padding: @indent__8 @indent__base;
+                            padding: 8px @indent__base;
                         }
                     }
                 }
@@ -2109,7 +2114,7 @@
 
             .column.main {
                 .items.order-links {
-                    margin: 0 @padding_40;
+                    margin: 0 40px;
                     padding-bottom: @indent__m;
                 }
 
@@ -2124,12 +2129,12 @@
                             display: flex;
                             flex-direction: column;
                             gap: @indent__m;
-                            padding: 0 @padding_40;
+                            padding: 0 40px;
 
                             .row.header-row {
                                 display: grid;
                                 grid-template-columns: 2fr repeat(4, 1fr);
-                                gap: @gap_40;
+                                gap: 40px;
                                 .lib-font-size(@font-size__m);
                                 line-height: 22px;
                                 font-weight: @font-weight__bold;
@@ -2146,7 +2151,7 @@
                                 & > div {
                                     display: grid;
                                     grid-template-columns: 2fr repeat(4, 1fr);
-                                    gap: @gap_40;;
+                                    gap: 40px;
 
                                     .product-item-name {
                                         margin: 0;
@@ -2178,10 +2183,10 @@
                         display: flex;
                         flex-direction: column;
                         gap: 18px;
-                        margin: 0 @padding_40;
+                        margin: 0 40px;
                         border-bottom: 1px solid @color-gray-dark3;
                         border-top: 1px solid @color-gray-dark3;
-                        padding: @indent__m 0 @padding_40;
+                        padding: @indent__m 0 40px;
 
                         div {
                             display: flex;
@@ -2194,7 +2199,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: 36px;
-                    padding: @padding_40 @padding_40 0;
+                    padding: 40px 40px 0;
 
                     .block-content {
                         display: flex;
@@ -2218,7 +2223,7 @@
 
     .block-addresses-list {
         .block-content {
-            padding: @padding_40;
+            padding: 40px;
 
             .addresses-wrapper.additional-addresses {
                 display: grid;
@@ -2235,7 +2240,7 @@
                     .address-data {
                         display: flex;
                         flex-direction: column;
-                        gap: @gap_16;
+                        gap: 16px;
 
                         .address-title {
                             .lib-font-size(@font-size__l);
@@ -2248,11 +2253,11 @@
 
                     .address-actions {
                         display: flex;
-                        gap: @gap_16;
+                        gap: 16px;
 
                         .action {
                             height: auto;
-                            padding: @indent__base @padding_40;
+                            padding: @indent__base 40px;
                         }
                     }
                 }
