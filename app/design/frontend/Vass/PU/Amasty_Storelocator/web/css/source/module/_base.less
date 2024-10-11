@@ -1,3 +1,8 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
 //
 //  Store Locator
 //  ____________________________________________
@@ -18,7 +23,7 @@
 
         .banner-store-locator__img {
             min-height: auto;
-            box-shadow: inset 0px -10px 20px 6px #cbbbac;
+            box-shadow: inset 0px -10px 20px 6px @color-beige-dark;
             width: 100%;
             min-height: 125px;
         }
@@ -36,33 +41,6 @@
             .lib-font-size(@font-size__m);
             color: @secondary-black;
             min-width: 50vw;
-            line-height: 1.42857143;
-            font-weight: 400;
-        }
-
-        .amlocator-button {
-            box-sizing: border-box;
-            min-height: 40px;
-            font-weight: inherit;
-            color: #fff;
-            background: #1979c3;
-            border: 1px solid #1979c3;
-            border-radius: 2px;
-            box-shadow: 0 2px 4px rgba(45, 147, 226, 0.1);
-        }
-
-        .amlocator-select {
-            cursor: pointer;
-        }
-
-        .amlocator-block.-separator {
-            box-sizing: border-box;
-            margin: 20px 0;
-        }
-
-        .amlocator-block.-separator > .hr {
-            margin: 0;
-            border-top: 1px solid #e7e7e7;
         }
 
         .amlocator-wrapper {
@@ -440,7 +418,7 @@
             .lib-vendor-prefix-display(flex);
             flex-direction: column;
             height: 100%;
-            max-height: 500px;
+            max-height: 910px;
         }
     }
 
@@ -525,15 +503,14 @@
         }
 
         .amlocator-today:before {
-            content: "";
+            content: @icon-clock;
+            font-family: @icons__font-name;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             left: 10px;
             width: 20px;
             height: 20px;
-            .lib-css(background, @amlocator-clock-icon__blue__background);
-            background-size: contain;
         }
 
         .amlocator-today .amlocator-time {
@@ -678,18 +655,19 @@
 
         .banner-store-locator__img {
             min-height: 238px;
-            box-shadow: inset -20px 0px 20px 6px #cbbbac;
+            box-shadow: inset -20px 0px 20px 6px @color-beige-dark;
         }
 
         .banner-store-locator__title {
             margin: 0;
+            margin-left: 100px;
+            .lib-font-size(36);
         }
     }
 
     .amlocator-main-container {
         & {
-            margin: 80px 70px 32px 70px;
-
+            margin: 80px 70px @indent__l 70px;
         }
     }
 
@@ -706,7 +684,7 @@
 
         .amlocator-button.-nearby {
             color: #1979c3;
-            background: #fff;
+            background: @primary-white;
             margin-top: 10px;
             width: 100%;
             margin-left: auto;
@@ -714,7 +692,7 @@
 
         .amlocator-button.-nearby:hover,
         .amlocator-button.-nearby:focus {
-            color: #fff;
+            color: @primary-white;
             background: #1979c3;
         }
 
