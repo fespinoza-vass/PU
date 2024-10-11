@@ -203,10 +203,6 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .wishlist-index-index,
     .catalog-category-view {
-        .column.main {
-            padding-right: ~"calc(120px - @{layout-indent__width})";
-        }
-
         .product-items {
             grid-template-columns: repeat(3, 1fr);
             gap: @indent__m;
