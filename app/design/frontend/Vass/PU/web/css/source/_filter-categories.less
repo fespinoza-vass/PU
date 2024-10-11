@@ -18,6 +18,7 @@
             &.active {
                 .filter-title {
                     strong:after {
+                        position: fixed;
                         -webkit-font-smoothing: antialiased;
                         -moz-osx-font-smoothing: grayscale;
                         .lib-font-size(@font-size__m);
@@ -181,7 +182,7 @@
             }
 
             &-item {
-                border-bottom: @border-width__base solid @border-color__base;
+                border-bottom: @border-width__base solid @secondary-white;
                 padding-bottom: @indent__s;
             }
 
@@ -203,15 +204,11 @@
                     &:hover {
                         background-color: @color-gray91;
                         text-decoration: none;
-
-                        & + .count {
-                            background-color: @color-gray91;
-                        }
                     }
                 }
 
                 .filter-count-label {
-                    &:extend(.abs-visually-hidden all);
+                    display: none;
                 }
             }
         }
@@ -234,6 +231,7 @@
         top: 95px;
         z-index: 500;
         padding: 0 16px;
+        margin-top: @indent__l;
     }
 
     body {
@@ -268,6 +266,7 @@
                     color: @secondary-black;
                     left: auto;
                     line-height: @line-height__l;
+                    font-weight: @font-weight__bold;
                 }
             }
 
@@ -297,13 +296,8 @@
     }
 
     .filter .filter-current {
-        margin: @indent__xs @indent__s 0;
-
-        .items {
-            display: none;
-        }
-
         &-subtitle {
+            display: none !important;
             position: relative;
             z-index: 1;
 
@@ -337,6 +331,7 @@
             }
 
             .items {
+                visibility: visible;
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -344,12 +339,9 @@
             }
 
             & + .block-actions {
-                display: block;
+                display: inline;
+                padding-left: 20px;
             }
-        }
-
-        & + .block-actions {
-            display: none;
         }
     }
 
@@ -403,6 +395,7 @@
         &.filter {
             background-color: @primary-white;
             padding: 12px;
+
             .filter {
                 &-title {
                     display: none;
