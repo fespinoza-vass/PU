@@ -1,0 +1,20 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Vass\AmastyStoreLocator\ViewModel\Storelocator $viewModel
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$viewModel = $block->getData('view_model');
+?>
+<li class="header-top-stores">
+    <a class="stores-link" href="<?= $escaper->escapeUrl($viewModel->getLinkToMap()) ?>">
+        <icon class="icon icon-shop" />
+        <?= $escaper->escapeHtml(__('Stores')) ?>
+    </a>
+</li>

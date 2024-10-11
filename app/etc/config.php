@@ -614,6 +614,7 @@ return [
         'PechoSolutions_Visanet' => 1,
         'Temando_ShippingRemover' => 1,
         'Vass_AppIntegrations' => 1,
+        'Vass_AmastyStoreLocator' => 1,
         'Vass_Checkout' => 1,
         'Vass_Customer' => 1,
         'Vass_General' => 1,
