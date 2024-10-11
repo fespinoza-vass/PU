@@ -619,8 +619,14 @@
     }
 
     .amlocator-info-popup {
-        & {
-            width: 250px
+        width: 250px;
+        .lib-font-size(@font-size__m);
+        line-height: 22px;
+
+        .amlocator-link {
+            text-decoration: none;
+            .lib-font-size(@font-size__xl);
+            font-weight: @font-weight__heavier;
         }
 
         .amlocator-name {
