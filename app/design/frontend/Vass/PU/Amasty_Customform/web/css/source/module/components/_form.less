@@ -15,9 +15,152 @@
                 background-color: @primary-white;
 
                 .fields {
+                    .amform-layout-one {
+                        margin-right: 0;
+                        max-width: 100%;
+                    }
+
+                    .amform-layout-two {
+                        max-width: 100%;
+                        padding: 0 @indent__base;
+                        margin: 0;
+                    }
+
                     .field {
                         &.form-group {
-                            margin-bottom: 0;
+                            padding: 0 @indent__base;
+                            margin-bottom: 8px;
+                            height: 100%;
+
+                            .label {
+                                .required {
+                                    color: @primary-black;
+                                }
+                            }
+
+                            &.fb-h3 {
+                                padding: 0;
+                                padding-top: @indent__l;
+                                background-color: @tertiary-white;
+
+                                .cbform-title {
+                                    .lib-font-size(20);
+                                    font-weight: @font-weight__bold;
+                                    color: @primary-white;
+                                    background-color: @primary-black;
+                                    padding: 12px @indent__base;
+                                    margin-bottom: 0;
+                                    line-height: 22px;
+                                }
+                            }
+
+                            &.fb-checkbox {
+                                width: auto;
+                                padding: 0 0 0 @indent__base;
+                                margin: 0;
+                                margin-top: @indent__base;
+
+                                .amform-checkbox {
+                                    margin: 0;
+                                }
+
+                                .checkbox-group {
+                                    display: flex;
+                                    align-items: center;
+                                }
+
+                                .fb-checkbox-group-label {
+                                    display: none;
+                                }
+                            }
+
+                            .control {
+                                position: relative;
+
+                                & >
+                                input,
+                                select,
+                                .cbform-date {
+                                    .lib-form-element-input(@_type: input-text);
+                                }
+
+                                & > select {
+                                    display: inline-block;
+                                }
+
+                                .cbform-textarea {
+                                    height: 136px;
+                                    margin-top: @indent__base;
+                                }
+
+
+                                &:has(select) {
+                                    top: 50%;
+                                }
+
+                                &:has(.checkbox-group) {
+                                    & > .mage-error {
+                                        position: absolute;
+                                        bottom: 20px;
+                                        width: max-content;
+                                    }
+                                }
+
+                                &:has(.cbform-section-title) {
+                                    .lib-font-size(@font-size__l);
+                                    font-weight: @font-weight__bold;
+                                }
+
+                                &:has(.cbform-section-subtitle) {
+                                    .lib-font-size(14);
+                                    color: @primary-black;
+                                }
+
+                                &:has(.cb-label-checkbox) {
+                                    flex: 1;
+                                    padding: 0;
+                                    margin: 0;
+                                }
+
+                                &:has(.cbform-info) {
+                                    font-weight: @font-weight__heavier;
+                                    color: @primary-black;
+                                }
+
+                                &:has(.cbform-date) {
+                                    &::after {
+                                        .lib-font-size(@font-size__l);
+                                        position: absolute;
+                                        content: @icon-calendar;
+                                        font-family: @icons__font-name;
+                                        color: @color-gray-dark3;
+                                        top: ~"calc((56px / 2) + 10px)";
+                                        right: 20px;
+                                        transform: translateY(-50%);
+                                    }
+                                }
+
+                                &:has(.cbform-checkbox) {
+                                    align-items: center;
+                                    flex-wrap: wrap;
+                                    gap: @indent__base;
+                                    position: relative;
+
+                                    .control {
+                                        margin: 0;
+                                    }
+
+                                    .cbform-checkbox {
+                                        flex: 1;
+                                        padding: 0;
+                                        margin: 0;
+                                    }
+                                }
+
+                                .ui-datepicker-trigger {
+                                    display: none;
+                                }
+                            }
 
                             &.fb-radio {
                                 margin-bottom: @indent__m;
@@ -42,158 +185,22 @@
                                 }
                             }
 
+                            &:has(.cb-label-checkbox) {
+                                margin: @indent__base 0;
+                                width: 80%;
+                            }
+
+                            &:has(.cbform-section-title) {
+                                margin-bottom: 6px;
+                            }
+
                             &:has(.cbform-title) {
                                 margin-bottom: @indent__l;
                             }
-                        }
-                    }
-                    .amform-layout-one {
-                        margin-right: 0;
-                        max-width: 100%;
-                    }
 
-                    .amform-layout-two {
-                        max-width: 100%;
-                        padding: 0 @indent__base;
-                        margin: 0;
-                    }
-                }
-
-                .field {
-                    padding: 0 @indent__base;
-                    margin-bottom: 8px;
-                    height: 100%;
-
-                    .label {
-                        .required {
-                            color: @primary-black;
-                        }
-                    }
-
-                    &.fb-h3 {
-                        padding: 0;
-                        padding-top: @indent__l;
-                        background-color: @tertiary-white;
-
-                        .cbform-title {
-                            .lib-font-size(20);
-                            font-weight: @font-weight__bold;
-                            color: @primary-white;
-                            background-color: @primary-black;
-                            padding: 12px @indent__base;
-                            margin-bottom: 0;
-                            line-height: 22px;
-                        }
-                    }
-
-                    &.fb-checkbox {
-                        width: auto;
-                        padding: 0 0 0 @indent__base;
-                        margin: 0;
-                        margin-top: @indent__base;
-
-                        .amform-checkbox {
-                            margin: 0;
-                        }
-
-                        .checkbox-group {
-                            display: flex;
-                            align-items: center;
-                        }
-
-                        .fb-checkbox-group-label {
-                            display: none;
-                        }
-                    }
-
-                    .cb-label-checkbox {
-                        & > p {
-                            margin: 0;
-                        }
-                    }
-
-                    .control {
-                        position: relative;
-
-                        & >
-                        input,
-                        select,
-                        .cbform-date {
-                            .lib-form-element-input(@_type: input-text);
-                        }
-
-                        & > .mage-error {
-                            position: absolute;
-                            bottom: 20px;
-                            width: max-content;
-                        }
-
-                        .cbform-textarea {
-                            height: 136px;
-                            margin-top: @indent__base;
-                        }
-
-                        &:has(.cbform-section-title) {
-                            .lib-font-size(@font-size__l);
-                            font-weight: @font-weight__bold;
-                            margin-bottom: 6px;
-                        }
-
-                        &:has(.cbform-section-subtitle) {
-                            .lib-font-size(14);
-                            margin-bottom: @indent__base;
-                            color: @primary-black;
-                        }
-
-                        &:has(.cbform-last-field) {
-                            margin-bottom: @indent__l;
-                        }
-
-                        &:has(.cb-label-checkbox) {
-                            flex: 1;
-                            padding-right: @indent__base;
-                            padding-left: 12px;
-                            margin: 0;
-                        }
-
-                        &:has(.cbform-info) {
-                            font-weight: @font-weight__heavier;
-                            color: @primary-black;
-                            margin-top: @indent__m;
-                        }
-
-                        &:has(.cbform-date) {
-                            &::after {
-                                .lib-font-size(@font-size__l);
-                                position: absolute;
-                                content: @icon-calendar;
-                                font-family: @icons__font-name;
-                                color: @color-gray-dark3;
-                                top: ~"calc((56px / 2) + 10px)";
-                                right: 20px;
-                                transform: translateY(-50%);
+                            &:has(.cbform-field-last) {
+                                margin-bottom: @indent__l;
                             }
-                        }
-
-                        &:has(.cbform-checkbox) {
-                            align-items: center;
-                            flex-wrap: wrap;
-                            gap: @indent__base;
-                            position: relative;
-
-                            .control {
-                                margin: 0;
-                            }
-
-                            .cbform-checkbox {
-                                flex: 1;
-                                padding: 0;
-                                margin: 0;
-                            }
-                        }
-
-                        .ui-datepicker-trigger {
-                            display: none;
                         }
                     }
                 }
@@ -226,44 +233,45 @@
                     .field {
                         &.form-group {
                             margin-bottom: @indent__m;
+                            padding: 0 @indent__l;
+
+                            &:has(.cb-label-checkbox) {
+                                margin-top: 0;
+                            }
+
+                            &:has(.cbform-field-right) {
+                                padding-left: 8px;
+                                padding-right: @indent__l;
+                            }
+
+                            &:has(.cbform-field-left) {
+                                padding-left: @indent__l;
+                                padding-right: 8px;
+                            }
+
+                            &:has(.cb-label-checkbox) {
+                                max-width: 60%;
+                                margin: 0;
+                                padding-left: @indent__base;
+                            }
+
+                            &:has(.cbform-checkbox) {
+                                padding-left: @indent__l;
+                                margin: 0;
+                            }
+
+                            .control {
+                                &:has(.cbform-firstdate) {
+                                    max-width: 49%;
+                                }
+                            }
                         }
                     }
+
                     .amform-layout-two {
                         max-width: 50%;
                         padding: 0;
                     }
-                }
-
-                .field {
-                    padding: 0 @indent__l;
-
-                    &:has(.cbform-field-right) {
-                        padding-left: 8px;
-                        padding-right: @indent__l;
-                    }
-
-                    &:has(.cbform-field-left) {
-                        padding-left: @indent__l;
-                        padding-right: 8px;
-                    }
-
-                    &:has(.cb-label-checkbox) {
-                        max-width: 60%;
-                        margin: 0;
-                        padding-left: @indent__base;
-                    }
-
-                    &:has(.cbform-checkbox) {
-                        padding-left: @indent__l;
-                        margin: 0;
-                    }
-
-                    .control {
-                        &:has(.cbform-firstdate) {
-                            max-width: 49%;
-                        }
-                    }
-
                 }
 
                 .amcform-toolbar {
@@ -272,7 +280,7 @@
                     .amcform-submit {
                         width: 250px;
                     }
-               }
+                }
             }
         }
     }
