@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Vass_Checkout::js/general-validation.js"/>
+        <script src="Vass_Checkout::js/validation-documento.js"/>
+        <script src="Vass_Checkout::js/popups.js"/>
+        <script src="Vass_Checkout::js/texto-checkbox.js"/>
+    </head>
+    <body>
+        <referenceBlock name="minicart" remove="true"/>
+        <referenceContainer name="header.panel" remove="true"/>
+        <referenceContainer name="links.login" remove="true"/>
+        <referenceContainer name="navigation.sections" remove="true"/>
+        <referenceBlock name="top.search" remove="true"/>
+        <referenceBlock name="catalog.compare.link" remove="true"/>
+        <referenceBlock name="catalog.topnav" remove="true"/>
+        <referenceContainer name="footer" remove="true"/>
+        <referenceContainer name="footer-container" remove="true"/>
+    </body>
+</page>

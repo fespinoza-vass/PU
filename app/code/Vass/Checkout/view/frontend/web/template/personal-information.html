@@ -1,0 +1,43 @@
+<!--Use 'stepCode' as id attribute-->
+<li id="personal-information" data-bind="fadeVisible: isVisible, attr: { id: stepCode }" style="display: none">
+    <div class="step-title" data-bind="i18n: stepTitle" data-role="title"></div>
+    <div id="personal-information-content"
+         class="step-content"
+         data-role="content">
+
+        <!-- ko if: isLoggedIn() -->
+            <div class="customer-info">
+                <div class="customer-info__name">
+                    <span><!-- ko i18n: 'Name'--><!-- /ko -->:</span>
+                    <span data-bind="text: getCustomerName()"></span>
+                </div>
+
+                <div class="customer-info__lastname">
+                   <span><!-- ko i18n: 'Last Name'--><!-- /ko -->:</span>
+                    <span data-bind="text: getCustomerLastName()"></span>
+                </div>
+
+                <div class="customer-info__document">
+                    <span><span data-bind="text: getDocumentType()"></span>:</span>
+                    <span data-bind="text: getDocument()"></span>
+                </div>
+
+                <div class="customer-info__email">
+                    <span><!-- ko i18n: 'Email'--><!-- /ko -->:</span>
+                    <span data-bind="text: customer().email"></span>
+                </div>
+
+                <button class="action primary edit-personal-information"
+                        type="button"
+                        data-bind="click: editAddress()"
+                >
+                    <!-- ko i18n: 'Edit personal information'--><!-- /ko -->
+                </button>
+            </div>
+        <!-- /ko -->
+
+        <form id="personal-information-form">
+            <div class="fieldset"></div>
+        </form>
+    </div>
+</li>
