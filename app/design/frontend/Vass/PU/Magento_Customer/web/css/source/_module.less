@@ -293,6 +293,7 @@
             text-align: center;
             .lib-font-size(@font-size__xl);
             margin: @indent__l 0;
+            .lib-line-height(32);
         }
 
         .form.password.forget {
@@ -303,15 +304,23 @@
                 border: none;
                 padding: 0;
 
+                .field {
+                    margin-bottom: 8px;
+                }
                 .note {
                     padding: 0;
-                    font-weight: 700;
+                    font-weight: @font-weight__bold;
+                    margin-bottom: @indent__m;
                     .lib-font-size(@font-size__l);
                 }
             }
 
             .actions-toolbar {
-                margin-top: 24px;
+                margin-top: @indent__base;
+
+                .submit {
+                    width: 250px;
+                }
             }
         }
     }
@@ -1092,10 +1101,20 @@
     }
 
     .control.captcha-image {
-        .lib-css(margin-top, @indent__s);
+        margin-top: @indent__m;
+
+        .captcha-reload {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            margin-top: @indent__base;
+            cursor: pointer;
+        }
 
         .captcha-img {
             vertical-align: middle;
+            margin: 0;
+            border: 1px solid @color-gray-dark1;
         }
     }
 }
@@ -1788,9 +1807,9 @@
 
     .customer-account-forgotpassword {
         .page-title {
-            margin-top: 60px;
+            margin-top: 80px;
             margin-bottom: 40px;
-            .lib-font-size(32);
+            .lib-font-size(36);
         }
 
         .column.main {
@@ -1799,6 +1818,7 @@
 
             .form.password.forget {
                 padding: 32px;
+                max-width: 522px;
             }
         }
     }
@@ -2251,6 +2271,7 @@
     .control.captcha-image {
         display: flex;
         gap: @indent__base;
+        margin-top: 0;
 
         .captcha-reload {
             margin-top: 0;
