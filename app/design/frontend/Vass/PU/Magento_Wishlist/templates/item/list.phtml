@@ -1,0 +1,48 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_Wishlist
+ * @author Vass Team
+ */
+
+/**
+ * @var \Magento\Wishlist\Block\Customer\Wishlist\Items $block
+ * @var Escaper $escaper
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Catalog\Block\Product\ReviewRendererInterface;
+use Magento\Swatches\Block\Product\Renderer\Configurable;
+
+$columns = $block->getColumns();
+
+$image = 'wishlist_thumbnail';
+$templateType = ReviewRendererInterface::SHORT_VIEW;
+
+?>
+
+<div class="products-grid wishlist">
+    <?php if (count($block->getItems())) : ?>
+    <div class="products list items product-items">
+        <?php foreach ($block->getItems() as $item) : ?>
+            <div class="item product product-item">
+                <div class="product-item-info">
+                    <div class="product details product-item-details">
+                        <?php foreach ($columns as $column) : ?>
+                            <?= $column->setItem($item)->toHtml();?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <?php else : ?>
+        <div class="message info empty">
+            <span><?= $block->escapeHtml(__('This Wish List has no Items')) ?></span>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php foreach ($columns as $column) : ?>
+    <?= $column->getAdditionalHtml() ?>
+<?php endforeach; ?>

@@ -1,0 +1,19 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_Wishlist
+ * @author Vass Team
+ */
+
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Image $block */
+
+/** @var \Magento\Wishlist\Model\Item $item */
+$item = $block->getItem();
+$product = $item->getProduct();
+?>
+
+<div class="product-item-image">
+    <a class="image__link" tabindex="-1" href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>" title="<?= $block->escapeHtmlAttr($product->getName()) ?>">
+        <?= $block->getImage($block->getProductForThumbnail($item), 'wishlist_thumbnail')->toHtml() ?>
+    </a>
+</div>
