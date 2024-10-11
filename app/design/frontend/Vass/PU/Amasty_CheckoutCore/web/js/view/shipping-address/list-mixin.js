@@ -374,6 +374,15 @@ define([
                 let isNewAddress = isAddressNew(address);
                 this.isAddressFormVisible(isNewAddress);
 
+                if (isNewAddress) {
+                    if ($('.form-shipping-address').is(':visible')) {
+                        let inputDocument = $('.form-shipping-address input[name="custom_attributes[numero_identificacion_picker]"]');
+                        if (inputDocument.siblings('.field-error').length) {
+                            inputDocument.val('');
+                        }
+                    }
+                }
+
                 if (
                     $('.shipping-address-form').is(':visible')
                     && !$('select[name="custom_attributes[city]"]').val()
