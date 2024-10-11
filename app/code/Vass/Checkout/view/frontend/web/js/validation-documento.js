@@ -60,6 +60,7 @@ require([
                 $select.val(OPTIONS.DNI);
                 $select.siblings('.field-error').remove();
                 $input.siblings('.field-error').remove();
+                $input.val('');
 
                 setTimeout(function() {
                     if (!$input.siblings('.field-error').length) {
