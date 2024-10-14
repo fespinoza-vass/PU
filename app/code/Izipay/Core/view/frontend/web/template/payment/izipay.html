@@ -6,7 +6,7 @@
     table.data-izipay-response-success td{
         padding:3px;
     }
-    
+
     .modal-izipay-result {
         position: fixed;
         width: 100vw;
@@ -49,7 +49,7 @@
         border: 0px;
         font-weight: bold;
         cursor: pointer;
-    }    
+    }
 
 
     .payment-method__izipay-alternative-payments {
@@ -78,7 +78,7 @@
     div.description-izipay-payment-method {
         margin-left: 15px;
     }
-     
+
     div.error-validation-izipay-payment-method {
         margin-left: 44px;
         padding: 10px;
@@ -128,7 +128,7 @@
     </div>
     <div class="payment-method-content">
         <span class="image-payment">
-            <img style="width:150px" data-bind="attr: { src: require.toUrl('Izipay_Core/images/logo-izipay-checkout.png') }" />
+            <img class="payment-izipay-image" style="width:150px" data-bind="attr: { src: require.toUrl('Izipay_Core/images/logo-izipay-checkout.png') }" />
         </span>
         <br />
 
@@ -138,12 +138,12 @@
         <!--ko if: getAlternativePaymentMethods().length -->
             <input type="hidden" name="has-izipay-alternative-methods" value="true" />
             <ul class="payment-method__izipay-alternative-payments" >
-                <!-- ko foreach: {data: getAlternativePaymentMethods(), as: 'item'} -->         
+                <!-- ko foreach: {data: getAlternativePaymentMethods(), as: 'item'} -->
                 <li data-bind="attr: { class: item.type }" >
                     <label>
                         <input type="radio"
                         name="izipay-alternative-payment"
-                        class="radio" 
+                        class="radio"
                         data-bind="value: item.payment_method"
                         />
                         <span class="title-payment" data-bind="text: item.title"></span>
@@ -162,7 +162,7 @@
             Paga con métodos de pago Tarjeta de Crédito/Débito, QR, Millas
         </div>
         <!--/ko-->
-        
+
 
 
         <br />
@@ -177,7 +177,7 @@
         <div id="error-izipay-result" class="error-izipay-result" style="display:none">
             Error enviando datos de izipay
         </div>
-        
+
         <!-- TIPO DE DOCUMENTO Y NUMERO DE DOCUMENTO -->
         <div class="extra-fields-izipay">
             <fieldset class="fieldset address">
@@ -209,7 +209,7 @@
                         <input class="input-text" type="text" name="izipay_razon_social" maxlength="100" value="" />
                     </div>
                 </div>
-                
+
             </fieldset>
         </div>
         <div class="error-validation-izipay-document-number" style="display:none">
@@ -317,7 +317,7 @@
                 </button>
             </div>
         </div>
-   
-        
+
+
     </div>
 </div>

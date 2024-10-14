@@ -22,10 +22,9 @@ define([
                     var telephone = registry.get('checkout.steps.shipping-step.shippingAddress.billing-address-form.form-fields.telephone');
                     name.value(shippingAddress.firstname);
                     lastname.value(shippingAddress.lastname);
-                    // street.value(shippingAddress.street);
                     telephone.value(shippingAddress.telephone);
 
-                    originalMethod();   
+                    originalMethod();
                 });
 
                 return this;

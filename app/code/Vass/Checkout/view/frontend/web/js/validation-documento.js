@@ -13,15 +13,19 @@ require([
         let documentSelector = 'select[name="custom_attributes[identificacion_picker]"]';
         let numberDocumentInput = 'input[name="custom_attributes[numero_identificacion_picker]"]';
 
-        // On change event handler for the select
-        $(document).on('change', documentSelector, function() {
+        $(document).on('change', documentSelector, function(event) {
             let self = this;
             let selectedValue = $(this).val();
             let $input = $(numberDocumentInput);
             let $select = $(documentSelector);
+            let loader = $('.loading-mask').length;
 
-            // clear the input field
-            $input.val('');
+            let referenceAddress = $('textarea[name="custom_attributes[referencia_envio]"]');
+            if (referenceAddress.val() === 'referencia_envio') {
+                referenceAddress.val('');
+            }
+
+            if (!loader) $input.val('');
             $input.removeAttr('data-validate');
             $input.off('keyup');
             $input.parent().parent().addClass('_error');
@@ -34,6 +38,8 @@ require([
                 $input.off('keyup');
                 $select.parent().parent().removeClass('_error');
                 $select.siblings('.field-error').remove();
+                if (!loader) $input.val('');
+                $input.attr('maxlength', 8);
                 $input.attr('data-validate', JSON.stringify({
                     'required-entry': true,
                     'validate-length': { min: 8, max: 8 },
@@ -47,6 +53,8 @@ require([
                 $input.off('keyup');
                 $select.parent().parent().removeClass('_error');
                 $select.siblings('.field-error').remove();
+                if (!loader) $input.val('');
+                $input.attr('maxlength', 12);
                 $input.attr('data-validate', JSON.stringify({
                     'required-entry': true,
                     'validate-length': { min: 6, max: 12 },
@@ -59,11 +67,15 @@ require([
             } else {
                 $select.val(OPTIONS.DNI);
                 $select.siblings('.field-error').remove();
+                $input.removeAttr('maxlength');
                 $input.siblings('.field-error').remove();
-                $input.val('');
+                $input.attr('maxlength', 8);
+                if (!loader) $input.val('');
+                $input.val($input.val().replace('numero_identificacion_picker', ''));
+                validateDNI(event, $input);
 
                 setTimeout(function() {
-                    if (!$input.siblings('.field-error').length) {
+                    if (!$input.siblings('.field-error').length && !$input.val()) {
                         showValidationMessage($t('This is a required field.'));
                         $input.parent().parent().addClass('_error');
                         $input.focus();
