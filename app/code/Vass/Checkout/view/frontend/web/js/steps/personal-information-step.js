@@ -114,7 +114,7 @@ define([
                 let customer = customerData.get('customer');
                 let totalAddresses = addressList().length;
                 if (!customer().firstname || !totalAddresses) {
-                    $(this.elements.login).prependTo($(this.elements.content));
+                    $(this.elements.login).prependTo($(this.elements.id));
 
                     this.moveInputs.forEach(function (element) {
                         $(self.elements.shippingAddress).find(`div[name='${element}']`)
@@ -152,6 +152,21 @@ define([
                 selectShippingAddressAction(addresses[totalAddresses - 1]);
                 checkoutData.setSelectedShippingAddress(addresses[totalAddresses - 1].getKey());
                 $('#opc-new-shipping-address').siblings('.actions-toolbar').find('.action-update').click();
+
+                $('body').css('overflow', 'hidden');
+                if ($('.shipping-address-form').is(':visible')) {
+                    let referenceShipping = $("[name='custom_attributes[referencia_envio]']");
+                    let identificationNumber = $("[name='custom_attributes[numero_identificacion_picker]']");
+
+                    if (referenceShipping.val() === 'referencia_envio') {
+                        referenceShipping.val('');
+                    }
+
+                    if (identificationNumber.val().includes('numero_identificacion_picker')) {
+                        identificationNumber.val(identificationNumber.val()
+                            .replace('numero_identificacion_picker', ''));
+                    }
+                }
             },
 
             getCustomerName: function () {

@@ -64,10 +64,21 @@ define([
                 });
 
                 $(document).on('click', '.billing-address-same-as-shipping-block', function () {
+                    let input = $("[name='billing-address-same-as-shipping']");
+                    let infoBill = $('.billing-info');
+
+                    if (input.is(':checked')) {
+                        infoBill.hide();
+                    } else {
+                        infoBill.show();
+                    }
+
+                    let rucInput = $('[name="custom_attributes[ruc]"]');
                     let ruc = registry.get('checkout.steps.billing-step.payment.afterMethods.billing-address-form.form-fields.ruc');
                     let nameCompany = registry.get('checkout.steps.billing-step.payment.afterMethods.billing-address-form.form-fields.razon_social');
                     let taxDirectory = registry.get('checkout.steps.billing-step.payment.afterMethods.billing-address-form.form-fields.direccion_fiscal');
 
+                    rucInput.attr('maxlength', 11)
                     ruc.value('');
                     nameCompany.value('');
                     taxDirectory.value('');

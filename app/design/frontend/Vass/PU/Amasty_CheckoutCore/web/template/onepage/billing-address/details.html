@@ -14,14 +14,14 @@
 
             <!-- ko if: element.attribute_code === 'razon_social' -->
                 <div class="card-content">
-                    <!-- ko i18n: 'Company Name:' --><!-- /ko -->
+                    <span><!-- ko i18n: 'Company Name Bill' --><!-- /ko -->:</span>
                     <span class="value" data-bind="text: element.value"></span>
                 </div>
             <!-- /ko -->
 
             <!-- ko if: element.attribute_code === 'direccion_fiscal' -->
                 <div class="card-content">
-                    <!-- ko i18n: 'Tax Directorate:' --><!-- /ko -->
+                    <span><!-- ko i18n: 'Tax Directorate' --><!-- /ko -->:</span>
                     <span class="value" data-bind="text: element.value"></span>
                 </div>
             <!-- /ko -->
@@ -29,7 +29,7 @@
 
         <!-- Button inside the Card -->
         <button type="button"
-                class="action action-edit-address amcheckout-button edit-button"
+                class="action primary action-edit-address amcheckout-button edit-button"
                 data-bind="visible: !isAddressSameAsShipping(), click: editAddress">
             <span data-bind="i18n: 'Edit'"></span>
         </button>
