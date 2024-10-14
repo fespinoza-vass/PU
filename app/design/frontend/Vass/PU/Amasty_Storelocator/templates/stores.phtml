@@ -1,0 +1,12 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+?>
+<li class="header-top-stores">
+    <a class="stores-link" href="<?= $block->escapeUrl($block->getLinkToMap()) ?>" <?= /* @noEscape */ $block->getLinkAttributes() ?>>
+        <icon class="icon icon-shop" />
+        <?= $block->escapeHtml(__('Stores')) ?>
+    </a>
+</li>
