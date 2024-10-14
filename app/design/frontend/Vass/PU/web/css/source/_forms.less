@@ -48,6 +48,27 @@
         .field {
             ._lib-form-field-required();
             .lib-form-field();
+
+            &.choice.tos {
+                flex-wrap: wrap;
+
+                .label {
+                    order: 1;
+                    width: ~"calc(100% - 38px)";
+                }
+
+                .mage-error {
+                    padding: 0;
+                }
+
+                > div {
+                    &.mage-error {
+                        order: 2;
+                        margin-left: @indent__base;
+                        margin-top: 8px;
+                    }
+                }
+            }
         }
 
         .mage-error {
