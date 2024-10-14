@@ -1,17 +1,18 @@
 <?php
 /**
- * @author Amasty Team
- * @copyright Copyright (c) Amasty (https://www.amasty.com)
- * @package Store Locator for Magento 2
- */ /** @var \Amasty\Storelocator\Block\Location $block */ ?>
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+/** @var \Amasty\Storelocator\Block\Location $block */
+?>
 <?php
 
 $productId = (int)$block->getRequest()->getParam('product');
 $attributes = $block->getAttributes();
+?>
 
-if ($productId):
-    $product = $block->getProductById($productId);
-    ?>
+<?php if ($productId): ?>
+    <?php $product = $block->getProductById($productId); ?>
     <h1><?= $block->escapeHtml($product->getName()); ?><?= $block->escapeHtml(__(' can be found at the following stores:&nbsp;')); ?></h1>
     <hr>
 <?php endif; ?>
@@ -53,10 +54,7 @@ if ($productId):
                                                 <?php endif?>
                                                 <?php foreach ($attribute['options'] as $valueId => $option): ?>
                                                     <option
-                                                        <?php if ($block->isOptionSelected(
-                                                            $attribute,
-                                                            $option
-                                                        )): ?>
+                                                        <?php if ($block->isOptionSelected($attribute, $option)): ?>
                                                             selected
                                                         <?php endif; ?>
                                                         value="<?= (int)$option['value'] ?>">
