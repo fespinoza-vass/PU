@@ -153,7 +153,6 @@ define([
                 checkoutData.setSelectedShippingAddress(addresses[totalAddresses - 1].getKey());
                 $('#opc-new-shipping-address').siblings('.actions-toolbar').find('.action-update').click();
 
-                $('body').css('overflow', 'hidden');
                 if ($('.shipping-address-form').is(':visible')) {
                     let referenceShipping = $("[name='custom_attributes[referencia_envio]']");
                     let identificationNumber = $("[name='custom_attributes[numero_identificacion_picker]']");
