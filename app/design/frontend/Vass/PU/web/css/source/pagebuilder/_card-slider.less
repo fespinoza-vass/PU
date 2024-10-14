@@ -17,6 +17,11 @@
     .card-slider {
         .swiper {
             height: 100%;
+
+            &-pagination {
+                bottom: -6px;
+                display: block;
+            }
         }
 
         &__wrapper {
@@ -79,14 +84,11 @@
 
             .link {
                 text-decoration: none;
+
                 &-only-desktop {
                     display: none;
                 }
             }
-        }
-
-        .swiper-pagination {
-            bottom: -4px;
         }
     }
 }
@@ -106,6 +108,10 @@
     .card-slider {
         .swiper {
             height: 100%;
+
+            &-pagination {
+                bottom: -4px !important; // Override swiper-pagination bottom limit
+            }
         }
 
         &__wrapper {
@@ -143,6 +149,7 @@
                 color: @link__color;
                 text-decoration: none;
             }
+
             .link-only-desktop {
                 display: block;
                 text-transform: uppercase;
