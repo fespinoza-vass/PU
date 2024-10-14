@@ -28,16 +28,14 @@ $urls = $block->getUrl();
                     <?php if ($image): ?>
                         <div class="swiper-slide">
                             <div class="card-slider__img">
-                                <a class="link" href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>"
-                                   class="link-only-mobile">
+                                <a class="link link-only-mobile" href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>">
                                     <img class="card-img"
                                          src="<?= $escaper->escapeUrl($image) ?>"
                                          alt="<?= $escaper->escapeHtmlAttr($titles[$index] ?? '') ?>"/>
                                 </a>
                             </div>
                             <div class="card-slider__content">
-                                <a class="link" href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>"
-                                   class="link-only-mobile">
+                                <a class="link link-only-mobile" href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>">
                                     <h3 class="title">
                                         <?= $escaper->escapeHtml($titles[$index] ?? '') ?>
                                     </h3>
