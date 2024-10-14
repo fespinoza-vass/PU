@@ -5,7 +5,8 @@ var config = {
             'validation-documento': 'Vass_Checkout/js/validation-documento',
             'Magento_SalesRule/template/payment/discount.html': 'Vass_Checkout/template/payment/discount.html',
             'popups': 'Vass_Checkout/js/popups',
-            'texto-checkbox': 'Vass_Checkout/js/texto-checkbox'
+            'texto-checkbox': 'Vass_Checkout/js/texto-checkbox',
+            'Magento_Customer/js/action/login':'Vass_Checkout/js/action/login'
         }
     },
     paths: {

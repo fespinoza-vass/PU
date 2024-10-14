@@ -1,0 +1,93 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Address\Book $block */
+?>
+<div class="block block-addresses-list">
+    <div class="block-content default">
+        <div class="addresses-wrapper additional-addresses">
+            <?php if ($block->getDefaultBilling()) : ?>
+                <?php $address = $block->getAddressById($block->getDefaultBilling()); ?>
+                <div class="address-item">
+                    <div class="address-data">
+                        <div class="address-title">
+                            <?= $block->escapeHtml(_('Default Billing Address')) ?>
+                        </div>
+
+                        <div class="field firstname">
+                            <span><?= $block->escapeHtml($address->getFirstname()) ?></span>
+                            <span><?= $block->escapeHtml($address->getLastname()) ?></span>
+                        </div>
+
+                        <div class="field streetaddress">
+                            <span><?= $block->escapeHtml($block->getStreetAddress($address)) ?></span>
+                        </div>
+
+                        <div class="field city">
+                            <span><?= $block->escapeHtml($address->getCity()) ?></span>
+                            <span><?= $block->escapeHtml($address->getRegion()->getRegion()) ?></span>
+                            <span><?= $block->escapeHtml($block->getCountryByCode($address->getCountryId())) ?></span>
+                            <span><?= $block->escapeHtml($address->getPostcode()) ?></span>
+                        </div>
+
+                        <div class="field phone">
+                            <span><?= $block->escapeHtml($address->getTelephone()) ?></span>
+                        </div>
+                    </div>
+
+                    <div class="address-actions">
+                        <a class="action secondary edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>">
+                            <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                        <a class="action secondary delete" href="#" role="delete-address" data-address="<?= $block->escapeHtmlAttr($address->getId()) ?>">
+                            <span><?= $block->escapeHtml(__('Delete')) ?></span>
+                        </a>
+                    </div>
+                </div>
+            <?php endif ?>
+
+            <?php if ($block->getDefaultShipping()) : ?>
+                <?php $address = $block->getAddressById($block->getDefaultShipping()); ?>
+                <div class="address-item">
+                    <div class="address-data">
+                        <div class="address-title">
+                            <?= $block->escapeHtml(_('Default Shipping Address')) ?>
+                        </div>
+
+                        <div class="field firstname">
+                            <span><?= $block->escapeHtml($address->getFirstname()) ?></span>
+                            <span><?= $block->escapeHtml($address->getLastname()) ?></span>
+                        </div>
+
+                        <div class="field streetaddress">
+                            <span><?= $block->escapeHtml($block->getStreetAddress($address)) ?></span>
+                        </div>
+
+                        <div class="field city">
+                            <span><?= $block->escapeHtml($address->getCity()) ?></span>
+                            <span><?= $block->escapeHtml($address->getRegion()->getRegion()) ?></span>
+                            <span><?= $block->escapeHtml($block->getCountryByCode($address->getCountryId())) ?></span>
+                            <span><?= $block->escapeHtml($address->getPostcode()) ?></span>
+                        </div>
+
+                        <div class="field phone">
+                            <span><?= $block->escapeHtml($address->getTelephone()) ?></span>
+                        </div>
+                    </div>
+
+                    <div class="address-actions">
+                        <a class="action secondary edit" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>">
+                            <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                        <a class="action secondary delete" href="#" role="delete-address" data-address="<?= $block->escapeHtmlAttr($address->getId()) ?>">
+                            <span><?= $block->escapeHtml(__('Delete')) ?></span>
+                        </a>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+</div>

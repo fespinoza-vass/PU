@@ -18,6 +18,7 @@ $customer = $viewModel->getCustomer();
 <div class="account-sidebar__head">
     <span class="head__icon icon icon-user"></span>
     <span class="head__title">
-        <?= $escaper->escapeHtml($customer->getName()) ?>
+        ¡<?= $escaper->escapeHtml(__('Hello')) ?>,
+        <?= $escaper->escapeHtml($customer->getName()) ?>!
     </span>
 </div>

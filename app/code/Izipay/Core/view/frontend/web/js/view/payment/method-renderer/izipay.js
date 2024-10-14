@@ -1,5 +1,5 @@
-define(
-    [
+define([
+        'ko',
         'Magento_Checkout/js/view/payment/default',
         'Magento_CheckoutAgreements/js/model/agreements-assigner',
         'Magento_Checkout/js/model/error-processor',
@@ -10,23 +10,36 @@ define(
         'Magento_Checkout/js/model/payment/additional-validators',
         'Magento_Checkout/js/model/full-screen-loader',
         'Magento_Customer/js/model/customer',
-        'Magento_Ui/js/model/messageList'
-    ],
-    function (Component, agreementsAssigner, errorProcessor, $, quote, redirectOnSuccessAction, url, additionalValidators, fullScreenLoader, customer, messageList ) {
+        'mage/translate'
+], function (
+    ko,
+    Component,
+    agreementsAssigner,
+    errorProcessor,
+    $,
+    quote,
+    redirectOnSuccessAction,
+    url,
+    additionalValidators,
+    fullScreenLoader,
+    customer,
+    $t
+    ) {
         'use strict';
- 
+
         return Component.extend({
             defaults: {
                 template: 'Izipay_Core/payment/izipay'
             },
             redirectAfterPlaceOrder: true,
+            isPlacedClick: ko.observable(false),
 
             getAlternativePaymentMethods: function() {
-                let alternative_payment_methods = window.checkoutConfig.payment.izipay.alternative_payment_methods;                
+                let alternative_payment_methods = window.checkoutConfig.payment.izipay.alternative_payment_methods;
                 return alternative_payment_methods;
             },
             getTypeForm: function() {
-                let izipay_type_form = window.checkoutConfig.payment.izipay.appearence.type_form;               
+                let izipay_type_form = window.checkoutConfig.payment.izipay.appearence.type_form;
                 return izipay_type_form;
             },
             callEventsDefault: function() {
@@ -35,7 +48,7 @@ define(
                     var content_razon_social_izipay = $('.content_razon_social_izipay');
                     var razon_social_izipay = $('[name="izipay_razon_social"]');
                     var document_type = $('[name="izipay_document_type"]');
-                    
+
                     document_type.on('change', function() {
                         if (this.value == "RUC") {
                             content_razon_social_izipay.show();
@@ -123,7 +136,7 @@ define(
                 var izipay_document_type = $('[name="izipay_document_type"]').val();
                 var izipay_document_number = $('[name="izipay_document_number"]').val();
                 var razon_social_izipay = $('[name="izipay_razon_social"]').val();
-                
+
                 var izipay_transaction_id = $('[name="izipay_transaction_id"]').val();
                 var izipay_order_number = $('[name="izipay_order_number"]').val();
                 var izipay_payment_code_response = $('[name="izipay_payment_code_response"]').val();
@@ -165,23 +178,22 @@ define(
             },
             placeOrderIzipay : function() {
                 var self = this;
+
+                if (self.isPlacedClick()) {
+                    return;
+                }
+
+                self.isPlacedClick(true)
+                setTimeout(function(){
+                    self.isPlacedClick(false)
+                }, 1000);
+
                 console.log("Open izipay");
+                $(document).off('ajaxComplete');
 
-                var checkboxValuePrivacity = $('[name="sidebar[additional][checkbox_privacidad]').is(':checked');
-                var checkboxValueNews = $('[name="sidebar[additional][checkbox_newsletter]"]').is(':checked');
-            
-                if (!checkboxValuePrivacity) {
-                    messageList.addErrorMessage({ message: 'Por favor, acepta los términos de privacidad y política de datos personales.' });
-                    return false;
-                }
 
-                if (!checkboxValueNews) {
-                    messageList.addErrorMessage({ message: 'Por favor, acepta los términos de publicidad y promociones' });
-                    return false;
-                }
-
-                // Si todo es valido entra.
-                if(additionalValidators.validate()) {
+                let validAgreements = this.validateAgreements();
+                if(additionalValidators.validate() && validAgreements) {
 
                     if (self.getTypeForm() == "embedded") {
                         $("#action-tool-bar-content-izi").hide();
@@ -212,7 +224,7 @@ define(
                         if (window.checkoutConfig.quoteData.base_currency_code != "PEN") {
                             order_currency = "USD";
                         }
-                        
+
                         var amount = quote.totals._latestValue.grand_total;
                         var izipay_email_user = "";
                         var merchantBuyerId = "";
@@ -313,6 +325,8 @@ define(
                             self.saveLogIzipay("Form Izipay Response", "", responseIzi, response.code);
                             $("[name='izipay_payment_code_response']").val(response.code);
 
+                            console.log('response', response);
+
                             if (response.code == "00") {
                                 $("#btnPlaceOrderOriginal").click();
                             } else if (response.code == "021") {
@@ -332,7 +346,7 @@ define(
                                 if (response.response) {
                                     const obj_response = JSON.parse(response.response.payloadHttp);
                                     console.log(obj_response);
-    
+
                                     if (obj_response.response.hasOwnProperty("dateTransaction")) {
                                         //mostrar popup de error
                                         var modal = $(".modal-izipay-result");
@@ -353,7 +367,7 @@ define(
                                         $("#result_izipay_order_number").html(obj_response.response.orderNumber);
                                         $("#result_izipay_codeauth").html(obj_response.response.codeAuth);
                                         $("#result_izipay_fecha_hora").html(fecha_response+" "+hora_response);
-                                        $("#result_izipay_metodo_pago").html(obj_response.response.payMethod);                                        
+                                        $("#result_izipay_metodo_pago").html(obj_response.response.payMethod);
                                     }
                                     fullScreenLoader.startLoader();
                                     self.generateToken(function(){
@@ -378,13 +392,13 @@ define(
                                         publicKey: iziConfig?.publicKey,
                                         config: iziConfig?.config,
                                     });
-                    
+
                                     izi && izi.LoadForm({
                                         authorization: izipay_token,
                                         keyRSA: 'RSA',
                                         callbackResponse: callbackResponsePayment,
                                     });
-        
+
                                     $("#error-izipay-result").hide();
                                 });
                             } else {
@@ -392,13 +406,13 @@ define(
                                     publicKey: iziConfig?.publicKey,
                                     config: iziConfig?.config,
                                 });
-                
+
                                 izi && izi.LoadForm({
                                     authorization: izipay_token,
                                     keyRSA: 'RSA',
                                     callbackResponse: callbackResponsePayment,
                                 });
-    
+
                                 $("#error-izipay-result").hide();
                             }
                         } catch (error) {
@@ -417,7 +431,7 @@ define(
 
                             $("#error-izipay-result").html(html_error);
                             $("#error-izipay-result").show();
-                            
+
                             var requestIzipay = JSON.stringify(iziConfig);
                             var responseError = JSON.stringify(error.Errors);
                             self.saveLogIzipay("Form Izipay Error", requestIzipay, responseError, "");
@@ -428,12 +442,37 @@ define(
                         }
 
                     }
+                } else {
+                    $('input[type=radio][name=izipay-alternative-payment]').prop('checked', false)
                 }
             },
+
             afterPlaceOrder: function () {
                 //redirectOnSuccessAction.redirectUrl = url.build('izipay/payment/index');
                 //this.redirectAfterPlaceOrder = true;
-            }
+            },
+
+            /**
+             * Validate agreements
+             *
+             * @returns {Boolean}
+             */
+            validateAgreements: function () {
+                let validAgreements = true
+                let checkboxPrivacy = $('[name="sidebar[additional][checkbox_privacidad]');
+                if (!checkboxPrivacy.is(':checked')) {
+                    let message = $t('This is a required field.');
+                    let id = checkboxPrivacy.attr('id');
+                    checkboxPrivacy.siblings('.field-error').remove();
+                    checkboxPrivacy.siblings('label')
+                        .after(`<div class="field-error" id="error-${id}">${message}</div>`);
+                    validAgreements = false;
+                } else {
+                    checkboxPrivacy.siblings('.field-error').remove();
+                }
+
+                return validAgreements;
+            },
         });
     }
 );
