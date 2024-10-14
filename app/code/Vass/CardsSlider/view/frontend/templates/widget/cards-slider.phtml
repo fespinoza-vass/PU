@@ -1,0 +1,72 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_CardsSlider
+ * @author VASS Team
+ */
+
+use Magento\Framework\Escaper;
+use Vass\CardsSlider\Block\Widget\CardsSlider;
+
+/**
+ * @var CardsSlider $block
+ * @var Escaper $escaper
+ */
+
+$images = $block->getImages();
+$titles = $block->getTitle();
+$descriptions = $block->getDescription();
+$textUrls = $block->getTextUrl();
+$urls = $block->getUrl();
+?>
+
+<div class="card-slider__wrapper">
+    <div id="card-slider" class="card-slider swiper">
+        <div class="swiper-wrapper slider">
+            <?php if (!empty($images) && is_array($images)): ?>
+                <?php foreach ($images as $index => $image): ?>
+                    <?php if ($image): ?>
+                        <div class="swiper-slide">
+                            <div class="card-slider__img">
+                                <a class="link" href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>"
+                                   class="link-only-mobile">
+                                    <img class="card-img"
+                                         src="<?= $escaper->escapeUrl($image) ?>"
+                                         alt="<?= $escaper->escapeHtmlAttr($titles[$index] ?? '') ?>"/>
+                                </a>
+                            </div>
+                            <div class="card-slider__content">
+                                <a class="link" href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>"
+                                   class="link-only-mobile">
+                                    <h3 class="title">
+                                        <?= $escaper->escapeHtml($titles[$index] ?? '') ?>
+                                    </h3>
+                                    <p class="description">
+                                        <?= $escaper->escapeHtml($descriptions[$index] ?? '') ?>
+                                    </p>
+                                </a>
+                                <a class="link"
+                                   href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>">
+                                    <?= $escaper->escapeHtml($textUrls[$index] ?? '') ?>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+        <div class="swiper-pagination card-slider"></div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#card-slider": {
+            "cardsSlider": {
+                "slidesInMobile": "<?= $escaper->escapeJs($block->getSlidesToShowInMobile()) ?>",
+                "slidesInDesktop": "<?= $escaper->escapeJs($block->getSlidesToShowInDesktop()) ?>",
+                "slidesInTablet": "<?= $escaper->escapeJs($block->getSlidesToShowInTablet()) ?>"
+            }
+        }
+    }
+</script>

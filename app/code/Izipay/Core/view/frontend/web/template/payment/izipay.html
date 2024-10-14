@@ -1,0 +1,319 @@
+<style>
+    table.data-izipay-response-success {
+        padding:3px;
+        width: 356px;
+    }
+    table.data-izipay-response-success td{
+        padding:3px;
+    }
+
+    .modal-izipay-result {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-izipay-result.open {
+        visibility: visible;
+        opacity: 1;
+        transition-delay: 0s;
+    }
+    .modal-izipay-result-bg {
+        position: absolute;
+        background: #ccc;
+        opacity: .5;
+        width: 100%;
+        height: 100%;
+    }
+    .modal-izipay-result-container {
+        border-radius: 10px;
+        background: #fff;
+        position: relative;
+        padding: 30px;
+    }
+    .modal-izipay-result-close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        outline: none;
+        appearance: none;
+        color: red;
+        background: none;
+        border: 0px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+
+    .payment-method__izipay-alternative-payments {
+        list-style-type: none;
+    }
+
+    ul.payment-method__izipay-alternative-payments li {
+        padding: 2px;
+    }
+
+    ul.payment-method__izipay-alternative-payments li {
+        padding: 2px;
+    }
+
+    ul.payment-method__izipay-alternative-payments li label span{
+        font-weight: bold;
+        font-size: 15px;
+        width: 80% !important;
+        display: inline-grid;
+    }
+
+    ul.payment-method__izipay-alternative-payments li div.description-payment {
+        margin-left: 22px;
+    }
+
+    div.description-izipay-payment-method {
+        margin-left: 15px;
+    }
+
+    div.error-validation-izipay-payment-method {
+        margin-left: 44px;
+        padding: 10px;
+        border: 1px solid red;
+        width: 80%;
+        background-color: #ffe8e8;
+        color: red;
+        border-radius: 8px;
+    }
+
+    div.error-validation-izipay-document-number  {
+        margin: -15px 0px 0px 24px;
+        color: red;
+    }
+    div.error-izipay-result {
+        margin: -15px 0px 0px 5px;
+        color: red;
+    }
+
+    div.extra-fields-izipay .field_required label{
+        font-weight: bold;
+    }
+    div.extra-fields-izipay .field_required label:after{
+        content: '*';
+        color: #e02b27;
+        font-size: 1.2rem;
+        margin: 0 0 0 5px;
+    }
+    div.extra-fields-izipay{
+        width: 300px;
+        margin-left: 19px;
+    }
+    div.extra-fields-izipay .field_required {
+        padding: 5px;
+    }
+</style>
+
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+        <label data-bind="attr: {'for': getCode()}" class="">
+            <span class="title-payment" data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <span class="image-payment">
+            <img class="payment-izipay-image" style="width:150px" data-bind="attr: { src: require.toUrl('Izipay_Core/images/logo-izipay-checkout.png') }" />
+        </span>
+
+        <input type="hidden" name="has-izipay-payment-active" value="1" />
+
+        <!-- LISTAR LOS METODOS DE PAGO IZIPAY -->
+        <!--ko if: getAlternativePaymentMethods().length -->
+            <input type="hidden" name="has-izipay-alternative-methods" value="true" />
+            <ul class="payment-method__izipay-alternative-payments" >
+                <!-- ko foreach: {data: getAlternativePaymentMethods(), as: 'item'} -->
+                <li data-bind="attr: { class: item.type }" >
+                    <label>
+                        <input type="radio"
+                        name="izipay-alternative-payment"
+                        class="radio"
+                        data-bind="value: item.payment_method"
+                        />
+                        <span class="title-payment" data-bind="text: item.title"></span>
+                    </label>
+                    <div class="description-payment" data-bind="text: item.description"></div>
+                </li>
+                <!--/ko-->
+            </ul>
+            <div class="error-validation-izipay-payment-method" style="display:none">
+                Debe seleccionar una de las opciones de pago.
+            </div>
+        <!--/ko-->
+        <!-- ko ifnot: getAlternativePaymentMethods().length -->
+        <input type="hidden" name="has-izipay-alternative-methods" value="false" />
+        <div class="description-izipay-payment-method">
+            Paga con métodos de pago Tarjeta de Crédito/Débito, QR, Millas
+        </div>
+        <!--/ko-->
+
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div id="error-izipay-result" class="error-izipay-result" style="display:none">
+            Error enviando datos de izipay
+        </div>
+
+        <!-- TIPO DE DOCUMENTO Y NUMERO DE DOCUMENTO -->
+        <div class="extra-fields-izipay">
+            <fieldset class="fieldset address">
+                <div class="field_required">
+                    <label class="label">
+                        <span>Tipo de Documento:</span>
+                    </label>
+                    <div class="control">
+                        <select class="select" name="izipay_document_type">
+                            <option value="DNI">DNI</option>
+                            <option value="RUC">RUC</option>
+                            <option value="CE">Carnet de Extranjería</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field_required">
+                    <label class="label">
+                        <span>Número de Documento:</span>
+                    </label>
+                    <div class="control">
+                        <input class="input-text" type="text" name="izipay_document_number" maxlength="15" value="" />
+                    </div>
+                </div>
+                <div class="field_required content_razon_social_izipay" style="display:none">
+                    <label class="label">
+                        <span>Razón Social:</span>
+                    </label>
+                    <div class="control">
+                        <input class="input-text" type="text" name="izipay_razon_social" maxlength="100" value="" />
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+        <div class="error-validation-izipay-document-number" style="display:none">
+            Debe ingresar un número de documento
+        </div>
+        <div class="ko-concetp">
+            <div data-bind="afterRender: callEventsDefault"></div>
+        </div>
+        <!-- FIN DE CAMPOS EXTRAS -->
+
+        <!-- IFRAME IZIPAY -->
+        <div id="izipay-iframe-payment"></div>
+
+        <!-- CUSTOM POPUP IZIPAY RESULT -->
+        <div class="modal-izipay-result" id="modal-one">
+            <div class="modal-izipay-result-bg modal-exit"></div>
+            <div class="modal-izipay-result-container">
+              <b>Error al procesar el pago</b>
+              <p> </p>
+                <table class="data-izipay-response-success">
+                    <tr>
+                        <td>Código de Respuesta:</td>
+                        <td><span id="result_izipay_code"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Mensaje Izipay:</td>
+                        <td><span id="result_izipay_message"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Moneda:</td>
+                        <td><span id="result_izipay_moneda"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Monto:</td>
+                        <td><span id="result_izipay_monto"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Order Number:</td>
+                        <td><span id="result_izipay_order_number"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Código Autorización:</td>
+                        <td><span id="result_izipay_codeauth"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha y Hora de Transacción:</td>
+                        <td><span id="result_izipay_fecha_hora"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Método de pago:</td>
+                        <td><span id="result_izipay_metodo_pago"></span></td>
+                    </tr>
+                </table>
+              <button class="modal-izipay-result-close modal-exit">X</button>
+            </div>
+          </div>
+        <!-- FIN CUSTOM POPUP  -->
+
+        <!-- GET TOKEN -->
+        <div class="ko-concetp">
+            <div data-bind="afterRender: generateToken"></div>
+        </div>
+        <input type="hidden" name="izipay_token" />
+        <input type="hidden" name="izipay_token_code" />
+        <input type="hidden" name="izipay_transaction_id" />
+        <input type="hidden" name="izipay_order_number" />
+        <input type="hidden" name="izipay_payment_code_response" />
+        <!-- FIN GET TOKEN -->
+
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+
+        <div class="actions-toolbar" id="action-tool-bar-content-izi">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrderIzipay,
+                        attr: {title: $t('Place Order')},
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+        <div class="actions-toolbar" style="visibility:hidden">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        id="btnPlaceOrderOriginal"
+                        data-bind="
+                        click: placeOrder,
+                        attr: {title: $t('Place Order')},
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
