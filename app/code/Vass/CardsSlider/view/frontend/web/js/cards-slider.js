@@ -24,7 +24,7 @@ define([
                     breakpoints: {
                         1024: {
                             slidesPerView: slidesInDesktop,
-                            spaceBetween: 30,
+                            spaceBetween: 24,
                         },
                         768: {
                             slidesPerView: slidesInTablet,

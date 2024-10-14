@@ -45,9 +45,9 @@ $urls = $block->getUrl();
                                         <?= $escaper->escapeHtml($descriptions[$index] ?? '') ?>
                                     </p>
                                 </a>
-                                <a class="link"
+                                <a class="link-only-desktop"
                                    href="<?= isset($urls[$index]) ? $escaper->escapeUrl($urls[$index]) : '#' ?>">
-                                    <?= $escaper->escapeHtml($textUrls[$index] ?? '') ?>
+                                <?= $escaper->escapeHtml($textUrls[$index] ?? '') ?>
                                 </a>
                             </div>
                         </div>
