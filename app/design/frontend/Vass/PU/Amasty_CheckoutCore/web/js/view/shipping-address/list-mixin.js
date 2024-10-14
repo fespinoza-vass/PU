@@ -73,10 +73,6 @@ define([
                     shippingRegistry.excludedCollectionNames.push('shipping-address-fieldset');
                 }
 
-                $(document).on('click', '.form-shipping-address .action-update', function () {
-
-                });
-
                 return this;
             },
 
@@ -363,6 +359,10 @@ define([
                 this.isAddressDetailsVisible(true);
                 this.isAddressListVisible(false);
                 this.isAddressFormVisible(false);
+
+                if (!$('.form-shipping-address').is(':visible')) {
+                    $('body').css('overflow', 'auto');
+                }
             },
 
             /**
@@ -372,10 +372,35 @@ define([
              */
             onAddressChange: function (address) {
                 let isNewAddress = isAddressNew(address);
+                let formAddress = $('.shipping-address-form');
                 this.isAddressFormVisible(isNewAddress);
 
+                if (isNewAddress) {
+                    if ($('.form-shipping-address').is(':visible')) {
+                        $('body').css('overflow', 'hidden');
+                        let inputDocument = $('.form-shipping-address input[name="custom_attributes[numero_identificacion_picker]"]');
+                        if (inputDocument.siblings('.field-error').length) {
+                            inputDocument.val('');
+                        }
+                    }
+                }
+
+                if (formAddress.is(':visible')) {
+                    let referenceShipping = $("[name='custom_attributes[referencia_envio]']");
+                    let identificationNumber = $("[name='custom_attributes[numero_identificacion_picker]']");
+
+                    if (referenceShipping.val() === 'referencia_envio') {
+                        referenceShipping.val('');
+                    }
+
+                    if (identificationNumber.val().includes('numero_identificacion_picker')) {
+                        identificationNumber.val(identificationNumber.val()
+                            .replace('numero_identificacion_picker', ''));
+                    }
+                }
+
                 if (
-                    $('.shipping-address-form').is(':visible')
+                    formAddress.is(':visible')
                     && !$('select[name="custom_attributes[city]"]').val()
                 ) {
                     $('select[name="region_id"]').trigger('change');

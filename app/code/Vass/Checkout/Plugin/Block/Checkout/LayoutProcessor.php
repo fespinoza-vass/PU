@@ -116,19 +116,19 @@ class LayoutProcessor
 
         $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
         ['shippingAddress']['children']['shipping-address-fieldset']['children']['referencia_envio'] = [
-            'component' => 'Magento_Ui/js/form/element/textarea',
+            'component' => 'Magento_Ui/js/form/element/abstract',
             'config' => [
                 'customScope' => 'shippingAddress.custom_attributes',
                 'template' => 'ui/form/field',
-                'elementTmpl' => 'ui/form/element/textarea',
+                'elementTmpl' => 'ui/form/element/input',
                 'id' => 'referencia_envio',
                 'sortOrder' => 100
             ],
-            'placeholder' => 'Ej: Por favor, llamar 1 hora antes de la entrega.',
+            'placeholder' => __('Ex: At block 34 of Benavides Avenue'),
             'dataScope' => 'shippingAddress.custom_attributes.referencia_envio',
             'label' => __('Shipping Reference'),
             'provider' => 'checkoutProvider',
-            'visible' => true
+            'visible' => true,
         ];
 
         $checkbox_privacy = [
@@ -151,8 +151,14 @@ class LayoutProcessor
 
         ];
 
-        $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']
-        ['custom_checkbox2'] = $checkbox_privacy;
+        $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['checkboxes']
+        ['children']['custom_checkbox2'] = $checkbox_privacy;
+
+        $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['checkboxes']
+        ['children']['gift_message_container']['sortOrder'] = 5;
+
+        $jsLayout['components']['checkout']['children']['sidebar']['children']['additional']['children']['checkboxes']
+        ['children']['subscribe']['sortOrder'] = 15;
 
         $cityField = [
             'component' => 'Vass_Checkout/js/form/element/custom-select-address-city',
@@ -165,7 +171,7 @@ class LayoutProcessor
             'dataScope' => 'shippingAddress.custom_attributes.city',
             'label' => 'Provincia',
             'provider' => 'checkoutProvider',
-            'sortOrder' => 75,
+            'sortOrder' => 60,
             'validation' => [
                 'required-entry' => true
             ],

@@ -14,6 +14,7 @@ define([
     return select.extend({
         isLoaded: ko.observable(false),
         isLoadedColony: ko.observable(false),
+        totalLoader: ko.observable(0),
 
         /**
          * Initializes component.
@@ -50,14 +51,17 @@ define([
             let intervalFunction = setInterval(function(){
                 $('body').trigger('processStart');
                 let loader = $('.loading-mask').length;
-                if (loader === 1) {
+                let totalLoader = loader > 1 ? 0 : self.totalLoader() + 1;
+                self.totalLoader(totalLoader);
+
+                if (loader === 1 && self.totalLoader() === 2) {
                     $('body').trigger('processStop');
                     $('body > .loading-mask').remove();
                     $(document).off('ajaxComplete');
                     $(".billing-address-same-as-shipping").click();
                     clearInterval(intervalFunction);
                 }
-            }, 2000);
+            }, 1000);
 
             $(document).on('change', '[name="custom_attributes[colony]"]', function () {
                 if (self.isLoadedColony()) {
@@ -70,25 +74,6 @@ define([
 
             $(document).ajaxComplete(function () {
                 $('#opc-new-shipping-address').siblings('.actions-toolbar').find('.action-update').click()
-            });
-        },
-
-        /**
-         * Filters colony by city.
-         *
-         * @param {string} cityId
-         * @param {string} regionId
-         */
-        filterCities: function (cityId, regionId) {
-            let self = this;
-            $.ajax({
-                url: '/zipcode/index/gettown',
-                data: {region_id: regionId, city: cityId},
-                success: function (data) {
-                    let colonies = JSON.parse(data);
-                    self.setOptions(colonies);
-                    fullScreenLoader.stopLoader();
-                }
             });
         },
 
@@ -123,6 +108,43 @@ define([
                 quote.shippingAddress(shipping);
                 rateService.updateRates(quote.shippingAddress());
             }
+        },
+
+        /**
+         * Filters colony by city.
+         *
+         * @param {string} cityId
+         * @param {string} regionId
+         */
+        filterCities: function (cityId, regionId) {
+            let self = this;
+
+            $.ajax({
+                url: '/zipcode/index/gettown',
+                data: {region_id: regionId, city: cityId},
+                success: function (data) {
+                    let colonies = JSON.parse(data);
+                    colonies = self.formatOptions(colonies);
+                    self.setOptions(colonies);
+                    fullScreenLoader.stopLoader();
+                }
+            });
+        },
+
+        /**
+         * Format options
+         *
+         * @param options
+         */
+        formatOptions: function (options) {
+            return options.map(function (option) {
+                return {
+                    value: option.value,
+                    label: `${option.label.charAt(0).toUpperCase()}${option.label.slice(1).toLowerCase()}`,
+                    postcode: option.postcode,
+                    labeltitle: option.labeltitle
+                };
+            });
         }
     });
 });
