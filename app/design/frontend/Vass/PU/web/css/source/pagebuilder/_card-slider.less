@@ -15,11 +15,13 @@
     }
 
     .card-slider {
+        &.swiper-initialized {
+            padding-bottom: 32px;
+        }
         .swiper {
             height: 100%;
 
             &-pagination {
-                bottom: -6px;
                 display: block;
             }
         }
@@ -41,6 +43,7 @@
 
             .card-img {
                 max-height: 315px;
+                min-height: 315px;
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
@@ -65,7 +68,6 @@
             .title {
                 font-family: @font-family__secondary;
                 .lib-font-size(@font-size__xl);
-                font-weight: (@font-weight__regular);
                 line-height: @line-height__l;
                 text-align: left;
                 color: @primary-black;
@@ -94,6 +96,22 @@
 }
 
 //
+// Tablet
+// _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s){
+
+    .card-slider {
+        &__img {
+            .card-img {
+                max-height: 400px;
+                min-height: 400px;
+            }
+        }
+    }
+}
+
+
+//
 // Desktop
 // _____________________________________________
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
@@ -101,17 +119,14 @@
         pointer-events: none;
     }
 
-    .swiper-wrapper.slider {
-        padding-bottom: 20px;
+    //TODO revisar
+    .swiper-initialized {
+        padding-bottom: 30px;
     }
 
     .card-slider {
         .swiper {
             height: 100%;
-
-            &-pagination {
-                bottom: -4px !important; // Override swiper-pagination bottom limit
-            }
         }
 
         &__wrapper {
@@ -123,8 +138,8 @@
             width: 100%;
 
             .card-img {
-                max-height: 500px;
-                height: 100%;
+                max-height: 520px;
+                min-height: 520px;
             }
         }
 
@@ -133,8 +148,6 @@
                 .lib-font-size(26);
                 bottom: 5px;
                 line-height: @line-height__l;
-                font-weight: @font-weight__regular;
-                text-transform: uppercase;
             }
 
             .description {
