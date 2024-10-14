@@ -83,7 +83,7 @@ require([
                 }, 1000);
 
                 $input.on('keyup', function(event) {
-                    validateDNI(event, $(this));
+                    self.validateDNI(event, $(this));
                 });
             }
         });
@@ -119,7 +119,6 @@ require([
             let value = input.val().replace(/\D/g, '');
             input.val(value);
 
-            // Validate length for DNI
             if (!/^\d{8}$/.test(value)) {
                 showValidationMessage($t('Please enter less or equal than %1 symbols.').replace('%1', 8));
                 input.parent().parent().addClass('_error');

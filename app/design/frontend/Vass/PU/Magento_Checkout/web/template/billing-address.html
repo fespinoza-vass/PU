@@ -33,10 +33,11 @@
         <div data-bind="fadeVisible: isAddressFormVisible">
             <render args="formTemplate"></render>
         </div>
+
+        <div class="billing-info">
+            <span data-bind="i18n: 'The registered tax address will be used to issue the invoice'"></span>
+        </div>
+
         <render args="actionsTemplate"></render>
     </fieldset>
-
-    <div class="billing-info">
-        <span data-bind="i18n: 'We will use the address you previously entered for your ballot'"></span>
-    </div>
 </div>
