@@ -1,0 +1,70 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+& when (@media-common = true) {
+    .banner-cards-benefits {
+        min-height: 454px;
+        margin-bottom: @indent__base;
+
+        .banner-cards-benefits__content  {
+            padding: 0 @indent__base;
+
+            .banner-cards-benefits__title {
+                .lib-font-size(@font-size__xl);
+                line-height: 32px;
+            }
+
+            .banner-cards-benefits__logos {
+                width: 300px;
+
+                .pagebuilder-column-line {
+                    flex-wrap: nowrap;
+                    gap: @indent__l;
+                }
+            }
+        }
+
+        .banner-cards-benefits__img {
+            min-height: 264px;
+            box-shadow: inset 0px -20px 10px 2px @color-beige3,
+                        inset 0px 20px 50px 4px @primary-black;
+        }
+    }
+
+    .cards-benefits__title {
+        & > h2 {
+            .lib-font-size(22);
+            line-height: 30px;
+            margin: @indent__l 0;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .banner-cards-benefits {
+        min-height: 238px;
+
+        .banner-cards-benefits__content {
+            padding: 0 90px;
+
+            .banner-cards-benefits__title {
+                .lib-font-size(36);
+                line-height: 44px;
+            }
+
+        }
+
+        .banner-cards-benefits__img {
+            min-height: 238px;
+            box-shadow: inset -20px 0 20px 2px #F2EDE9;
+        }
+    }
+
+    .cards-benefits__title {
+        & > h2 {
+            .lib-font-size(32);
+        }
+    }
+}

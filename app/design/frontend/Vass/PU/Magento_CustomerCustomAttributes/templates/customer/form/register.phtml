@@ -30,7 +30,7 @@ $createAccountButtonViewModel = $block->getData('create_account_button_view_mode
 ?>
 <div class="register-container">
     <div class="block-left">
-        <img class="customer-login-image"
+        <img class="customer-register-image"
                     src="<?= $escaper->escapeUrl($this->getViewFileUrl('Magento_Customer::image/register_image.png')); ?>"
                     alt="">
     </div>
@@ -130,7 +130,7 @@ $createAccountButtonViewModel = $block->getData('create_account_button_view_mode
                         <input name="tos" type="checkbox" id="tos" class="checkbox" data-validate="{required:true}" data-msg-required="<?= __('You should accept the privacy policy') ?>" title="<?php echo __('I accept the legal terms and conditions'); ?>"/>
                         <label class="label label-text-wrapper" for="tos">
                             <span>
-                            <?= __('I have read and accept the <a class="alink" href="%1">Terms and Conditions</a> and <a class="alink" href="%2">Personal Data Protection *</a>',
+                            <?= __('I have read and accept the <a class="alink" href="%1">Terms and Conditions</a> and <a class="alink" href="%2">Personal Data Protection</a> *',
                             $escaper->escapeUrl($block->getUrl('terminos-y-condiciones')),
                             $escaper->escapeUrl($block->getUrl('politicas-de-proteccion-de-datos-personales')),
                             )

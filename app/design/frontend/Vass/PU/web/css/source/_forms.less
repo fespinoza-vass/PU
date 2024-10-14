@@ -48,9 +48,31 @@
         .field {
             ._lib-form-field-required();
             .lib-form-field();
+
+            &.choice.tos {
+                flex-wrap: wrap;
+
+                .label {
+                    order: 1;
+                    width: ~"calc(100% - 38px)";
+                }
+
+                .mage-error {
+                    padding: 0;
+                }
+
+                > div {
+                    &.mage-error {
+                        order: 2;
+                        margin-left: @indent__base;
+                        margin-top: 8px;
+                    }
+                }
+            }
         }
 
-        .mage-error {
+        .mage-error,
+        .field-error {
             padding: @form-validation-note__padding;
         }
 
@@ -60,12 +82,16 @@
             padding: @form-validation-note__padding;
         }
 
-        input.mage-error,
-        select.mage-error {
-            &:focus {
-                border: @form-element-validation__focus__border;
-                color: @form-element-input__focus__color;
+        input,
+        select {
+            &.mage-error,
+            &.field-error {
+                &:focus {
+                    border: @form-element-validation__focus__border;
+                    color: @form-element-input__focus__color;
+                }
             }
+
         }
 
         input,
@@ -76,6 +102,10 @@
                 .lib-font-size(@font-size__m)
             }
         }
+    }
+
+    div.field-error {
+        .lib-form-validation-note();
     }
 
     //

@@ -40,14 +40,31 @@ define([
          */
         filterCities: function (regionId) {
             let self = this;
+
             $.ajax({
                 url: '/zipcode/index/getcity',
                 data: {region_id: regionId},
                 success: function (data) {
                     let options = JSON.parse(data);
+                    options = self.formatOptions(options);
                     self.setOptions(options);
                     fullScreenLoader.stopLoader();
                 }
+            });
+        },
+
+        /**
+         * Format options
+         *
+         * @param options
+         */
+        formatOptions: function (options) {
+            return options.map(function (option) {
+                return {
+                    value: option.value,
+                    label: `${option.label.charAt(0).toUpperCase()}${option.label.slice(1).toLowerCase()}`,
+                    labeltitle: option.labeltitle
+                };
             });
         }
     });

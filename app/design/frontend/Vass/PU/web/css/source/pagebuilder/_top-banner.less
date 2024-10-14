@@ -1,0 +1,65 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+& when (@media-common = true) {
+    .top-banner {
+        margin: 0 @indent__base @indent__base @indent__base;
+
+        .pagebuilder-banner-wrapper {
+            min-height: 300px;
+
+             .pagebuilder-overlay {
+                padding: @indent__m 85px @indent__m @indent__m;
+            }
+        }
+
+
+        .pagebuilder-collage-content {
+            h1 {
+                .lib-font-size(@indent__m);
+                line-height: 32px;
+            }
+
+            p {
+                .lib-font-size(@font-size__base);
+                margin-bottom: 0;
+                color: @primary-black;
+                width: 179px;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  -------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .top-banner {
+        .pagebuilder-banner-wrapper {
+            display: flex;
+            align-items: center;
+            min-height: 240px;
+
+            .pagebuilder-overlay {
+                margin-left: 50%;
+                padding-right: @indent__m;
+            }
+        }
+
+
+        .pagebuilder-collage-content {
+            h1 {
+                .lib-font-size(32);
+            }
+
+            p {
+                .lib-font-size(@font-size__l);
+                width: auto;
+            }
+        }
+
+    }
+}
