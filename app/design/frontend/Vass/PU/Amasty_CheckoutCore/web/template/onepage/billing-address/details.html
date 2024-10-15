@@ -1,0 +1,38 @@
+<div class="billing-address-details" data-bind="if: isAddressDetailsVisible() && currentBillingAddress() && !isAddressSameAsShipping()">
+    <div class="card custom-card">
+        <div class="card-header">
+            <!-- ko i18n: 'Invoice Data' --><!-- /ko -->
+        </div>
+
+        <!-- ko foreach: { data: currentBillingAddress().customAttributes, as: 'element' } -->
+            <!-- ko if: element.attribute_code === 'ruc' -->
+                <div class="card-content">
+                    <!-- ko i18n: 'RUC:' --><!-- /ko -->
+                    <span class="value" data-bind="text: element.value"></span>
+                </div>
+            <!-- /ko -->
+
+            <!-- ko if: element.attribute_code === 'razon_social' -->
+                <div class="card-content">
+                    <span><!-- ko i18n: 'Company Name Bill' --><!-- /ko -->:</span>
+                    <span class="value" data-bind="text: element.value"></span>
+                </div>
+            <!-- /ko -->
+
+            <!-- ko if: element.attribute_code === 'direccion_fiscal' -->
+                <div class="card-content">
+                    <span><!-- ko i18n: 'Tax Directorate' --><!-- /ko -->:</span>
+                    <span class="value" data-bind="text: element.value"></span>
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- Button inside the Card -->
+        <button type="button"
+                class="action primary action-edit-address amcheckout-button edit-button"
+                data-bind="visible: !isAddressSameAsShipping(), click: editAddress">
+            <span data-bind="i18n: 'Edit'"></span>
+        </button>
+    </div>
+    <!-- Card Container End -->
+</div>

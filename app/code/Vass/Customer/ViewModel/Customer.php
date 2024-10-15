@@ -33,4 +33,15 @@ class Customer implements ArgumentInterface
     {
         return $this->customerSession->getCustomer() ?? null;
     }
+
+    public function getGender(): ?string
+    {
+        $customer = $this->getCustomer();
+        return $customer->getAttribute('gender')->getSource()->getOptionText($customer->getGender()) ?? '';
+    }
+
+    public function formatDate($date): ?string
+    {
+        return date('d/m/Y', strtotime($date));
+    }
 }

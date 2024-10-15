@@ -1,0 +1,43 @@
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+-->
+<div class="document-type-checkout">
+    <div class="document-type-checkout-title">
+        <p class="checkout-billing-address-title">¿Qué tipo documento quiere?</p>
+    </div>
+    <div class="document-type-checkout-choices">
+        <div class="billing-address-same-as-shipping-block field choice" data-bind="visible: canUseShippingAddress()">
+            <div class="ticket">
+                <input type="checkbox" name="billing-address-same-as-shipping" class="billing-address-same-as-shipping"
+                       data-bind="checked: isAddressSameAsShipping, click: useShippingAddress, attr: {id: 'billing-address-same-as-shipping-' + getCode($parent)}"/>
+                <label data-bind="attr: {for: 'billing-address-same-as-shipping-' + getCode($parent)}"><span
+                    data-bind="i18n: 'Ticket'"></span></label>
+            </div>
+           <div class="bill">
+               <input type="checkbox" name="billing-address-same-as-shipping" class="billing-address-not-same-as-shipping"
+                      data-bind="checked: isAddressSameAsShipping, click: useShippingAddress, attr: {id: 'billing-address-same-as-shipping-' + getCode($parent)}"/>
+               <label data-bind="attr: {for: 'billing-address-same-as-shipping-' + getCode($parent)}"><span
+                   data-bind="i18n: 'Bill'"></span></label>
+           </div>
+        </div>
+    </div>
+</div>
+
+<div class="checkout-billing-address">
+    <render args="detailsTemplate"></render>
+    <fieldset class="fieldset fieldset-wrap" data-bind="visible: !isAddressDetailsVisible()">
+        <each args="getRegion('billing-address-list')" render=""></each>
+        <div data-bind="fadeVisible: isAddressFormVisible">
+            <render args="formTemplate"></render>
+        </div>
+
+        <div class="billing-info">
+            <span data-bind="i18n: 'The registered tax address will be used to issue the invoice'"></span>
+        </div>
+
+        <render args="actionsTemplate"></render>
+    </fieldset>
+</div>
