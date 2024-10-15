@@ -22,7 +22,7 @@
     }
 
     .products-slider {
-        margin: @indent__l 0 0;
+        margin: @indent__l @indent__base;
 
         .products-slider__wrapper {
             padding-bottom: 28px;
@@ -48,7 +48,7 @@
             .lib-font-size(@font-size__xl);
             line-height: 36px;
             text-align: center;
-            margin: 0 auto @indent__m;
+            margin: 0 auto @indent__base;
         }
     }
 
@@ -192,6 +192,12 @@
 
         .swatch-opt {
             display: none;
+        }
+    }
+
+    .catalog-product-view {
+        .product-slider-brands {
+            margin-bottom: 0;
         }
     }
 }
