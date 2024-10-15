@@ -57,10 +57,13 @@ SCRIPT;
      class="checkout-container am-checkout -<?= /* @noEscape */ $design?> -layout-<?= /* @noEscape */ $layout?>"
      data-amcheckout-js="checkout">
     <div class="checkout-header">
+
         <h1 class="title"><?= $escaper->escapeHtml($onepageDataProvider->getTitle()); ?></h1>
-        <div class="description">
-            <?= $escaper->escapeHtml($onepageDataProvider->getDescription(), ['a', 'b', 'i', 'u', 's', 'strong']); ?>
-        </div>
+        <!-- ko ifnot: window.checkoutConfig.isCustomerLoggedIn  -->
+            <div class="description">
+                <?= $escaper->escapeHtml($onepageDataProvider->getDescription(), ['a', 'b', 'i', 'u', 's', 'strong']); ?>
+            </div>
+        <!-- /ko -->
     </div>
 
     <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" data-mage-init='{"checkoutLoader": {}}'>
