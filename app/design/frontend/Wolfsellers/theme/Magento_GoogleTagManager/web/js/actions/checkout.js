@@ -81,30 +81,6 @@ define([
         window.dataLayer.push(dlUpdate);
     }
 
-/**
- * Notifies a purchase event to the dataLayer.
- *
- * @param {Object} order - The order object containing the purchase details.
- * @param {string} order.actionField - The action field for the purchase.
- * @param {Array} order.products - An array of products in the purchase.
- * @param {string} order.currencyCode - The currency code for the purchase.
- * @return {void} This function does not return a value.
- */
-    function notifyPurchase(order) {
-        const purchaseData = {
-            'event': 'purchase',
-            'ecommerce': {
-                'purchase': {
-                    'actionField': order.actionField,
-                    'products': order.products
-                },
-                'currencyCode': order.currencyCode
-            }
-        };
-
-        window.dataLayer.push(purchaseData);
-    }
-
     return function (data) {
         var events = {
                 shipping: {
@@ -131,13 +107,5 @@ define([
                 notify.bind(this, data.cart, events.shipping.index, events.shipping.desctiption, data.currencyCode, data.dataUser)
             );
         }
-
-        $(document).on('order:placed', function (event, orderData) {
-            if (window.dataLayer) {
-                notifyPurchase(orderData);
-            } else {
-                $(document).on('ga:inited', notifyPurchase.bind(this, orderData));
-            }
-        });
     };
 });

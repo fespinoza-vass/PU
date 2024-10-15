@@ -49,6 +49,9 @@ var config = {
             },
             'Amasty_CheckoutCore/js/view/payment/method-renderer/default-mixin': {
                 'Vass_Checkout/js/view/payment/method-renderer/default-mixin': true
+            },
+            'Magento_Checkout/js/view/shipping': {
+                'Vass_Checkout/js/view/mixin/shipping-method-mixin': true
             }
         }
     }
