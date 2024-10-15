@@ -11,7 +11,7 @@
     .row-page-content {
         .default {
             &.amform-form {
-                margin: 0 @indent__base;
+                margin: 0 @indent__base @indent__l;
                 background-color: @primary-white;
 
                 .fields {
@@ -191,6 +191,7 @@
                             &:has(.cb-label-checkbox) {
                                 width: 80%;
                                 margin-top: @indent__base;
+                                color: @primary-black;
                             }
 
                             &:has(.cbform-section-title) {
@@ -230,7 +231,7 @@
         .default {
             &.amform-form {
                 max-width: 792px;
-                margin: 0 auto;
+                margin: 0 auto 80px;
 
                 .fields {
                     .field {
