@@ -1,0 +1,391 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Imports
+//  --------------------------------------------------
+
+@import '../../_mixins';
+
+//
+//  Common
+//  --------------------------------------------------
+
+& when (@media-common = true) {
+    .amshopby-slider-container .amshopby-slider-display {
+        margin: 0;
+        text-align: right;
+        padding-bottom: 8px;
+    }
+
+    .filter-options-item .filter-options-content {
+        padding-bottom: 5px;
+
+        .am-swatch-wrapper .swatch-option.image,
+        .swatch-attribute.size .swatch-option.selected,
+        .swatch-attribute.manufacturer .swatch-option.selected {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .range {
+            align-items: center;
+            display: flex;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .am-shopby-form {
+            margin: 0 7px;
+        }
+
+        .items [class*='am-filter-item'] {
+            margin-left: 7px;
+            padding: 0;
+        }
+
+        .count {
+            display: none;
+        }
+
+        .am-shopby-swatch-label .count {
+            margin: 0;
+            padding: 0;
+        }
+
+        .am-shopby-swatch-label .label {
+            margin-right: 5px;
+        }
+
+        .am-shopby-form {
+            margin-bottom: -15px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 3px;
+        }
+
+        .am-shopby-form .swatch-attribute .swatch-option-link-layered:hover {
+            background-color: unset;
+        }
+    }
+
+    .amasty-catalog-topnav .filter-options-item .filter-options-content {
+        padding-bottom: @indent__s;
+
+        .items:not(.items-children):not(.am-category-view),
+        .am-shopby-form,
+        .am-category-wrapper,
+        .amshopby-fromto-wrap {
+            margin: 0;
+        }
+    }
+
+    .filter-options {
+        .item.-is-collapsible.-is-by-click.-folded .-folding {
+            display: none;
+        }
+
+        .items.-am-overflow {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .items .items-children.-folding {
+            list-style: none;
+            padding-left: 20px;
+            width: 100%;
+        }
+
+        .items.-am-singleselect .item.-is-by-click .items-children.-folding .item .amshopby-filter-parent {
+            padding-left: 28px;
+        }
+
+        .items.-am-multiselect .item.-is-expanded .items-children.-folding {
+            padding-left: 0;
+        }
+
+        .items .items-children.-folding .item {
+            margin: 5px 0;
+        }
+
+        .item.-empty-value {
+            opacity: .5;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .ui-widget-overlay {
+            background: @color-gray-light1;
+            opacity: .3;
+        }
+
+        .ui-widget-shadow {
+            box-shadow: 0 0 5px @color-gray-dark2;
+        }
+
+        .filter-options-content .rating-summary {
+            display: inline-block;
+            vertical-align: sub;
+        }
+
+        .amshopby-search-box {
+            margin: 0 0 15px;
+        }
+
+        .am-labels-folding.-am-singleselect .item .am-input,
+        [class*='am-filter-items-'].am-labels-folding.-am-singleselect .item:not(.swatch-option-link-layered) input[type='radio'],
+        .amshopby-category-dropdown + form .-am-singleselect .item input[type='radio'],
+        .am-category-view input[type='radio'] {
+            display: none;
+        }
+
+        .am-labels-folding.-am-singleselect .item {
+            padding: 0;
+        }
+
+        .am-category-wrapper .items.-am-multiselect .item.-filter-parent:not(.-is-collapsible),
+        .items:not(.items-children) > .item.-is-by-click.-filter-parent ~ .item.-is-expanded {
+            margin-left: 20px;
+        }
+    }
+
+    .filter-options-content .am-ranges .items.-am-multiselect .item {
+        position: relative;
+        .lib-font-size(@font-size__l);
+        font-weight: @font-weight__light;
+
+        [class*='am-filter-item'] {
+            padding-left: 28px;
+        }
+    }
+
+    .filter-actions .filter-clear {
+        > * {
+            .lib-font-size(@font-size__m);
+            overflow: hidden;
+            color: @link__color;
+            text-align: center;
+            line-height: @line-height__s;
+            text-decoration-line: @link__text-decoration;
+        }
+
+        &:hover {
+            color: @color-gray-dark1;
+            text-decoration: @link__hover__text-decoration;
+        }
+
+        &:focus,
+        &:active {
+            color: @color-green-light2;
+            text-decoration: @link__hover__text-decoration;
+        }
+    }
+
+    .filter-options-content .item a {
+        .lib-font-size(@font-size__l);
+        font-weight: @font-weight__light;
+
+        &:hover {
+            background-color: transparent;
+            color: @color-gray-light4;
+        }
+
+        &:hover .count {
+            color: @color-gray-light4;
+        }
+
+        &:active,
+        &:active .count {
+            color: @secondary-black;
+            text-decoration: none;
+        }
+    }
+
+    .filter-options-content {
+        .item:first-child {
+            margin-top: 0;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item > a {
+            display: block;
+        }
+
+        .items.-am-singleselect .item > input[type='radio'] {
+            display: none;
+        }
+    }
+
+    .am-show-more {
+        &,
+        .filter-options-content & {
+            background: transparent;
+            border: 0;
+            color: @secondary-black;
+            cursor: pointer;
+            display: none;
+            .lib-font-size(14);
+            font-weight: @font-weight__regular;
+            letter-spacing: @indent__xs;
+            line-height: 20px;
+            margin: @indent__s 0 0;
+            position: relative;
+        }
+
+        .amasty-catalog-topnav .filter-options-content & {
+            padding-left: 0;
+        }
+
+        &:hover,
+        .filter-options-content &:hover {
+            background-color: transparent;
+            color: @secondary-black;
+            text-decoration: none;
+        }
+
+        &:active,
+        .filter-options-content &:active {
+            box-shadow: none;
+            color: @secondary-black;
+        }
+
+        &:before {
+            &:extend(.am-collapse-icon:after all);
+
+            top: 0;
+        }
+
+        &.-active {
+            align-items: center;
+            display: inline-flex;
+        }
+
+        .am-counter {
+            display: inline-block;
+            margin: 0 2px;
+            opacity: .5;
+        }
+
+        &[data-is-hide='false']:before {
+            transform: rotate(180deg);
+        }
+    }
+
+    .filter-options .items:not(.items-children).-am-multiselect > .item.-is-by-click {
+        .items-children.-folding {
+            padding-left: 0;
+        }
+
+        .items-children.-folding .item.-is-expanded {
+            margin-left: 20px;
+        }
+    }
+
+    .am-filter-items-stock .amshopby-link-selected,
+    .am-filter-items-rating .amshopby-link-selected {
+        text-decoration: none;
+    }
+
+    .filter-content .items.-am-multiselect [class*='am-filter-item']:hover {
+        color: inherit;
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+    .filter-options-content .am-ranges .items.-am-multiselect .item [class*='am-filter-item'] {
+        position: inherit;
+    }
+
+    .filter-options {
+        .am-labels-folding .item .am-collapse-icon ~ [class*='am-filter-item-'],
+        .am-labels-folding .item {
+            position: relative;
+        }
+
+        .items:not(.items-children).-am-multiselect > .item.-is-by-click .items-children.-folding .item.-is-expanded,
+        .am-category-wrapper .items.-am-multiselect .item.-filter-parent:not(.-is-collapsible),
+        .items:not(.items-children) > .item.-is-by-click.-filter-parent ~ .item.-is-expanded {
+            margin-left: 35px;
+        }
+    }
+
+    .am-labels-folding .am-collapse-icon,
+    .filter-options .amshopby-category-dropdown + form .items.-am-multiselect .item .am-collapse-icon {
+        margin: 7px 0;
+        padding-left: 12px;
+    }
+
+    .filter-options [class*='am-filter-items-'].am-labels-folding .item:not(.swatch-option-link-layered),
+    .filter-options .amshopby-category-dropdown + form .item {
+        .am-collapse-icon ~ .am-input,
+        .am-collapse-icon ~ input[type='radio'],
+        .am-collapse-icon ~ input[type='checkbox'],
+        .am-collapse-icon ~ input[type='checkbox'] + .amshopby-choice {
+            left: 35px;
+        }
+    }
+
+    .filter-options {
+        .items.-am-singleselect .item.-is-by-click .items-children.-folding .item .amshopby-filter-parent,
+        .amshopby-category-dropdown + form .items.-am-multiselect .item .items-children.-folding,
+        .am-category-wrapper .items .items-children.-folding,
+        .am-category-view .item a.amshopby-filter-parent {
+            padding-left: 35px;
+        }
+
+        .am-category-view.-am-multiselect .item > .am-collapse-icon ~ a.amshopby-filter-parent {
+            padding-left: 70px;
+        }
+
+        .am-category-view.-am-singleselect .am-collapse-icon {
+            margin: 7px 0;
+        }
+    }
+
+    .am-collapse-icon:after {
+        width: 20px;
+    }
+
+    .filter-content .active .am-show-more {
+        &:before {
+            width: 12px;
+        }
+
+        &.-active {
+            margin-bottom: @indent__s;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    .filter-options-item .filter-options-content .items [class*='am-filter-item'] {
+        margin-left: 14px;
+        padding: 0;
+    }
+
+    .filter-options-content .am-ranges .items.-am-multiselect .item {
+        position: relative;
+        .lib-font-size(@font-size__l);
+        font-weight: @font-weight__light;
+
+        [class*='am-filter-item'] {
+            padding-left: 20px;
+        }
+    }
+}

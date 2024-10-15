@@ -26,24 +26,26 @@
 
             .filter {
                 &-options {
-
                     overflow-y: auto;
-                    height: calc(100vh - 100px);
+                    height: calc(100vh - 136px);
                     position: relative;
                 }
+
                 &-title {
                     strong {
                         position: fixed;
                         border: 0;
                         top: 55px;
                         .lib-font-size(20);
+                        font-weight: @font-weight__bold;
                     }
 
                     strong:after {
                         position: fixed;
                         -webkit-font-smoothing: antialiased;
                         -moz-osx-font-smoothing: grayscale;
-                        .lib-font-size(@font-size__m);
+                        .lib-font-size(@font-size__s);
+                        font-weight: @font-weight__regular;
                         line-height: inherit;
                         color: @tertiary-black;
                         content: @icon-close;
@@ -72,6 +74,7 @@
                 .lib-font-size(@font-size__m);
                 border: 1px solid @secondary-black;
                 border-radius: 3px;
+                font-weight: @font-weight__regular;
                 line-height: @line-height__l;
                 padding: @indent__s @indent__m;
                 z-index: 2;
@@ -79,8 +82,8 @@
                 &::after {
                     .lib-font-size(14);
                     font-family: @icons__font-name;
-                    content: @icon-filter;
-                    padding-left: @indent__xs;
+                    content: @icon-filters;
+                    padding-left: @indent__s;
                 }
 
                 &[data-count]:after {
@@ -111,10 +114,6 @@
         &-current {
             margin: 0;
 
-            .items {
-                padding: @indent__xs @indent__s;
-            }
-
             .item {
                 padding-left: 17px;
                 position: relative;
@@ -131,11 +130,11 @@
                 position: absolute;
                 top: -1px;
             }
-        }
 
-        &-actions {
-            margin-bottom: @indent__m;
-            padding: 0 @indent__s;
+            & + .filter-action {
+                display: inline;
+                padding-left: 20px;
+            }
         }
 
         &-label {
@@ -153,9 +152,9 @@
                 font-family: @font-family__base !important; // Override Magento style
                 font-weight: @font-weight__regular !important; // Override Magento style
                 cursor: pointer;
-                margin: 0;
+                margin: @indent__m 0 !important; // Override Magento style
                 overflow: hidden;
-                padding: @indent__s @indent__s + 30px 0 @indent__s;
+                padding-right: 40px;
                 position: relative;
                 word-break: break-all;
                 z-index: 1;
@@ -170,7 +169,7 @@
                 &:after {
                     position: absolute;
                     right: 13px;
-                    top: 12px;
+                    top: 0;
                 }
 
                 .active > & {
@@ -182,8 +181,7 @@
             }
 
             &-item {
-                border-bottom: @border-width__base solid @border-color__base;
-                padding-bottom: @indent__s;
+                border-bottom: @border-width__base solid @secondary-white;
             }
 
             &-content {
@@ -196,38 +194,17 @@
                 }
 
                 a {
-                    margin-left: -5px;
                     margin-right: -5px;
-                    padding-left: 5px;
                     padding-right: 7px;
 
                     &:hover {
                         background-color: @color-gray91;
                         text-decoration: none;
-
-                        & + .count {
-                            background-color: @color-gray91;
-                        }
-                    }
-                }
-
-                .count {
-
-                    font-weight: @font-weight__light;
-                    padding-left: 5px;
-                    padding-right: 5px;
-
-                    &:before {
-                        content: '(';
-                    }
-
-                    &:after {
-                        content: ')';
                     }
                 }
 
                 .filter-count-label {
-                    &:extend(.abs-visually-hidden all);
+                    display: none;
                 }
             }
         }
@@ -282,8 +259,9 @@
                     .lib-font-size(20);
                     background: none;
                     color: @secondary-black;
-                    left: auto;
+                    left: -7px;
                     line-height: @line-height__l;
+                    margin-bottom: @indent__l;
                 }
             }
 
@@ -294,17 +272,20 @@
                 overflow: scroll;
                 position: relative;
                 right: 0;
-                top: 0;
                 z-index: 10;
+            }
+        }
+
+        &-current {
+            & + .filter-actions {
+                display: inline;
+                margin-bottom: 32px;
+                margin-top: 16px;
             }
         }
 
         &-subtitle {
             display: none;
-        }
-
-        &-actions {
-            margin: -35px -@indent__s @indent__m;
         }
 
         &-options-content {
@@ -313,13 +294,8 @@
     }
 
     .filter .filter-current {
-        margin: @indent__xs @indent__s 0;
-
-        .items {
-            display: none;
-        }
-
         &-subtitle {
+            display: none !important;
             position: relative;
             z-index: 1;
 
@@ -353,19 +329,17 @@
             }
 
             .items {
+                visibility: visible;
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
-                gap: 5px;
+                column-gap: 8px;
             }
 
             & + .block-actions {
-                display: block;
+                display: inline;
+                padding-left: 20px;
             }
-        }
-
-        & + .block-actions {
-            display: none;
         }
     }
 
@@ -409,29 +383,69 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .filter {
+        .block-subtitle {
+            .lib-font-size(20);
+            font-weight: @font-weight__bold;
+            padding: 0;
+        }
 
-    .filter .block-subtitle {
-        .lib-font-size(20);
-        font-weight: @font-weight__bold;
+        &-options {
+            .filter-options-title {
+                padding-right: 40px;
+                margin: @indent__m 0;
+
+                &:after {
+                    right: 6px;
+                    top: @indent__m;
+                }
+            }
+        }
+
+        &-actions {
+            padding: 0;
+        }
+
+        &-current {
+            + .filter-actions {
+                margin-bottom: 40px;
+                margin-top: 16px;
+            }
+
+            .item {
+                margin-bottom: 0;
+            }
+        }
+
+        &.active {
+            .filter-options {
+                top: 0;
+            }
+        }
     }
 
     .block {
         &.filter {
             background-color: @primary-white;
-            padding: 12px;
+            padding: 40px;
+
             .filter {
                 &-title {
                     display: none;
                 }
 
                 &-options-content {
-                    padding: @indent__xs 0;
-                    padding-left: @indent__s;
+                    padding: 0;
                 }
 
                 &-options {
                     display: block;
-                    padding: @indent__base 0;
+                    padding: 0;
+
+                    &.filter-options-title {
+                        margin: 0;
+                        padding-top: 12px;
+                    }
                 }
             }
         }
