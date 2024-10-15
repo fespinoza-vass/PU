@@ -22,11 +22,11 @@ define([
                         clickable: true,
                     },
                     breakpoints: {
-                        1024: {
+                        1025: {
                             slidesPerView: slidesInDesktop,
-                            spaceBetween: 30,
+                            spaceBetween: 24,
                         },
-                        768: {
+                        769: {
                             slidesPerView: slidesInTablet,
                             spaceBetween: 10,
                         }
