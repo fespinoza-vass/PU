@@ -1,7 +1,11 @@
 /**
- * Methods to moving and removing filters from top to sidebar on mobile devices
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
  */
 
+/**
+ * Methods to moving and removing filters from top to sidebar on mobile devices
+ */
 define([
     'jquery'
 ], function ($) {
