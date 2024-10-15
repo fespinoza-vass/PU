@@ -1,0 +1,25 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Imports
+//  --------------------------------------------------
+
+@import '../../_mixins';
+
+@amshopby-choice-element__border-color: #e3e3e3;
+//
+//  Common
+//  --------------------------------------------------
+
+.am-checkbox-mixin() {
+  & + .amshopby-choice:after {
+    content: none;
+  }
+
+  &:checked + .amshopby-choice:after {
+    content: '';
+  }
+}
