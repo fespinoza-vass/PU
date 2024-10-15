@@ -1,6 +1,12 @@
 <?php
 /*
- * The data is added:
+ * /**
+ * @copyright Copyright (c) 2024 VASS
+ * @package Vass_GTM
+ * @author VASS Team
+*/
+
+/* The data is added:
  * category
  * subcategory
  * brand
@@ -11,7 +17,20 @@
  * In the CustomerData of the product, to be able to send them to the Tag Manager
  */
 
-namespace WolfSellers\GoogleTagManager\Plugin\Checkout\CustomerData;
+namespace WolfSellers\GTM\Plugin\Checkout\CustomerData;
+
+use Closure;
+use Magento\Catalog\Api\CategoryRepositoryInterface;
+use Magento\Catalog\Model\ProductRepository;
+use Magento\CatalogRule\Api\CatalogRuleRepositoryInterface;
+use Magento\CatalogRule\Model\ResourceModel\Rule;
+use Magento\Checkout\CustomerData\AbstractItem;
+use Magento\Customer\Model\Session\Proxy;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Quote\Model\Quote\Item;
+use Magento\Store\Model\StoreManagerInterface;
+use Psr\Log\LoggerInterface;
+use function array_merge;
 
 class DefaultItem
 {
@@ -26,18 +45,18 @@ class DefaultItem
      * @param LoggerInterface $logger
      */
     public function __construct(
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $date,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Customer\Model\Session\Proxy $sessionProxy,
-        \Magento\CatalogRule\Model\ResourceModel\Rule $rule,
-        \Magento\CatalogRule\Api\CatalogRuleRepositoryInterface $catalogRuleRepository,
-        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
-        \Magento\Catalog\Model\ProductRepository $productRepository,
-        \Psr\Log\LoggerInterface $logger)
+        TimezoneInterface    $date,
+        StoreManagerInterface              $storeManager,
+        Proxy                   $sessionProxy,
+        Rule           $rule,
+        CatalogRuleRepositoryInterface $catalogRuleRepository,
+        CategoryRepositoryInterface        $categoryRepository,
+        ProductRepository                $productRepository,
+        LoggerInterface                                $logger)
     {
-        $this->_date =  $date;
+        $this->_date = $date;
         $this->_storeManager = $storeManager;
-        $this->sessionProxy= $sessionProxy;
+        $this->sessionProxy = $sessionProxy;
         $this->ruleResource = $rule;
         $this->catalogRuleRepository = $catalogRuleRepository;
         $this->_categoryRepository = $categoryRepository;
@@ -46,10 +65,11 @@ class DefaultItem
     }
 
     public function aroundGetItemData(
-        \Magento\Checkout\CustomerData\AbstractItem $subject,
-        \Closure $proceed,
-        \Magento\Quote\Model\Quote\Item $item
-    ) {
+        AbstractItem $subject,
+        Closure                                    $proceed,
+        Item             $item
+    )
+    {
         $data = $proceed($item);
 
         $attributes = $item->getProduct()->getAttributes();
@@ -58,22 +78,22 @@ class DefaultItem
         $brand = null;
         $gender = null;
         $size = null;
-        foreach($attributes as $attribute){
-            if($attribute->getName() === 'categoria') {
+        foreach ($attributes as $attribute) {
+            if ($attribute->getName() === 'categoria') {
                 $category = $attribute->getFrontend()->getValue($item->getProduct());
             }
-            if($attribute->getName() === 'sub_categoria') {
+            if ($attribute->getName() === 'sub_categoria') {
                 $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
             }
-            if($attribute->getName() === 'manufacturer') {
+            if ($attribute->getName() === 'manufacturer') {
                 $brand = $attribute->getFrontend()->getValue($item->getProduct());
             }
-            if($attribute->getName() === 'genero') {
+            if ($attribute->getName() === 'genero') {
                 $gender = $attribute->getFrontend()->getValue($item->getProduct());
             }
-            if($attribute->getName() === 'tamano') {
+            if ($attribute->getName() === 'tamano') {
                 $size = $attribute->getFrontend()->getValue($item->getProduct());
-                if( !$size ) $size = null;
+                if (!$size) $size = null;
             }
         }
 
@@ -82,12 +102,12 @@ class DefaultItem
         /** Get Rules of product */
         $rules = $this->getRules($product->getId());
         $dataRule = [];
-        if($rules){
-            foreach ($rules as $rule){
+        if ($rules) {
+            foreach ($rules as $rule) {
                 $dataRule[] = $rule;
             }
         }
-        $dataRule = implode( ', ', $dataRule);
+        $dataRule = implode(', ', $dataRule);
 
         /** Get Name Categories of product */
         $categories = $this->getCategoryName($product);
@@ -103,7 +123,7 @@ class DefaultItem
         $result['size'] = $size;
         $result['promotion'] = $dataRule;
 
-        return \array_merge(
+        return array_merge(
             $result,
             $data
         );
@@ -124,11 +144,12 @@ class DefaultItem
     /*
      * Function for get Name Category
      */
-    public function getCategoryName($product){
+    public function getCategoryName($product)
+    {
         $categories = [];
         $this->logger->debug('CATEGORYIDS: ');
         $this->logger->debug(print_r($product->getCategoryIds(), true));
-        foreach($product->getCategoryIds() as $categoryId){
+        foreach ($product->getCategoryIds() as $categoryId) {
             array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
         }
         return $categories;
@@ -143,14 +164,14 @@ class DefaultItem
         $websiteId = $this->_storeManager->getStore()->getWebsiteId();
         $customerGroupId = $this->sessionProxy->getCustomer()->getGroupId();
 
-        $this->logger->debug('DATE: '.$date);
-        $this->logger->debug('WEBSITEID: '.$websiteId);
-        $this->logger->debug('CUSTOMERGROUPID: '.$customerGroupId);
+        $this->logger->debug('DATE: ' . $date);
+        $this->logger->debug('WEBSITEID: ' . $websiteId);
+        $this->logger->debug('CUSTOMERGROUPID: ' . $customerGroupId);
 
         $rules = $this->ruleResource->getRulesFromProduct($date, $websiteId, $customerGroupId, $productId);
         $promos = [];
 
-        foreach ($rules as $rule){
+        foreach ($rules as $rule) {
             $promo = $this->catalogRuleRepository->get($rule['rule_id']);
             array_push($promos, $promo->getName());
         }
