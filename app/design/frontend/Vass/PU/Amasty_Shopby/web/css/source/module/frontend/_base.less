@@ -16,7 +16,7 @@
 & when (@media-common = true) {
 
     .amshopby-filter-current {
-        margin-top: 32px;
+        margin-top: @indent__l;
 
         .amshopby-item.item {
             display: inline-flex !important; // Override Amasty
@@ -280,7 +280,6 @@
         border: 1px solid @tertiary-white;
         cursor: pointer;
         display: block;
-        font-weight: 400;
         min-height: 51px;
         overflow: hidden;
         padding-right: 57px;
@@ -450,7 +449,6 @@
         cursor: pointer;
         -webkit-font-smoothing: antialiased;
         font-style: normal;
-        font-weight: @font-weight__regular;
         height: @amshopby-collapse-icon__size;
         line-height: 1;
         position: absolute;
@@ -626,7 +624,7 @@
     }
 
     .amshopby-filter-current .amshopby-item.item {
-        margin-left: 0;
+        margin-bottom: 8px;
     }
 
     .ui-tooltip.ui-widget {

@@ -68,13 +68,12 @@
         }
 
         &-title {
-            margin-top: 32px;
+            margin-top: @indent__l;
 
             strong {
                 .lib-font-size(@font-size__m);
                 border: 1px solid @secondary-black;
                 border-radius: 3px;
-                font-weight: @font-weight__regular;
                 line-height: @line-height__l;
                 padding: @indent__s @indent__m;
                 z-index: 2;
@@ -86,19 +85,6 @@
                     padding-left: @indent__s;
                 }
 
-                &[data-count]:after {
-                    .lib-css(color, @color-white);
-                    background: @theme__color__secondary;
-                    border-radius: 2px;
-                    content: attr(data-count);
-                    display: inline-block;
-                    font-size: .8em;
-                    line-height: 1;
-                    margin: 0 @indent__xs;
-                    min-width: 1em;
-                    padding: 2px;
-                }
-
                 &.disabled {
                     opacity: .5;
                 }
@@ -106,7 +92,7 @@
         }
 
         .block-subtitle {
-            font-size: @font-size__base;
+            .lib-font-size(@font-size__base);
             line-height: 1em;
             padding: @indent__s @indent__s @indent__base;
         }
@@ -226,7 +212,7 @@
         position: relative;
         top: 95px;
         z-index: 500;
-        padding: 0 16px;
+        padding: 0 @indent__base;
     }
 
     body {
@@ -248,7 +234,7 @@
             }
 
             .filter-title {
-                height: 48px;
+                height: @indent__xl;
                 left: 0;
                 position: fixed;
                 right: 0;
@@ -279,8 +265,8 @@
         &-current {
             & + .filter-actions {
                 display: inline;
-                margin-bottom: 32px;
-                margin-top: 16px;
+                margin-bottom: @indent__l;
+                margin-top: @indent__base;
             }
         }
 
@@ -308,13 +294,8 @@
 
             &:before {
                 position: absolute;
-                right: 10px;
-                top: 10px;
-            }
-
-            &:after {
-                content: ' (' attr(data-count) ')';
-                font-size: .9em;
+                right: @indent__s;
+                top: @indent__s;
             }
         }
 
@@ -409,7 +390,7 @@
         &-current {
             + .filter-actions {
                 margin-bottom: 40px;
-                margin-top: 16px;
+                margin-top: @indent__base;
             }
 
             .item {
