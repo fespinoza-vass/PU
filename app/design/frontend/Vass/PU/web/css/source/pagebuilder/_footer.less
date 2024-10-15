@@ -43,6 +43,20 @@
         &__contact {
             .lib-font-size(14);
 
+            p:first-child {
+                color: @primary-black;
+            }
+
+            .icon {
+                &:before {
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
             .contact__info {
                 display: flex;
                 justify-content: flex-start;
