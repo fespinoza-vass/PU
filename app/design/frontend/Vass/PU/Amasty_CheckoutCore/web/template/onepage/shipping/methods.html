@@ -21,7 +21,7 @@
                             <div class="table-checkout-shipping-method amcheckout-shipping-methods">
                                 <div class="amcheckout-items">
 
-                                <!-- ko foreach: { data: rates(), as: 'method'} -->
+                                <!-- ko foreach: { data: filteredRates(), as: 'method'} -->
                                 <div class="row amcheckout-method"
                                     data-bind="
                                         click: $parent.selectShippingMethod,
