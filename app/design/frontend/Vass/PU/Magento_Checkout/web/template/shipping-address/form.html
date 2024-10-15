@@ -1,7 +1,7 @@
 <!--
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
  */
 -->
 <form class="form form-shipping-address" id="co-shipping-form" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
@@ -26,10 +26,10 @@
 
     <div class="actions-toolbar">
         <div class="primary">
-            <button class="action action-update" type="button" data-bind="click: $parent.updateAddress">
+            <button class="action primary action-update" type="button" data-bind="click: $parent.updateAddress">
                 <span data-bind="i18n: 'Update'"></span>
             </button>
-            <button class="action action-cancel" type="button" data-bind="click: $parent.cancelAddressEdit">
+            <button class="action secondary action-cancel" type="button" data-bind="click: $parent.cancelAddressEdit">
                 <span data-bind="i18n: 'Cancel'"></span>
             </button>
         </div>

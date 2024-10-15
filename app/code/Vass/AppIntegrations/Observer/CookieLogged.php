@@ -73,7 +73,7 @@ class CookieLogged implements ObserverInterface
      */
     private function isCustomerLoggedIn(): bool
     {
-        return $this->httpContext->getValue(Context::CONTEXT_AUTH);
+        return $this->httpContext->getValue(Context::CONTEXT_AUTH) ?? false;
     }
 
     /**

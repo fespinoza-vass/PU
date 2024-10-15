@@ -14,7 +14,7 @@ require([
 
             let $privacyLabelCheck = $('input[name="sidebar[additional][checkbox_privacidad]"] + label');
             let privacyText = $t('I have read and accept the')
-                + ' <strong id="tyc">' + $t('Terms and Conditions') + ' </strong>' + $t('and')
+                + ' <strong id="tyc">' + $t('Terms and Conditions') + '</strong> ' + $t('and')
                 + ' <strong id="privacidad">' + $t('the Personal Data Protection Policy') + '</strong>.'
             if ($privacyLabelCheck.html() !== privacyText) {
                 $privacyLabelCheck.html(privacyText);

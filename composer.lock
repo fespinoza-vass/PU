@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c70d4250c01650e7fc20a52026bd18d",
+    "content-hash": "c5ba85dae737e7a9b35dccc82cd84fe6",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -483,16 +483,15 @@
         },
         {
             "name": "amasty/module-elastic-search",
-            "version": "1.17.0",
+            "version": "2.3.0",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/amasty/module-elastic-search-1.17.0.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/module-elastic-search-2.3.0.zip"
             },
             "require": {
-                "amasty/base": ">=1.14.6",
+                "amasty/base": ">=1.17.0",
                 "amasty/cron-schedule-list": "*",
-                "amasty/xsearch": ">=1.18.0",
-                "elasticsearch/elasticsearch": ">=5.1",
+                "amasty/xsearch": ">=1.22.0",
                 "php": ">=7.3.0"
             },
             "suggest": {
@@ -1307,13 +1306,13 @@
         },
         {
             "name": "amasty/xsearch",
-            "version": "1.23.1",
+            "version": "1.24.0",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.amasty.com/enterprise/packages/amasty/xsearch-1.23.1.zip"
+                "url": "https://composer.amasty.com/enterprise/packages/amasty/xsearch-1.24.0.zip"
             },
             "require": {
-                "amasty/base": ">=1.16.0",
+                "amasty/base": ">=1.17.0",
                 "magento/module-cms": "*",
                 "php": ">=7.3.0"
             },

@@ -1,24 +1,23 @@
-<!-- ko if: canShowDeleteButton() -->
-<div class="action delete" data-bind="click: deleteItem.bind($data, $parent)"></div>
-<!-- /ko -->
-
 <!-- ko foreach: getRegion('before_details') -->
 <!-- ko template: getTemplate() --><!-- /ko -->
 <!-- /ko -->
 <div class="product-item-details" data-bind="css: {'-editable': isEditingAvailable($parent)}">
     <!-- ko ifnot: isEditingAvailable($parent) -->
     <div class="product-item-inner">
-        <div class="product-item-name-block">
-            <strong class="product-item-name" data-bind="html: $parent.name"></strong>
-            <div class="details-qty amcheckout-qty">
-                <span class="label"><!-- ko i18n: 'Qty' --><!-- /ko --></span>
-                <div class="quantity-controls">
-                    <button class="quantity-button decrease">-</button>
-                    <span class="value" data-bind="text: $parent.qty"></span>
-                    <button class="quantity-button increase">+</button>
-                </div>
+        <strong class="product-item-name" data-bind="html: $parent.name"></strong>
+
+        <div class="details-qty amcheckout-qty">
+            <div class="quantity-controls">
+                <button class="quantity-button icon icon-minus decrease"></button>
+                <span class="value" data-bind="text: $parent.qty"></span>
+                <button class="quantity-button icon icon-plus increase"></button>
             </div>
+
+            <!-- ko if: canShowDeleteButton() -->
+            <div class="icon icon-trash" data-bind="click: deleteItem.bind($data, $parent)"></div>
+            <!-- /ko -->
         </div>
+
         <if args="isShowUnitPrice">
             <div class="amcheckout-price-wrapper" if="window.checkoutConfig.reviewItemPriceDisplayMode === 'both'
                 || window.checkoutConfig.reviewItemPriceDisplayMode === 'excluding'">
@@ -29,6 +28,7 @@
                 <each args="getRegion('unit_incl_tax')" render=""></each>
             </div>
         </if>
+
         <!-- ko foreach: getRegion('after_details') -->
             <!-- ko template: getTemplate() --><!-- /ko -->
         <!-- /ko -->
@@ -75,22 +75,22 @@
                         ? updateItemAuto.bind($data, $parent)
                         : updateItem.bind($data, $parent)">
         <div class="product-item-inner">
-            <div class="product-item-name-block">
-                <strong class="product-item-name" data-bind="text: $parent.name"></strong>
-                <div class="details-qty amcheckout-qty">
-                    <span class="label"><!-- ko i18n: 'Qty' --><!-- /ko --></span>
-                    <div class="quantity-controls">
-                        <button class="quantity-button decrease">-</button>
-                        <!-- ko if: isDecimal($parent) -->
-                        <input class="qty" type="number" step="0.1" min="0.1" name="qty" data-bind="value: $parent.qty, event: {change: updateItem.bind($data, $parent)}" autocomplete="off">
-                        <!-- /ko -->
-                        <!-- ko ifnot: isDecimal($parent) -->
-                        <input class="qty" type="number" step="1" min="1" name="qty" data-bind="value: $parent.qty, event: {change: updateItem.bind($data, $parent)}" autocomplete="off">
-                        <!-- /ko -->
-                        <button class="quantity-button increase">+</button>
-                    </div>
+            <strong class="product-item-name" data-bind="text: $parent.name"></strong>
+
+            <div class="details-qty amcheckout-qty">
+                <div class="quantity-controls">
+                    <button class="quantity-button icon icon-minus decrease"></button>
+                    <input class="qty" type="text" name="qty"
+                           data-bind="value: $parent.qty, event: {change: updateItem.bind($data, $parent)}"
+                           autocomplete="off">
+                    <button class="quantity-button icon icon-plus increase"></button>
                 </div>
+
+                <!-- ko if: canShowDeleteButton() -->
+                    <div class="icon icon-trash" data-bind="click: deleteItem.bind($data, $parent)"></div>
+                <!-- /ko -->
             </div>
+
             <if args="isShowUnitPrice">
                 <div class="amcheckout-price-wrapper" if="window.checkoutConfig.reviewItemPriceDisplayMode === 'both'
                     || window.checkoutConfig.reviewItemPriceDisplayMode === 'excluding'">
@@ -101,6 +101,7 @@
                     <each args="getRegion('unit_incl_tax')" render=""></each>
                 </div>
             </if>
+
             <!-- ko foreach: getRegion('after_details') -->
                 <!-- ko template: getTemplate() --><!-- /ko -->
             <!-- /ko -->
@@ -160,28 +161,6 @@
 <!-- ko foreach: getRegion('item_message') -->
 <!-- ko template: getTemplate() --><!-- /ko -->
 <!-- /ko -->
-
-<script type="text/javascript">
-    require(["jquery"],function($){
-
-        const increaseQty = (input) => {
-            let qty = input.val();
-        }
-
-        const decreaseQty = (intpu) => {
-            let qty = input.val();
-        }
-
-        let buttonsQty = $('.quantity-button');
-
-        buttonsQty.on('click', function(){
-            if($(this).hasClass('decrease')){
-                decreaseQty($(this));
-            };
-        });
-
-    });
-</script>
 <style>
 .checkout-index-index .opc-block-summary .minicart-items .delete {
     background: none !important; /* Elimina el fondo */

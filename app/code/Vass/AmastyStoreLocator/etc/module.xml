@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_AmastyStoreLocator
+ * @author Vass Team
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Vass_AmastyStoreLocator">
+        <sequence>
+            <module name="Amasty_StoreLocator"/>
+        </sequence>
+    </module>
+</config>

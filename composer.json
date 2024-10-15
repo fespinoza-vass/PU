@@ -21,6 +21,10 @@
         "amasty": {
             "type": "composer",
             "url": "https://composer.amasty.com/enterprise/"
+        },
+        "amasty_pu": {
+            "type": "composer",
+            "url": "https://composer1.amasty.com/enterprise/"
         }
     },
     "require": {
@@ -30,8 +34,8 @@
         "amasty/mega-menu": "^2.4.2",
         "amasty/mega-menu-graphql": "^1.0",
         "amasty/mega-menu-page-builder": "^1.0",
-        "amasty/module-elastic-search": "^1.13",
-        "amasty/module-elastic-search-graphql": "^1.0",
+        "amasty/module-elastic-search": "^2.3",
+        "amasty/module-elastic-search-graphql": "^1.2",
         "amasty/module-magento-custom-form": "^1.17",
         "amasty/module-mega-menu-package-pro": "^2.4.2",
         "amasty/module-one-step-checkout-core": "^1.3",
@@ -48,6 +52,7 @@
         "amasty/shopby": "^2.17",
         "amasty/shopby-graphql": "^1.0",
         "amasty/sorting": "^2.10",
+        "amasty/xsearch": "^1.24",
         "bacon/bacon-qr-code": "^2.0",
         "laminas/laminas-log": "^2.15",
         "magento/composer-root-update-plugin": "~2.0",

@@ -1,7 +1,7 @@
 <!--
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
  */
 -->
 <div class="payment-option opc-payment-additional discount-code">
@@ -33,7 +33,7 @@
             <div class="actions-toolbar">
                 <div class="primary">
                     <!-- ko ifnot: isApplied() -->
-                        <button class="action action-apply" type="submit" data-bind="'value': $t('Apply Discount'), click: apply">
+                        <button class="action secondary" type="submit" data-bind="'value': $t('Apply Discount'), click: apply">
                             <span><!-- ko i18n: 'Apply Discount'--><!-- /ko --></span>
                         </button>
                     <!-- /ko -->
