@@ -37,6 +37,7 @@
                         border: 0;
                         top: 55px;
                         .lib-font-size(20);
+                        font-weight: @font-weight__bold;
                     }
 
                     strong:after {
@@ -44,6 +45,7 @@
                         -webkit-font-smoothing: antialiased;
                         -moz-osx-font-smoothing: grayscale;
                         .lib-font-size(@font-size__s);
+                        font-weight: @font-weight__regular;
                         line-height: inherit;
                         color: @tertiary-black;
                         content: @icon-close;
@@ -150,9 +152,9 @@
                 font-family: @font-family__base !important; // Override Magento style
                 font-weight: @font-weight__regular !important; // Override Magento style
                 cursor: pointer;
-                margin: 0;
+                margin: @indent__m 0 !important; // Override Magento style
                 overflow: hidden;
-                padding: @indent__s 40px 0 0;
+                padding-right: 40px;
                 position: relative;
                 word-break: break-all;
                 z-index: 1;
@@ -167,7 +169,7 @@
                 &:after {
                     position: absolute;
                     right: 13px;
-                    top: 12px;
+                    top: 0;
                 }
 
                 .active > & {
@@ -180,7 +182,6 @@
 
             &-item {
                 border-bottom: @border-width__base solid @secondary-white;
-                padding-bottom: @indent__s;
             }
 
             &-content {
@@ -226,7 +227,6 @@
         top: 95px;
         z-index: 500;
         padding: 0 16px;
-        margin-top: @indent__l;
     }
 
     body {
@@ -259,9 +259,9 @@
                     .lib-font-size(20);
                     background: none;
                     color: @secondary-black;
-                    left: auto;
+                    left: -7px;
                     line-height: @line-height__l;
-                    font-weight: @font-weight__bold;
+                    margin-bottom: @indent__l;
                 }
             }
 
@@ -272,7 +272,6 @@
                 overflow: scroll;
                 position: relative;
                 right: 0;
-                top: @indent__l;
                 z-index: 10;
             }
         }
@@ -280,6 +279,8 @@
         &-current {
             & + .filter-actions {
                 display: inline;
+                margin-bottom: 32px;
+                margin-top: 16px;
             }
         }
 
@@ -332,7 +333,7 @@
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
-                gap: 5px;
+                column-gap: 8px;
             }
 
             & + .block-actions {
@@ -391,7 +392,8 @@
 
         &-options {
             .filter-options-title {
-                padding: @indent__m 40px 0 0;
+                padding-right: 40px;
+                margin: @indent__m 0;
 
                 &:after {
                     right: 6px;
@@ -402,6 +404,23 @@
 
         &-actions {
             padding: 0;
+        }
+
+        &-current {
+            + .filter-actions {
+                margin-bottom: 40px;
+                margin-top: 16px;
+            }
+
+            .item {
+                margin-bottom: 0;
+            }
+        }
+
+        &.active {
+            .filter-options {
+                top: 0;
+            }
         }
     }
 

@@ -15,12 +15,18 @@
 
 & when (@media-common = true) {
 
-    .amshopby-filter-current .amshopby-item.item {
-        display: inline-flex !important; // Override Amasty
-        flex-direction: row;
-        flex-wrap: wrap;
-        background-color: @color-gray-light5;
-        padding: @indent__xs @indent__m @indent__xs @indent__xs;
+    .amshopby-filter-current {
+        margin-top: 32px;
+
+        .amshopby-item.item {
+            display: inline-flex !important; // Override Amasty
+            flex-direction: row;
+            flex-wrap: wrap;
+            background-color: @color-gray-light5;
+            padding: @indent__xs @indent__m @indent__xs @indent__xs;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
     }
 
     .ui-tooltip .arrow {
@@ -503,7 +509,6 @@
 
         .amshopby-filter-name {
             .am-flex();
-            font-weight: @font-weight__semibold;
             padding: 0 @indent__xs 0 0;
 
             &:after {
@@ -530,7 +535,7 @@
         .amshopby-remove {
             .am-flex(center, center);
             height: 8px;
-            right: 6px;
+            right: 4px;
             position: absolute;
             width: 8px;
 
