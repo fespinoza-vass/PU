@@ -5,10 +5,14 @@
  */
 
 /**
- * @var \Amasty\ShopbyBase\Model\FilterSetting $filterSetting
- * @var \Amasty\Shopby\Block\Navigation\FilterRenderer $block
- * @var \Magento\Framework\Escaper $escaper
+ * @var FilterSetting $filterSetting
+ * @var FilterRenderer $block
+ * @var Escaper $escaper
  */
+
+use Amasty\Shopby\Block\Navigation\FilterRenderer;
+use Amasty\ShopbyBase\Model\FilterSetting;
+use Magento\Framework\Escaper;
 
 $postfix = uniqid();
 $filterCode = $filterSetting->getAttributeCode();
@@ -28,21 +32,24 @@ $hideDigitsAfterDot = $filterSetting->getHideZeros();
                  data-am-js="slider-container"
                  data-min="<?= $escaper->escapeHtmlAttr($min) ?>"
                  data-max="<?= $escaper->escapeHtmlAttr($max) ?>"
-                 data-rate="<?= /* @noEscape */ $fromToConfig['curRate'] ?>">
+                 data-rate="<?= /* @noEscape */
+                 $fromToConfig['curRate'] ?>">
                 <div data-amshopby-slider-id="display"
                      class="amshopby-slider-display"
                      data-am-js="slider-display"></div>
                 <input data-amshopby-slider-id="value"
                        type=hidden
-                       data-digits-after-dot="<?= /* @noEscape */ $hideDigitsAfterDot ? '1' : '0' ?>"
-                       name="amshopby[<?= $escaper->escapeHtmlAttr($block->getFilter()->getRequestVar())?>][]"/>
+                       data-digits-after-dot="<?= /* @noEscape */
+                       $hideDigitsAfterDot ? '1' : '0' ?>"
+                       name="amshopby[<?= $escaper->escapeHtmlAttr($block->getFilter()->getRequestVar()) ?>][]"/>
                 <div data-amshopby-slider-id="slider" class="am-slider"></div>
             </div>
         </form>
     </div>
 
     <?php if ($filterSetting->getAddFromToWidget()): ?>
-        <?= /* @noEscape */ $block->getFromToWidget('slider') ?>
+        <?= /* @noEscape */
+        $block->getFromToWidget('slider') ?>
     <?php endif; ?>
 </div>
 
@@ -52,23 +59,33 @@ $hideDigitsAfterDot = $filterSetting->getHideZeros();
             "amShopbyFilterSlider": {
                 "style": "<?= $escaper->escapeHtml($sliderStyle) ?>",
                 "colors": { "main": "<?= $escaper->escapeHtml($sliderColor) ?>"},
-                "collectFilters": <?= /* @noEscape */ $block->collectFilters() ?>,
+                "collectFilters": <?= /* @noEscape */
+    $block->collectFilters() ?>,
                 "template":"<?= $escaper->escapeHtml($fromToConfig['template']) ?>",
                 "currencySymbol":"<?= $escaper->escapeHtml($fromToConfig['currencySymbol']) ?>",
                 "currencyPosition":"<?= $escaper->escapeHtml($fromToConfig['currencyPosition']) ?>",
-                "step":<?= /* @noEscape */ $escaper->escapeHtml(floatval($fromToConfig['step'])) ?>,
-                "from": "<?= /* @noEscape */ $fromToConfig['from'] ?>",
-                "to": "<?= /* @noEscape */ $fromToConfig['to'] ?>",
-                "deltaFrom": "<?= /* @noEscape */ $fromToConfig['deltaFrom'] ?>",
-                "deltaTo": "<?= /* @noEscape */ $fromToConfig['deltaTo'] ?>",
-                "curRate": "<?= /* @noEscape */ $fromToConfig['curRate'] ?>",
+                "step":<?= /* @noEscape */
+    $escaper->escapeHtml(floatval($fromToConfig['step'])) ?>,
+                "from": "<?= /* @noEscape */
+    $fromToConfig['from'] ?>",
+                "to": "<?= /* @noEscape */
+    $fromToConfig['to'] ?>",
+                "deltaFrom": "<?= /* @noEscape */
+    $fromToConfig['deltaFrom'] ?>",
+                "deltaTo": "<?= /* @noEscape */
+    $fromToConfig['deltaTo'] ?>",
+                "curRate": "<?= /* @noEscape */
+    $fromToConfig['curRate'] ?>",
                 "min":<?= (float)$min ?>,
                 "max":<?= (float)$max ?>,
-                "url": "<?= /* @noEscape */ $block->getSliderUrlTemplate() ?>",
+                "url": "<?= /* @noEscape */
+    $block->getSliderUrlTemplate() ?>",
                 "code":"<?= $escaper->escapeHtml($filterSetting->getAttributeModel()->getAttributeCode()) ?>",
-                "hideDisplay": <?= /* @noEscape */ $filterSetting->getAddFromToWidget() ? "1" : '0' ?>,
-                "hideDigitsAfterDot": <?= /* @noEscape */ $hideDigitsAfterDot ? '1' : '0' ?>
-            }
-        }
+                "hideDisplay": <?= /* @noEscape */
+    $filterSetting->getAddFromToWidget() ? "1" : '0' ?>,
+                "hideDigitsAfterDot": <?= /* @noEscape */
+    $hideDigitsAfterDot ? '1' : '0' ?>
     }
+}
+}
 </script>
