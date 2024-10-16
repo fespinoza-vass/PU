@@ -14,6 +14,10 @@
         }
     },
     "repositories": {
+        "private-packagist": {
+            "type": "composer",
+            "url": "https://anowave.repo.packagist.com/vass/"
+        },
         "repo": {
             "type": "composer",
             "url": "https://repo.magento.com"
@@ -53,6 +57,9 @@
         "amasty/shopby-graphql": "^1.0",
         "amasty/sorting": "^2.10",
         "amasty/xsearch": "^1.24",
+        "anowave/ec": "^104.4",
+        "anowave/ec4": "^201.0",
+        "anowave/package": "^3.0",
         "bacon/bacon-qr-code": "^2.0",
         "laminas/laminas-log": "^2.15",
         "magento/composer-root-update-plugin": "~2.0",
