@@ -3,114 +3,82 @@
  * @author VASS Team
  */
 
-/**
- * Methods to moving and removing filters from top to sidebar on mobile devices
- */
 define([
-    'jquery'
-], function ($) {
+    "underscore",
+    "jquery",
+    "amShopbyFilterAbstract",
+    "mage/translate"
+], function (_, $) {
     'use strict';
 
-    var options = {
-        widgets: {
-            collapsible: '{"collapsible":{"openedState": "active", "collapsible": true, "active": true, '
-                + '"collateral": { "openedState": "filter-active", "element": "body" } }}',
-            accordion: '{"accordion":{"openedState": "active", "collapsible": true, "active": false, '
-                + '"multipleCollapsible": %1}}'
-        },
-        selectors: {
-            sidebar: '.sidebar.sidebar-main',
-            sidebarList: '.sidebar.sidebar-main #narrow-by-list',
-            list: '#narrow-by-list',
-            topNav: '.catalog-topnav',
-            topFilterActions: '.catalog-topnav .filter-actions',
-            topNarrowList: '.catalog-topnav #narrow-by-list',
-            layeredFilter: '#layered-filter-block',
-            blockFilter: '.block.filter',
-            optionsItem: '.filter-options-item',
-            filterTitle: '.filter-title:before',
-            filterActions: '.block-actions.filter-actions',
-            swatches: '.items, .swatch-attribute'
-        },
-        classes: {
-            allTop: 'amshopby-all-top-filters-append-left',
-            filterTop: 'amshopby-filter-top'
-        }
-    };
+    $.widget('mage.amShopbyApplyFilters', {
+        showButtonClick: false,
+        showButtonContainer: '.am_shopby_apply_filters',
+        showButton: 'am-show-button',
 
-    return {
-        /**
-         * @public
-         * @returns {void}
-         */
-        moveTopFiltersToSidebar: function () {
-            if ($(options.selectors.sidebarList).length === 0) {
-                var blockClass = $(options.selectors.layeredFilter).length
-                        ? options.selectors.layeredFilter
-                        : options.selectors.blockFilter,
-                    $element = $(options.selectors.topNav + ' ' + blockClass).clone(),
-                    $sidebar = $(options.selectors.sidebar).first();
+        _create: function () {
+            var self = this;
+            $(function () {
+                var element = $(self.element[0]);
+                $(self.showButtonContainer).appendTo('.block-content.filter-content');
 
-                //$(options.selectors.topFilterActions);
-                //$element.find(options.selectors.filterTitle);
-                $(options.selectors.topFilterActions).hide();
-                $element.find(options.selectors.filterTitle).css('display', 'none');
-                $element
-                    .addClass(options.classes.allTop)
-                    .attr('data-mage-init', options.widgets.collapsible);
-                $element.find(options.selectors.list)
-                    .attr('data-mage-init', options.widgets.accordion.replace('%1', 'false'));
-                $element.find(options.selectors.filterActions).remove();
-                $sidebar.append($element);
-                $sidebar.trigger('contentUpdated');
+                element.on('click', function (e) {
+                    $.mage.amShopbyFilterAbstract.prototype.options.isCategorySingleSelect
+                        = self.options.isCategorySingleSelect;
 
-                return;
-            }
+                    window.onpopstate = function () {
+                        location.reload();
+                    };
 
-            $(options.selectors.topNarrowList + ' ' + options.selectors.optionsItem).each(function () {
-                var isPresent = false,
-                    classes = $(this).find(options.selectors.swatches).first().attr('class'),
-                    i;
+                    if (self.options.ajaxSettingEnabled !== 1) {
+                        document.location.href = $.mage.amShopbyApplyFilters.prototype.responseUrl;
+                    } else {
+                        let {ajaxData, clearFilter, isSorting} = $.mage.amShopbyAjax.prototype.prevData;
 
-                if (classes) {
-                    var listClasses = classes.split(' '),
-                        currentClass = '';
+                        ajaxData.isGetCounter = false;
 
-                    for (i = 0; i < listClasses.length; i++) {
-                        if (listClasses[i].indexOf('am-filter-items-') !== -1) {
-                            currentClass = listClasses[i];
-
-                            break;
-                        }
+                        $(element).trigger('amshopby:submit_filters', {
+                            data: ajaxData,
+                            clearFilter: clearFilter,
+                            isSorting: isSorting
+                        });
                     }
 
-                    if (currentClass !== '' && $(options.selectors.sidebarList + ' .' + currentClass).length > 0) {
-                        isPresent = true;
-                    }
-                }
+                    this.blur();
+                    //self.removeShowButton();
 
-                if (isPresent) {
-                    return;
-                }
-
-                $(this).addClass(options.classes.filterTop).appendTo($(options.selectors.sidebarList).first());
+                    return true;
+                });
             });
-
-            $(options.selectors.sidebar + ' ' + options.selectors.blockFilter).first().trigger('contentUpdated');
         },
 
-        /**
-         * @public
-         * @returns {void}
-         */
-        removeTopFiltersFromSidebar: function () {
-            if ($(options.selectors.topNav).length === 0) {
-                return;
-            }
+        renderShowButton: function (e, element) {
+        },
 
-            $(options.selectors.sidebarList + ' .' + options.classes.filterTop)
-                .appendTo($(options.selectors.topNarrowList));
-            $(options.selectors.sidebar + ' .' + options.classes.allTop).remove();
-        }
-    };
+        removeShowButton: function () {
+            $($.mage.amShopbyApplyFilters.prototype.showButtonContainer).remove();
+        },
+
+        showButtonCounter: function (count) {
+            var items = $('.' + $.mage.amShopbyApplyFilters.prototype.showButton + ' .am-items'),
+                button = $('.' + $.mage.amShopbyApplyFilters.prototype.showButton + ' .amshopby-button');
+
+            items.removeClass('-loading');
+
+            count = parseInt(count);
+
+            if (count > 1) {
+                items.html(count + ' ' + $.mage.__('Items'));
+                button.prop('disabled', false);
+            } else if (count === 1) {
+                items.html(count + ' ' + $.mage.__('Item'));
+                button.prop('disabled', false);
+            } else {
+                items.html(count + ' ' + $.mage.__('Items'));
+                button.prop('disabled', true);
+            }
+        },
+    });
+
+    return $.mage.amShopbyApplyFilters;
 });
