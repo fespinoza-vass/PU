@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5ba85dae737e7a9b35dccc82cd84fe6",
+    "content-hash": "81d633f453054d833cb3b9d153ad1819",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -1333,6 +1333,155 @@
                 "proprietary"
             ],
             "description": "Search Autocomplete / Advanced Search by Amasty"
+        },
+        {
+            "name": "anowave/ec",
+            "version": "104.4.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://anowave.repo.packagist.com/vass/dists/anowave/ec/104.4.2.0/3d719530fd67fc48e20efb92e6684d402622ed07.zip",
+                "reference": "3d719530fd67fc48e20efb92e6684d402622ed07",
+                "mirrors": [
+                    {
+                        "url": "https://anowave.repo.packagist.com/vass/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "anowave/package": ">0.0.0",
+                "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.0.0|~8.1.0|~8.2.0|~8.3.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Anowave\\Ec\\": ""
+                }
+            },
+            "notification-url": "https://anowave.repo.packagist.com/vass/downloads/",
+            "license": [
+                "Proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Anowave",
+                    "homepage": "https://www.anowave.com"
+                }
+            ],
+            "description": "Magento 2 Google Analytics 4 (GA4) GTM Extension BASE",
+            "homepage": "https://www.anowave.com/marketplace/magento-2-extensions/magento-2-google-analytics-4-enhanced-ecommerce-tracking-gtm/",
+            "keywords": [
+                "adwords dynamic remarketing",
+                "enhanced ecommerce tracking",
+                "google analytics",
+                "google tag manager",
+                "gtag"
+            ],
+            "support": {
+                "email": "developer@anowave.com",
+                "source": "https://github.com/anowave/ec/tree/104.4.2",
+                "issues": "https://github.com/anowave/ec/issues"
+            },
+            "time": "2024-10-15T12:35:32+00:00"
+        },
+        {
+            "name": "anowave/ec4",
+            "version": "201.0.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://anowave.repo.packagist.com/vass/dists/anowave/ec4/201.0.2.0/2955006889cfde17b6792425223c3c7178752f5c.zip",
+                "reference": "2955006889cfde17b6792425223c3c7178752f5c",
+                "mirrors": [
+                    {
+                        "url": "https://anowave.repo.packagist.com/vass/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "anowave/ec": ">=104.3.2",
+                "anowave/package": ">0.0.0",
+                "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.0.0|~8.1.0|~8.2.0|~8.3.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Anowave\\Ec4\\": ""
+                }
+            },
+            "notification-url": "https://anowave.repo.packagist.com/vass/downloads/",
+            "license": [
+                "Proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Anowave",
+                    "email": "developer@anowave.com",
+                    "homepage": "https://www.anowave.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Magento 2 Google Analytics 4 (GA4) GTM Extension",
+            "support": {
+                "email": "developer@anowave.com",
+                "source": "https://github.com/anowave/ec4/tree/201.0.2",
+                "issues": "https://github.com/anowave/ec4/issues"
+            },
+            "time": "2024-10-15T12:36:00+00:00"
+        },
+        {
+            "name": "anowave/package",
+            "version": "3.0.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://anowave.repo.packagist.com/vass/dists/anowave/package/3.0.3.0/3aac60eec22d46cb323f2fff342e7cf5fb3ac83d.zip",
+                "reference": "3aac60eec22d46cb323f2fff342e7cf5fb3ac83d",
+                "mirrors": [
+                    {
+                        "url": "https://anowave.repo.packagist.com/vass/dists/%package%/%version%/r%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.0.0|~8.1.0|~8.2.0|~8.3.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Anowave\\Package\\": ""
+                }
+            },
+            "notification-url": "https://anowave.repo.packagist.com/vass/downloads/",
+            "authors": [
+                {
+                    "name": "Anowave",
+                    "email": "developer@anowave.com",
+                    "homepage": "https://www.anowave.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Anowave Package",
+            "homepage": "https://www.anowave.com",
+            "keywords": [
+                "anowave package",
+                "magento 2 package extension"
+            ],
+            "support": {
+                "email": "developer@anowave.com",
+                "source": "https://github.com/anowave/package/tree/3.0.3",
+                "issues": "https://github.com/anowave/package/issues"
+            },
+            "time": "2024-05-10T08:22:14+00:00"
         },
         {
             "name": "astock/stock-api-libphp",
