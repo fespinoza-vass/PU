@@ -126,6 +126,9 @@
                                 &:has(.cbform-info) {
                                     font-weight: @font-weight__heavier;
                                     color: @primary-black;
+                                    p {
+                                        margin-bottom: @indent__m;
+                                    }
                                 }
 
                                 &:has(.cbform-date) {
@@ -205,6 +208,10 @@
                             &:has(.cbform-field-last) {
                                 margin-bottom: @indent__l;
                             }
+
+                            &:has(.cbform-info) {
+                                margin-bottom: @indent__base;
+                            }
                         }
                     }
                 }
@@ -255,7 +262,6 @@
 
                             &:has(.cb-label-checkbox) {
                                 max-width: 60%;
-                                margin: 0;
                                 padding-left: @indent__base;
                             }
 
