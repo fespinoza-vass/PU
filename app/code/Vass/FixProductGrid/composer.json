@@ -1,0 +1,22 @@
+{
+    "name": "vass/module-fixproductgrid",
+    "description": "This module is responsible for reordering the products in Magento/CatalogWidget/Block/Product/ProductsList when the sort order is set to show the newest or oldest products first.",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "VASS",
+            "email": "carlos.almuna@vasscompany.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Vass\\FixProductGrid\\": ""
+        }
+    }
+}
