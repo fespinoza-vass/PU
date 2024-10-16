@@ -1,0 +1,43 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+/** @var \Magento\Customer\Block\Newsletter $block */
+?>
+<?= $block->getChildHtml('form_before') ?>
+    <form class="form form-newsletter-manage" action="<?= $block->escapeUrl($block->getAction()) ?>" method="post" id="form-validate">
+        <div class="form-container">
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="choice label">
+                <span><?= $block->escapeHtml(__('Subscription option')) ?></span>
+            </div>
+
+            <div class="field choice">
+                <input type="checkbox"
+                        name="is_subscribed"
+                        id="subscription"
+                        value="1"
+                        title="<?= $block->escapeHtmlAttr(__('General Subscription')) ?>"<?php if ($block->getIsSubscribed()) : ?>
+                            checked="checked"<?php endif; ?>
+                             class="checkbox">
+                <label for="subscription" class="label">
+                    <span><?= $block->escapeHtml(__('General Subscription')) ?></span>
+                </label>
+            </div>
+
+            <?php /* Extensions placeholder */ ?>
+            <?= $block->getChildHtml('customer.form.newsletter.extra') ?>
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" title="<?= $block->escapeHtmlAttr(__('Save')) ?>" class="action save primary">
+                    <span><?= $block->escapeHtml(__('Save')) ?></span>
+                </button>
+            </div>
+        </div>
+    </form>
+<?php /* Extensions placeholder */ ?>
+<?= $block->getChildHtml('customer.form.newsletter.extra2') ?>
