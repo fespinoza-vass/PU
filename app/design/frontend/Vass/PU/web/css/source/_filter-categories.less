@@ -1,0 +1,441 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    #page-title-heading {
+        display: none;
+    }
+
+    .filter {
+        &.active {
+            display: block;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 500;
+            width: 100%;
+            background-color: @primary-white;
+
+            .filter {
+                &-options {
+                    overflow-y: auto;
+                    height: calc(100vh - 136px);
+                    position: relative;
+                }
+
+                &-title {
+                    strong {
+                        position: fixed;
+                        border: 0;
+                        top: 55px;
+                        .lib-font-size(20);
+                        font-weight: @font-weight__bold;
+                    }
+
+                    strong:after {
+                        position: fixed;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        .lib-font-size(@font-size__s);
+                        font-weight: @font-weight__regular;
+                        line-height: inherit;
+                        color: @tertiary-black;
+                        content: @icon-close;
+                        font-family: @icons__font-name;
+                        display: inline-block;
+                        text-align: center;
+                        right: 18px;
+                        top: 23px;
+                    }
+                }
+            }
+        }
+
+        &.block {
+            margin-bottom: 0;
+
+            &-subtitle {
+                display: block;
+            }
+        }
+
+        &-title {
+            margin-top: @indent__l;
+
+            strong {
+                .lib-font-size(@font-size__m);
+                border: 1px solid @secondary-black;
+                border-radius: 3px;
+                line-height: @line-height__l;
+                padding: @indent__s @indent__m;
+                z-index: 2;
+
+                &::after {
+                    .lib-font-size(14);
+                    font-family: @icons__font-name;
+                    content: @icon-filters;
+                    padding-left: @indent__s;
+                }
+
+                &.disabled {
+                    opacity: .5;
+                }
+            }
+        }
+
+        .block-subtitle {
+            .lib-font-size(@font-size__base);
+            line-height: 1em;
+            padding: @indent__s @indent__s @indent__base;
+        }
+
+        &-current {
+            margin: 0;
+
+            .item {
+                padding-left: 17px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .filter-subtitle {
+                display: none;
+            }
+
+            .action.remove {
+                &:extend(.abs-remove-button-for-blocks all);
+                left: -2px;
+                position: absolute;
+                top: -1px;
+            }
+
+            & + .filter-action {
+                display: inline;
+                padding-left: 20px;
+            }
+        }
+
+        &-label {
+            &:after {
+                content: ': ';
+            }
+        }
+
+        &-options {
+            display: none;
+            margin: 0;
+
+            .filter-options-item {
+                .filter-options-title {
+                    .lib-font-size(@font-size__l);
+                    font-family: @font-family__base;
+                    font-weight: @font-weight__regular;
+                    cursor: pointer;
+                    margin: @indent__m 0;
+                    overflow: hidden;
+                    padding-right: 40px;
+                    position: relative;
+                    word-break: break-all;
+                    z-index: 1;
+                    line-height: @line-height__l;
+
+                    .lib-icon-font(
+                        @_icon-font-content: @icon-down,
+                        @_icon-font-size: 13px,
+                        @_icon-font-position: after,
+                        @_icon-font-display: block
+                    );
+
+                    &:after {
+                        position: absolute;
+                        right: 13px;
+                        top: 0;
+                    }
+
+                    .active > & {
+                        .lib-icon-font-symbol(
+                            @_icon-font-content: @icon-up,
+                            @_icon-font-position: after
+                        );
+                    }
+                }
+            }
+
+            &-item {
+                border-bottom: @border-width__base solid @secondary-white;
+            }
+
+            &-content {
+                margin: 0;
+                padding: @indent__s;
+
+                .item {
+                    line-height: 1.5em;
+                    margin: @indent__s 0;
+                }
+
+                a {
+                    margin-right: -5px;
+                    padding-right: 7px;
+
+                    &:hover {
+                        background-color: @color-gray91;
+                        text-decoration: none;
+                    }
+                }
+
+                .filter-count-label {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+    .filter-content {
+        display: none;
+    }
+
+    .filter.active .filter-content {
+        display: block;
+        position: relative;
+        top: 95px;
+        z-index: 500;
+        padding: 0 @indent__base;
+    }
+
+    body {
+        &.filter-active {
+            .page-header {
+                display: none;
+            }
+
+            .columns {
+                z-index: 999;
+            }
+        }
+    }
+
+    .filter {
+        .filter-title strong {
+            font-weight: @font-weight__regular;
+        }
+
+        &.active {
+            .filter-options-item:last-child {
+                margin-bottom: @indent__xl;
+            }
+
+            .filter-title {
+                height: @indent__xl;
+                left: 0;
+                position: fixed;
+                right: 0;
+                top: 0;
+                z-index: 2;
+
+                strong {
+                    .lib-font-size(20);
+                    background: none;
+                    color: @secondary-black;
+                    left: -7px;
+                    line-height: @line-height__l;
+                    margin-bottom: @indent__l;
+                    font-weight: @font-weight__bold;
+                }
+            }
+
+            .filter-options {
+                bottom: 0;
+                display: block;
+                left: 0;
+                overflow: scroll;
+                position: relative;
+                right: 0;
+                z-index: 10;
+            }
+        }
+
+        &-current {
+            & + .filter-actions {
+                display: block;
+                margin-top: @indent__base;
+            }
+        }
+
+        &-subtitle {
+            display: none;
+        }
+
+        &-options-content {
+            padding: 0;
+        }
+    }
+
+    .filter .filter-current {
+        &-subtitle {
+            display: none !important;
+            position: relative;
+            z-index: 1;
+
+            .lib-icon-font(
+                @_icon-font-content: @icon-down,
+                @_icon-font-size: 13px,
+                @_icon-font-position: before,
+                @_icon-font-display: block
+            );
+
+            &:before {
+                position: absolute;
+                right: @indent__s;
+                top: @indent__s;
+            }
+        }
+
+        &.active {
+            padding-bottom: 35px;
+
+            .block-subtitle {
+                .lib-icon-font-symbol(
+                    @_icon-font-content: @icon-up,
+                    @_icon-font-position: before
+                );
+            }
+
+            .items {
+                visibility: visible;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                column-gap: 8px;
+            }
+
+            & + .block-actions {
+                display: inline;
+                padding-left: 20px;
+            }
+        }
+    }
+
+    .filter-no-options {
+        .filter-title {
+            &:before {
+                background-color: @color-gray-light2;
+                content: '';
+                display: block;
+                height: 40px;
+                left: 0;
+                margin-top: -60px;
+                position: relative;
+                width: 75px;
+                z-index: 99;
+            }
+        }
+
+        .filter-content {
+            margin-bottom: @indent__base;
+            display: none;
+
+            &.active {
+                display: block;
+            }
+        }
+    }
+
+    .page-with-filter {
+        .columns {
+            .sidebar-main {
+                .lib-vendor-prefix-order(0);
+            }
+        }
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .filter {
+        .block-subtitle {
+            .lib-font-size(20);
+            font-weight: @font-weight__bold;
+            padding: 0;
+        }
+
+        &-options {
+            .filter-options-title {
+                padding-right: 40px;
+                margin: @indent__m 0;
+
+                &:after {
+                    right: 6px;
+                    top: 0;
+                }
+            }
+        }
+
+        &-actions {
+            padding: 0;
+        }
+
+        &-current {
+            + .filter-actions {
+                margin-bottom: 40px;
+                margin-top: @indent__base;
+            }
+
+            .item {
+                margin-bottom: 0;
+            }
+        }
+
+        &.active {
+            .filter-options {
+                top: 0;
+            }
+        }
+    }
+
+    .block {
+        &.filter {
+            background-color: @primary-white;
+            padding: 40px;
+
+            .filter {
+                &-title {
+                    display: none;
+                }
+
+                &-options-content {
+                    padding: 0;
+                }
+
+                &-options {
+                    display: block;
+                    padding: 0;
+
+                    &.filter-options-title {
+                        margin: 0;
+                        padding-top: 12px;
+                    }
+                }
+            }
+        }
+    }
+}

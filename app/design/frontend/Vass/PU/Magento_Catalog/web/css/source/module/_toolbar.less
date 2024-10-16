@@ -34,9 +34,9 @@
 
     .toolbar-amount {
         display: block;
+        .lib-font-size(@font-size__l);
         line-height: @toolbar-mode-icon-font-size + 2;
-        margin: 0;
-        padding: 8px 0 0;
+        margin-top: 20px;
         vertical-align: middle;
 
         .products.wrapper ~ .toolbar & {
@@ -45,6 +45,7 @@
     }
 
     .toolbar-products {
+        padding: 0 @indent__s;
         text-align: center;
         &:extend(.abs-add-clearfix all);
 
@@ -70,7 +71,10 @@
     }
 
     .sorter {
-        padding: 4px 0 0;
+            position: absolute;
+            top: 13px;
+            right: 7px;
+            padding: 4px 0 0;
 
         .control:has(select):after {
             top: ~"calc((56px / 2) + 2px)";
@@ -150,6 +154,8 @@
 
     .sorter {
         float: right;
+        top: 0;
+        right: 0;
     }
 
     .modes {

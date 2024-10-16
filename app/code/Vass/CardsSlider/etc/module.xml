@@ -10,7 +10,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="Vass_CardsSlider">
         <sequence>
-            <module name="Magento_Widget" />
+            <module name="Magento_Widget"/>
         </sequence>
     </module>
 </config>
