@@ -209,16 +209,26 @@
 
     .amsearch-form-block {
         &.-opened {
+            .amsearch-collapsible-title:after {
+                content: inherit;
+                display: none;
+            }
+
             .amsearch-input-wrapper {
                 .amsearch-button.-loupe {
                     display: none;
                 }
 
                 .amsearch-loader-block {
-                    right: 50px;
+                    right: 60px;
+                }
+
+                .amsearch-message-block {
+                    max-width: inherit;
                 }
 
                 .amsearch-button.-close {
+                    /** TODO: quitar el importatnt, ahora esta puesto por el javascript **/
                     display: block!important;
                     background-image: inherit;
                     background-repeat: no-repeat;
@@ -336,8 +346,21 @@
         .amsearch-form-block {
             &.-opened {
                 .amsearch-input-wrapper {
+                    .amsearch-loader-block {
+                        right: 40px;
+                    }
+
                     .amsearch-button.-close {
-                        right: 0;
+                        width: 24px;
+                        height: 24px;
+                        .lib-font-size(14);
+
+                        &:before {
+                            .lib-font-size(14);
+                            position: absolute;
+                            left: 5px;
+                            top: 3px;
+                        }
                     }
                 }
 
@@ -348,6 +371,7 @@
                     background: white;
                     z-index: 99999;
                     margin-top: 0;
+                    border-top: 1px solid @color-gray-dark2;
 
                     .amsearch-items-section {
                         display: flex;
@@ -550,9 +574,7 @@
                         }
 
                         > div {
-                            &:nth-child(2) {
-                                order: 1;
-
+                            .-popular_searches {
                                 .amsearch-tab-items.amsearch-collapsible-content {
                                     flex-direction: column;
 
@@ -570,10 +592,6 @@
                                     }
                                 }
                             }
-
-                            &:nth-child(3) {
-                                order: 2;
-                            }
                         }
                     }
                 }
@@ -582,6 +600,8 @@
     }
 
     .amsearch-wrapper-block {
+        z-index: 999999;
+
         .amsearch-form-block.-opened {
             .amsearch-result-block.-preload {
                 .amsearch-items-section:not(.amsearch-items-section:has(.amsearch-products-section.-list)) {
