@@ -73,6 +73,12 @@
                                 .fb-checkbox-group-label {
                                     display: none;
                                 }
+
+                                div.mage-error {
+                                    position: absolute;
+                                    top: ~"calc(100% + 16px)";
+                                    width: max-content;
+                                }
                             }
 
                             .control {
@@ -91,20 +97,12 @@
 
                                 .cbform-textarea {
                                     height: 136px;
-                                    margin-top: @indent__base;
+                                    margin: 8px 0;
                                 }
 
 
                                 &:has(select) {
                                     top: 50%;
-                                }
-
-                                &:has(.checkbox-group) {
-                                    & > .mage-error {
-                                        position: absolute;
-                                        top: ~"calc(100% + 12px)";
-                                        width: max-content;
-                                    }
                                 }
 
                                 &:has(.cbform-section-title) {
@@ -121,11 +119,18 @@
                                     flex: 1;
                                     padding: 0;
                                     margin: 0;
+
+                                    p {
+                                        margin: 0;
+                                    }
                                 }
 
                                 &:has(.cbform-info) {
                                     font-weight: @font-weight__heavier;
                                     color: @primary-black;
+                                    p {
+                                        margin-bottom: @indent__m;
+                                    }
                                 }
 
                                 &:has(.cbform-date) {
@@ -147,7 +152,7 @@
                                     gap: @indent__base;
                                     position: relative;
                                     height: 100%;
-                                    margin-bottom: @indent__l;
+                                    margin-bottom: @indent__base;
 
                                     .control {
                                         margin: 0;
@@ -191,6 +196,7 @@
                             &:has(.cb-label-checkbox) {
                                 width: 80%;
                                 margin-top: @indent__base;
+                                margin-bottom: 0;
                                 color: @primary-black;
                             }
 
@@ -204,6 +210,11 @@
 
                             &:has(.cbform-field-last) {
                                 margin-bottom: @indent__l;
+                            }
+
+                            &:has(.cbform-info) {
+                                margin-bottom: @indent__base;
+                                margin-top: @indent__l;
                             }
                         }
                     }
@@ -239,6 +250,12 @@
                             margin-bottom: @indent__m;
                             padding: 0 @indent__l;
 
+                            &.fb-checkbox {
+                                .checkbox-group {
+                                    height: 100%;
+                                }
+                            }
+
                             &:has(.cb-label-checkbox) {
                                 margin-top: 0;
                             }
@@ -254,8 +271,7 @@
                             }
 
                             &:has(.cb-label-checkbox) {
-                                max-width: 60%;
-                                margin: 0;
+                                max-width: 100%;
                                 padding-left: @indent__base;
                             }
 
