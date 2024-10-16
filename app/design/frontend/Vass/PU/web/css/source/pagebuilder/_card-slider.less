@@ -10,19 +10,25 @@
 & when (@media-common = true) {
 
     .link-only-mobile {
+        text-decoration: none;
         display: block;
     }
 
     .card-slider {
+        &.swiper-initialized {
+            padding-bottom: 32px;
+        }
         .swiper {
-            height: auto;
+            height: 100%;
+
+            &-pagination {
+                display: block;
+            }
         }
 
         &__wrapper {
             position: relative;
-            height: auto;
             width: 100%;
-            padding: 0 0 20px;
         }
 
         .swiper-slide {
@@ -34,9 +40,11 @@
 
         &__img {
             width: 100%;
-                max-height: 315px;
+
             .card-img {
-                height: inherit;
+                max-height: 315px;
+                min-height: 315px;
+                height: 100%;
                 width: 100%;
                 object-fit: cover;
                 overflow: hidden;
@@ -55,18 +63,17 @@
             justify-content: flex-start;
             gap: @indent__s;
             box-sizing: border-box;
-
-            .link {
-                text-decoration: none;
-            }
+            text-decoration: none;
 
             .title {
+                font-family: @font-family__secondary;
                 .lib-font-size(@font-size__xl);
-                font-weight: (@font-weight__regular);
                 line-height: @line-height__l;
                 text-align: left;
                 color: @primary-black;
                 margin-top: 0;
+                text-transform: uppercase;
+                text-decoration: none;
             }
 
             .description {
@@ -78,34 +85,46 @@
             }
 
             .link {
-                display: none;
-            }
-        }
-    }
+                text-decoration: none;
 
-    .card-slider {
-        .swiper-pagination {
-            bottom: 4px;
+                &-only-desktop {
+                    display: none;
+                }
+            }
         }
     }
 }
 
 //
-// Tablet y Desktop
+// Tablet
 // _____________________________________________
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s){
+
+    .card-slider {
+        &__img {
+            .card-img {
+                max-height: 400px;
+                min-height: 400px;
+            }
+        }
+    }
+}
+
+
+//
+// Desktop
+// _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
     .link-only-mobile {
         pointer-events: none;
     }
 
-    .swiper-wrapper.slider {
-        padding-bottom: 20px;
+    .swiper-initialized {
+        padding-bottom: 30px;
     }
 
     .card-slider {
-
         .swiper {
-            height: auto;
             height: 100%;
         }
 
@@ -118,17 +137,16 @@
             width: 100%;
 
             .card-img {
-                max-height: 480px;
-                height: 100%;
+                max-height: 520px;
+                min-height: 520px;
             }
         }
 
         &__content {
-
             .title {
                 .lib-font-size(26);
+                bottom: 5px;
                 line-height: @line-height__l;
-                font-weight: @font-weight__regular;
             }
 
             .description {
@@ -141,8 +159,13 @@
                 .lib-font-size(@font-size__m);
                 line-height: @line-height__s;
                 color: @link__color;
-                text-decoration: underline;
+                text-decoration: none;
+            }
+
+            .link-only-desktop {
+                display: block;
                 text-transform: uppercase;
+                text-decoration: underline;
             }
         }
     }

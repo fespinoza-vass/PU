@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <block class="Magento\Cms\Block\Block" name="store-locator-banner" before="-">
+              <arguments>
+                <argument name="block_id" xsi:type="string">store-locator-banner</argument>
+              </arguments>
+            </block>
+            <block class="Amasty\Storelocator\Block\Location" name="amasty.locator.center"
+                   template="Amasty_Storelocator::center.phtml" output="1">
+                <arguments>
+                    <argument name="cache_lifetime" xsi:type="number">86400</argument>
+                </arguments>
+                <block class="Amasty\Storelocator\Block\View\Schedule" name="amasty_store_locator_schedule" template="Amasty_Storelocator::schedule.phtml"/>
+                <block class="Amasty\Storelocator\Block\View\Reviews" name="amasty_store_locator_rating" template="Amasty_Storelocator::rating.phtml"/>
+                <container name="extra.filters" as="extra_filters" />
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="page.main.title" remove="true" />
+    </body>
+</page>

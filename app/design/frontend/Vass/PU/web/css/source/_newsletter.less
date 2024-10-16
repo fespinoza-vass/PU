@@ -53,6 +53,10 @@
             margin-bottom: @indent__base;
             gap: 8px;
 
+            &:has(#newsletter-error) {
+                margin-bottom: @indent__l;
+            }
+
             input {
                 .lib-font-size(@font-size__m);
                 width: @input-text__width;
@@ -85,12 +89,7 @@
 
         #newsletter-error {
             position: absolute;
-            padding-bottom: @indent__s;
-        }
-
-        #tos-error {
-            position: absolute;
-            padding-top: @indent__xl;
+            padding-top: 8px;
         }
     }
 
@@ -115,7 +114,6 @@
                     color: @primary-black;
                     position: relative;
                     height: auto;
-                    width: auto;
                     top: -7px;
                 }
             }
@@ -139,6 +137,10 @@
                     margin: 0;
                     line-height: @line-height__l;
                     max-width: 360px;
+
+                    div.mage-error {
+                        margin-top: 0;
+                    }
 
                     input {
                         margin-right: 15px;
@@ -230,10 +232,6 @@
             input {
                 margin: 0;
                 padding: 8px;
-            }
-
-            .label.label-text-wrapper {
-                width: 100%;
             }
 
             .field {
