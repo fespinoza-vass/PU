@@ -43,14 +43,38 @@
         &__contact {
             .lib-font-size(14);
 
+            .contact__location {
+                color: @primary-black;
+            }
+
+            .icon {
+                &:before {
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: @primary-black;
+                }
+            }
+
             .contact__info {
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
+                margin-bottom: 6px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
 
                 a {
                     display: flex;
                     align-items: center;
+                }
+
+                .contact__number {
+                    color: @primary-black;
                 }
             }
 
@@ -195,14 +219,24 @@
             &:first-of-type {
                 flex-grow: 2;
             }
+
+            .footer__subcategory {
+                .lib-font-size(14);
+                display: flex;
+                margin-bottom: 12px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
         }
 
         &__accordion {
-            gap: 20px;
+            gap: 0;
             flex-grow: 1;
 
-            div {
-                display: flex;
+            .footer__title {
+                margin-bottom: 20px;
             }
 
             &.active {
