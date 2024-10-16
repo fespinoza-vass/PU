@@ -4,15 +4,15 @@
  * @author VASS Team
  */
 
+use Amasty\Shopby\Block\Navigation\FilterRenderer;
+use Amasty\ShopbyBase\Model\FilterSetting;
+use Magento\Framework\Escaper;
+
 /**
  * @var FilterSetting $filterSetting
  * @var FilterRenderer $block
  * @var Escaper $escaper
  */
-
-use Amasty\Shopby\Block\Navigation\FilterRenderer;
-use Amasty\ShopbyBase\Model\FilterSetting;
-use Magento\Framework\Escaper;
 
 $postfix = uniqid();
 $filterCode = $filterSetting->getAttributeCode();
