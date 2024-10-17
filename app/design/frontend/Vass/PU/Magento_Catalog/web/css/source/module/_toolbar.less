@@ -36,7 +36,7 @@
         display: block;
         .lib-font-size(@font-size__l);
         line-height: @toolbar-mode-icon-font-size + 2;
-        margin-top: 20px;
+        margin-top: @indent__m;
         vertical-align: middle;
 
         .products.wrapper ~ .toolbar & {
@@ -45,7 +45,6 @@
     }
 
     .toolbar-products {
-        padding: 0 @indent__s;
         text-align: center;
         &:extend(.abs-add-clearfix all);
 
@@ -56,6 +55,7 @@
 
         .pages {
             display: none;
+            margin-bottom: @indent__l;
 
             .products.wrapper ~ & {
                 display: block;
@@ -71,16 +71,17 @@
     }
 
     .sorter {
-            position: absolute;
-            top: 13px;
-            right: 7px;
-            padding: 4px 0 0;
+        position: absolute;
+        right: 0;
+        top: 138px;
 
         .control:has(select):after {
-            top: ~"calc((56px / 2) + 2px)";
+            top: 50%;
         }
 
         .control  > select {
+            height: 40px;
+            width: 180px;
             margin: 0;
             color: @color-gray-dark3;
         }
@@ -155,7 +156,7 @@
     .sorter {
         float: right;
         top: 0;
-        right: 0;
+        top: 17px;
     }
 
     .modes {
@@ -211,6 +212,14 @@
     }
 
     .toolbar {
+        position: relative;
+
+        &-products {
+            .pages {
+                margin-bottom: 80px;
+            }
+        }
+
         .products.wrapper ~ & .limiter {
             display: block;
             float: right;
