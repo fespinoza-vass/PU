@@ -31,7 +31,7 @@ define([
             let pathRegister = 'customer/app/register';
             let customer = customerData.get('customer');
             let cart = customerData.get('cart');
-            var customerName = '', customerLastName = '', cartQty = 0;
+            var customerName = '', customerLastName = '', customerEmail = '', cartQty = 0;
 
             if (cart().summary_count) {
                 cartQty = cart().summary_count;
@@ -43,16 +43,19 @@ define([
                     if (customer().fullname) {
                         customerName = customer().firstname ?? '';
                         customerLastName = customer().fullname.replace(customerName, '').trim() ?? '';
+                        customerEmail = customer().email ?? '';
                     }
 
                     if (pathUrl.startsWith('/' + pathLogin)) {
                         logEvent(paramMobile, 'loginSuccess', {
+                            email: customerEmail,
                             name: customerName,
                             lastName: customerLastName,
                             cartQty: cartQty,
                         });
                     } else if (pathUrl.startsWith('/' + pathRegister)) {
                         logEvent(paramMobile, 'registerSuccess', {
+                            email: customerEmail,
                             name: customerName,
                             lastName: customerLastName,
                             cartQty: cartQty,

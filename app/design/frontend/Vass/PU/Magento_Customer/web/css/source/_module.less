@@ -369,7 +369,7 @@
                             position: absolute;
                             content: @icon-calendar;
                             font-family: @icons__font-name;
-                            .lib-font-size(19px);
+                            .lib-font-size(19);
                             top: 13px;
                             right: 20px;
                         }
@@ -895,6 +895,62 @@
             color: @primary-white;
             margin: 0;
             padding: 8px @indent__base;
+        }
+
+        &.newsletter-manage-index {
+            .rewards {
+                padding: 40px 40px 0;
+
+                .message.info.reward.reward-newsletter {
+                    margin: 0;
+                }
+            }
+
+            .form.form-newsletter-manage {
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+                padding: 40px;
+
+                .form-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 40px;
+
+                    .choice.label {
+                        .lib-font-size(@font-size__l);
+                        line-height: 22px;
+                        font-weight: @font-weight__semibold;
+                        font-family: @font-family__base;
+                        color: @primary-black;
+                    }
+
+                    .field.choice {
+                        display: flex;
+                        place-items: center;
+                        gap: 24px;
+
+                        #subscription {
+                            margin: 0;
+                            top: inherit;
+                        }
+
+                        .label {
+                            span {
+                                font-weight: @font-weight__regular;
+                            }
+                        }
+                    }
+                }
+
+                .actions-toolbar {
+                    .primary {
+                        .save {
+                            padding: @indent__base 40px;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1591,6 +1647,43 @@
                                         }
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.newsletter-manage-index {
+            .rewards {
+                padding: 0;
+            }
+
+            .form.form-newsletter-manage {
+                gap: @indent__m;
+                padding: 0;
+                margin-top: @indent__m;
+
+                .form-container {
+                    gap: @indent__m;
+
+                    .choice.label {
+                        .lib-font-size(@font-size__l);
+                        font-weight: @font-weight__regular;
+                    }
+
+                    .field.choice {
+                        gap: @indent__m;
+
+                        #subscription {
+                            margin: 0;
+                            top: inherit;
+                        }
+
+                        .label {
+                            span {
+                                .lib-font-size(@font-size__m);
+                                font-weight: @font-weight__regular;
                             }
                         }
                     }
