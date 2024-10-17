@@ -32,6 +32,7 @@
             <div class="field">
                 <label class="label" for="customer-password"><span data-bind="i18n: 'Password'"></span></label>
                 <div class="control">
+                    <span class="icon icon-eye" data-bind="click: showPassword.bind($element)"></span>
                     <input class="input-text"
                            data-bind="
                                 attr: {
@@ -41,6 +42,7 @@
                            name="password"
                            id="customer-password"
                            data-validate="{required:true}" autocomplete="off">
+                    </input>
                     <span class="note" data-bind="i18n: 'You already have an account with us. Sign in or continue as guest.'"></span>
                 </div>
 

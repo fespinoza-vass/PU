@@ -83,7 +83,7 @@ require([
                 }, 1000);
 
                 $input.on('keyup', function(event) {
-                    self.validateDNI(event, $(this));
+                    validateDNI(event, $(this));
                 });
             }
         });

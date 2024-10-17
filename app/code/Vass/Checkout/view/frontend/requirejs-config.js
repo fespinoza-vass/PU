@@ -47,11 +47,14 @@ var config = {
             'Magento_Checkout/js/view/billing-address/list': {
                 'Vass_Checkout/js/view/billing-address/list-mixin': true
             },
+            'Magento_Checkout/js/view/shipping': {
+                'Vass_Checkout/js/view/mixin/shipping-method-mixin': true
+            },
             'Amasty_CheckoutCore/js/view/payment/method-renderer/default-mixin': {
                 'Vass_Checkout/js/view/payment/method-renderer/default-mixin': true
             },
-            'Magento_Checkout/js/view/shipping': {
-                'Vass_Checkout/js/view/mixin/shipping-method-mixin': true
+            'Amasty_CheckoutCore/js/view/form/element/email': {
+                'Vass_Checkout/js/view/form/element/email-mixin': true
             }
         }
     }
