@@ -230,9 +230,18 @@
         }
     }
 
-    .filter {
-        .filter-title strong {
-            font-weight: @font-weight__regular;
+    .block.filter {
+        margin: 0;
+        height: auto;
+
+        .filter-title {
+            margin: 0;
+            height: auto;
+
+            strong {
+                display: inline-block;
+                font-weight: @font-weight__regular;
+            }
         }
 
         &.active {
@@ -360,6 +369,8 @@
         .columns {
             .sidebar-main {
                 .lib-vendor-prefix-order(0);
+                display: flex;
+                flex-direction: column-reverse;
             }
         }
     }
