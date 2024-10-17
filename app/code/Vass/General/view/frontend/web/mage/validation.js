@@ -696,13 +696,11 @@ define([
                     result = pass.length >= passwordMinLength;
 
                 if (result === false) {
-                    validator.passwordErrorMessage = $.mage.__('Minimum length of this field must be equal or greater than %1 symbols. Leading and trailing spaces will be ignored.').replace('%1', passwordMinLength); //eslint-disable-line max-len
+                    //validator.passwordErrorMessage = $.mage.__('Minimum length of this field must be equal or greater than %1 symbols. Leading and trailing spaces will be ignored.').replace('%1', passwordMinLength); //eslint-disable-line max-len
+                    validator.passwordErrorMessage = $.mage.__('La longitud mínima de este campo es de  %1 caracteres.').replace('%1', passwordMinLength); //eslint-disable-line max-len
+
 
                     return result;
-                }
-
-                if (pass.match(/\d+/)) {
-                    counter++;
                 }
 
                 if (pass.match(/[a-z]+/)) {
@@ -713,13 +711,10 @@ define([
                     counter++;
                 }
 
-                if (pass.match(/[^a-zA-Z0-9]+/)) {
-                    counter++;
-                }
-
                 if (counter < passwordMinCharacterSets) {
                     result = false;
-                    validator.passwordErrorMessage = $.mage.__('Minimum of different classes of characters in password is %1. Classes of characters: Lower Case, Upper Case, Digits, Special Characters.').replace('%1', passwordMinCharacterSets); //eslint-disable-line max-len
+                    //validator.passwordErrorMessage = $.mage.__('Minimum of different classes of characters in password is %1. Classes of characters: Lower Case, Upper Case, Digits, Special Characters.').replace('%1', passwordMinCharacterSets); //eslint-disable-line max-len
+                    validator.passwordErrorMessage = $.mage.__('El mínimo de caracteres de este campo es %1 : Mayúsculas y Minúsculas').replace('%1', passwordMinCharacterSets); //eslint-disable-line max-len
                 }
 
                 return result;
