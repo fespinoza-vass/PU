@@ -1,0 +1,262 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    .page-footer {
+        padding: 0;
+
+        .footer.content {
+            margin: 0;
+            padding: 0;
+            border: none;
+
+            .widget {
+                margin: 0;
+            }
+        }
+    }
+
+    .footer {
+        &__top {
+            border-bottom: 1px solid @secondary-white;
+
+            .pagebuilder-column-line {
+                flex-direction: column;
+                padding: 40px 0;
+                width: ~"calc(100% - 32px)" !important; // Override pagebuilder
+                margin: 0 auto;
+            }
+        }
+
+        &__column {
+            width: 100% !important; // Override pagebuilder
+            gap: 24px;
+        }
+
+        &__contact {
+            .lib-font-size(14);
+
+            .contact__location {
+                color: @primary-black;
+            }
+
+            .icon {
+                &:before {
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: @primary-black;
+                }
+            }
+
+            .contact__info {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 6px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                a {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .contact__number {
+                    color: @primary-black;
+                }
+            }
+
+            .icon {
+                margin-right: @indent__base;
+                .lib-font-size(20)
+            }
+        }
+
+        &__social {
+            margin-bottom: @indent__m;
+
+            li {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                border: .75px solid @primary-black;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+            }
+
+            ul {
+                display: flex;
+                gap: @indent__base;
+            }
+
+            .icon {
+                .lib-font-size(15);
+                line-height: @font-size__l;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        &__title {
+            font-family: @font-family-name__secondary;
+            .lib-font-size(@font-size__l);
+            border-bottom: 1px solid @primary-black;
+            margin-top: 0;
+
+            &:before {
+                position: absolute;
+                .lib-font-size(12);
+                right: 18px;
+            }
+        }
+
+        &__bottom {
+            width: ~"calc(100% - 32px)" !important; // Override pagebuilder
+            margin: @indent__m auto;
+
+            .pagebuilder-column-line {
+                gap: @indent__base;
+            }
+        }
+
+        &__accordion {
+            gap: @indent__base;
+
+            div {
+                display: none;
+
+                &:last-of-type {
+                    margin-bottom: @indent__base;
+                }
+            }
+
+            &.active {
+                div {
+                    display: flex;
+                }
+
+                .icon:before {
+                    content: @icon-up;
+                }
+            }
+        }
+
+        &__payment-methods {
+            flex-direction: row !important; // Override pagebuilder
+            flex-wrap: wrap;
+            gap: @indent__m;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-footer {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .footer {
+        &.content {
+            max-width: initial;
+
+            .widget {
+                width: 100%;
+
+                div[data-content-type='row'] {
+                    max-width: initial;
+                }
+            }
+        }
+
+        &__top {
+            padding: 40px 0;
+
+            .pagebuilder-column-line {
+                max-width: @layout__max-width;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                width: auto !important; // Override pagebuilder
+                margin: 0 auto;
+                padding: 0 80px;
+                gap: 30px;
+
+            }
+        }
+
+        &__bottom {
+            display: flex;
+            justify-content: center;
+            width: 100% !important; // Override pagebuilder
+
+            .pagebuilder-column-line {
+                max-width: @layout__max-width;
+                padding: 24px 80px
+            }
+        }
+
+        &__column {
+            width: auto !important; // Override pagebuilder
+
+            &:first-of-type {
+                flex-grow: 2;
+            }
+
+            .footer__subcategory {
+                .lib-font-size(14);
+                display: flex;
+                margin-bottom: 12px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        &__accordion {
+            gap: 0;
+            flex-grow: 1;
+
+            .footer__title {
+                margin-bottom: 20px;
+            }
+
+            &.active {
+                .icon:before {
+                    content: none;
+                }
+            }
+        }
+
+        &__title {
+            border: none;
+            padding-top: 15px;
+
+            &:before {
+                content: none;
+            }
+        }
+
+        &__payment-methods {
+            justify-content: flex-end !important; // Override pagebuilder
+        }
+    }
+}

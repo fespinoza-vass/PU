@@ -1,0 +1,28 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_Wishlist
+ * @author Vass Team
+ */
+
+/* @var \Magento\Wishlist\Block\Link $block */
+?>
+<li class="link wishlist" data-bind="scope: 'wishlist'">
+    <a <?= /* @noEscape */ $block->getLinkAttributes() ?>>
+        <icon class="icon icon-wishlist-empty" />
+    </a>
+</li>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "wishlist": {
+                        "component": "Magento_Wishlist/js/view/wishlist"
+                    }
+                }
+            }
+        }
+    }
+
+</script>

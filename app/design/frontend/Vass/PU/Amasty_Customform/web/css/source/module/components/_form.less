@@ -1,0 +1,317 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .row-page-content {
+        .default {
+            &.amform-form {
+                margin: 0 @indent__base @indent__l;
+                background-color: @primary-white;
+
+                .fields {
+                    .amform-layout-one {
+                        margin-right: 0;
+                        max-width: 100%;
+                    }
+
+                    .amform-layout-two {
+                        max-width: 100%;
+                        padding: 0 @indent__base;
+                        margin: 0;
+                    }
+
+                    .field {
+                        &.form-group {
+                            padding: 0 @indent__base;
+                            margin-bottom: 8px;
+                            height: 100%;
+
+                            .label {
+                                .required {
+                                    color: @primary-black;
+                                }
+                            }
+
+                            &.fb-h3 {
+                                padding: 0;
+                                padding-top: @indent__l;
+                                background-color: @tertiary-white;
+
+                                .cbform-title {
+                                    .lib-font-size(20);
+                                    font-weight: @font-weight__bold;
+                                    color: @primary-white;
+                                    background-color: @primary-black;
+                                    padding: 12px @indent__base;
+                                    margin-bottom: 0;
+                                    line-height: 22px;
+                                }
+                            }
+
+                            &.fb-checkbox {
+                                width: auto;
+                                height: auto;
+                                padding: 0 0 0 @indent__base;
+                                margin: 0;
+                                margin-top: @indent__base;
+
+                                .amform-checkbox {
+                                    margin: 0;
+                                }
+
+                                .checkbox-group {
+                                    display: flex;
+                                    align-items: center;
+                                }
+
+                                .fb-checkbox-group-label {
+                                    display: none;
+                                }
+
+                                div.mage-error {
+                                    position: absolute;
+                                    top: ~"calc(100% + 16px)";
+                                    width: max-content;
+                                }
+                            }
+
+                            .control {
+                                position: relative;
+
+                                & >
+                                input,
+                                select,
+                                .cbform-date {
+                                    .lib-form-element-input(@_type: input-text);
+                                }
+
+                                & > select {
+                                    display: inline-block;
+                                }
+
+                                .cbform-textarea {
+                                    height: 136px;
+                                    margin: 8px 0;
+                                }
+
+
+                                &:has(select) {
+                                    top: 50%;
+                                }
+
+                                &:has(.cbform-section-title) {
+                                    .lib-font-size(@font-size__l);
+                                    font-weight: @font-weight__bold;
+                                }
+
+                                &:has(.cbform-section-subtitle) {
+                                    .lib-font-size(14);
+                                    color: @primary-black;
+                                }
+
+                                &:has(.cb-label-checkbox) {
+                                    flex: 1;
+                                    padding: 0;
+                                    margin: 0;
+
+                                    p {
+                                        margin: 0;
+                                    }
+                                }
+
+                                &:has(.cbform-info) {
+                                    font-weight: @font-weight__heavier;
+                                    color: @primary-black;
+                                    p {
+                                        margin-bottom: @indent__m;
+                                    }
+                                }
+
+                                &:has(.cbform-date) {
+                                    &::after {
+                                        .lib-font-size(@font-size__l);
+                                        position: absolute;
+                                        content: @icon-calendar;
+                                        font-family: @icons__font-name;
+                                        color: @color-gray-dark3;
+                                        top: ~"calc((56px / 2) + 10px)";
+                                        right: 20px;
+                                        transform: translateY(-50%);
+                                    }
+                                }
+
+                                &:has(.cbform-checkbox) {
+                                    align-items: center;
+                                    flex-wrap: wrap;
+                                    gap: @indent__base;
+                                    position: relative;
+                                    height: 100%;
+                                    margin-bottom: @indent__base;
+
+                                    .control {
+                                        margin: 0;
+                                    }
+
+                                    .cbform-checkbox {
+                                        flex: 1;
+                                        padding: 0;
+                                        margin: 0;
+                                    }
+                                }
+
+                                .ui-datepicker-trigger {
+                                    display: none;
+                                }
+                            }
+
+                            &.fb-radio {
+                                margin-bottom: @indent__m;
+
+                                .label {
+                                    margin-bottom: @indent__base;
+                                }
+
+                                .radio-group {
+                                    display: flex;
+                                    gap: @indent__m;
+
+                                    .amform-groupv2 {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: @indent__s;
+
+                                        .cbform-radiotwo {
+                                            margin: 0;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &:has(.cb-label-checkbox) {
+                                width: 80%;
+                                margin-top: @indent__base;
+                                margin-bottom: 0;
+                                color: @primary-black;
+                            }
+
+                            &:has(.cbform-section-title) {
+                                margin-bottom: 6px;
+                            }
+
+                            &:has(.cbform-title) {
+                                margin-bottom: @indent__l;
+                            }
+
+                            &:has(.cbform-field-last) {
+                                margin-bottom: @indent__l;
+                            }
+
+                            &:has(.cbform-info) {
+                                margin-bottom: @indent__base;
+                                margin-top: @indent__l;
+                            }
+                        }
+                    }
+                }
+
+                .amcform-toolbar {
+                    width: 100%;
+                    padding: 8px @indent__base @indent__l;
+
+                    .amcform-submit {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  -------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .row-page-content {
+        .default {
+            &.amform-form {
+                max-width: 792px;
+                margin: 0 auto 80px;
+
+                .fields {
+                    .field {
+                        &.form-group {
+                            margin-bottom: @indent__m;
+                            padding: 0 @indent__l;
+
+                            &.fb-checkbox {
+                                .checkbox-group {
+                                    height: 100%;
+                                }
+                            }
+
+                            &:has(.cb-label-checkbox) {
+                                margin-top: 0;
+                            }
+
+                            &:has(.cbform-field-right) {
+                                padding-left: 8px;
+                                padding-right: @indent__l;
+                            }
+
+                            &:has(.cbform-field-left) {
+                                padding-left: @indent__l;
+                                padding-right: 8px;
+                            }
+
+                            &:has(.cb-label-checkbox) {
+                                max-width: 100%;
+                                padding-left: @indent__base;
+                            }
+
+                            &:has(.cbform-checkbox) {
+                                padding-left: @indent__l;
+                                margin: 0;
+                            }
+
+                            .control {
+                                &:has(.cbform-firstdate) {
+                                    max-width: 49%;
+                                }
+                            }
+                        }
+                    }
+
+                    .amform-layout-two {
+                        max-width: 50%;
+                        padding: 0;
+                    }
+                }
+
+                .amcform-toolbar {
+                    padding-left: @indent__l;
+
+                    .amcform-submit {
+                        width: 250px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  -------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .amform-layout-two {
+        max-width: 100%;
+    }
+}

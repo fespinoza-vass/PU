@@ -1,0 +1,172 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+// Common
+// _____________________________________________
+
+& when (@media-common = true) {
+
+    .link-only-mobile {
+        text-decoration: none;
+        display: block;
+    }
+
+    .card-slider {
+        &.swiper-initialized {
+            padding-bottom: 32px;
+        }
+        .swiper {
+            height: 100%;
+
+            &-pagination {
+                display: block;
+            }
+        }
+
+        &__wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        &__img {
+            width: 100%;
+
+            .card-img {
+                max-height: 315px;
+                min-height: 315px;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                overflow: hidden;
+            }
+        }
+
+        &__content {
+            position: absolute;
+            bottom: 7px;
+            right: 0;
+            width: 72%;
+            padding: @indent__base @indent__m;
+            background-color: @color-green-light2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: @indent__s;
+            box-sizing: border-box;
+            text-decoration: none;
+
+            .title {
+                font-family: @font-family__secondary;
+                .lib-font-size(@font-size__xl);
+                line-height: @line-height__l;
+                text-align: left;
+                color: @primary-black;
+                margin-top: 0;
+                text-transform: uppercase;
+                text-decoration: none;
+            }
+
+            .description {
+                .lib-font-size(@font-size__m);
+                line-height: @indent__m;
+                text-align: left;
+                color: @primary-black;
+                text-decoration: none;
+            }
+
+            .link {
+                text-decoration: none;
+
+                &-only-desktop {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+//
+// Tablet
+// _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s){
+
+    .card-slider {
+        &__img {
+            .card-img {
+                max-height: 400px;
+                min-height: 400px;
+            }
+        }
+    }
+}
+
+
+//
+// Desktop
+// _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m){
+    .link-only-mobile {
+        pointer-events: none;
+    }
+
+    .swiper-initialized {
+        padding-bottom: 30px;
+    }
+
+    .card-slider {
+        .swiper {
+            height: 100%;
+        }
+
+        &__wrapper {
+            height: auto;
+            gap: @indent__m;
+        }
+
+        &__img {
+            width: 100%;
+
+            .card-img {
+                max-height: 520px;
+                min-height: 520px;
+            }
+        }
+
+        &__content {
+            .title {
+                .lib-font-size(26);
+                bottom: 5px;
+                line-height: @line-height__l;
+            }
+
+            .description {
+                .lib-font-size(@font-size__l);
+                line-height: @line-height__s;
+            }
+
+            .link {
+                display: block;
+                .lib-font-size(@font-size__m);
+                line-height: @line-height__s;
+                color: @link__color;
+                text-decoration: none;
+            }
+
+            .link-only-desktop {
+                display: block;
+                text-transform: uppercase;
+                text-decoration: underline;
+            }
+        }
+    }
+}

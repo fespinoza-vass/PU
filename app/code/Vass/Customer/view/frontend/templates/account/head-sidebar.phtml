@@ -1,0 +1,24 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_Customer
+ * @author Vass Team
+ */
+
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Vass\Customer\ViewModel\Customer $viewModel
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$viewModel = $block->getData('view_model');
+$customer = $viewModel->getCustomer();
+?>
+
+<div class="account-sidebar__head">
+    <span class="head__icon icon icon-user"></span>
+    <span class="head__title">
+        ¡<?= $escaper->escapeHtml(__('Hello')) ?>,
+        <?= $escaper->escapeHtml($customer->getName()) ?>!
+    </span>
+</div>

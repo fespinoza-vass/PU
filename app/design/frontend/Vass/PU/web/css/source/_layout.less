@@ -1,11 +1,6 @@
-/**
- * @copyright Copyright (c) 2024 VASS
- * @author VASS Team
- */
-
-//
-//  Variables
-//  _____________________________________________
+// /**
+//  * Copyright © Vdshop, Inc. All rights reserved.
+//  */
 
 @layout-column-main__sidebar-offset: 2%;
 @layout-column__additional-sidebar-offset: @layout-column-main__sidebar-offset;
@@ -21,8 +16,7 @@
 
         .column.main {
             &:extend(.abs-add-box-sizing all);
-            .lib-css(padding-bottom, @indent__xl);
-            .lib-vendor-prefix-flex-basis(auto);
+            .lib-vendor-prefix-flex-basis(100%);
             .lib-vendor-prefix-flex-grow(1);
             .lib-vendor-prefix-order(1);
             width: 100%;
@@ -42,25 +36,25 @@
             .lib-vendor-prefix-order(2);
         }
     }
-
-    .page-bottom {
-        .content {
-            max-width: 100%; //made page-bottom full width
-        }
-    }
 }
 
 //
 //  Mobile
 //  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .page-main {
+        .account &,
+        .cms-privacy-policy & {
+            padding-top: 0;
+        }
+    }
+}
+
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .navigation,
-    .breadcrumbs,
     .page-header .header.panel,
-    .header.content,
-    .footer.content,
-    .page-main,
+    .content,
     .page-wrapper > .widget,
     .block.category.event,
     .top-container,
@@ -84,14 +78,12 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .navigation,
-    .breadcrumbs,
     .page-header .header.panel,
-    .header.content,
+    .content,
     .page-wrapper > .widget,
     .block.category.event,
     .top-container,
-    .page-main,
-    .page-main > .main-wrapper:not(.pagebuilder) {
+    .page-main > .main-wrapper {
         box-sizing: border-box;
         margin-left: auto;
         margin-right: auto;
@@ -101,8 +93,10 @@
         width: auto;
     }
 
-    .page-main {
-        width: 100%;
+    .page-bottom {
+        .content {
+            max-width: 100%; //made page-bottom full width
+        }
     }
 
     .columns {
@@ -134,19 +128,20 @@
     }
 
     .page-layout-2columns-left {
-        .main {
-            padding-left: @layout-column__additional-sidebar-offset
+        .column.main {
+            width: 74%;
+        }
+
+        .sidebar-main {
+            width: 25%;
         }
 
         .sidebar-additional {
             clear: left;
             float: left;
             padding-left: 0;
+            padding-right: @layout-column__additional-sidebar-offset;
         }
-    }
-
-    .panel.header {
-        padding: 10px 20px;
     }
 }
 
@@ -157,7 +152,7 @@
     .page-wrapper > .widget,
     .block.category.event,
     .top-container,
-    .page-main > .main-wrapper:not(.pagebuilder) {
+    .page-main > .main-wrapper {
         max-width: @layout__width-l;
     }
 }
@@ -173,7 +168,7 @@
     .page-wrapper > .widget,
     .block.category.event,
     .top-container,
-    .page-main > .main-wrapper:not(.pagebuilder) {
+    .page-main > .main-wrapper {
         max-width: @layout__width-xl;
     }
 }

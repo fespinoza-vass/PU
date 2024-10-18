@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
  */
 
 /**
@@ -147,17 +147,18 @@
 
     <?php if ($block->isShowPerPage()): ?>
         <div class="limiter">
-            <strong class="limiter-label"><?= $block->escapeHtml(__('Show')) ?></strong>
             <select id="limiter" data-mage-init='{"redirectUrl": {"event":"change"}}' class="limiter-options">
                 <?php foreach ($block->getAvailableLimit() as $_key => $_limit): ?>
                     <option value="<?= $block->escapeUrl($block->getLimitUrl($_key)) ?>"
                         <?php if ($block->isLimitCurrent($_key)): ?>
                             selected="selected"<?php endif ?>>
-                        <?= $block->escapeHtml($localeFormatter->formatNumber((int) $_limit)) ?>
+                        <?= $block->escapeHtml(
+                            __('Show')
+                            . ' ' . $localeFormatter->formatNumber((int) $_limit)
+                            . ' ' . __('per page')) ?>
                     </option>
                 <?php endforeach; ?>
             </select>
-            <span class="limiter-text"><?= $block->escapeHtml(__('per page')) ?></span>
         </div>
     <?php endif ?>
 

@@ -1,0 +1,81 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .magento__dropdown-widget {
+        margin-bottom: @indent__l;
+
+        .faqs-accordeon {
+            cursor: pointer;
+            background-color: @primary-white;
+            border-bottom: 0.5px solid @color-gray-light2;
+            padding: @indent__m;
+
+            .faq-title {
+                position: relative;
+                padding-right: @indent__xl;
+                color: @primary-black;
+                margin: 0;
+                .lib-font-size(20);
+
+                &::after {
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    content: @icon-plus;
+                    font-family: @icons__font-name;
+                    .lib-font-size(@font-size__l);
+                }
+
+                strong {
+                    font-weight: @font-weight__heavier;
+                }
+            }
+
+            &:has(.active) {
+                .faq-title::after {
+                    content: @icon-minus;
+                    .lib-font-size(2);
+                }
+
+                .faq-content {
+                    display: block;
+                }
+            }
+
+            &:not(.active) {
+                .faq-content {
+                    display: none;
+                }
+            }
+
+
+            .faq-content {
+                padding-top: @indent__m;
+                line-height: 28px;
+                color: @secondary-black;
+                .lib-font-size(@font-size__l);
+
+                &-subtitle {
+                    font-weight: @font-weight__heavier;
+                }
+            }
+        }
+    }
+}
+
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .magento__dropdown-widget {
+        .faqs-accordeon {
+            padding: @indent__m @indent__l;
+        }
+    }
+}

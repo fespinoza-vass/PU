@@ -1,0 +1,11 @@
+--- /dev/null
++++ ../ViewModel/CountryFilter.php
+@@ -46,7 +46,7 @@
+                 self::XML_PATH_EU_COUNTRIES_LIST,
+                 ScopeInterface::SCOPE_STORE,
+                 $storeId
+-            )
++            ) ?? ''
+         );
+ 
+         return $euCountries;

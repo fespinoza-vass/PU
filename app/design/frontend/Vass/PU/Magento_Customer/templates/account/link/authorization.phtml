@@ -1,0 +1,49 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @package Vass_Customer
+ * @author Vass Team
+ */
+
+/**
+ * @var \Magento\Customer\Block\Account\AuthorizationLink $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$dataPostParam = '';
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+?>
+<li class="link authorization-link" data-label="<?= $escaper->escapeHtml(__('or')) ?>"
+    data-bind="scope: 'customer'">
+
+    <?php if ($block->isLoggedIn()): ?>
+        <a href="<?= $block->getUrl('customer/account') ?>"
+            class="account-link">
+            <icon class="icon icon-user" />
+            <span data-bind="text: customer().fullname">
+            </span>
+        </a>
+    <?php else: ?>
+        <a <?= /* @noEscape */ $block->getLinkAttributes() ?>
+            <?= /* @noEscape */ $dataPostParam ?>
+            class="account-link">
+            <icon class="icon icon-user" />
+            <?= $escaper->escapeHtml($block->getLabel()) ?>
+        </a>
+    <?php endif; ?>
+</li>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "customer": {
+                        "component": "Magento_Customer/js/view/customer"
+                    }
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,53 @@
+<?php
+/**
+ * @copyright Copyright (c) 2024 Vass
+ * @author Vass Team
+ */
+
+/** @var \Magento\Newsletter\Block\Subscribe $block */
+?>
+
+<div class="block newsletter">
+    <form class="form subscribe"
+          novalidate
+          action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+          method="post"
+          data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+          id="newsletter-validate-detail">
+        <div class="newsletter__row">
+            <div class="field newsletter">
+                <div class="control">
+                    <label for="newsletter">
+                        <input name="email" type="email" id="newsletter"
+                               placeholder="<?= $block->escapeHtml(__('Enter your mail')) ?>"
+                               data-mage-init='{"mage/trim-input":{}}'
+                               data-validate="{required:true, 'validate-email':true}"
+                        />
+                    </label>
+                </div>
+            </div>
+            <div class="actions">
+                <button id="subscribe"
+                        class="action subscribe newsletter secondary"
+                        title="<?= $block->escapeHtml(__('Subscribe')) ?>"
+                        type="submit"
+                        aria-label="Subscribe">
+                    <span><?= $block->escapeHtml(__('Subscribe')) ?></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="field choice tos">
+            <input name="tos" type="checkbox" id="tos" data-validate="{required:true}" data-msg-required="<?= __('You should accept the privacy policy') ?>" title="<?php echo __('I accept the legal terms and conditions'); ?>"/>
+            <label class="label label-text-wrapper" for="tos">
+        <span>
+            <?= __('I have read and accept the <a class="alink" href="%1">General Purchase Conditions</a>, the <a class="alink" href="%2">Privacy Policy</a>, and the <a class="alink" href="%3">Legal Notice</a>.',
+            'tos',
+            'privacy-policy',
+            'legal-notice')
+            ?>
+        </span>
+            </label>
+        </div>
+    </form>
+</div>

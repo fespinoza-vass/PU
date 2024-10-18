@@ -1,0 +1,87 @@
+/**
+ * @copyright Copyright (c) 2024 VASS
+ * @author VASS Team
+ */
+
+& when (@media-common = true) {
+    .banner-dior {
+        &__block {
+            margin: 0 16px 32px 16px;
+        }
+
+        &__text {
+            display: flex;
+            justify-content: center;
+            background: @color-beige2;
+            padding: 16px 24px;
+            width: 100%;
+
+            &-headding {
+                .lib-heading(h2);
+                .lib-font-size(@font-size__xl);
+                line-height: 32px;
+                font-family: @font-family__secondary;
+                margin: 0 0 10px;
+            }
+
+            &-par {
+                .lib-font-size(@font-size__m);
+                line-height: 22px;
+            }
+        }
+
+        &__image {
+            .pagebuilder-overlay {
+                min-height: 160px;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .banner-dior {
+        &__block {
+            margin: 0 0 80px;
+            padding: 0 120px;
+        }
+
+        &__columns {
+            display: flex;
+            flex-direction: row-reverse;
+            max-height: 200px;
+
+            .pagebuilder-column-line:last-of-type {
+                width: ~"calc(100% - 80px)" !important; // Override default styles pagebuilder
+            }
+        }
+
+        &__text {
+            min-height: 210px;
+            padding: 0 70px;
+            background: @color-beige;
+            justify-content: center !important; // Override default styles pagebuilder
+
+            &-headding {
+                .lib-font-size(40);
+                line-height: 52px;
+                margin-top: 0;
+            }
+
+            &-par {
+                p {
+                    margin: 0;
+                }
+            }
+        }
+
+        &__image {
+            .pagebuilder-overlay {
+                min-height: 210px;
+            }
+        }
+    }
+}
