@@ -233,7 +233,6 @@
 
 		.slick-arrow{
 			transform: translate(0, 0);
-			position: initial;
 			.lib-font-size(0);
 			width: auto;
 
@@ -259,6 +258,31 @@
 						}
 					}
 				}
+			}
+		}
+	}
+
+	.auto-hide-arrows{
+		.slick-arrow {
+			border-radius: 33.333rem;
+			background: #00000040;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 0;
+			backdrop-filter: blur(2px);
+			position: absolute;
+			&::before{
+				color: #fff;
+				padding: 10px;
+			}
+		}
+		.slick{
+			&-next{
+				right: 1.5rem;
+			}
+			&-prev{
+				left: 1.5rem;
 			}
 		}
 	}
@@ -287,7 +311,6 @@
 
 		.slick-arrow{
 			transform: translate(0, 0);
-			position: initial;
 			.lib-font-size(0);
 			width: auto;
 
@@ -315,6 +338,23 @@
 						}
 					}
 				}
+			}
+		}
+	}
+
+	.auto-hide-arrows{
+		.slick-arrow{
+			height: 48px !important;
+			width: 48px !important;
+			opacity: 0 !important;
+			top: 50%;
+			&::before{
+				font-size: 2rem;
+			}
+		}
+		&:hover{
+			.slick-arrow{
+				opacity: 1 !important;
 			}
 		}
 	}
@@ -465,6 +505,25 @@
 						}
 					}
 				}
+			}
+		}
+	}
+
+	.auto-hide-arrows{
+		.slick-arrow{
+			width: 25px !important;
+			height: 25px !important;
+			top: 50%;
+			&::before{
+				font-size: 1.3rem;
+			}
+		}
+		.slick{
+			&-next{
+				right: 0.3rem!important;
+			}
+			&-prev{
+				left: 0.3rem!important;
 			}
 		}
 	}
