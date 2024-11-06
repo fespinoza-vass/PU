@@ -53,7 +53,6 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
             return false;
         }
 
-        $postcodes = array(150102, 150107, 150109, 150118, 150119, 150123, 150124, 150125, 150126, 150127, 150129, 150138, 150139, 150101, 150103, 150104, 150105, 150106, 150108, 150110, 150111, 150112, 150113, 150114, 150115, 150116, 150117, 150120, 150121, 150122, 150128, 150130, 150131, 150132, 150133, 150134, 150135, 150136, 150137, 150140, 150141, 150142, 150143, 70101, 70102, 70103, 70104, 70105, 70106, 70107);
         $this->setRawRequest($request);
         $quotes = $this->getQuotes();
 
@@ -63,7 +62,7 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
 
             return false;
         }
-        $postCode = (int)$request->getDestPostcode();
+
         $result = $this->_rateFactory->create();
 
         // Append quotes to result
@@ -75,15 +74,9 @@ class Urbano extends AbstractCarrierOnline implements CarrierInterface
 
             $method->setMethod($quote['method']);
             $method->setMethodTitle($this->getConfigData('name'));
-            
-            if(in_array($postCode,$postcodes)){
-                $method->setPrice(0);
-                $method->setCost(0);
-            }else{
-                $method->setPrice($quote['cost']);
-                $method->setCost($quote['cost']);
-            }
-            
+
+            $method->setPrice($quote['cost']);
+            $method->setCost($quote['cost']);
             $method->setTime($quote['time']);
 
             $result->append($method);
