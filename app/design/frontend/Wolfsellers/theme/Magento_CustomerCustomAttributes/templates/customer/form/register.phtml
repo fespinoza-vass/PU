@@ -260,8 +260,8 @@ $formData = $block->getFormData();
                 <input type="password" name="password" id="password"
                        title="<?= $block->escapeHtmlAttr(__('Password')) ?>"
                        class="input-text"
-                       data-password-min-length="6"
-                       data-password-min-character-sets="2"
+                       data-password-min-length="<?= $block->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                       data-password-min-character-sets="<?= /* @noEscape */ $requiredCharacterClassesNumber ?>"
                        data-validate="{required:true, 'validate-customer-password':true}"
                        autocomplete="off">
                 <div id="password-strength-meter-container" data-role="password-strength-meter" aria-live="polite">
