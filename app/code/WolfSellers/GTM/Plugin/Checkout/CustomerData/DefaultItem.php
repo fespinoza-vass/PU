@@ -88,7 +88,7 @@ class DefaultItem
         $family = $product->getData('familia') ?? '';
         $brand = $product->getAttributeText('manufacturer') ?? '';
         $gender = $product->getAttributeText('genero') ?? '';
-        $size = $product->getData('tamano') ?? '';
+        $size = $product->getAttributeText('tamano') ?? '';
 
         $result['category'] = $category;
         $result['subcategory'] = $subcategory;
