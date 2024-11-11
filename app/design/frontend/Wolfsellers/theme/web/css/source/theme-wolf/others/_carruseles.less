@@ -231,8 +231,7 @@
 		align-items: center;
 		display: flex;
 
-		.slick-arrow{
-			transform: translate(0, 0);
+		.slick-arrow {
 			.lib-font-size(0);
 			width: auto;
 
@@ -286,6 +285,12 @@
 			}
 		}
 	}
+
+	.align-arrow-center {
+		.slick-arrow {
+			top: ~"calc(50% - 30px)" !important;
+		}
+	}
 }
 
 ///DESKTOP
@@ -310,7 +315,6 @@
 		display: flex;
 
 		.slick-arrow{
-			transform: translate(0, 0);
 			.lib-font-size(0);
 			width: auto;
 
@@ -475,7 +479,6 @@
 		display: flex;
 
 		.slick-arrow{
-			transform: translate(0, 0);
 			position: initial;
 			.lib-font-size(0);
 			width: auto;
@@ -524,6 +527,22 @@
 			}
 			&-prev{
 				left: 0.3rem!important;
+			}
+		}
+	}
+
+	.align-arrow-center {
+		.slick-slide {
+			.pagebuilder-slide-wrapper {
+				min-height: auto !important;
+				padding-bottom: 97%;
+				.pagebuilder-overlay {
+					min-height: 0 !important;
+					padding: 0 !important;
+				}
+				[data-element="content"] {
+					min-height: 0 !important;
+				}
 			}
 		}
 	}
