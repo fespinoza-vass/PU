@@ -8,50 +8,47 @@
 namespace WolfSellers\GTM\Observer;
 
 use Exception;
+use Magento\Customer\Model\Session;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Catalog\Model\ProductRepository;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Registry;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use WolfSellers\GTM\Block\Ga as GaBlock;
-use Psr\Log\LoggerInterface;
 
 class BeginCheckout implements ObserverInterface
 {
-    protected $registry;
-    protected $checkoutSession;
-    protected $gaBlock;
-    protected $logger;
-
+    /**
+     * @param Registry $registry
+     * @param CheckoutSession $checkoutSession
+     * @param GaBlock $gaBlock
+     * @param ProductRepository $productRepository
+     * @param Session $customerSession
+     */
     public function __construct(
-        Registry        $registry,
-        CheckoutSession $checkoutSession,
-        GaBlock         $gaBlock,
-        LoggerInterface $logger
-    )
-    {
-        $this->registry = $registry;
-        $this->checkoutSession = $checkoutSession;
-        $this->gaBlock = $gaBlock;
-        $this->logger = $logger;
+        private Registry $registry,
+        private CheckoutSession $checkoutSession,
+        private GaBlock $gaBlock,
+        private ProductRepository $productRepository,
+        private Session $customerSession
+    ) {
     }
 
     public function execute(Observer $observer)
     {
-        $this->logger->debug('BeginCheckout Observer executed');
         $quote = $this->checkoutSession->getQuote();
 
         if ($quote && $quote->getId()) {
             $products = [];
+            $productsIds = [];
+            $productsSkus = [];
+            $totalPrice = 0;
+            $totalQty = 0;
+
             foreach ($quote->getAllVisibleItems() as $item) {
 
-                $product = $item->getProduct();
-                $this->logger->debug('Processing product ID: ' . $product->getId());
+                $product = $this->productRepository->getById($item->getProductId());
                 $imageUrl = $this->gaBlock->imageHelper->init($item, 'product_base_image')->getUrl();
-                $category = '';
-                $subcategory = '';
-                $family = '';
-                $brand = '';
-
                 $categories = [];
                 if ($product->getCategoryIds()) {
                     foreach ($product->getCategoryIds() as $categoryId) {
@@ -59,41 +56,29 @@ class BeginCheckout implements ObserverInterface
                             $categoryObj = $this->gaBlock->_categoryRepository->get($categoryId);
                             $categories[] = $categoryObj->getName();
                         } catch (Exception $e) {
-                            $this->logger->warning('Category not found for ID: ' . $categoryId);
+                            throw $e;
                         }
                     }
                 }
 
-                $this->logger->debug('Categories: ' . implode(', ', $categories));
-
-                // Asignar valores de categorías
-                if (isset($categories[0])) $category = $categories[0];
-                if (isset($categories[1])) $subcategory = $categories[1];
-                if (isset($categories[2])) $family = $categories[2];
-
-                $manufacturer = $product->getData('manufacturer');
-                if ($manufacturer) {
-                    $options = $this->gaBlock->attributerepository->get('manufacturer')->getOptions();
-                    foreach ($options as $option) {
-                        if ($option->getValue() == $manufacturer) {
-                            $brand = $option->getLabel();
-                            break;
-                        }
-                    }
-                }
-
-                $this->logger->debug('Brand: ' . $brand);
+                $category = $product->getData('categoria') ?? '';
+                $subcategory = $product->getData('sub_categoria') ?? '';
+                $family = $product->getData('familia') ?? '';
+                $brand = $product->getAttributeText('manufacturer') ?? '';
+                $gender = $product->getAttributeText('genero') ?? '';
+                $size = $product->getData('tamano') ?? '';
+                $price = number_format($item->getProduct()->getFinalPrice(), 2);
 
                 $productData = [
                     'id' => $item->getId(),
                     'name' => $item->getName(),
                     'sku' => $item->getSku(),
-                    'price' => $item->getBasePrice(),
+                    'price' => $price,
                     'category' => $category,
                     'sub_categoria' => $subcategory,
                     'familia' => $family,
-                    'genero' => $product->getAttributeText('genero') ?: '',
-                    'tamano' => $product->getAttributeText('tamano') ?: '',
+                    'genero' => $gender,
+                    'tamano' => $size,
                     'quantity' => $item->getQty(),
                     'promotion' => $this->gaBlock->getRules($product->getId()),
                     'brand' => $brand,
@@ -102,23 +87,59 @@ class BeginCheckout implements ObserverInterface
                 ];
 
                 $products[] = $productData;
+                $productsIds[] = $item->getProduct()->getId();
+                $productsSkus[] = $item->getProduct()->getSku();
+                $totalPrice += $price * $item->getQty();
+                $totalQty += $item->getQty();
             }
+
+            $customer = $this->customerSession->getCustomer();
+            if ($customer?->getId()) {
+                $dataUser = [
+                    'email' => $customer->getEmail(),
+                    'first_name' => $customer->getFirstname(),
+                    'last_name' => $customer->getLastname(),
+                ];
+            } else {
+                $dataUser = [];
+            }
+
 
             $gtmData = [
                 'event' => 'begin_checkout',
+                'pagePostAuthor' => "Perfumerias Unidas",
+                'ecomm_pagetype' => "Checkout",
+                'ecomm_prodid' => $productsIds,
+                'ecomm_prodsku' => $productsSkus,
+                'ecomm_totalvalue' => (float)number_format($totalPrice, 2),
+                'ecomm_totalquantity' => (int)$totalQty,
                 'ecommerce' => [
                     'checkout' => [
                         'actionField' => ['step' => 1],
                         'products' => $products
                     ]
                 ],
-                'checkout_total' => $quote->getGrandTotal()
+                'dataUser' => $dataUser
             ];
 
-            $this->logger->debug('BeginCheckout GTM Data: ' . json_encode($gtmData));
             $this->registry->register('gtm_begin_checkout_data', $gtmData, true);
-        } else {
-            $this->logger->warning('BeginCheckout Observer: Quote not found or empty');
         }
+    }
+
+    /**
+     * Obtener el label del atributo personalizado
+     */
+    private function getCustomAttributeLabel($product, $attributeCode)
+    {
+        $attributeValue = $product->getData($attributeCode);
+        if ($attributeValue) {
+            $options = $this->gaBlock->attributerepository->get($attributeCode)->getOptions();
+            foreach ($options as $option) {
+                if ($option->getValue() == $attributeValue) {
+                    return $option->getLabel();
+                }
+            }
+        }
+        return '';
     }
 }
