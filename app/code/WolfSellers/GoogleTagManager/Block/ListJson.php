@@ -168,7 +168,7 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             $family = $item2->getData('familia') ?? '';
             $brand = $item2->getAttributeText('manufacturer') ?? '';
             $gender = $item2->getAttributeText('genero') ?? '';
-            $size = $item2->getData('tamano') ?? '';
+            $size = $item2->getAttributeText('tamano') ?? '';
             $price = number_format($item2->getFinalPrice(), 2);
 
             $cartItem = [

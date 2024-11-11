@@ -59,7 +59,7 @@ class DefaultItem
         $subcategory = $product->getData('sub_categoria') ?? '';
         $brand = $product->getAttributeText('manufacturer') ?? '';
         $gender = $product->getAttributeText('genero') ?? '';
-        $size = $product->getData('tamano') ?? '';
+        $size = $product->getAttributeText('tamano') ?? '';
         $family = $product->getData('familia') ?? '';
 
         /** Get Rules of product */
