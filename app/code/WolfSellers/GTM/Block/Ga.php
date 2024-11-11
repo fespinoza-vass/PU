@@ -1,9 +1,4 @@
 <?php
-/**
- * @copyright Copyright (c) 2024 VASS
- * @package Vass_GTM
- * @author VASS Team
- */
 
 namespace WolfSellers\GTM\Block;
 
@@ -150,106 +145,6 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             $result[] = 'dataLayer.push(' . $this->jsonHelper->jsonEncode($orderDara) . ");\n";
         }
         return implode("\n", $result);
-    }
-
-    /**
-     * Return information about order and items
-     *
-     * @return array
-     * @since 100.2.0
-     */
-    public function getOrdersDataArray()
-    {
-        $result = [];
-        $orderIds = $this->getOrderIds();
-        if (empty($orderIds) || !is_array($orderIds)) {
-            return $result;
-        }
-        $collection = $this->_salesOrderCollection->create();
-        $collection->addFieldToFilter('entity_id', ['in' => $orderIds]);
-
-        /** @var Order $order */
-        foreach ($collection as $order) {
-            $orderData = [
-                'id' => $order->getIncrementId(),
-                'revenue' => $order->getBaseGrandTotal(),
-                'tax' => $order->getBaseTaxAmount(),
-                'shipping' => $order->getBaseShippingAmount(),
-                'coupon' => (string)$order->getCouponCode()
-            ];
-
-            $products = [];
-            /** @var Item $item */
-            foreach ($order->getAllVisibleItems() as $item) {
-
-                /** Get Name Categories of product */
-                $categories = [];
-                foreach ($item->getProduct()->getCategoryIds() as $categoryId) {
-                    array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
-                }
-
-                $category = isset($categories[0]) ? $categories[0] : '';
-                $subcategory = isset($categories[1]) ? $categories[1] : '';
-                $family = isset($categories[2]) ? $categories[2] : '';
-
-                /** Get Rules of product */
-                $rules = $this->getRules($item->getProduct()->getId());
-                $dataRule = [];
-                if ($rules) {
-                    foreach ($rules as $rule) {
-                        $dataRule[] = $rule;
-                    }
-                }
-                $dataRule = implode(', ', $dataRule);
-
-                $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
-                $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
-                $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
-                //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
-
-                $options = $this->attributerepository->get('manufacturer')->getOptions();
-
-                $brand = '';
-                foreach ($options as $options_value) {
-                    if ($options_value->getValue() == $item->getProduct()->getData('manufacturer')) {
-                        $brand = $options_value->getLabel();
-                    }
-                }
-
-                $gender = !empty($item->getProduct()->getAttributeText('genero')) ? $item->getProduct()->getAttributeText('genero') : '';
-                $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
-
-                $products[] = [
-                    'id' => $item->getId(),
-                    'name' => $item->getName(),
-                    'sku' => $item->getSku(),
-                    'price' => $item->getBasePrice(),
-                    'category' => $category,
-                    'sub_categoria' => $subcategory,
-                    'familia' => $family,
-                    'genero' => $gender,
-                    'tamano' => $size,
-                    'quantity' => $item->getQtyOrdered(),
-                    'promotion' => $dataRule,
-                    'brand' => $brand,
-                    'productURL' => $item->getProduct()->getProductUrl(),
-                    'imageURL' => $imageUrl
-
-                ];
-            }
-
-            $result[] = [
-                'ecommerce' => [
-                    'purchase' => [
-                        'actionField' => $orderData,
-                        'products' => $products
-                    ],
-                    'currencyCode' => $this->getStoreCurrencyCode()
-                ],
-                'event' => 'purchase'
-            ];
-        }
-        return $result;
     }
 
     /**
