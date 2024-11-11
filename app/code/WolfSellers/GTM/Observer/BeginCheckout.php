@@ -66,7 +66,7 @@ class BeginCheckout implements ObserverInterface
                 $family = $product->getData('familia') ?? '';
                 $brand = $product->getAttributeText('manufacturer') ?? '';
                 $gender = $product->getAttributeText('genero') ?? '';
-                $size = $product->getData('tamano') ?? '';
+                $size = $product->getAttributeText('tamano') ?? '';
                 $price = number_format($item->getProduct()->getFinalPrice(), 2);
 
                 $productData = [
