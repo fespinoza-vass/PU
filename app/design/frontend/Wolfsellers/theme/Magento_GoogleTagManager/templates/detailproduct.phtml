@@ -12,39 +12,10 @@ use WolfSellers\GoogleTagManager\Block\ListJson;
 /** @var ListJson $block */
 $product = $block->getCurrentProduct();
 
-$categories = $block->getCategoryName();
-
-$category = isset($categories[0]) ? $categories[0] : '';
-$subcategory = isset($categories[1]) ? $categories[1] : '';
-$family = isset($categories[2]) ? $categories[2] : '';
-
-
-$gender = '';
-$size = '';
-
-$attr = $product->getResource()->getAttribute('tamano');
-if ($attr->usesSource()) {
-    $size = $attr->getSource()->getOptionText($product->getTamano());
-}
-
-$attr = $product->getResource()->getAttribute('genero');
-if ($attr->usesSource()) {
-    $gender = $attr->getSource()->getOptionText($product->getGenero());
-}
-
-$attributes = $product->getAttributes();
-$brand = '';
-
-foreach ($attributes as $attribute) {
-    if ($attribute->getName() === 'manufacturer') {
-        $brand = $attribute->getFrontend()->getValue($product);
-    }
-}
 $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
     ->init($product, 'product_base_image')->getUrl();
 
 $rules = $block->getRules($product->getId());
-
 $data = [];
 if ($rules) {
     foreach ($rules as $rule) {
@@ -52,6 +23,15 @@ if ($rules) {
     }
 }
 $data = implode(', ', $data);
+
+$category = $product->getData('categoria') ?? '';
+$subcategory = $product->getData('sub_categoria') ?? '';
+$family = $product->getData('familia') ?? '';
+$brand = $product->getAttributeText('manufacturer') ?? '';
+$gender = $product->getAttributeText('genero') ?? '';
+$size = $product->getData('tamano') ?? '';
+$price = number_format($product->getFinalPrice(), 2);
+
 ?>
 
 <script type="text/x-magento-init">
@@ -60,7 +40,7 @@ $data = implode(', ', $data);
             "Magento_GoogleTagManager/js/actions/product-detail": {
                 "product":{
                     "id": "<?= $block->escapeJs($product->getId()); ?>",
-                    "totalValue": "<?= $block->escapeJs($product->getFinalPrice()); ?>",
+                    "totalValue": "<?= $block->escapeJs($price); ?>",
                     "name": "<?= $block->escapeJs($product->getName()); ?>",
                     "sku": "<?= $block->escapeJs($product->getSku()); ?>",
                     "category": "<?= $block->escapeJs($category); ?>",
