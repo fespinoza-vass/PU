@@ -152,30 +152,6 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
         foreach ($quote->getAllVisibleItems() as $item) {
             $item2 = $item->getProduct();
             $imageUrl = $this->imageHelper->init($item2, 'product_base_image')->getUrl();
-            $attributes = $item2->getAttributes();
-            $category = null;
-            $subcategory = null;
-            $brand = null;
-            $gender = null;
-            $size = null;
-            foreach($attributes as $attribute){
-                if($attribute->getName() === 'categoria') {
-                    $category = $attribute->getFrontend()->getValue($item->getProduct());
-                }
-                if($attribute->getName() === 'sub_categoria') {
-                    $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
-                }
-                if($attribute->getName() === 'manufacturer') {
-                    $brand = $attribute->getFrontend()->getValue($item->getProduct());
-                }
-                if($attribute->getName() === 'genero') {
-                    $gender = $attribute->getFrontend()->getValue($item->getProduct());
-                }
-                if($attribute->getName() === 'tamano') {
-                    $size = $attribute->getFrontend()->getValue($item->getProduct());
-                    if( !$size ) $size = null;
-                }
-            }
 
             /** Get Rules of product */
             $rules = $this->getRules($item2->getId());
@@ -187,26 +163,20 @@ class ListJson extends \Magento\GoogleTagManager\Block\ListJson
             }
             $dataRule = implode( ', ', $dataRule);
 
-            /** Get Name Categories of product */
-            $categories = [];
-            foreach($item2->getCategoryIds() as $categoryId){
-                array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
-            }
-
-//            $category = isset($categories[0]) ? $categories[0] : '';
-//            $subcategory = isset($categories[1]) ? $categories[1] : '';
-//            $family = isset($categories[2]) ? $categories[2] : '';
-
-            $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
-            $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
-            $family = !empty($item->getProduct()->getData('familia')) ? $item->getProduct()->getData('familia') : '';
+            $category = $item2->getData('categoria') ?? '';
+            $subcategory = $item2->getData('sub_categoria') ?? '';
+            $family = $item2->getData('familia') ?? '';
+            $brand = $item2->getAttributeText('manufacturer') ?? '';
+            $gender = $item2->getAttributeText('genero') ?? '';
+            $size = $item2->getData('tamano') ?? '';
+            $price = number_format($item2->getFinalPrice(), 2);
 
 
             $cartItem = [
                 'id' => $item2->getId(),
                 'name' => $item2->getName(),
                 'sku' => $item2->getSku(),
-                'price' => $item2->getFinalPrice(),
+                'price' => $price,
                 'category' => $category,
                 'sub_categoria' => $subcategory,
                 'familia' => $family,

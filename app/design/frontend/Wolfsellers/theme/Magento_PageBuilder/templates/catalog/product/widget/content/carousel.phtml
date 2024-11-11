@@ -77,6 +77,15 @@ use Magento\Framework\App\Action\Action;
                                                     <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
                                                 </button>
                                             </form>
+                                            <script type="text/x-magento-init">
+                                                {
+                                                    "[data-role=tocart-form], .form.map.checkout": {
+                                                        "catalogAddToCart": {
+                                                            "product_sku": "<?= $block->escapeJs($_item->getSku()); ?>"
+                                                    }
+                                                }
+                                            }
+                                            </script>
                                         <?php else : ?>
                                             <?php if ($_item->getIsSalable()) : ?>
                                                 <div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
@@ -111,12 +120,3 @@ use Magento\Framework\App\Action\Action;
         <?php endforeach ?>
     </ol>
 <?php endif;?>
-
-<script type="text/x-magento-init">
-    {
-        ".tocart": {
-            "ModalCart":{}
-        }
-    }
-
-</script>

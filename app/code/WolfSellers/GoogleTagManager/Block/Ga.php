@@ -176,18 +176,10 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
             /** @var \Magento\Sales\Model\Order\Item $item*/
             foreach ($order->getAllVisibleItems() as $item) {
 
-                /** Get Name Categories of product */
-                $categories = [];
-                foreach($item->getProduct()->getCategoryIds() as $categoryId){
-                    array_push($categories, $this->_categoryRepository->get($categoryId)->getName());
-                }
-
-                $category = isset($categories[0]) ? $categories[0] : '';
-                $subcategory = isset($categories[1]) ? $categories[1] : '';
-                $family = isset($categories[2]) ? $categories[2] : '';
+                $product = $item->getProduct();
 
                 /** Get Rules of product */
-                $rules = $this->getRules($item->getProduct()->getId());
+                $rules = $this->getRules($product->getId());
                 $dataRule = [];
                 if($rules){
                     foreach ($rules as $rule){
@@ -197,28 +189,20 @@ class Ga extends \Magento\GoogleAnalytics\Block\Ga
                 $dataRule = implode( ', ', $dataRule);
 
                 $imageUrl = $this->imageHelper->init($item, 'product_base_image')->getUrl();
+                $category = $product->getData('categoria') ?? '';
+                $subcategory = $product->getData('sub_categoria') ?? '';
+                $family = $product->getData('familia') ?? '';
+                $brand = $product->getAttributeText('manufacturer') ?? '';
+                $gender = $product->getAttributeText('genero') ?? '';
+                $size = $product->getData('tamano') ?? '';
+                $price = number_format($product->getFinalPrice(), 2);
 
-                $category = !empty($item->getProduct()->getData('categoria')) ? $item->getProduct()->getData('categoria') : '';
-                $subcategory = !empty($item->getProduct()->getData('sub_categoria')) ? $item->getProduct()->getData('sub_categoria') : '';
-                //$brand = !empty($item->getProduct()->getAttributeText('brand_ids')) ? $item->getProduct()->getAttributeText('brand_ids') : '';
-
-                $options = $this->attributerepository->get('manufacturer')->getOptions();
-
-                $brand = '';
-                foreach($options as $options_value){
-                    if($options_value->getValue() == $item->getProduct()->getData('manufacturer')){
-                        $brand = $options_value->getLabel();
-                    }
-                }
-
-                $gender = !empty($item->getProduct()->getAttributeText('genero')) ? $item->getProduct()->getAttributeText('genero') : '';
-                $size = !empty($item->getProduct()->getAttributeText('tamano')) ? $item->getProduct()->getAttributeText('tamano') : '';
 
                 $products[] = [
                     'id' => $item->getId(),
                     'name' => $item->getName(),
                     'sku' => $item->getSku(),
-                    'price' => $item->getBasePrice(),
+                    'price' => $price,
                     'category'  => $category,
                     'sub_categoria' => $subcategory,
                     'familia' => $family,

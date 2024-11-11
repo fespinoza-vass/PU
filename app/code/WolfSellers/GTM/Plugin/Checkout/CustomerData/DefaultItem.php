@@ -71,32 +71,6 @@ class DefaultItem
     )
     {
         $data = $proceed($item);
-
-        $attributes = $item->getProduct()->getAttributes();
-        $category = null;
-        $subcategory = null;
-        $brand = null;
-        $gender = null;
-        $size = null;
-        foreach ($attributes as $attribute) {
-            if ($attribute->getName() === 'categoria') {
-                $category = $attribute->getFrontend()->getValue($item->getProduct());
-            }
-            if ($attribute->getName() === 'sub_categoria') {
-                $subcategory = $attribute->getFrontend()->getValue($item->getProduct());
-            }
-            if ($attribute->getName() === 'manufacturer') {
-                $brand = $attribute->getFrontend()->getValue($item->getProduct());
-            }
-            if ($attribute->getName() === 'genero') {
-                $gender = $attribute->getFrontend()->getValue($item->getProduct());
-            }
-            if ($attribute->getName() === 'tamano') {
-                $size = $attribute->getFrontend()->getValue($item->getProduct());
-                if (!$size) $size = null;
-            }
-        }
-
         $product = $this->getProductById($data['product_id']);
 
         /** Get Rules of product */
@@ -109,11 +83,12 @@ class DefaultItem
         }
         $dataRule = implode(', ', $dataRule);
 
-        /** Get Name Categories of product */
-        $categories = $this->getCategoryName($product);
-        $category = isset($categories[0]) ? $categories[0] : '';
-        $subcategory = isset($categories[1]) ? $categories[1] : '';
-        $family = isset($categories[2]) ? $categories[2] : '';
+        $category = $product->getData('categoria') ?? '';
+        $subcategory = $product->getData('sub_categoria') ?? '';
+        $family = $product->getData('familia') ?? '';
+        $brand = $product->getAttributeText('manufacturer') ?? '';
+        $gender = $product->getAttributeText('genero') ?? '';
+        $size = $product->getData('tamano') ?? '';
 
         $result['category'] = $category;
         $result['subcategory'] = $subcategory;
