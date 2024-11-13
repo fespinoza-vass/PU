@@ -86,10 +86,11 @@ class BeginCheckout implements ObserverInterface
                     'imageURL' => $imageUrl
                 ];
 
+                $productPrice = round($item->getProduct()->getFinalPrice(), 2);
                 $products[] = $productData;
                 $productsIds[] = $item->getProduct()->getId();
                 $productsSkus[] = $item->getProduct()->getSku();
-                $totalPrice += $price * $item->getQty();
+                $totalPrice += $productPrice * $item->getQty();
                 $totalQty += $item->getQty();
             }
 
